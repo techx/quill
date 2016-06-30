@@ -1,0 +1,52 @@
+.page {
+  padding-top: 2em;
+  padding-bottom: 4em;
+  .title {
+    font-family: $font-header;
+    text-transform: uppercase;
+    font-size: 2.5em;
+    text-align: center;
+    color: $page-header-color;
+    letter-spacing: 8px;
+    font-weight: 700;
+    &.divided:after {
+        content: " ";
+        width: 200px;
+        display: block;
+        margin: 1em auto 2em;
+        border-bottom: 4px solid $page-header-color;
+    }
+
+    &.small {
+      font-size: 1em;
+      letter-spacing: 4px;
+      &:after {
+        border-width: 2px;
+      }
+    }
+  }
+
+  .form {
+    .title {
+      font-size: 1em;
+      letter-spacing: 4px;
+      &:after {
+        border-width: 2px;
+      }
+    }
+  }
+
+  .subheader {
+    font-size: 1.2em;
+    text-align: center;
+  }
+
+}
+
+@media only screen and (max-width: 768px) {
+  .page {
+    .title {
+      font-size: 1.25em;
+    }
+  }
+}

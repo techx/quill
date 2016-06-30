@@ -1,0 +1,412 @@
+<div class="page">
+  <div class="divided title">
+    Confirmation
+  </div>
+
+  <div class="ui stackable page grid">
+    <div class="column">
+
+      <div class="ui form">
+
+        <div class="divided title">Basic Details</div>
+
+        <fieldset ng-disabled="pastConfirmation">
+
+          <div class="field">
+            <label> What's your phone number? (required) </label>
+            <p>
+              We need this in case we need to get ahold of you!
+            </p>
+            <input type="tel"
+                   name="phone"
+                   ng-model="user.confirmation.phoneNumber"
+                   placeholder="(123) - 555 - 1234"
+                   required>
+          </div>
+
+          <div class="field">
+            <label> Dietary Restrictions </label>
+
+            <p>
+              If your restriction is not included here, please let us know in the additional notes at the bottom.
+            </p>
+            <p>
+              We'll make sure you get fed :)
+            </p>
+
+          </div>
+
+          <div class="inline fields">
+            <div class="field"
+              ng-repeat="(key, value) in dietaryRestrictions">
+
+              <div class="ui checkbox">
+                <input type="checkbox" ng-model="dietaryRestrictions[key]" />
+                <label>{{key}}</label>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="field">
+            <label> Shirt Size (required) </label>
+            <p>
+              Let's get you some swag!
+            </p>
+            <select
+              name="shirt"
+              ng-model="user.confirmation.shirtSize"
+              required>
+              <option value="">Shirt Size</option>
+              <option value="XS">Unisex X-Small</option>
+              <option value="S">Unisex Small</option>
+              <option value="M">Unisex Medium</option>
+              <option value="L">Unisex Large</option>
+              <option value="XL">Unisex X-Large</option>
+              <option value="XXL">Unisex XX-Large</option>
+              <option value="WXS">Women's X-Small</option>
+              <option value="WS">Women's Small</option>
+              <option value="WM">Women's Medium</option>
+              <option value="WL">Women's Large</option>
+              <option value="WXL">Women's X-Large</option>
+              <option value="WXXL">Women's XX-Large</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>
+              Will you be needing hardware?
+            </label>
+            <div class="ui checkbox">
+              <input type="checkbox" ng-model="user.confirmation.wantsHardware">
+              <label> Yes, I would like to use hardware in my hack. </label>
+            </div>
+          </div>
+
+          <div
+            class="field"
+            ng-show="user.confirmation.wantsHardware">
+            <label>
+              What kind of hardware would be useful for you?
+            </label>
+            <p>
+              We will have a hardware checkout, and we'll try our best to provide things that would be useful to you - however, we can't guarantee everything. We will publish a list of available hardware closer to the day of the event.
+            </p>
+            <input type="text" ng-model="user.confirmation.hardware">
+          </div>
+
+
+          <br>
+          <br>
+
+          <div class="divided title"> Skills & Accomplishments </div>
+
+          <div class="field">
+            <label> What are you studying? </label>
+            <input type="text"
+                   name="study"
+                   placeholder="Computer Science, Product Design, Basket Weaving, etc."
+                   ng-model="user.confirmation.major">
+          </div>
+
+          <div class="field">
+            <label> Github </label>
+            <input type="text"
+                   name="github"
+                   placeholder="https://github.com/foobar"
+                   ng-model="user.confirmation.github">
+          </div>
+
+          <div class="field">
+            <label> Twitter </label>
+            <input type="text"
+                   name="twitter"
+                   placeholder="https://twitter.com/foobar"
+                   ng-model="user.confirmation.twitter">
+          </div>
+
+          <div class="field">
+            <label> Skill Sheet (required) </label>
+            <p>
+              Upload a document outlining any skills or experience you'd like to share (ex. resume). PDF preferred!
+            </p>
+            <a
+              target="_blank"
+              href="https://go.hackmit.org/skill-sheets"
+              class="ui pink button">
+              Upload
+            </a>
+          </div>
+
+          <br>
+          <br>
+
+          <div class="divided title">Hosting Details</div>
+
+          <p>
+            Would you like us to find you a host? We can match you with someone so you can catch some zzz's the night before and/or the night of the event!
+          </p>
+
+          <div class="field">
+            <div class="ui checkbox">
+              <input type="checkbox" ng-model="user.confirmation.hostNeededFri">
+              <label>
+                <strong>
+                  I would like a host for Friday, Sept. 18th.
+                </strong>
+              </label>
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="ui checkbox">
+              <input type="checkbox" ng-model="user.confirmation.hostNeededSat">
+              <label>
+                <strong>
+                I would like a host for Saturday, Sept. 19th.
+                </strong>
+              </label>
+            </div>
+          </div>
+
+          <div
+            ng-show="user.confirmation.hostNeededFri || user.confirmation.hostNeededSat">
+
+            <div class="field">
+              <div class="ui checkbox">
+                <input type="checkbox" ng-model="user.confirmation.genderNeutral">
+                <label> I would be okay with gender neutral housing. </label>
+              </div>
+            </div>
+
+            <div class="field">
+              <div class="ui checkbox">
+                <input type="checkbox" ng-model="user.confirmation.smokingFriendly">
+                <label> I would be okay in housing with smoking-friendly policies. </label>
+              </div>
+            </div>
+
+            <div class="field">
+              <div class="ui checkbox">
+                <input type="checkbox" ng-model="user.confirmation.catFriendly">
+                <label> I would be okay in housing that has cats. Meow! </label>
+              </div>
+            </div>
+
+
+            <div class="field">
+              <label>
+                Let us know if there's anything else we should know about matching you with a host.
+              </label>
+              <textarea
+                name="hostNotes"
+                ng-model="user.confirmation.hostNotes">
+              </textarea>
+            </div>
+
+          </div>
+
+          <br>
+          <br>
+
+          <div class="divided title">Travel</div>
+
+          <div class="field">
+            <p>
+              As a reminder, our reimbursement policy is as follows:
+            </p>
+            <ul>
+              <li> Up to $100 from within Massachusetts </li>
+              <li> Up to $200 from anywhere else in North America </li>
+              <li> Up to $500 from outside North America </li>
+            </ul>
+            <p>
+              We’ll also be sending buses free of charge to Princeton, NJ; New York, NY; New Haven, CT; and Providence, RI. Again, we only reimburse the minimum-cost travel path. Head back to the dashboard to read our full travel policy.
+            </p>
+          </div>
+
+          <div class="field">
+            <label> Will you be needing travel reimbursement? </label>
+            <div class="ui checkbox">
+              <input type="checkbox" ng-model="user.confirmation.needsReimbursement">
+              <label> I will be needing travel reimbursement. </label>
+            </div>
+          </div>
+
+          <div
+            ng-show="user.confirmation.needsReimbursement">
+
+            <div class="ui header">
+              Mailing Address
+            </div>
+
+            <p>
+              Travel reimbursement is processed and sent by check after the event. To expedite the reimbursement process and ensure that you receive your reimbursement as quickly as possible, make sure that your mailing address is accurate and you upload your receipts.
+            </p>
+
+            <div class="field">
+              <label>Full Name</label>
+              <input type="text"
+                     name="name"
+                     ng-model="user.confirmation.address.name">
+            </div>
+
+            <div class="field">
+              <label> Address Line 1 - Street address, P.O. box, company name, c/o </label>
+              <input
+                type="text"
+                name="addressLine1"
+                ng-model="user.confirmation.address.line1">
+            </div>
+
+            <div class="field">
+              <label> Address Line 2 - Apartment, suite, unit, building, floor, etc. </label>
+              <input
+                type="text"
+                name="addressLine2"
+                ng-model="user.confirmation.address.line2">
+            </div>
+
+            <div class="four fields">
+              <div class="field">
+                <label> City </label>
+                <input
+                  type="text"
+                  name="city"
+                  ng-model="user.confirmation.address.city">
+              </div>
+              <div class="field">
+                <label> State/Province/Region </label>
+                <input
+                  type="text"
+                  name="state"
+                  ng-model="user.confirmation.address.state">
+              </div>
+              <div class="field">
+                <label> ZIP </label>
+                <input
+                  type="text"
+                  name="zip"
+                  ng-model="user.confirmation.address.zip">
+              </div>
+              <div class="field">
+                <label> Country </label>
+                <input
+                  type="text"
+                  name="country"
+                  ng-model="user.confirmation.address.country">
+              </div>
+            </div>
+
+            <div class="field">
+              <label> Travel Receipt </label>
+              <p>
+                So that we can process your reimbursement faster, please name your receipt: <strong>{{fileName}}</strong>
+              </p>
+              <a
+                target="_blank"
+                href="https://go.hackmit.org/travel-receipts"
+                class="ui pink button">
+                Upload Receipt
+              </a>
+            </div>
+
+          </div>
+
+          <br>
+          <br>
+
+          <div class="divided title">Legal</div>
+
+          <div class="field">
+            <label> Liability Waiver </label>
+            <p>
+              <a
+                target="_blank"
+                href="https://go.hackmit.org/liability-waiver">
+                Liability Waiver
+              </a>
+            </p>
+            <p>
+              For legal reasons, our university asks that you read and accept the terms of our liability waiver. Again, as we mentioned in the original lottery application - you <strong> must </strong> be 18 years or older or an MIT undergraduate by the day of the event, or <strong> we will refuse you admission at the door. We will be checking ID. </strong>
+            </p>
+            <p>
+              By writing my name below, I affirm that I have read and accepted the terms of the liability waiver above, and will be either an MIT undergraduate or 18 years or older at the time of the event.
+            </p>
+            <input type="text"
+                   name="signatureLiabilityWaiver"
+                   placeholder="Your Full Legal Name"
+                   ng-model="user.confirmation.signatureLiability">
+          </div>
+
+          <div class="field">
+            <label> Photo Release </label>
+            <p>
+              <a
+                target="_blank"
+                href="https://go.hackmit.org/photo-release">
+                Photo Release
+              </a>
+            </p>
+            <p>
+              Signing this photo release means if we take photos or photos of you, we can share it with the world.
+            </p>
+            <p>
+              By writing my name below, I affirm that I have read and accepted the terms of the photo release above.
+            </p>
+            <input type="text"
+                   name="signaturePhotoRelease"
+                   placeholder="Your Full Legal Name"
+                   ng-model="user.confirmation.signaturePhotoRelease">
+          </div>
+
+          <div class="field">
+            <label> Code of Conduct </label>
+            <p>
+              <a
+                target="_blank"
+                href="https://go.hackmit.org/code-of-conduct">
+                Hacker Code of Conduct
+              </a>
+            </p>
+            <p>
+              It is extremely important to us that attendees follow a set of guidelines to make the event fun for everyone involved. Please read through and make sure you understand what we will be expecting of you.
+            </p>
+            <p>
+              By writing my name below, I affirm that I have read and will abide by the code of conduct detailed above.
+            </p>
+            <input type="text"
+                   name="signatureCodeOfConduct"
+                   placeholder="Your Full Legal Name"
+                   ng-model="user.confirmation.signatureCodeOfConduct">
+          </div>
+
+          <br>
+          <br>
+
+          <div class="divided title">everything else</div>
+
+          <div class="field">
+            <label>
+              Additional Notes
+            </label>
+            <p>
+              If there's anything else you need to let us know, tell us here!
+            </p>
+            <textarea
+              ng-model="user.confirmation.notes"></textarea>
+          </div>
+
+          <div class="field" ng-hide="regIsClosed">
+            <button type="submit"
+                    class="fluid ui purple button"
+                    ng-click="submitForm()">
+              Submit
+            </button>
+          </div>
+
+        </fieldset>
+      </div>
+    </div>
+  </div>
+</div>
