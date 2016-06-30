@@ -1,0 +1,48 @@
+<div id="login">
+  <div class="container">
+    <div class="content">
+      <div class="ui segment">
+
+        <div class="logo">
+          <img src="assets/images/logo-color.svg">
+        </div>
+
+        <div class="ui divider"></div>
+
+        <div class="ui small error message"
+             ng-show="error">
+          {{error}}
+        </div>
+
+        <div class="ui login-password form">
+          <form ng-submit="changePassword()">
+            <div class="field">
+              <label> New Password</label>
+              <input type="password"
+                     id='password'
+                     placeholder="Password (at least 6 characters)"
+                     ng-model="password" required>
+            </div>
+            <div class="field">
+              <label> Confirm Password</label>
+              <input type="password"
+                     id='confirm'
+                     placeholder="Just making sure you got it!"
+                     ng-model="confirm" required>
+            </div>
+            <div class="field">
+              <button id="reset-password"
+                      type="submit"
+                      class="fluid ui login button">
+                      Reset Password
+              </button>
+            </div>
+
+          </form>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>

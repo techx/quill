@@ -1,0 +1,273 @@
+<div id="stats">
+
+  <div
+    class="ui green segment"
+    ng-class="{'loading': loading}">
+    <div class="ui header">
+      Stats
+    </div>
+    <div class="content">
+      <em> Last updated: {{fromNow(stats.lastUpdated)}}</em>
+      <div class="ui list">
+        <div
+          class="item">
+          <i class="green circle check icon"></i>
+          <div class="content">
+            <strong>
+            Total Users
+            </strong> :
+            {{stats.total}}
+          </div>
+        </div>
+        <div
+          class="item">
+          <i class="green circle check icon"></i>
+          <div class="content">
+            <strong>
+            Verified Users
+            </strong> :
+            {{stats.verified}} ({{stats.verified / stats.total * 100 | number: 1}}%)
+          </div>
+        </div>
+        <div
+          class="item">
+          <i class="green circle check icon"></i>
+          <div class="content">
+            <strong>
+            Submitted Users
+            </strong> :
+            {{stats.submitted}} ({{stats.submitted / stats.total * 100 | number: 1}}%)
+          </div>
+        </div>
+        <div class="ui divider"></div>
+        <div
+          class="item">
+          <i class="green circle check icon"></i>
+          <div class="content">
+            <strong>
+              Admitted
+            </strong> :
+            {{stats.admitted}}
+          </div>
+        </div>
+        <div
+          class="item">
+          <i class="green circle check icon"></i>
+          <div class="content">
+            <strong>
+              Confirmed (Total)
+            </strong> :
+            {{stats.confirmed}}
+          </div>
+        </div>
+        <div
+          class="item">
+          <i class="green circle check icon"></i>
+          <div class="content">
+            <strong>
+              Confirmed (MIT)
+            </strong> :
+            {{stats.confirmedMit}}
+          </div>
+        </div>
+        <div class="item">
+          <i class="circle red icon"></i>
+          <div class="content">
+            <strong>
+              Declined
+            </strong> :
+              {{stats.declined}}
+          </div>
+        </div>
+
+        <div class="item">
+          <i class="green flag icon"></i>
+          <div class="content">
+            <strong>
+              Checked In
+            </strong> :
+              {{stats.checkedIn}}
+          </div>
+        </div>
+
+        <div class="ui divider"></div>
+
+        <div class="item">
+          <i class="child icon"></i>
+          <div class="content">
+            <strong>
+              Unisex shirt sizes:
+            </strong> :
+              XS ({{stats.shirtSizes['XS']}})
+              S ({{stats.shirtSizes['S']}})
+              M ({{stats.shirtSizes['M']}})
+              L ({{stats.shirtSizes['L']}})
+              XL ({{stats.shirtSizes['XL']}})
+              XXL ({{stats.shirtSizes['XXL']}})
+          </div>
+        </div>
+
+        <div class="item">
+          <i class="child icon"></i>
+          <div class="content">
+            <strong>
+              Women's shirt sizes:
+            </strong> :
+              XS ({{stats.shirtSizes['WXS']}})
+              S ({{stats.shirtSizes['WS']}})
+              M ({{stats.shirtSizes['WM']}})
+              L ({{stats.shirtSizes['WL']}})
+              XL ({{stats.shirtSizes['WXL']}})
+              XXL ({{stats.shirtSizes['WXXL']}})
+          </div>
+        </div>
+
+        <div class="ui divider"></div>
+
+        <div class="item">
+          <i class="green money icon"></i>
+          <div class="content">
+            <strong>
+              Total Reimbursements:
+            </strong>{{stats.reimbursementTotal}}
+          </div>
+        </div>
+
+        <div class="item">
+          <i class="frown icon"></i>
+          <div class="content">
+            <strong>
+              Still Need Reimbursement:
+            </strong>{{stats.reimbursementMissing}}
+          </div>
+        </div>
+
+        <div class="ui divider"></div>
+
+        <div class="item">
+          <i class="plug icon"></i>
+          <div class="content">
+            <strong>
+              Need/Want Hardware:
+            </strong>{{stats.wantsHardware}}
+          </div>
+        </div>
+
+        <div class="ui divider"></div>
+
+        <div class="item">
+          <i class="food icon"></i>
+          <div class="content">
+            <strong>
+              Dietary Restrictions:
+            </strong>
+            <span
+              ng-repeat="restriction in stats.dietaryRestrictions | orderBy: '-count'">
+              {{restriction.name}} ({{restriction.count}})
+            </span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="ui pink segment"
+    ng-class="{'loading': loading}">
+    <div class="ui header">
+      Demographics
+    </div>
+    <div class="ui list">
+      <div class="item">
+        <i class="users icon"></i>
+        <div class="content">
+          <strong>Total users</strong>: {{stats.total}}
+        </div>
+      </div>
+      <div class="item">
+        <i class="female icon"></i>
+        <div class="content">
+          <strong>Female</strong>: {{stats.demo.gender['F']}} ({{stats.demo.gender['F'] / stats.total * 100 | number:1}}%)
+        </div>
+      </div>
+      <div class="item">
+        <i class="male icon"></i>
+        <div class="content">
+          <strong>Male</strong>: {{stats.demo.gender['M']}} ({{stats.demo.gender['M'] / stats.total * 100 | number:1}}%)
+        </div>
+      </div>
+      <div class="item">
+        <i class="other gender icon"></i>
+        <div class="content">
+          <strong>Other</strong>: {{stats.demo.gender['O']}} ({{stats.demo.gender['O'] / stats.total * 100 | number:1}}%)
+        </div>
+      </div>
+      <div class="item">
+        <i class="question icon"></i>
+        <div class="content">
+          <strong>Did not respond</strong>: {{stats.demo.gender['N']}} ({{stats.demo.gender['N'] / stats.total * 100 | number:1 }}%)
+        </div>
+      </div>
+    </div>
+    <div class="ui divider"></div>
+      <div class="ui list">
+        <div class="item">
+          <strong>Fresh:</strong> {{stats.demo.year['2019']}} ({{stats.demo.year['2019'] / stats.total * 100 | number: 1}}%)
+        </div>
+        <div class="item">
+          <strong>Soph:</strong> {{stats.demo.year['2018']}} ({{stats.demo.year['2018'] / stats.total * 100 | number: 1}}%)
+        </div>
+        <div class="item">
+         <strong>Junior:</strong> {{stats.demo.year['2017']}} ({{stats.demo.year['2017'] / stats.total * 100 | number: 1}}%)
+        </div>
+        <div class="item">
+          <strong>Senior:</strong> {{stats.demo.year['2016']}} ({{stats.demo.year['2016'] / stats.total * 100 | number: 1}}%)
+        </div>
+      </div>
+    <div class="ui divider"></div>
+    <div class="ui list">
+      <div
+        class="item"
+        ng-repeat="school in stats.demo.schools | orderBy: '-count'">
+        <div class="content">
+          <strong>{{school.email}}</strong> : {{school.count}} ({{school.count / stats.total * 100 | number: 1}}%)
+          <p>
+          <div class="ui purple mini label">
+            Submitted: {{school.stats.submitted}}
+          </div>
+          <div class="ui pink mini label">
+            Admitted: {{school.stats.admitted}}
+          </div>
+          <div class="ui green mini label">
+            Confirmed: {{school.stats.confirmed}}
+          </div>
+          <div class="ui red mini label">
+            Declined: {{school.stats.declined}}
+          </div>
+          </p>
+          <div class="ui divider"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!--   <div
+    class="ui purple segment"
+    ng-class="{'loading': loading}">
+    <div class="ui header">
+      Team Names
+    </div>
+    <div class="ui list">
+      <div
+        class="item"
+        ng-repeat="team in stats.teams | orderBy: 'name'">
+        <div class="header">
+          {{team.name}}
+        </div>
+        {{team.users.join(', ')}}
+      </div>
+    </div>
+  </div> -->
+
+</div>

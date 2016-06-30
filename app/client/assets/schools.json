@@ -1,0 +1,779 @@
+
+{
+    "utdallas.edu": {
+        "school": "The University of Texas at Dallas",
+        "state": "Texas"
+    },
+    "emory.edu": {
+        "school": "Emory University",
+        "state": "Georgia"
+    },
+    "rice.edu": {
+        "school": "Rice University",
+        "state": "Texas"
+    },
+    "osu.edu": {
+        "school": "Ohio State University-Main Campus",
+        "state": "Ohio"
+    },
+    "berea.edu": {
+        "school": "Berea College",
+        "state": "Kentucky"
+    },
+    "monmouth.edu": {
+        "school": "Monmouth University",
+        "state": "New Jersey"
+    },
+    "semo.edu": {
+        "school": "Southeast Missouri State University",
+        "state": "Missouri"
+    },
+    "grinnell.edu": {
+        "school": "Grinnell College",
+        "state": "Iowa"
+    },
+    "murraystate.edu": {
+        "school": "Murray State University",
+        "state": "Kentucky"
+    },
+    "duke.edu": {
+        "school": "Duke University",
+        "state": "North Carolina"
+    },
+    "live.marshall.edu": {
+        "school": "Marshall University",
+        "state": "West Virginia"
+    },
+    "brandeis.edu": {
+        "school": "Brandeis University",
+        "state": "Massachusetts"
+    },
+    "colorado.edu": {
+        "school": "University of Colorado Boulder",
+        "state": "Colorado"
+    },
+    "owls.southernct.edu": {
+        "school": "Southern Connecticut State University",
+        "state": "Connecticut"
+    },
+    "evergreen.edu": {
+        "school": "The Evergreen State College",
+        "state": "Washington"
+    },
+    "knights.ucf.edu": {
+        "school": "University of Central Florida",
+        "state": "Florida"
+    },
+    "students.tntech.edu": {
+        "school": "Tennessee Technological University",
+        "state": "Tennessee"
+    },
+    "dickinson.edu": {
+        "school": "Dickinson College",
+        "state": "Pennsylvania"
+    },
+    "mail.missouri.edu": {
+        "school": "University of Missouri-Columbia",
+        "state": "Missouri"
+    },
+    "swarthmore.edu": {
+        "school": "Swarthmore College",
+        "state": "Pennsylvania"
+    },
+    "tufts.edu": {
+        "school": "Tufts University",
+        "state": "Massachusetts"
+    },
+    "marshall.edu": {
+        "school": "Marshall University",
+        "state": "West Virginia"
+    },
+    "berkeley.edu": {
+        "school": "University of California-Berkeley",
+        "state": "California"
+    },
+    "binghamton.edu": {
+        "school": "SUNY at Binghamton",
+        "state": "New York"
+    },
+    "mymail.bcc.edu": {
+        "school": "Burlington County College",
+        "state": "New Jersey"
+    },
+    "yale.edu": {
+        "school": "Yale University",
+        "state": "Connecticut"
+    },
+    "rose-hulman.edu": {
+        "school": "Rose-Hulman Institute of Technology",
+        "state": "Indiana"
+    },
+    "amherst.edu": {
+        "school": "Amherst College",
+        "state": "Massachusetts"
+    },
+    "lawrence.edu": {
+        "school": "Lawrence University",
+        "state": "Wisconsin"
+    },
+    "cs.stanford.edu": {
+        "school": "Stanford University",
+        "state": "California"
+    },
+    "csupomona.edu": {
+        "school": "California State Polytechnic University-Pomona",
+        "state": "California"
+    },
+    "trincoll.edu": {
+        "school": "Trinity College",
+        "state": "Connecticut"
+    },
+    "simons-rock.edu": {
+        "school": "Bard College at Simon's Rock",
+        "state": "Massachusetts"
+    },
+    "vt.edu": {
+        "school": "Virginia Polytechnic Institute and State University",
+        "state": "Virginia"
+    },
+    "u.rochester.edu": {
+        "school": "University of Rochester",
+        "state": "New York"
+    },
+    "barnard.edu": {
+        "school": "Barnard College",
+        "state": "New York"
+    },
+    "cs.rutgers.edu": {
+        "school": "Rutgers University-New Brunswick",
+        "state": "New Jersey"
+    },
+    "umbc.edu": {
+        "school": "University of Maryland-Baltimore County",
+        "state": "Maryland"
+    },
+    "my.fisk.edu": {
+        "school": "Fisk University",
+        "state": "Tennessee"
+    },
+    "chatham.edu": {
+        "school": "Chatham University",
+        "state": "Pennsylvania"
+    },
+    "mail.usf.edu": {
+        "school": "University of South Florida-Main Campus",
+        "state": "Florida"
+    },
+    "wne.edu": {
+        "school": "Western New England University",
+        "state": "Massachusetts"
+    },
+    "lsu.edu": {
+        "school": "Louisiana State University and Agricultural & Mechanical College",
+        "state": "Louisiana"
+    },
+    "mtholyoke.edu": {
+        "school": "Mount Holyoke College",
+        "state": "Massachusetts"
+    },
+    "fordham.edu": {
+        "school": "Fordham University",
+        "state": "New York"
+    },
+    "hawk.iit.edu": {
+        "school": "Illinois Institute of Technology",
+        "state": "Illinois"
+    },
+    "nd.edu": {
+        "school": "University of Notre Dame",
+        "state": "Indiana"
+    },
+    "nyu.edu": {
+        "school": "New York University",
+        "state": "New York"
+    },
+    "terpmail.umd.edu": {
+        "school": "University of Maryland-College Park",
+        "state": "Maryland"
+    },
+    "utexas.edu": {
+        "school": "The University of Texas at Austin",
+        "state": "Texas"
+    },
+    "masonlive.gmu.edu": {
+        "school": "George Mason University",
+        "state": "Virginia"
+    },
+    "uiuc.edu": {
+        "school": "University of Illinois at Urbana-Champaign",
+        "state": "Illinois"
+    },
+    "purdue.edu": {
+        "school": "Purdue University-Main Campus",
+        "state": "Indiana"
+    },
+    "case.edu": {
+        "school": "Case Western Reserve University",
+        "state": "Ohio"
+    },
+    "bison.howard.edu": {
+        "school": "Howard University",
+        "state": "District of Columbia"
+    },
+    "cs.umb.edu": {
+        "school": "University of Massachusetts-Boston",
+        "state": "Massachusetts"
+    },
+    "baylor.edu": {
+        "school": "Baylor University",
+        "state": "Texas"
+    },
+    "mtu.edu": {
+        "school": "Michigan Technological University",
+        "state": "Michigan"
+    },
+    "miamioh.edu": {
+        "school": "Miami University-Oxford",
+        "state": "Ohio"
+    },
+    "studentbody.byu.edu": {
+        "school": "Brigham Young University-Provo",
+        "state": "Utah"
+    },
+    "mail.csuchico.edu": {
+        "school": "California State University-Chico",
+        "state": "California"
+    },
+    "njit.edu": {
+        "school": "New Jersey Institute of Technology",
+        "state": "New Jersey"
+    },
+    "zips.uakron.edu": {
+        "school": "University of Akron Main Campus",
+        "state": "Ohio"
+    },
+    "uw.edu": {
+        "school": "University of Washington-Seattle Campus",
+        "state": "Washington"
+    },
+    "sunyit.edu": {
+        "school": "SUNY Institute of Technology at Utica-Rome",
+        "state": "New York"
+    },
+    "princeton.edu": {
+        "school": "Princeton University",
+        "state": "New Jersey"
+    },
+    "berklee.edu": {
+        "school": "Berklee College of Music",
+        "state": "Massachusetts"
+    },
+    "tjhsst.edu": {
+        "school": "Thomas Jefferson High School for Science and Technolo",
+        "state": "Thomas Jefferson High School for Science and Technolog"
+    },
+    "wheatoncollege.edu": {
+        "school": "Wheaton College",
+        "state": "Massachusetts"
+    },
+    "mail.depaul.edu": {
+        "school": "DePaul University",
+        "state": "Illinois"
+    },
+    "cornell.edu": {
+        "school": "Cornell University",
+        "state": "New York"
+    },
+    "live.unc.edu": {
+        "school": "University of North Carolina at Chapel Hill",
+        "state": "North Carolina"
+    },
+    "virginia.edu": {
+        "school": "University of Virginia-Main Campus",
+        "state": "Virginia"
+    },
+    "email.wm.edu": {
+        "school": "College of William and Mary",
+        "state": "Virginia"
+    },
+    "lehigh.edu": {
+        "school": "Lehigh University",
+        "state": "Pennsylvania"
+    },
+    "uvm.edu": {
+        "school": "University of Vermont",
+        "state": "Vermont"
+    },
+    "bba11.mccombs.utexas.edu": {
+        "school": "The University of Texas at Austin",
+        "state": "Texas"
+    },
+    "calpoly.edu": {
+        "school": "California Polytechnic State University-San Luis Obispo",
+        "state": "California"
+    },
+    "mit.edu": {
+        "school": "Massachusetts Institute of Technology",
+        "state": "Massachusetts"
+    },
+    "ncsu.edu": {
+        "school": "North Carolina State University at Raleigh",
+        "state": "North Carolina"
+    },
+    "louisville.edu": {
+        "school": "University of Louisville",
+        "state": "Kentucky"
+    },
+    "college.harvard.edu": {
+        "school": "Harvard University",
+        "state": "Massachusetts"
+    },
+    "wharton.upenn.edu": {
+        "school": "University of Pennsylvania",
+        "state": "Pennsylvania"
+    },
+    "hmc.edu": {
+        "school": "Harvey Mudd College",
+        "state": "California"
+    },
+    "cs.utexas.edu": {
+        "school": "The University of Texas at Austin",
+        "state": "Texas"
+    },
+    "cs.washington.edu": {
+        "school": "University of Washington-Seattle Campus",
+        "state": "Washington"
+    },
+    "students.niu.edu": {
+        "school": "Northern Illinois University",
+        "state": "Illinois"
+    },
+    "stevens.edu": {
+        "school": "Stevens Institute of Technology",
+        "state": "New Jersey"
+    },
+    "columbia.edu": {
+        "school": "Columbia University in the City of New York",
+        "state": "New York"
+    },
+    "vcu.edu": {
+        "school": "Virginia Commonwealth University",
+        "state": "Virginia"
+    },
+    "ucsc.edu": {
+        "school": "University of California-Santa Cruz",
+        "state": "California"
+    },
+    "rutgers.edu": {
+        "school": "Rutgers University-New Brunswick",
+        "state": "New Jersey"
+    },
+    "smu.edu": {
+        "school": "Southern Methodist University",
+        "state": "Texas"
+    },
+    "uwosh.edu": {
+        "school": "University of Wisconsin-Oshkosh",
+        "state": "Wisconsin"
+    },
+    "georgetown.edu": {
+        "school": "Georgetown University",
+        "state": "District of Columbia"
+    },
+    "bths.edu": {
+        "school": "bte",
+        "state": "btec"
+    },
+    "drexel.edu": {
+        "school": "Drexel University",
+        "state": "Pennsylvania"
+    },
+    "wisc.edu": {
+        "school": "University of Wisconsin-Madison",
+        "state": "Wisconsin"
+    },
+    "sas.upenn.edu": {
+        "school": "University of Pennsylvania",
+        "state": "Pennsylvania"
+    },
+    "temple.edu": {
+        "school": "Temple University",
+        "state": "Pennsylvania"
+    },
+    "kettering.edu": {
+        "school": "Kettering University",
+        "state": "Michigan"
+    },
+    "dupage.edu": {
+        "school": "College of DuPage",
+        "state": "Illinois"
+    },
+    "wpi.edu": {
+        "school": "Worcester Polytechnic Institute",
+        "state": "Massachusetts"
+    },
+    "stonybrook.edu": {
+        "school": "Stony Brook University",
+        "state": "New York"
+    },
+    "utah.edu": {
+        "school": "University of Utah",
+        "state": "Utah"
+    },
+    "indiana.edu": {
+        "school": "Indiana University-Bloomington",
+        "state": "Indiana"
+    },
+    "g.harvard.edu": {
+        "school": "Harvard University",
+        "state": "Massachusetts"
+    },
+    "students.olin.edu": {
+        "school": "Franklin W. Olin College of Engineering",
+        "state": "Massachusetts"
+    },
+    "nus.edu.sg": {
+        "school": "National University of Singapore",
+        "state": "Singapore"
+    },
+    "scsu.edu": {
+        "school": "South Carolina State University",
+        "state": "South Carolina"
+    },
+    "u.pacific.edu": {
+        "school": "University of the Pacific",
+        "state": "California"
+    },
+    "g.rit.edu": {
+        "school": "Rochester Institute of Technology",
+        "state": "New York"
+    },
+    "tc.columbia.edu": {
+        "school": "Teachers College at Columbia University",
+        "state": "New York"
+    },
+    "asu.edu": {
+        "school": "Arizona State University",
+        "state": "Arizona"
+    },
+    "illinois.edu": {
+        "school": "University of Illinois at Urbana-Champaign",
+        "state": "Illinois"
+    },
+    "email.vccs.edu": {
+        "school": "Northern Virginia Community College",
+        "state": "Virginia"
+    },
+    "student.fitchburgstate.edu": {
+        "school": "Fitchburg State University",
+        "state": "Massachusetts"
+    },
+    "husky.neu.edu": {
+        "school": "Northeastern University",
+        "state": "Massachusetts"
+    },
+    "ccs.neu.edu": {
+        "school": "Northeastern University",
+        "state": "Massachusetts"
+    },
+    "genetics.med.harvard.edu": {
+        "school": "Rensselaer Polytechnic Institute",
+        "state": "New York"
+    },
+    "wesleyan.edu": {
+        "school": "Wesleyan University",
+        "state": "Connecticut"
+    },
+    "mail.uc.edu": {
+        "school": "University of Cincinnati-Main Campus",
+        "state": "Ohio"
+    },
+    "upr.edu": {
+        "school": "University of Puerto Rico-Ponce",
+        "state": "Puerto Rico"
+    },
+    "umiami.edu": {
+        "school": "University of Miami",
+        "state": "Florida"
+    },
+    "g.ucla.edu": {
+        "school": "University of California-Los Angeles",
+        "state": "California"
+    },
+    "u.northwestern.edu": {
+        "school": "Northwestern University",
+        "state": "Illinois"
+    },
+    "uchicago.edu": {
+        "school": "University of Chicago",
+        "state": "Illinois"
+    },
+    "rit.edu": {
+        "school": "Rochester Institute of Technology",
+        "state": "New York"
+    },
+    "wellesley.edu": {
+        "school": "Wellesley College",
+        "state": "Massachusetts"
+    },
+    "odu.edu": {
+        "school": "Old Dominion University",
+        "state": "Virginia"
+    },
+    "andrew.cmu.edu": {
+        "school": "Carnegie Mellon University",
+        "state": "Pennsylvania"
+    },
+    "vanderbilt.edu": {
+        "school": "Vanderbilt University",
+        "state": "Tennessee"
+    },
+    "umich.edu": {
+        "school": "University of Michigan-Ann Arbor",
+        "state": "Michigan"
+    },
+    "ucdavis.edu": {
+        "school": "University of California-Davis",
+        "state": "California"
+    },
+    "student.american.edu": {
+        "school": "American University",
+        "state": "District of Columbia"
+    },
+    "ufl.edu": {
+        "school": "University of Florida",
+        "state": "Florida"
+    },
+    "brown.edu": {
+        "school": "Brown University",
+        "state": "Rhode Island"
+    },
+    "fas.harvard.edu": {
+        "school": "Harvard University",
+        "state": "Massachusetts"
+    },
+    "media.mit.edu": {
+        "school": "Massachusetts Institute of Technology",
+        "state": "Massachusetts"
+    },
+    "email.sc.edu": {
+        "school": "University of South Carolina-Columbia",
+        "state": "South Carolina"
+    },
+    "ucla.edu": {
+        "school": "University of California-Los Angeles",
+        "state": "California"
+    },
+    "middlebury.edu": {
+        "school": "Middlebury College",
+        "state": "Vermont"
+    },
+    "cooper.edu": {
+        "school": "Cooper Union for the Advancement of Science and Art",
+        "state": "New York"
+    },
+    "babson.edu": {
+        "school": "Babson College",
+        "state": "Massachusetts"
+    },
+    "seas.upenn.edu": {
+        "school": "University of Pennsylvania",
+        "state": "Pennsylvania"
+    },
+    "williams.edu": {
+        "school": "Williams College",
+        "state": "Massachusetts"
+    },
+    "uci.edu": {
+        "school": "University of California-Irvine",
+        "state": "California"
+    },
+    "dartmouth.edu": {
+        "school": "Dartmouth College",
+        "state": "New Hampshire"
+    },
+    "gmu.edu": {
+        "school": "George Mason University",
+        "state": "Virginia"
+    },
+    "tamu.edu": {
+        "school": "Texas A & M University-College Station",
+        "state": "Texas"
+    },
+    "colby.edu": {
+        "school": "Colby College",
+        "state": "Maine"
+    },
+    "buckeyemail.osu.edu": {
+        "school": "Ohio State University-Main Campus",
+        "state": "Ohio"
+    },
+    "umn.edu": {
+        "school": "University of Minnesota-Twin Cities",
+        "state": "Minnesota"
+    },
+    "stern.nyu.edu": {
+        "school": "New York University",
+        "state": "New York"
+    },
+    "ou.edu": {
+        "school": "University of Oklahoma Norman Campus",
+        "state": "Oklahoma"
+    },
+    "conncoll.edu": {
+        "school": "Connecticut College",
+        "state": "Connecticut"
+    },
+    "uic.edu": {
+        "school": "University of Illinois at Chicago",
+        "state": "Illinois"
+    },
+    "cmu.edu": {
+        "school": "Carnegie Mellon University",
+        "state": "Pennsylvania"
+    },
+    "bu.edu": {
+        "school": "Boston University",
+        "state": "Massachusetts"
+    },
+    "risd.edu": {
+        "school": "Rhode Island School of Design",
+        "state": "Rhode Island"
+    },
+    "rochester.edu": {
+        "school": "University of Rochester",
+        "state": "New York"
+    },
+    "ucsd.edu": {
+        "school": "University of California-San Diego",
+        "state": "California"
+    },
+    "my.scccd.edu": {
+        "school": "Fresno City College",
+        "state": "California"
+    },
+    "bowdoin.edu": {
+        "school": "Bowdoin College",
+        "state": "Maine"
+    },
+    "caltech.edu": {
+        "school": "California Institute of Technology",
+        "state": "California"
+    },
+    "umass.edu": {
+        "school": "University of Massachusetts Amherst",
+        "state": "Massachusetts"
+    },
+    "haverford.edu": {
+        "school": "Haverford College",
+        "state": "Pennsylvania"
+    },
+    "iastate.edu": {
+        "school": "Iowa State University",
+        "state": "Iowa"
+    },
+    "jhu.edu": {
+        "school": "Johns Hopkins University",
+        "state": "Maryland"
+    },
+    "ug.bilkent.edu.tr": {
+        "school": "Bilkent University",
+        "state": "Turkey"
+    },
+    "neo.tamu.edu": {
+        "school": "Texas A & M University-College Station",
+        "state": "Texas"
+    },
+    "buffalo.edu": {
+        "school": "University at Buffalo",
+        "state": "New York"
+    },
+    "scarletmail.rutgers.edu": {
+        "school": "Rutgers University-New Brunswick",
+        "state": "New Jersey"
+    },
+    "aggies.ncat.edu": {
+        "school": "North Carolina A & T State University",
+        "state": "North Carolina"
+    },
+    "cs.brown.edu": {
+        "school": "Brown University",
+        "state": "Rhode Island"
+    },
+    "acsmail.ucsd.edu": {
+        "school": "University of California-San Diego",
+        "state": "California"
+    },
+    "marist.edu": {
+        "school": "Marist College",
+        "state": "New York"
+    },
+    "auburn.edu": {
+        "school": "Auburn University",
+        "state": "Alabama"
+    },
+    "smith.edu": {
+        "school": "Smith College",
+        "state": "Massachusetts"
+    },
+    "bc.edu": {
+        "school": "Boston College",
+        "state": "Massachusetts"
+    },
+    "gatech.edu": {
+        "school": "Georgia Institute of Technology-Main Campus",
+        "state": "Georgia"
+    },
+    "msu.edu": {
+        "school": "Michigan State University",
+        "state": "Michigan"
+    },
+    "uga.edu": {
+        "school": "University of Georgia",
+        "state": "Georgia"
+    },
+    "jagmail.southalabama.edu": {
+        "school": "University of South Alabama",
+        "state": "Alabama"
+    },
+    "tcnj.edu": {
+        "school": "The College of New Jersey",
+        "state": "New Jersey"
+    },
+    "kent.edu": {
+        "school": "Kent State University at Kent",
+        "state": "Ohio"
+    },
+    "student.gsu.edu": {
+        "school": "Georgia State University",
+        "state": "Georgia"
+    },
+    "rpi.edu": {
+        "school": "Rensselaer Polytechnic Institute",
+        "state": "New York"
+    },
+    "wustl.edu": {
+        "school": "Washington University in St Louis",
+        "state": "Missouri"
+    },
+    "stanford.edu": {
+        "school": "Stanford University",
+        "state": "California"
+    },
+    "umd.edu": {
+        "school": "University of Maryland-College Park",
+        "state": "Maryland"
+    },
+    "psu.edu": {
+        "school": "Pennsylvania State University-Main Campus",
+        "state": "Pennsylvania"
+    },
+    "zewailcity.edu.eg": {
+        "school": "Zewail University of Science and Technology",
+        "state": "Egypt"
+    },
+    "fiu.edu": {
+        "school": "Florida International University",
+        "state": "Florida"
+    }
+}

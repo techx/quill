@@ -1,0 +1,398 @@
+<div class="ui top attached segment">
+
+  <div class="ui header">
+    {{selectedUser.profile.name ? selectedUser.profile.name : selectedUser.email}}
+    <span
+      ng-show="selectedUser.admin">
+      (Admin)
+    </span>
+  </div>
+
+</div>
+
+<div class="ui botom attached segment">
+
+  <div>
+    <p>
+      <strong> Status: </strong>
+      <span
+        class="ui label">
+        {{selectedUser.status.name.toUpperCase()}}
+      </span>
+    </p>
+    <p>
+      <strong> Admitted by: </strong> {{selectedUser.status.admittedBy ? selectedUser.status.admittedBy : 'N/A'}}
+    </p>
+  </div>
+
+  <div class="ui divider"></div>
+
+  <div class="ui form">
+
+    <fieldset ng-disabled="false">
+
+      <div class="ui header">
+        Basic Info
+      </div>
+
+      <div class="field">
+        <strong>
+          Created on:
+        </strong>
+        {{formatTime(selectedUser.timestamp)}}
+      </div>
+
+      <div class="field">
+        <strong>
+          Last Updated:
+        </strong>
+        {{formatTime(selectedUser.lastUpdated)}}
+      </div>
+
+
+      <div class="field">
+        <label> Email </label>
+        <input type="text" ng-model="selectedUser.email" />
+      </div>
+
+      <div class="field">
+        <label> Team </label>
+        <input type="text" ng-model="selectedUser.teamCode" />
+      </div>
+
+    </fieldset>
+
+  </div>
+
+  <div class="ui divider"></div>
+
+  <div class="ui form">
+
+    <fieldset ng-disabled="false">
+
+      <div class="ui header">
+       Profile
+      </div>
+
+      <div class="field">
+        <label> Email </label>
+        <input type="email"
+               name="email"
+               disabled="disabled"
+               ng-model="selectedUser.email">
+      </div>
+
+      <div class="field">
+        <label> Full Name </label>
+        <input type="text"
+               name="name"
+               ng-model="selectedUser.profile.name">
+      </div>
+
+      <div class="field" ng-show="autoFilledSchool">
+        <label> School </label>
+        <input class="ui input"
+               disabled="disabled"
+               ng-show="autoFilledSchool"
+               ng-model="selectedUser.profile.school">
+      </div>
+
+      <div class="field" ng-show="!autoFilledSchool">
+        <label> School </label>
+        <input class="ui input"
+               name="school"
+               ng-model="selectedUser.profile.school">
+      </div>
+
+      <div class="field">
+        <label>Graduation Year</label>
+        <select
+          name="year"
+          ng-model="selectedUser.profile.graduationYear">
+          <option value="">Graduation Year</option>
+          <option value="2016">2016</option>
+          <option value="2017">2017</option>
+          <option value="2018">2018</option>
+          <option value="2019">2019</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Gender</label>
+        <select
+          name="gender"
+          ng-model="selectedUser.profile.gender">
+          <option value="">Gender</option>
+          <option value="M">Male</option>
+          <option value="F">Female</option>
+          <option value="O">Other</option>
+          <option value="N">I prefer not to answer.</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>I would describe myself as a...</label>
+        <input type="text"
+               placeholder="Designer, Data Scientist, iOS Wizard, Hacker Extraordinaire"
+               ng-model="selectedUser.profile.description">
+      </div>
+
+      <div class="field">
+        <label>
+            What would you like to learn or get out of HackMIT? (optional)
+        </label>
+        <textarea ng-model="selectedUser.profile.essay">
+        </textarea>
+      </div>
+
+      <div class="field"
+           ng-hide="isMitStudent">
+        <p>
+          Because of limitations imposed by MIT, we are not legally allowed to host
+          non-MIT minors (those under 18) for HackMIT 2015. Checking the box below affirms that you are or will be 18 years or older by September 19th, 2015.
+        </p>
+        <p>
+          <strong>
+          We will be checking ID. If you are a non-MIT minor, you will be turned away at the door.
+          </strong>
+        </p>
+        <div class="ui checkbox">
+          <input type="checkbox" id="adult" ng-model="selectedUser.profile.adult">
+          <label for="adult">I am 18 or older.</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <div
+          ng-click="updateProfile()"
+          class="ui positive right labeled icon button">
+          Update Profile
+          <i class="checkmark icon"></i>
+        </div>
+      </div>
+
+    </fieldset>
+  </div>
+
+  <div class="ui divider"></div>
+
+  <div class="ui form">
+
+    <fieldset ng-disabled="false">
+
+      <div class="ui header">
+        Confirmation
+      </div>
+
+      <div class="field">
+        <label> Phone </label>
+        <input type="tel" ng-model="selectedUser.confirmation.phoneNumber" />
+      </div>
+
+      <div class="field">
+        <label> Dietary Restrictions </label>
+        <input
+          type="text" ng-model="selectedUser.confirmation.dietaryRestrictions" />
+      </div>
+
+      <div class="field">
+        <label> Shirt Size </label>
+        <input type="text" ng-model="selectedUser.profile.shirtSize" />
+      </div>
+
+      <div class="field">
+        <label> Major </label>
+        <input type="text" ng-model="selectedUser.profile.major" />
+      </div>
+
+      <div class="field">
+        <label> Github </label>
+        <input type="url" ng-model="selectedUser.profile.github" />
+      </div>
+
+      <div class="field">
+        <label> Website </label>
+        <input type="url" ng-model="selectedUser.profile.website" />
+      </div>
+
+      <div class="field">
+        <label> Resume </label>
+        <input type="url" ng-model="selectedUser.profile.resume" />
+      </div>
+
+      <div class="ui divider"></div>
+
+      <div class="field">
+        <label>
+          Needs Hardware
+        </label>
+        <div class="ui checkbox">
+          <input type="checkbox" ng-model="selectedUser.confirmation.wantsHardware">
+          <label> Yup, I need hardware </label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>
+        Hardware
+        </label>
+        <input type="text" ng-model="selectedUser.confirmation.hardware">
+      </div>
+
+      <div class="ui divider"></div>
+
+      <div class="ui header">
+        Hosting
+      </div>
+
+      <div class="field">
+        <strong> Needs Hosting Friday </strong>
+        <i
+          ng-if="selectedUser.confirmation.hostNeededFri"
+          class="green check circle icon">
+        </i>
+        <i
+          ng-if="!selectedUser.confirmation.hostNeededFri"
+          class="red remove circle icon">
+        </i>
+      </div>
+
+      <div class="field">
+        <strong> Needs Hosting Saturday </strong>
+        <i
+          ng-if="selectedUser.confirmation.hostNeededSat"
+          class="green check circle icon">
+        </i>
+        <i
+          ng-if="!selectedUser.confirmation.hostNeededSat"
+          class="red remove circle icon">
+        </i>
+      </div>
+
+      <div class="field">
+        <strong> Gender Neutral </strong>
+        <i
+          ng-if="selectedUser.confirmation.genderNeutral"
+          class="green check circle icon">
+        </i>
+        <i
+          ng-if="!selectedUser.confirmation.genderNeutral"
+          class="red remove circle icon">
+        </i>
+      </div>
+
+      <div class="field">
+        <strong> Cat Friendly </strong>
+        <i
+          ng-if="selectedUser.confirmation.catFriendly"
+          class="green check circle icon">
+        </i>
+        <i
+          ng-if="!selectedUser.confirmation.catFriendly"
+          class="red remove circle icon">
+        </i>
+      </div>
+
+      <div class="field">
+        <strong> Smoking Friendly </strong>
+        <i
+          ng-if="selectedUser.confirmation.smokingFriendly"
+          class="green check circle icon">
+        </i>
+        <i
+          ng-if="!selectedUser.confirmation.smokingFriendly"
+          class="red remove circle icon">
+        </i>
+      </div>
+
+      <div class="field">
+        <label> Hosting Notes </label>
+        <textarea ng-model="selectedUser.confirmation.hostNotes"></textarea>
+      </div>
+
+      <div class="ui divider"></div>
+
+      <div class="ui header">
+        Travel
+      </div>
+
+      <div class="field">
+        <strong> Needs Reimbursement</strong>
+        <i
+          ng-if="selectedUser.confirmation.needsReimbursement"
+          class="green check circle icon">
+        </i>
+        <i
+          ng-if="!selectedUser.confirmation.needsReimbursement"
+          class="red remove circle icon">
+        </i>
+      </div>
+
+      <div class="field">
+        <label>Full Name</label>
+        <input type="text"
+               name="name"
+               ng-model="selectedUser.confirmation.address.name">
+      </div>
+
+      <div class="field">
+        <label> Address Line 1 - Street address, P.O. box, company name, c/o </label>
+        <input
+          type="text"
+          name="addressLine1"
+          ng-model="selectedUser.confirmation.address.line1">
+      </div>
+
+      <div class="field">
+        <label> Address Line 2 - Apartment, suite, unit, building, floor, etc. </label>
+        <input
+          type="text"
+          name="addressLine2"
+          ng-model="selectedUser.confirmation.address.line2">
+      </div>
+
+      <div class="four fields">
+        <div class="field">
+          <label> City </label>
+          <input
+            type="text"
+            name="city"
+            ng-model="selectedUser.confirmation.address.city">
+        </div>
+        <div class="field">
+          <label> State/Province/Region </label>
+          <input
+            type="text"
+            name="state"
+            ng-model="selectedUser.confirmation.address.state">
+        </div>
+        <div class="field">
+          <label> ZIP </label>
+          <input
+            type="text"
+            name="zip"
+            ng-model="selectedUser.confirmation.address.zip">
+        </div>
+        <div class="field">
+          <label> Country </label>
+          <input
+            type="text"
+            name="country"
+            ng-model="selectedUser.confirmation.address.country">
+        </div>
+      </div>
+
+      <div class="field">
+        <label> Receipt </label>
+        <input type="url" ng-model="selectedUser.confirmation.receipt" />
+      </div>
+
+      <div class="field">
+        <label> Additional Notes </label>
+        <textarea ng-model="selectedUser.confirmation.notes"></textarea>
+      </div>
+
+    </fieldset>
+
+  </div>
+</div>

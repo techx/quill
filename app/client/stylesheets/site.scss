@@ -1,0 +1,121 @@
+@import 'colors';
+$font-body: 'Lato', 'Helvetica Neue', 'Helvetica', sans-serif;
+$font-header: 'Montserrat', 'Helvetica Neue', 'Helvetica', sans-serif;
+
+// Login screen variables
+$login-bg-color: $purple;
+$login-color: $pink;
+$register-color: $blue;
+
+$status-unverified-color: rgb(82, 82, 82);
+$status-incomplete-color: #F5F5F5;
+$status-submitted-color: lighten($purple, 20%);
+$status-admitted-color: $pink;
+$status-confirmed-color: $purple;
+$status-checkedin-color: $purple;
+$status-waitlist-color: $blue;
+$status-declined-color: $blue;
+$status-rejected-color: red; // Not used
+
+// Sidebar variables
+$sidebar-color: $pink;
+$sidebar-width: 265px;
+$sidebar-transition-time: .5s;
+$sidebar-tab-size: 55px;
+
+// Page variables
+$page-header-color: $purple;
+
+$brand-primary: $pink;
+$brand-secondary: $purple;
+$brand-tertiary: $blue;
+
+@mixin transform($transforms) {
+  -webkit-transform: $transforms;
+          transform: $transforms;
+}
+
+@mixin transition-duration($duration) {
+  -webkit-transition-duration: $duration;
+  transition-duration: $duration;
+}
+
+@import 'login';
+@import 'base';
+@import 'sidebar';
+@import 'page';
+@import 'dashboard';
+@import 'verify';
+@import 'team';
+@import 'admin';
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  font-size: 1.02em;
+}
+
+body {
+  margin: 0;
+  font-family: 'Lato', 'Helvetica Neue', 'Helvetica', sans-serif;
+  font-weight: 300;
+
+  > .container {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/**
+ * SweetAlert Overrides
+ */
+.sweet-alert {
+  font-family: $font-body;
+}
+
+/**
+ * Semantic-UI Overrides for squareishness
+ */
+.ui.segment {
+  border-radius: 0;
+  box-shadow: none;
+}
+input {
+  border-radius: 0 !important;
+}
+.ui.button {
+  border-radius: 0;
+  &.pink {
+    background: $pink;
+    &:hover {
+      background: lighten($pink, 3%);
+    }
+    &:active {
+      background: darken($pink, 3%);
+    }
+  }
+  &.purple {
+    background: $purple;
+    &:hover {
+      background: lighten($purple, 3%);
+    }
+    &:active {
+      background: darken($purple, 3%);
+    }
+    &:focus {
+      background: $purple;
+    }
+  }
+}
+
+.ui.form select {
+  height: 2.5em;
+}
+
+fieldset {
+  padding: 0;
+  border: none;
+}
+
+// @import 'animation';
