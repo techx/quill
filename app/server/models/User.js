@@ -319,11 +319,11 @@ schema.statics.findOneByEmail = function(email){
  * @param  {Function} callback args(err, user)
  */
 schema.statics.getByToken = function(token, callback){
-  jwt.verify(token, JWT_SECRET, function(err, decoded){
+  jwt.verify(token, JWT_SECRET, function(err, id){
     if (err) {
       return callback(err);
     }
-    this.findOne({_id: decoded.id}, callback);
+    this.findOne({_id: id}, callback);
   }.bind(this));
 };
 
