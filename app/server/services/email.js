@@ -12,6 +12,10 @@ var EMAIL_USER = process.env.EMAIL_USER;
 var EMAIL_PASS = process.env.EMAIL_PASS;
 var EMAIL_PORT = process.env.EMAIL_PORT;
 var EMAIL_CONTACT = process.env.EMAIL_CONTACT;
+var EMAIL_HEADER_IMAGE = process.env.EMAIL_HEADER_IMAGE;
+if(EMAIL_HEADER_IMAGE.indexOf("https") == -1){
+  EMAIL_HEADER_IMAGE = ROOT_URL + EMAIL_HEADER_IMAGE;
+}
 
 var NODE_ENV = process.env.NODE_ENV;
 
@@ -43,6 +47,7 @@ function sendOne(templateName, options, data, callback){
       return callback(err);
     }
 
+    data.emailHeaderImage = EMAIL_HEADER_IMAGE;
     template(templateName, data, function(err, html, text){
       if (err) {
         return callback(err);
