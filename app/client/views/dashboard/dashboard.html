@@ -28,7 +28,7 @@
         <div
           ng-if="showWaitlist"
           class="waitlist state">
-          on waitlist
+          On waitlist
         </div>
 
         <div class="ui divider"></div>
@@ -52,8 +52,7 @@
             </strong>
           </p>
           <p>
-            You should have received an email asking you verify your email. Click the
-            link the email and you can start your application!
+            {{ DASH_TXT.unverified }}
           </p>
           <div class="ui purple button" ng-click="resendEmail()">
             Resend verification email
@@ -65,12 +64,11 @@
           class="description">
           <p>
             <strong>
-            You still need to complete your application!
+                {{ DASH_TXT.incompleteTitle }} 
             </strong>
           </p>
           <p>
-            If you do not complete your application before the {{formatTime(timeClose)}},
-            you will not be considered for the admissions lottery!
+            {{ DASH_TXT.incomplete }}
           </p>
 
           <div class="ui purple button"
@@ -85,16 +83,11 @@
           class="description">
           <p>
             <strong>
-              Your application has been submitted!
+                {{ DASH_TXT.submittedTitle }}
             </strong>
           </p>
           <p>
-            Feel free to edit it at any time. However, once registration is closed,
-            you will not be able to edit it any further.
-          </p>
-          <p>
-            Admissions will be determined by a random lottery. Please make sure your
-            information is accurate before registration is closed!
+            {{ DASH_TXT.submitted }}            
           </p>
           <div class="ui purple button"
                ui-sref="app.application">
@@ -121,11 +114,11 @@
           ng-if="dashState('closedAndIncomplete')">
           <p>
             <strong>
-              Unfortunately, registration has closed, and the lottery process has begun.
+                {{ DASH_TXT.closedAndIncompleteTitle }}
             </strong>
           </p>
           <p>
-            Because you have not completed your profile in time, you will not be eligible for the lottery process.
+            {{ DASH_TXT.closdAndIncomplete }}
           </p>
         </div>
 
@@ -157,7 +150,7 @@
 
           <div class="markdown">
             <h4>
-              You must confirm by {{formatTime(user.status.confirmBy)}}.
+                {{ DASH_TXT.admittedAndCanConfirmTitle }}
             </h4>
           </div>
 
@@ -168,7 +161,7 @@
 
           <div class="markdown">
             <h4>
-              You must confirm by {{formatTime(user.status.confirmBy)}}.
+                {{ DASH_TXT.admittedAndCanConfirmTitle }}
             </h4>
           </div>
 
@@ -190,17 +183,11 @@
 
           <div class="markdown">
             <h4>
-              Your confirmation deadline of {{formatTime(user.status.confirmBy)}} has passed.
+                {{ DASH_TXT.admittedAndCannotConfirmTitle }}
             </h4>
 
             <p>
-              Although you were accepted, you did not complete your confirmation in time.
-            </p>
-            <p>
-              Unfortunately, this means that you will not be able to attend the event, as we must begin to accept other applicants on the waitlist.
-            </p>
-            <p>
-              We hope to see you again next year!
+                {{ DASH_TXT.admittedAndCannotConfirm }}
             </p>
           </div>
 
@@ -214,7 +201,7 @@
             ng-show="!pastConfirmation"
             class="markdown">
             <h4>
-              You can edit your confirmation information until {{formatTime(user.status.confirmBy)}}.
+                {{ DASH_TXT.confirmedNotPastTitle }} 
             </h4>
           </div>
 
@@ -240,11 +227,7 @@
           ng-if="dashState('declined')">
 
           <p>
-            We're sorry to hear that you won't be able to make it to HackMIT 2015! :(
-          </p>
-
-          <p>
-            Maybe next year! We hope to see you again soon.
+            {{ DASH_TXT.declined }}
           </p>
         </div>
 
