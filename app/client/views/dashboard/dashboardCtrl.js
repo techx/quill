@@ -8,15 +8,24 @@ angular.module('reg')
     'Utils',
     'AuthService',
     'UserService',
-    function($rootScope, $scope, $sce, currentUser, settings, Utils, AuthService, UserService){
-
+    'EVENT_INFO',
+    'DASH_TXT',
+    function($rootScope, $scope, $sce, currentUser, settings, Utils, AuthService, UserService, EVENT_INFO, DASH_TXT){
       var Settings = settings.data;
       var user = currentUser.data;
       $scope.user = user;
 
-      $scope.timeClose = Settings.timeClose;
-
-      $scope.formatTime = Utils.formatTime;
+      $scope.EVENT_INFO = EVENT_INFO;
+      $scope.DASH_TXT = DASH_TXT;
+      
+      for (var msg in $scope.DASH_TXT) {
+        if ($scope.DASH_TXT[msg].includes('[APP_DEADLINE]')) {
+          $scope.DASH_TXT[msg] = $scope.DASH_TXT[msg].replace('[APP_DEADLINE]', Utils.formatTime(Settings.timeClose));
+        }
+        if ($scope.DASH_TXT[msg].includes('[CONFIRM_DEADLINE]')) {
+          $scope.DASH_TXT[msg] = $scope.DASH_TXT[msg].replace('[CONFIRM_DEADLINE]', Utils.formatTime(user.status.confirmBy));
+        }
+      }
 
       // Is registration open?
       var regIsOpen = $scope.regIsOpen = Utils.isRegOpen(Settings);
