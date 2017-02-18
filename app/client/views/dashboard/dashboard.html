@@ -52,7 +52,7 @@
             </strong>
           </p>
           <p>
-            {{ DASH_TXT.unverified }}
+            {{ DASHBOARD.UNVERIFIED }}
           </p>
           <div class="ui purple button" ng-click="resendEmail()">
             Resend verification email
@@ -64,11 +64,11 @@
           class="description">
           <p>
             <strong>
-                {{ DASH_TXT.incompleteTitle }} 
+                {{ DASHBOARD.INCOMPLETE_TITLE }} 
             </strong>
           </p>
           <p>
-            {{ DASH_TXT.incomplete }}
+            {{ DASHBOARD.INCOMPLETE }}
           </p>
 
           <div class="ui purple button"
@@ -83,11 +83,11 @@
           class="description">
           <p>
             <strong>
-                {{ DASH_TXT.submittedTitle }}
+                {{ DASHBOARD.SUBMITTED_TITLE }}
             </strong>
           </p>
           <p>
-            {{ DASH_TXT.submitted }}            
+            {{ DASHBOARD.SUBMITTED }}            
           </p>
           <div class="ui purple button"
                ui-sref="app.application">
@@ -114,11 +114,11 @@
           ng-if="dashState('closedAndIncomplete')">
           <p>
             <strong>
-                {{ DASH_TXT.closedAndIncompleteTitle }}
+                {{ DASHBOARD.CLOSED_AND_INCOMPLETE_TITLE }}
             </strong>
           </p>
           <p>
-            {{ DASH_TXT.closdAndIncomplete }}
+            {{ DASHBOARD.CLOSED_AND_INCOMPLETE }}
           </p>
         </div>
 
@@ -150,7 +150,7 @@
 
           <div class="markdown">
             <h4>
-                {{ DASH_TXT.admittedAndCanConfirmTitle }}
+                {{ DASHBOARD.ADMITTED_AND_CAN_CONFIRM_TITLE }}
             </h4>
           </div>
 
@@ -161,7 +161,7 @@
 
           <div class="markdown">
             <h4>
-                {{ DASH_TXT.admittedAndCanConfirmTitle }}
+                {{ DASHBOARD.ADMITTED_AND_CAN_CONFIRM }}
             </h4>
           </div>
 
@@ -183,11 +183,11 @@
 
           <div class="markdown">
             <h4>
-                {{ DASH_TXT.admittedAndCannotConfirmTitle }}
+                {{ DASHBOARD.ADMITTED_AND_CANNOT_CONFIRM_TITLE }}
             </h4>
 
             <p>
-                {{ DASH_TXT.admittedAndCannotConfirm }}
+                {{ DASHBOARD.ADMITTED_AND_CANNOT_CONFIRM }}
             </p>
           </div>
 
@@ -201,7 +201,7 @@
             ng-show="!pastConfirmation"
             class="markdown">
             <h4>
-                {{ DASH_TXT.confirmedNotPastTitle }} 
+                {{ DASHBOARD.CONFIRMED_NOT_PAST_TITLE }} 
             </h4>
           </div>
 
@@ -227,7 +227,7 @@
           ng-if="dashState('declined')">
 
           <p>
-            {{ DASH_TXT.declined }}
+            {{ DASHBOARD.DECLINED }}
           </p>
         </div>
 

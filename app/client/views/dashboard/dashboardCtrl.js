@@ -9,21 +9,21 @@ angular.module('reg')
     'AuthService',
     'UserService',
     'EVENT_INFO',
-    'DASH_TXT',
-    function($rootScope, $scope, $sce, currentUser, settings, Utils, AuthService, UserService, EVENT_INFO, DASH_TXT){
+    'DASHBOARD',
+    function($rootScope, $scope, $sce, currentUser, settings, Utils, AuthService, UserService, EVENT_INFO, DASHBOARD){
       var Settings = settings.data;
       var user = currentUser.data;
       $scope.user = user;
 
       $scope.EVENT_INFO = EVENT_INFO;
-      $scope.DASH_TXT = DASH_TXT;
+      $scope.DASHBOARD = DASHBOARD;
       
-      for (var msg in $scope.DASH_TXT) {
-        if ($scope.DASH_TXT[msg].includes('[APP_DEADLINE]')) {
-          $scope.DASH_TXT[msg] = $scope.DASH_TXT[msg].replace('[APP_DEADLINE]', Utils.formatTime(Settings.timeClose));
+      for (var msg in $scope.DASHBOARD) {
+        if ($scope.DASHBOARD[msg].includes('[APP_DEADLINE]')) {
+          $scope.DASHBOARD[msg] = $scope.DASHBOARD[msg].replace('[APP_DEADLINE]', Utils.formatTime(Settings.timeClose));
         }
-        if ($scope.DASH_TXT[msg].includes('[CONFIRM_DEADLINE]')) {
-          $scope.DASH_TXT[msg] = $scope.DASH_TXT[msg].replace('[CONFIRM_DEADLINE]', Utils.formatTime(user.status.confirmBy));
+        if ($scope.DASHBOARD[msg].includes('[CONFIRM_DEADLINE]')) {
+          $scope.DASHBOARD[msg] = $scope.DASHBOARD[msg].replace('[CONFIRM_DEADLINE]', Utils.formatTime(user.status.confirmBy));
         }
       }
 
