@@ -5,13 +5,16 @@ angular.module('reg')
     'settings',
     'Utils',
     'UserService',
-    function($scope, currentUser, settings, Utils, UserService){
+    'TEAM',
+    function($scope, currentUser, settings, Utils, UserService, TEAM){
       // Get the current user's most recent data.
       var Settings = settings.data;
 
       $scope.regIsOpen = Utils.isRegOpen(Settings);
 
       $scope.user = currentUser.data;
+
+      $scope.TEAM = TEAM;
 
       if ($scope.user.teamCode){
         UserService
