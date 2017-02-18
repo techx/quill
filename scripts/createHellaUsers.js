@@ -6,12 +6,12 @@ mongoose.connect(database.url);
 var UserController = require('../app/server/controllers/UserController');
 
 var users = 1000;
-var username = 'fucker';
+var username = 'hacker';
 
 for (var i = 0; i < users; i++){
   console.log(username, i);
   UserController
-    .createUser(username + i + '@balls.edu', 'foobar', function(){
+    .createUser(username + i + '@school.edu', 'foobar', function(){
     console.log(i);
     });
 }

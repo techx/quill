@@ -7,14 +7,14 @@ mongoose.connect(database.url);
 var User = require('../app/server/models/User');
 var UserController = require('../app/server/controllers/UserController');
 
-var email = 'ehzhang@mit.edu';
+var email = 'hacker@school.edu';
 
 User.findOne({
   email: email
 }, function(err, user){
   var id = user._id;
 
-  // Change with old password
+  /* Change with old password */ 
   UserController.changePassword(
     id,
     'foobar',
@@ -24,6 +24,7 @@ User.findOne({
     }
   );
 
+  /* Change with auth token */
   // var token = user.generateTempAuthToken();
 
   // UserController.resetPassword(

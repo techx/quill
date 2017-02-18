@@ -6,7 +6,7 @@ mongoose.connect(database);
 
 var UserController = require('../app/server/controllers/UserController');
 
-var user = { email: "admin@hackmit.org" };
+var user = { email: process.env.ADMIN_EMAIL };
 
 var userArray = require('fs').readFileSync('accepted.txt').toString().split('\n');
 var count = 0;
