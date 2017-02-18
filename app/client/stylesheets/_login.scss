@@ -1,8 +1,9 @@
+@import 'asset_urls';
 #login {
   height: 100%;
   width: 100%;
   background-color: $login-bg-color;
-  background: url('https://s3.amazonaws.com/hackmit-assets/tintedphoto_1920_1080_low.jpg');
+  background: $login-bg; 
   background-size: cover;
 
   > .container {
