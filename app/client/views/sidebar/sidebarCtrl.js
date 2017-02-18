@@ -6,10 +6,13 @@ angular.module('reg')
     'Utils',
     'AuthService',
     'Session',
-    function($rootScope, $scope, Settings, Utils, AuthService, Session){
+    'EVENT_INFO',
+    function($rootScope, $scope, Settings, Utils, AuthService, Session, EVENT_INFO){
 
       var settings = Settings.data;
       var user = $rootScope.currentUser;
+
+      $scope.EVENT_INFO = EVENT_INFO;
 
       $scope.pastConfirmation = Utils.isAfter(user.status.confirmBy);
 
