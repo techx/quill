@@ -1,0 +1,15 @@
+/** BRANDING COLORS
+ * primary (default pink): sidebar color, admitted dashboard status
+ * secondary (default purple): header text, submitted/confirmed/checked-in dashboard status
+ * tertiary (default blue): waitlist/declined dashboard status
+ */
+
+$primary: #e76482;
+$secondary: #473899;
+$tertiary: #4c82cc;
+
+/** ASSET URLS
+ * login-bg: image for login splash page 
+ */
+
+$login-bg: url('https://s3.amazonaws.com/hackmit-assets/tintedphoto_1920_1080_low.jpg');
