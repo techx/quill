@@ -1,0 +1,46 @@
+#login {
+  height: 100%;
+  width: 100%;
+  background-color: $login-bg-color;
+  background: url('https://s3.amazonaws.com/hackmit-assets/tintedphoto_1920_1080_low.jpg');
+  background-size: cover;
+
+  > .container {
+    position: relative;
+    top: 50%;
+
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+
+    > .content {
+      max-width: 320px;
+      margin: 0 auto;
+
+      .logo {
+        max-width: 100px;
+        margin: .5rem auto 1rem auto;
+        img {
+          width: 100px;
+          height: 100px;
+        }
+      }
+
+      .button {
+        color: white;
+        &.login {
+          background: $login-color;
+        }
+        &.register {
+          background: $register-color
+        }
+      }
+
+      .forgot {
+        text-align: center;
+      }
+
+    }
+  }
+
+}

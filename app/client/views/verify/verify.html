@@ -1,0 +1,24 @@
+<div class="verify page">
+  <div class="divided title">
+    EMAIL VERIFICATION
+  </div>
+  <div class="ui segment">
+    <div ng-show="success">
+      <i class="green check circle icon"></i>
+      <p>
+        Your email has been verified!
+      </p>
+      <br>
+      <div class="ui fluid pink button"
+           ui-sref="app.dashboard">
+        Continue to Dashboard
+      </div>
+    </div>
+    <div ng-show="!success">
+      <i class="red circle remove icon"></i>
+      <p>
+        This token is invalid.
+      </p>
+    </div>
+  </div>
+</div>

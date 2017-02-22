@@ -1,0 +1,214 @@
+<div class="ui stackable two column grid">
+  <div class="column">
+
+    <!-- Reigstration Open/Close -->
+    <div
+      ng-class="{'loading': loading}"
+      class="ui red segment">
+      <div class="ui form">
+
+        <div class="ui header">
+          Open/Close Registration
+        </div>
+
+        <p>
+          Users will be able to register new accounts within the time period specified.
+        </p>
+
+        <div class="field">
+          <label>
+            Opens: {{ formatDate(settings.timeOpen) }}
+          </label>
+          <input type="datetime-local" ng-model="settings.timeOpen">
+        </div>
+
+        <div class="field">
+          <label>
+            Closes: {{ formatDate(settings.timeClose) }}
+          </label>
+          <input type="datetime-local" ng-model="settings.timeClose">
+        </div>
+
+        <div class="ui field">
+          <div
+            class="ui green button"
+            ng-click="updateRegistrationTimes()">
+            Update
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="column">
+
+    <!-- Confirmation Date -->
+    <div
+      ng-class="{'loading': loading}"
+      class="ui orange segment">
+      <div class="ui form">
+
+        <div class="ui header">
+          Confirmation Date
+        </div>
+
+        <p>
+          Any users that are accepted will have to confirm by the date selected.
+        </p>
+
+        <div class="field">
+          <label>
+            Confirm By: {{ formatDate(settings.timeConfirm) }}
+          </label>
+          <input type="datetime-local" ng-model="settings.timeConfirm">
+        </div>
+
+        <div class="ui field">
+          <div
+            class="ui green button"
+            ng-click="updateConfirmationTime()">
+            Update
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Whitelist -->
+<div
+  ng-class="{'loading': loading}"
+  class="ui green segment">
+
+  <div class="ui header">
+    Whitelisted Emails
+  </div>
+
+  <div class="ui form">
+   <div
+      class="ui label"
+      ng-repeat="email in whitelist.replace(' ','').split(',')">
+      {{email}}
+    </div>
+    <br>
+    <br>
+    <div class="field">
+      <textarea class="ui input" type="text" ng-model="whitelist">
+      </textarea>
+    </div>
+    <div class="field">
+      <div
+        class="ui green button"
+        ng-click="updateWhitelist()">
+        Update
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Waitlist Text Editor -->
+<div
+  ng-class="{'loading': loading}"
+  class="ui blue segment">
+  <div class="ui header">
+    Waitlist Text
+  </div>
+  <div class="ui stackable two column grid">
+    <div class="column">
+      <div class="ui form">
+        <div class="field">
+          <textarea
+            class="ui input"
+            type="text"
+            ng-model="settings.waitlistText">
+          </textarea>
+        </div>
+        <div class="field">
+          <div
+            class="ui green button"
+            ng-click="updateWaitlistText()">
+            Update
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div
+        class="preview ui segment"
+        ng-bind-html="markdownPreview(settings.waitlistText)">
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Acceptance Text Editor -->
+<div
+  ng-class="{'loading': loading}"
+  class="ui pink segment">
+  <div class="ui header">
+    Acceptance Text
+  </div>
+  <div class="ui stackable two column grid">
+    <div class="column">
+      <div class="ui form">
+        <div class="field">
+          <textarea
+            class="ui input"
+            type="text"
+            ng-model="settings.acceptanceText">
+          </textarea>
+        </div>
+        <div class="field">
+          <div
+            class="ui green button"
+            ng-click="updateAcceptanceText()">
+            Update
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div
+        class="preview ui segment"
+        ng-bind-html="markdownPreview(settings.acceptanceText)">
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div
+  ng-class="{'loading': loading}"
+  class="ui orange segment">
+  <div class="ui header">
+    Confirmation Text
+  </div>
+  <div class="ui stackable two column grid">
+    <div class="column">
+      <div class="ui form">
+        <div class="field">
+          <textarea
+            class="ui input"
+            type="text"
+            ng-model="settings.confirmationText">
+          </textarea>
+        </div>
+        <div class="field">
+          <div
+            class="ui green button"
+            ng-click="updateConfirmationText()">
+            Update
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div
+        class="preview ui segment"
+        ng-bind-html="markdownPreview(settings.confirmationText)">
+      </div>
+    </div>
+  </div>
+</div>

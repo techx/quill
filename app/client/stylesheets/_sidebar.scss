@@ -1,0 +1,111 @@
+#sidebar {
+  height: 100%;
+  position: fixed;
+  background: $sidebar-color;
+  color: white;
+  width: $sidebar-width;
+  z-index: 999;
+  overflow: auto;
+
+  @include transition-duration($sidebar-transition-time);
+
+  .item {
+    width: 100%;
+    padding: 16px;
+    transition-duration: .1s;
+    transition: border-left, .5s, linear;
+    border-bottom: 1px solid lighten($sidebar-color, 3%);
+    opacity: .7;
+    border-left: 0px solid transparent;
+
+    &.active {
+      background: lighten($sidebar-color, 4%);
+      opacity: 1;
+      border-left: 8px solid lighten($sidebar-color, 10%);
+    }
+    &:hover {
+      cursor: pointer;
+      background: darken($sidebar-color, 2%);
+      opacity: 1;
+    }
+    &:active {
+      background: darken($sidebar-color, 5%);
+      opacity: 1;
+    }
+
+    &.logo {
+      opacity: 1;
+      padding: 48px;
+    }
+
+  }
+
+  .note {
+    font-size: .8em;
+    text-align: center;
+    padding: 16px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 16px;
+
+  }
+
+  // Tab is the sibling of the sidebar
+  +.tab {
+    position: fixed;
+    width: $sidebar-tab-size;
+    height: $sidebar-tab-size;
+    background: $sidebar-color;
+    top: 12px;
+
+    z-index: 9999;
+
+    // Is not visible unless mobile.
+    visibility: 'hidden';
+    opacity: 0;
+
+    @include transform(translate3d($sidebar-width, 0,0));
+    @include transition-duration($sidebar-transition-time);
+
+    cursor: pointer;
+
+    .close {
+      color: white;
+      font-size: 2em;
+    }
+  }
+
+}
+
+@media only screen and (max-width: 768px) {
+  #sidebar {
+    @include transform(translate3d(-$sidebar-width, 0, 0));
+
+    // When the sidebar is open
+    &.open {
+      // Transform the sidebar to original position
+      @include transform(translate3d(0,0,0));
+      +.tab {
+        // Transform the tab to the side of the sidebar
+        @include transform(translate3d($sidebar-width, 0, 0));
+
+        // Hack to get the X lined up
+        line-height: $sidebar-tab-size;
+        text-align: center;
+        padding: 0;
+      }
+    }
+    // When the tab is closed.
+    +.tab {
+      visibility: 'visible';
+      opacity: 1;
+      @include transform(translate3d(0,0,0));
+      padding: 12px;
+    }
+    .note {
+      display: none;
+    }
+
+  }
+}

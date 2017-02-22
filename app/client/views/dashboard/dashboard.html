@@ -1,0 +1,255 @@
+<div id="dashboard" class="page">
+  <div class="divided title">
+    Dashboard
+  </div>
+
+  <div class="ui stackable centered page grid">
+    <div class="column">
+      <div class="ui status segment">
+        <div class="small title">
+          Your status:
+        </div>
+        <br>
+
+        <div
+          class="state"
+          ng-class="user.status.name"
+          ng-if="!showWaitlist && !dashState('admittedAndCannotConfirm')">
+          {{user.status.name}}
+        </div>
+
+        <div
+          class="declined state"
+          ng-if="dashState('admittedAndCannotConfirm')">
+          Expired Admission
+        </div>
+
+
+        <div
+          ng-if="showWaitlist"
+          class="waitlist state">
+          on waitlist
+        </div>
+
+        <div class="ui divider"></div>
+
+        <div ng-if="user.profile.name.length > 0">
+          <p>
+            <strong>
+              Welcome back, {{user.profile.name}}!
+            </strong>
+          </p>
+          <p>
+          </p>
+        </div>
+
+        <div
+          ng-if="dashState('unverified')"
+          class="description">
+          <p>
+            <strong>
+            Your email address ({{user.email}}) is not yet verified.
+            </strong>
+          </p>
+          <p>
+            You should have received an email asking you verify your email. Click the
+            link the email and you can start your application!
+          </p>
+          <div class="ui purple button" ng-click="resendEmail()">
+            Resend verification email
+          </div>
+        </div>
+
+        <div
+          ng-if="dashState('openAndIncomplete')"
+          class="description">
+          <p>
+            <strong>
+            You still need to complete your application!
+            </strong>
+          </p>
+          <p>
+            If you do not complete your application before the {{formatTime(timeClose)}},
+            you will not be considered for the admissions lottery!
+          </p>
+
+          <div class="ui purple button"
+               ui-sref="app.application">
+            Complete your application
+          </div>
+
+        </div>
+
+        <div
+          ng-if="dashState('openAndSubmitted')"
+          class="description">
+          <p>
+            <strong>
+              Your application has been submitted!
+            </strong>
+          </p>
+          <p>
+            Feel free to edit it at any time. However, once registration is closed,
+            you will not be able to edit it any further.
+          </p>
+          <p>
+            Admissions will be determined by a random lottery. Please make sure your
+            information is accurate before registration is closed!
+          </p>
+          <div class="ui purple button"
+               ui-sref="app.application">
+            Edit your application
+          </div>
+
+          <div
+            class="ui pink button"
+            ng-show="!user.teamCode"
+            ui-sref="app.team">
+            Create or join a team
+          </div>
+
+          <div
+            class="ui pink button"
+            ng-show="user.teamCode"
+            ui-sref="app.team">
+            View your Team
+          </div>
+
+        </div>
+
+        <div
+          ng-if="dashState('closedAndIncomplete')">
+          <p>
+            <strong>
+              Unfortunately, registration has closed, and the lottery process has begun.
+            </strong>
+          </p>
+          <p>
+            Because you have not completed your profile in time, you will not be eligible for the lottery process.
+          </p>
+        </div>
+
+        <div
+          ng-if="dashState('closedAndSubmitted')"
+          class="description" >
+
+          <div
+            class="markdown"
+            ng-bind-html="waitlistText">
+          </div>
+
+          <div class="ui purple button"
+               ui-sref="app.application">
+            View your application
+          </div>
+
+          <div
+            class="ui pink button"
+            ng-show="user.teamCode"
+            ui-sref="app.team">
+            View your Team
+          </div>
+        </div>
+
+        <div
+          class="description"
+          ng-if="dashState('admittedAndCanConfirm')">
+
+          <div class="markdown">
+            <h4>
+              You must confirm by {{formatTime(user.status.confirmBy)}}.
+            </h4>
+          </div>
+
+          <div
+            class="markdown"
+            ng-bind-html="acceptanceText">
+          </div>
+
+          <div class="markdown">
+            <h4>
+              You must confirm by {{formatTime(user.status.confirmBy)}}.
+            </h4>
+          </div>
+
+          <div class="ui purple button"
+               ui-sref="app.confirmation">
+            Confirm your spot
+          </div>
+
+          <div class="ui red button"
+               ng-click="declineAdmission()">
+            Sorry, I can't make it
+          </div>
+
+        </div>
+
+        <div
+          class="description"
+          ng-if="dashState('admittedAndCannotConfirm')">
+
+          <div class="markdown">
+            <h4>
+              Your confirmation deadline of {{formatTime(user.status.confirmBy)}} has passed.
+            </h4>
+
+            <p>
+              Although you were accepted, you did not complete your confirmation in time.
+            </p>
+            <p>
+              Unfortunately, this means that you will not be able to attend the event, as we must begin to accept other applicants on the waitlist.
+            </p>
+            <p>
+              We hope to see you again next year!
+            </p>
+          </div>
+
+        </div>
+
+        <div
+          class="description"
+          ng-if="dashState('confirmed')">
+
+          <div
+            ng-show="!pastConfirmation"
+            class="markdown">
+            <h4>
+              You can edit your confirmation information until {{formatTime(user.status.confirmBy)}}.
+            </h4>
+          </div>
+
+          <div
+            class="markdown"
+            ng-bind-html="confirmationText">
+          </div>
+
+          <div class="ui purple button"
+               ui-sref="app.confirmation">
+            {{pastConfirmation ? 'View' : 'Edit'}} your confirmation information
+          </div>
+
+          <div class="ui red button"
+               ng-click="declineAdmission()">
+            Sorry, I can't make it
+          </div>
+
+        </div>
+
+        <div
+          class="description"
+          ng-if="dashState('declined')">
+
+          <p>
+            We're sorry to hear that you won't be able to make it to HackMIT 2015! :(
+          </p>
+
+          <p>
+            Maybe next year! We hope to see you again soon.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>

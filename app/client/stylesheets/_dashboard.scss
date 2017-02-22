@@ -1,0 +1,67 @@
+#dashboard {
+  .status {
+    text-align: center;
+    p {
+      text-align: left;
+    }
+    .button {
+      margin-top: 12px;
+    }
+    .header {
+      font-size: 1.2em;
+    }
+    .state {
+      text-align: center;
+      padding: 12px 24px;
+      margin-bottom: 1em;
+      color: white;
+      font-size: 1.3em;
+      text-transform: uppercase;
+
+      &.unverified {
+        background: $status-unverified-color;
+      }
+
+      &.incomplete {
+        background: $status-incomplete-color;
+        color: black;
+      }
+
+      &.submitted {
+        background: $status-submitted-color;
+      }
+
+      &.waitlist {
+        background: $status-waitlist-color;
+      }
+
+      &.admitted {
+        background: $status-admitted-color;
+      }
+
+      &.confirmed {
+        background: $status-confirmed-color;
+      }
+
+      &.checked.in {
+        background: $status-checkedin-color;
+      }
+
+      &.declined {
+        background: $status-declined-color;
+      }
+    }
+  }
+
+  .segment {
+    padding: 36px 36px 12px 36px;
+  }
+
+  .description {
+    margin-bottom: 24px;
+    .markdown {
+      text-align: left;
+      margin-bottom: 24px;
+    }
+  }
+}
