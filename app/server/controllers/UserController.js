@@ -287,6 +287,27 @@ UserController.updateProfileById = function (id, profile, callback){
       return callback({message: 'invalid profile'});
     }
 
+    // Check if its within the registration window.
+    Settings.getRegistrationTimes(function(err, times){
+      if (err) {
+        callback(err);
+      }
+
+      var now = Date.now();
+
+      if (now < times.timeOpen){
+        return callback({
+          message: "Registration opens in " + moment(times.timeOpen).fromNow() + "!"
+        });
+      }
+
+      if (now > times.timeClose){
+        return callback({
+          message: "Sorry, registration is closed."
+        });
+      }
+    });
+
     User.findOneAndUpdate({
       _id: id,
       verified: true
