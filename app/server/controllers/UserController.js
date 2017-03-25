@@ -460,13 +460,18 @@ UserController.createOrJoinTeam = function(id, code, callback){
     });
   }
 
+  if (typeof code !== 'string') {
+    return callback({
+      message: "Get outta here, punk!"
+    });
+  }
+
   User.find({
     teamCode: code
   })
   .select('profile.name')
   .exec(function(err, users){
     // Check to see if this team is joinable (< team max size)
-
     if (users.length >= maxTeamSize){
       return callback({
         message: "Team is full."
