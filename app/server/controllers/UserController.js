@@ -287,6 +287,27 @@ UserController.updateProfileById = function (id, profile, callback){
       return callback({message: 'invalid profile'});
     }
 
+    // Check if its within the registration window.
+    Settings.getRegistrationTimes(function(err, times){
+      if (err) {
+        callback(err);
+      }
+
+      var now = Date.now();
+
+      if (now < times.timeOpen){
+        return callback({
+          message: "Registration opens in " + moment(times.timeOpen).fromNow() + "!"
+        });
+      }
+
+      if (now > times.timeClose){
+        return callback({
+          message: "Sorry, registration is closed."
+        });
+      }
+    });
+
     User.findOneAndUpdate({
       _id: id,
       verified: true
@@ -439,13 +460,18 @@ UserController.createOrJoinTeam = function(id, code, callback){
     });
   }
 
+  if (typeof code !== 'string') {
+    return callback({
+      message: "Get outta here, punk!"
+    });
+  }
+
   User.find({
     teamCode: code
   })
   .select('profile.name')
   .exec(function(err, users){
     // Check to see if this team is joinable (< team max size)
-
     if (users.length >= maxTeamSize){
       return callback({
         message: "Team is full."
