@@ -82,26 +82,30 @@ gulp server
 If you’d like to customize the text that users see on their dashboards, edit them at `client/src/constants.js`.
 
 ### Branding / Assets
-Customize the color scheme and hosted assets by editing `client/stylesheets/_custom.scss`. Don’t forget to use your own email banner, favicon, and logo (color/white) in the `assets/images` folder as well! 
+Customize the color scheme and hosted assets by editing `client/stylesheets/_custom.scss`. Don’t forget to use your own email banner, favicon, and logo (color/white) in the `assets/images/` folder as well! 
 
 ### Application questions
 If you want to change the application questions, edit:
-- `client/views/application/application`
+- `client/views/application/`
 - `server/models/User.js`
-- `client/admin/user` and `client/admin/users` to render the updated form properly in the admin view
+- `client/views/admin/user/` and `client/views/admin/users/` to render the updated form properly in the admin view
 
 If you want stats for your new fields:
 - Recalculate them in `server/services/stats.js`
-- Display them on the admin panel by editing `client/admin/stats/` 
+- Display them on the admin panel by editing `client/views/admin/stats/` 
 
 ### Email Templates
-To customize the verification and confirmation emails for your event, put your new email templates in `server/templates` and edit `server/services/email.js`
+To customize the verification and confirmation emails for your event, put your new email templates in `server/templates/` and edit `server/services/email.js`
 
 ## Contributing
-Contributions to Quill are welcome and appreciated! Please take a look at `CONTRIBUTING.md` first.
+Contributions to Quill are welcome and appreciated! Please take a look at [`CONTRIBUTING.md`](contribute) first.
 
 ## Feedback / Questions
-If you have any questions about this software, please contact quill@hackmit.org.
+If you have any questions about this software, please contact [quill@hackmit.org](email).
 
 ## License
-Copyright (c) 2015-2016 Edwin Zhang (https://github.com/ehzhang). Released under AGPLv3. See ```LICENSE.txt``` for details.
+Copyright (c) 2015-2016 Edwin Zhang (https://github.com/ehzhang). Released under AGPLv3. See [`LICENSE.txt`](license) for details.
+
+[contribute]: https://github.com/techx/quill/blob/master/CONTRIBUTING.md
+[license]: https://github.com/techx/quill/blob/master/LICENSE.txt
+[email]: mailto:quill@hackmit.org
