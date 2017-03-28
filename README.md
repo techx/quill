@@ -101,7 +101,7 @@ To customize the verification and confirmation emails for your event, put your n
 Contributions to Quill are welcome and appreciated! Please take a look at `CONTRIBUTING.md` first.
 
 ## Feedback / Questions
-If you have any questions about this software, please contact team@hackmit.org.
+If you have any questions about this software, please contact quill@hackmit.org.
 
 ## License
 Copyright (c) 2015-2016 Edwin Zhang (https://github.com/ehzhang). Released under AGPLv3. See ```LICENSE.txt``` for details.
