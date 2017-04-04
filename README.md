@@ -59,10 +59,11 @@ On the Settings tab, admins can easily control their event application timeline 
 
 # Setup
 
-Getting a local instance of Quill up and running takes less than 5 minutes! Start by setting up the database:
+Getting a local instance of Quill up and running takes less than 5 minutes! Start by setting up the database. Ideally, you should run MongoDB as a daemon with a secure configuration (with most linux distributions, you should be able to install it with your package manager, and it'll be set up as a daemon). Although not recommended for production, when running locally for development, you could do it like this
+
 ```
 mkdir db
-mongod --dbpath db
+mongod --dbpath db --bind_ip 127.0.0.1 --nohttpinterface
 ```
 
 Install the necessary dependencies:
