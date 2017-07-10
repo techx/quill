@@ -42,5 +42,8 @@
     "gulp-sourcemaps": "^1.5.2",
     "gulp-uglify": "^1.2.0",
     "nodemon": "^1.2.1"
+  },
+  "engines": {
+      "node": "7.4.0"
   }
 }
