@@ -16,13 +16,17 @@ angular.module('reg')
 
       $scope.TEAM = TEAM;
 
-      if ($scope.user.teamCode){
+      function _populateTeammates() {
         UserService
           .getMyTeammates()
           .success(function(users){
             $scope.error = null;
             $scope.teammates = users;
           });
+      }
+
+      if ($scope.user.teamCode){
+        _populateTeammates();
       }
 
       $scope.joinTeam = function(){
