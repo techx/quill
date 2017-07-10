@@ -1,0 +1,45 @@
+{
+    "name": "Quill",
+    "description": "Registration, for hackathons!",
+    "env": {
+        "NODE_ENV": {
+            "description": "dev or production",
+            "value": "dev"
+        },
+        "DATABASE": {
+            "description": "URI for your MongoDB database",
+            "value": ""
+        },
+        "JWT_SECRET": {
+            "description": "Long random string used to verify JWT tokens for user authentication",
+            "generator": "secret"
+        },
+        "ROOT_URL": {
+            "description": "Root URL for your registration system",
+            "value": "http://localhost:3000"
+        },
+        "ADMIN_EMAIL": {
+            "description": "Credentials for the admin user created at app initialization",
+            "value": "admin@hackmit.org"
+        },
+        "ADMIN_PASS": "party",
+        "EMAIL_CONTACT": {
+            "description": "Used to send verification, registration, and confirmation emails",
+            "value": "HackMIT Team <hackmit.reg.system@gmail.com>"
+        },
+        "EMAIL_HOST": "smtp.gmail.com",
+        "EMAIL_USER": "foo@bar.com",
+        "EMAIL_PASS": "password",
+        "EMAIL_PORT": "465",
+        "EMAIL_HEADER_IMAGE": "https://s3.amazonaws.com/hackmit-assets/Banner_600.jpg",
+        "TEAM_MAX_SIZE": {
+            "description": "Limits the number of users that can join a team",
+            "value": 4
+        },
+        "SLACK_HOOK": {
+            "description": "Used to send error messages to your Slack team when the API catches an error",
+            "value": "https://hooks.slack.com/services/your-api-key"
+        }
+    },
+    "keywords": ["quill", "node", "express", "mongo"]
+}
