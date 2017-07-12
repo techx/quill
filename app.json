@@ -6,11 +6,6 @@
             "description": "dev or production",
             "value": "dev"
         },
-        "PORT": "3000",
-        "DATABASE": {
-            "description": "URI for your MongoDB database",
-            "value": ""
-        },
         "JWT_SECRET": {
             "description": "Long random string used to verify JWT tokens for user authentication",
             "generator": "secret"
@@ -35,12 +30,15 @@
         "EMAIL_HEADER_IMAGE": "https://s3.amazonaws.com/hackmit-assets/Banner_600.jpg",
         "TEAM_MAX_SIZE": {
             "description": "Limits the number of users that can join a team",
-            "value": 4
+            "value": "4"
         },
         "SLACK_HOOK": {
             "description": "Used to send error messages to your Slack team when the API catches an error",
             "value": "https://hooks.slack.com/services/your-api-key"
         }
     },
+    "addons": [
+        "mongolab"
+    ],
     "keywords": ["quill", "node", "express", "mongo"]
 }

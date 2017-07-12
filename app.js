@@ -1,5 +1,5 @@
 // Load the dotfiles.
-require('dotenv').load();
+require('dotenv').load({silent: true});
 
 var express         = require('express');
 
@@ -11,7 +11,7 @@ var cookieParser    = require('cookie-parser');
 
 var mongoose        = require('mongoose');
 var port            = process.env.PORT || 3000;
-var database        = process.env.DATABASE || "mongodb://localhost:27017";
+var database        = process.env.DATABASE || process.env.MONGODB_URI || "mongodb://localhost:27017";
 
 var settingsConfig  = require('./config/settings');
 var adminConfig     = require('./config/admin');
