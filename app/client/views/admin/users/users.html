@@ -240,6 +240,20 @@
 
               </button>
 
+              <button
+                ng-click="toggleAdmin($event, user, $index)"
+                class="ui circular mini basic green icon button">
+
+                <i
+                  ng-if="!user.admin"
+                  class="spy outline icon"></i>
+
+                <i
+                  ng-if="user.admin"
+                  class="green spy icon"></i>
+
+              </button>
+
             </td>
           </tr>
         </tbody>
