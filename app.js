@@ -1,7 +1,11 @@
 // Load the dotfiles.
 require('dotenv').load({silent: true});
 
+var fs              = require('fs');
+var https           = require('https');
 var express         = require('express');
+var privkey         = process.env.PRIVKEY;
+var fullchain       = process.env.FULLCHAIN;
 
 // Middleware!
 var bodyParser      = require('body-parser');
@@ -46,6 +50,15 @@ app.use('/auth', authRouter);
 require('./app/server/routes')(app);
 
 // listen (start app with node server.js) ======================================
-app.listen(port);
-console.log("App listening on port " + port);
-
+if(privkey != '' && fullchain != ''){
+  var cert = {
+    key: fs.readFileSync(privkey, 'utf8'),
+    cert: fs.readFileSync(fullchain, 'utf8'),
+  };
+  var server = https.createServer(cert, app).listen(port, function() {
+    console.log('Quill listening on port ' + port + ' with SSL.');
+  });
+} else {
+  app.listen(port);
+  console.log("Quill listening on port " + port);
+}
