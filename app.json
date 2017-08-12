@@ -16,12 +16,12 @@
         },
         "ADMIN_EMAIL": {
             "description": "Credentials for the admin user created at app initialization",
-            "value": "admin@hackmit.org"
+            "value": "admin@example.org"
         },
         "ADMIN_PASS": "party",
         "EMAIL_CONTACT": {
             "description": "Used to send verification, registration, and confirmation emails",
-            "value": "HackMIT Team <hackmit.reg.system@gmail.com>"
+            "value": "Hackathon Team <team@example.com>"
         },
         "EMAIL_HOST": "smtp.gmail.com",
         "EMAIL_USER": "foo@bar.com",
