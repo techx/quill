@@ -16,9 +16,22 @@
         },
         "ADMIN_EMAIL": {
             "description": "Credentials for the admin user created at app initialization",
-            "value": "admin@example.org"
+            "value": "admin@example.com"
         },
         "ADMIN_PASS": "party",
+        "EMAIL_ADDRESS": {
+            "description": "The email address that is included in the 'email us' link at the bottom of emails.",
+            "value": "team@example.com"
+        },
+        "HACKATHON_NAME": "Hackathon",
+        "TWITTER_HANDLE": {
+            "description": "Everything after https://twitter.com/",
+            "value": "hackathon"
+        },
+        "FACEBOOK_HANDLE": {
+            "description": "Everything after https://facebook.com/",
+            "value": "hackathon"
+        },
         "EMAIL_CONTACT": {
             "description": "Used to send verification, registration, and confirmation emails",
             "value": "Hackathon Team <team@example.com>"
