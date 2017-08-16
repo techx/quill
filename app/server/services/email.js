@@ -9,8 +9,8 @@ var ROOT_URL = process.env.ROOT_URL;
 
 var HACKATHON_NAME = process.env.HACKATHON_NAME;
 var EMAIL_ADDRESS = process.env.EMAIL_ADDRESS;
-var TWITTER_HANDLE = proccess.env.TWITTER_HANDLE;
-var FACEBOOK_HANDLE = proccess.env.FACEBOOK_HANDLE;
+var TWITTER_HANDLE = process.env.TWITTER_HANDLE;
+var FACEBOOK_HANDLE = process.env.FACEBOOK_HANDLE;
 
 var EMAIL_HOST = process.env.EMAIL_HOST;
 var EMAIL_USER = process.env.EMAIL_USER;
