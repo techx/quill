@@ -28,7 +28,7 @@ var profile = {
   graduationYear: {
     type: String,
     enum: {
-      values: '2016 2017 2018 2019'.split(' '),
+      values: '2017 2018 2019 2020 2021'.split(' '),
     }
   },
 
