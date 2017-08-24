@@ -3,7 +3,7 @@ angular.module('reg')
         NAME: 'Hack the Hill 2017',
     })
     .constant('DASHBOARD', {
-        UNVERIFIED: 'Please verify your email by clicking on the link in the ',
+        UNVERIFIED: 'Please verify your email by clicking on the link in the verification email sent to you.',
         INCOMPLETE_TITLE: 'Your application is incomplete!',
         INCOMPLETE: 'If you do not complete your application before the [APP_DEADLINE], you will not be considered for admission!',
         SUBMITTED_TITLE: 'Your application has been submitted!',
