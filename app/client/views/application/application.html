@@ -11,6 +11,26 @@
         <div class="divided title">Basic Information</div>
 
         <fieldset ng-disabled="regIsClosed">
+        <!-- 
+          Order of questions:
+            Name
+            Email
+            School
+            Graduation Year
+            Date of Birth
+            Gender
+            Resume
+            Github
+            Describe yourself in a few words
+            MLH Agreeance
+            HtH agreeance
+        -->
+        <div class="field">
+          <label> Full Name </label>
+          <input type="text"
+                 name="name"
+                 ng-model="user.profile.name">
+        </div>
 
         <div class="field">
           <label> Email </label>
@@ -18,13 +38,6 @@
                  name="email"
                  disabled="disabled"
                  ng-model="user.email">
-        </div>
-
-        <div class="field">
-          <label> Full Name </label>
-          <input type="text"
-                 name="name"
-                 ng-model="user.profile.name">
         </div>
 
         <div class="field" ng-show="autoFilledSchool">
@@ -48,11 +61,18 @@
             name="year"
             ng-model="user.profile.graduationYear">
             <option value="">Graduation Year</option>
-            <option value="2016">2016</option>
             <option value="2017">2017</option>
             <option value="2018">2018</option>
             <option value="2019">2019</option>
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
           </select>
+        </div>
+
+        <!-- date of birth -->
+        <div class="field">
+          <label>Date of Birth (MM/DD/YYYY)</label>
+          <input type="date" name="dateofbirth" max="1999-11-05" ng-model="user.profile.dateofbirth">
         </div>
 
         <div class="field">
@@ -68,6 +88,20 @@
           </select>
         </div>
 
+        <div class="divided title">Resume</div>
+
+        <!-- resume -->
+        <div class="field">
+          <p>Upload a resume or skill sheet detailing your relevant experience. PDFs are preferred.</p>
+          <a class="ui red button" href="https://apply.hackthehill.org/resumes">Upload</a>
+        </div>
+
+        <!-- github username (optional)-->
+        <div class="field">
+          <label>Github Username (Optional)</label>
+          <input type="text" name="github" placeholder="@username" ng-model="user.profile.github">
+        </div>
+
         <div class="field">
           <label>I would describe myself as a...</label>
           <input type="text"
@@ -75,19 +109,11 @@
                  ng-model="user.profile.description">
         </div>
 
-        <div class="field">
-          <label>
-              What would you like to learn or get out of HackMIT? (optional)
-          </label>
-          <textarea ng-model="user.profile.essay">
-          </textarea>
-        </div>
-
         <div class="field"
              ng-hide="isMitStudent">
           <p>
-            Because of limitations imposed by MIT, we are not legally allowed to host
-            non-MIT minors (those under 18) for HackMIT 2015. Checking the box below affirms that you are or will be 18 years or older by September 19th, 2015.
+            Because of limitations imposed by WKU, we are not legally allowed to host
+            non-WKU minors (those under 18) for Hack the Hill. Checking the box below affirms that you are or will be 18 years or older by November 5th, 2017.
           </p>
           <p>
             <strong>
