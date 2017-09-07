@@ -13,12 +13,6 @@ var profile = {
     max: 100,
   },
 
-  adult: {
-    type: Boolean,
-    required: true,
-    default: false,
-  },
-
   school: {
     type: String,
     min: 1,
@@ -38,19 +32,42 @@ var profile = {
     max: 300
   },
 
-  essay: {
-    type: String,
-    min: 0,
-    max: 1500
-  },
-
-  // Optional info for demographics
   gender: {
     type: String,
     enum : {
       values: 'M F O N'.split(' ')
     }
   },
+
+  dateofbirth: {
+    type: String,
+    min: 1,
+    max: 100
+  },
+
+  github: {
+    type: String,
+    min: 1,
+    max: 100
+  },
+
+  mlh: {
+    type: Boolean,
+    required: true,
+    default: false
+  },
+
+  hthconduct: {
+    type: Boolean,
+    required: true,
+    default: false
+  },
+
+  adult: {
+    type: Boolean,
+    required: true,
+    default: false
+  }
 
 };
 
@@ -142,10 +159,6 @@ var status = {
   },
   confirmBy: {
     type: Number
-  },
-  reimbursementGiven: {
-    type: Boolean,
-    default: false
   }
 };
 
@@ -332,7 +345,7 @@ schema.statics.validateProfile = function(profile, cb){
     profile.name.length > 0 &&
     profile.adult &&
     profile.school.length > 0 &&
-    ['2016', '2017', '2018', '2019'].indexOf(profile.graduationYear) > -1 &&
+    ['2017', '2018', '2019', '2020', '2021'].indexOf(profile.graduationYear) > -1 &&
     ['M', 'F', 'O', 'N'].indexOf(profile.gender) > -1
     ));
 };

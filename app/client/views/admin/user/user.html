@@ -110,11 +110,17 @@
           name="year"
           ng-model="selectedUser.profile.graduationYear">
           <option value="">Graduation Year</option>
-          <option value="2016">2016</option>
           <option value="2017">2017</option>
           <option value="2018">2018</option>
           <option value="2019">2019</option>
+          <option value="2020">2020</option>
+          <option value="2021">2021</option>
         </select>
+      </div>
+
+      <div class="field">
+        <label>Date of Birth (MM/DD/YYYY)</label>
+        <input type="date" name="dateofbirth" max="1999-11-05" ng-model="selectedUser.profile.dateofbirth">
       </div>
 
       <div class="field">
@@ -138,22 +144,34 @@
       </div>
 
       <div class="field">
-        <label>
-            What would you like to learn or get out of HackMIT? (optional)
-        </label>
-        <textarea ng-model="selectedUser.profile.essay">
-        </textarea>
+        <label>Github Username (Optional)</label>
+        <input type="text" name="github" placeholder="@username" ng-model="selectedUser.profile.github">
       </div>
 
-      <div class="field"
-           ng-hide="isMitStudent">
+      <div class="field">
+        <p>You must agree to the MLH Code of Conduct to be eligable for admission. You can find the MLH Code of Conduct <a href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf" target="_blank">here</a>.</p>
+        <div class="ui checkbox">
+          <input type="checkbox" id="mlh" ng-model="selectedUser.profile.mlh">
+          <label for="mlh">I agree to the MLH Code of Conduct.</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <p>You must also agree to the Hack the Hill Code of Conduct to be eligable for admission. You can find the Hack the Hill Code of Conduct <a href="#" target="_blank">here</a>.</p>
+        <div class="ui checkbox">
+          <input type="checkbox" id="hthconduct" ng-model="selectedUser.profile.hthconduct">
+          <label for="hthconduct">I agree to the Hack the Hill Code of Conduct.</label>
+        </div>
+      </div>
+
+      <div class="field">
         <p>
-          Because of limitations imposed by MIT, we are not legally allowed to host
-          non-MIT minors (those under 18) for HackMIT 2015. Checking the box below affirms that you are or will be 18 years or older by September 19th, 2015.
+          Because of limitations imposed by WKU, we are not legally allowed to host
+          non-WKU/non-Gatton Academy minors (those under 18) for Hack the Hill. Checking the box below affirms that you are or will be 18 years or older by November 5th, 2017.
         </p>
         <p>
           <strong>
-          We will be checking ID. If you are a non-MIT minor, you will be turned away at the door.
+          We will be checking ID. If you are a minor and you are not associated with WKU or the Gatton Academy, you will be turned away at the door.
           </strong>
         </p>
         <div class="ui checkbox">

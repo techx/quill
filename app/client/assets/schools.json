@@ -775,5 +775,9 @@
     "fiu.edu": {
         "school": "Florida International University",
         "state": "Florida"
+    },
+    "topper.wku.edu": {
+        "school": "Western Kentucky University",
+        "state": "Kentucky"
     }
 }
