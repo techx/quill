@@ -24,6 +24,7 @@
             Describe yourself in a few words
             MLH Agreeance
             HtH agreeance
+            Over 18 Agreence
         -->
         <div class="field">
           <label> Full Name </label>
@@ -88,11 +89,12 @@
           </select>
         </div>
 
+        <br>
         <div class="divided title">Resume</div>
 
         <!-- resume -->
         <div class="field">
-          <p>Upload a resume or skill sheet detailing your relevant experience. PDFs are preferred.</p>
+          <p>Upload a resume or skill sheet detailing your relevant experience. PDFs are preferred. <strong>Your name and email must match our system for you to be considered for admission.</strong></p>
           <a class="ui red button" href="https://apply.hackthehill.org/resumes">Upload</a>
         </div>
 
@@ -109,15 +111,30 @@
                  ng-model="user.profile.description">
         </div>
 
-        <div class="field"
-             ng-hide="isMitStudent">
+        <div class="field">
+          <p>You must agree to the MLH Code of Conduct to be eligable for admission. You can find the MLH Code of Conduct <a href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf" target="_blank">here</a>.</p>
+          <div class="ui checkbox">
+            <input type="checkbox" id="mlh" ng-model="user.profile.mlh">
+            <label for="mlh">I agree to the MLH Code of Conduct.</label>
+          </div>
+        </div>
+
+        <div class="field">
+          <p>You must also agree to the Hack the Hill Code of Conduct to be eligable for admission. You can find the Hack the Hill Code of Conduct <a href="#" target="_blank">here</a>.</p>
+          <div class="ui checkbox">
+            <input type="checkbox" id="hthconduct" ng-model="user.profile.hthconduct">
+            <label for="hthconduct">I agree to the Hack the Hill Code of Conduct.</label>
+          </div>
+        </div>
+
+        <div class="field">
           <p>
             Because of limitations imposed by WKU, we are not legally allowed to host
-            non-WKU minors (those under 18) for Hack the Hill. Checking the box below affirms that you are or will be 18 years or older by November 5th, 2017.
+            non-WKU/non-Gatton Academy minors (those under 18) for Hack the Hill. Checking the box below affirms that you are or will be 18 years or older by November 5th, 2017.
           </p>
           <p>
             <strong>
-            We will be checking ID. If you are a non-MIT minor, you will be turned away at the door.
+            We will be checking ID. If you are a minor and you are not associated with WKU or the Gatton Academy, you will be turned away at the door.
             </strong>
           </p>
           <div class="ui checkbox">
