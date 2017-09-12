@@ -2,7 +2,12 @@
   height: 100%;
   width: 100%;
   background-color: $login-bg-color;
-  background: $login-bg; 
+  background: linear-gradient(
+  	rgba($primary, .5),
+	rgba($secondary, .5),
+	rgba($tertiary, .5)
+  )
+  , $login-bg;
   background-size: cover;
 
   > .container {
@@ -16,6 +21,10 @@
     > .content {
       max-width: 320px;
       margin: 0 auto;
+
+      .segment {
+	border-radius: 15px;
+      }
 
       .logo {
         max-width: 100px;
