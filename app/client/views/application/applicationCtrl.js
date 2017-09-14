@@ -100,6 +100,10 @@ angular.module('reg')
                 {
                   type: 'empty',
                   prompt: 'Please type your resonse here.'
+                },
+                {
+                  type: 'minLength[100]',
+                  prompt: 'Your response must be at least 100 characters.'
                 }
               ]
             },
