@@ -94,6 +94,15 @@ angular.module('reg')
                 }
               ]
             },
+            essay: {
+              identifier: 'essay',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please type your resonse here.'
+                }
+              ]
+            },
             gender: {
               identifier: 'gender',
               rules: [

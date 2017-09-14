@@ -40,7 +40,7 @@ var profile = {
 
   essay: {
     type: String,
-    min: 0,
+    min: 1,
     max: 1500
   },
 
