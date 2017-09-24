@@ -162,6 +162,13 @@ function calculateStats(){
           });
         }
 
+        //teams
+        /* if (user.confirmation.teams) {
+          user.confirmation.teams.forEach(function(team) {
+            newStats.teams[team] = user.profile.name;
+          });
+        } */
+
         // Count checked in
         newStats.checkedIn += user.status.checkedIn ? 1 : 0;
 
@@ -191,7 +198,7 @@ function calculateStats(){
         newStats.demo.schools = schools;
 
         // Likewise, transform the teams into an array of objects
-        var teams = [];
+        /* var teams = [];
         _.keys(newStats.teams)
           .forEach(function(key){
             teams.push({
@@ -199,7 +206,7 @@ function calculateStats(){
               users: newStats.teams[key]
             });
           });
-        newStats.teams = teams;
+        newStats.teams = teams; */
 
         console.log('Stats updated!');
         newStats.lastUpdated = new Date();
