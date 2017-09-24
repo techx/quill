@@ -93,33 +93,15 @@ angular.module('reg')
                 }
               ]
             },
-            signatureLiability: {
-              identifier: 'signatureLiabilityWaiver',
+            formSign: {
+              identifier: 'formSign',
               rules: [
                 {
-                  type: 'empty',
-                  prompt: 'Please type your digital signature.'
+                  type: 'checked',
+                  prompt: 'You must to agree to sign any required forms which may come up. We will send out notifications as the forms become available. Any questions or concerns can be sent to wkuhackthehill@gmail.com'
                 }
               ]
-            },
-            signaturePhotoRelease: {
-              identifier: 'signaturePhotoRelease',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please type your digital signature.'
-                }
-              ]
-            },
-            signatureCodeOfConduct: {
-              identifier: 'signatureCodeOfConduct',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please type your digital signature.'
-                }
-              ]
-            },
+            }
           }
         });
       }
