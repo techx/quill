@@ -94,8 +94,12 @@
 
         <!-- resume -->
         <div class="field">
-          <p>Upload a resume or skill sheet detailing your relevant experience. PDFs are preferred. <strong>Your name and email must match our system for you to be considered for admission.</strong></p>
+          <p>Upload a resume or skill sheet detailing your relevant experience. PDFs are preferred. <strong>Your name and email on the file request must match the one on our system for you to be considered for admission.</strong></p>
           <a class="ui red button" href="https://apply.hackthehill.org/resumes">Upload</a>
+          <div class="ui checkbox">
+            <input type="checkbox" id="resume" ng-model="user.profile.resume">
+            <label for="resume">I have uploaded a resume, and it matches the name and email address which are used in this application</label>
+          </div>
         </div>
 
         <!-- github username (optional)-->
@@ -129,8 +133,7 @@
 
         <div class="field">
           <p>
-            Because of limitations imposed by WKU, we are not legally allowed to host
-            non-WKU/non-Gatton Academy minors (those under 18) for Hack the Hill. Checking the box below affirms that you are or will be 18 years or older by November 5th, 2017.
+            Because of limitations from WKU, we are not allowed to host minors (under 18 years old) unless they are a student at WKU or a student in the Gatton Academy.
           </p>
           <p>
             <strong>
@@ -139,7 +142,7 @@
           </p>
           <div class="ui checkbox">
             <input type="checkbox" id="adult" ng-model="user.profile.adult">
-            <label for="adult">I am over 18 or am a minor from WKU or the Gatton Academy.</label>
+            <label for="adult">I am over 18 or associated with WKU/the Gatton Academy</label>
           </div>
         </div>
 

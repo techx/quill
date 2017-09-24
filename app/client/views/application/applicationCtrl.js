@@ -108,7 +108,16 @@ angular.module('reg')
               rules: [
                 {
                   type: 'checked',
-                  prompt: 'You must be an adult, or an MIT student.'
+                  prompt: 'You must be an adult, or an WKU/Gatton Academy student.'
+                }
+              ]
+            },
+            resume: {
+              identifier: 'resume',
+              rules: [
+                {
+                  type: 'checked',
+                  prompt: 'You must confirm that you uploaded a resume.'
                 }
               ]
             }
