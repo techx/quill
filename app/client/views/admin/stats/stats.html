@@ -65,7 +65,7 @@
           <i class="green circle check icon"></i>
           <div class="content">
             <strong>
-              Confirmed (MIT)
+              Confirmed (WKU)
             </strong> :
             {{stats.confirmedMit}}
           </div>
@@ -96,7 +96,7 @@
           <i class="child icon"></i>
           <div class="content">
             <strong>
-              Unisex shirt sizes:
+              Shirt sizes:
             </strong> :
               XS ({{stats.shirtSizes['XS']}})
               S ({{stats.shirtSizes['S']}})
@@ -104,41 +104,6 @@
               L ({{stats.shirtSizes['L']}})
               XL ({{stats.shirtSizes['XL']}})
               XXL ({{stats.shirtSizes['XXL']}})
-          </div>
-        </div>
-
-        <div class="item">
-          <i class="child icon"></i>
-          <div class="content">
-            <strong>
-              Women's shirt sizes:
-            </strong> :
-              XS ({{stats.shirtSizes['WXS']}})
-              S ({{stats.shirtSizes['WS']}})
-              M ({{stats.shirtSizes['WM']}})
-              L ({{stats.shirtSizes['WL']}})
-              XL ({{stats.shirtSizes['WXL']}})
-              XXL ({{stats.shirtSizes['WXXL']}})
-          </div>
-        </div>
-
-        <div class="ui divider"></div>
-
-        <div class="item">
-          <i class="green money icon"></i>
-          <div class="content">
-            <strong>
-              Total Reimbursements:
-            </strong>{{stats.reimbursementTotal}}
-          </div>
-        </div>
-
-        <div class="item">
-          <i class="frown icon"></i>
-          <div class="content">
-            <strong>
-              Still Need Reimbursement:
-            </strong>{{stats.reimbursementMissing}}
           </div>
         </div>
 
@@ -213,16 +178,19 @@
     <div class="ui divider"></div>
       <div class="ui list">
         <div class="item">
-          <strong>Fresh:</strong> {{stats.demo.year['2019']}} ({{stats.demo.year['2019'] / stats.total * 100 | number: 1}}%)
+          <strong>Freshman:</strong> {{stats.demo.year['2021']}} ({{stats.demo.year['2021'] / stats.total * 100 | number: 1}}%)
         </div>
         <div class="item">
-          <strong>Soph:</strong> {{stats.demo.year['2018']}} ({{stats.demo.year['2018'] / stats.total * 100 | number: 1}}%)
+          <strong>Sophomore:</strong> {{stats.demo.year['2020']}} ({{stats.demo.year['2020'] / stats.total * 100 | number: 1}}%)
         </div>
         <div class="item">
-         <strong>Junior:</strong> {{stats.demo.year['2017']}} ({{stats.demo.year['2017'] / stats.total * 100 | number: 1}}%)
+         <strong>Junior:</strong> {{stats.demo.year['2019']}} ({{stats.demo.year['2019'] / stats.total * 100 | number: 1}}%)
         </div>
         <div class="item">
-          <strong>Senior:</strong> {{stats.demo.year['2016']}} ({{stats.demo.year['2016'] / stats.total * 100 | number: 1}}%)
+          <strong>Senior (2018):</strong> {{stats.demo.year['2018']}} ({{stats.demo.year['2018'] / stats.total * 100 | number: 1}}%)
+        </div>
+        <div class="item">
+          <strong>Senior (2017):</strong> {{stats.demo.year['2017']}} ({{stats.demo.year['2017'] / stats.total * 100 | number: 1}}%)
         </div>
       </div>
     <div class="ui divider"></div>
@@ -252,8 +220,8 @@
     </div>
   </div>
 
-<!--   <div
-    class="ui purple segment"
+<!-- <div
+    class="ui blue segment"
     ng-class="{'loading': loading}">
     <div class="ui header">
       Team Names

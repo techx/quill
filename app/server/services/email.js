@@ -103,10 +103,10 @@ controller.sendVerificationEmail = function(email, token, callback) {
    */
   sendOne('email-verify', options, locals, function(err, info){
     if (err){
-      console.log(err);
+      console.log("ERROR: "+err);
     }
     if (info){
-      console.log(info.message);
+      console.log("SUCCESS: "+info.message);
     }
     if (callback){
       callback(err, info);

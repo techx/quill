@@ -13,7 +13,7 @@ var schema = new mongoose.Schema({
   status: String,
   timeOpen: {
     type: Number,
-    default: 0
+    default: Date.now()
   },
   timeClose: {
     type: Number,
@@ -21,7 +21,7 @@ var schema = new mongoose.Schema({
   },
   timeConfirm: {
     type: Number,
-    default: 604800000 // Date of confirmation
+    default: Date.now() + 31104000000 // Date of confirmation
   },
   whitelistedEmails: {
     type: [String],

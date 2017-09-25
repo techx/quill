@@ -13,8 +13,8 @@ angular.module('reg')
       // Set up the user
       $scope.user = currentUser.data;
 
-      // Is the student from MIT?
-      $scope.isMitStudent = $scope.user.email.split('@')[1] == 'mit.edu';
+      // Is the student from WKU?
+      $scope.isMitStudent = $scope.user.email.split('@')[1] == 'topper.wku.edu';
 
       // If so, default them to adult: true
       if ($scope.isMitStudent){
@@ -108,7 +108,16 @@ angular.module('reg')
               rules: [
                 {
                   type: 'checked',
-                  prompt: 'You must be an adult, or an MIT student.'
+                  prompt: 'You must be an adult, or an WKU/Gatton Academy student.'
+                }
+              ]
+            },
+            resume: {
+              identifier: 'resume',
+              rules: [
+                {
+                  type: 'checked',
+                  prompt: 'You must confirm that you uploaded a resume.'
                 }
               ]
             }
