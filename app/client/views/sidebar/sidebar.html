@@ -7,7 +7,8 @@
 
   <div ui-sref-active="active"
        ui-sref="app.dashboard"
-       class="item">
+       class="item"
+       ng-show="isLoggedIn">
     Dashboard
   </div>
 
@@ -48,7 +49,8 @@
   </div>
 
   <div class="item"
-       ng-click="logout()">
+       ng-click="logout()"
+       ng-show="isLoggedIn">
     Logout
   </div>
 
