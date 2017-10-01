@@ -13,7 +13,7 @@ angular.module('reg')
       // Basic Actions
       // ----------------------
       getCurrentUser: function(){
-        return $http.get(base + Session.getUserId());
+        return Session.getUserId() ? $http.get(base + Session.getUserId()) : '';
       },
 
       get: function(id){

@@ -7,16 +7,17 @@
 
   <div ui-sref-active="active"
        ui-sref="app.dashboard"
-       class="item">
+       class="item"
+       ng-if="isLoggedIn">
     Dashboard
   </div>
 
-  <div ng-show="currentUser.verified">
+  <div ng-if="currentUser.verified">
 
     <div
       ui-sref-active="active"
       ui-sref="app.application"
-      ng-show="!currentUser.status.declined"
+      ng-if="!currentUser.status.declined"
       class="item">
       Application
     </div>
@@ -24,7 +25,7 @@
     <div
       ui-sref-active="active"
       ui-sref="app.confirmation"
-      ng-show="!pastConfirmation && currentUser.status.admitted && !currentUser.status.declined"
+      ng-if="!pastConfirmation && currentUser.status.admitted && !currentUser.status.declined"
       class="item">
       Confirmation
     </div>
@@ -32,7 +33,7 @@
     <div
       ui-sref-active="active"
       ui-sref="app.team"
-      ng-show="!currentUser.status.declined"
+      ng-if="!currentUser.status.declined"
       class="item">
       Team
     </div>
@@ -41,14 +42,15 @@
       ui-sref-active="active"
       ui-sref="app.admin.stats"
       class="item"
-      ng-show="currentUser.admin">
+      ng-if="currentUser.admin">
       Admin
     </div>
 
   </div>
 
   <div class="item"
-       ng-click="logout()">
+       ng-click="logout()"
+       ng-if="isLoggedIn">
     Logout
   </div>
 
@@ -60,7 +62,7 @@
 
 <div class="tab"
   ng-click="toggleSidebar()">
-  <img ng-show="!showSidebar" src="assets/images/logo.svg" />
+  <img ng-if="!showSidebar" src="assets/images/logo.svg" />
   <span class="close" ng-show="showSidebar">&#x2715</span>
 </div>
 

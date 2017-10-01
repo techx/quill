@@ -8,7 +8,7 @@ angular.module('reg')
       $urlRouterProvider,
       $locationProvider) {
 
-    // For any unmatched url, redirect to /state1
+    // For any unmatched url, redirect to /404
     $urlRouterProvider.otherwise("/404");
 
     // Set up de states
@@ -46,8 +46,21 @@ angular.module('reg')
           requireLogin: true
         }
       })
-      .state('app.dashboard', {
+      .state('app.home', {
         url: "/",
+        templateUrl: "views/home/home.html",
+        controller: 'HomeCtrl',
+        data: {
+          requireLogin: false
+        },
+        resolve: {
+          currentUser: function(UserService){
+            return UserService.getCurrentUser();
+          }
+        }
+      })
+      .state('app.dashboard', {
+        url: "/dashboard",
         templateUrl: "views/dashboard/dashboard.html",
         controller: 'DashboardCtrl',
         resolve: {

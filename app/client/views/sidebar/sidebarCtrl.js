@@ -11,14 +11,17 @@ angular.module('reg')
 
       var settings = Settings.data;
       var user = $rootScope.currentUser;
+      $scope.isLoggedIn = !!$rootScope.currentUser;
 
       $scope.EVENT_INFO = EVENT_INFO;
 
-      $scope.pastConfirmation = Utils.isAfter(user.status.confirmBy);
+      if ($scope.isLoggedIn) {
+        $scope.pastConfirmation = Utils.isAfter(user.status.confirmBy);
 
-      $scope.logout = function(){
-        AuthService.logout();
-      };
+        $scope.logout = function(){
+          AuthService.logout();
+        };
+      }
 
       $scope.showSidebar = false;
       $scope.toggleSidebar = function(){
