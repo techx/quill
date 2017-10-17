@@ -13,11 +13,11 @@ angular.module('reg')
       // Set up the user
       $scope.user = currentUser.data;
 
-      // Is the student from MIT?
-      $scope.isMitStudent = $scope.user.email.split('@')[1] == 'mit.edu';
+      // Is the student from UCI?
+      $scope.isUciStudent = $scope.user.email.split('@')[1] == 'uci.edu';
 
       // If so, default them to adult: true
-      if ($scope.isMitStudent){
+      if ($scope.isUciStudent){
         $scope.user.profile.adult = true;
       }
 
@@ -104,6 +104,10 @@ angular.module('reg')
                 {
                   type: 'minLength[100]',
                   prompt: 'Your response must be at least 100 characters.'
+                },
+                {
+                  type: 'maxLength[1500]',
+                  prompt: 'Your response must be at most 1500 characters.'
                 }
               ]
             },

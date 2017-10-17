@@ -84,10 +84,11 @@
             name="essay"
             placeholder="Please enter your response here (100 chars min, 1500 max)">
           </textarea>
+          <span>{{user.profile.essay.length}}/1500</span>
         </div>
 
         <div class="field"
-             ng-hide="isMitStudent">
+             ng-hide="isUciStudent">
           <p>
             Because of limitations imposed by UCI, we are not legally allowed to host
             non-UCI minors (those under 18) for HackUCI 2018. Checking the box below affirms that you are or will be 18 years or older by Feburary 2nd, 2018.
