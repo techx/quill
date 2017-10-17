@@ -31,9 +31,9 @@ angular.module('reg')
           '': {
             templateUrl: "views/base.html"
           },
-          'sidebar@app': {
-            templateUrl: "views/sidebar/sidebar.html",
-            controller: 'SidebarCtrl',
+          'navbar@app': {
+            templateUrl: "views/navbar/navbar.html",
+            controller: 'NavbarCtrl',
             resolve: {
               'settings' : function(SettingsService) {
                 return SettingsService.getPublicSettings();
