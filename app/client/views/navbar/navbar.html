@@ -1,0 +1,70 @@
+<!-- <div id="navbar"
+     ng-class="{open: showNavbar}">
+  <div ui-sref="app.dashboard"
+       class="logo item">
+    <img src="assets/images/logo.svg">
+  </div>
+
+  <div ui-sref-active="active"
+       ui-sref="app.dashboard"
+       class="item"
+       ng-if="isLoggedIn">
+    Dashboard
+  </div>
+
+  <div ng-if="currentUser.verified">
+
+    <div
+      ui-sref-active="active"
+      ui-sref="app.application"
+      ng-if="!currentUser.status.declined"
+      class="item">
+      Application
+    </div>
+
+    <div
+      ui-sref-active="active"
+      ui-sref="app.confirmation"
+      ng-if="!pastConfirmation && currentUser.status.admitted && !currentUser.status.declined"
+      class="item">
+      Confirmation
+    </div>
+
+    <div
+      ui-sref-active="active"
+      ui-sref="app.team"
+      ng-if="!currentUser.status.declined"
+      class="item">
+      Team
+    </div>
+
+    <div
+      ui-sref-active="active"
+      ui-sref="app.admin.stats"
+      class="item"
+      ng-if="currentUser.admin">
+      Admin
+    </div>
+
+  </div>
+
+  <div class="item"
+       ng-click="logout()"
+       ng-if="isLoggedIn">
+    Logout
+  </div>
+
+  <div class="note">
+    {{ EVENT_INFO.NAME }}
+  </div>
+
+</div>
+
+<div class="tab"
+  ng-click="toggleNavbar()">
+  <img ng-if="!showNavbar" src="assets/images/logo.svg" />
+  <span class="close" ng-show="showNavbar">&#x2715</span>
+</div>
+
+
+ -->
