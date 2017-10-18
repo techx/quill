@@ -73,27 +73,6 @@
 		position: absolute;
 	}
 
-	.logo-header {
-		height: 100px;
-		padding: 35px 0 0 50px;
-		position: absolute;
-		animation: fadein .5s both;
-		animation-delay: .15s;
-	}
-
-	.logo-header>img {
-		height: 100%;
-	}
-
-	.logo-header>span {
-		font-weight: 700;
-		font-size: 1.5em;
-		padding-left: 0.5em;
-		letter-spacing: 0.02em;
-		color: white;
-		margin-top: -1px;
-	}
-
 	#hero-content {
 		height: 100%;
 		position: relative;
@@ -284,12 +263,6 @@
 	@media (max-width: 767px) {
 		.title {
 			margin-bottom: 5%;
-		}
-
-		.logo-header {
-			justify-content: center;
-			width: 100%;
-			padding: 35px 0 0 0;
 		}
 
 		.hero-border {
