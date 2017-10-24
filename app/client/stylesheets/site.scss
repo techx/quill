@@ -41,6 +41,7 @@ $brand-tertiary: $tertiary;
   transition-duration: $duration;
 }
 
+@import 'global';
 @import 'home';
 @import 'login';
 @import 'base';
@@ -53,7 +54,7 @@ $brand-tertiary: $tertiary;
 
 html,
 body {
-  height: 100%;
+  height: 100% !important;
   width: 100%;
   font-size: 1.02em;
 }

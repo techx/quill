@@ -1,90 +1,158 @@
-<div id="navbar"
-     ng-class="{open: showNavbar}">
-
-  <div class="navbar">
+<div id="navbar" ng-class="currentPath === 'app.home' ? 'position-absolute' : 'position-fixed'">
+  <div class="navbar ui grid computer only no-margin" ng-class="{'navbar-home': currentPath === 'app.home'}">
+    <div class="logo-header logo-cog">
+      <img src="../assets/images/logo-cog.svg">
+    </div>
     <div class="logo-header">
-      <img src="../assets/images/logo.svg">
+      <img src="../assets/images/logo-anteater.svg">
     </div>
 
-    <div class="menu">
-      <a href="#" class="menu-item">
+    <div class="navbar-menu">
+      <a
+        ui-sref="app.home"
+        ui-sref-active="menu-item-active"
+        class="menu-item">
         HOME
       </a>
-      <a href="#" class="menu-item">
-        CONTACT
-      </a>
-      <a href="#" class="menu-item">
+      <a
+        ui-sref="app.dashboard"
+        ui-sref-active="menu-item-active"
+        class="menu-item"
+        ng-if="isLoggedIn">
         DASHBOARD
       </a>
-      <a href="#" class="menu-item menu-item--sponsor">
+      <a
+        ui-sref="login"
+        ui-sref-active="menu-item-active"
+        class="menu-item"
+        ng-if="!isLoggedIn">
+        LOGIN
+      </a>
+      <a
+        ui-sref-active="menu-item-active"
+        ui-sref="app.application"
+        ng-if="currentUser.verified && !currentUser.status.declined"
+        class="menu-item">
+        APPLICATION
+      </a>
+      <a
+        ui-sref-active="menu-item-active"
+        ui-sref="app.confirmation"
+        ng-if="currentUser.verified && !pastConfirmation && currentUser.status.admitted && !currentUser.status.declined"
+        class="menu-item">
+        CONFIRMATION
+      </a>
+      <a
+        ui-sref-active="menu-item-active"
+        ui-sref="app.team"
+        ng-if="currentUser.verified && !currentUser.status.declined"
+        class="menu-item">
+        TEAM
+      </a>
+      <a
+        ui-sref-active="menu-item-active"
+        ui-sref="app.admin.stats"
+        class="menu-item"
+        ng-if="currentUser.verified && currentUser.admin">
+        ADMIN
+      </a>
+      <a class="menu-item"
+        ng-click="logout()"
+        ng-if="isLoggedIn">
+        LOGOUT
+      </a>
+      <a href="/sponsor" class="menu-item menu-item--sponsor">
         SPONSOR
       </a>
     </div>
   </div>
-  <!-- <div ui-sref="app.dashboard"
-       class="logo item">
-    <img src="assets/images/logo.svg">
-  </div>
 
-  <div ui-sref-active="active"
-       ui-sref="app.dashboard"
-       class="item"
-       ng-if="isLoggedIn">
-    Dashboard
-  </div>
-
-  <div ng-if="currentUser.verified">
-
-    <div
-      ui-sref-active="active"
-      ui-sref="app.application"
-      ng-if="!currentUser.status.declined"
-      class="item">
-      Application
+  <div class="navbar-mobile ui grid mobile only tablet only no-margin" ng-class="{'navbar-mobile-transparent' : currentPath === 'app.home'}">
+    <div class="logo-header logo-cog" ng-show="currentPath !== 'app.home'">
+      <img src="../assets/images/logo-cog.svg">
     </div>
-
-    <div
-      ui-sref-active="active"
-      ui-sref="app.confirmation"
-      ng-if="!pastConfirmation && currentUser.status.admitted && !currentUser.status.declined"
-      class="item">
-      Confirmation
+    <div class="logo-header" ng-show="currentPath !== 'app.home'">
+      <img src="../assets/images/logo-anteater.svg">
     </div>
-
-    <div
-      ui-sref-active="active"
-      ui-sref="app.team"
-      ng-if="!currentUser.status.declined"
-      class="item">
-      Team
+    <div class="navbar-mobile-menu-button">
+      <i class="fa fa-bars navbar-mobile-menu-icon" aria-hidden="true"></i>
     </div>
-
-    <div
-      ui-sref-active="active"
-      ui-sref="app.admin.stats"
-      class="item"
-      ng-if="currentUser.admin">
-      Admin
-    </div>
-
   </div>
-
-  <div class="item"
-       ng-click="logout()"
-       ng-if="isLoggedIn">
-    Logout
-  </div>
-
-  <div class="note">
-    {{ EVENT_INFO.NAME }}
-  </div> -->
-
 </div>
 
-<!-- <div class="tab"
-  ng-click="toggleNavbar()">
-  <img ng-if="!showNavbar" src="assets/images/logo.svg" />
-  <span class="close" ng-show="showNavbar">&#x2715</span>
-</div> -->
-
-
+<div id="navbar-modal" class="ui modal navbar-modal">
+  <div class="header">
+    <span class="modal-title">Menu</span>
+    <div class="navbar-mobile-menu-close-button">
+      <i class="fa fa-times navbar-mobile-menu-close-icon" aria-hidden="true"></i>
+    </div>
+  </div>
+  <div class="content">
+    <div class="navbar-mobile-menu">
+      <a
+        ui-sref="app.home"
+        ui-sref-active="menu-item-active"
+        class="menu-item"
+        ng-click="onMenuClick()">
+        HOME
+      </a>
+      <a
+        ui-sref="app.dashboard"
+        ui-sref-active="menu-item-active"
+        class="menu-item"
+        ng-if="isLoggedIn"
+        ng-click="onMenuClick()">
+        DASHBOARD
+      </a>
+      <a
+        ui-sref="login"
+        ui-sref-active="menu-item-active"
+        class="menu-item"
+        ng-if="!isLoggedIn"
+        ng-click="onMenuClick()">
+        LOGIN
+      </a>
+      <a
+        ui-sref-active="menu-item-active"
+        ui-sref="app.application"
+        ng-if="currentUser.verified && !currentUser.status.declined"
+        class="menu-item"
+        ng-click="onMenuClick()">
+        APPLICATION
+      </a>
+      <a
+        ui-sref-active="menu-item-active"
+        ui-sref="app.confirmation"
+        ng-if="currentUser.verified && !pastConfirmation && currentUser.status.admitted && !currentUser.status.declined"
+        class="menu-item"
+        ng-click="onMenuClick()">
+        CONFIRMATION
+      </a>
+      <a
+        ui-sref-active="menu-item-active"
+        ui-sref="app.team"
+        ng-if="currentUser.verified && !currentUser.status.declined"
+        class="menu-item"
+        ng-click="onMenuClick()">
+        TEAM
+      </a>
+      <a
+        ui-sref-active="menu-item-active"
+        ui-sref="app.admin.stats"
+        class="menu-item"
+        ng-if="currentUser.verified && currentUser.admin"
+        ng-click="onMenuClick()">
+        ADMIN
+      </a>
+      <a class="menu-item"
+        ng-click="logout()"
+        ng-if="isLoggedIn"
+        ng-click="onMenuClick()">
+        LOGOUT
+      </a>
+      <a href="/sponsor" class="menu-item">
+        SPONSOR
+      </a>
+    </div>
+  </div>
+</div>

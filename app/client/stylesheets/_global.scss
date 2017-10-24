@@ -1,0 +1,31 @@
+.center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.center-left {
+	display: flex;
+	align-items: center;
+}
+
+.center-top {
+	display: flex;
+	justify-content: center;
+}
+
+.no-margin {
+	margin: 0 !important;
+}
+
+.no-margin-right {
+	margin-right: 0 !important;
+}
+
+.position-absolute {
+	position: absolute;
+}
+
+.position-fixed {
+	position: fixed;
+}

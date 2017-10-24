@@ -1,17 +1,18 @@
+/* Keyframes */
+@keyframes fadein {
+    from {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+/* Home */
 #home {
 	height: 100%;
 	font-family: 'Rubik', sans-serif;
-
-	/* Keyframes */
-	@keyframes fadein {
-	    from {
-	        opacity: 0
-	    }
-
-	    to {
-	        opacity: 1
-	    }
-	}
 
 	/* Global */
 	button, .btn {
@@ -33,22 +34,6 @@
 
 	button:focus, .btn:focus {
 		outline: none;
-	}
-
-	.center {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
-
-	.center-left {
-		display: flex;
-		align-items: center;
-	}
-
-	.center-top {
-		display: flex;
-		justify-content: center;
 	}
 
 	.title {
@@ -78,6 +63,35 @@
 		position: relative;
 		color: white;
 		z-index: 3;
+	}
+
+	#hero-content>div {
+		margin-top: -50px;
+	}
+
+	.logo-header-container {
+		height: 125px;
+		margin-bottom: 5%;
+		animation: fadein .5s both;
+		animation-delay: .15s;
+	}
+
+	.logo-header {
+		height: 125px;
+		position: absolute;
+		left: 0;
+		right: 0;
+		width: 100%;
+		text-align: center;
+		transition: all .2s ease;
+	}
+
+	.logo-cog {
+		animation: spin 12s linear infinite;
+	}
+
+	.logo-header>img {
+		height: 100%;
 	}
 
 	.hero-title {
