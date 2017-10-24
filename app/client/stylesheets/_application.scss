@@ -1,0 +1,14 @@
+.error-message{
+  color: red;
+}
+
+.essay-error-flexcontainer{
+  display: flex;
+  flex-direction: row;
+}
+
+.essay-word-count{
+  display: flex;
+  justify-content: flex-end;
+  flex: 1 0 auto;
+}
