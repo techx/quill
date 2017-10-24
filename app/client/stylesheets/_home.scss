@@ -58,15 +58,15 @@
 		position: absolute;
 	}
 
-	#hero-content {
+	.hero-content {
 		height: 100%;
 		position: relative;
 		color: white;
 		z-index: 3;
-	}
 
-	#hero-content>div {
-		margin-top: -50px;
+		> div {
+			margin-top: -50px;
+		}
 	}
 
 	.logo-header-container {
