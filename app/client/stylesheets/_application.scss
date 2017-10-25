@@ -1,13 +1,13 @@
-.error-message{
+.error-red-color {
   color: red;
 }
 
-.essay-error-flexcontainer{
+.essay-feedback-container {
   display: flex;
   flex-direction: row;
 }
 
-.essay-word-count{
+.essay-character-count {
   display: flex;
   justify-content: flex-end;
   flex: 1 0 auto;

@@ -76,23 +76,27 @@
                  ng-model="user.profile.description">
         </div>
 
-        <div class="field" ng-class="{error: user.profile.essay.length>1500}">
+        <div class="field" ng-class="{error: user.profile.essay.length > 1500}">
           <label>
               What would you like to learn or get out of HackUCI?
           </label>
+
           <textarea ng-model="user.profile.essay"
             name="essay"
             placeholder="Please enter your response here (100 chars min, 1500 max)" 
-            ng-class="{'error':user.profile.essay.length>1500}">
+            ng-class="{'error': user.profile.essay.length > 1500}">
           </textarea>
-          <div class="essay-error-flexcontainer">
-            <div class="error-message" >
-              <span ng-show="user.profile.essay.length>1500" class="error-message">The essay length must be between 100 and 1500 characters.</span>
+
+          <div class="essay-feedback-container">
+            <div class="error-red-color" >
+              <span ng-show="user.profile.essay.length > 1500" class="error-red-color">The essay length must be between 100 and 1500 characters.</span>
             </div>
-            <div class="error-message" >
-              <span ng-show="user.profile.essay.length<100" class="error-message">The essay length must be between 100 and 1500 characters.</span>
+
+            <div class="error-red-color">
+              <span ng-show="activateCharCount && user.profile.essay.length < 100" class="error-red-color">The essay length must be between 100 and 1500 characters.</span>
             </div>
-            <div class="essay-word-count" ng-class="{'error-message':user.profile.essay.length>1500}">            
+
+            <div class="essay-character-count" ng-class="{'error-red-color': user.profile.essay.length > 1500}">            
               {{user.profile.essay.length}}/1500
             </div>
           </div>

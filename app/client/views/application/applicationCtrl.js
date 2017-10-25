@@ -133,7 +133,15 @@ angular.module('reg')
         });
       }
 
+      $scope.activateCharCount = false
 
+      $scope.$watch(
+        "user.profile.essay.length",
+        function (newValue, oldValue, scope){
+          if ($scope.activateCharCount === false & newValue > 100)
+            $scope.activateCharCount = true
+        }
+      );
 
       $scope.submitForm = function(){
         if ($('.ui.form').form('is valid')){
