@@ -182,13 +182,16 @@ angular.module('reg')
   .run([
     '$rootScope',
     '$state',
+    '$timeout',
     'Session',
     function(
       $rootScope,
       $state,
+      $timeout,
       Session ){
 
       $rootScope.$on('$stateChangeSuccess', function() {
+         $rootScope.fadeOut = false;
          document.body.scrollTop = document.documentElement.scrollTop = 0;
       });
 
@@ -196,6 +199,15 @@ angular.module('reg')
         var requireLogin = toState.data.requireLogin;
         var requireAdmin = toState.data.requireAdmin;
         var requireVerified = toState.data.requireVerified;
+
+        if (!$rootScope.fadeOut) {
+          event.preventDefault();
+          $rootScope.fadeOut = true;
+
+          $timeout(function() {
+            $state.go(toState.name);
+          }, 100);
+        }
 
         if (requireLogin && !Session.getToken()) {
           event.preventDefault();
