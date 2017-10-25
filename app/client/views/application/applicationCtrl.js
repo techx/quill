@@ -135,10 +135,12 @@ angular.module('reg')
 
       $scope.activateCharCount = false
 
+      /* Watching for character changes to trigger error only 
+       if the user has reach a 100 characters at least once */
       $scope.$watch(
         "user.profile.essay.length",
-        function (newValue, oldValue, scope){
-          if ($scope.activateCharCount === false & newValue > 100)
+        function (newValue, oldValue){
+          if (!$scope.activateCharCount && newValue > 100)
             $scope.activateCharCount = true
         }
       );
