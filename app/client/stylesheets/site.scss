@@ -42,9 +42,11 @@ $brand-tertiary: $tertiary;
 }
 
 @import 'application';
+@import 'global';
+@import 'home';
 @import 'login';
 @import 'base';
-@import 'sidebar';
+@import 'navbar';
 @import 'page';
 @import 'dashboard';
 @import 'verify';
@@ -53,14 +55,14 @@ $brand-tertiary: $tertiary;
 
 html,
 body {
-  height: 100%;
+  height: 100% !important;
   width: 100%;
   font-size: 1.02em;
 }
 
 body {
   margin: 0;
-  font-family: 'Lato', 'Helvetica Neue', 'Helvetica', sans-serif;
+  font-family: 'Rubik', 'Lato', 'Helvetica Neue', 'Helvetica', sans-serif;
   font-weight: 300;
 
   > .container {
