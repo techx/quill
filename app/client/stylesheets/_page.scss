@@ -1,6 +1,6 @@
 .page {
-  padding-top: 2em;
-  padding-bottom: 4em;
+  padding: calc(4em + 100px) 2em 4em 2em;
+
   .title {
     font-family: $font-header;
     text-transform: uppercase;
@@ -9,6 +9,7 @@
     color: $page-header-color;
     letter-spacing: 8px;
     font-weight: 700;
+
     &.divided:after {
         content: " ";
         width: 200px;
@@ -45,6 +46,8 @@
 
 @media only screen and (max-width: 768px) {
   .page {
+    padding: calc(4em + 40px) 1em 2em 1em;
+
     .title {
       font-size: 1.25em;
     }
