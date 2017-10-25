@@ -1,9 +1,18 @@
 #login {
-  height: 100%;
+  height: calc(100% + 49px);
   width: 100%;
-  background-color: $login-bg-color;
-  background:  $login-bg;
+  background-image: url('../assets/images/hero.jpg');
   background-size: cover;
+  background-position: center center;
+
+  &::before {
+    content: '';
+    background-image: linear-gradient(to bottom right, #02ccba 0%, #3d99be 31%, #9848d5 100%);
+    opacity: 0.8;
+    width: 100%;
+    height: calc(100% + 50px);
+    position: absolute;
+  }
 
   > .container {
     position: relative;
@@ -17,33 +26,97 @@
       max-width: 320px;
       margin: 0 auto;
 
-      .segment {
-	border-radius: 15px;
+      .logo-header-container {
+        height: 125px;
+        margin-top: 0;
+        margin-bottom: 5%;
+        animation: fadein .5s both;
+        animation-delay: .15s;
       }
 
-      .logo {
-        max-width: 100px;
-        margin: .5rem auto 1rem auto;
-        img {
-          width: 100px;
-          height: 100px;
+      .logo-header {
+        height: 125px;
+        position: absolute;
+        left: 0;
+        right: 0;
+        width: 100%;
+        text-align: center;
+        transition: all .2s ease;
+      }
 
-          border-radius: 20px;
-        }
+      .logo-cog {
+        animation: spin 12s linear infinite;
+      }
+
+      .logo-header>img {
+        height: 100%;
+      }
+
+      .ui.small.error.message {
+        box-shadow: none;
+        margin-top: 0;
+      }
+
+      .segment {
+        border-radius: 15px;
+        border: none;
+        margin: 0;
+        background-color: rgba(255,255,255,0.85);
+        animation: fadein .5s both;
+        animation-delay: .2s;
+      }
+
+      .ui.login-password .field:nth-child(1) {
+        animation: fadein .5s both;
+        animation-delay: .3s;
+      }
+
+      .ui.login-password .field:nth-child(2) {
+        animation: fadein .5s both;
+        animation-delay: .35s;
+      }
+
+      .ui.login-password .field:nth-child(3) {
+        animation: fadein .5s both;
+        animation-delay: .4s;
+      }
+
+      .ui:not(.login-password) .field {
+        animation: fadein .5s both;
+        animation-delay: .45s;
+      }
+
+      .ui.form .field>label {
+        font-weight: 300;
+        font-size: 0.8em;
+        letter-spacing: 0.07em;
       }
 
       .button {
         color: white;
+
         &.login {
           background: $login-color;
+          font-weight: 300;
+          font-size: 0.95em;
+          letter-spacing: 0.07em;
         }
+
         &.register {
-          background: $register-color
+          background: $register-color;
+          font-weight: 300;
+          font-size: 0.95em;
+          letter-spacing: 0.07em;
         }
       }
 
       .forgot {
         text-align: center;
+        font-weight: 300;
+        font-size: 0.8em;
+        letter-spacing: 0.07em;
+        animation: fadein .5s both;
+        animation-delay: .5s;
       }
 
     }

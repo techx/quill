@@ -13,19 +13,6 @@ angular.module('reg')
 
     // Set up de states
     $stateProvider
-      .state('login', {
-        url: "/login",
-        templateUrl: "views/login/login.html",
-        controller: 'LoginCtrl',
-        data: {
-          requireLogin: false
-        },
-        resolve: {
-          'settings': function(SettingsService){
-            return SettingsService.getPublicSettings();
-          }
-        }
-      })
       .state('app', {
         views: {
           '': {
@@ -56,6 +43,19 @@ angular.module('reg')
         resolve: {
           currentUser: function(UserService){
             return UserService.getCurrentUser();
+          }
+        }
+      })
+      .state('app.login', {
+        url: "/login",
+        templateUrl: "views/login/login.html",
+        controller: 'LoginCtrl',
+        data: {
+          requireLogin: false
+        },
+        resolve: {
+          'settings': function(SettingsService){
+            return SettingsService.getPublicSettings();
           }
         }
       })
@@ -199,7 +199,7 @@ angular.module('reg')
 
         if (requireLogin && !Session.getToken()) {
           event.preventDefault();
-          $state.go('login');
+          $state.go('app.login');
         }
 
         if (requireAdmin && !Session.getUser().admin) {

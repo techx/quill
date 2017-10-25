@@ -9,27 +9,33 @@ angular.module('reg')
     'Session',
     'EVENT_INFO',
     function($rootScope, $scope, $state, Settings, Utils, AuthService, Session, EVENT_INFO){
-
-      var settings = Settings.data;
-      var user = $rootScope.currentUser;
-      $scope.isLoggedIn = !!$rootScope.currentUser;
-      $scope.currentPath = $state.current.name
+      var transparentNavbarViews = ['app.home', 'app.login']
 
       $scope.$watch(function(){
         return $state.$current.name
       }, function(newPath, oldPath){
-        $scope.currentPath = newPath;
+        if (transparentNavbarViews.includes(newPath)) {
+          $scope.transparentNavbar = true;
+        } else {
+          $scope.transparentNavbar = false;
+        }
+
+        var settings = Settings.data;
+
+        $scope.isLoggedIn = !!$rootScope.currentUser;
+
+        if ($scope.isLoggedIn) {
+          var user = $rootScope.currentUser;
+          
+          $scope.pastConfirmation = Utils.isAfter(user.status.confirmBy);
+
+          $scope.logout = function(){
+            AuthService.logout();
+          };
+        }
       })
 
       $scope.EVENT_INFO = EVENT_INFO;
-
-      if ($scope.isLoggedIn) {
-        $scope.pastConfirmation = Utils.isAfter(user.status.confirmBy);
-
-        $scope.logout = function(){
-          AuthService.logout();
-        };
-      }
 
       $scope.showNavbar = false;
       $scope.toggleNavbar = function(){

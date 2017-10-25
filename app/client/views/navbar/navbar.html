@@ -1,9 +1,9 @@
-<div id="navbar" ng-class="currentPath === 'app.home' ? 'position-absolute' : 'position-fixed'">
-  <div class="navbar ui grid computer only no-margin" ng-class="{'navbar-home': currentPath === 'app.home'}">
-    <div class="logo-header logo-cog">
+<div id="navbar" ng-class="transparentNavbar ? 'position-absolute' : 'position-fixed'">
+  <div class="navbar ui grid computer only no-margin" ng-class="{'navbar-transparent': transparentNavbar}">
+    <div class="logo-header logo-cog" ui-sref="app.home">
       <img src="../assets/images/logo-cog.svg">
     </div>
-    <div class="logo-header">
+    <div class="logo-header" ui-sref="app.home">
       <img src="../assets/images/logo-anteater.svg">
     </div>
 
@@ -22,7 +22,7 @@
         DASHBOARD
       </a>
       <a
-        ui-sref="login"
+        ui-sref="app.login"
         ui-sref-active="menu-item-active"
         class="menu-item"
         ng-if="!isLoggedIn">
@@ -67,11 +67,11 @@
     </div>
   </div>
 
-  <div class="navbar-mobile ui grid mobile only tablet only no-margin" ng-class="{'navbar-mobile-transparent' : currentPath === 'app.home'}">
-    <div class="logo-header logo-cog" ng-show="currentPath !== 'app.home'">
+  <div class="navbar-mobile ui grid mobile only tablet only no-margin" ng-class="{'navbar-mobile-transparent' : transparentNavbar}">
+    <div class="logo-header logo-cog" ng-show="!transparentNavbar">
       <img src="../assets/images/logo-cog.svg">
     </div>
-    <div class="logo-header" ng-show="currentPath !== 'app.home'">
+    <div class="logo-header" ng-show="!transparentNavbar">
       <img src="../assets/images/logo-anteater.svg">
     </div>
     <div class="navbar-mobile-menu-button">
@@ -105,7 +105,7 @@
         DASHBOARD
       </a>
       <a
-        ui-sref="login"
+        ui-sref="app.login"
         ui-sref-active="menu-item-active"
         class="menu-item"
         ng-if="!isLoggedIn"
