@@ -88,8 +88,8 @@
           </textarea>
 
           <div class="essay-feedback-container">
-              <span ng-show="activateCharCount && (user.profile.essay.length > 1500 || user.profile.essay.length < 100)" 
-                class="error-red-color">The essay length must be between 100 and 1500 characters.</span>
+            <span ng-show="activateCharCount && (user.profile.essay.length > 1500 || user.profile.essay.length < 100)" 
+              class="error-red-color">The essay length must be between 100 and 1500 characters.</span>
 
             <div class="essay-character-count" ng-class="{'error-red-color': user.profile.essay.length > 1500}">            
               {{user.profile.essay.length}}/1500
