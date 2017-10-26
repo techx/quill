@@ -194,4 +194,41 @@ controller.sendPasswordChangedEmail = function(email, callback){
 
 };
 
+/**
+ * Send the acceptance email to the participant.
+ * @param  {[type]}   email    [description]
+ * @param  {Function} callback [description]
+ */
+controller.sendAcceptanceEmail = function(email, callback){
+
+  var options = {
+    to: email,
+    subject: "[HackUCI 2018] - Congrats! You're coming to HackUCI 2018!"
+  };
+
+  var locals = {
+    title: 'Welcome to HackUCI 2018',
+    body: 'Please sign into your dashboard to confirm your spot.',
+  };
+
+  /**
+   * Eamil-verify takes a few template values:
+   * {
+   *   verifyUrl: the url that the user must visit to verify their account
+   * }
+   */
+  sendOne('email-basic', options, locals, function(err, info){
+    if (err){
+      console.log(err);
+    }
+    if (info){
+      console.log(info.message);
+    }
+    if (callback){
+      callback(err, info);
+    }
+  });
+
+};
+
 module.exports = controller;
