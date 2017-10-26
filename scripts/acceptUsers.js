@@ -1,6 +1,6 @@
 require('dotenv').load();
 var mongoose        = require('mongoose');
-var database        = process.env.DATABASE || "mongodb://develop:HackUCI2018@cluster0-shard-00-00-j5esm.mongodb.net:27017,cluster0-shard-00-01-j5esm.mongodb.net:27017,cluster0-shard-00-02-j5esm.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin";
+var database        = process.env.DATABASE || "";
 var jwt             = require('jsonwebtoken');
 mongoose.connect(database);
 
@@ -13,10 +13,21 @@ var user = { email: process.env.ADMIN_EMAIL };
 var userArray = require('fs').readFileSync('accepted.txt').toString().split('\n');
 var count = 0;
 userArray.forEach(function (id) {
-  UserController.sendAcceptanceEmailById( id, function() {
+  UserController.admitUser(id, user, function() {
     count += 1;
     if (count == userArray.length) {
       console.log("Done");
+      process.exit(0);
+    }
+  });
+});
+
+userArray.forEach(function (id) {
+  UserController.sendAcceptanceEmailById(id, function() {
+    count += 1;
+    if (count == userArray.length) {
+      console.log("Done");
+      process.exit(0);
     }
   });
 });

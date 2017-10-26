@@ -707,7 +707,6 @@ UserController.checkOutById = function(id, user, callback){
 };
 
 
-
 /**
  * [ADMIN ONLY]
  */
