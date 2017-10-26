@@ -715,14 +715,14 @@ UserController.checkOutById = function(id, user, callback){
   * @param  {[type]}   ID    [description]
   * @param  {Function} callback [description]
   */
-UserController.sendAcceptanceEmailById = function(id, callback){
+UserController.sendAcceptanceEmailById = function(id, callback) {
    User.findOne(
      {
        _id: id,
        verified: true
      },
-     function(err, user){
-       if (err || !user){
+     function(err, user) {
+       if (err || !user) {
          return callback(err);
        }
        Mailer.sendAcceptanceEmail(user.email, callback);
