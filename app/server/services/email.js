@@ -199,7 +199,7 @@ controller.sendPasswordChangedEmail = function(email, callback){
  * @param  {[type]}   email    [description]
  * @param  {Function} callback [description]
  */
-controller.sendAcceptanceEmail = function(email, callback){
+controller.sendAcceptanceEmail = function(email, callback) {
 
   var options = {
     to: email,
@@ -217,14 +217,14 @@ controller.sendAcceptanceEmail = function(email, callback){
    *   verifyUrl: the url that the user must visit to verify their account
    * }
    */
-  sendOne('email-basic', options, locals, function(err, info){
-    if (err){
+  sendOne('email-basic', options, locals, function(err, info) {
+    if (err) {
       console.log(err);
     }
-    if (info){
+    if (info) {
       console.log(info.message);
     }
-    if (callback){
+    if (callback) {
       callback(err, info);
     }
   });
