@@ -18,6 +18,29 @@ function endsWith(s, test){
 }
 
 /**
+ * Determine whether or not a registration email is whitelisted.
+ * @param  {String}   email    Email of the user
+ * @param  {Function} callback args(err, true, false)
+ * @return {[type]}            [description]
+ */
+function checkWhitelistedEmails(email, callback) {
+  // Check for emails.
+  Settings.getWhitelistedEmails(function (err, emails) {
+    if (err || !emails) {
+      return callback(err);
+    }
+    for (var i = 0; i < emails.length; i++) {
+      if (endsWith(emails[i], email)) {
+        return callback(null, true);
+      }
+    }
+    return callback({
+      message: "Not a valid educational email."
+    }, false);
+  });
+}
+
+/**
  * Determine whether or not a user can register.
  * @param  {String}   email    Email of the user
  * @param  {Function} callback args(err, true, false)
@@ -49,19 +72,23 @@ function canRegister(email, password, callback){
       });
     }
 
-    // Check for emails.
-    Settings.getWhitelistedEmails(function(err, emails){
-      if (err || !emails){
+    if(!validator.isEmail(email)){
+      return callback({
+        message: "Not a valid email."
+      }, false);
+    }
+
+    Settings.getPublicSettings(function (err, settings) {
+      if (err || !settings) {
         return callback(err);
       }
-      for (var i = 0; i < emails.length; i++) {
-        if (validator.isEmail(email) && endsWith(emails[i], email)){
-          return callback(null, true);
-        }
+
+      // Check for all emails allowed.
+      if (settings.allowAllEmails) {
+        return callback(null, true);
+      } else {
+        checkWhitelistedEmails(email, callback);
       }
-      return callback({
-        message: "Not a valid educational email."
-      }, false);
     });
 
   });
