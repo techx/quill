@@ -31,7 +31,7 @@ angular.module('reg')
           .updateAllowMinors($scope.allowMinors)
           .success(function (data) {
             $scope.settings.allowMinors = data.allowMinors;
-            var successText = $scope.settings.allowMinors ?
+            const successText = $scope.settings.allowMinors ?
               "Minors are now allowed to register." :
               "Minors are no longer allowed to register."
             swal("Looks good!", successText, "success");
