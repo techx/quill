@@ -283,7 +283,8 @@ module.exports = function(router) {
    *   timeClose: Number,
    *   timeToConfirm: Number,
    *   acceptanceText: String,
-   *   confirmationText: String
+   *   confirmationText: String,
+   *   allowMinors: Boolean
    * }
    */
   router.get('/settings', function(req, res){
@@ -369,6 +370,19 @@ module.exports = function(router) {
   router.put('/settings/whitelist', isAdmin, function(req, res){
     var emails = req.body.emails;
     SettingsController.updateWhitelistedEmails(emails, defaultResponse(req, res));
+  });
+
+  /**
+   * [ADMIN ONLY]
+   * {
+   *   allowMinors: Boolean
+   * }
+   * res: Settings
+   *
+   */
+  router.put('/settings/minors', isAdmin, function(req, res){
+    var allowMinors = req.body.allowMinors;
+    SettingsController.updateField('allowMinors', allowMinors, defaultResponse(req, res));
   });
 
 };

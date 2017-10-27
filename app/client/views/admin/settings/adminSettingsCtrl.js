@@ -21,6 +21,22 @@ angular.module('reg')
 
         $scope.settings = settings;
       }
+      
+      // Additional Options --------------------------------------
+
+      $scope.updateAllowMinors = function () {
+        $scope.allowMinors = !$scope.allowMinors;
+
+        SettingsService
+          .updateAllowMinors($scope.allowMinors)
+          .success(function (data) {
+            $scope.settings.allowMinors = data.allowMinors;
+            var successText = $scope.settings.allowMinors ?
+              "Minors are now allowed to register." :
+              "Minors are no longer allowed to register."
+            swal("Looks good!", successText, "success");
+          });
+      };
 
       // Whitelist --------------------------------------
 
