@@ -210,6 +210,74 @@ UserController.getAll = function (callback) {
 };
 
 /**
+ * Builds search text queries.
+ * 
+ * @param   {String} searchText the text to search
+ * @returns {Object} queries    text queries
+ */
+function buildTextQueries(searchText) {
+  const queries = [];
+  if (searchText.length > 0) {
+    const re = new RegExp(searchText, 'i');
+    queries.push({ 'email': re });
+    queries.push({ 'profile.name': re });
+    queries.push({ 'teamCode': re });
+  }
+  return queries;
+}
+
+/**
+ * Builds status queries.
+ * Each key on 'statusFilters' is a status, and the value is a bool.
+ * 
+ * @param   {[type]} statusFilters object with status keys
+ * @returns {Object} queries  status queries
+ */
+function buildStatusQueries(statusFilters) {
+  const queries = [];
+  for (var key in statusFilters) {
+    if (statusFilters.hasOwnProperty(key)) {
+      // Convert to boolean
+      const hasStatus = (statusFilters[key] === 'true');
+      if (hasStatus) {
+        var q = {};
+        // Verified is a prop on user object
+        var queryKey = (key === 'verified' ? key : 'status.' + key);
+        q[queryKey] = true;
+        queries.push(q);
+      }
+    }
+  }
+  return queries;
+}
+
+/**
+ * Builds a find query.
+ * The root changes according to the following:
+ * $and { $or, $and } for text and status queries respectively
+ * $or for text queries
+ * $and for status queries
+ * 
+ * @param   {[type]} textQueries   text query objects
+ * @param   {[type]} statusQueries size of the page
+ * @returns {Object} findQuery     query object
+ */
+function buildFindQuery(textQueries, statusQueries) {
+  const findQuery = {};
+  if (textQueries.length > 0 && statusQueries.length > 0) {
+    var queryRoot = [];
+    queryRoot.push({ '$or': textQueries });
+    queryRoot.push({ '$and': statusQueries });
+    findQuery.$and = queryRoot;
+  } else if (textQueries.length > 0) {
+    findQuery.$or = textQueries;
+  } else if (statusQueries.length > 0) {
+    findQuery.$and = statusQueries;
+  }
+  return findQuery;
+}
+
+/**
  * Get a page of users.
  * @param  {[type]}   page     page number
  * @param  {[type]}   size     size of the page
@@ -219,17 +287,16 @@ UserController.getPage = function(query, callback){
   var page = query.page;
   var size = parseInt(query.size);
   var searchText = query.text;
+  var statusFilters = query.statusFilters;
 
-  var findQuery = {};
-  if (searchText.length > 0){
-    var queries = [];
-    var re = new RegExp(searchText, 'i');
-    queries.push({ email: re });
-    queries.push({ 'profile.name': re });
-    queries.push({ 'teamCode': re });
+  // Build a query for the search text
+  var textQueries = buildTextQueries(searchText);
 
-    findQuery.$or = queries;
-  }
+  // Build a query for each status
+  var statusQueries = buildStatusQueries(statusFilters);
+
+  // Build find query
+  var findQuery = buildFindQuery(textQueries, statusQueries);
 
   User
     .find(findQuery)
