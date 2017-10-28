@@ -69,7 +69,7 @@ angular.module('reg')
         AuthService
           .resendVerificationEmail()
           .then(function(){
-            sweetAlert('Your email has been sent.');
+            sweetAlert('Resend Verification Email', 'Your email has been sent.', 'success');
           });
       };
 
