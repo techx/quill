@@ -218,7 +218,7 @@ angular.module('reg')
           $rootScope.fadeOut = true;
 
           $timeout(function() {
-            $state.go(toState.name);
+            $state.go(toState.name, toParams);
           }, 100);
         }
 
