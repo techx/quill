@@ -788,7 +788,7 @@
         "school": "San Diego State University",
         "state": "California"
     },
-    "ucsb.edu": {
+    "umail.ucsb.edu": {
         "school": "University of California-Santa Barbara",
         "state": "California"
     },
@@ -850,10 +850,6 @@
     },
     "elcamino.edu": {
         "school": "El Camino College",
-        "state": "California"
-    },
-    "lovincyrus.com": {
-        "school": "Foothill College",
         "state": "California"
     },
     "ivc.edu": {
