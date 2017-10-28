@@ -1,14 +1,49 @@
-.error-red-color {
-  color: red;
-}
+#application {
+	.error-red-color {
+		color: red;
+	}
 
-.essay-feedback-container {
-  display: flex;
-  flex-direction: row;
-}
+	.essay-feedback-container {
+		display: flex;
+		flex-direction: row;
+	}
 
-.essay-character-count {
-  display: flex;
-  justify-content: flex-end;
-  flex: 1 0 auto;
+	.essay-character-count {
+		display: flex;
+		justify-content: flex-end;
+		flex: 1 0 auto;
+	}
+
+	.resume-dropzone {
+		width: 225px;
+		height: 175px;
+		text-align: center;
+		line-height: 1.2142em;
+		padding: .67861429em 1em;
+		font-size: 1em;
+		background: #fff;
+		border: 1px dashed rgba(34,36,38,.25);
+		color: rgba(0,0,0,.87);
+		cursor: pointer;
+		border-radius: .28571429rem;
+		box-shadow: 0 0 0 0 transparent inset;
+		transition: color .1s ease, border-color .1s ease, background .1s ease;
+
+		&.dz-drag-hover, &:hover {
+			background: rgba(34,36,38,.05);
+		}
+
+		span {
+			font-weight: 300;
+			font-size: 0.8em;
+			letter-spacing: 0.07em;
+
+			i {
+				display: block;
+				font-size: 2.5em;
+				color: rgba(0,0,0,0.75);
+				padding-bottom: 0.15em;
+			}
+		}
+	}
 }

@@ -1,24 +1,15 @@
-<div class="page" ng-class="{ 'fade-out': fadeOut }">
+<div id="application" class="page" ng-class="{ 'fade-out': fadeOut }">
   <div class="divided title">
     Application
   </div>
 
   <div class="ui stackable page grid">
     <div class="column">
-      <div class="ui form"
-            ng-class="{'loading': loading}">
+      <form class="ui form">
 
         <div class="divided title">Basic Information</div>
 
         <fieldset ng-disabled="regIsClosed">
-
-        <div class="field">
-          <label> Email </label>
-          <input type="email"
-                 name="email"
-                 disabled="disabled"
-                 ng-model="user.email">
-        </div>
 
         <div class="field">
           <label> Full Name </label>
@@ -26,6 +17,32 @@
                  name="name"
                  ng-model="user.profile.name">
         </div>
+
+        <div class="fields">
+          <div class="eleven wide field">
+            <label> Email </label>
+            <input type="email"
+                   name="email"
+                   ng-model="user.email" disabled>
+          </div>
+
+          <div class="five wide field">
+            <label> Gender </label>
+            <select
+              name="gender"
+              ng-model="user.profile.gender">
+              <option value="">Gender</option>
+              <option value="M">Male</option>
+              <option value="F">Female</option>
+              <option value="O">Other</option>
+              <option value="N">I prefer not to answer.</option>
+            </select>
+          </div>
+        </div>
+
+        <br>
+
+        <div class="divided title">School Information</div>
 
         <div class="field" ng-show="autoFilledSchool">
           <label> School </label>
@@ -42,31 +59,57 @@
                  ng-model="user.profile.school">
         </div>
 
-        <div class="field">
-          <label>Graduation Year</label>
-          <select
-            name="year"
-            ng-model="user.profile.graduationYear">
-            <option value="">Graduation Year</option>
-            <option value="2018">2018</option>
-            <option value="2019">2019</option>
-            <option value="2020">2020</option>
-            <option value="2021">2021</option>
-            <option value="later">Later than 2021</option>
-          </select>
+        <div class="two fields">
+          <div class="field">
+            <label>Major</label>
+            <select
+              name="major"
+              ng-model="user.profile.major">
+              <option value="">Major</option>
+              <option value="CS">Computer Science</option>
+              <option value="CGS">Computer Game Science</option>
+              <option value="CSE">Computer Science and Engineering</option>
+              <option value="INF">Informatics</option>
+              <option value="SE">Software Engineering</option>
+              <option value="BIM">Business Information Management</option>
+              <option value="others">Others</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Graduation Year</label>
+            <select
+              name="year"
+              ng-model="user.profile.graduationYear">
+              <option value="">Graduation Year</option>
+              <option value="2018">2018</option>
+              <option value="2019">2019</option>
+              <option value="2020">2020</option>
+              <option value="2021">2021</option>
+              <option value="later">Later than 2021</option>
+            </select>
+          </div>
         </div>
 
-        <div class="field">
-          <label>Gender</label>
-          <select
-            name="gender"
-            ng-model="user.profile.gender">
-            <option value="">Gender</option>
-            <option value="M">Male</option>
-            <option value="F">Female</option>
-            <option value="O">Other</option>
-            <option value="N">I prefer not to answer.</option>
-          </select>
+        <br>
+
+        <div class="divided title">Profile Information</div>
+
+        <div class="two fields">
+          <div class="field">
+            <label> LinkedIn </label>
+            <input type="text"
+                   name="linkedin"
+                   placeholder="http://"
+                   ng-model="user.profile.linkedin">
+          </div>
+          <div class="field">
+            <label> Portfolio (GitHub, website, etc.) </label>
+            <input type="text"
+                   name="portfolio"
+                   placeholder="http://"
+                   ng-model="user.profile.portfolio">
+          </div>
         </div>
 
         <div class="field">
@@ -97,6 +140,20 @@
           </div>
         </div>
 
+        <div class="field">
+          <label>Resume</label>
+          <div class="resume-dropzone center"
+            id="resume-upload">
+            <span>
+              <i class="fa fa-upload" aria-hidden="true"></i>
+              DRAG AND DROP
+            </span>
+            <div class="fallback">
+              <input name="file" type="file" multiple />
+            </div>
+          </div>
+        </div>
+
         <div class="field"
              ng-hide="isUciStudent">
           <p>
@@ -109,7 +166,7 @@
             </strong>
           </p>
           <div class="ui checkbox">
-            <input type="checkbox" id="adult" ng-model="user.profile.adult">
+            <input type="checkbox" name="adult" id="adult" ng-model="user.profile.adult">
             <label for="adult">I am 18 or older.</label>
           </div>
         </div>
@@ -125,7 +182,9 @@
         </div>
 
         </fieldset>
-      </div>
+
+        <div class="ui error message"></div>
+      </form>
     </div>
   </div>
 </div>

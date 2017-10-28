@@ -13,6 +13,9 @@ angular.module('reg')
       // Set up the user
       $scope.user = currentUser.data;
 
+      // TODO: Replace URL once server side implementation is done
+      var resumeDropzone = new Dropzone('div#resume-upload', { url: '/file/post'});
+
       // Is the student from UCI?
       $scope.isUciStudent = $scope.user.email.split('@')[1] == 'uci.edu';
 

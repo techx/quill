@@ -31,7 +31,7 @@
       <a
         ui-sref-active="menu-item-active"
         ui-sref="app.application"
-        ng-if="!currentUser.status.declined"
+        ng-if="isLoggedIn && !currentUser.status.declined"
         class="menu-item">
         APPLICATION
       </a>
@@ -115,7 +115,7 @@
       <a
         ui-sref-active="menu-item-active"
         ui-sref="app.application"
-        ng-if="!currentUser.status.declined"
+        ng-if="isLoggedIn && !currentUser.status.declined"
         class="menu-item"
         ng-click="onMenuClick()">
         APPLICATION
