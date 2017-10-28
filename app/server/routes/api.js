@@ -385,4 +385,17 @@ module.exports = function(router) {
     SettingsController.updateField('allowMinors', allowMinors, defaultResponse(req, res));
   });
 
+    /**
+   * [ADMIN ONLY]
+   * {
+   *   allowAllEmails: Boolean
+   * }
+   * res: Settings
+   *
+   */
+  router.put('/settings/allEmails', isAdmin, function(req, res){
+    var allowAllEmails = req.body.allowAllEmails;
+    SettingsController.updateField('allowAllEmails', allowAllEmails, defaultResponse(req, res));
+  });
+
 };

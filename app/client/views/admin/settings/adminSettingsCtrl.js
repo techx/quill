@@ -36,6 +36,18 @@ angular.module('reg')
           });
       };
 
+      $scope.updateAllowAllEmails = function () {
+        SettingsService
+          .updateAllowAllEmails($scope.settings.allowAllEmails)
+          .success(function (data) {
+            $scope.settings.allowAllEmails = data.allowAllEmails;
+            const successText = $scope.settings.allowAllEmails ?
+              "All emails are now allowed to register." :
+              "Only whitelisted emails are now allowed to register."
+            swal("Looks good!", successText, "success");
+          });
+      };
+
       // Whitelist --------------------------------------
 
       SettingsService
