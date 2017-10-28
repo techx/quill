@@ -74,6 +74,8 @@
 	.menu-item {
 		color: rgba(255,255,255,0.95);
 		cursor: pointer;
+		line-height: 2em;
+		border-bottom: 1px solid rgba(255,255,255,0);
 		transition: all .2s ease;
 	}
 
@@ -83,12 +85,18 @@
 
 	.menu-item:hover {
 		color: rgba(255,255,255,1);
+		border-bottom: 1px solid rgba(255,255,255,0.95);
+	}
+
+	.menu-item-active {
+		color: rgba(255,255,255,1);
+		border-bottom: 1px solid rgba(255,255,255,1);
 	}
 
 	.menu-item--sponsor {
 		border: 1px solid rgba(255,255,255,0.95);
 		border-radius: 25px;
-		padding: 10px 25px;
+		padding: 9px 25px;
 		margin-left: 2.5%;
 		background-color: transparent;
 		transition: all .2s ease;
