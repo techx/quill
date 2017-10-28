@@ -120,7 +120,7 @@
         "school": "Stanford University",
         "state": "California"
     },
-    "csupomona.edu": {
+    "cpp.edu": {
         "school": "California State Polytechnic University-Pomona",
         "state": "California"
     },
@@ -775,5 +775,129 @@
     "fiu.edu": {
         "school": "Florida International University",
         "state": "Florida"
+    },
+    "usc.edu": {
+        "school": "University of Southern California",
+        "state": "California"
+    },
+    "csu.fullerton.edu": {
+        "school": "California State University-Fullerton",
+        "state": "California"
+    },
+    "sdsu.edu": {
+        "school": "San Diego State University",
+        "state": "California"
+    },
+    "ucsb.edu": {
+        "school": "University of California-Santa Barbara",
+        "state": "California"
+    },
+    "csun.edu": {
+        "school": "California State University-Northtidge",
+        "state": "California"
+    },
+    "mail.sfsu.edu": {
+        "school": "San Francisco State University",
+        "state": "California"
+    },
+    "student.csulb.edu": {
+        "school": "California State University - Long Beach",
+        "state": "California"
+    },
+    "mail.chapman.edu": {
+        "school": "Chapman University",
+        "state": "California"
+    },
+    "mail.ccsf.edu": {
+        "school": "City College of San Francisco",
+        "state": "California"
+    },
+    "csus.edu": {
+        "school": "California State University - Sacramento",
+        "state": "California"
+    },
+    "ucr.edu": {
+        "school": "University of California - Riverside",
+        "state": "California"
+    },
+    "biola.edu": {
+        "school": "Biola University",
+        "state": "California"
+    },
+    "brynmawr.edu": {
+        "school": "Bryn Mawr College",
+        "state": "California"
+    },
+    "calstatela.edu": {
+        "school": "California State University - Los Angeles",
+        "state": "California"
+    },
+    "coyote.csusb.edu": {
+        "school": "California State University - San Bernardino",
+        "state": "California"
+    },
+    "student.citruscollege.edu": {
+        "school": "Citrus College",
+        "state": "California"
+    },
+    "my.smccd.edu": {
+        "school": "College of San Mateo",
+        "state": "California"
+    },
+    "insite.4cd.edu": {
+        "school": "Diablo Valley College",
+        "state": "California"
+    },
+    "elcamino.edu": {
+        "school": "El Camino College",
+        "state": "California"
+    },
+    "lovincyrus.com": {
+        "school": "Foothill College",
+        "state": "California"
+    },
+    "ivc.edu": {
+        "school": "Irvine Valley College",
+        "state": "California"
+    },
+    "student.laccd.edu": {
+        "school": "Los Angeles Pierce College",
+        "state": "California"
+    },
+    "my.vcccd.edu": {
+        "school": "Moorpark College",
+        "state": "California"
+    },
+    "student.rcc.edu": {
+        "school": "Moreno Valley College",
+        "state": "California"
+    },
+    "student.cccd.edu": {
+        "school": "Orange Coast College",
+        "state": "California"
+    },
+    "student.palomar.edu": {
+        "school": "Palomar College",
+        "state": "California"
+    },
+    "go.pasadena.edu": {
+        "school": "Pasadena City College",
+        "state": "California"
+    },
+    "my.riohondo.edu": {
+        "school": "Rio Hondo College",
+        "state": "California"
+    },
+    "sjsu.edu": {
+        "school": "San Jose State University",
+        "state": "California"
+    },
+    "scu.edu": {
+        "school": "Santa Clara University",
+        "state": "California"
+    },
+    "ucmerced.edu": {
+        "school": "University of California - Merced",
+        "state": "California"
     }
 }
