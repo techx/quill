@@ -30,6 +30,13 @@
       </a>
       <a
         ui-sref-active="menu-item-active"
+        ui-sref="app.apply"
+        ng-if="!isLoggedIn"
+        class="menu-item">
+        APPLY
+      </a>
+      <a
+        ui-sref-active="menu-item-active"
         ui-sref="app.application"
         ng-if="isLoggedIn && !currentUser.status.declined"
         class="menu-item">
@@ -111,6 +118,14 @@
         ng-if="!isLoggedIn"
         ng-click="onMenuClick()">
         LOGIN
+      </a>
+      <a
+        ui-sref-active="menu-item-active"
+        ui-sref="app.apply"
+        ng-if="!isLoggedIn"
+        class="menu-item"
+        ng-click="onMenuClick()">
+        APPLY
       </a>
       <a
         ui-sref-active="menu-item-active"
