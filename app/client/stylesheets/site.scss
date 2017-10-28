@@ -111,6 +111,12 @@ body {
   }
 }
 
+.ui.form .field>label {
+  font-weight: 400;
+  font-size: 0.9em;
+  letter-spacing: 0.02em;
+}
+
 .ui.form select {
   height: 2.5em;
 }

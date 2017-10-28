@@ -13,14 +13,20 @@
 
         <div class="two fields">
           <div class="field">
-            <label> First Name </label>
+            <label>
+              First Name
+              <span class="required">*</span>
+            </label>
             <input type="text"
                    name="name"
                    ng-model="user.profile.firstname">
           </div>
 
           <div class="field">
-            <label> Last Name </label>
+            <label>
+              Last Name
+              <span class="required">*</span>
+            </label>
             <input type="text"
                    name="name"
                    ng-model="user.profile.lastname">
@@ -29,14 +35,20 @@
 
         <div class="fields">
           <div class="eleven wide field">
-            <label> Email </label>
+            <label>
+              Email
+              <span class="required">*</span>
+            </label>
             <input type="email"
                    name="email"
                    ng-model="user.email">
           </div>
 
           <div class="five wide field">
-            <label> Gender </label>
+            <label>
+              Gender
+              <span class="required">*</span>
+            </label>
             <select
               name="gender"
               ng-model="user.profile.gender">
@@ -51,13 +63,19 @@
 
         <div class="two fields">
           <div class="field">
-            <label> Password </label>
+            <label>
+              Password
+              <span class="required">*</span>
+            </label>
             <input type="password"
                    name="password"
                    ng-model="user.password" required>
           </div>
           <div class="field">
-            <label> Confirm Password </label>
+            <label>
+              Confirm Password
+               <span class="required">*</span>
+            </label>
             <input type="password"
                    name="confirmPassword"
                    ng-model="confirmPassword" required>
@@ -69,7 +87,10 @@
         <div class="divided title">School Information</div>
 
         <div class="field" ng-show="autoFilledSchool">
-          <label> School </label>
+          <label>
+            School
+             <span class="required">*</span>
+          </label>
           <input class="ui input"
                  disabled="disabled"
                  ng-show="autoFilledSchool"
@@ -77,7 +98,9 @@
         </div>
 
         <div class="field" ng-show="!autoFilledSchool">
-          <label> School </label>
+          <label> School
+             <span class="required">*</span>
+          </label>
           <input class="ui input"
                  name="school"
                  ng-model="user.profile.school">
@@ -85,7 +108,10 @@
 
         <div class="two fields">
           <div class="field">
-            <label>Major</label>
+            <label>
+              Major
+               <span class="required">*</span>
+            </label>
             <select
               name="major"
               ng-model="user.profile.major">
@@ -101,7 +127,10 @@
           </div>
 
           <div class="field">
-            <label>Graduation Year</label>
+            <label>
+              Graduation Year
+               <span class="required">*</span>
+            </label>
             <select
               name="year"
               ng-model="user.profile.graduationYear">
@@ -137,7 +166,10 @@
         </div>
 
         <div class="field">
-          <label>I would describe myself as a...</label>
+          <label>
+            I would describe myself as a...
+             <span class="required">*</span>
+          </label>
           <input type="text"
                  placeholder="Designer, Data Scientist, iOS Wizard, Hacker Extraordinaire"
                  ng-model="user.profile.description">
@@ -146,6 +178,7 @@
         <div class="field" ng-class="{error: user.profile.essay.length > 1500}">
           <label>
               What would you like to learn or get out of HackUCI?
+               <span class="required">*</span>
           </label>
 
           <textarea ng-model="user.profile.essay"
@@ -165,7 +198,10 @@
         </div>
 
         <div class="field">
-          <label>Resume</label>
+          <label>
+            Resume
+             <span class="required">*</span>
+          </label>
           <div class="resume-dropzone center"
             id="resume-upload">
             <span>

@@ -1,4 +1,9 @@
 #apply {
+	.required {
+		color: red;
+		font-weight: 500;
+	}
+
 	.resume-dropzone {
 		width: 225px;
 		height: 175px;
