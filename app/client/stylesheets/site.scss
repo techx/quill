@@ -52,6 +52,7 @@ $brand-tertiary: $tertiary;
 @import 'verify';
 @import 'team';
 @import 'admin';
+@import 'apply';
 
 html,
 body {
@@ -84,9 +85,6 @@ body {
 .ui.segment {
   border-radius: 0;
   box-shadow: none;
-}
-input {
-  border-radius: 0 !important;
 }
 .ui.button {
   border-radius: 0;

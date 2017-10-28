@@ -59,6 +59,7 @@
 
       .segment {
         border-radius: 15px;
+        padding: 1em 1.25em;
         border: none;
         margin: 0;
         background-color: rgba(255,255,255,0.85);
@@ -94,19 +95,17 @@
 
       .button {
         color: white;
+        font-weight: 300;
+        font-size: 0.95em;
+        letter-spacing: 0.07em;
+        border-radius: 25px;
 
         &.login {
           background: $login-color;
-          font-weight: 300;
-          font-size: 0.95em;
-          letter-spacing: 0.07em;
         }
 
         &.register {
           background: $register-color;
-          font-weight: 300;
-          font-size: 0.95em;
-          letter-spacing: 0.07em;
         }
       }
 

@@ -140,7 +140,7 @@ angular.module('reg')
       $scope.$watch(
         "user.profile.essay.length",
         function (newValue, oldValue){
-          if (!$scope.activateCharCount && newValue > 100)
+          if (!$scope.activateCharCount && newValue >= 100)
             $scope.activateCharCount = true
         }
       );

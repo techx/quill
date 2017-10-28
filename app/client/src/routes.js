@@ -59,6 +59,19 @@ angular.module('reg')
           }
         }
       })
+      .state('app.apply', {
+        url: "/apply",
+        templateUrl: "views/apply/apply.html",
+        controller: 'ApplyCtrl',
+        data: {
+          requireLogin: false
+        },
+        resolve: {
+          settings: function(SettingsService){
+            return SettingsService.getPublicSettings();
+          }
+        },
+      })
       .state('app.dashboard', {
         url: "/dashboard",
         templateUrl: "views/dashboard/dashboard.html",

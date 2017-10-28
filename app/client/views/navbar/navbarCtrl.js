@@ -43,7 +43,7 @@ angular.module('reg')
       };
 
       $('.navbar-mobile-menu-icon').on('click', function() {
-        $('.ui.modal')
+        $('.navbar-modal')
           .modal('setting', 'transition', 'fade left')
           .modal('show');
       });

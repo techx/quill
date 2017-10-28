@@ -309,8 +309,7 @@ UserController.updateProfileById = function (id, profile, callback){
     });
 
     User.findOneAndUpdate({
-      _id: id,
-      verified: true
+      _id: id
     },
       {
         $set: {
