@@ -25,8 +25,6 @@ angular.module('reg')
       // Additional Options --------------------------------------
 
       $scope.updateAllowMinors = function () {
-        $scope.settings.allowMinors = !$scope.settings.allowMinors;
-
         SettingsService
           .updateAllowMinors($scope.settings.allowMinors)
           .success(function (data) {

@@ -86,14 +86,21 @@ class="ui green segment">
   </div>
 
   <div class="column">
-    <div class="ui buttons">
-        <button 
-          class="ui toggle button"
-          ng-class="{true: 'active', false: ''}[settings.allowMinors]"
-          ng-click="updateAllowMinors()">
-          Minors {{ settings.allowMinors && 'allowed' || 'disallowed' }}
-        </button>
+    <div class="ui form">
+      <div class="grouped fields">
+        <div class="field">
+          <div class="ui toggle checkbox">
+              <input 
+              type="checkbox"
+              name="allowMinors"
+              ng-class="{true: 'checked', false: ''}[settings.allowMinors]"
+              ng-model="settings.allowMinors"
+              ng-change="updateAllowMinors()">
+              <label>Allow minors</label>
+          </div>
+        </div>
       </div>
+    </div>
   </div>
 </div>
 
