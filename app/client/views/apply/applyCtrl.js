@@ -87,12 +87,15 @@ angular.module('reg')
                 $state.go('app.dashboard');
               });
             })
-            .error(function(res){
-              console.log(res)
+            .error(function(err){
               sweetAlert("Uh oh!", "Something went wrong.", "error");
             });
         }, function error(err) {
-          sweetAlert("Uh oh!", "Something went wrong.", "error");
+          if (err.message === 'An account for this email already exists.') {
+            sweetAlert('Oops', 'Looks like an account for this email already exists. Please log in to edit your application.', 'error');
+          } else {
+            sweetAlert("Uh oh!", "Something went wrong.", "error");
+          }
         });
       }
 
