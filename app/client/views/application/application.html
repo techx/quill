@@ -11,11 +11,20 @@
 
         <fieldset ng-disabled="regIsClosed">
 
-        <div class="field">
-          <label> Full Name </label>
-          <input type="text"
-                 name="name"
-                 ng-model="user.profile.name">
+        <div class="two fields">
+          <div class="field">
+            <label> First Name </label>
+            <input type="text"
+                   name="name"
+                   ng-model="user.profile.firstname">
+          </div>
+
+          <div class="field">
+            <label> Last Name </label>
+            <input type="text"
+                   name="name"
+                   ng-model="user.profile.lastname">
+          </div>
         </div>
 
         <div class="fields">

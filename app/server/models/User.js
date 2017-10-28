@@ -13,6 +13,18 @@ var profile = {
     max: 100,
   },
 
+  firstname: {
+    type: String,
+    min: 1,
+    max: 100,
+  },
+
+  lastname: {
+    type: String,
+    min: 1,
+    max: 100,
+  },
+
   adult: {
     type: Boolean,
     required: true,
@@ -23,6 +35,10 @@ var profile = {
     type: String,
     min: 1,
     max: 150,
+  },
+
+  major: {
+    type: String
   },
 
   graduationYear: {
@@ -38,10 +54,26 @@ var profile = {
     max: 300
   },
 
+  linkedin: {
+    type: String,
+    min: 0,
+    max: 100
+  },
+
+  portfolio: {
+    type: String,
+    min: 0,
+    max: 100
+  },
+
   essay: {
     type: String,
     min: 0,
     max: 1500
+  },
+
+  resume: {
+    type: String
   },
 
   // Optional info for demographics
