@@ -1,6 +1,6 @@
-<div id="application" class="page" ng-class="{ 'fade-out': fadeOut }">
+<div id="apply" class="page" ng-class="{ 'fade-out': fadeOut }">
   <div class="divided title">
-    Application
+    Apply
   </div>
 
   <div class="ui stackable page grid">
@@ -41,7 +41,7 @@
             </label>
             <input type="email"
                    name="email"
-                   ng-model="user.email" disabled>
+                   ng-model="user.email">
           </div>
 
           <div class="five wide field">
@@ -58,6 +58,27 @@
               <option value="O">Other</option>
               <option value="N">I prefer not to answer.</option>
             </select>
+          </div>
+        </div>
+
+        <div class="two fields">
+          <div class="field">
+            <label>
+              Password
+              <span class="required">*</span>
+            </label>
+            <input type="password"
+                   name="password"
+                   ng-model="user.password" required>
+          </div>
+          <div class="field">
+            <label>
+              Confirm Password
+               <span class="required">*</span>
+            </label>
+            <input type="password"
+                   name="confirmPassword"
+                   ng-model="confirmPassword" required>
           </div>
         </div>
 

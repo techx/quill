@@ -309,8 +309,7 @@ UserController.updateProfileById = function (id, profile, callback){
     });
 
     User.findOneAndUpdate({
-      _id: id,
-      verified: true
+      _id: id
     },
       {
         $set: {
@@ -405,16 +404,18 @@ UserController.declineById = function (id, callback){
  */
 UserController.verifyByToken = function(token, callback){
   User.verifyEmailVerificationToken(token, function(err, email){
-    User.findOneAndUpdate({
-      email: new RegExp('^' + email + '$', 'i')
-    },{
-      $set: {
-        'verified': true
-      }
-    }, {
-      new: true
-    },
-    callback);
+    if (email) {
+      User.findOneAndUpdate({
+        email: email.toLowerCase()
+      },{
+        $set: {
+          'verified': true
+        }
+      }, {
+        new: true
+      },
+      callback);
+    }
   });
 };
 

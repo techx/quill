@@ -52,6 +52,7 @@ $brand-tertiary: $tertiary;
 @import 'verify';
 @import 'team';
 @import 'admin';
+@import 'apply';
 
 html,
 body {
@@ -85,9 +86,6 @@ body {
   border-radius: 0;
   box-shadow: none;
 }
-input {
-  border-radius: 0 !important;
-}
 .ui.button {
   border-radius: 0;
   &.primary {
@@ -113,8 +111,17 @@ input {
   }
 }
 
+.ui.form .field>label {
+  font-weight: 400;
+  font-size: 0.9em;
+  letter-spacing: 0.02em;
+}
+
 .ui.form select {
   height: 2.5em;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 0.5em;
 }
 
 fieldset {

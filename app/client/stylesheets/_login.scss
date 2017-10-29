@@ -59,8 +59,10 @@
 
       .segment {
         border-radius: 15px;
+        padding: 1em 1.25em;
         border: none;
         margin: 0;
+        box-shadow: 0 2px 16px rgba(24,51,59,.35);
         background-color: rgba(255,255,255,0.85);
         animation: fadein .5s both;
         animation-delay: .2s;
@@ -92,21 +94,34 @@
         letter-spacing: 0.07em;
       }
 
+      .ui.form input[type=email]:focus, .ui.form input[type=password]:focus {
+        border-color: rgba(34, 36, 38, 0.15);
+        box-shadow: 0 2px 16px rgba(24,51,59,.1);
+      }
+
       .button {
         color: white;
+        font-weight: 300;
+        font-size: 0.95em;
+        letter-spacing: 0.07em;
+        border-radius: 25px;
+        box-shadow: 0 2px 16px rgba(24,51,59,.2);
+          transition: background .2s ease;
 
         &.login {
-          background: $login-color;
-          font-weight: 300;
-          font-size: 0.95em;
-          letter-spacing: 0.07em;
+          background: rgba(61,153,190,0.95);
+        }
+
+        &.login:hover {
+          background: rgba(61,153,190,1);
         }
 
         &.register {
-          background: $register-color;
-          font-weight: 300;
-          font-size: 0.95em;
-          letter-spacing: 0.07em;
+          background: rgba(2,204,186,0.95);
+        }
+
+        &.register:hover {
+          background: rgba(2,204,186,1);
         }
       }
 

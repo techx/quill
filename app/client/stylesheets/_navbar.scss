@@ -18,7 +18,6 @@
 	.navbar {
 		width: 100%;
 		height: 100px;
-		padding: 35px 50px;
 		background: linear-gradient(-225deg, #2CD8D5 0%, #6B8DD6 48%, #8E37D7 100%);
 		display: flex;
 		animation: fadein .5s both;
@@ -28,7 +27,7 @@
 	.navbar-transparent {
 		position: absolute;
 		background: none;
-		padding: 35px 50px 0 50px;
+		padding-top: 35px;
 		transition: all .2s ease;
 
 		.logo-header {
@@ -39,7 +38,11 @@
 	.logo-header {
 		animation: fadein .5s both;
 		animation-delay: .15s;
-		height: calc(100% - 35px);
+		width: 65px;
+		height: 65px;
+		top: 35px;
+		left: 50px;
+		padding: 0;
 		position: absolute;
 		cursor: pointer;
 		margin-top: -17.5px;
@@ -69,6 +72,7 @@
 		justify-content: flex-end;
 		align-items: center;
 		margin: 0;
+		padding-right: 50px;
 	}
 
 	.menu-item {
@@ -120,7 +124,8 @@
 		.logo-header {
 			margin-top: 0;
 			height: 50px;
-			left: 0;
+			top: 10px;
+			left: 10px;
 			right: 0;
 			text-align: center;
 		}

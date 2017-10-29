@@ -96,7 +96,7 @@
 
           <div
             class="ui pink button"
-            ng-show="!user.teamCode"
+            ng-show="user.verified && !user.teamCode"
             ui-sref="app.team">
             Create or join a team
           </div>
