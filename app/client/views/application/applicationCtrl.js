@@ -14,7 +14,16 @@ angular.module('reg')
       $scope.user = currentUser.data;
 
       // TODO: Replace URL once server side implementation is done
-      var resumeDropzone = new Dropzone('div#resume-upload', { url: '/file/post'});
+      var dropzoneConfig = {
+        url: '/api/resume/upload',
+        maxFilesize: 1, // MB
+        acceptedFiles: 'application/pdf',
+        headers: {
+          'x-access-token': Session.getToken()
+        }
+      };
+      
+      var resumeDropzone = new Dropzone('div#resume-upload', dropzoneConfig);
 
       // Is the student from UCI?
       $scope.isUciStudent = $scope.user.email.split('@')[1] == 'uci.edu';

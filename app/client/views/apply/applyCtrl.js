@@ -13,8 +13,14 @@ angular.module('reg')
         $state.go('app.application');
       }
 
-      // TODO: Replace URL once server side implementation is done
-      var resumeDropzone = new Dropzone('div#resume-upload', { url: '/file/post'});
+      var dropzoneConfig = {
+        url: '/api/resume/upload',
+        maxFilesize: 1, // MB
+        acceptedFiles: 'application/pdf',
+        autoProcessQueue: false
+      };
+
+      var resumeDropzone = new Dropzone('div#resume-upload', dropzoneConfig);
       
       // Initialize user object and its nested objects
       $scope.user = {
@@ -78,14 +84,22 @@ angular.module('reg')
           UserService
             .updateProfile(Session.getUserId(), $scope.user.profile)
             .success(function(data){
-              sweetAlert({
-                title: "Awesome!",
-                text: "Your application has been saved.",
-                type: "success",
-                confirmButtonColor: "#e76482"
-              }, function(){
-                $state.go('app.dashboard');
+              resumeDropzone.options.headers = {
+                'x-access-token': Session.getToken()
+              }
+
+              resumeDropzone.processQueue();
+              resumeDropzone.on('queuecomplete', function() {
+                sweetAlert({
+                  title: "Awesome!",
+                  text: "Your application has been saved.",
+                  type: "success",
+                  confirmButtonColor: "#e76482"
+                }, function(){
+                  $state.go('app.dashboard');
+                });
               });
+
             })
             .error(function(err){
               sweetAlert("Uh oh!", "Something went wrong.", "error");
