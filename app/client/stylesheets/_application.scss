@@ -31,14 +31,20 @@
 		color: rgba(0,0,0,.87);
 		cursor: pointer;
 		border-radius: .28571429rem;
+		flex-wrap: wrap;
 		box-shadow: 0 0 0 0 transparent inset;
 		transition: color .1s ease, border-color .1s ease, background .1s ease;
 
-		&.dz-drag-hover, &:hover {
+		&.dz-drag-hover, &.resume-uploading, &:hover {
 			background: rgba(34,36,38,.05);
 		}
 
-		span {
+		&.resume-dropzone-error {
+			border-color: rgba(231, 76, 60, 1.0);
+			background: rgba(231, 76, 60, 0.05);
+		}
+
+		>span {
 			font-weight: 300;
 			font-size: 0.8em;
 			letter-spacing: 0.07em;
@@ -48,6 +54,30 @@
 				font-size: 2.5em;
 				color: rgba(0,0,0,0.75);
 				padding-bottom: 0.15em;
+			}
+		}
+
+		.dz-details {
+			>div {
+				padding: 4px 0;
+			}
+
+			i {
+				font-size: 2em;
+				color: rgba(0,0,0,0.75);
+			}
+
+			span[data-dz-name] {
+				font-size: 0.95em;
+				font-weight: 400;
+				letter-spacing: 0.02em;
+			}
+
+			span[data-dz-errormessage] {
+				font-weight: 300;
+				font-size: 0.8em;
+				letter-spacing: 0.07em;
+				line-height: 1em;
 			}
 		}
 	}

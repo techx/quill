@@ -16,6 +16,8 @@ angular.module('reg')
       var dropzoneConfig = {
         url: '/api/resume/upload',
         maxFilesize: 1, // MB
+        maxFiles: 1,
+        uploadMultiple: false,
         acceptedFiles: 'application/pdf',
         autoProcessQueue: false
       };
@@ -92,7 +94,7 @@ angular.module('reg')
               resumeDropzone.on('queuecomplete', function() {
                 sweetAlert({
                   title: "Awesome!",
-                  text: "Your application has been saved.",
+                  text: "Your application has been received.",
                   type: "success",
                   confirmButtonColor: "#e76482"
                 }, function(){

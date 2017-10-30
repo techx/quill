@@ -401,7 +401,6 @@ module.exports = function(router) {
   })
 
   router.post('/resume/upload', upload.single('file'), (req, res) => {    
-
     res.send(200);
   });
 };
