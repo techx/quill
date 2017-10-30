@@ -279,8 +279,12 @@ angular.module('reg')
       );
 
       $scope.submitForm = function(){
-        if ($('.ui.form').form('is valid')){
-          _apply();
+        if ($('.ui.form').form('is valid') && !$scope.resumeDropzoneHasError) {
+          if ($scope.resumeDropzone.files.length) {
+            _apply();
+          } else {
+            $scope.resumeDropzoneHasError = true;
+          }
         }
       };
 
