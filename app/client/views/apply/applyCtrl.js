@@ -137,12 +137,15 @@ angular.module('reg')
             })
             .error(function(err){
               sweetAlert("Uh oh!", "Something went wrong.", "error");
+              $scope.submitButtonDisabled = false;
             });
         }, function error(err) {
           if (err.message === 'An account for this email already exists.') {
             sweetAlert('Oops', 'Looks like an account for this email already exists. Please log in to edit your application.', 'error');
+            $scope.submitButtonDisabled = false;
           } else {
             sweetAlert("Uh oh!", "Something went wrong.", "error");
+            $scope.submitButtonDisabled = false;
           }
         });
       }
@@ -278,13 +281,17 @@ angular.module('reg')
         }
       );
 
-      $scope.submitForm = function(){
+      $scope.submitForm = function() {
+        $scope.submitButtonDisabled = true;
         if ($('.ui.form').form('is valid') && !$scope.resumeDropzoneHasError) {
           if ($scope.resumeDropzone.files.length) {
             _apply();
           } else {
+            $scope.submitButtonDisabled = false;
             $scope.resumeDropzoneHasError = true;
           }
+        } else {
+          $scope.submitButtonDisabled = false;
         }
       };
 

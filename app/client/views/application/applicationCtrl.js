@@ -110,6 +110,7 @@ angular.module('reg')
           })
           .error(function(res){
             sweetAlert("Uh oh!", "Something went wrong.", "error");
+            $scope.submitButtonDisabled = false;
           });
       }
 
@@ -196,8 +197,11 @@ angular.module('reg')
       );
 
       $scope.submitForm = function(){
+        $scope.submitButtonDisabled = true;
         if ($('.ui.form').form('is valid')){
           _updateUser();
+        } else {
+          $scope.submitButtonDisabled = false;
         }
       };
 

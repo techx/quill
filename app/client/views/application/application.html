@@ -233,6 +233,7 @@
         <div class="field" ng-hide="regIsClosed">
           <button type="submit"
                   class="fluid ui purple button"
+                  ng-class="{'disabled': submitButtonDisabled}"
                   ng-click="submitForm()">
             Submit
           </button>
