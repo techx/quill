@@ -15,14 +15,46 @@ angular.module('reg')
 
       var dropzoneConfig = {
         url: '/api/resume/upload',
-        maxFilesize: 1, // MB
+        previewTemplate: document.querySelector('#resume-dropzone-preview').innerHTML,
         maxFiles: 1,
+        maxFilesize: 1, // MB
         uploadMultiple: false,
         acceptedFiles: 'application/pdf',
         autoProcessQueue: false
       };
 
-      var resumeDropzone = new Dropzone('div#resume-upload', dropzoneConfig);
+      $scope.showResumeDropzoneIcon = true;
+      $scope.resumeDropzoneErrorMessage = '';
+
+      $scope.resumeDropzone = new Dropzone('div#resume-upload', dropzoneConfig);
+
+      $scope.resumeDropzone.on("error", function(file, errorMessage) {
+        $scope.resumeDropzoneHasError = true;
+        $scope.resumeDropzoneErrorMessage = errorMessage;
+        $scope.$apply();
+      });
+
+      $scope.resumeDropzone.on("addedfile", function() {
+        if ($scope.resumeDropzone.files.length > 1) {
+          $scope.resumeDropzone.removeFile($scope.resumeDropzone.files[0]);
+        }
+
+        $scope.resumeDropzoneHasError = false;
+        $scope.resumeDropzoneErrorMessage = '';
+        $scope.showResumeDropzoneIcon = !!!$scope.resumeDropzone.files.length;
+        $scope.$apply();
+      })
+
+      $scope.resumeDropzone.on("removedfile", function() {
+        $scope.resumeDropzoneHasError = false;
+        $scope.resumeDropzoneErrorMessage = '';
+        $scope.showResumeDropzoneIcon = !!!$scope.resumeDropzone.files.length;
+        $scope.$apply();
+      })
+
+      $scope.resumeDropzone.on("processing", function() {
+        $scope.resumeDropzoneIsUploading = true;
+      })
       
       // Initialize user object and its nested objects
       $scope.user = {
@@ -86,12 +118,12 @@ angular.module('reg')
           UserService
             .updateProfile(Session.getUserId(), $scope.user.profile)
             .success(function(data){
-              resumeDropzone.options.headers = {
+              $scope.resumeDropzone.options.headers = {
                 'x-access-token': Session.getToken()
               }
 
-              resumeDropzone.processQueue();
-              resumeDropzone.on('queuecomplete', function() {
+              $scope.resumeDropzone.processQueue();
+              $scope.resumeDropzone.on('queuecomplete', function() {
                 sweetAlert({
                   title: "Awesome!",
                   text: "Your application has been received.",
