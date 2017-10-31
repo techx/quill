@@ -55,3 +55,10 @@
         opacity: 0
     }
 }
+
+/* Keyframes */
+@keyframes spin {
+	100% {
+		transform: rotate(360deg);
+	}
+}
