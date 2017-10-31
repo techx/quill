@@ -13,8 +13,48 @@ angular.module('reg')
         $state.go('app.application');
       }
 
-      // TODO: Replace URL once server side implementation is done
-      var resumeDropzone = new Dropzone('div#resume-upload', { url: '/file/post'});
+      var dropzoneConfig = {
+        url: '/api/resume/upload',
+        previewTemplate: document.querySelector('#resume-dropzone-preview').innerHTML,
+        maxFiles: 1,
+        maxFilesize: 1, // MB
+        uploadMultiple: false,
+        acceptedFiles: 'application/pdf',
+        autoProcessQueue: false
+      };
+
+      $scope.showResumeDropzoneIcon = true;
+      $scope.resumeDropzoneErrorMessage = '';
+
+      $scope.resumeDropzone = new Dropzone('div#resume-upload', dropzoneConfig);
+
+      $scope.resumeDropzone.on("error", function(file, errorMessage) {
+        $scope.resumeDropzoneHasError = true;
+        $scope.resumeDropzoneErrorMessage = errorMessage;
+        $scope.$apply();
+      });
+
+      $scope.resumeDropzone.on("addedfile", function() {
+        if ($scope.resumeDropzone.files.length > 1) {
+          $scope.resumeDropzone.removeFile($scope.resumeDropzone.files[0]);
+        }
+
+        $scope.resumeDropzoneHasError = false;
+        $scope.resumeDropzoneErrorMessage = '';
+        $scope.showResumeDropzoneIcon = !!!$scope.resumeDropzone.files.length;
+        $scope.$apply();
+      })
+
+      $scope.resumeDropzone.on("removedfile", function() {
+        $scope.resumeDropzoneHasError = false;
+        $scope.resumeDropzoneErrorMessage = '';
+        $scope.showResumeDropzoneIcon = !!!$scope.resumeDropzone.files.length;
+        $scope.$apply();
+      })
+
+      $scope.resumeDropzone.on("processing", function() {
+        $scope.resumeDropzoneIsUploading = true;
+      })
       
       // Initialize user object and its nested objects
       $scope.user = {
@@ -78,23 +118,34 @@ angular.module('reg')
           UserService
             .updateProfile(Session.getUserId(), $scope.user.profile)
             .success(function(data){
-              sweetAlert({
-                title: "Awesome!",
-                text: "Your application has been saved.",
-                type: "success",
-                confirmButtonColor: "#e76482"
-              }, function(){
-                $state.go('app.dashboard');
+              $scope.resumeDropzone.options.headers = {
+                'x-access-token': Session.getToken()
+              }
+
+              $scope.resumeDropzone.processQueue();
+              $scope.resumeDropzone.on('queuecomplete', function() {
+                sweetAlert({
+                  title: "Awesome!",
+                  text: "Your application has been received.",
+                  type: "success",
+                  confirmButtonColor: "#e76482"
+                }, function(){
+                  $state.go('app.dashboard');
+                });
               });
+
             })
             .error(function(err){
               sweetAlert("Uh oh!", "Something went wrong.", "error");
+              $scope.submitButtonDisabled = false;
             });
         }, function error(err) {
           if (err.message === 'An account for this email already exists.') {
             sweetAlert('Oops', 'Looks like an account for this email already exists. Please log in to edit your application.', 'error');
+            $scope.submitButtonDisabled = false;
           } else {
             sweetAlert("Uh oh!", "Something went wrong.", "error");
+            $scope.submitButtonDisabled = false;
           }
         });
       }
@@ -230,9 +281,17 @@ angular.module('reg')
         }
       );
 
-      $scope.submitForm = function(){
-        if ($('.ui.form').form('is valid')){
-          _apply();
+      $scope.submitForm = function() {
+        $scope.submitButtonDisabled = true;
+        if ($('.ui.form').form('is valid') && !$scope.resumeDropzoneHasError) {
+          if ($scope.resumeDropzone.files.length) {
+            _apply();
+          } else {
+            $scope.submitButtonDisabled = false;
+            $scope.resumeDropzoneHasError = true;
+          }
+        } else {
+          $scope.submitButtonDisabled = false;
         }
       };
 

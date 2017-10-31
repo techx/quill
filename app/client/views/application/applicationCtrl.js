@@ -14,8 +14,52 @@ angular.module('reg')
       $scope.user = currentUser.data;
 
       // TODO: Replace URL once server side implementation is done
-      var resumeDropzone = new Dropzone('div#resume-upload', { url: '/file/post'});
+      var dropzoneConfig = {
+        url: '/api/resume/upload',
+        previewTemplate: document.querySelector('#resume-dropzone-preview').innerHTML,
+        maxFiles: 1,
+        maxFilesize: 1, // MB
+        uploadMultiple: false,
+        acceptedFiles: 'application/pdf',
+        autoProcessQueue: false,
+        headers: {
+          'x-access-token': Session.getToken()
+        }
+      };
 
+      $scope.showResumeDropzoneIcon = true;
+      $scope.resumeDropzoneErrorMessage = '';
+
+      $scope.resumeDropzone = new Dropzone('div#resume-upload', dropzoneConfig);
+
+      $scope.resumeDropzone.on("error", function(file, errorMessage) {
+        $scope.resumeDropzoneHasError = true;
+        $scope.resumeDropzoneErrorMessage = errorMessage;
+        $scope.$apply();
+      });
+
+      $scope.resumeDropzone.on("addedfile", function() {
+        if ($scope.resumeDropzone.files.length > 1) {
+          $scope.resumeDropzone.removeFile($scope.resumeDropzone.files[0]);
+        }
+
+        $scope.resumeDropzoneHasError = false;
+        $scope.resumeDropzoneErrorMessage = '';
+        $scope.showResumeDropzoneIcon = !!!$scope.resumeDropzone.files.length;
+        $scope.$apply();
+      })
+
+      $scope.resumeDropzone.on("removedfile", function() {
+        $scope.resumeDropzoneHasError = false;
+        $scope.resumeDropzoneErrorMessage = '';
+        $scope.showResumeDropzoneIcon = !!!$scope.resumeDropzone.files.length;
+        $scope.$apply();
+      })
+
+      $scope.resumeDropzone.on("processing", function() {
+        $scope.resumeDropzoneIsUploading = true;
+      })
+      
       // Is the student from UCI?
       $scope.isUciStudent = $scope.user.email.split('@')[1] == 'uci.edu';
 
@@ -52,17 +96,21 @@ angular.module('reg')
         UserService
           .updateProfile(Session.getUserId(), $scope.user.profile)
           .success(function(data){
-            sweetAlert({
-              title: "Awesome!",
-              text: "Your application has been saved.",
-              type: "success",
-              confirmButtonColor: "#e76482"
-            }, function(){
-              $state.go('app.dashboard');
+            $scope.resumeDropzone.processQueue();
+            $scope.resumeDropzone.on('queuecomplete', function() {
+              sweetAlert({
+                title: "Done!",
+                text: "Your application has been saved.",
+                type: "success",
+                confirmButtonColor: "#e76482"
+              }, function(){
+                $state.go('app.dashboard');
+              });
             });
           })
           .error(function(res){
             sweetAlert("Uh oh!", "Something went wrong.", "error");
+            $scope.submitButtonDisabled = false;
           });
       }
 
@@ -149,8 +197,11 @@ angular.module('reg')
       );
 
       $scope.submitForm = function(){
+        $scope.submitButtonDisabled = true;
         if ($('.ui.form').form('is valid')){
           _updateUser();
+        } else {
+          $scope.submitButtonDisabled = false;
         }
       };
 
