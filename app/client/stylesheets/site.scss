@@ -83,11 +83,11 @@ body {
  * Semantic-UI Overrides for squareishness
  */
 .ui.segment {
-  border-radius: 0;
+  border-radius: 5px;
   box-shadow: none;
 }
 .ui.button {
-  border-radius: 0;
+  border-radius: 5px;
   &.primary {
     background: $primary;
     &:hover {
