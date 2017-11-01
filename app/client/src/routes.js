@@ -39,11 +39,6 @@ angular.module('reg')
         controller: 'HomeCtrl',
         data: {
           requireLogin: false
-        },
-        resolve: {
-          currentUser: function(UserService){
-            return UserService.getCurrentUser();
-          }
         }
       })
       .state('app.login', {
@@ -162,6 +157,14 @@ angular.module('reg')
         url: "/admin/settings",
         templateUrl: "views/admin/settings/settings.html",
         controller: 'AdminSettingsCtrl',
+      })
+      .state('app.sponsor', {
+        url: "/sponsor",
+        templateUrl: "views/sponsor/sponsor.html",
+        controller: 'SponsorCtrl',
+        data: {
+          requireLogin: false
+        }
       })
       .state('reset', {
         url: "/reset/:token",
