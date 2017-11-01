@@ -128,8 +128,10 @@ angular.module('reg')
                   title: "Awesome!",
                   text: "Your application has been received.",
                   type: "success",
-                  confirmButtonColor: "#e76482"
-                }, function(){
+                  showConfirmButton: false,
+                  timer: 1500
+                }, function() {
+                  swal.close();
                   $state.go('app.dashboard');
                 });
               });
@@ -282,16 +284,14 @@ angular.module('reg')
       );
 
       $scope.submitForm = function() {
-        $scope.submitButtonDisabled = true;
         if ($('.ui.form').form('is valid') && !$scope.resumeDropzoneHasError) {
+          $scope.submitButtonDisabled = true;
           if ($scope.resumeDropzone.files.length) {
             _apply();
           } else {
             $scope.submitButtonDisabled = false;
             $scope.resumeDropzoneHasError = true;
           }
-        } else {
-          $scope.submitButtonDisabled = false;
         }
       };
 

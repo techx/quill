@@ -13,6 +13,8 @@ angular.module('reg')
       // Set up the user
       $scope.user = currentUser.data;
 
+      $scope.submitButtonDisabled = true;
+
       // TODO: Replace URL once server side implementation is done
       var dropzoneConfig = {
         url: '/api/resume/upload',
@@ -46,6 +48,7 @@ angular.module('reg')
         $scope.resumeDropzoneHasError = false;
         $scope.resumeDropzoneErrorMessage = '';
         $scope.showResumeDropzoneIcon = !!!$scope.resumeDropzone.files.length;
+        $scope.submitButtonDisabled = false;
         $scope.$apply();
       })
 
@@ -68,6 +71,12 @@ angular.module('reg')
         $scope.user.profile.adult = true;
       }
 
+      $scope.$watch('user', function(newValue, oldValue) {
+        if (newValue !== oldValue) {
+          $scope.submitButtonDisabled = false;
+        }
+      }, true);
+
       // Populate the school dropdown
       populateSchools();
       _setupForm();
@@ -78,7 +87,6 @@ angular.module('reg')
        * TODO: JANK WARNING
        */
       function populateSchools(){
-
         $http
           .get('/assets/schools.json')
           .then(function(res){
@@ -92,23 +100,31 @@ angular.module('reg')
           });
       }
 
+      function _successModal() {
+        sweetAlert({
+          title: "Done!",
+          text: "Your application has been saved.",
+          type: "success",
+          showConfirmButton: false,
+          timer: 1500
+        }, function() {
+          swal.close();
+          $state.go('app.dashboard');
+        });
+      }
+
       function _updateUser(e){
         UserService
           .updateProfile(Session.getUserId(), $scope.user.profile)
           .success(function(data){
-            $scope.resumeDropzone.processQueue();
-            $scope.resumeDropzone.on('queuecomplete', function() {
-              sweetAlert({
-                title: "Done!",
-                text: "Your application has been saved.",
-                type: "success",
-                confirmButtonColor: "#e76482"
-              }, function(){
-                $state.go('app.dashboard');
-              });
-            });
+            if ($scope.resumeDropzone.files.length) {
+              $scope.resumeDropzone.processQueue();
+              $scope.resumeDropzone.on('queuecomplete', _successModal);
+            } else {
+              _successModal();
+            }
           })
-          .error(function(res){
+          .error(function(res) {
             sweetAlert("Uh oh!", "Something went wrong.", "error");
             $scope.submitButtonDisabled = false;
           });
@@ -197,11 +213,9 @@ angular.module('reg')
       );
 
       $scope.submitForm = function(){
-        $scope.submitButtonDisabled = true;
         if ($('.ui.form').form('is valid')){
+          $scope.submitButtonDisabled = true;
           _updateUser();
-        } else {
-          $scope.submitButtonDisabled = false;
         }
       };
 
