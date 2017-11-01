@@ -31,7 +31,6 @@ angular.module('reg')
        * TODO: JANK WARNING
        */
       function populateSchools(){
-
         $http
           .get('/assets/schools.json')
           .then(function(res){
@@ -43,6 +42,29 @@ angular.module('reg')
               $scope.autoFilledSchool = true;
             }
           });
+
+        $http
+          .get('/assets/schools.csv')
+          .then(function(res){ 
+            $scope.schools = res.data.split('\n');
+            $scope.schools.push('Other');
+
+            var content = [];
+
+            for(i = 0; i < $scope.schools.length; i++) {                                          
+              $scope.schools[i] = $scope.schools[i].trim(); 
+              content.push({title: $scope.schools[i]})
+            }
+
+            $('#school.ui.search')
+              .search({
+                source: content,
+                cache: true,     
+                onSelect: function(result, response) {                                    
+                  $scope.user.profile.school = result.title.trim();
+                }        
+              })             
+          });          
       }
 
       function _updateUser(e){

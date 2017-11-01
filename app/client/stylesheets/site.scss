@@ -46,6 +46,7 @@ $brand-tertiary: $tertiary;
 @import 'sidebar';
 @import 'page';
 @import 'dashboard';
+@import 'application';
 @import 'verify';
 @import 'team';
 @import 'admin';
@@ -119,4 +120,7 @@ fieldset {
   border: none;
 }
 
+.ui.search >.results {
+  width: 100%;
+}
 // @import 'animation';
