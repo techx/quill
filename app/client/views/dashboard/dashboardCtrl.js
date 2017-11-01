@@ -14,6 +14,8 @@ angular.module('reg')
       var Settings = settings.data;
       var user = currentUser.data;
       $scope.user = user;
+      $scope.timeClose = Utils.formatTime(Settings.timeClose);
+      $scope.timeConfirm = Utils.formatTime(Settings.timeConfirm);
 
       $scope.DASHBOARD = DASHBOARD;
 
@@ -81,7 +83,6 @@ angular.module('reg')
       $scope.acceptanceText = $sce.trustAsHtml(converter.makeHtml(Settings.acceptanceText));
       $scope.confirmationText = $sce.trustAsHtml(converter.makeHtml(Settings.confirmationText));
       $scope.waitlistText = $sce.trustAsHtml(converter.makeHtml(Settings.waitlistText));
-
 
       $scope.declineAdmission = function(){
 
