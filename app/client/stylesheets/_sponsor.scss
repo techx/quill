@@ -245,6 +245,11 @@
 		text-decoration: none;
 	}
 
+	hr {
+		width: 90%;
+		border-top: 1px solid #eee;
+	}
+
 	/* Sponsors */
 	#sponsors {
 		padding: 6% 0 5% 0;
@@ -496,11 +501,6 @@
 	}
 }
 
-hr {
-	width: 90%;
-	border-top: 1px solid #eee;
-}
-
 /* Bootstrap override */
 .col-xs-5ths,
 .col-sm-5ths,
@@ -538,22 +538,24 @@ hr {
     }
 }
 
-/* Placeholder override */
-::-webkit-input-placeholder {
-  color: #34495e;
-  opacity: .35;
-}
-::-moz-placeholder {
-  color: #34495e;
-  opacity: .35;
-}
-:-ms-input-placeholder {
-  color: #34495e;
-  opacity: .35;
-}
-:-moz-placeholder {
-  color: #34495e;
-  opacity: .35;
+#contactModal {
+	/* Placeholder override */
+	::-webkit-input-placeholder {
+	  color: #34495e;
+	  opacity: .35;
+	}
+	::-moz-placeholder {
+	  color: #34495e;
+	  opacity: .35;
+	}
+	:-ms-input-placeholder {
+	  color: #34495e;
+	  opacity: .35;
+	}
+	:-moz-placeholder {
+	  color: #34495e;
+	  opacity: .35;
+	}
 }
 
 /* Modal */
@@ -656,14 +658,6 @@ hr {
 		border-radius: 0;
 		padding-left: 0;
 		margin-bottom: 2.5%;
-	}
-
-	.modal-dialog {
-		margin: 0;
-	}
-
-	.modal-body {
-		padding: 10px 15px;
 	}
 
 	#contactModal .modal-content {
