@@ -15,6 +15,7 @@ var FACEBOOK_HANDLE = process.env.FACEBOOK_HANDLE;
 
 var EMAIL_HOST = process.env.EMAIL_HOST;
 var EMAIL_USER = process.env.EMAIL_USER;
+var EMAIL_PASS = process.env.EMAIL_PASS;
 var EMAIL_PORT = process.env.EMAIL_PORT;
 
 var SMTP_CLIENT_ID = process.env.SMTP_CLIENT_ID;
@@ -30,18 +31,16 @@ if(EMAIL_HEADER_IMAGE.indexOf("https") == -1){
 var NODE_ENV = process.env.NODE_ENV;
 
 var options = {
-  service: 'Gmail',
+  host: EMAIL_HOST,
+  port: EMAIL_PORT,
   secure: true,
   auth: {
-    type: 'OAuth2',
     user: EMAIL_USER,
-    clientId: SMTP_CLIENT_ID,
-    clientSecret: SMTP_CLIENT_SECRET,
-    refreshToken: SMTP_CLIENT_REFRESH
+    pass: EMAIL_PASS
   }
 };
 
-var transporter = nodemailer.createTransport(options);
+var transporter = nodemailer.createTransport(smtpTransport(options));
 
 var controller = {};
 
