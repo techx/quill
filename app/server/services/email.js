@@ -4,6 +4,7 @@ var smtpTransport = require('nodemailer-smtp-transport');
 
 var templatesDir = path.join(__dirname, '../templates');
 var emailTemplates = require('email-templates');
+var xoauth2 = require('xoauth2')
 
 var ROOT_URL = process.env.ROOT_URL;
 
@@ -14,8 +15,12 @@ var FACEBOOK_HANDLE = process.env.FACEBOOK_HANDLE;
 
 var EMAIL_HOST = process.env.EMAIL_HOST;
 var EMAIL_USER = process.env.EMAIL_USER;
-var EMAIL_PASS = process.env.EMAIL_PASS;
 var EMAIL_PORT = process.env.EMAIL_PORT;
+
+var SMTP_CLIENT_ID = process.env.SMTP_CLIENT_ID;
+var SMTP_CLIENT_SECRET = process.env.SMTP_CLIENT_SECRET;
+var SMTP_CLIENT_REFRESH = process.env.SMTP_CLIENT_REFRESH;
+
 var EMAIL_CONTACT = process.env.EMAIL_CONTACT;
 var EMAIL_HEADER_IMAGE = process.env.EMAIL_HEADER_IMAGE;
 if(EMAIL_HEADER_IMAGE.indexOf("https") == -1){
@@ -25,16 +30,18 @@ if(EMAIL_HEADER_IMAGE.indexOf("https") == -1){
 var NODE_ENV = process.env.NODE_ENV;
 
 var options = {
-  host: EMAIL_HOST,
-  port: EMAIL_PORT,
+  service: 'Gmail',
   secure: true,
   auth: {
+    type: 'OAuth2',
     user: EMAIL_USER,
-    pass: EMAIL_PASS
+    clientId: SMTP_CLIENT_ID,
+    clientSecret: SMTP_CLIENT_SECRET,
+    refreshToken: SMTP_CLIENT_REFRESH
   }
 };
 
-var transporter = nodemailer.createTransport(smtpTransport(options));
+var transporter = nodemailer.createTransport(options);
 
 var controller = {};
 
@@ -88,7 +95,7 @@ controller.sendVerificationEmail = function(email, token, callback) {
 
   var options = {
     to: email,
-    subject: "[HACKATHON] - Verify your email"
+    subject: "[HackUCI 2018] - Verify your email"
   };
 
   var locals = {
@@ -125,7 +132,7 @@ controller.sendPasswordResetEmail = function(email, token, callback) {
 
   var options = {
     to: email,
-    subject: "[HACKATHON] - Password reset requested!"
+    subject: "[HackUCI 2018] - Password reset requested!"
   };
 
   var locals = {
@@ -166,7 +173,7 @@ controller.sendPasswordChangedEmail = function(email, callback){
 
   var options = {
     to: email,
-    subject: "[HACKATHON] - Your password has been changed!"
+    subject: "[HackUCI 2018] - Your password has been changed!"
   };
 
   var locals = {
@@ -188,6 +195,43 @@ controller.sendPasswordChangedEmail = function(email, callback){
       console.log(info.message);
     }
     if (callback){
+      callback(err, info);
+    }
+  });
+
+};
+
+/**
+ * Send the acceptance email to the participant.
+ * @param  {[type]}   email    [description]
+ * @param  {Function} callback [description]
+ */
+controller.sendAcceptanceEmail = function(email, callback) {
+
+  var options = {
+    to: email,
+    subject: "[HackUCI 2018] - Congrats! You're coming to HackUCI 2018!"
+  };
+
+  var locals = {
+    title: 'Welcome to HackUCI 2018',
+    body: 'Please sign into your dashboard to confirm your spot.',
+  };
+
+  /**
+   * Eamil-verify takes a few template values:
+   * {
+   *   verifyUrl: the url that the user must visit to verify their account
+   * }
+   */
+  sendOne('email-basic', options, locals, function(err, info) {
+    if (err) {
+      console.log(err);
+    }
+    if (info) {
+      console.log(info.message);
+    }
+    if (callback) {
       callback(err, info);
     }
   });
