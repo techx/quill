@@ -386,6 +386,13 @@ module.exports = function(router) {
     SettingsController.updateWhitelistedEmails(emails, defaultResponse(req, res));
   });
 
+  /**
+   * Ping route for elastic load balancer
+   */
+  router.get('/ping', (req, res) => {
+    res.sendStatus(200);
+  });
+
   // multer S3 object to upload resumes
   var upload = multer({
     storage: multerS3({
