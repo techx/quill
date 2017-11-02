@@ -68,7 +68,10 @@
         ng-if="isLoggedIn">
         LOGOUT
       </a>
-      <a href="/sponsor" class="menu-item menu-item--sponsor">
+      <a
+        ui-sref-active="menu-item-active"
+        ui-sref="app.sponsor"
+        class="menu-item menu-item--sponsor">
         SPONSOR
       </a>
     </div>
@@ -165,7 +168,11 @@
         ng-click="onMenuClick()">
         LOGOUT
       </a>
-      <a href="/sponsor" class="menu-item">
+      <a
+        ui-sref="app.sponsor"
+        ui-sref-active="menu-item-active"
+        class="menu-item"
+        ng-click="onMenuClick()">
         SPONSOR
       </a>
     </div>

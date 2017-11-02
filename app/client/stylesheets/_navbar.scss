@@ -99,6 +99,10 @@
 		transition: all .2s ease;
 	}
 
+	.menu-item--sponsor.menu-item-active {
+		background-color: rgba(255,255,255,0.1);
+	}
+
 	.menu-item--sponsor:hover {
 		background-color: white;
 		color: #6B8DD6;
