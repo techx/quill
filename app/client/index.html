@@ -15,6 +15,13 @@
     <meta name="twitter:card" content="summary_large_image">
 
     <title> HackUCI 2018 </title>
+
+    <script>
+        /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+    !function(a){"use strict";var b=function(b,c,d){function e(a){return h.body?a():void setTimeout(function(){e(a)})}function f(){i.addEventListener&&i.removeEventListener("load",f),i.media=d||"all"}var g,h=a.document,i=h.createElement("link");if(c)g=c;else{var j=(h.body||h.getElementsByTagName("head")[0]).childNodes;g=j[j.length-1]}var k=h.styleSheets;i.rel="stylesheet",i.href=b,i.media="only x",e(function(){g.parentNode.insertBefore(i,c?g:g.nextSibling)});var l=function(a){for(var b=i.href,c=k.length;c--;)if(k[c].href===b)return a();setTimeout(function(){l(a)})};return i.addEventListener&&i.addEventListener("load",f),i.onloadcssdefined=l,l(f),i};"undefined"!=typeof exports?exports.loadCSS=b:a.loadCSS=b}("undefined"!=typeof global?global:this);
+    /*! loadCSS rel=preload polyfill. [c]2017 Filament Group, Inc. MIT License */
+    !function(a){if(a.loadCSS){var b=loadCSS.relpreload={};if(b.support=function(){try{return a.document.createElement("link").relList.supports("preload")}catch(b){return!1}},b.poly=function(){for(var b=a.document.getElementsByTagName("link"),c=0;c<b.length;c++){var d=b[c];"preload"===d.rel&&"style"===d.getAttribute("as")&&(a.loadCSS(d.href,d,d.getAttribute("media")),d.rel=null)}},!b.support()){b.poly();var c=a.setInterval(b.poly,300);a.addEventListener&&a.addEventListener("load",function(){b.poly(),a.clearInterval(c)}),a.attachEvent&&a.attachEvent("onload",function(){a.clearInterval(c)})}}}(this);
+    </script>
     
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-108825240-1"></script>
     <script>
@@ -26,7 +33,7 @@
     </script>
 
     <script src="plugins/jquery/dist/jquery.min.js"></script>
-    <link async rel="stylesheet" href="stylesheets/normalize.css">
+    <link rel="preload" href="stylesheets/normalize.css" as="style" onload="this.rel='stylesheet'">
 
     <!-- Angular stuff -->
     <script src="plugins/angular/angular.min.js"></script>
@@ -37,11 +44,11 @@
 
     <!-- Semantic-UI -->
     <link rel="stylesheet" href="plugins/semantic-ui/dist/semantic.min.css">
-    <script src="plugins/semantic-ui/dist/semantic.min.js"></script>
+    <script async src="plugins/semantic-ui/dist/semantic.min.js"></script>
 
     <!-- Sweet Alert -->
     <script async defer src="plugins/sweetalert/dist/sweetalert.min.js"></script>
-    <link async defer rel="stylesheet" type="text/css" href="plugins/sweetalert/dist/sweetalert.css">
+    <link rel="preload" type="text/css" href="plugins/sweetalert/dist/sweetalert.css" as="style" onload="this.rel='stylesheet'">
 
     <!-- Moment -->
     <script async defer src="plugins/moment/min/moment.min.js"></script>
@@ -50,13 +57,13 @@
     <script async defer src="plugins/showdown/dist/showdown.min.js"></script>
 
     <!-- Dropzone -->
-    <link async defer rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.2.0/min/dropzone.min.css">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.2.0/min/dropzone.min.css" as="style" onload="this.rel='stylesheet'">
     <script async defer src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.2.0/min/dropzone.min.js"></script>
 
     <!-- Custom styling -->
-    <link async href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="preload" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" as="style" onload="this.rel='stylesheet'">
     <link rel="stylesheet" href="build/site.css">
-    <link async href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700" rel="stylesheet">
 
     <!-- iOS Web Clip -->
     <link rel="apple-touch-icon" href="assets/images/icons/favicon-32x32.png">
