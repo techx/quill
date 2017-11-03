@@ -17,7 +17,7 @@ angular.module('reg')
         url: '/api/resume/upload',
         previewTemplate: document.querySelector('#resume-dropzone-preview').innerHTML,
         maxFiles: 1,
-        maxFilesize: 1, // MB
+        maxFilesize: .5, // MB
         uploadMultiple: false,
         acceptedFiles: 'application/pdf',
         autoProcessQueue: false
