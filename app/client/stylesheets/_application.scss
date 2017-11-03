@@ -82,4 +82,8 @@
 			}
 		}
 	}
+
+	.ui.checkbox {
+		backface-visibility: unset;
+	}
 }
