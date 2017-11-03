@@ -403,9 +403,12 @@ module.exports = function(router) {
         jwt.verify(authToken, JWT_SECRET, (err, id) => {
           cb(err, id + '.pdf');
         });
+      },
+      limits: {
+        fileSize: 512 * 1024, // max upload size is 512kb
       }
     })
-  })
+  });
 
   router.post('/resume/upload', upload.single('file'), (req, res) => {    
     res.send(200);
