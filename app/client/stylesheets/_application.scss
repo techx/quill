@@ -1,4 +1,10 @@
 #application {
+	#school .title {
+		text-align: left;
+		text-transform: none;
+		letter-spacing: 0;
+	}
+	
 	.required {
 		color: red;
 		font-weight: 500;
@@ -86,10 +92,4 @@
 	.ui.checkbox {
 		backface-visibility: unset;
 	}
-	
-  #school .title {
-    text-align: left;
-    text-transform: none;
-    letter-spacing: 0;
-  }
 }
