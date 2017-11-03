@@ -80,9 +80,12 @@
           <label> School
              <span class="required">*</span>
           </label>
-          <input class="ui input"
-                 name="school"
-                 ng-model="user.profile.school">
+          <div id="school" class="ui search">
+            <div class="ui input">
+              <input class="prompt" type="text" placeholder="School" name="school" ng-model="user.profile.school">                
+            </div>
+            <div class="results"></div>
+          </div>
         </div>
 
         <div class="two fields">
