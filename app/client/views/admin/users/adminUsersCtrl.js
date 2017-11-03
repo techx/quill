@@ -226,7 +226,7 @@ angular.module('reg')
                 value: user.confirmation.website
               },{
                 name: 'Needs Hardware',
-                value: user.confirmation.wantsHardware,
+                value: user.confirmation.needsHardware,
                 type: 'boolean'
               },{
                 name: 'Hardware Requested',
