@@ -115,12 +115,12 @@ angular.module('reg')
             $('#school.ui.search')
               .search({
                 source: content,
-                cache: true,     
-                onSelect: function(result, response) {                                    
+                cache: true,
+                onSelect: function(result, response) {
                   $scope.user.profile.school = result.title.trim();
-                }        
-              })             
-          });          
+                }
+              })
+          });
       }
 
       function _successModal() {
