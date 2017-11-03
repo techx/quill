@@ -111,6 +111,29 @@ angular.module('reg')
           .then(function(res) {
             $scope.schools = res.data;
           });
+
+        $http
+          .get('/assets/schools.csv')
+          .then(function(res){ 
+            $scope.schools = res.data.split('\n');
+            $scope.schools.push('Other');
+
+            var content = [];
+
+            for(i = 0; i < $scope.schools.length; i++) {
+              $scope.schools[i] = $scope.schools[i].trim();
+              content.push({title: $scope.schools[i]})
+            }
+
+            $('#school.ui.search')
+              .search({
+                source: content,
+                cache: true,
+                onSelect: function(result, response) {
+                  $scope.user.profile.school = result.title.trim();
+                }
+              })
+          });
       }
 
       function _apply(e){
