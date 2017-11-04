@@ -29,7 +29,7 @@ angular.module('reg')
               type: "success",
               confirmButtonColor: "#e76482"
             }, function(){
-              $state.go('app.login');
+              $state.go('login');
             });
           },
           function(data){

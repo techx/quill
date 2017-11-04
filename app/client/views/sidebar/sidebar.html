@@ -1,0 +1,67 @@
+<div id="sidebar"
+     ng-class="{open: showSidebar}">
+  <div ui-sref="app.dashboard"
+       class="logo item">
+    <img src="assets/images/logo.svg">
+  </div>
+
+  <div ui-sref-active="active"
+       ui-sref="app.dashboard"
+       class="item">
+    Dashboard
+  </div>
+
+  <div ng-show="currentUser.verified">
+
+    <div
+      ui-sref-active="active"
+      ui-sref="app.application"
+      ng-show="!currentUser.status.declined"
+      class="item">
+      Application
+    </div>
+
+    <div
+      ui-sref-active="active"
+      ui-sref="app.confirmation"
+      ng-show="!pastConfirmation && currentUser.status.admitted && !currentUser.status.declined"
+      class="item">
+      Confirmation
+    </div>
+
+    <div
+      ui-sref-active="active"
+      ui-sref="app.team"
+      ng-show="!currentUser.status.declined"
+      class="item">
+      Team
+    </div>
+
+    <div
+      ui-sref-active="active"
+      ui-sref="app.admin.stats"
+      class="item"
+      ng-show="currentUser.admin">
+      Admin
+    </div>
+
+  </div>
+
+  <div class="item"
+       ng-click="logout()">
+    Logout
+  </div>
+
+  <div class="note">
+    {{ EVENT_INFO.NAME }}
+  </div>
+
+</div>
+
+<div class="tab"
+  ng-click="toggleSidebar()">
+  <img ng-show="!showSidebar" src="assets/images/logo.svg" />
+  <span class="close" ng-show="showSidebar">&#x2715</span>
+</div>
+
+
