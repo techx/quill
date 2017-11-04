@@ -13,7 +13,7 @@ angular.module('reg')
       // Basic Actions
       // ----------------------
       getCurrentUser: function(){
-        return $http.get(base + Session.getUserId());
+        return Session.getUserId() ? $http.get(base + Session.getUserId()) : '';
       },
 
       get: function(id){
@@ -35,6 +35,8 @@ angular.module('reg')
       },
 
       updateProfile: function(id, profile){
+        profile.name = profile.firstname + ' ' + profile.lastname;
+        
         return $http.put(base + id + '/profile', {
           profile: profile
         });
