@@ -9,7 +9,7 @@
 
         <div class="divided title">Basic Information</div>
 
-        <fieldset ng-disabled="regIsClosed">
+        <fieldset ng-disabled="!regIsOpen">
 
         <div class="two fields">
           <div class="field">
@@ -254,7 +254,7 @@
 
         <br>
 
-        <div class="field" ng-hide="regIsClosed">
+        <div class="field">
           <button type="submit"
                   class="fluid ui purple button"
                   ng-class="{'disabled': submitButtonDisabled}"

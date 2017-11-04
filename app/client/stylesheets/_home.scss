@@ -127,6 +127,15 @@
 			color: white;
 			background: #fb465e;
 		}
+
+		.btn--coming-soon {
+			cursor: default;
+			background: rgba(252, 96, 118, 0.9);
+		}
+
+		.btn--coming-soon:hover {
+			background: #fc6076;
+		}
 	}
 
 	.hero-border {

@@ -39,6 +39,11 @@ angular.module('reg')
         controller: 'HomeCtrl',
         data: {
           requireLogin: false
+        },
+        resolve: {
+          'settings': function(SettingsService){
+            return SettingsService.getPublicSettings();
+          }
         }
       })
       .state('app.login', {
