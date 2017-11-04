@@ -1,4 +1,4 @@
-<div id="dashboard" class="page" ng-class="{ 'fade-out': fadeOut }">
+<div id="dashboard" class="page">
   <div class="divided title">
     Dashboard
   </div>
@@ -32,6 +32,16 @@
         </div>
 
         <div class="ui divider"></div>
+
+        <div ng-if="user.profile.name.length > 0">
+          <p>
+            <strong>
+              Welcome back, {{user.profile.name}}!
+            </strong>
+          </p>
+          <p>
+          </p>
+        </div>
 
         <div
           ng-if="dashState('unverified')"
@@ -86,7 +96,7 @@
 
           <div
             class="ui pink button"
-            ng-show="user.verified && !user.teamCode"
+            ng-show="!user.teamCode"
             ui-sref="app.team">
             Create or join a team
           </div>

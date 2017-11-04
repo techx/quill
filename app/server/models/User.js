@@ -13,18 +13,6 @@ var profile = {
     max: 100,
   },
 
-  firstname: {
-    type: String,
-    min: 1,
-    max: 100,
-  },
-
-  lastname: {
-    type: String,
-    min: 1,
-    max: 100,
-  },
-
   adult: {
     type: Boolean,
     required: true,
@@ -37,14 +25,10 @@ var profile = {
     max: 150,
   },
 
-  major: {
-    type: String
-  },
-
   graduationYear: {
     type: String,
     enum: {
-      values: '2018 2019 2020 2021 later'.split(' '),
+      values: '2016 2017 2018 2019'.split(' '),
     }
   },
 
@@ -54,26 +38,10 @@ var profile = {
     max: 300
   },
 
-  linkedin: {
-    type: String,
-    min: 0,
-    max: 100
-  },
-
-  portfolio: {
-    type: String,
-    min: 0,
-    max: 100
-  },
-
   essay: {
     type: String,
     min: 0,
     max: 1500
-  },
-
-  resume: {
-    type: String
   },
 
   // Optional info for demographics
@@ -340,13 +308,9 @@ schema.statics.verifyTempAuthToken = function(token, callback){
 };
 
 schema.statics.findOneByEmail = function(email){
-  if (email) {
-    return this.findOne({
-      email: email.toLowerCase()
-    });
-  } else {
-    return null;
-  }
+  return this.findOne({
+    email: new RegExp('^' + email + '$', 'i')
+  });
 };
 
 /**
@@ -368,7 +332,7 @@ schema.statics.validateProfile = function(profile, cb){
     profile.name.length > 0 &&
     profile.adult &&
     profile.school.length > 0 &&
-    ['2018', '2019', '2020', '2021', 'later'].indexOf(profile.graduationYear) > -1 &&
+    ['2016', '2017', '2018', '2019'].indexOf(profile.graduationYear) > -1 &&
     ['M', 'F', 'O', 'N'].indexOf(profile.gender) > -1
     ));
 };

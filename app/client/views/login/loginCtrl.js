@@ -33,7 +33,6 @@ angular.module('reg')
           $scope.email, $scope.password, onSuccess, onError);
       };
 
-      // TODO: Remove reference after migrating to ApplyCtrl
       $scope.register = function(){
         resetError();
         AuthService.register(

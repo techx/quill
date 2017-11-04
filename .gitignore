@@ -4,4 +4,3 @@ app/client/build/
 app/client/plugins/
 *.log
 .env
-.DS_Store
