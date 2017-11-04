@@ -103,7 +103,6 @@ angular.module('reg')
 
       var Settings = settings.data;
       $scope.regIsOpen = Utils.isRegOpen(Settings);
-      debugger
 
       /**
        * TODO: JANK WARNING
