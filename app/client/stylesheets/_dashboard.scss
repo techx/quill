@@ -3,12 +3,9 @@
     text-align: center;
     p {
       text-align: left;
-      margin-bottom: 0;
     }
     .button {
-      margin-top: 16px;
-      border-radius: 5px;
-      padding: 0.8em 1.5em;
+      margin-top: 12px;
     }
     .header {
       font-size: 1.2em;
@@ -20,7 +17,6 @@
       color: white;
       font-size: 1.3em;
       text-transform: uppercase;
-      border-radius: 5px;
 
       &.unverified {
         background: $status-unverified-color;
@@ -59,15 +55,10 @@
 
   .segment {
     padding: 36px 36px 12px 36px;
-    border-radius: 5px;
-
-    strong {
-      font-weight: 500;
-    }
   }
 
   .description {
-    margin-bottom: 16px;
+    margin-bottom: 24px;
     .markdown {
       text-align: left;
       margin-bottom: 24px;
