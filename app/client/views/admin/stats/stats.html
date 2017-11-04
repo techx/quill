@@ -211,19 +211,11 @@
       </div>
     </div>
     <div class="ui divider"></div>
-      <div class="ui list">
-        <div class="item">
-          <strong>Fresh:</strong> {{stats.demo.year['2019']}} ({{stats.demo.year['2019'] / stats.total * 100 | number: 1}}%)
-        </div>
-        <div class="item">
-          <strong>Soph:</strong> {{stats.demo.year['2018']}} ({{stats.demo.year['2018'] / stats.total * 100 | number: 1}}%)
-        </div>
-        <div class="item">
-         <strong>Junior:</strong> {{stats.demo.year['2017']}} ({{stats.demo.year['2017'] / stats.total * 100 | number: 1}}%)
-        </div>
-        <div class="item">
-          <strong>Senior:</strong> {{stats.demo.year['2016']}} ({{stats.demo.year['2016'] / stats.total * 100 | number: 1}}%)
-        </div>
+    <div class="ui header">Graduation Yaer</div>
+    <div class="ui list">
+	<div class="item" ng-repeat="(key, value) in stats.demo.year">
+		<strong>{{key}}:</strong> {{value}} ({{value / stats.total * 100 | number: 1}}%)
+	</div>
       </div>
     <div class="ui divider"></div>
     <div class="ui list">

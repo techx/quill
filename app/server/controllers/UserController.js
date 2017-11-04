@@ -309,8 +309,7 @@ UserController.updateProfileById = function (id, profile, callback){
     });
 
     User.findOneAndUpdate({
-      _id: id,
-      verified: true
+      _id: id
     },
       {
         $set: {
@@ -405,16 +404,18 @@ UserController.declineById = function (id, callback){
  */
 UserController.verifyByToken = function(token, callback){
   User.verifyEmailVerificationToken(token, function(err, email){
-    User.findOneAndUpdate({
-      email: new RegExp('^' + email + '$', 'i')
-    },{
-      $set: {
-        'verified': true
-      }
-    }, {
-      new: true
-    },
-    callback);
+    if (email) {
+      User.findOneAndUpdate({
+        email: email.toLowerCase()
+      },{
+        $set: {
+          'verified': true
+        }
+      }, {
+        new: true
+      },
+      callback);
+    }
   });
 };
 
@@ -710,6 +711,25 @@ UserController.checkOutById = function(id, user, callback){
 /**
  * [ADMIN ONLY]
  */
+ /**
+  * Send the acceptance email to the participant by their ID.
+  * @param  {[type]}   ID    [description]
+  * @param  {Function} callback [description]
+  */
+UserController.sendAcceptanceEmailById = function(id, callback) {
+   User.findOne(
+     {
+       _id: id,
+       verified: true
+     },
+     function(err, user) {
+       if (err || !user) {
+         return callback(err);
+       }
+       Mailer.sendAcceptanceEmail(user.email, callback);
+       return callback(err, user);
+   });
+ };
 
 UserController.getStats = function(callback){
   return callback(null, Stats.getUserStats());

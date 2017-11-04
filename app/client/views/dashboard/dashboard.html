@@ -1,4 +1,4 @@
-<div id="dashboard" class="page">
+<div id="dashboard" class="page" ng-class="{ 'fade-out': fadeOut }">
   <div class="divided title">
     Dashboard
   </div>
@@ -14,7 +14,7 @@
         <div
           class="state"
           ng-class="user.status.name"
-          ng-if="!showWaitlist && !dashState('admittedAndCannotConfirm')">
+          ng-if="!showAppInReview && !dashState('admittedAndCannotConfirm')">
           {{user.status.name}}
         </div>
 
@@ -26,37 +26,44 @@
 
 
         <div
-          ng-if="showWaitlist"
+          ng-if="showAppInReview"
           class="waitlist state">
-          On waitlist
+          Application in Review
         </div>
 
         <div class="ui divider"></div>
 
-        <div ng-if="user.profile.name.length > 0">
-          <p>
-            <strong>
-              Welcome back, {{user.profile.name}}!
-            </strong>
-          </p>
-          <p>
-          </p>
-        </div>
-
         <div
           ng-if="dashState('unverified')"
           class="description">
-          <p>
+          <div>
             <strong>
             Your email address ({{user.email}}) is not yet verified.
             </strong>
-          </p>
-          <p>
-            {{ DASHBOARD.UNVERIFIED }}
-          </p>
+          </div>
           <div class="ui purple button" ng-click="resendEmail()">
             Resend verification email
           </div>
+
+          <div class="ui divider"></div>
+        </div>
+
+        <div
+          ng-class="settings.timeClose"
+          ng-if="!dashState('admittedAndCanConfirm') || !dashState('admittedAndCannotConfirm') || !dashState('confirmed') || !dashState('declined')">
+          <strong>
+            Registration Deadline:
+          </strong>
+          {{ timeClose }}
+        </div>
+
+        <div
+          ng-class="settings.timeConfirm"
+          ng-if="dashState('admittedAndCanConfirm') || dashState('admittedAndCannotConfirm') || dashState('confirmed') || dashState('declined')">
+          <strong>
+            Confirmation Deadline:
+          </strong>
+          {{ timeConfirm }}
         </div>
 
         <div
@@ -81,14 +88,6 @@
         <div
           ng-if="dashState('openAndSubmitted')"
           class="description">
-          <p>
-            <strong>
-                {{ DASHBOARD.SUBMITTED_TITLE }}
-            </strong>
-          </p>
-          <p>
-            {{ DASHBOARD.SUBMITTED }}
-          </p>
           <div class="ui purple button"
                ui-sref="app.application">
             Edit your application
@@ -96,7 +95,7 @@
 
           <div
             class="ui pink button"
-            ng-show="!user.teamCode"
+            ng-show="user.verified && !user.teamCode"
             ui-sref="app.team">
             Create or join a team
           </div>
@@ -125,11 +124,6 @@
         <div
           ng-if="dashState('closedAndSubmitted')"
           class="description" >
-
-          <div
-            class="markdown"
-            ng-bind-html="waitlistText">
-          </div>
 
           <div class="ui purple button"
                ui-sref="app.application">
