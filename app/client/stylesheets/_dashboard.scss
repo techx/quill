@@ -3,9 +3,10 @@
     text-align: center;
     p {
       text-align: left;
+      margin-bottom: 0;
     }
     .button {
-      margin-top: 12px;
+      margin-top: 16px;
       border-radius: 5px;
       padding: 0.8em 1.5em;
     }
@@ -59,10 +60,14 @@
   .segment {
     padding: 36px 36px 12px 36px;
     border-radius: 5px;
+
+    strong {
+      font-weight: 500;
+    }
   }
 
   .description {
-    margin-bottom: 24px;
+    margin-bottom: 16px;
     .markdown {
       text-align: left;
       margin-bottom: 24px;

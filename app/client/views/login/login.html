@@ -43,12 +43,13 @@
             </form>
           </div>
 
-          <div class="ui form" ng-show="regIsOpen">
+          <div class="ui form">
             <div class="ui divider"></div>
             <div class="field">
               <button id="register"
                       type="submit"
                       class="fluid ui register button"
+                      ng-class="{'disabled': !regIsOpen}"
                       ui-sref="app.apply">
                       APPLY
               </button>

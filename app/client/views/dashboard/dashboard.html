@@ -14,7 +14,7 @@
         <div
           class="state"
           ng-class="user.status.name"
-          ng-if="!showWaitlist && !dashState('admittedAndCannotConfirm')">
+          ng-if="!showAppInReview && !dashState('admittedAndCannotConfirm')">
           {{user.status.name}}
         </div>
 
@@ -36,17 +36,16 @@
         <div
           ng-if="dashState('unverified')"
           class="description">
-          <p>
+          <div>
             <strong>
             Your email address ({{user.email}}) is not yet verified.
             </strong>
-          </p>
-          <p>
-            {{ DASHBOARD.UNVERIFIED }}
-          </p>
+          </div>
           <div class="ui purple button" ng-click="resendEmail()">
             Resend verification email
           </div>
+
+          <div class="ui divider"></div>
         </div>
 
         <div
@@ -89,14 +88,6 @@
         <div
           ng-if="dashState('openAndSubmitted')"
           class="description">
-          <p>
-            <strong>
-                {{ DASHBOARD.SUBMITTED_TITLE }}
-            </strong>
-          </p>
-          <p>
-            {{ DASHBOARD.SUBMITTED }}
-          </p>
           <div class="ui purple button"
                ui-sref="app.application">
             Edit your application

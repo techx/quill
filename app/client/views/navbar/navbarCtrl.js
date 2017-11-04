@@ -8,8 +8,12 @@ angular.module('reg')
     'AuthService',
     'Session',
     'EVENT_INFO',
-    function($rootScope, $scope, $state, Settings, Utils, AuthService, Session, EVENT_INFO){
+    function($rootScope, $scope, $state, settings, Utils, AuthService, Session, EVENT_INFO){
       var transparentNavbarViews = ['app.home', 'app.login', 'app.sponsor']
+
+      var Settings = settings.data;
+
+      $scope.regIsOpen = Utils.isRegOpen(Settings);
 
       $scope.$watch(function(){
         return $state.$current.name
@@ -19,8 +23,6 @@ angular.module('reg')
         } else {
           $scope.transparentNavbar = false;
         }
-
-        var settings = Settings.data;
 
         $scope.isLoggedIn = !!$rootScope.currentUser;
 

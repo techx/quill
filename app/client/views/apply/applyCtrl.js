@@ -5,10 +5,11 @@ angular.module('reg')
     '$state',
     '$http',
     'settings',
+    'Utils',
     'Session',
     'UserService',
     'AuthService',
-    function($scope, $rootScope, $state, $http, Settings, Session, UserService, AuthService) {
+    function($scope, $rootScope, $state, $http, settings, Utils, Session, UserService, AuthService) {
       if (Session.getUserId()) {
         $state.go('app.application');
       }
@@ -85,8 +86,8 @@ angular.module('reg')
               $scope.user.profile.adult = true;
             }
 
-            if ($scope.schools[domain]) {
-              $scope.user.profile.school = $scope.schools[domain].school;
+            if ($scope.schoolList[domain]) {
+              $scope.user.profile.school = $scope.schoolList[domain].school;
               $scope.autoFilledSchool = true;
             } else {
               $scope.user.profile.school = '';
@@ -100,7 +101,9 @@ angular.module('reg')
       populateSchools();
       _setupForm();
 
-      $scope.regIsClosed = Date.now() > Settings.data.timeClose;
+      var Settings = settings.data;
+      $scope.regIsOpen = Utils.isRegOpen(Settings);
+      debugger
 
       /**
        * TODO: JANK WARNING
@@ -109,7 +112,7 @@ angular.module('reg')
         $http
           .get('/assets/schools.json')
           .then(function(res) {
-            $scope.schools = res.data;
+            $scope.schoolList = res.data;
           });
 
         $http
