@@ -1,7 +1,22 @@
 var UserController = require('../controllers/UserController');
 var SettingsController = require('../controllers/SettingsController');
-
 var request = require('request');
+
+jwt        = require('jsonwebtoken');
+JWT_SECRET = process.env.JWT_SECRET;
+
+var aws = require('aws-sdk');
+aws.config.update({
+  region: 'us-west-1',
+  accessKeyId: process.env.AWS_ACCESS,
+  secretAccessKey: process.env.AWS_SECRET
+});
+var s3 = new aws.S3();
+var s3BucketName = process.env.AWS_S3_BUCKET;
+
+var multer = require('multer')
+var multerS3 = require('multer-s3')
+var uuidv4 = require('uuid/v4');
 
 module.exports = function(router) {
 
@@ -371,4 +386,31 @@ module.exports = function(router) {
     SettingsController.updateWhitelistedEmails(emails, defaultResponse(req, res));
   });
 
+  /**
+   * Ping route for elastic load balancer
+   */
+  router.get('/ping', (req, res) => {
+    res.sendStatus(200);
+  });
+
+  // multer S3 object to upload resumes
+  var upload = multer({
+    storage: multerS3({
+      s3: s3,
+      bucket: s3BucketName,
+      key: function (req, file, cb) {
+        var authToken = req.headers['x-access-token'];
+        jwt.verify(authToken, JWT_SECRET, (err, id) => {
+          cb(err, id + '.pdf');
+        });
+      },
+      limits: {
+        fileSize: 512 * 1024, // max upload size is 512kb
+      }
+    })
+  });
+
+  router.post('/resume/upload', upload.single('file'), (req, res) => {    
+    res.send(200);
+  });
 };
