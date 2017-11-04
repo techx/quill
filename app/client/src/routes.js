@@ -8,45 +8,12 @@ angular.module('reg')
       $urlRouterProvider,
       $locationProvider) {
 
-    // For any unmatched url, redirect to /404
+    // For any unmatched url, redirect to /state1
     $urlRouterProvider.otherwise("/404");
 
     // Set up de states
     $stateProvider
-      .state('app', {
-        views: {
-          '': {
-            templateUrl: "views/base.html"
-          },
-          'navbar@app': {
-            templateUrl: "views/navbar/navbar.html",
-            controller: 'NavbarCtrl',
-            resolve: {
-              'settings' : function(SettingsService) {
-                return SettingsService.getPublicSettings();
-              }
-            }
-
-          }
-        },
-        data: {
-          requireLogin: true
-        }
-      })
-      .state('app.home', {
-        url: "/",
-        templateUrl: "views/home/home.html",
-        controller: 'HomeCtrl',
-        data: {
-          requireLogin: false
-        },
-        resolve: {
-          'settings': function(SettingsService){
-            return SettingsService.getPublicSettings();
-          }
-        }
-      })
-      .state('app.login', {
+      .state('login', {
         url: "/login",
         templateUrl: "views/login/login.html",
         controller: 'LoginCtrl',
@@ -59,21 +26,28 @@ angular.module('reg')
           }
         }
       })
-      .state('app.apply', {
-        url: "/apply",
-        templateUrl: "views/apply/apply.html",
-        controller: 'ApplyCtrl',
-        data: {
-          requireLogin: false
-        },
-        resolve: {
-          settings: function(SettingsService){
-            return SettingsService.getPublicSettings();
+      .state('app', {
+        views: {
+          '': {
+            templateUrl: "views/base.html"
+          },
+          'sidebar@app': {
+            templateUrl: "views/sidebar/sidebar.html",
+            controller: 'SidebarCtrl',
+            resolve: {
+              'settings' : function(SettingsService) {
+                return SettingsService.getPublicSettings();
+              }
+            }
+
           }
         },
+        data: {
+          requireLogin: true
+        }
       })
       .state('app.dashboard', {
-        url: "/dashboard",
+        url: "/",
         templateUrl: "views/dashboard/dashboard.html",
         controller: 'DashboardCtrl',
         resolve: {
@@ -163,14 +137,6 @@ angular.module('reg')
         templateUrl: "views/admin/settings/settings.html",
         controller: 'AdminSettingsCtrl',
       })
-      .state('app.sponsor', {
-        url: "/sponsor",
-        templateUrl: "views/sponsor/sponsor.html",
-        controller: 'SponsorCtrl',
-        data: {
-          requireLogin: false
-        }
-      })
       .state('reset', {
         url: "/reset/:token",
         templateUrl: "views/reset/reset.html",
@@ -203,16 +169,13 @@ angular.module('reg')
   .run([
     '$rootScope',
     '$state',
-    '$timeout',
     'Session',
     function(
       $rootScope,
       $state,
-      $timeout,
       Session ){
 
       $rootScope.$on('$stateChangeSuccess', function() {
-         $rootScope.fadeOut = false;
          document.body.scrollTop = document.documentElement.scrollTop = 0;
       });
 
@@ -221,18 +184,9 @@ angular.module('reg')
         var requireAdmin = toState.data.requireAdmin;
         var requireVerified = toState.data.requireVerified;
 
-        if (!$rootScope.fadeOut) {
-          event.preventDefault();
-          $rootScope.fadeOut = true;
-
-          $timeout(function() {
-            $state.go(toState.name, toParams);
-          }, 100);
-        }
-
         if (requireLogin && !Session.getToken()) {
           event.preventDefault();
-          $state.go('app.login');
+          $state.go('login');
         }
 
         if (requireAdmin && !Session.getUser().admin) {

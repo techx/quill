@@ -18,7 +18,7 @@ angular.module('reg')
       }
 
       function loginFailure(data, cb){
-        $state.go('app.login');
+        $state.go('login');
         if (cb) {
           cb(data);
         }
@@ -56,7 +56,7 @@ angular.module('reg')
       authService.logout = function(callback) {
         // Clear the session
         Session.destroy(callback);
-        $state.go('app.login');
+        $state.go('login');
       };
 
       authService.register = function(email, password, onSuccess, onFailure) {
