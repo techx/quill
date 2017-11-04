@@ -41,30 +41,25 @@ $brand-tertiary: $tertiary;
   transition-duration: $duration;
 }
 
-@import 'application';
-@import 'global';
-@import 'home';
 @import 'login';
 @import 'base';
-@import 'navbar';
+@import 'sidebar';
 @import 'page';
 @import 'dashboard';
 @import 'verify';
 @import 'team';
 @import 'admin';
-@import 'apply';
-@import 'sponsor';
 
 html,
 body {
-  height: 100% !important;
+  height: 100%;
   width: 100%;
   font-size: 1.02em;
 }
 
 body {
   margin: 0;
-  font-family: 'Rubik', 'Lato', 'Helvetica Neue', 'Helvetica', sans-serif;
+  font-family: 'Lato', 'Helvetica Neue', 'Helvetica', sans-serif;
   font-weight: 300;
 
   > .container {
@@ -84,11 +79,14 @@ body {
  * Semantic-UI Overrides for squareishness
  */
 .ui.segment {
-  border-radius: 5px;
+  border-radius: 0;
   box-shadow: none;
 }
+input {
+  border-radius: 0 !important;
+}
 .ui.button {
-  border-radius: 5px;
+  border-radius: 0;
   &.primary {
     background: $primary;
     &:hover {
@@ -112,17 +110,8 @@ body {
   }
 }
 
-.ui.form .field>label {
-  font-weight: 400;
-  font-size: 0.9em;
-  letter-spacing: 0.02em;
-}
-
 .ui.form select {
   height: 2.5em;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 0.5em;
 }
 
 fieldset {
