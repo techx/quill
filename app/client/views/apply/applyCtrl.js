@@ -21,7 +21,8 @@ angular.module('reg')
         maxFilesize: .5, // MB
         uploadMultiple: false,
         acceptedFiles: 'application/pdf',
-        autoProcessQueue: false
+        autoProcessQueue: false,
+        clickable: ['.resume-dropzone', '.resume-dropzone>span']
       };
 
       $scope.showResumeDropzoneIcon = true;
