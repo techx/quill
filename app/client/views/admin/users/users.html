@@ -70,6 +70,8 @@
                 <i class="green circle check icon" ng-show="field.value"></i>
               </span>
 
+              <a ng-if="field.type === 'link'" ng-href="{{field.value}}" target="_blank">{{field.text}}</a>
+
               <span ng-if="field.type == null">
                 {{field.value}}
               </span>
