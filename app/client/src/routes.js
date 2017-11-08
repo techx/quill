@@ -76,6 +76,9 @@ angular.module('reg')
         url: "/confirmation",
         templateUrl: "views/confirmation/confirmation.html",
         controller: 'ConfirmationCtrl',
+        data: {
+          requireCompletedProfile: true
+        },
         resolve: {
           currentUser: function(UserService){
             return UserService.getCurrentUser();
@@ -183,6 +186,7 @@ angular.module('reg')
         var requireLogin = toState.data.requireLogin;
         var requireAdmin = toState.data.requireAdmin;
         var requireVerified = toState.data.requireVerified;
+        var requireCompletedProfile = toState.data.requireCompletedProfile;
 
         if (requireLogin && !Session.getToken()) {
           event.preventDefault();
@@ -195,6 +199,11 @@ angular.module('reg')
         }
 
         if (requireVerified && !Session.getUser().verified){
+          event.preventDefault();
+          $state.go('app.dashboard');
+        }
+
+        if (requireCompletedProfile && !Session.getUser().completedProfile) {
           event.preventDefault();
           $state.go('app.dashboard');
         }
