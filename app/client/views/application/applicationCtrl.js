@@ -16,7 +16,6 @@ angular.module('reg')
 
       $scope.submitButtonDisabled = true;
 
-      // TODO: Replace URL once server side implementation is done
       var dropzoneConfig = {
         url: '/api/resume/upload',
         previewTemplate: document.querySelector('#resume-dropzone-preview').innerHTML,

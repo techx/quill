@@ -2,9 +2,10 @@ angular.module('reg')
   .controller('AdminUserCtrl',[
     '$scope',
     '$http',
+    '$window',
     'user',
     'UserService',
-    function($scope, $http, User, UserService){
+    function($scope, $http, $window, User, UserService){
       $scope.selectedUser = User.data;
 
       // Populate the school dropdown
@@ -41,5 +42,13 @@ angular.module('reg')
             swal("Oops, you forgot something.");
           });
       };
+
+      $scope.openResume = function() {
+        $window.open('/api/resume/' + $scope.selectedUser.id, '_blank');
+      }
+
+      $scope.formatTime = function(time) {
+        return moment(time).format('MMMM Do YYYY, h:mm:ss a');
+      }
 
     }]);
