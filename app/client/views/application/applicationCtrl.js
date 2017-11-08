@@ -230,7 +230,12 @@ angular.module('reg')
       }
 
       $scope.openResume = function() {
-        $window.open('/api/resume/' + Session.getUserId(), '_blank');
+        var id = Session.getUserId();
+        $http
+          .get('/api/resume/' + id)
+          .then(function(response) {
+            $window.open('/api/resume/view/' + response.data.token, '_blank');
+          })
       }
 
       $scope.activateCharCount = false
