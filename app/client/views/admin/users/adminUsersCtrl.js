@@ -178,19 +178,17 @@ angular.module('reg')
               },{
                 name: 'Team',
                 value: user.teamCode || 'None'
-              },{
-                name: 'Resume',
-                value: '/api/resume/' + user.id,
-                type: 'link',
-                text: 'View Resume'
               }
             ]
           },{
             name: 'Profile',
             fields: [
               {
-                name: 'Name',
-                value: user.profile.name
+                name: 'First Name',
+                value: user.profile.firstname
+              },{
+                name: 'Last Name',
+                value: user.profile.lastname
               },{
                 name: 'Gender',
                 value: user.profile.gender
@@ -198,14 +196,32 @@ angular.module('reg')
                 name: 'School',
                 value: user.profile.school
               },{
+                name: 'Major',
+                value: user.profile.major
+              },{
                 name: 'Graduation Year',
                 value: user.profile.graduationYear
+              },{
+                name: 'LinkedIn',
+                value: user.profile.linkedin,
+                type: 'link',
+                text: user.profile.linkedin
+              },{
+                name: 'Portfolio',
+                value: user.profile.portfolio,
+                type: 'link',
+                text: user.profile.portfolio
               },{
                 name: 'Description',
                 value: user.profile.description
               },{
                 name: 'Essay',
                 value: user.profile.essay
+              },{
+                name: 'Resume',
+                value: '/api/resume/' + user.id,
+                type: 'link',
+                text: 'View Resume'
               }
             ]
           },{
