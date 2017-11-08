@@ -237,7 +237,7 @@
 		color: #2c3e50;
 	}
 
-	#sponsors-list>div {
+	#sponsors-list>a {
 		height: 60px;
 		padding-right: 10px;
 		padding-left: 10px;
@@ -246,11 +246,11 @@
 		transition: opacity .2s ease;
 	}
 
-	#sponsors-list>div:hover {
+	#sponsors-list>a:hover {
 		opacity: 1;
 	}
 
-	#sponsors-list>div>img {
+	#sponsors-list>a>img {
 		width: 100%;
 		padding: 0 7%;
 	}
