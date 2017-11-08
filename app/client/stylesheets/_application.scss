@@ -25,6 +25,10 @@
 		flex: 1 0 auto;
 	}
 
+	button+.resume-dropzone {
+		margin-top: .67861429em;
+	}
+
 	.resume-dropzone {
 		width: 225px;
 		height: 175px;

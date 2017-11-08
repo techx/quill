@@ -4,11 +4,12 @@ angular.module('reg')
     '$rootScope',
     '$state',
     '$http',
+    '$window',
     'currentUser',
     'settings',
     'Session',
     'UserService',
-    function($scope, $rootScope, $state, $http, currentUser, Settings, Session, UserService){
+    function($scope, $rootScope, $state, $http, $window, currentUser, Settings, Session, UserService){
 
       // Set up the user
       $scope.user = currentUser.data;
@@ -32,6 +33,7 @@ angular.module('reg')
 
       $scope.showResumeDropzoneIcon = true;
       $scope.resumeDropzoneErrorMessage = '';
+      $scope.showResumeDropzone = false;
 
       $scope.resumeDropzone = new Dropzone('div#resume-upload', dropzoneConfig);
 
@@ -63,6 +65,10 @@ angular.module('reg')
       $scope.resumeDropzone.on("processing", function() {
         $scope.resumeDropzoneIsUploading = true;
       })
+
+      $scope.toggleResumeDropzone = function() {
+        $scope.showResumeDropzone = !$scope.showResumeDropzone;
+      }
       
       // Is the student from UCI?
       $scope.isUciStudent = $scope.user.email.split('@')[1] == 'uci.edu';
@@ -222,6 +228,10 @@ angular.module('reg')
             }
           }
         });
+      }
+
+      $scope.openResume = function() {
+        $window.open('/api/resume/' + Session.getUserId(), '_blank');
       }
 
       $scope.activateCharCount = false
