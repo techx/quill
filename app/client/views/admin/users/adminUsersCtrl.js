@@ -4,7 +4,9 @@ angular.module('reg')
     '$state',
     '$stateParams',
     'UserService',
-    function($scope, $state, $stateParams, UserService){
+    '$http',
+    '$window',
+    function($scope, $state, $stateParams, UserService, $http, $window){
 
       $scope.pages = [];
       $scope.users = [];
@@ -60,6 +62,19 @@ angular.module('reg')
           id: user._id
         });
       };
+
+      $scope.resolveClick = function(functionKey, data) {
+        $scope[functionKey](data);
+      }
+
+      $scope.openResume = function() {
+        var id = $scope.selectedUser.id;
+        $http
+          .get('/api/resume/' + id)
+          .then(function(response) {
+            $window.open('/api/resume/view/' + response.data.token, '_blank');
+          })
+      }
 
       $scope.toggleCheckIn = function($event, user, index) {
         $event.stopPropagation();
@@ -219,8 +234,8 @@ angular.module('reg')
                 value: user.profile.essay
               },{
                 name: 'Resume',
-                value: '/api/resume/' + user.id,
-                type: 'link',
+                value: 'openResume',
+                type: 'click',
                 text: 'View Resume'
               }
             ]

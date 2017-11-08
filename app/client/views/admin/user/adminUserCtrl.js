@@ -44,7 +44,12 @@ angular.module('reg')
       };
 
       $scope.openResume = function() {
-        $window.open('/api/resume/' + $scope.selectedUser.id, '_blank');
+        var id = $scope.selectedUser.id;
+        $http
+          .get('/api/resume/' + id)
+          .then(function(response) {
+            $window.open('/api/resume/view/' + response.data.token, '_blank');
+          });
       }
 
       $scope.formatTime = function(time) {
