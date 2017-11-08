@@ -237,20 +237,21 @@
 		color: #2c3e50;
 	}
 
-	#sponsors-list>div {
+	#sponsors-list>a {
 		height: 60px;
 		padding-right: 10px;
 		padding-left: 10px;
 		margin-top: 1%;
+		margin-bottom: 0.5%;
 		opacity: 0.6;
 		transition: opacity .2s ease;
 	}
 
-	#sponsors-list>div:hover {
+	#sponsors-list>a:hover {
 		opacity: 1;
 	}
 
-	#sponsors-list>div>img {
+	#sponsors-list>a>img {
 		width: 100%;
 		padding: 0 7%;
 	}
@@ -336,7 +337,7 @@
 			margin-top: 5%;
 		}
 
-		#sponsors-list>div {
+		#sponsors-list>a {
 			height: 110px;
 			text-align: center;
 			padding-top: 0 !important;
@@ -366,7 +367,7 @@
 			width: 85%;
 		}
 
-		#sponsors-list>div {
+		#sponsors-list>a {
 			height: 110px;
 			text-align: center;
 			padding-top: 0 !important;

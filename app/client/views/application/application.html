@@ -198,11 +198,14 @@
 
         <div class="field">
           <label>
-            Update Resume (PDF)
-             <span class="required">*</span>
+            Resume (PDF)
+            <span class="required">*</span>
           </label>
+          <button class="ui violet tiny button" ng-show="!showResumeDropzone" ng-click="toggleResumeDropzone()">Upload New Resume</button>
+          <button class="ui pink tiny button" ng-click="openResume()">View Resume</button>
           <div class="resume-dropzone center"
             ng-class="{ 'resume-uploading': resumeDropzoneIsUploading, 'resume-dropzone-error': resumeDropzoneHasError }"
+            ng-show="showResumeDropzone"
             id="resume-upload">
             <span ng-show="showResumeDropzoneIcon">
               <i class="fa fa-upload" aria-hidden="true"></i>

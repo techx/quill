@@ -410,7 +410,22 @@ module.exports = function(router) {
     })
   });
 
+  // upload the resume to AWS S3 using the multer object defined above
   router.post('/resume/upload', upload.single('file'), (req, res) => {    
     res.send(200);
+  });
+
+  // get the resume of a given user
+  router.get('/resume/:id', (req, res) => {
+    var id = req.params.id;
+    var fileName = id + '.pdf';
+
+    var s3Params = {
+      Bucket: s3BucketName,
+      Key: fileName
+    };
+
+    res.setHeader('Content-type', 'application/pdf');
+    s3.getObject(s3Params).createReadStream().pipe(res);
   });
 };

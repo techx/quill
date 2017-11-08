@@ -178,6 +178,11 @@ angular.module('reg')
               },{
                 name: 'Team',
                 value: user.teamCode || 'None'
+              },{
+                name: 'Resume',
+                value: '/api/resume/' + user.id,
+                type: 'link',
+                text: 'View Resume'
               }
             ]
           },{
