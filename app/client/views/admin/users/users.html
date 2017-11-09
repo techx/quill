@@ -72,6 +72,8 @@
 
               <a ng-if="field.type === 'link'" ng-href="{{field.value}}" target="_blank">{{field.text}}</a>
 
+              <a href="#" ng-if="field.type === 'click'" ng-click="resolveClick(field.value)">{{field.text}}</a>
+
               <span ng-if="field.type == null">
                 {{field.value}}
               </span>
