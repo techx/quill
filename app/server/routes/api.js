@@ -298,7 +298,8 @@ module.exports = function(router) {
    *   timeClose: Number,
    *   timeToConfirm: Number,
    *   acceptanceText: String,
-   *   confirmationText: String
+   *   confirmationText: String,
+   *   allowMinors: Boolean
    * }
    */
   router.get('/settings', function(req, res){
@@ -428,4 +429,17 @@ module.exports = function(router) {
     res.setHeader('Content-type', 'application/pdf');
     s3.getObject(s3Params).createReadStream().pipe(res);
   });
+   
+  /* [ADMIN ONLY]
+   * {
+   *   allowMinors: Boolean
+   * }
+   * res: Settings
+   *
+   */
+  router.put('/settings/minors', isAdmin, function(req, res){
+    var allowMinors = req.body.allowMinors;
+    SettingsController.updateField('allowMinors', allowMinors, defaultResponse(req, res));
+  });
+
 };

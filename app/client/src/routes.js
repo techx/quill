@@ -254,6 +254,11 @@ angular.module('reg')
           $state.go('app.dashboard');
         }
 
+        if (requireCompletedProfile && !Session.getUser().completedProfile) {
+          event.preventDefault();
+          $state.go('app.dashboard');
+        }
+
       });
 
     }]);
