@@ -254,9 +254,9 @@ angular.module('reg')
           $state.go('app.dashboard');
         }
 
-        if (requireCompletedProfile && !Session.getUser().completedProfile) {
+        if (toState.name === 'app.apply' && Session.getUserId()) {
           event.preventDefault();
-          $state.go('app.dashboard');
+          $state.go('app.application');
         }
 
       });
