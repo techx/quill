@@ -159,7 +159,28 @@ angular.module('reg')
           });
       }
 
+      function isMinor() {
+        return !$scope.user.profile.adult;
+      }
+
+      function minorsAreAllowed() {
+        return Settings.data.allowMinors;
+      }
+
+      function minorsValidation() {
+        // Are minors allowed to register?
+        if (isMinor() && !minorsAreAllowed()) {
+          return false;
+        }
+        return true;
+      }
+
       function _setupForm(){
+        // Custom minors validation rule
+        $.fn.form.settings.rules.allowMinors = function (value) {
+          return minorsValidation();
+        };
+
         // Semantic-UI form validation
         $('.ui.form').form({
           fields: {
@@ -220,7 +241,7 @@ angular.module('reg')
               identifier: 'adult',
               rules: [
                 {
-                  type: 'checked',
+                  type: 'allowMinors',
                   prompt: 'You must be an adult, or an MIT student.'
                 }
               ]
@@ -231,10 +252,11 @@ angular.module('reg')
 
       $scope.openResume = function() {
         var id = Session.getUserId();
+        var resumeWindow = $window.open('', '_blank');
         $http
           .get('/api/resume/' + id)
           .then(function(response) {
-            $window.open('/api/resume/view/' + response.data.token, '_blank');
+            resumeWindow.location.href = '/api/resume/view/' + response.data.token;
           })
       }
 

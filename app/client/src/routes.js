@@ -254,6 +254,11 @@ angular.module('reg')
           $state.go('app.dashboard');
         }
 
+        if (toState.name === 'app.apply' && Session.getUserId()) {
+          event.preventDefault();
+          $state.go('app.application');
+        }
+
       });
 
     }]);

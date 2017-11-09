@@ -274,11 +274,11 @@ schema.methods.checkPassword = function(password) {
 
 // Token stuff
 schema.methods.generateEmailVerificationToken = function(){
-  return jwt.sign(this.email, JWT_SECRET);
+  return jwt.sign(this.email.toString(), JWT_SECRET);
 };
 
 schema.methods.generateAuthToken = function(){
-  return jwt.sign(this._id, JWT_SECRET);
+  return jwt.sign(this._id.toString(), JWT_SECRET);
 };
 
 /**
