@@ -252,10 +252,11 @@ angular.module('reg')
 
       $scope.openResume = function() {
         var id = Session.getUserId();
+        var resumeWindow = $window.open('', '_blank');
         $http
           .get('/api/resume/' + id)
           .then(function(response) {
-            $window.open('/api/resume/view/' + response.data.token, '_blank');
+            resumeWindow.location.href = '/api/resume/view/' + response.data.token;
           })
       }
 
