@@ -434,7 +434,7 @@ module.exports = function(router) {
       if (err) {
         res.sendStatus(404);
       } else {
-        var token = jwt.sign(fileName, JWT_SECRET, {expiresIn: '30s'});
+        var token = jwt.sign({fileName: fileName}, JWT_SECRET, {expiresIn: '30s'});
         res.json({
           token: token
         });
@@ -447,14 +447,14 @@ module.exports = function(router) {
     // extract the filename then return the file
 
     var token = req.params.token
-    jwt.verify(token, JWT_SECRET, (err, fileName) => {
+    jwt.verify(token, JWT_SECRET, (err, data) => {
 
       if (err) {
         res.sendStatus(401)
       } else {
         var s3Params = {
           Bucket: s3BucketName,
-          Key: fileName
+          Key: data.fileName
         };
 
         res.setHeader('Content-type', 'application/pdf');
