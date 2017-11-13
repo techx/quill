@@ -2,9 +2,10 @@ angular.module('reg')
   .controller('AdminUserCtrl',[
     '$scope',
     '$http',
+    '$window',
     'user',
     'UserService',
-    function($scope, $http, User, UserService){
+    function($scope, $http, $window, User, UserService){
       $scope.selectedUser = User.data;
 
       // Populate the school dropdown
@@ -41,5 +42,19 @@ angular.module('reg')
             swal("Oops, you forgot something.");
           });
       };
+
+      $scope.openResume = function() {
+        var id = $scope.selectedUser.id;
+        var resumeWindow = $window.open('', '_blank');
+        $http
+          .get('/api/resume/' + id)
+          .then(function(response) {
+            resumeWindow.location.href = '/api/resume/view/' + response.data.token;
+          });
+      }
+
+      $scope.formatTime = function(time) {
+        return moment(time).format('MMMM Do YYYY, h:mm:ss a');
+      }
 
     }]);

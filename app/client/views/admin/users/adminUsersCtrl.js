@@ -4,7 +4,9 @@ angular.module('reg')
     '$state',
     '$stateParams',
     'UserService',
-    function($scope, $state, $stateParams, UserService){
+    '$http',
+    '$window',
+    function($scope, $state, $stateParams, UserService, $http, $window){
 
       $scope.pages = [];
       $scope.users = [];
@@ -60,6 +62,20 @@ angular.module('reg')
           id: user._id
         });
       };
+
+      $scope.resolveClick = function(functionKey, data) {
+        $scope[functionKey](data);
+      }
+
+      $scope.openResume = function() {
+        var id = $scope.selectedUser.id;
+        var resumeWindow = $window.open('', '_blank');
+        $http
+          .get('/api/resume/' + id)
+          .then(function(response) {
+            resumeWindow.location.href = '/api/resume/view/' + response.data.token;
+          })
+      }
 
       $scope.toggleCheckIn = function($event, user, index) {
         $event.stopPropagation();
@@ -178,19 +194,17 @@ angular.module('reg')
               },{
                 name: 'Team',
                 value: user.teamCode || 'None'
-              },{
-                name: 'Resume',
-                value: '/api/resume/' + user.id,
-                type: 'link',
-                text: 'View Resume'
               }
             ]
           },{
             name: 'Profile',
             fields: [
               {
-                name: 'Name',
-                value: user.profile.name
+                name: 'First Name',
+                value: user.profile.firstname
+              },{
+                name: 'Last Name',
+                value: user.profile.lastname
               },{
                 name: 'Gender',
                 value: user.profile.gender
@@ -198,14 +212,32 @@ angular.module('reg')
                 name: 'School',
                 value: user.profile.school
               },{
+                name: 'Major',
+                value: user.profile.major
+              },{
                 name: 'Graduation Year',
                 value: user.profile.graduationYear
+              },{
+                name: 'LinkedIn',
+                value: user.profile.linkedin,
+                type: 'link',
+                text: user.profile.linkedin
+              },{
+                name: 'Portfolio',
+                value: user.profile.portfolio,
+                type: 'link',
+                text: user.profile.portfolio
               },{
                 name: 'Description',
                 value: user.profile.description
               },{
                 name: 'Essay',
                 value: user.profile.essay
+              },{
+                name: 'Resume',
+                value: 'openResume',
+                type: 'click',
+                text: 'View Resume'
               }
             ]
           },{

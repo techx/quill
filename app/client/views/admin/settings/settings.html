@@ -76,6 +76,34 @@
   </div>
 </div>
 
+<!-- Additional Options -->
+<div
+ng-class="{'loading': loading}"
+class="ui green segment">
+
+  <div class="ui header">
+    Additional Options
+  </div>
+
+  <div class="column">
+    <div class="ui form">
+      <div class="grouped fields">
+        <div class="field">
+          <div class="ui toggle checkbox">
+              <input 
+              type="checkbox"
+              name="allowMinors"
+              ng-class="{true: 'checked', false: ''}[settings.allowMinors]"
+              ng-model="settings.allowMinors"
+              ng-change="updateAllowMinors()">
+              <label>Allow minors</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Whitelist -->
 <div
   ng-class="{'loading': loading}"

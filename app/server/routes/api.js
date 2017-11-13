@@ -298,7 +298,8 @@ module.exports = function(router) {
    *   timeClose: Number,
    *   timeToConfirm: Number,
    *   acceptanceText: String,
-   *   confirmationText: String
+   *   confirmationText: String,
+   *   allowMinors: Boolean
    * }
    */
   router.get('/settings', function(req, res){
@@ -416,8 +417,12 @@ module.exports = function(router) {
   });
 
   // get the resume of a given user
-  router.get('/resume/:id', (req, res) => {
-    var id = req.params.id;
+  router.get('/resume/:id', isOwnerOrAdmin, (req, res) => {
+    // check to see if you can access this shiz and
+    // check if the file exists in s3 anddd
+    // take the id and put it in a jwt with 30 seconds of validity
+
+    var id = req.params.id;    
     var fileName = id + '.pdf';
 
     var s3Params = {
@@ -425,7 +430,49 @@ module.exports = function(router) {
       Key: fileName
     };
 
-    res.setHeader('Content-type', 'application/pdf');
-    s3.getObject(s3Params).createReadStream().pipe(res);
+    s3.headObject(s3Params, (err, data) => {
+      if (err) {
+        res.sendStatus(404);
+      } else {
+        var token = jwt.sign({fileName: fileName}, JWT_SECRET, {expiresIn: '30s'});
+        res.json({
+          token: token
+        });
+      }
+    });
   });
+
+  router.get('/resume/view/:token', (req, res) => {
+    // get a token returned by the above object
+    // extract the filename then return the file
+
+    var token = req.params.token
+    jwt.verify(token, JWT_SECRET, (err, data) => {
+
+      if (err) {
+        res.sendStatus(401)
+      } else {
+        var s3Params = {
+          Bucket: s3BucketName,
+          Key: data.fileName
+        };
+
+        res.setHeader('Content-type', 'application/pdf');
+        s3.getObject(s3Params).createReadStream().pipe(res);
+      }
+    })
+  });
+   
+  /* [ADMIN ONLY]
+   * {
+   *   allowMinors: Boolean
+   * }
+   * res: Settings
+   *
+   */
+  router.put('/settings/minors', isAdmin, function(req, res){
+    var allowMinors = req.body.allowMinors;
+    SettingsController.updateField('allowMinors', allowMinors, defaultResponse(req, res));
+  });
+
 };
