@@ -165,7 +165,7 @@
       </div>
     </div>
     <div class="ui divider"></div>
-    <div class="ui header">Graduation Yaer</div>
+    <div class="ui header">Graduation Year</div>
     <div class="ui list">
 	<div class="item" ng-repeat="(key, value) in stats.demo.year">
 		<strong>{{key}}:</strong> {{value}} ({{value / stats.total * 100 | number: 1}}%)
@@ -190,6 +190,38 @@
           </div>
           <div class="ui red mini label">
             Declined: {{school.stats.declined}}
+          </div>
+          </p>
+          <div class="ui divider"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="ui purple segment"
+    ng-class="{'loading': loading}">
+    <div class="ui header">
+      Majors
+    </div>
+    <div class="ui list">
+      <div
+        class="item"
+        ng-repeat="major in stats.demo.majors | orderBy: '-count'">
+        <div class="content">
+          <strong>{{major.name}}</strong> : {{major.count}} ({{major.count / stats.total * 100 | number: 1}}%)
+          <p>
+          <div class="ui purple mini label">
+            Submitted: {{major.stats.submitted}}
+          </div>
+          <div class="ui pink mini label">
+            Admitted: {{major.stats.admitted}}
+          </div>
+          <div class="ui green mini label">
+            Confirmed: {{major.stats.confirmed}}
+          </div>
+          <div class="ui red mini label">
+            Declined: {{major.stats.declined}}
           </div>
           </p>
           <div class="ui divider"></div>
