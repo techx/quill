@@ -63,6 +63,9 @@ angular.module('reg')
         url: "/application",
         templateUrl: "views/application/application.html",
         controller: 'ApplicationCtrl',
+        data: {
+          requireCompletedProfile: true
+        },
         resolve: {
           currentUser: function(UserService){
             return UserService.getCurrentUser();
