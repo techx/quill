@@ -32,7 +32,7 @@ function calculateStats(){
     submitted: 0,
     admitted: 0,
     confirmed: 0,
-    confirmedMit: 0,
+    confirmedUCI: 0,
     declined: 0,
 
     confirmedFemale: 0,
@@ -47,30 +47,9 @@ function calculateStats(){
       'L': 0,
       'XL': 0,
       'XXL': 0,
-      'WXS': 0,
-      'WS': 0,
-      'WM': 0,
-      'WL': 0,
-      'WXL': 0,
-      'WXXL': 0,
-      'None': 0
     },
 
     dietaryRestrictions: {},
-
-    hostNeededFri: 0,
-    hostNeededSat: 0,
-    hostNeededUnique: 0,
-
-    hostNeededFemale: 0,
-    hostNeededMale: 0,
-    hostNeededOther: 0,
-    hostNeededNone: 0,
-
-    reimbursementTotal: 0,
-    reimbursementMissing: 0,
-
-    wantsHardware: 0,
 
     checkedIn: 0
   };
@@ -104,8 +83,8 @@ function calculateStats(){
         // Count confirmed
         newStats.confirmed += user.status.confirmed ? 1 : 0;
 
-        // Count confirmed that are mit
-        newStats.confirmedMit += user.status.confirmed && email === "mit.edu" ? 1 : 0;
+        // Count confirmed that are uci
+        newStats.confirmedUCI += user.status.confirmed && email === "uci.edu" ? 1 : 0;
 
         newStats.confirmedFemale += user.status.confirmed && user.profile.gender == "F" ? 1 : 0;
         newStats.confirmedMale += user.status.confirmed && user.profile.gender == "M" ? 1 : 0;
