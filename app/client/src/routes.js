@@ -64,7 +64,7 @@ angular.module('reg')
         templateUrl: "views/application/application.html",
         controller: 'ApplicationCtrl',
         data: {
-          requireCompletedProfile: true
+          requireVerified: true
         },
         resolve: {
           currentUser: function(UserService){
