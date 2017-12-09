@@ -52,7 +52,7 @@
       <a
         ui-sref-active="menu-item-active"
         ui-sref="app.team"
-        ng-if="currentUser.verified && !currentUser.status.declined"
+        ng-if="regIsOpen && currentUser.verified && !currentUser.status.declined"
         class="menu-item">
         TEAM
       </a>
