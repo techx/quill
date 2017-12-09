@@ -65,9 +65,9 @@
           <i class="green circle check icon"></i>
           <div class="content">
             <strong>
-              Confirmed (MIT)
+              Confirmed (UCI)
             </strong> :
-            {{stats.confirmedMit}}
+            {{stats.confirmedUCI}}
           </div>
         </div>
         <div class="item">
@@ -104,52 +104,6 @@
               L ({{stats.shirtSizes['L']}})
               XL ({{stats.shirtSizes['XL']}})
               XXL ({{stats.shirtSizes['XXL']}})
-          </div>
-        </div>
-
-        <div class="item">
-          <i class="child icon"></i>
-          <div class="content">
-            <strong>
-              Women's shirt sizes:
-            </strong> :
-              XS ({{stats.shirtSizes['WXS']}})
-              S ({{stats.shirtSizes['WS']}})
-              M ({{stats.shirtSizes['WM']}})
-              L ({{stats.shirtSizes['WL']}})
-              XL ({{stats.shirtSizes['WXL']}})
-              XXL ({{stats.shirtSizes['WXXL']}})
-          </div>
-        </div>
-
-        <div class="ui divider"></div>
-
-        <div class="item">
-          <i class="green money icon"></i>
-          <div class="content">
-            <strong>
-              Total Reimbursements:
-            </strong>{{stats.reimbursementTotal}}
-          </div>
-        </div>
-
-        <div class="item">
-          <i class="frown icon"></i>
-          <div class="content">
-            <strong>
-              Still Need Reimbursement:
-            </strong>{{stats.reimbursementMissing}}
-          </div>
-        </div>
-
-        <div class="ui divider"></div>
-
-        <div class="item">
-          <i class="plug icon"></i>
-          <div class="content">
-            <strong>
-              Need/Want Hardware:
-            </strong>{{stats.wantsHardware}}
           </div>
         </div>
 
@@ -211,7 +165,7 @@
       </div>
     </div>
     <div class="ui divider"></div>
-    <div class="ui header">Graduation Yaer</div>
+    <div class="ui header">Graduation Year</div>
     <div class="ui list">
 	<div class="item" ng-repeat="(key, value) in stats.demo.year">
 		<strong>{{key}}:</strong> {{value}} ({{value / stats.total * 100 | number: 1}}%)
@@ -236,6 +190,38 @@
           </div>
           <div class="ui red mini label">
             Declined: {{school.stats.declined}}
+          </div>
+          </p>
+          <div class="ui divider"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="ui purple segment"
+    ng-class="{'loading': loading}">
+    <div class="ui header">
+      Majors
+    </div>
+    <div class="ui list">
+      <div
+        class="item"
+        ng-repeat="major in stats.demo.majors | orderBy: '-count'">
+        <div class="content">
+          <strong>{{major.name}}</strong> : {{major.count}} ({{major.count / stats.total * 100 | number: 1}}%)
+          <p>
+          <div class="ui purple mini label">
+            Submitted: {{major.stats.submitted}}
+          </div>
+          <div class="ui pink mini label">
+            Admitted: {{major.stats.admitted}}
+          </div>
+          <div class="ui green mini label">
+            Confirmed: {{major.stats.confirmed}}
+          </div>
+          <div class="ui red mini label">
+            Declined: {{major.stats.declined}}
           </div>
           </p>
           <div class="ui divider"></div>

@@ -18,6 +18,7 @@ function calculateStats(){
         N: 0
       },
       schools: {},
+      majors: {},
       year: {
         '2018': 0,
         '2019': 0,
@@ -32,7 +33,7 @@ function calculateStats(){
     submitted: 0,
     admitted: 0,
     confirmed: 0,
-    confirmedMit: 0,
+    confirmedUCI: 0,
     declined: 0,
 
     confirmedFemale: 0,
@@ -47,30 +48,9 @@ function calculateStats(){
       'L': 0,
       'XL': 0,
       'XXL': 0,
-      'WXS': 0,
-      'WS': 0,
-      'WM': 0,
-      'WL': 0,
-      'WXL': 0,
-      'WXXL': 0,
-      'None': 0
     },
 
     dietaryRestrictions: {},
-
-    hostNeededFri: 0,
-    hostNeededSat: 0,
-    hostNeededUnique: 0,
-
-    hostNeededFemale: 0,
-    hostNeededMale: 0,
-    hostNeededOther: 0,
-    hostNeededNone: 0,
-
-    reimbursementTotal: 0,
-    reimbursementMissing: 0,
-
-    wantsHardware: 0,
 
     checkedIn: 0
   };
@@ -88,6 +68,7 @@ function calculateStats(){
 
         // Grab the email extension
         var email = user.email.split('@')[1];
+        var major = user.profile.major;
 
         // Add to the gender
         newStats.demo.gender[user.profile.gender] += 1;
@@ -104,8 +85,8 @@ function calculateStats(){
         // Count confirmed
         newStats.confirmed += user.status.confirmed ? 1 : 0;
 
-        // Count confirmed that are mit
-        newStats.confirmedMit += user.status.confirmed && email === "mit.edu" ? 1 : 0;
+        // Count confirmed that are uci
+        newStats.confirmedUCI += user.status.confirmed && email === "uci.edu" ? 1 : 0;
 
         newStats.confirmedFemale += user.status.confirmed && user.profile.gender == "F" ? 1 : 0;
         newStats.confirmedMale += user.status.confirmed && user.profile.gender == "M" ? 1 : 0;
@@ -138,6 +119,20 @@ function calculateStats(){
         newStats.demo.schools[email].admitted += user.status.admitted ? 1 : 0;
         newStats.demo.schools[email].confirmed += user.status.confirmed ? 1 : 0;
         newStats.demo.schools[email].declined += user.status.declined ? 1 : 0;
+
+        // Count majors
+        if (!newStats.demo.majors[major]){
+          newStats.demo.majors[major] = {
+            submitted: 0,
+            admitted: 0,
+            confirmed: 0,
+            declined: 0,
+          };
+        }
+        newStats.demo.majors[major].submitted += user.status.completedProfile ? 1 : 0;
+        newStats.demo.majors[major].admitted += user.status.admitted ? 1 : 0;
+        newStats.demo.majors[major].confirmed += user.status.confirmed ? 1 : 0;
+        newStats.demo.majors[major].declined += user.status.declined ? 1 : 0;
 
         // Count graduation years
         if (user.profile.graduationYear){
@@ -208,6 +203,46 @@ function calculateStats(){
             });
           });
         newStats.demo.schools = schools;
+
+        var majorsList = {
+          'AE': 'Aerospace Engineering',
+          'AP': 'Applied Physics',
+          'BE': 'Biomedical Engineering',
+          'BIM': 'Business Information Management',
+          'CME': 'Chemical Engineering',
+          'CH': 'Chemistry',
+          'CVE': 'Civil Engineering',
+          'CE': 'Computer Engineering',
+          'CGS': 'Computer Game Science',
+          'CS': 'Computer Science',
+          'CSE': 'Computer Science and Engineering',
+          'DS': 'Data Science',
+          'ESS': 'Earth System Science',
+          'EE': 'Electrical Engineering',
+          'ENG': 'Engineering',
+          'ENE': 'Environmental Engineering',
+          'ENS': 'Environmental Science',
+          'INF': 'Informatics',
+          'MSE': 'Materials Science Engineering',
+          'MAT': 'Mathematics',
+          'MCE': 'Mechanical Engineering',
+          'PHY': 'Physics',
+          'SE': 'Software Engineering',
+          'other': 'Other',
+          'undefined': 'Undefined'
+        }
+
+        // Transform majors into an array of objects
+        var majors = [];
+        _.keys(newStats.demo.majors)
+          .forEach(function(key){
+            majors.push({
+              name: majorsList[key],
+              count: newStats.demo.majors[key].submitted,
+              stats: newStats.demo.majors[key]
+            });
+          });
+        newStats.demo.majors = majors;
 
         // Likewise, transform the teams into an array of objects
         // var teams = [];
