@@ -35,7 +35,8 @@
 
     &.logo {
       opacity: 1;
-      padding: 48px;
+      padding: 32px;
+      width: 100%;
     }
 
   }
@@ -101,7 +102,8 @@
       visibility: 'visible';
       opacity: 1;
       @include transform(translate3d(0,0,0));
-      padding: 12px;
+      padding: 4px;
+      width: 100%;
     }
     .note {
       display: none;
