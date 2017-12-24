@@ -23,14 +23,14 @@
             "description": "The email address that is included in the 'email us' link at the bottom of emails.",
             "value": "team@example.com"
         },
-        "HACKATHON_NAME": "Hackathon",
+        "HACKATHON_NAME": "VTHacks",
         "TWITTER_HANDLE": {
             "description": "Everything after https://twitter.com/",
-            "value": "hackathon"
+            "value": "vt_hacks"
         },
         "FACEBOOK_HANDLE": {
             "description": "Everything after https://facebook.com/",
-            "value": "hackathon"
+            "value": "vthacks"
         },
         "EMAIL_CONTACT": {
             "description": "Used to send verification, registration, and confirmation emails",
