@@ -25,7 +25,6 @@ angular.module('reg')
       $scope.queryText = $stateParams.query;
 
       function updatePage(data){
-        console.log('update page called')
         $scope.users = data.users;
         $scope.currentPage = data.page;
         $scope.pageSize = data.size;
