@@ -45,12 +45,6 @@
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-browserify": "^0.5.1",
-    "gulp-concat": "^2.6.0",
-    "gulp-ng-annotate": "^1.0.0",
-    "gulp-nodemon": "^2.0.3",
-    "gulp-sass": "^2.0.1",
-    "gulp-sourcemaps": "^1.5.2",
-    "gulp-uglify": "^1.2.0",
     "nodemon": "^1.2.1"
   },
   "engines": {
