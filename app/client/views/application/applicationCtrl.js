@@ -32,7 +32,7 @@ angular.module('reg')
        */
       function populateSchools(){
         $http
-          .get('/assets/schools.json')
+          .get('/register/assets/schools.json')
           .then(function(res){
             var schools = res.data;
             var email = $scope.user.email.split('@')[1];
@@ -44,7 +44,7 @@ angular.module('reg')
           });
 
         $http
-          .get('/assets/schools.csv')
+          .get('/register/assets/schools.csv')
           .then(function(res){
             $scope.schools = res.data.split('\n');
             $scope.schools.push('Other');
