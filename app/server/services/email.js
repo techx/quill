@@ -62,17 +62,19 @@ function sendOne(templateName, options, data, callback){
         return callback(err);
       }
 
-      transporter.sendMail({
-        from: EMAIL_CONTACT,
+      // using SendGrid's v3 Node.js Library
+      // https://github.com/sendgrid/sendgrid-nodejs
+      const sgMail = require('@sendgrid/mail');
+      sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+      const msg = {
         to: options.to,
+        from: EMAIL_CONTACT,
         subject: options.subject,
-        html: html,
-        text: text
-      }, function(err, info){
-        if(callback){
-          callback(err, info);
-        }
-      });
+        text: text,
+        html: html
+      };
+      sgMail.send(msg);
+
     });
   });
 }
