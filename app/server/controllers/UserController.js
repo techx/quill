@@ -252,6 +252,7 @@ UserController.getPage = function(query, callback){
         }
 
         return callback(null, {
+          query: searchText,
           users: users,
           page: page,
           size: size,
