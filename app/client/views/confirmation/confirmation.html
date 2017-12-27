@@ -58,18 +58,11 @@
               ng-model="user.confirmation.shirtSize"
               required>
               <option value="">Shirt Size</option>
-              <option value="XS">Unisex X-Small</option>
               <option value="S">Unisex Small</option>
               <option value="M">Unisex Medium</option>
               <option value="L">Unisex Large</option>
               <option value="XL">Unisex X-Large</option>
               <option value="XXL">Unisex XX-Large</option>
-              <option value="WXS">Women's X-Small</option>
-              <option value="WS">Women's Small</option>
-              <option value="WM">Women's Medium</option>
-              <option value="WL">Women's Large</option>
-              <option value="WXL">Women's X-Large</option>
-              <option value="WXXL">Women's XX-Large</option>
             </select>
           </div>
 
@@ -126,16 +119,13 @@
           </div>
 
           <div class="field">
-            <label> Skill Sheet (required) </label>
+            <label> Resume/CV </label>
             <p>
-              Upload a document outlining any skills or experience you'd like to share (ex. resume). PDF preferred!
+              Attach a link to a document outlining any skills or experience you'd like to share (ex. resume). PDF preferred!
             </p>
-            <a
-              target="_blank"
-              href="https://go.hackmit.org/skill-sheets"
-              class="ui secondary button">
-              Upload
-            </a>
+            <input type="text"
+              placeholder="A Google Drive, Dropbox, or Website link"
+              ng-model="user.confirmation.resume">
           </div>
 
           <br>
@@ -207,118 +197,34 @@
           </div>
 
           <br>
-          <br>
+          <br>-->
 
           <div class="divided title">Travel</div>
 
           <div class="field">
             <p>
-              As a reminder, our reimbursement policy is as follows:
+              VTHacks tries to send out buses to schools that send a lot of attendees. If you would like transportation via bus please mark the box below
             </p>
-            <ul>
-              <li> Up to $100 from within Massachusetts </li>
-              <li> Up to $200 from anywhere else in North America </li>
-              <li> Up to $500 from outside North America </li>
-            </ul>
             <p>
-              We’ll also be sending buses free of charge to Princeton, NJ; New York, NY; New Haven, CT; and Providence, RI. Again, we only reimburse the minimum-cost travel path. Head back to the dashboard to read our full travel policy.
+              If we can, we will send a bus your way. We do our best to accomodate but there is no guarantee there will be a bus at your school. We will release
+              a list of schools with buses closer to the hackathon and hopefully there is one close to you. Always feel free to send us an email at <a href="mailto:transportation@vthacks.com">transportation@vthacks.com</a> with any questions.
             </p>
           </div>
 
           <div class="field">
-            <label> Will you be needing travel reimbursement? </label>
+            <label> Would you like a bus at your school? </label>
             <div class="ui checkbox">
               <input type="checkbox" ng-model="user.confirmation.needsReimbursement">
-              <label> I will be needing travel reimbursement. </label>
+              <label> Yes please I love public transport </label>
             </div>
-          </div>
-
-          <div
-            ng-show="user.confirmation.needsReimbursement">
-
-            <div class="ui header">
-              Mailing Address
-            </div>
-
-            <p>
-              Travel reimbursement is processed and sent by check after the event. To expedite the reimbursement process and ensure that you receive your reimbursement as quickly as possible, make sure that your mailing address is accurate and you upload your receipts.
-            </p>
-
-            <div class="field">
-              <label>Full Name</label>
-              <input type="text"
-                     name="name"
-                     ng-model="user.confirmation.address.name">
-            </div>
-
-            <div class="field">
-              <label> Address Line 1 - Street address, P.O. box, company name, c/o </label>
-              <input
-                type="text"
-                name="addressLine1"
-                ng-model="user.confirmation.address.line1">
-            </div>
-
-            <div class="field">
-              <label> Address Line 2 - Apartment, suite, unit, building, floor, etc. </label>
-              <input
-                type="text"
-                name="addressLine2"
-                ng-model="user.confirmation.address.line2">
-            </div>
-
-            <div class="four fields">
-              <div class="field">
-                <label> City </label>
-                <input
-                  type="text"
-                  name="city"
-                  ng-model="user.confirmation.address.city">
-              </div>
-              <div class="field">
-                <label> State/Province/Region </label>
-                <input
-                  type="text"
-                  name="state"
-                  ng-model="user.confirmation.address.state">
-              </div>
-              <div class="field">
-                <label> ZIP </label>
-                <input
-                  type="text"
-                  name="zip"
-                  ng-model="user.confirmation.address.zip">
-              </div>
-              <div class="field">
-                <label> Country </label>
-                <input
-                  type="text"
-                  name="country"
-                  ng-model="user.confirmation.address.country">
-              </div>
-            </div>
-
-            <div class="field">
-              <label> Travel Receipt </label>
-              <p>
-                So that we can process your reimbursement faster, please name your receipt: <strong>{{fileName}}</strong>
-              </p>
-              <a
-                target="_blank"
-                href="https://go.hackmit.org/travel-receipts"
-                class="ui secondary button">
-                Upload Receipt
-              </a>
-            </div>
-
           </div>
 
           <br>
-          <br> -->
+          <br>
 
           <div class="divided title">Legal</div>
 
-          <div class="field">
+          <!-- <div class="field">
             <label> Liability Waiver </label>
             <p>
               <a
@@ -337,14 +243,14 @@
                    name="signatureLiabilityWaiver"
                    placeholder="Your Full Legal Name"
                    ng-model="user.confirmation.signatureLiability">
-          </div>
+          </div> -->
 
           <div class="field">
             <label> Photo Release </label>
             <p>
               <a
                 target="_blank"
-                href="https://go.hackmit.org/photo-release">
+                href="https://vthacks.com/release">
                 Photo Release
               </a>
             </p>
@@ -365,15 +271,15 @@
             <p>
               <a
                 target="_blank"
-                href="https://go.hackmit.org/code-of-conduct">
-                Hacker Code of Conduct
+                href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf">
+                MLH Code of Conduct
               </a>
             </p>
             <p>
               It is extremely important to us that attendees follow a set of guidelines to make the event fun for everyone involved. Please read through and make sure you understand what we will be expecting of you.
             </p>
             <p>
-              By writing my name below, I affirm that I have read and will abide by the code of conduct detailed above.
+              By writing my name below, I affirm that I have read and will abide by the MLH Code of Conduct detailed above.
             </p>
             <input type="text"
                    name="signatureCodeOfConduct"
