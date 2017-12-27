@@ -5,6 +5,8 @@ var smtpTransport = require('nodemailer-smtp-transport');
 var templatesDir = path.join(__dirname, '../templates');
 var emailTemplates = require('email-templates');
 
+const sgMail = require('@sendgrid/mail');
+
 var ROOT_URL = process.env.ROOT_URL;
 
 var HACKATHON_NAME = process.env.HACKATHON_NAME;
@@ -64,7 +66,6 @@ function sendOne(templateName, options, data, callback){
 
       // using SendGrid's v3 Node.js Library
       // https://github.com/sendgrid/sendgrid-nodejs
-      const sgMail = require('@sendgrid/mail');
       sgMail.setApiKey(process.env.SENDGRID_API_KEY);
       const msg = {
         to: options.to,
@@ -73,7 +74,15 @@ function sendOne(templateName, options, data, callback){
         text: text,
         html: html
       };
-      sgMail.send(msg);
+      sgMail.send(msg, (err, res) => {
+        if (err) {
+          const {message, code, response} = err;
+          console.log("MAIL SEND ERROR: " + message + " code: " + code);
+        }
+        else {
+          console.log(Date.now() + ": Mail sent to " + msg.to);
+        }
+      });
 
     });
   });
