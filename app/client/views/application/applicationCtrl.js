@@ -154,16 +154,8 @@ angular.module('reg')
                   prompt: 'You must be an adult, or an VT student.'
                 }
               ]
-            },
-            codeOfConduct: {
-              identifier: 'codeOfConduct',
-              rules: [
-                {
-                  type: 'checked',
-                  prompt: 'You must accept the MLH Code of Conduct'
-                }
-              ]
             }
+
           }
         });
       }
