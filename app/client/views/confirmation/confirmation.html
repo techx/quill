@@ -126,16 +126,13 @@
           </div>
 
           <div class="field">
-            <label> Skill Sheet (required) </label>
+            <label> Resume/CV </label>
             <p>
-              Upload a document outlining any skills or experience you'd like to share (ex. resume). PDF preferred!
+              Attach a link to a document outlining any skills or experience you'd like to share (ex. resume). PDF preferred!
             </p>
-            <a
-              target="_blank"
-              href="https://go.hackmit.org/skill-sheets"
-              class="ui secondary button">
-              Upload
-            </a>
+            <input type="text"
+              placeholder="A Google Drive, Dropbox, or Website link"
+              ng-model="user.confirmation.resume">
           </div>
 
           <br>
@@ -318,7 +315,7 @@
 
           <div class="divided title">Legal</div>
 
-          <div class="field">
+          <!-- <div class="field">
             <label> Liability Waiver </label>
             <p>
               <a
@@ -337,7 +334,7 @@
                    name="signatureLiabilityWaiver"
                    placeholder="Your Full Legal Name"
                    ng-model="user.confirmation.signatureLiability">
-          </div>
+          </div> -->
 
           <div class="field">
             <label> Photo Release </label>
@@ -365,15 +362,15 @@
             <p>
               <a
                 target="_blank"
-                href="https://go.hackmit.org/code-of-conduct">
-                Hacker Code of Conduct
+                href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf">
+                MLH Code of Conduct
               </a>
             </p>
             <p>
               It is extremely important to us that attendees follow a set of guidelines to make the event fun for everyone involved. Please read through and make sure you understand what we will be expecting of you.
             </p>
             <p>
-              By writing my name below, I affirm that I have read and will abide by the code of conduct detailed above.
+              By writing my name below, I affirm that I have read and will abide by the MLH Code of Conduct detailed above.
             </p>
             <input type="text"
                    name="signatureCodeOfConduct"
