@@ -33,7 +33,6 @@ app.use(methodOverride());
 
 app.use('/', express.static(__dirname + '/www'));
 app.use('/register', express.static(__dirname + '/app/client'));
-app.use('/prospectus', express.static(__dirname + '/files/vthacks-v-prospectus.pdf'));
 app.use('/release', express.static(__dirname + '/files/VTHacks Media Release Statement.pdf'));
 
 // Routers =====================================================================
