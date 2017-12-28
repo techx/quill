@@ -16,11 +16,16 @@ var database        = process.env.DATABASE || process.env.MONGODB_URI || "mongod
 var settingsConfig  = require('./config/settings');
 var adminConfig     = require('./config/admin');
 
+const compression = require('compression');
+const minify = require('express-minify');
+
 var app             = express();
 
 // Connect to mongodb
 mongoose.connect(database);
 
+app.use(compression());
+app.use(minify());
 app.use(morgan('dev'));
 app.use(cookieParser());
 
@@ -33,6 +38,7 @@ app.use(methodOverride());
 
 app.use('/', express.static(__dirname + '/www'));
 app.use('/register', express.static(__dirname + '/app/client'));
+app.use('/prospectus', express.static(__dirname + '/files/vthacks-v-prospectus.pdf'));
 
 // Routers =====================================================================
 
