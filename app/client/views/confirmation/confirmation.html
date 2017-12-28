@@ -219,6 +219,87 @@
             </div>
           </div>
 
+          <div
+            ng-show="user.confirmation.needsReimbursement">
+
+            <div class="ui header">
+              Mailing Address
+            </div>
+
+            <p>
+              Travel reimbursement is processed and sent by check after the event. To expedite the reimbursement process and ensure that you receive your reimbursement as quickly as possible, make sure that your mailing address is accurate and you upload your receipts.
+            </p>
+
+            <div class="field">
+              <label>Full Name</label>
+              <input type="text"
+                     name="name"
+                     ng-model="user.confirmation.address.name">
+            </div>
+
+            <div class="field">
+              <label> Address Line 1 - Street address, P.O. box, company name, c/o </label>
+              <input
+                type="text"
+                name="addressLine1"
+                ng-model="user.confirmation.address.line1">
+            </div>
+
+            <div class="field">
+              <label> Address Line 2 - Apartment, suite, unit, building, floor, etc. </label>
+              <input
+                type="text"
+                name="addressLine2"
+                ng-model="user.confirmation.address.line2">
+            </div>
+
+            <div class="four fields">
+              <div class="field">
+                <label> City </label>
+                <input
+                  type="text"
+                  name="city"
+                  ng-model="user.confirmation.address.city">
+              </div>
+              <div class="field">
+                <label> State/Province/Region </label>
+                <input
+                  type="text"
+                  name="state"
+                  ng-model="user.confirmation.address.state">
+              </div>
+              <div class="field">
+                <label> ZIP </label>
+                <input
+                  type="text"
+                  name="zip"
+                  ng-model="user.confirmation.address.zip">
+              </div>
+              <div class="field">
+                <label> Country </label>
+                <input
+                  type="text"
+                  name="country"
+                  ng-model="user.confirmation.address.country">
+              </div>
+            </div>
+
+            <div class="field">
+              <label> Travel Receipt </label>
+              <p>
+                So that we can process your reimbursement faster, please name your receipt: <strong>{{fileName}}</strong>
+              </p>
+              <a
+                target="_blank"
+                href="https://go.hackmit.org/travel-receipts"
+                class="ui secondary button">
+                Upload Receipt
+              </a>
+            </div>
+
+
+          </div>
+
           <br>
           <br>
 
@@ -278,13 +359,11 @@
             <p>
               It is extremely important to us that attendees follow a set of guidelines to make the event fun for everyone involved. Please read through and make sure you understand what we will be expecting of you.
             </p>
-            <p>
-              By writing my name below, I affirm that I have read and will abide by the MLH Code of Conduct detailed above.
-            </p>
-            <input type="text"
-                   name="signatureCodeOfConduct"
-                   placeholder="Your Full Legal Name"
-                   ng-model="user.confirmation.signatureCodeOfConduct">
+            <div class="ui checkbox">
+              <input id="agreeCodeOfConduct"
+              type="checkbox" ng-model="user.confirmation.agreeCodeOfConduct">
+              <label for="agreeCodeOfConduct"> I agree the MLH Code of Conduct</label>
+            </div>
           </div>
 
           <br>

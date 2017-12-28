@@ -38,12 +38,6 @@ var profile = {
     max: 300
   },
 
-  resume: {
-    type: String,
-    min: 0,
-    max: 300
-  },
-
   essay: {
     type: String,
     min: 0,
@@ -102,7 +96,7 @@ var confirmation = {
 
   signatureLiability: String,
   signaturePhotoRelease: String,
-  signatureCodeOfConduct: String,
+  agreeCodeOfConduct: Boolean,
 };
 
 var status = {

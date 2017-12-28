@@ -111,12 +111,12 @@ angular.module('reg')
                 }
               ]
             },
-            signatureCodeOfConduct: {
-              identifier: 'signatureCodeOfConduct',
+            agreeCodeOfConduct: {
+              identifier: 'agreeCodeOfConduct',
               rules: [
                 {
-                  type: 'empty',
-                  prompt: 'Please type your digital signature.'
+                  type: 'checked',
+                  prompt: 'You  must accept the MLH Code of Conduct'
                 }
               ]
             },
