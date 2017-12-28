@@ -96,7 +96,7 @@ var confirmation = {
 
   signatureLiability: String,
   signaturePhotoRelease: String,
-  signatureCodeOfConduct: String,
+  agreeCodeOfConduct: Boolean,
 };
 
 var status = {

@@ -155,6 +155,7 @@ angular.module('reg')
                 }
               ]
             }
+
           }
         });
       }

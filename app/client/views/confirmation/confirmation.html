@@ -308,6 +308,7 @@
               </a>
             </div>
 
+
           </div>
 
           <br>
@@ -369,13 +370,11 @@
             <p>
               It is extremely important to us that attendees follow a set of guidelines to make the event fun for everyone involved. Please read through and make sure you understand what we will be expecting of you.
             </p>
-            <p>
-              By writing my name below, I affirm that I have read and will abide by the MLH Code of Conduct detailed above.
-            </p>
-            <input type="text"
-                   name="signatureCodeOfConduct"
-                   placeholder="Your Full Legal Name"
-                   ng-model="user.confirmation.signatureCodeOfConduct">
+            <div class="ui checkbox">
+              <input id="agreeCodeOfConduct"
+              type="checkbox" ng-model="user.confirmation.agreeCodeOfConduct">
+              <label for="agreeCodeOfConduct"> I agree the MLH Code of Conduct</label>
+            </div>
           </div>
 
           <br>
