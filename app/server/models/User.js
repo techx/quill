@@ -79,7 +79,7 @@ var confirmation = {
   website: String,
   resume: String,
 
-  needsReimbursement: Boolean,
+  userNeedsTransportation: Boolean,
   address: {
     name: String,
     line1: String,
