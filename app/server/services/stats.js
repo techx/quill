@@ -131,12 +131,14 @@ function calculateStats(){
             admitted: 0,
             confirmed: 0,
             declined: 0,
+            requestTravel: 0,
           };
         }
         newStats.demo.schools[email].submitted += user.status.completedProfile ? 1 : 0;
         newStats.demo.schools[email].admitted += user.status.admitted ? 1 : 0;
         newStats.demo.schools[email].confirmed += user.status.confirmed ? 1 : 0;
         newStats.demo.schools[email].declined += user.status.declined ? 1 : 0;
+        newStats.demo.schools[email].requestTravel += user.confirmation.userNeedsTransportation ? 1 : 0;
 
         // Count graduation years
         if (user.profile.graduationYear){
