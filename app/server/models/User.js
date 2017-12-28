@@ -61,7 +61,7 @@ var confirmation = {
   shirtSize: {
     type: String,
     enum: {
-      values: 'XS S M L XL XXL WXS WS WM WL WXL WXXL'.split(' ')
+      values: 'S M L XL XXL'.split(' ')
     }
   },
   wantsHardware: Boolean,

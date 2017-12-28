@@ -135,13 +135,13 @@ controller.sendConfirmationEmail = function(email, callback) {
 
   var options = {
     to: email,
-    subject: "["+HACKATHON_NAME+"] - Application Accepted! Confirm NOW!"
+    subject: "["+HACKATHON_NAME+"] - Application Accepted! Confirm Now!"
   };
 
   var locals = {
     title: 'You\'re in! Confirm your application now!' ,
     subtitle: '',
-    description: 'We think you\'re awesome, and would love you to be a part' +
+    description: 'We think you\'re awesome, and would love you to be a part ' +
       'of this years event! We just need you to confirm some additional information.',
     actionUrl: ROOT_URL + '/confirmation',
     actionName: "Confirm Your Account"

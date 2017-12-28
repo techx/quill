@@ -25,6 +25,7 @@
     "handlebars": "^3.0.3",
     "jsonwebtoken": "5.0.4",
     "method-override": "^2.3.5",
+    "minify": "^3.0.2",
     "moment": "^2.10.3",
     "mongod": "^2.0.0",
     "mongodb": "^3.0.1",
