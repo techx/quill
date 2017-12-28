@@ -52,12 +52,21 @@
 
       <div class="field">
         <label> Email </label>
-        <input type="text" ng-model="selectedUser.email" />
+        <input type="text" ng-model="selectedUser.email" disabled />
       </div>
 
       <div class="field">
         <label> Team </label>
         <input type="text" ng-model="selectedUser.teamCode" />
+      </div>
+
+      <div class="field">
+        <div
+          ng-click="updateBasicInfo()"
+          class="ui positive right labeled icon button">
+          Update Basic Info
+          <i class="checkmark icon"></i>
+        </div>
       </div>
 
     </fieldset>
@@ -197,27 +206,44 @@
 
       <div class="field">
         <label> Shirt Size </label>
-        <input type="text" ng-model="selectedUser.profile.shirtSize" />
+        <select
+          name="shirt"
+          ng-model="selectedUser.confirmation.shirtSize"
+          required>
+          <option value="">Shirt Size</option>
+          <option value="XS">Unisex X-Small</option>
+          <option value="S">Unisex Small</option>
+          <option value="M">Unisex Medium</option>
+          <option value="L">Unisex Large</option>
+          <option value="XL">Unisex X-Large</option>
+          <option value="XXL">Unisex XX-Large</option>
+          <option value="WXS">Women's X-Small</option>
+          <option value="WS">Women's Small</option>
+          <option value="WM">Women's Medium</option>
+          <option value="WL">Women's Large</option>
+          <option value="WXL">Women's X-Large</option>
+          <option value="WXXL">Women's XX-Large</option>
+        </select>
       </div>
 
       <div class="field">
         <label> Major </label>
-        <input type="text" ng-model="selectedUser.profile.major" />
+        <input type="text" ng-model="selectedUser.confirmation.major" />
       </div>
 
       <div class="field">
         <label> Github </label>
-        <input type="url" ng-model="selectedUser.profile.github" />
+        <input type="url" ng-model="selectedUser.confirmation.github" />
       </div>
 
       <div class="field">
         <label> Website </label>
-        <input type="url" ng-model="selectedUser.profile.website" />
+        <input type="url" ng-model="selectedUser.confirmation.website" />
       </div>
 
       <div class="field">
         <label> Resume </label>
-        <input type="url" ng-model="selectedUser.profile.resume" />
+        <input type="url" ng-model="selectedUser.confirmation.resume" />
       </div>
 
       <div class="ui divider"></div>
@@ -239,7 +265,7 @@
         <input type="text" ng-model="selectedUser.confirmation.hardware">
       </div>
 
-      <div class="ui divider"></div>
+      <!-- <div class="ui divider"></div>
 
       <div class="ui header">
         Hosting
@@ -385,11 +411,20 @@
       <div class="field">
         <label> Receipt </label>
         <input type="url" ng-model="selectedUser.confirmation.receipt" />
-      </div>
+      </div> -->
 
       <div class="field">
         <label> Additional Notes </label>
         <textarea ng-model="selectedUser.confirmation.notes"></textarea>
+      </div>
+
+      <div class="field">
+        <div
+          ng-click="updateConfirmationInfo()"
+          class="ui positive right labeled icon button">
+          Update Confirmation Info
+          <i class="checkmark icon"></i>
+        </div>
       </div>
 
     </fieldset>

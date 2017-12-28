@@ -5,6 +5,8 @@ var smtpTransport = require('nodemailer-smtp-transport');
 var templatesDir = path.join(__dirname, '../templates');
 var emailTemplates = require('email-templates');
 
+const sgMail = require('@sendgrid/mail');
+
 var ROOT_URL = process.env.ROOT_URL;
 
 var HACKATHON_NAME = process.env.HACKATHON_NAME;
@@ -62,17 +64,26 @@ function sendOne(templateName, options, data, callback){
         return callback(err);
       }
 
-      transporter.sendMail({
-        from: EMAIL_CONTACT,
+      // using SendGrid's v3 Node.js Library
+      // https://github.com/sendgrid/sendgrid-nodejs
+      sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+      const msg = {
         to: options.to,
+        from: EMAIL_CONTACT,
         subject: options.subject,
-        html: html,
-        text: text
-      }, function(err, info){
-        if(callback){
-          callback(err, info);
+        text: text,
+        html: html
+      };
+      sgMail.send(msg, (err, res) => {
+        if (err) {
+          const {message, code, response} = err;
+          console.log("MAIL SEND ERROR: " + message + " code: " + code);
+        }
+        else {
+          console.log(Date.now() + ": Mail sent to " + msg.to);
         }
       });
+
     });
   });
 }
@@ -113,6 +124,46 @@ controller.sendVerificationEmail = function(email, token, callback) {
     }
   });
 
+};
+
+/**
+ * Send a confirmation email.
+ * @param  {[type]}   email    [description]
+ * @param  {Function} callback [description]
+ */
+controller.sendConfirmationEmail = function(email, callback) {
+
+  var options = {
+    to: email,
+    subject: "["+HACKATHON_NAME+"] - Application Accepted! Confirm NOW!"
+  };
+
+  var locals = {
+    title: 'You\'re in! Confirm your application now!' ,
+    subtitle: '',
+    description: 'We think you\'re awesome, and would love you to be a part' +
+      'of this years event! We just need you to confirm some additional information.',
+    actionUrl: ROOT_URL + '/confirmation',
+    actionName: "Confirm Your Account"
+  };
+
+  /**
+   * Eamil-verify takes a few template values:
+   * {
+   *   verifyUrl: the url that the user must visit to verify their account
+   * }
+   */
+  sendOne('email-link-action', options, locals, function(err, info){
+    if (err){
+      console.log(err);
+    }
+    if (info){
+      console.log(info.message);
+    }
+    if (callback){
+      callback(err, info);
+    }
+  });
 };
 
 /**
