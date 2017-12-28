@@ -127,6 +127,46 @@ controller.sendVerificationEmail = function(email, token, callback) {
 };
 
 /**
+ * Send a confirmation email.
+ * @param  {[type]}   email    [description]
+ * @param  {Function} callback [description]
+ */
+controller.sendConfirmationEmail = function(email, callback) {
+
+  var options = {
+    to: email,
+    subject: "["+HACKATHON_NAME+"] - Application Accepted! Confirm NOW!"
+  };
+
+  var locals = {
+    title: 'You\'re in! Confirm your application now!' ,
+    subtitle: '',
+    description: 'We think you\'re awesome, and would love you to be a part' +
+      'of this years event! We just need you to confirm some additional information.',
+    actionUrl: ROOT_URL + '/confirmation',
+    actionName: "Confirm Your Account"
+  };
+
+  /**
+   * Eamil-verify takes a few template values:
+   * {
+   *   verifyUrl: the url that the user must visit to verify their account
+   * }
+   */
+  sendOne('email-link-action', options, locals, function(err, info){
+    if (err){
+      console.log(err);
+    }
+    if (info){
+      console.log(info.message);
+    }
+    if (callback){
+      callback(err, info);
+    }
+  });
+};
+
+/**
  * Send a password recovery email.
  * @param  {[type]}   email    [description]
  * @param  {[type]}   token    [description]
