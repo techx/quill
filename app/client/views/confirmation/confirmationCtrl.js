@@ -28,13 +28,25 @@ angular.module('reg')
         'Vegan': false,
         'Halal': false,
         'Kosher': false,
-        'Nut Allergy': false
+        'Nut Allergy': false,
+        'Other': {
+          'hasOther': false,
+          'description': ''
+        }
       };
 
       if (user.confirmation.dietaryRestrictions){
         user.confirmation.dietaryRestrictions.forEach(function(restriction){
-          if (restriction in dietaryRestrictions){
+          // If they have an "Other" restriction this will mark that box
+          if (restriction == "Other"){
+            dietaryRestrictions['Other']['hasOther'] = true;
+          }
+          else if (restriction in dietaryRestrictions){
             dietaryRestrictions[restriction] = true;
+          }
+          // This must be the description of their restriction
+          else {
+            dietaryRestrictions['Other']['description'] = restriction;
           }
         });
       }
@@ -52,6 +64,9 @@ angular.module('reg')
             drs.push(key);
           }
         });
+        if ($scope.dietaryRestrictions['Other']['hasOther']){
+          drs.push(dietaryRestrictions['Other']['description']);
+        }
         confirmation.dietaryRestrictions = drs;
 
         UserService

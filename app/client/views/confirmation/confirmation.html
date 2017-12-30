@@ -28,7 +28,7 @@
             <label> Dietary Restrictions </label>
 
             <p>
-              If your restriction is not included here, please let us know in the additional notes at the bottom.
+              If your restriction is not included here, mark "Other" and let us know how we can accomodate!
             </p>
             <p>
               We'll make sure you get fed :)
@@ -38,7 +38,7 @@
 
           <div class="inline fields">
             <div class="field"
-              ng-repeat="(key, value) in dietaryRestrictions">
+              ng-repeat="(key, value) in dietaryRestrictions"  ng-if="key != 'Other'">
 
               <div class="ui checkbox">
                 <input type="checkbox" ng-model="dietaryRestrictions[key]" />
@@ -46,6 +46,14 @@
               </div>
 
             </div>
+            <div class="ui checkbox">
+              <input type="checkbox" ng-model="dietaryRestrictions['Other']['hasOther']" />
+              <label>Other</label>
+            </div>
+          </div>
+          <div class="field" ng-show="dietaryRestrictions['Other']['hasOther']">
+            Describe your dietary restriction here and we will do our best to accomodate:
+            <input type="text" ng-model="dietaryRestrictions['Other']['description']">
           </div>
 
           <div class="field">
