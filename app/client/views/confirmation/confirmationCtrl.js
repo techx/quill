@@ -102,12 +102,12 @@ angular.module('reg')
                 }
               ]
             },
-            signaturePhotoRelease: {
-              identifier: 'signaturePhotoRelease',
+            agreePhotoRelease: {
+              identifier: 'agreePhotoRelease',
               rules: [
                 {
-                  type: 'empty',
-                  prompt: 'Please type your digital signature.'
+                  type: 'checked',
+                  prompt: 'You must accept the VTHacks Media Release Statement.'
                 }
               ]
             },
@@ -116,7 +116,25 @@ angular.module('reg')
               rules: [
                 {
                   type: 'checked',
-                  prompt: 'You  must accept the MLH Code of Conduct'
+                  prompt: 'You must accept the MLH Code of Conduct'
+                }
+              ]
+            },
+            agreeTermsAndPrivacy: {
+              identifier: 'agreeTermsAndPrivacy',
+              rules: [
+                {
+                  type: 'checked',
+                  prompt: 'You must accept the MLH Terms and Conditions and Privacy Policy'
+                }
+              ]
+            },
+            agreeConfirmationDate: {
+              identifier: 'agreeConfirmationDate',
+              rules: [
+                {
+                  type: 'checked',
+                  prompt: 'You must acknowledge that you understand the date of the event'
                 }
               ]
             },

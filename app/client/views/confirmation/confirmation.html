@@ -327,42 +327,35 @@
           </div> -->
 
           <div class="field">
-            <label> Photo Release </label>
-            <p>
-              <a
-                target="_blank"
-                href="https://vthacks.com/release">
-                Photo Release
-              </a>
-            </p>
-            <p>
-              Signing this photo release means if we take photos or photos of you, we can share it with the world.
-            </p>
-            <p>
-              By writing my name below, I affirm that I have read and accepted the terms of the photo release above.
-            </p>
-            <input type="text"
-                   name="signaturePhotoRelease"
-                   placeholder="Your Full Legal Name"
-                   ng-model="user.confirmation.signaturePhotoRelease">
-          </div>
-
-          <div class="field">
             <label> Code of Conduct </label>
-            <p>
-              <a
-                target="_blank"
-                href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf">
-                MLH Code of Conduct
-              </a>
-            </p>
             <p>
               It is extremely important to us that attendees follow a set of guidelines to make the event fun for everyone involved. Please read through and make sure you understand what we will be expecting of you.
             </p>
             <div class="ui checkbox">
               <input id="agreeCodeOfConduct"
               type="checkbox" ng-model="user.confirmation.agreeCodeOfConduct">
-              <label for="agreeCodeOfConduct"> I agree the MLH Code of Conduct</label>
+              <label for="agreeCodeOfConduct"> I agree the <a target="_blank" href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf">MLH Code of Conduct</a></label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label> Terms and Conditions and Privacy Policy </label>
+            <div class="ui checkbox">
+              <input id="agreeTermsAndPrivacy"
+              type="checkbox" ng-model="user.confirmation.agreeTermsAndPrivacy">
+              <label for="agreeTermsAndPrivacy">I agree to the terms of both the <a target="_blank" href="https://github.com/MLH/mlh-policies/tree/master/prize-terms-and-conditions">MLH Contest Terms and Conditions</a> and the <a target="_blank" href="https://mlh.io/privacy">MLH Privacy Policy</a>. Please note that you may receive pre and post-event informational e-mails and occasional messages about hackathons from MLH as per the MLH Privacy Policy.</label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label> Photo Release </label>
+            <p>
+              Agreeing to this photo release means if we take photos or photos of you, we can share it with the world.
+            </p>
+            <div class="ui checkbox">
+              <input id="agreePhotoRelease"
+              type="checkbox" ng-model="user.confirmation.agreePhotoRelease">
+              <label for="agreePhotoRelease">I agree the <a target="_blank" href="https://vthacks.com/release">VTHacks Media Release Statement</a></label>
             </div>
           </div>
 
@@ -370,6 +363,15 @@
           <br>
 
           <div class="divided title">everything else</div>
+
+          <div class="field">
+            <label> Confirmation of Date </label>
+            <div class="ui checkbox">
+              <input id="agreeConfirmationDate"
+              type="checkbox" ng-model="user.confirmation.agreeConfirmationDate">
+              <label for="agreeConfirmationDate">I understand that the event takes place February 16-18th, and intend to attend the event.</label>
+            </div>
+          </div>
 
           <div class="field">
             <label>
