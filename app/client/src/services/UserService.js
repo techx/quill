@@ -87,6 +87,12 @@ angular.module('reg')
         return $http.post(base + id + '/checkout');
       },
 
+      emailAllUsers: function(data) {
+        return $http.put(base + 'emailallusers', {
+          data: data,
+        });
+      },
+
     };
   }
   ]);

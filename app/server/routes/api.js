@@ -386,4 +386,20 @@ module.exports = function(router) {
     SettingsController.updateField('allowMinors', allowMinors, defaultResponse(req, res));
   });
 
+  // ---------------------------------------------
+  // Email [ADMIN ONLY!]
+  // ---------------------------------------------
+
+  /**
+   * [ADMIN ONLY]
+   * {
+   *   emails: [String]
+   * }
+   * res: Settings
+   *
+   */
+  router.put('/users/emailallusers', isAdmin, function(req, res){
+    UserController.sendEmailToAllUsers(req.body.data, defaultResponse(req, res));
+  });
+
 };
