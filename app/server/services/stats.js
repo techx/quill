@@ -227,7 +227,6 @@ function calculateStats(){
         console.log('Stats updated!');
         newStats.lastUpdated = new Date();
         stats = newStats;
-        console.log(stats);
       });
     });
 
