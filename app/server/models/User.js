@@ -146,7 +146,7 @@ var status = {
   reimbursementGiven: {
     type: Boolean,
     default: false
-  }
+  },
 };
 
 // define the schema for our admin model
@@ -201,6 +201,11 @@ var schema = new mongoose.Schema({
     required: true,
     default: Date.now(),
     select: false
+  },
+
+  ignoreStats: {
+    type: Boolean,
+    default: false,
   },
 
   /**
