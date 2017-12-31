@@ -37,38 +37,36 @@ angular.module('reg')
 
       if (user.confirmation.dietaryRestrictions){
         user.confirmation.dietaryRestrictions.forEach(function(restriction){
-          // If they have an "Other" restriction this will mark that box
-          if (restriction == "Other"){
-            dietaryRestrictions['Other']['hasOther'] = true;
-          }
-          else if (restriction in dietaryRestrictions){
+          if (restriction in dietaryRestrictions && restriction != 'Other'){
             dietaryRestrictions[restriction] = true;
-          }
-          // This must be the description of their restriction
-          else {
-            dietaryRestrictions['Other']['description'] = restriction;
           }
         });
       }
+      if (user.confirmation.otherDietaryRestrictions != ''){
+          dietaryRestrictions['Other']['hasOther'] = true;
+          dietaryRestrictions['Other']['description'] = user.confirmation.otherDietaryRestrictions;
+      }
 
       $scope.dietaryRestrictions = dietaryRestrictions;
-
       // -------------------------------
 
       function _updateUser(e){
         var confirmation = $scope.user.confirmation;
         // Get the dietary restrictions as an array
         var drs = [];
+        confirmation.otherDietaryRestrictions = '';
+
         Object.keys($scope.dietaryRestrictions).forEach(function(key){
+          if (key == 'Other' && $scope.dietaryRestrictions[key]['hasOther']){
+            confirmation.otherDietaryRestrictions = $scope.dietaryRestrictions[key]['description'];
+          }
           if ($scope.dietaryRestrictions[key]){
             drs.push(key);
           }
         });
-        if ($scope.dietaryRestrictions['Other']['hasOther']){
-          drs.push(dietaryRestrictions['Other']['description']);
-        }
         confirmation.dietaryRestrictions = drs;
 
+        console.log('otherDietaryRestrictions: ' + confirmation.otherDietaryRestrictions);
         UserService
           .updateConfirmation(user._id, confirmation)
           .success(function(data){
