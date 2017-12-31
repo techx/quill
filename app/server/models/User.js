@@ -94,9 +94,10 @@ var confirmation = {
 
   notes: String,
 
-  signatureLiability: String,
-  signaturePhotoRelease: String,
   agreeCodeOfConduct: Boolean,
+  agreePhotoRelease: Boolean,
+  agreeTermsAndPrivacy: Boolean,
+  agreeConfirmationDate: Boolean,
 };
 
 var status = {
