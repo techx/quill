@@ -54,5 +54,5 @@ angular.module('reg')
         });
       };
 
-      particlesJS("particles-js", "particles.json");
-  ]);
+      particlesJS.load("particles-js", "assets/particles.json");
+  }]);
