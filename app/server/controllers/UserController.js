@@ -512,6 +512,25 @@ UserController.leaveTeam = function(id, callback){
 };
 
 /**
+ * Sends a custom email to all users.
+ * @param {Object}    data      Data for the email template.
+ * @param {Function}  callback  args(err, users)
+ */
+UserController.sendEmailToAllUsers = function(data, callback) {
+  // Currently sends to all users. We can filter useing the input
+  // to User.find if needed (ex: {admin: false}).
+  User.find({})
+    .select('email')
+    .exec(function(err, users){
+      if (err || !users) {
+        return callback(err);
+      }
+      Mailer.sendMassEmail(users, data);
+      return callback(err, users);
+  });
+}
+
+/**
  * Resend an email verification email given a user id.
  */
 UserController.sendVerificationEmailById = function(id, callback){

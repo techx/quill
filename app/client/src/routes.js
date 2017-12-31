@@ -140,6 +140,11 @@ angular.module('reg')
         templateUrl: "views/admin/settings/settings.html",
         controller: 'AdminSettingsCtrl',
       })
+      .state('app.admin.email', {
+        url: "/admin/email",
+        templateUrl: "views/admin/email/email.html",
+        controller: 'AdminEmailCtrl',
+      })
       .state('reset', {
         url: "/reset/:token",
         templateUrl: "views/reset/reset.html",

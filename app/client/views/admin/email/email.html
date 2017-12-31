@@ -1,0 +1,88 @@
+<!-- Send Email -->
+<div
+  ng-class="{'loading': loading}"
+  class="ui red segment">
+  <form class="ui form">
+
+    <div class="ui header">
+      Send Mass Email:
+    </div>
+
+    <div class="field">
+      <label>
+        Subject:
+      </label>
+      <input
+        type="text"
+        ng-model="email.subject"
+        name="subject"
+        placeholder="Subject...">
+    </div>
+
+    <div class="field">
+      <label>
+        Title:
+      </label>
+      <input
+        type="text"
+        ng-model="email.title"
+        name="title"
+        placeholder="Title...">
+    </div>
+
+    <div class="field" ng-if="email.title">
+      <label>
+        Subtitle (optional):
+      </label>
+      <input
+        type="text"
+        ng-model="email.subtitle"
+        name="subtitle"
+        placeholder="Subtitle...">
+    </div>
+
+    <div class="field">
+      <label>
+        Description:
+      </label>
+      <textarea
+        ng-model="email.description"
+        name="description"
+        placeholder="Description...">
+      </textarea>
+    </div>
+
+    <div class="field">
+      <label>
+        Link Action URL (optional):
+      </label>
+      <input
+        type="url"
+        ng-model="email.actionUrl"
+        name="actionUrl"
+        placeholder="https://vthacks.com/register">
+    </div>
+
+    <div class="field" ng-if="email.actionUrl">
+      <label>
+        Link Action Text:
+      </label>
+      <input
+        type="text"
+        ng-model="email.actionName"
+        name="actionName"
+        placeholder="Go to Registration">
+    </div>
+
+    <div class="ui field">
+      <button
+        type="submit"
+        class="ui positive right labeled icon button"
+        ng-click="sendEmails()"
+        tabindex="0">
+        Send Emails
+        <i class="send icon"></i>
+      </button>
+    </div>
+  </form>
+</div>
