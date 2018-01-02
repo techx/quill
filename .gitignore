@@ -5,3 +5,4 @@ app/client/plugins/
 www/
 *.log
 .env
+.DS_Store
