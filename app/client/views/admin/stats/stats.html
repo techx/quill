@@ -98,11 +98,18 @@
             <strong>
               Shirt sizes:
             </strong> :
+              XS ({{stats.shirtSizes['XS']}})
               S ({{stats.shirtSizes['S']}})
               M ({{stats.shirtSizes['M']}})
               L ({{stats.shirtSizes['L']}})
               XL ({{stats.shirtSizes['XL']}})
               XXL ({{stats.shirtSizes['XXL']}})
+              WXS ({{stats.shirtSizes['WXS']}})
+              WS ({{stats.shirtSizes['WS']}})
+              WM ({{stats.shirtSizes['WM']}})
+              WL ({{stats.shirtSizes['WL']}})
+              WXL ({{stats.shirtSizes['WXL']}})
+              WXXL ({{stats.shirtSizes['WXXL']}})
           </div>
         </div>
 
@@ -206,6 +213,18 @@
     <div class="ui divider"></div>
       <div class="ui list">
         <div class="item">
+          <strong>Graduate in 2025:</strong> {{stats.demo.year['2025']}} ({{stats.demo.year['2025'] / stats.total * 100 | number: 1}}%)
+        </div>
+        <div class="item">
+          <strong>Graduate in 2024:</strong> {{stats.demo.year['2024']}} ({{stats.demo.year['2024'] / stats.total * 100 | number: 1}}%)
+        </div>
+        <div class="item">
+          <strong>Graduate in 2023:</strong> {{stats.demo.year['2023']}} ({{stats.demo.year['2023'] / stats.total * 100 | number: 1}}%)
+        </div>
+        <div class="item">
+          <strong>Graduate in 2022:</strong> {{stats.demo.year['2022']}} ({{stats.demo.year['2022'] / stats.total * 100 | number: 1}}%)
+        </div>
+        <div class="item">
           <strong>Fresh:</strong> {{stats.demo.year['2021']}} ({{stats.demo.year['2021'] / stats.total * 100 | number: 1}}%)
         </div>
         <div class="item">
@@ -216,6 +235,9 @@
         </div>
         <div class="item">
           <strong>Senior:</strong> {{stats.demo.year['2018']}} ({{stats.demo.year['2018'] / stats.total * 100 | number: 1}}%)
+        </div>
+        <div class="item">
+          <strong>Graduated:</strong> {{stats.demo.year['2017']}} ({{stats.demo.year['2017'] / stats.total * 100 | number: 1}}%)
         </div>
       </div>
     <div class="ui divider"></div>

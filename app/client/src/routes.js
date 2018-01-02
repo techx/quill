@@ -145,6 +145,11 @@ angular.module('reg')
         templateUrl: "views/admin/email/email.html",
         controller: 'AdminEmailCtrl',
       })
+      .state('app.mlhterms', {
+        url: "/mlh-terms-and-conditions",
+        templateUrl: "views/mlh-terms/mlh-terms.html",
+        controller: 'MLHTermsCtrl',
+      })
       .state('reset', {
         url: "/reset/:token",
         templateUrl: "views/reset/reset.html",
