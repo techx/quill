@@ -27,7 +27,7 @@
       margin: 0 auto;
 
       .ui {
-        background: #424242;
+        background: #111;
         .form .field > label{
           color: white;
         }
@@ -43,7 +43,7 @@
       }
 
       .button {
-        color: #212121;
+        color: white;
         &.login {
           background: $login-color;
         }
@@ -53,6 +53,7 @@
       }
 
       .forgot {
+        font-weight: 400;
         text-align: center;
       }
 
