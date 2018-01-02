@@ -1,9 +1,18 @@
+#particles-js{
+  height: 60%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 #login {
   height: 100%;
   width: 100%;
   background-color: $login-bg-color;
-  background: $login-bg; 
+  background: $login-bg;
   background-size: cover;
+  overflow: hidden;
 
   > .container {
     position: relative;
@@ -16,6 +25,13 @@
     > .content {
       max-width: 320px;
       margin: 0 auto;
+
+      .ui {
+        background: #111;
+        .form .field > label{
+          color: white;
+        }
+      }
 
       .logo {
         max-width: 100px;
@@ -37,6 +53,7 @@
       }
 
       .forgot {
+        font-weight: 400;
         text-align: center;
       }
 
