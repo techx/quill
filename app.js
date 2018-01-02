@@ -36,7 +36,7 @@ app.use(bodyParser.json());
 
 app.use(methodOverride());
 
-app.use('/', express.static(__dirname + '/www'));
+app.use('/', express.static(__dirname + '/www/dist'));
 app.use('/register', express.static(__dirname + '/app/client'));
 app.use('/release', express.static(__dirname + '/files/VTHacks Media Release Statement.pdf'));
 app.use('/prospectus', express.static(__dirname + '/files/vthacks-v-prospectus.pdf'));
