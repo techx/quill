@@ -52,6 +52,13 @@ var profile = {
     }
   },
 
+  ethnicity: {
+    type: String,
+    enum: {
+      values: 'White,Hispanic or Latino,Black or African American,Native American or American Indian,Asian or Pacific Islander,Other'.split(',')
+    }
+  }
+
 };
 
 // Only after confirmed
