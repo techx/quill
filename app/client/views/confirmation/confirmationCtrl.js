@@ -42,7 +42,7 @@ angular.module('reg')
           }
         });
       }
-      if (user.confirmation.otherDietaryRestrictions != ''){
+      if (user.confirmation.otherDietaryRestrictions){
           dietaryRestrictions['Other']['hasOther'] = true;
           dietaryRestrictions['Other']['description'] = user.confirmation.otherDietaryRestrictions;
       }
@@ -65,7 +65,7 @@ angular.module('reg')
           }
         });
         confirmation.dietaryRestrictions = drs;
-        
+
         UserService
           .updateConfirmation(user._id, confirmation)
           .success(function(data){
