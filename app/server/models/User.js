@@ -58,6 +58,7 @@ var profile = {
 var confirmation = {
   phoneNumber: String,
   dietaryRestrictions: [String],
+  otherDietaryRestrictions: String,
   shirtSize: {
     type: String,
     enum: {

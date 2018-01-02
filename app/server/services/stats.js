@@ -56,6 +56,7 @@ function calculateStats(){
     },
 
     dietaryRestrictions: {},
+    otherDietaryRestrictions: [],
 
     hostNeededFri: 0,
     hostNeededSat: 0,
@@ -175,11 +176,15 @@ function calculateStats(){
         // Dietary restrictions
         if (user.confirmation.dietaryRestrictions){
           user.confirmation.dietaryRestrictions.forEach(function(restriction){
-            if (!newStats.dietaryRestrictions[restriction]){
-              newStats.dietaryRestrictions[restriction] = 0;
-            }
-            newStats.dietaryRestrictions[restriction] += 1;
+              if (!newStats.dietaryRestrictions[restriction]){
+                newStats.dietaryRestrictions[restriction] = 0;
+              }
+              newStats.dietaryRestrictions[restriction] += 1;
           });
+        }
+
+        if (user.confirmation.otherDietaryRestrictions){
+          newStats.otherDietaryRestrictions.push(user.confirmation.otherDietaryRestrictions);
         }
 
         // Count checked in
