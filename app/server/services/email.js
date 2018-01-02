@@ -5,6 +5,8 @@ var smtpTransport = require('nodemailer-smtp-transport');
 var templatesDir = path.join(__dirname, '../templates');
 var emailTemplates = require('email-templates');
 
+const sgMail = require('@sendgrid/mail');
+
 var ROOT_URL = process.env.ROOT_URL;
 
 var HACKATHON_NAME = process.env.HACKATHON_NAME;
@@ -62,18 +64,110 @@ function sendOne(templateName, options, data, callback){
         return callback(err);
       }
 
-      transporter.sendMail({
-        from: EMAIL_CONTACT,
+      // using SendGrid's v3 Node.js Library
+      // https://github.com/sendgrid/sendgrid-nodejs
+      sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+      const msg = {
         to: options.to,
+        from: EMAIL_CONTACT,
         subject: options.subject,
-        html: html,
-        text: text
-      }, function(err, info){
-        if(callback){
-          callback(err, info);
+        text: text,
+        html: html
+      };
+      sgMail.send(msg, (err, res) => {
+        if (err) {
+          const {message, code, response} = err;
+          console.log("MAIL SEND ERROR: " + message + " code: " + code);
+        }
+        else {
+          console.log(Date.now() + ": Mail sent to " + msg.to);
+        }
+        if (callback) {
+          callback(err, res);
         }
       });
+
     });
+  });
+}
+
+function sendMultiple(templateName, users, options, data, callback) {
+  if (NODE_ENV === "dev") {
+    console.log(templateName);
+    console.log(JSON.stringify(data, "", 2));
+  }
+
+  emailTemplates(templatesDir, function(err, template){
+    if (err) {
+      return callback(err);
+    }
+
+    data.emailHeaderImage = EMAIL_HEADER_IMAGE;
+    data.emailAddress = EMAIL_ADDRESS;
+    data.hackathonName = HACKATHON_NAME;
+    data.twitterHandle = TWITTER_HANDLE;
+    data.facebookHandle = FACEBOOK_HANDLE;
+    template(templateName, data, function(err, html, text){
+      if (err) {
+        return callback(err);
+      }
+
+      // using SendGrid's v3 Node.js Library
+      // https://github.com/sendgrid/sendgrid-nodejs
+      sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+      var msgs = [];
+      users.forEach(function(user) {
+        msgs.push({
+          to: user.email,
+          from: EMAIL_CONTACT,
+          subject: options.subject,
+          text: text,
+          html: html
+        });
+      });
+      if (msgs.length > 0) {
+        sgMail.send(msgs, (err, res) => {
+          if (err) {
+            const {message, code, response} = err;
+            console.log("MAIL SEND ERROR: " + message + " code: " + code);
+          }
+          else {
+            msgs.forEach((msg) => {
+              console.log(Date.now() + ": Mail sent to " + msg.to);
+            });
+          }
+          if (callback) {
+            callback(err, res);
+          }
+        });
+      }
+    });
+  });
+}
+
+/**
+ * Send a mass email to a collection of users.
+ * @param  {[User]}   users
+ * @param  {[type]}   data
+ * @param  {Function} callback
+ */
+controller.sendMassEmail = function(users, data, callback) {
+  var options = {
+    subject: data.subject,
+  };
+
+  var locals = {
+    title: data.title ,
+    subtitle: data.subtitle,
+    description: data.description,
+    actionUrl: data.actionUrl,
+    actionName: data.actionName,
+  };
+
+  sendMultiple(locals.actionUrl ? 'email-link-action' : 'email-basic', users, options, locals, function(err, res){
+    if (callback){
+      callback(err, res);
+    }
   });
 }
 
@@ -101,18 +195,46 @@ controller.sendVerificationEmail = function(email, token, callback) {
    *   verifyUrl: the url that the user must visit to verify their account
    * }
    */
-  sendOne('email-verify', options, locals, function(err, info){
-    if (err){
-      console.log(err);
-    }
-    if (info){
-      console.log(info.message);
-    }
+  sendOne('email-verify', options, locals, function(err, res){
     if (callback){
-      callback(err, info);
+      callback(err, res);
     }
   });
 
+};
+
+/**
+ * Send a confirmation email.
+ * @param  {[type]}   email    [description]
+ * @param  {Function} callback [description]
+ */
+controller.sendConfirmationEmail = function(email, callback) {
+
+  var options = {
+    to: email,
+    subject: "["+HACKATHON_NAME+"] - Application Accepted! Confirm Now!"
+  };
+
+  var locals = {
+    title: 'You\'re in! Confirm your application now!' ,
+    subtitle: '',
+    description: 'We think you\'re awesome, and would love you to be a part ' +
+      'of this years event! We just need you to confirm some additional information.',
+    actionUrl: ROOT_URL + '/confirmation',
+    actionName: "Confirm Your Account"
+  };
+
+  /**
+   * Eamil-verify takes a few template values:
+   * {
+   *   verifyUrl: the url that the user must visit to verify their account
+   * }
+   */
+  sendOne('email-link-action', options, locals, function(err, res){
+    if (callback){
+      callback(err, res);
+    }
+  });
 };
 
 /**
@@ -143,15 +265,9 @@ controller.sendPasswordResetEmail = function(email, token, callback) {
    *   verifyUrl: the url that the user must visit to verify their account
    * }
    */
-  sendOne('email-link-action', options, locals, function(err, info){
-    if (err){
-      console.log(err);
-    }
-    if (info){
-      console.log(info.message);
-    }
+  sendOne('email-link-action', options, locals, function(err, res){
     if (callback){
-      callback(err, info);
+      callback(err, res);
     }
   });
 
@@ -171,7 +287,7 @@ controller.sendPasswordChangedEmail = function(email, callback){
 
   var locals = {
     title: 'Password Updated',
-    body: 'Somebody (hopefully you!) has successfully changed your password.',
+    description: 'Somebody (hopefully you!) has successfully changed your password.',
   };
 
   /**
@@ -180,15 +296,9 @@ controller.sendPasswordChangedEmail = function(email, callback){
    *   verifyUrl: the url that the user must visit to verify their account
    * }
    */
-  sendOne('email-basic', options, locals, function(err, info){
-    if (err){
-      console.log(err);
-    }
-    if (info){
-      console.log(info.message);
-    }
+  sendOne('email-basic', options, locals, function(err, res){
     if (callback){
-      callback(err, info);
+      callback(err, res);
     }
   });
 

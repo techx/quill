@@ -251,6 +251,7 @@ module.exports = function(router) {
     var id = req.params.id;
     var user = req.user;
     UserController.admitUser(id, user, defaultResponse(req, res));
+    UserController.sendConfirmationEmailById(id, function() {});
   });
 
   /**
@@ -383,6 +384,22 @@ module.exports = function(router) {
   router.put('/settings/minors', isAdmin, function(req, res){
     var allowMinors = req.body.allowMinors;
     SettingsController.updateField('allowMinors', allowMinors, defaultResponse(req, res));
+  });
+
+  // ---------------------------------------------
+  // Email [ADMIN ONLY!]
+  // ---------------------------------------------
+
+  /**
+   * [ADMIN ONLY]
+   * {
+   *   emails: [String]
+   * }
+   * res: Settings
+   *
+   */
+  router.put('/users/emailallusers', isAdmin, function(req, res){
+    UserController.sendEmailToAllUsers(req.body.data, defaultResponse(req, res));
   });
 
 };

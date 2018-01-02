@@ -52,12 +52,21 @@
 
       <div class="field">
         <label> Email </label>
-        <input type="text" ng-model="selectedUser.email" />
+        <input type="text" ng-model="selectedUser.email" disabled />
       </div>
 
       <div class="field">
         <label> Team </label>
         <input type="text" ng-model="selectedUser.teamCode" />
+      </div>
+
+      <div class="field">
+        <div
+          ng-click="updateBasicInfo()"
+          class="ui positive right labeled icon button">
+          Update Basic Info
+          <i class="checkmark icon"></i>
+        </div>
       </div>
 
     </fieldset>
@@ -139,21 +148,21 @@
 
       <div class="field">
         <label>
-            What would you like to learn or get out of HackMIT? (optional)
+            What would you like to learn or get out of VTHacks? (optional)
         </label>
         <textarea ng-model="selectedUser.profile.essay">
         </textarea>
       </div>
 
       <div class="field"
-           ng-hide="isMitStudent">
+           ng-hide="isVTStudent">
         <p>
-          Because of limitations imposed by MIT, we are not legally allowed to host
-          non-MIT minors (those under 18) for HackMIT 2015. Checking the box below affirms that you are or will be 18 years or older by September 19th, 2015.
+          Because of limitations imposed by VT, we are not legally allowed to host
+          non-VT minors (those under 18) for VTHacks V. Checking the box below affirms that you are or will be 18 years or older by September 19th, 2015.
         </p>
         <p>
           <strong>
-          We will be checking ID. If you are a non-MIT minor, you will be turned away at the door.
+          We will be checking ID. If you are a non-VT minor, you will be turned away at the door.
           </strong>
         </p>
         <div class="ui checkbox">
@@ -197,27 +206,37 @@
 
       <div class="field">
         <label> Shirt Size </label>
-        <input type="text" ng-model="selectedUser.profile.shirtSize" />
+        <select
+          name="shirt"
+          ng-model="selectedUser.confirmation.shirtSize"
+          required>
+          <option value="">Shirt Size</option>
+          <option value="S">Unisex Small</option>
+          <option value="M">Unisex Medium</option>
+          <option value="L">Unisex Large</option>
+          <option value="XL">Unisex X-Large</option>
+          <option value="XXL">Unisex XX-Large</option>
+        </select>
       </div>
 
       <div class="field">
         <label> Major </label>
-        <input type="text" ng-model="selectedUser.profile.major" />
+        <input type="text" ng-model="selectedUser.confirmation.major" />
       </div>
 
       <div class="field">
         <label> Github </label>
-        <input type="url" ng-model="selectedUser.profile.github" />
+        <input type="url" ng-model="selectedUser.confirmation.github" />
       </div>
 
       <div class="field">
         <label> Website </label>
-        <input type="url" ng-model="selectedUser.profile.website" />
+        <input type="url" ng-model="selectedUser.confirmation.website" />
       </div>
 
       <div class="field">
         <label> Resume </label>
-        <input type="url" ng-model="selectedUser.profile.resume" />
+        <input type="url" ng-model="selectedUser.confirmation.resume" />
       </div>
 
       <div class="ui divider"></div>
@@ -239,7 +258,7 @@
         <input type="text" ng-model="selectedUser.confirmation.hardware">
       </div>
 
-      <div class="ui divider"></div>
+      <!-- <div class="ui divider"></div>
 
       <div class="ui header">
         Hosting
@@ -385,11 +404,20 @@
       <div class="field">
         <label> Receipt </label>
         <input type="url" ng-model="selectedUser.confirmation.receipt" />
-      </div>
+      </div> -->
 
       <div class="field">
         <label> Additional Notes </label>
         <textarea ng-model="selectedUser.confirmation.notes"></textarea>
+      </div>
+
+      <div class="field">
+        <div
+          ng-click="updateConfirmationInfo()"
+          class="ui positive right labeled icon button">
+          Update Confirmation Info
+          <i class="checkmark icon"></i>
+        </div>
       </div>
 
     </fieldset>

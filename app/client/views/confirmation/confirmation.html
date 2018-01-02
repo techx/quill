@@ -28,7 +28,7 @@
             <label> Dietary Restrictions </label>
 
             <p>
-              If your restriction is not included here, please let us know in the additional notes at the bottom.
+              If your restriction is not included here, mark "Other" and let us know how we can accomodate!
             </p>
             <p>
               We'll make sure you get fed :)
@@ -38,7 +38,7 @@
 
           <div class="inline fields">
             <div class="field"
-              ng-repeat="(key, value) in dietaryRestrictions">
+              ng-repeat="(key, value) in dietaryRestrictions"  ng-if="key != 'Other'">
 
               <div class="ui checkbox">
                 <input type="checkbox" ng-model="dietaryRestrictions[key]" />
@@ -46,6 +46,14 @@
               </div>
 
             </div>
+            <div class="ui checkbox">
+              <input type="checkbox" ng-model="dietaryRestrictions['Other']['hasOther']" />
+              <label>Other</label>
+            </div>
+          </div>
+          <div class="field" ng-show="dietaryRestrictions['Other']['hasOther']">
+            Describe your dietary restriction here and we will do our best to accomodate:
+            <input type="text" ng-model="dietaryRestrictions['Other']['description']">
           </div>
 
           <div class="field">
@@ -58,18 +66,11 @@
               ng-model="user.confirmation.shirtSize"
               required>
               <option value="">Shirt Size</option>
-              <option value="XS">Unisex X-Small</option>
               <option value="S">Unisex Small</option>
               <option value="M">Unisex Medium</option>
               <option value="L">Unisex Large</option>
               <option value="XL">Unisex X-Large</option>
               <option value="XXL">Unisex XX-Large</option>
-              <option value="WXS">Women's X-Small</option>
-              <option value="WS">Women's Small</option>
-              <option value="WM">Women's Medium</option>
-              <option value="WL">Women's Large</option>
-              <option value="WXL">Women's X-Large</option>
-              <option value="WXXL">Women's XX-Large</option>
             </select>
           </div>
 
@@ -126,22 +127,19 @@
           </div>
 
           <div class="field">
-            <label> Skill Sheet (required) </label>
+            <label> Resume/CV </label>
             <p>
-              Upload a document outlining any skills or experience you'd like to share (ex. resume). PDF preferred!
+              Attach a link to a document outlining any skills or experience you'd like to share (ex. resume). PDF preferred!
             </p>
-            <a
-              target="_blank"
-              href="https://go.hackmit.org/skill-sheets"
-              class="ui pink button">
-              Upload
-            </a>
+            <input type="text"
+              placeholder="A Google Drive, Dropbox, or Website link"
+              ng-model="user.confirmation.resume">
           </div>
 
           <br>
           <br>
 
-          <div class="divided title">Hosting Details</div>
+          <!-- <div class="divided title">Hosting Details</div>
 
           <p>
             Would you like us to find you a host? We can match you with someone so you can catch some zzz's the night before and/or the night of the event!
@@ -207,29 +205,25 @@
           </div>
 
           <br>
-          <br>
+          <br>-->
 
           <div class="divided title">Travel</div>
 
           <div class="field">
             <p>
-              As a reminder, our reimbursement policy is as follows:
+              VTHacks tries to send out buses to schools that send a lot of attendees. If you would like transportation via bus please mark the box below
             </p>
-            <ul>
-              <li> Up to $100 from within Massachusetts </li>
-              <li> Up to $200 from anywhere else in North America </li>
-              <li> Up to $500 from outside North America </li>
-            </ul>
             <p>
-              We’ll also be sending buses free of charge to Princeton, NJ; New York, NY; New Haven, CT; and Providence, RI. Again, we only reimburse the minimum-cost travel path. Head back to the dashboard to read our full travel policy.
+              If we can, we will send a bus your way. We do our best to accomodate but there is no guarantee there will be a bus at your school. We will release
+              a list of schools with buses closer to the hackathon and hopefully there is one close to you. Always feel free to send us an email at <a href="mailto:transportation@vthacks.com">transportation@vthacks.com</a> with any questions.
             </p>
           </div>
 
           <div class="field">
-            <label> Will you be needing travel reimbursement? </label>
+            <label> Would you like a bus at your school? </label>
             <div class="ui checkbox">
-              <input type="checkbox" ng-model="user.confirmation.needsReimbursement">
-              <label> I will be needing travel reimbursement. </label>
+              <input type="checkbox" ng-model="user.confirmation.userNeedsTransportation">
+              <label> Yes please I love public transport </label>
             </div>
           </div>
 
@@ -306,10 +300,11 @@
               <a
                 target="_blank"
                 href="https://go.hackmit.org/travel-receipts"
-                class="ui pink button">
+                class="ui secondary button">
                 Upload Receipt
               </a>
             </div>
+
 
           </div>
 
@@ -318,7 +313,7 @@
 
           <div class="divided title">Legal</div>
 
-          <div class="field">
+          <!-- <div class="field">
             <label> Liability Waiver </label>
             <p>
               <a
@@ -337,54 +332,54 @@
                    name="signatureLiabilityWaiver"
                    placeholder="Your Full Legal Name"
                    ng-model="user.confirmation.signatureLiability">
+          </div> -->
+
+          <div class="field">
+            <label> Code of Conduct </label>
+            <p>
+              It is extremely important to us that attendees follow a set of guidelines to make the event fun for everyone involved. Please read through and make sure you understand what we will be expecting of you.
+            </p>
+            <div class="ui checkbox">
+              <input id="agreeCodeOfConduct"
+              type="checkbox" ng-model="user.confirmation.agreeCodeOfConduct">
+              <label for="agreeCodeOfConduct"> I agree the <a target="_blank" href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf">MLH Code of Conduct</a></label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label> Terms and Conditions and Privacy Policy </label>
+            <div class="ui checkbox">
+              <input id="agreeTermsAndPrivacy"
+              type="checkbox" ng-model="user.confirmation.agreeTermsAndPrivacy">
+              <label for="agreeTermsAndPrivacy">I agree to the terms of both the <a target="_blank" href="https://github.com/MLH/mlh-policies/tree/master/prize-terms-and-conditions">MLH Contest Terms and Conditions</a> and the <a target="_blank" href="https://mlh.io/privacy">MLH Privacy Policy</a>. Please note that you may receive pre and post-event informational e-mails and occasional messages about hackathons from MLH as per the MLH Privacy Policy.</label>
+            </div>
           </div>
 
           <div class="field">
             <label> Photo Release </label>
             <p>
-              <a
-                target="_blank"
-                href="https://go.hackmit.org/photo-release">
-                Photo Release
-              </a>
+              Agreeing to this photo release means if we take photos or photos of you, we can share it with the world.
             </p>
-            <p>
-              Signing this photo release means if we take photos or photos of you, we can share it with the world.
-            </p>
-            <p>
-              By writing my name below, I affirm that I have read and accepted the terms of the photo release above.
-            </p>
-            <input type="text"
-                   name="signaturePhotoRelease"
-                   placeholder="Your Full Legal Name"
-                   ng-model="user.confirmation.signaturePhotoRelease">
-          </div>
-
-          <div class="field">
-            <label> Code of Conduct </label>
-            <p>
-              <a
-                target="_blank"
-                href="https://go.hackmit.org/code-of-conduct">
-                Hacker Code of Conduct
-              </a>
-            </p>
-            <p>
-              It is extremely important to us that attendees follow a set of guidelines to make the event fun for everyone involved. Please read through and make sure you understand what we will be expecting of you.
-            </p>
-            <p>
-              By writing my name below, I affirm that I have read and will abide by the code of conduct detailed above.
-            </p>
-            <input type="text"
-                   name="signatureCodeOfConduct"
-                   placeholder="Your Full Legal Name"
-                   ng-model="user.confirmation.signatureCodeOfConduct">
+            <div class="ui checkbox">
+              <input id="agreePhotoRelease"
+              type="checkbox" ng-model="user.confirmation.agreePhotoRelease">
+              <label for="agreePhotoRelease">I agree the <a target="_blank" href="https://vthacks.com/release">VTHacks Media Release Statement</a></label>
+            </div>
           </div>
 
           <br>
           <br>
 
           <div class="divided title">everything else</div>
+
+          <div class="field">
+            <label> Confirmation of Date </label>
+            <div class="ui checkbox">
+              <input id="agreeConfirmationDate"
+              type="checkbox" ng-model="user.confirmation.agreeConfirmationDate">
+              <label for="agreeConfirmationDate">I understand that the event takes place February 16-18th.</label>
+            </div>
+          </div>
 
           <div class="field">
             <label>
@@ -399,7 +394,7 @@
 
           <div class="field" ng-hide="regIsClosed">
             <button type="submit"
-                    class="fluid ui purple button"
+                    class="fluid ui secondary button"
                     ng-click="submitForm()">
               Submit
             </button>

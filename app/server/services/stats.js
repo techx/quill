@@ -19,10 +19,10 @@ function calculateStats(){
       },
       schools: {},
       year: {
-        '2016': 0,
-        '2017': 0,
         '2018': 0,
         '2019': 0,
+        '2020': 0,
+        '2021': 0,
       }
     },
 
@@ -31,7 +31,7 @@ function calculateStats(){
     submitted: 0,
     admitted: 0,
     confirmed: 0,
-    confirmedMit: 0,
+    confirmedVT: 0,
     declined: 0,
 
     confirmedFemale: 0,
@@ -56,6 +56,7 @@ function calculateStats(){
     },
 
     dietaryRestrictions: {},
+    otherDietaryRestrictions: [],
 
     hostNeededFri: 0,
     hostNeededSat: 0,
@@ -75,7 +76,7 @@ function calculateStats(){
   };
 
   User
-    .find({})
+    .find({ignoreStats: false})
     .exec(function(err, users){
       if (err || !users){
         throw err;
@@ -104,7 +105,7 @@ function calculateStats(){
         newStats.confirmed += user.status.confirmed ? 1 : 0;
 
         // Count confirmed that are mit
-        newStats.confirmedMit += user.status.confirmed && email === "mit.edu" ? 1 : 0;
+        newStats.confirmedVT += user.status.confirmed && email === "vt.edu" ? 1 : 0;
 
         newStats.confirmedFemale += user.status.confirmed && user.profile.gender == "F" ? 1 : 0;
         newStats.confirmedMale += user.status.confirmed && user.profile.gender == "M" ? 1 : 0;
@@ -131,12 +132,14 @@ function calculateStats(){
             admitted: 0,
             confirmed: 0,
             declined: 0,
+            requestTravel: 0,
           };
         }
         newStats.demo.schools[email].submitted += user.status.completedProfile ? 1 : 0;
         newStats.demo.schools[email].admitted += user.status.admitted ? 1 : 0;
         newStats.demo.schools[email].confirmed += user.status.confirmed ? 1 : 0;
         newStats.demo.schools[email].declined += user.status.declined ? 1 : 0;
+        newStats.demo.schools[email].requestTravel += user.confirmation.userNeedsTransportation ? 1 : 0;
 
         // Count graduation years
         if (user.profile.graduationYear){
@@ -173,11 +176,15 @@ function calculateStats(){
         // Dietary restrictions
         if (user.confirmation.dietaryRestrictions){
           user.confirmation.dietaryRestrictions.forEach(function(restriction){
-            if (!newStats.dietaryRestrictions[restriction]){
-              newStats.dietaryRestrictions[restriction] = 0;
-            }
-            newStats.dietaryRestrictions[restriction] += 1;
+              if (!newStats.dietaryRestrictions[restriction]){
+                newStats.dietaryRestrictions[restriction] = 0;
+              }
+              newStats.dietaryRestrictions[restriction] += 1;
           });
+        }
+
+        if (user.confirmation.otherDietaryRestrictions){
+          newStats.otherDietaryRestrictions.push(user.confirmation.otherDietaryRestrictions);
         }
 
         // Count checked in

@@ -28,32 +28,44 @@ angular.module('reg')
         'Vegan': false,
         'Halal': false,
         'Kosher': false,
-        'Nut Allergy': false
+        'Nut Allergy': false,
+        'Other': {
+          'hasOther': false,
+          'description': ''
+        }
       };
 
       if (user.confirmation.dietaryRestrictions){
         user.confirmation.dietaryRestrictions.forEach(function(restriction){
-          if (restriction in dietaryRestrictions){
+          if (restriction in dietaryRestrictions && restriction != 'Other'){
             dietaryRestrictions[restriction] = true;
           }
         });
       }
+      if (user.confirmation.otherDietaryRestrictions != ''){
+          dietaryRestrictions['Other']['hasOther'] = true;
+          dietaryRestrictions['Other']['description'] = user.confirmation.otherDietaryRestrictions;
+      }
 
       $scope.dietaryRestrictions = dietaryRestrictions;
-
       // -------------------------------
 
       function _updateUser(e){
         var confirmation = $scope.user.confirmation;
         // Get the dietary restrictions as an array
         var drs = [];
+        confirmation.otherDietaryRestrictions = '';
+
         Object.keys($scope.dietaryRestrictions).forEach(function(key){
+          if (key == 'Other' && $scope.dietaryRestrictions[key]['hasOther']){
+            confirmation.otherDietaryRestrictions = $scope.dietaryRestrictions[key]['description'];
+          }
           if ($scope.dietaryRestrictions[key]){
             drs.push(key);
           }
         });
         confirmation.dietaryRestrictions = drs;
-
+        
         UserService
           .updateConfirmation(user._id, confirmation)
           .success(function(data){
@@ -102,21 +114,39 @@ angular.module('reg')
                 }
               ]
             },
-            signaturePhotoRelease: {
-              identifier: 'signaturePhotoRelease',
+            agreePhotoRelease: {
+              identifier: 'agreePhotoRelease',
               rules: [
                 {
-                  type: 'empty',
-                  prompt: 'Please type your digital signature.'
+                  type: 'checked',
+                  prompt: 'You must accept the VTHacks Media Release Statement.'
                 }
               ]
             },
-            signatureCodeOfConduct: {
-              identifier: 'signatureCodeOfConduct',
+            agreeCodeOfConduct: {
+              identifier: 'agreeCodeOfConduct',
               rules: [
                 {
-                  type: 'empty',
-                  prompt: 'Please type your digital signature.'
+                  type: 'checked',
+                  prompt: 'You must accept the MLH Code of Conduct'
+                }
+              ]
+            },
+            agreeTermsAndPrivacy: {
+              identifier: 'agreeTermsAndPrivacy',
+              rules: [
+                {
+                  type: 'checked',
+                  prompt: 'You must accept the MLH Terms and Conditions and Privacy Policy'
+                }
+              ]
+            },
+            agreeConfirmationDate: {
+              identifier: 'agreeConfirmationDate',
+              rules: [
+                {
+                  type: 'checked',
+                  prompt: 'You must acknowledge that you understand the date of the event'
                 }
               ]
             },
