@@ -65,8 +65,7 @@ angular.module('reg')
           }
         });
         confirmation.dietaryRestrictions = drs;
-
-        console.log('otherDietaryRestrictions: ' + confirmation.otherDietaryRestrictions);
+        
         UserService
           .updateConfirmation(user._id, confirmation)
           .success(function(data){
