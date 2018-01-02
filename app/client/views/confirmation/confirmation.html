@@ -111,11 +111,19 @@
           </div>
 
           <div class="field">
-            <label> Github </label>
+            <label> GitHub </label>
             <input type="text"
                    name="github"
                    placeholder="https://github.com/foobar"
                    ng-model="user.confirmation.github">
+          </div>
+
+          <div class="field">
+            <label> LinkedIn </label>
+            <input type="text"
+                   name="linkedin"
+                   placeholder="https://linkedin.com/in/foobar"
+                   ng-model="user.confirmation.linkedin">
           </div>
 
           <div class="field">
@@ -342,7 +350,7 @@
             <div class="ui checkbox">
               <input id="agreeCodeOfConduct"
               type="checkbox" ng-model="user.confirmation.agreeCodeOfConduct">
-              <label for="agreeCodeOfConduct"> I agree the <a target="_blank" href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf">MLH Code of Conduct</a></label>
+              <label for="agreeCodeOfConduct"> I agree to the <a target="_blank" href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf">MLH Code of Conduct</a></label>
             </div>
           </div>
 
@@ -377,7 +385,7 @@
             <div class="ui checkbox">
               <input id="agreeConfirmationDate"
               type="checkbox" ng-model="user.confirmation.agreeConfirmationDate">
-              <label for="agreeConfirmationDate">I understand that the event takes place February 16-18th.</label>
+              <label for="agreeConfirmationDate">I understand that the event takes place February 16-18th</label>
             </div>
           </div>
 
