@@ -106,7 +106,9 @@ function calculateStats(){
         newStats.demo.gender[user.profile.gender] += 1;
 
         // Add to ethnicity demographics
-        newStats.demo.ethnicity[user.profile.ethnicity] += 1;
+        if (user.confirmation.ethnicity){
+          newStats.demo.ethnicity[user.confirmation.ethnicity] += 1;
+        }
 
         // Count verified
         newStats.verified += user.verified ? 1 : 0;
