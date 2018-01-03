@@ -17,6 +17,14 @@ function calculateStats(){
         O: 0,
         N: 0
       },
+      ethnicity: {
+        'White': 0,
+        'Hispanic or Latino': 0,
+        'Black or African American': 0,
+        'Native American or American Indian': 0,
+        'Asian or Pacific Islander': 0,
+        'Other': 0
+      },
       schools: {},
       year: {
         '2017': 0,
@@ -96,6 +104,9 @@ function calculateStats(){
 
         // Add to the gender
         newStats.demo.gender[user.profile.gender] += 1;
+
+        // Add to ethnicity demographics
+        newStats.demo.ethnicity[user.profile.ethnicity] += 1;
 
         // Count verified
         newStats.verified += user.verified ? 1 : 0;
