@@ -105,6 +105,15 @@ angular.module('reg')
                 }
               ]
             },
+            ethnicity: {
+              identifier: 'ethnicity',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please select an ethnicity.'
+                }
+              ]
+            },
             signatureLiability: {
               identifier: 'signatureLiabilityWaiver',
               rules: [
