@@ -52,13 +52,6 @@ var profile = {
     }
   },
 
-  ethnicity: {
-    type: String,
-    enum: {
-      values: 'White,Hispanic or Latino,Black or African American,Native American or American Indian,Asian or Pacific Islander,Other'.split(',')
-    }
-  }
-
 };
 
 // Only after confirmed
@@ -66,6 +59,12 @@ var confirmation = {
   phoneNumber: String,
   dietaryRestrictions: [String],
   otherDietaryRestrictions: String,
+  ethnicity: {
+    type: String,
+    enum: {
+      values: 'White,Hispanic or Latino,Black or African American,Native American or American Indian,Asian or Pacific Islander,Other'.split(',')
+    }
+  },
   shirtSize: {
     type: String,
     enum: {
