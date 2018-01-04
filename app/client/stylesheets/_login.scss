@@ -25,6 +25,7 @@
     &.b-lazy.b-loaded{
       height: 100%;
       width: calc(100% + 10px); // centers image
+      margin: 0;
       /* when loaded, harden the image */
       -webkit-filter: none;
       transition: 0.5s -webkit-filter linear;
