@@ -60,7 +60,7 @@ function canRegister(email, password, callback){
         }
       }
       return callback({
-        message: "Not a valid educational email."
+        message: 'Sorry we require a .edu email here. Email us at registration@vthacks.com and we can try to get you registered!'
       }, false);
     });
 
