@@ -1,4 +1,4 @@
-<div class="page" ng-class="{ 'fade-out': fadeOut }">
+<div id="confirmation" class="page" ng-class="{ 'fade-out': fadeOut }">
   <div class="divided title">
     Confirmation
   </div>
@@ -70,6 +70,27 @@
           <br>
           <br>
 
+          <div ng-if="showTransportation">
+            <div class="divided title">Transportation</div>
+
+            <div class="field">
+              <label> Bus </label>
+              <p>
+                Do you want to take the bus from {{user.profile.school}} to UC Irvine?
+              </p>
+              <select
+                name="bus"
+                ng-model="user.confirmation.needsReimbursement"
+                required>
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+              </select>
+            </div>
+
+            <br>
+            <br>
+          </div>
+
           <div class="divided title">Legal</div>
 
           <div class="field">
@@ -137,19 +158,6 @@
 
           <br>
           <br>
-
-          <div class="divided title">everything else</div>
-
-          <div class="field">
-            <label>
-              Additional Notes
-            </label>
-            <p>
-              If there's anything else you need to let us know, tell us here!
-            </p>
-            <textarea
-              ng-model="user.confirmation.notes"></textarea>
-          </div>
 
           <div class="field" ng-hide="regIsClosed">
             <button type="submit"

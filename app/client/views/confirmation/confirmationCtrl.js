@@ -16,6 +16,21 @@ angular.module('reg')
 
       $scope.formatTime = Utils.formatTime;
 
+      $scope.showTransportation = user.profile.school === 'University of California-Los Angeles' ||
+                                  user.profile.school === 'The University of California, Los Angeles' ||
+                                  user.profile.school === 'UCLA' ||
+                                  user.profile.school === 'University of California-San Diego' ||
+                                  user.profile.school === 'The University of California, San Diego' ||
+                                  user.profile.school === 'University of Southern California'
+
+      if ($scope.showTransportation) {
+        if (user.confirmation.needsReimbursement) {
+          $scope.user.confirmation.needsReimbursement = '1';
+        } else {
+          $scope.user.confirmation.needsReimbursement = '0';
+        }
+      }
+
       _setupForm();
 
       $scope.fileName = user._id + "_" + user.profile.name.split(" ").join("_");
