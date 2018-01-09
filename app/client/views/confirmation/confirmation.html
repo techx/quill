@@ -257,8 +257,26 @@
             </div>
           </div>
 
+          <div class="field" style="padding-top: 20px">
+            <p>
+              VTHacks will offer travel reimbursements to students who carpool from schools that are far away from Blacksburg, Virginia.
+              If you would like to apply for a travel reimbursement, please mark the box below and fill out the necessary info.
+            </p>
+            <p>
+              Preference will be given to participants who are able to carpool with other hackers.
+            </p>
+          </div>
+
+          <div class="field">
+            <label> Are you interested in travel reimbursement? </label>
+            <div class="ui checkbox">
+              <input type="checkbox" ng-model="user.confirmation.travel.userWantsReimbursement">
+              <label> Yeah I like driving with people, why not </label>
+            </div>
+          </div>
+
           <div
-            ng-show="user.confirmation.needsReimbursement">
+            ng-show="user.confirmation.travel.userWantsReimbursement">
 
             <div class="ui header">
               Mailing Address
@@ -272,7 +290,7 @@
               <label>Full Name</label>
               <input type="text"
                      name="name"
-                     ng-model="user.confirmation.address.name">
+                     ng-model="user.confirmation.travel.address.name">
             </div>
 
             <div class="field">
@@ -280,7 +298,7 @@
               <input
                 type="text"
                 name="addressLine1"
-                ng-model="user.confirmation.address.line1">
+                ng-model="user.confirmation.travel.address.line1">
             </div>
 
             <div class="field">
@@ -288,7 +306,7 @@
               <input
                 type="text"
                 name="addressLine2"
-                ng-model="user.confirmation.address.line2">
+                ng-model="user.confirmation.travel.address.line2">
             </div>
 
             <div class="four fields">
@@ -297,28 +315,28 @@
                 <input
                   type="text"
                   name="city"
-                  ng-model="user.confirmation.address.city">
+                  ng-model="user.confirmation.travel.address.city">
               </div>
               <div class="field">
                 <label> State/Province/Region </label>
                 <input
                   type="text"
                   name="state"
-                  ng-model="user.confirmation.address.state">
+                  ng-model="user.confirmation.travel.address.state">
               </div>
               <div class="field">
                 <label> ZIP </label>
                 <input
                   type="text"
                   name="zip"
-                  ng-model="user.confirmation.address.zip">
+                  ng-model="user.confirmation.travel.address.zip">
               </div>
               <div class="field">
                 <label> Country </label>
                 <input
                   type="text"
                   name="country"
-                  ng-model="user.confirmation.address.country">
+                  ng-model="user.confirmation.travel.address.country">
               </div>
             </div>
 
@@ -327,15 +345,30 @@
               <p>
                 So that we can process your reimbursement faster, please name your receipt: <strong>{{fileName}}</strong>
               </p>
+              <p>
+                This doesn't need to be done immediately, you can come back and upload it at any time!
+              </p>
               <a
                 target="_blank"
-                href="https://go.hackmit.org/travel-receipts"
+                href="/travel-receipts"
                 class="ui secondary button">
                 Upload Receipt
               </a>
             </div>
 
+            <div class="field">
+              <label> Travel Buddies</label>
+              <p>
+                If you are traveling with someone else who is attenting the hackathon, tell us who!
+                Preference is given to hackers that carpool.
+              </p>
+              <p> Just enter their names seperated by commas (e.g. Crash Override, Zero Cool, ...)</p>
+              <input
+                type="text"
+                name="buddies"
+                ng-model="user.confirmation.travel.buddies"/>
 
+            </div>
           </div>
 
           <br>

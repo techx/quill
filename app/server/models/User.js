@@ -82,23 +82,21 @@ var confirmation = {
   resume: String,
 
   userNeedsTransportation: Boolean,
-  address: {
-    name: String,
-    line1: String,
-    line2: String,
-    city: String,
-    state: String,
-    zip: String,
-    country: String
+  travel: {
+    userWantsReimbursement: Boolean,
+    address: {
+      name: String,
+      line1: String,
+      line2: String,
+      city: String,
+      state: String,
+      zip: String,
+      country: String
+    },
+    buddies: String,
+    receipt: String
   },
-  receipt: String,
-
-  hostNeededFri: Boolean,
-  hostNeededSat: Boolean,
   genderNeutral: Boolean,
-  catFriendly: Boolean,
-  smokingFriendly: Boolean,
-  hostNotes: String,
 
   notes: String,
 
