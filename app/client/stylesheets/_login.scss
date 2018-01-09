@@ -19,11 +19,11 @@
     object-fit: cover;
 
     &.b-lazy{
-      -webkit-filter: blur(10px);
+      filter: blur(10px);
     }
     &.b-lazy.b-loaded{
       /* when loaded, harden the image */
-      -webkit-filter: none;
+      filter: none;
       transition: 0.5s -webkit-filter linear;
     }
   }
