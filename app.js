@@ -42,6 +42,10 @@ app.use('/travel-receipts', (req, res) => {
   res.redirect('https://www.dropbox.com/request/BfzsQZKNE6GFoePSXwsa');
 });
 
+app.use('/resumes', (req, res) => { 
+  res.redirect('https://www.dropbox.com/request/BfzsQZKNE6GFoePSXwsa');
+});
+
 app.use('/sponsorship/vthacks-v-prospectus', express.static(__dirname + '/files/vthacks-v-prospectus.pdf'));
 // Redirect to the pdf
 app.get('/sponsorship/prospectus', (req, res) => {
