@@ -200,7 +200,9 @@ angular.module('reg')
 
         if (requireLogin && !Session.getToken()) {
           event.preventDefault();
-          $state.go('login');
+          $state.go('login', null, {
+            location: 'replace',
+          });
         }
 
         if (requireAdmin && !Session.getUser().admin) {
