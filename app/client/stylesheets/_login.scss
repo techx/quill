@@ -9,24 +9,19 @@
 #login {
   height: 100%;
   width: 100%;
+  background-color: black;
 
   > img.background {
+    width: 100%;
+    height: 100%;
     overflow: hidden;
     position: absolute;
     object-fit: cover;
 
     &.b-lazy{
-      /* This will harden up the edges on the blur*/
-      width: calc(100% + 16px);
-      height: calc(100% + 16px);
-      margin: -16px;
       -webkit-filter: blur(10px);
     }
     &.b-lazy.b-loaded{
-      height: 100%;
-      width: calc(100% + 10px); // centers image
-      margin: 0;
-      transition: margin 2s;
       /* when loaded, harden the image */
       -webkit-filter: none;
       transition: 0.5s -webkit-filter linear;
