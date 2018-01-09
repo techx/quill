@@ -24,7 +24,7 @@
     &.b-lazy.b-loaded{
       /* when loaded, harden the image */
       filter: none;
-      transition: 0.5s -webkit-filter linear;
+      transition: 0.5s filter linear;
     }
   }
 
