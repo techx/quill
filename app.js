@@ -38,9 +38,6 @@ app.use(methodOverride());
 
 app.use('/', express.static(__dirname + '/www/dist'));
 app.use('/register', express.static(__dirname + '/app/client'));
-app.use('/travel-receipts', (req, res) => {
-  res.redirect('https://www.dropbox.com/request/BfzsQZKNE6GFoePSXwsa');
-});
 
 app.use('/sponsorship/vthacks-v-prospectus', express.static(__dirname + '/files/vthacks-v-prospectus.pdf'));
 // Redirect to the pdf
