@@ -26,6 +26,7 @@
       height: 100%;
       width: calc(100% + 10px); // centers image
       margin: 0;
+      transition: margin 2s;
       /* when loaded, harden the image */
       -webkit-filter: none;
       transition: 0.5s -webkit-filter linear;
