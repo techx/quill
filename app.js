@@ -38,8 +38,11 @@ app.use(methodOverride());
 
 app.use('/', express.static(__dirname + '/www/dist'));
 app.use('/register', express.static(__dirname + '/app/client'));
-app.use('/prospectus', express.static(__dirname + '/files/vthacks-v-prospectus.pdf'));
-app.use('/sponsorship/prospectus', express.static(__dirname + '/files/vthacks-v-prospectus.pdf'));
+app.use('/sponsorship/vthacks-v-prospectus', express.static(__dirname + '/files/vthacks-v-prospectus.pdf'));
+// Redirect to the pdf
+app.get('/sponsorship/prospectus', (req, res) => {
+  res.redirect('/sponsorship/vthacks-v-prospectus');
+});
 
 // Routers =====================================================================
 
