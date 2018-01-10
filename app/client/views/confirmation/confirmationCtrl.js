@@ -31,6 +31,14 @@ angular.module('reg')
         }
       }
 
+      $scope.$watch("user.confirmation.needsReimbursement", (value) => {
+        if (value === '1') {
+          $scope.showTransportationMessage = true;
+        } else {
+          $scope.showTransportationMessage = false;
+        }
+      })
+
       _setupForm();
 
       $scope.fileName = user._id + "_" + user.profile.name.split(" ").join("_");
