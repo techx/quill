@@ -31,7 +31,7 @@ angular.module('reg')
         }
       }
 
-      $scope.$watch("user.confirmation.needsReimbursement", (value) => {
+      $scope.$watch("user.confirmation.needsReimbursement", function(value) {
         if (value === '1') {
           $scope.showTransportationMessage = true;
         } else {
