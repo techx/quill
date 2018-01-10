@@ -18,6 +18,16 @@ var multer = require('multer')
 var multerS3 = require('multer-s3')
 var uuidv4 = require('uuid/v4');
 
+const google = require('googleapis')
+const sheets = google.sheets('v4')
+
+const oauth2Client = new google.auth.OAuth2(
+  process.env.GOOGLE_ID,
+  process.env.GOOGLE_SECRET
+)
+
+oauth2Client.credentials.refresh_token = process.env.GOOGLE_REFRESH_TOKEN
+
 module.exports = function(router) {
 
   function getToken(req){
@@ -186,6 +196,94 @@ module.exports = function(router) {
   router.put('/users/:id/confirm', isOwnerOrAdmin, function(req, res){
     var confirmation = req.body.confirmation;
     var id = req.params.id;
+
+    if (confirmation.needsReimbursement) {
+      oauth2Client.refreshAccessToken((err, tokens) => {
+        if (err) return console.error(err)
+
+        oauth2Client.credentials.access_token = tokens.access_token;
+        var sheet = 'default';
+        var sheetId = 197870237;
+
+        // sets which sheet to insert to
+        var email = UserController.getById(id, (error, user) => {
+          if (user.profile.school === 'University of California-Los Angeles' ||
+              user.profile.school === 'The University of California, Los Angeles' ||
+              user.profile.school === 'UCLA') {
+            sheet = 'UCLA'
+            sheetId = 925052505
+          } else if (user.profile.school === 'University of California-San Diego' ||
+                     user.profile.school === 'The University of California, San Diego') {
+            sheet = 'UCSD'
+            sheetId = 698367773
+          } else if (user.profile.school === 'University of Southern California') {
+            sheet = 'USC'
+            sheetId = 723023891
+          }
+
+          // get all emails to check for duplicates
+          sheets.spreadsheets.values.get({
+            spreadsheetId: process.env.GOOGLE_SPREADSHEET_ID,
+            range: sheet + '!B:B',
+            auth: oauth2Client
+          }, (err, result) => {
+            if (err) return console.error(err)
+
+            // add to waitlist iff the user needs transportation and isn't on the waitlist
+            if (confirmation.needsReimbursement === '1' && !result.values.some((value) => {
+              return JSON.stringify(value) === JSON.stringify(user.email.split())
+            })) {
+              sheets.spreadsheets.values.append({
+                spreadsheetId: process.env.GOOGLE_SPREADSHEET_ID,
+                range: sheet + '!A1:B1',
+                valueInputOption: 'RAW',
+                insertDataOption: 'INSERT_ROWS',
+                resource: {
+                  values: [
+                    [new Date().toString(), user.email]
+                  ]
+                },
+                auth: oauth2Client
+              }, (err, response) => {
+                if (err) return console.error(err)
+              })
+            } else if (confirmation.needsReimbursement === '0' && result.values.some((value) => {
+              return JSON.stringify(value) === JSON.stringify(user.email.split())
+            })) {
+              // otherwise remove from waitlist if the user doesn't need transporation but is on the waitlist
+              // first find the index of the row
+              for (var i = 0; i < result.values.length; i++) {
+                if (result.values[i][0] === user.email) {
+                  // when found, send a delete request
+                  sheets.spreadsheets.batchUpdate({
+                    spreadsheetId: process.env.GOOGLE_SPREADSHEET_ID,
+                    resource: {
+                      requests: [
+                        {
+                          deleteDimension: {
+                            range: {
+                              sheetId: sheetId,
+                              dimension: "ROWS",
+                              startIndex: i,
+                              endIndex: i + 1
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    auth: oauth2Client
+                  }, (err, response) => {
+                    if (err) return console.error(err)
+                  })
+
+                  break;
+                }
+              }
+            }
+          })
+        })
+      });
+    }
 
     UserController.updateConfirmationById(id, confirmation, defaultResponse(req, res));
   });
