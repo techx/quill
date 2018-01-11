@@ -174,6 +174,14 @@ angular.module('reg')
           requireLogin: false
         }
       })
+      .state('app.volunteer', {
+        url: "/volunteer",
+        templateUrl: "views/volunteer/volunteer.html",
+        controller: 'VolunteerCtrl',
+        data: {
+          requireLogin: false
+        }
+      })
       .state('reset', {
         url: "/reset/:token",
         templateUrl: "views/reset/reset.html",

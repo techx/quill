@@ -70,6 +70,12 @@
       </a>
       <a
         ui-sref-active="menu-item-active"
+        ui-sref="app.volunteer"
+        class="menu-item">
+        VOLUNTEER
+      </a>
+      <a
+        ui-sref-active="menu-item-active"
         ui-sref="app.sponsor"
         class="menu-item menu-item--sponsor">
         SPONSOR
@@ -167,6 +173,13 @@
         ng-if="isLoggedIn"
         ng-click="onMenuClick()">
         LOGOUT
+      </a>
+      <a
+        ui-sref="app.volunteer"
+        ui-sref-active="menu-item-active"
+        class="menu-item"
+        ng-click="onMenuClick()">
+        VOLUNTEER
       </a>
       <a
         ui-sref="app.sponsor"
