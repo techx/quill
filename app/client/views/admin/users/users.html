@@ -96,7 +96,8 @@
             <th>School</th>
             <th>Grad</th>
             <th>V/S/A/C</th>
-             <th>$</th>
+            <th>$</th>
+            <th></th>
             <th></th>
             <th></th>
           </tr>
@@ -190,7 +191,8 @@
               class="collapsing">
               <button
                 ng-click="goUser($event, user)"
-                class="ui circular mini basic icon button">
+                class="ui circular mini basic icon button"
+                data-tooltip="View User">
                 <i class="linkify icon"></i>
               </button>
             </td>
@@ -216,6 +218,18 @@
                   ng-if="user.status.checkedIn"
                   class="green flag icon"></i>
 
+              </button>
+
+            </td>
+
+            <!-- Hardware Button -->
+            <td
+              class="right aligned collapsing">
+
+              <button
+                class="accept ui circular mini basic icon button"
+                ng-click="">
+                <i class="gamepad icon"></i>
               </button>
 
             </td>
