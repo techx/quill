@@ -91,16 +91,23 @@
             </textarea>
           </div>
 
-          <div class="field"
-               ng-hide="isVTStudent">
-            <p>
+          <div class="grouped fields" ng-hide="isVTStudent">
+            <label>
               <strong>
                 Will you be 18 or older by the date of the hackathon, February 16th, 2018?
               </strong>
-            </p>
-            <div class="ui checkbox">
-              <input type="checkbox" id="adult" ng-model="user.profile.adult">
-              <label for="adult">Yeah I will be</label>
+            </label>
+            <div class="field">
+              <div class="ui radio checkbox">
+                <input type="radio" id="adult" ng-model="user.profile.adult" ng-value="true">
+                <label for="adult">Yes</label>
+              </div>
+            </div>
+            <div class="field">
+              <div class="ui radio checkbox">
+                <input type="radio" id="minor" ng-model="user.profile.adult" ng-value="false">
+                <label for="minor">No</label>
+              </div>
             </div>
           </div>
 
