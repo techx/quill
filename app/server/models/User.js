@@ -342,7 +342,6 @@ schema.statics.getByToken = function(token, callback){
 schema.statics.validateProfile = function(profile, cb){
   return cb(!(
     profile.name.length > 0 &&
-    profile.adult &&
     profile.school.length > 0 &&
     ['2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025'].indexOf(profile.graduationYear) > -1 &&
     ['M', 'F', 'O', 'N'].indexOf(profile.gender) > -1
