@@ -21,6 +21,8 @@ var uuidv4 = require('uuid/v4');
 const google = require('googleapis')
 const sheets = google.sheets('v4')
 
+var hellosign = require('hellosign-sdk')({key: process.env.HELLOSIGN_KEY});
+
 const oauth2Client = new google.auth.OAuth2(
   process.env.GOOGLE_ID,
   process.env.GOOGLE_SECRET
@@ -166,6 +168,37 @@ module.exports = function(router) {
   router.get('/users/stats', isAdmin, function(req, res){
     UserController.getStats(defaultResponse(req, res));
   });
+
+  router.get('/users/waiver', (req, res) => {
+    var token = getToken(req);
+    UserController.getByToken(token, function(err, user){
+      if (err) {
+        return res.status(500).send(err);
+      }
+      
+      email = user.email;
+
+      hellosign.signatureRequest.list({
+        query: email
+      })
+      .then(function(response){
+        if(response.signature_requests.length) {
+          signatureExists = response.signature_requests[0].signatures.find(signature => signature.signer_email_address === email)
+          if(signatureExists) {
+            res.send(200);
+          } else {
+            res.send(404);
+          }
+        } else {
+          res.send(404)
+        }
+        
+      })
+      .catch(function(err){
+        return res.status(500).send(err);
+      });
+    });
+  })
 
   /**
    * [OWNER/ADMIN]
