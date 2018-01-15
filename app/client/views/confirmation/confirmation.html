@@ -99,64 +99,24 @@
           <div class="field">
             <label> Liability Waiver </label>
             <p>
-              <a
-                target="_blank"
-                href="https://go.hackmit.org/liability-waiver">
-                Liability Waiver
-              </a>
+              For legal reasons, our university asks that you read and accept the terms of our liability waiver.
             </p>
-            <p>
-              For legal reasons, our university asks that you read and accept the terms of our liability waiver. Again, as we mentioned in the original application - you <strong> must </strong> be 18 years or older or an UCI undergraduate by the day of the event, or <strong> we will refuse you admission at the door. We will be checking ID. </strong>
+            <p ng-if="!hasSignedLiability">
+              <strong>Please <a href="https://app.hellosign.com/s/4bf9f65f" target="_blank">click here</a> to begin the waiver signing process.</strong> You will be sent the waiver documents through email and have until the day of the event, February 2, to sign it.
             </p>
-            <p>
-              By writing my name below, I affirm that I have read and accepted the terms of the liability waiver above, and will be either an UCI undergraduate or 18 years or older at the time of the event.
+            <p ng-if="hasSignedLiability">
+              Our records show that you have signed the waiver documents. We look forward to seeing you at HackUCI!
             </p>
-            <input type="text"
-                   name="signatureLiabilityWaiver"
-                   placeholder="Your Full Legal Name"
-                   ng-model="user.confirmation.signatureLiability">
-          </div>
-
-          <div class="field">
-            <label> Photo Release </label>
-            <p>
-              <a
-                target="_blank"
-                href="https://go.hackmit.org/photo-release">
-                Photo Release
-              </a>
-            </p>
-            <p>
-              Signing this photo release means if we take photos or photos of you, we can share it with the world.
-            </p>
-            <p>
-              By writing my name below, I affirm that I have read and accepted the terms of the photo release above.
-            </p>
-            <input type="text"
-                   name="signaturePhotoRelease"
-                   placeholder="Your Full Legal Name"
-                   ng-model="user.confirmation.signaturePhotoRelease">
           </div>
 
           <div class="field">
             <label> Code of Conduct </label>
             <p>
-              <a
-                target="_blank"
-                href="https://go.hackmit.org/code-of-conduct">
-                Hacker Code of Conduct
-              </a>
-            </p>
-            <p>
               It is extremely important to us that attendees follow a set of guidelines to make the event fun for everyone involved. Please read through and make sure you understand what we will be expecting of you.
             </p>
             <p>
-              By writing my name below, I affirm that I have read and will abide by the code of conduct detailed above.
+              By clicking submit below, I affirm that I have read and will abide by the <a href="../assets/code_of_conduct.pdf" target="_blank">Code of Conduct</a>.
             </p>
-            <input type="text"
-                   name="signatureCodeOfConduct"
-                   placeholder="Your Full Legal Name"
-                   ng-model="user.confirmation.signatureCodeOfConduct">
           </div>
 
           <br>
