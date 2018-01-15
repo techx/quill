@@ -39,6 +39,10 @@ angular.module('reg')
         }
       })
 
+      if (user.confirmation.signatureLiability && user.confirmation.signatureLiability !== '') {
+        $scope.hasSignedLiability = true;
+      }
+
       _setupForm();
 
       $scope.fileName = user._id + "_" + user.profile.name.split(" ").join("_");

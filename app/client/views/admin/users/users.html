@@ -100,8 +100,8 @@
             <th>School</th>
             <th>Grad</th>
             <th>V/S/A/C</th>
-            <th>Signed</th>
-            <th>Bus</th>
+            <th>S</th>
+            <th>B</th>
             <th></th>
             <th></th>
           </tr>
@@ -177,22 +177,14 @@
 
             </td>
 
-            <!-- Host -->
+            <!-- Signed waiver documents -->
             <td
               class="collapsing">
 
               <span ng-if="user.status.confirmed">
                 <i
-                  ng-if="user.confirmation.hostNeededFri"
-                  class="home icon">
-                </i>
-                <i
-                  ng-if="!user.confirmation.hostNeededFri && user.confirmation.hostNeededSat"
-                  class="no icon">
-                </i>
-                <i
-                  ng-if="user.confirmation.hostNeededSat"
-                  class="home icon">
+                  ng-if="user.confirmation.signatureLiability"
+                  class="fa-pencil-square-o icon">
                 </i>
               </span>
 
