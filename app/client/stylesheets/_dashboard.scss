@@ -67,10 +67,13 @@
   }
 
   .description {
-    margin-bottom: 16px;
+    margin: 16px 0;
     .markdown {
-      text-align: left;
+      text-align: center;
       margin-bottom: 24px;
+      p {
+        text-align: center;
+      }
     }
   }
 }

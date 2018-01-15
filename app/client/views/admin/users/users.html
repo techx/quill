@@ -100,8 +100,8 @@
             <th>School</th>
             <th>Grad</th>
             <th>V/S/A/C</th>
-            <th>Host</th>
-            <th>$</th>
+            <th>Signed</th>
+            <th>Bus</th>
             <th></th>
             <th></th>
           </tr>
@@ -202,12 +202,8 @@
               class="collapsing">
               <span ng-if="user.status.confirmed">
                 <i
-                  ng-if="user.confirmation.needsReimbursement && !user.status.reimbursementGiven"
-                  class="red money icon">
-                </i>
-                <i
-                  ng-if="user.confirmation.needsReimbursement && user.status.reimbursementGiven"
-                  class="green money icon">
+                  ng-if="user.confirmation.needsReimbursement"
+                  class="bus icon">
                 </i>
               </span>
             </td>
