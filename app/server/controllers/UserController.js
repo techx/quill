@@ -664,6 +664,25 @@ UserController.admitUser = function(id, user, callback){
   });
 };
 
+UserController.admitUserByEmail = function(email, user, callback){
+  Settings.getRegistrationTimes(function(err, times){
+    User
+      .findOneAndUpdate({
+        email: email,
+        verified: true
+      },{
+        $set: {
+          'status.admitted': true,
+          'status.admittedBy': user.email,
+          'status.confirmBy': times.timeConfirm
+        }
+      }, {
+        new: true
+      },
+      callback);
+  });
+};
+
 /**
  * [ADMIN ONLY]
  *
@@ -732,6 +751,10 @@ UserController.sendAcceptanceEmailById = function(id, callback) {
        return callback(err, user);
    });
  };
+
+ UserController.sendAcceptanceEmailByEmail = function(email, callback) {
+    Mailer.sendAcceptanceEmail(email, callback);
+};
 
 UserController.getStats = function(callback){
   return callback(null, Stats.getUserStats());
