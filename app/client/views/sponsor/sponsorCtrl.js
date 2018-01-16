@@ -21,6 +21,6 @@ angular.module('reg')
 		}
 
 		$scope.sponsor = function() {
-			$window.open("mailto:hackuci@gmail.com?subject=Sponsor Inquiry", "_blank");
+			$window.open("https://squareup.com/store/hackuci", "_blank");
 		}
 	}]);
