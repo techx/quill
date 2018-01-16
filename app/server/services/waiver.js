@@ -13,7 +13,7 @@ function updateWaiverStatus() {
         var email = signature.signatures[0].signer_email_address;
 
         User.findOne({
-          'email': email,
+          'email': email.toLowerCase(),
           'status.admitted': true
         }).exec(function(err, user) {
           if (err || !user){
