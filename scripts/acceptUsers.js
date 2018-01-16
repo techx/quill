@@ -12,8 +12,8 @@ var user = { email: process.env.ADMIN_EMAIL };
  */
 var userArray = require('fs').readFileSync('accepted.txt').toString().split('\n');
 var count = 0;
-userArray.forEach(function (id) {
-  UserController.admitUser(id, user, function() {
+userArray.forEach(function (email) {
+  UserController.admitUserByEmail(email, user, function() {
     count += 1;
     if (count == userArray.length) {
       console.log("Done");
@@ -22,8 +22,8 @@ userArray.forEach(function (id) {
   });
 });
 
-userArray.forEach(function (id) {
-  UserController.sendAcceptanceEmailById(id, function() {
+userArray.forEach(function (email) {
+  UserController.sendAcceptanceEmailByEmail(email, function() {
     count += 1;
     if (count == userArray.length) {
       console.log("Done");

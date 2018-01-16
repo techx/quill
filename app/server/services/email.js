@@ -1,3 +1,5 @@
+var moment = require('moment');
+
 var path = require('path');
 var nodemailer = require('nodemailer');
 var smtpTransport = require('nodemailer-smtp-transport');
@@ -202,19 +204,22 @@ controller.sendPasswordChangedEmail = function(email, callback){
 
 /**
  * Send the acceptance email to the participant.
- * @param  {[type]}   email    [description]
- * @param  {Function} callback [description]
+ * @param  {[type]}   email     [description]
+ * @param  {[type]}   confirmBy [description]
+ * @param  {Function} callback  [description]
  */
-controller.sendAcceptanceEmail = function(email, callback) {
+controller.sendAcceptanceEmail = function(email, confirmBy, callback) {
 
   var options = {
     to: email,
-    subject: "[HackUCI 2018] - Congrats! You're coming to HackUCI 2018!"
+    subject: "[HackUCI 2018] - Congratulations! You're in!"
   };
 
   var locals = {
-    title: 'Welcome to HackUCI 2018',
-    body: 'Please sign into your dashboard to confirm your spot.',
+    title: 'Welcome to HackUCI 2018!',
+    description: 'Congratulations on getting accepted into HackUCI 2018! We are excited to have you at Orange County\'s largest hackathon. Please sign into your dashboard to confirm or decline your spot by ' + moment(confirmBy).format('MMMM D, YYYY h:mm A') + '. We look forward to seeing you!',
+    actionUrl: ROOT_URL + '/dashboard',
+    actionName: "Dashboard"
   };
 
   /**
@@ -223,7 +228,7 @@ controller.sendAcceptanceEmail = function(email, callback) {
    *   verifyUrl: the url that the user must visit to verify their account
    * }
    */
-  sendOne('email-basic', options, locals, function(err, info) {
+  sendOne('email-link-action', options, locals, function(err, info) {
     if (err) {
       console.log(err);
     }
