@@ -230,10 +230,10 @@ controller.sendAcceptanceEmail = function(email, confirmBy, callback) {
    */
   sendOne('email-link-action', options, locals, function(err, info) {
     if (err) {
-      console.log(err);
+      console.log('mailer error: ' + err);
     }
     if (info) {
-      console.log(info.message);
+      console.log('mailer info: ' + info.message);
     }
     if (callback) {
       callback(err, info);

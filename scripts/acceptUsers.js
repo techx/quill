@@ -1,4 +1,5 @@
 require('dotenv').load();
+const delay         = require('delay');
 var mongoose        = require('mongoose');
 var database        = process.env.DATABASE || "";
 var jwt             = require('jsonwebtoken');
@@ -12,18 +13,18 @@ var user = { email: process.env.ADMIN_EMAIL };
  */
 var userArray = require('fs').readFileSync('accepted.txt').toString().split('\n');
 var count = 0;
-userArray.forEach(function (email) {
+userArray.forEach(function (email, i) {
   UserController.admitUserByEmail(email, user, function() {
     // send one email a second as to not overload the sending api
-    setTimeout(() => {
-      UserController.sendAcceptanceEmailByEmail(email, function() {
-        console.log(email)
+    delay(500 * i, email).then((e) => {
+      UserController.sendAcceptanceEmailByEmail(e, function() {
+        console.log('processed: ' + e)
         count += 1;
         if (count == userArray.length) {
           console.log("Done in one second");
           setTimeout(() => process.exit(0), 1000);
         }
       });
-    }, 500)
+    })
   });
 });
