@@ -18,8 +18,8 @@ userArray.forEach(function (email) {
   UserController.admitUserByEmail(email, user, function() {
     // send one email a second as to not overload the sending api
     setTimeout(() => {
-      console.log(email)
       UserController.sendAcceptanceEmailByEmail(email, function() {
+        console.log(email)
         count += 1;
         if (count == userArray.length) {
           console.log("Done in one second");
