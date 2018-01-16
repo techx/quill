@@ -677,8 +677,7 @@ UserController.admitUserByEmail = function(email, user, callback){
   Settings.getRegistrationTimes(function(err, times){
     User
       .findOneAndUpdate({
-        email: email,
-        verified: true
+        email: email
       },{
         $set: {
           'status.admitted': true,
@@ -773,8 +772,7 @@ UserController.sendAcceptanceEmailByEmail = function(email, callback) {
    email = email.toLowerCase();
    User.findOne(
      {
-       email: email,
-       verified: true
+       email: email
      },
      function(err, user) {
        if (err || !user) {

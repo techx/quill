@@ -1,5 +1,3 @@
-import { setTimeout } from 'timers';
-
 require('dotenv').load();
 var mongoose        = require('mongoose');
 var database        = process.env.DATABASE || "";
