@@ -149,6 +149,31 @@ angular.module('reg')
 
       };
 
+      $scope.markWaiverAsSigned = function($event, user, index) {
+        $event.stopPropagation();
+
+        if (!user.confirmation.signatureLiability){
+          swal({
+            title: "Whoa, wait a minute!",
+            text: "You are about to mark " + user.profile.name + "'s waiver documents as signed!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, mark them as signed.",
+            closeOnConfirm: false
+            },
+            function(){
+              UserService
+                .markWaiverAsSigned(user._id)
+                .success(function(user){
+                  $scope.users[index] = user;
+                  swal("Marked As Signed", user.profile.name + '\'s waiver documents have been marked as signed.', "success");
+                });
+            }
+          );
+        }
+      }
+
       function formatTime(time){
         if (time) {
           return moment(time).format('MMMM Do YYYY, h:mm:ss a');

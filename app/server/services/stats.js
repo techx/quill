@@ -35,6 +35,8 @@ function calculateStats(){
     confirmed: 0,
     confirmedUCI: 0,
     declined: 0,
+    signedWaiver: 0,
+    requireTransportation: 0,
 
     confirmedFemale: 0,
     confirmedMale: 0,
@@ -96,8 +98,8 @@ function calculateStats(){
         // Count declined
         newStats.declined += user.status.declined ? 1 : 0;
 
-        // Count the number of people who need reimbursements
-        newStats.reimbursementTotal += user.confirmation.needsReimbursement ? 1 : 0;
+        // Count the number of people who need transportation
+        newStats.requireTransportation += user.confirmation.needsReimbursement ? 1 : 0;
 
         // Count the number of people who still need to be reimbursed
         newStats.reimbursementMissing += user.confirmation.needsReimbursement &&
@@ -105,6 +107,8 @@ function calculateStats(){
 
         // Count the number of people who want hardware
         newStats.wantsHardware += user.confirmation.wantsHardware ? 1 : 0;
+
+        newStats.signedWaiver += user.confirmation.signatureLiability && user.confirmation.signatureLiability !== "" ? 1 : 0;
 
         // Count schools
         if (!newStats.demo.schools[email]){

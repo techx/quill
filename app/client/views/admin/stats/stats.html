@@ -122,6 +122,30 @@
           </div>
         </div>
 
+        <div class="ui divider"></div>
+
+        <div
+          class="item">
+          <i class="money icon"></i>
+          <div class="content">
+            <strong>
+              Require Transportation
+            </strong> :
+            {{stats.requireTransportation}}
+          </div>
+        </div>
+
+        <div
+          class="item">
+          <i class="fa-pencil-square-o icon"></i>
+          <div class="content">
+            <strong>
+              Signed Waiver
+            </strong> :
+            {{stats.signedWaiver}} ({{stats.signedWaiver / stats.confirmed * 100 | number: 1}}%)
+          </div>
+        </div>
+
       </div>
     </div>
   </div>

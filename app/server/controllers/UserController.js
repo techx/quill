@@ -3,6 +3,7 @@ var User = require('../models/User');
 var Settings = require('../models/Settings');
 var Mailer = require('../services/email');
 var Stats = require('../services/stats');
+var Waiver = require('../services/waiver');
 
 var validator = require('validator');
 var moment = require('moment');
@@ -667,6 +668,32 @@ UserController.admitUser = function(id, user, callback){
 /**
  * [ADMIN ONLY]
  *
+ * Admit a user.
+ * @param  {String}   email    Email of the admit
+ * @param  {String}   user     User doing the admitting
+ * @param  {Function} callback args(err, user)
+ */
+UserController.admitUserByEmail = function(email, user, callback){
+  Settings.getRegistrationTimes(function(err, times){
+    User
+      .findOneAndUpdate({
+        email: email
+      },{
+        $set: {
+          'status.admitted': true,
+          'status.admittedBy': user.email,
+          'status.confirmBy': times.timeConfirm
+        }
+      }, {
+        new: true
+      },
+      callback);
+  });
+};
+
+/**
+ * [ADMIN ONLY]
+ *
  * Check in a user.
  * @param  {String}   userId   User id of the user getting checked in.
  * @param  {String}   user     User checking in this person.
@@ -732,6 +759,44 @@ UserController.sendAcceptanceEmailById = function(id, callback) {
        return callback(err, user);
    });
  };
+
+ /**
+ * [ADMIN ONLY]
+ */
+ /**
+  * Send the acceptance email to the participant by their email.
+  * @param  {[type]}   ID    [description]
+  * @param  {Function} callback [description]
+  */
+UserController.sendAcceptanceEmailByEmail = function(email, callback) {
+   email = email.toLowerCase();
+   User.findOne(
+     {
+       email: email
+     },
+     function(err, user) {
+       if (err || !user) {
+         return callback(err);
+       }
+       Mailer.sendAcceptanceEmail(email, user.status.confirmBy, callback);
+       return callback(err, user);
+   });
+ };
+
+UserController.markWaiverAsSigned = function(email, callback) {
+  User.findOneAndUpdate({
+    'email': email,
+    'status.admitted': true
+  },{
+    $set: {
+      'lastUpdated': Date.now(),
+      'confirmation.signatureLiability': Date.now()
+    }
+  }, {
+    new: true
+  },
+  callback);
+};
 
 UserController.getStats = function(callback){
   return callback(null, Stats.getUserStats());

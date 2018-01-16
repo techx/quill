@@ -12,22 +12,18 @@ var user = { email: process.env.ADMIN_EMAIL };
  */
 var userArray = require('fs').readFileSync('accepted.txt').toString().split('\n');
 var count = 0;
-userArray.forEach(function (id) {
-  UserController.admitUser(id, user, function() {
-    count += 1;
-    if (count == userArray.length) {
-      console.log("Done");
-      process.exit(0);
-    }
-  });
-});
-
-userArray.forEach(function (id) {
-  UserController.sendAcceptanceEmailById(id, function() {
-    count += 1;
-    if (count == userArray.length) {
-      console.log("Done");
-      process.exit(0);
-    }
+userArray.forEach(function (email) {
+  UserController.admitUserByEmail(email, user, function() {
+    // send one email a second as to not overload the sending api
+    setTimeout(() => {
+      UserController.sendAcceptanceEmailByEmail(email, function() {
+        console.log(email)
+        count += 1;
+        if (count == userArray.length) {
+          console.log("Done in one second");
+          setTimeout(() => process.exit(0), 1000);
+        }
+      });
+    }, 500)
   });
 });
