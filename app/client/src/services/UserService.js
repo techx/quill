@@ -89,6 +89,10 @@ angular.module('reg')
         return $http.post(base + id + '/checkout');
       },
 
+      markWaiverAsSigned: function(id){
+        return $http.post(base + id + '/sign');
+      },
+
     };
   }
   ]);

@@ -417,6 +417,16 @@ module.exports = function(router) {
     UserController.checkOutById(id, user, defaultResponse(req, res));
   });
 
+  /**
+   * Mark a user's waiver documents as signed.
+   */
+  router.post('/users/:id/sign', isAdmin, function(req, res){
+    var id = req.params.id;
+    UserController.getById(id, (error, user) => {
+       UserController.markWaiverAsSigned(user.email, defaultResponse(req, res));
+    });
+  });
+
 
   // ---------------------------------------------
   // Settings [ADMIN ONLY!]

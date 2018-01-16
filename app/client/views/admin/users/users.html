@@ -232,6 +232,19 @@
 
               </button>
 
+              <button
+                class="ui circular mini basic green icon button"
+                ng-click="markWaiverAsSigned($event, user, $index)"
+                ng-if="!user.confirmation.signatureLiability">
+                <i class="fa-pencil-square-o icon"></i>
+              </button>
+
+              <button
+                class="ui circular mini basic green icon disabled button"
+                ng-if="user.confirmation.signatureLiability">
+                <i class="fa-pencil-square-o icon"></i>
+              </button>
+
             </td>
           </tr>
         </tbody>
