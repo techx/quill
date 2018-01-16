@@ -31,7 +31,7 @@ app.use(bodyParser.json());
 
 app.use(methodOverride());
 
-app.use(express.static(__dirname + '/app/client'));
+app.use('/register', express.static(__dirname + '/app/client'));
 
 // Routers =====================================================================
 
