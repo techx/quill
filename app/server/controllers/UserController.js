@@ -355,7 +355,6 @@ UserController.updateConfirmationById = function (id, confirmation, callback){
     // You can only confirm acceptance if you're admitted and haven't declined.
     User.findOneAndUpdate({
       '_id': id,
-      'verified': true,
       'status.admitted': true,
       'status.declined': {$ne: true}
     },
