@@ -32,6 +32,15 @@ if(EMAIL_HEADER_IMAGE.indexOf("https") == -1){
 
 var NODE_ENV = process.env.NODE_ENV;
 
+var aws = require('aws-sdk');
+aws.config.update({
+  region: 'us-west-1',
+  accessKeyId: process.env.AWS_ACCESS,
+  secretAccessKey: process.env.AWS_SECRET
+});
+
+var ses = new AWS.SES({apiVersion: '2010-12-01'});
+
 var options = {
   host: EMAIL_HOST,
   port: EMAIL_PORT,
@@ -70,17 +79,47 @@ function sendOne(templateName, options, data, callback){
         return callback(err);
       }
 
-      transporter.sendMail({
-        from: EMAIL_CONTACT,
-        to: options.to,
-        subject: options.subject,
-        html: html,
-        text: text
-      }, function(err, info){
-        if(callback){
-          callback(err, info);
-        }
-      });
+      var params = {
+        Destination: { /* required */
+          ToAddresses: [
+            options.to,
+          ]
+        },
+        Message: { /* required */
+          Body: { /* required */
+            Html: {
+             Charset: "UTF-8",
+             Data: html
+            },
+            Text: {
+             Charset: "UTF-8",
+             Data: text
+            }
+           },
+           Subject: {
+            Charset: 'UTF-8',
+            Data: options.subject
+           }
+          },
+        Source: EMAIL_CONTACT, /* required */
+        ReplyToAddresses: [
+          EMAIL_CONTACT,
+        ],
+      };
+
+      ses.sendEmail(params, callback);
+
+      // transporter.sendMail({
+      //   from: EMAIL_CONTACT,
+      //   to: options.to,
+      //   subject: options.subject,
+      //   html: html,
+      //   text: text
+      // }, function(err, info){
+      //   if(callback){
+      //     callback(err, info);
+      //   }
+      // });
     });
   });
 }
