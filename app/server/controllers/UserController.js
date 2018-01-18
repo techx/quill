@@ -798,7 +798,7 @@ UserController.sendAcceptanceEmailByEmail = function(email, callback) {
      },
      function(err, user) {
        if (err || !user) {
-         return callback(err);
+         return callback(err || 'no user');
        }
        Mailer.sendAcceptanceEmail(email, user.status.confirmBy, callback);
    });
