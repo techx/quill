@@ -46,9 +46,9 @@ function updateWaiverStatus() {
   });
 }
 
-// Calculate once every five minutes.
+// Fetch new signature list once every 30 seconds.
 updateWaiverStatus();
-setInterval(updateWaiverStatus, 300000);
+setInterval(updateWaiverStatus, 30000);
 
 var Waiver = {}
 

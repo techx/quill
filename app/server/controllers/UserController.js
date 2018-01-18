@@ -367,8 +367,30 @@ UserController.updateConfirmationById = function (id, confirmation, callback){
         }
       }, {
         new: true
-      },
-      callback);
+      }, function(err, user){
+        if (!err && typeof user.confirmation.signatureLiability === 'undefined') {
+          Mailer.sendWaiverEmail(user.email, (err, info) => {
+            if (!err) {
+              User.findOneAndUpdate({
+                '_id': id
+              },
+              {
+                $set: {
+                  'lastUpdated': Date.now(),
+                  'confirmation.signatureLiability': ''
+                }
+              }, {
+                new: true
+              },
+              callback);
+            } else {
+              return callback(err, user);
+            }
+          });
+        } else {
+          return callback(err, user);
+        }
+      });
 
   });
 };
@@ -776,10 +798,9 @@ UserController.sendAcceptanceEmailByEmail = function(email, callback) {
      },
      function(err, user) {
        if (err || !user) {
-         return callback(err);
+         return callback(err || 'no user');
        }
        Mailer.sendAcceptanceEmail(email, user.status.confirmBy, callback);
-       return callback(err, user);
    });
  };
 

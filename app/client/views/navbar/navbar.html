@@ -63,12 +63,12 @@
         ng-if="currentUser.verified && currentUser.admin">
         ADMIN
       </a>
-      <a
+      <!--a
         ui-sref-active="menu-item-active"
         ui-sref="app.volunteer"
         class="menu-item">
         VOLUNTEER
-      </a>
+      </a-->
       <a class="menu-item"
         ng-click="logout()"
         ng-if="isLoggedIn">
@@ -168,13 +168,13 @@
         ng-click="onMenuClick()">
         ADMIN
       </a>
-      <a
+      <!--a
         ui-sref="app.volunteer"
         ui-sref-active="menu-item-active"
         class="menu-item"
         ng-click="onMenuClick()">
         VOLUNTEER
-      </a>
+      </a-->
       <a class="menu-item"
         ng-click="logout()"
         ng-if="isLoggedIn"

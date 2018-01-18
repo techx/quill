@@ -32,6 +32,15 @@ if(EMAIL_HEADER_IMAGE.indexOf("https") == -1){
 
 var NODE_ENV = process.env.NODE_ENV;
 
+var aws = require('aws-sdk');
+aws.config.update({
+  region: 'us-west-2',
+  accessKeyId: process.env.AWS_EMAIL_ACCESS,
+  secretAccessKey: process.env.AWS_EMAIL_SECRET
+});
+
+var ses = new aws.SES({apiVersion: '2010-12-01'});
+
 var options = {
   host: EMAIL_HOST,
   port: EMAIL_PORT,
@@ -70,17 +79,46 @@ function sendOne(templateName, options, data, callback){
         return callback(err);
       }
 
-      transporter.sendMail({
-        from: EMAIL_CONTACT,
-        to: options.to,
-        subject: options.subject,
-        html: html,
-        text: text
-      }, function(err, info){
-        if(callback){
-          callback(err, info);
-        }
+      var params = {
+        Destination: { /* required */
+          ToAddresses: [
+            options.to,
+          ]
+        },
+        Message: { /* required */
+          Body: { /* required */
+            Html: {
+             Charset: "UTF-8",
+             Data: html
+            },
+            Text: {
+             Charset: "UTF-8",
+             Data: text
+            }
+           },
+           Subject: {
+            Charset: 'UTF-8',
+            Data: options.subject
+           }
+          },
+        Source: EMAIL_CONTACT, /* required */
+      };
+
+      ses.sendEmail(params, (err, data) => {
+        callback(err, data);
       });
+
+      // transporter.sendMail({
+      //   from: EMAIL_CONTACT,
+      //   to: options.to,
+      //   subject: options.subject,
+      //   html: html,
+      //   text: text
+      // }, function(err, info){
+      //   if(callback){
+      //     callback(err, info);
+      //   }
+      // });
     });
   });
 }
@@ -218,8 +256,47 @@ controller.sendAcceptanceEmail = function(email, confirmBy, callback) {
   var locals = {
     title: 'Welcome to HackUCI 2018!',
     description: 'Congratulations on getting accepted into HackUCI 2018! We are excited to have you at Orange County\'s largest hackathon. Please sign into your dashboard to confirm or decline your spot by ' + moment(confirmBy).format('MMMM D, YYYY h:mm A') + '. We look forward to seeing you!',
-    actionUrl: ROOT_URL + '/dashboard',
+    actionUrl: 'https://www.hackuci.com/dashboard',
     actionName: "Dashboard"
+  };
+
+  /**
+   * Eamil-verify takes a few template values:
+   * {
+   *   verifyUrl: the url that the user must visit to verify their account
+   * }
+   */
+  sendOne('email-link-action', options, locals, function(err, info) {
+    if (err) {
+      console.log('mailer error: ' + err);
+    }
+    if (info) {
+      console.log('mailer info: ' + info.message);
+    }
+    if (callback) {
+      callback(err, info);
+    }
+  });
+
+};
+
+/**
+ * Send the waiver email to the participant.
+ * @param  {[type]}   email     [description]
+ * @param  {Function} callback  [description]
+ */
+controller.sendWaiverEmail = function(email, callback) {
+
+  var options = {
+    to: email,
+    subject: "[ACTION REQUIRED] Sign Your HackUCI Waiver Documents"
+  };
+
+  var locals = {
+    title: 'Welcome to HackUCI 2018!',
+    description: 'Congratulations on getting accepted into HackUCI 2018! Please sign our waiver documents below with this email address (' + email + '). Thank you for helping us save trees, and we look forward to seeing you!',
+    actionUrl: 'https://app.hellosign.com/s/4bf9f65f',
+    actionName: "Sign Waiver"
   };
 
   /**
