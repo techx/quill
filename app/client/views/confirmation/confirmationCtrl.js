@@ -43,6 +43,8 @@ angular.module('reg')
         $scope.hasSignedLiability = true;
       }
 
+      $scope.showButtonLoading = false;
+
       _setupForm();
 
       $scope.fileName = user._id + "_" + user.profile.name.split(" ").join("_");
@@ -71,6 +73,7 @@ angular.module('reg')
       // -------------------------------
 
       function _updateUser(e){
+        $scope.showButtonLoading = true;
         var confirmation = $scope.user.confirmation;
         // Get the dietary restrictions as an array
         var drs = [];
@@ -84,6 +87,7 @@ angular.module('reg')
         UserService
           .updateConfirmation(user._id, confirmation)
           .success(function(data){
+            $scope.showButtonLoading = false;
             sweetAlert({
               title: "Woo!",
               text: "You're confirmed!",
@@ -94,6 +98,7 @@ angular.module('reg')
             });
           })
           .error(function(res){
+            $scope.showButtonLoading = false;
             sweetAlert("Uh oh!", "Something went wrong.", "error");
           });
       }
