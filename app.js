@@ -19,6 +19,9 @@ var adminConfig     = require('./config/admin');
 
 var app             = express();
 
+// Determine app's base dir
+global.__basedir = __dirname;
+
 // Connect to mongodb
 mongoose.connect(database);
 
