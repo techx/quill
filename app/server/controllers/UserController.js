@@ -368,7 +368,7 @@ UserController.updateConfirmationById = function (id, confirmation, callback){
       }, {
         new: true
       }, function(err, user){
-        if (!err && typeof user.confirmation.signatureLiability === 'undefined') {
+        if (!err && user && typeof user.confirmation.signatureLiability === 'undefined') {
           Mailer.sendWaiverEmail(user.email, (err, info) => {
             if (!err) {
               User.findOneAndUpdate({
