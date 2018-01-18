@@ -242,4 +242,43 @@ controller.sendAcceptanceEmail = function(email, confirmBy, callback) {
 
 };
 
+/**
+ * Send the waiver email to the participant.
+ * @param  {[type]}   email     [description]
+ * @param  {Function} callback  [description]
+ */
+controller.sendWaiverEmail = function(email, callback) {
+
+  var options = {
+    to: email,
+    subject: "[ACTION REQUIRED] Sign Your HackUCI Waiver Documents"
+  };
+
+  var locals = {
+    title: 'Welcome to HackUCI 2018!',
+    description: 'Congratulations on getting accepted into HackUCI 2018! Please sign our waiver documents below with this email address (' + email + '). Thank you for helping us save trees, and we look forward to seeing you!',
+    actionUrl: 'https://app.hellosign.com/s/4bf9f65f',
+    actionName: "Sign Waiver"
+  };
+
+  /**
+   * Eamil-verify takes a few template values:
+   * {
+   *   verifyUrl: the url that the user must visit to verify their account
+   * }
+   */
+  sendOne('email-link-action', options, locals, function(err, info) {
+    if (err) {
+      console.log(err);
+    }
+    if (info) {
+      console.log(info.message);
+    }
+    if (callback) {
+      callback(err, info);
+    }
+  });
+
+};
+
 module.exports = controller;
