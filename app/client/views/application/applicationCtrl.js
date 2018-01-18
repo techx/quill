@@ -128,6 +128,15 @@ angular.module('reg')
                 }
               ]
             },
+            name: {
+              identifier: 'major',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please enter your major.'
+                }
+              ]
+            },
             year: {
               identifier: 'year',
               rules: [

@@ -44,6 +44,12 @@
             <div class="results"></div>
           </div>
         </div>
+		
+        <div class="field">
+          <label>Major</label>
+          <input type="text"
+                 ng-model="user.profile.major">
+        </div>
 
         <div class="field">
           <label>Graduation Year</label>
@@ -69,13 +75,6 @@
             <option value="O">Other</option>
             <option value="N">I prefer not to answer.</option>
           </select>
-        </div>
-
-        <div class="field">
-          <label>I would describe myself as a...</label>
-          <input type="text"
-                 placeholder="Designer, Data Scientist, iOS Wizard, Hacker Extraordinaire"
-                 ng-model="user.profile.description">
         </div>
 		
 		<div class="field">

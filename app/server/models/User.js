@@ -32,7 +32,7 @@ var profile = {
     }
   },
 
-  description: {
+  major: {
     type: String,
     min: 0,
     max: 300
