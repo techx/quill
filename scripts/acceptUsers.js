@@ -1,5 +1,4 @@
 require('dotenv').load();
-const delay         = require('delay');
 var mongoose        = require('mongoose');
 var database        = process.env.DATABASE || "";
 var jwt             = require('jsonwebtoken');
