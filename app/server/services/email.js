@@ -257,7 +257,7 @@ controller.sendAcceptanceEmail = function(email, confirmBy, callback) {
   var locals = {
     title: 'Welcome to HackUCI 2018!',
     description: 'Congratulations on getting accepted into HackUCI 2018! We are excited to have you at Orange County\'s largest hackathon. Please sign into your dashboard to confirm or decline your spot by ' + moment(confirmBy).format('MMMM D, YYYY h:mm A') + '. We look forward to seeing you!',
-    actionUrl: ROOT_URL + '/dashboard',
+    actionUrl: 'https://www.hackuci.com/dashboard',
     actionName: "Dashboard"
   };
 
