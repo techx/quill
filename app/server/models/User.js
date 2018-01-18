@@ -38,6 +38,12 @@ var profile = {
     max: 300
   },
 
+  resume: {
+    type: Boolean,
+	required: true,
+	default: false,
+  },
+  
   essay: {
     type: String,
     min: 0,

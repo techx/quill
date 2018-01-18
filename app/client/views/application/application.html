@@ -77,6 +77,14 @@
                  placeholder="Designer, Data Scientist, iOS Wizard, Hacker Extraordinaire"
                  ng-model="user.profile.description">
         </div>
+		
+		<div class="field">
+		<label>Resume</label>
+			<form id="resume" method="post" enctype="multipart/form-data">
+				<input name="resume" type="file" accept=".pdf"/>
+			</form>
+			<h6 style="padding:none"><strong>You must submit your resume as a PDF, no exceptions!</strong></h6>
+        </div>
 
         <div class="field">
           <label>

@@ -17,9 +17,9 @@ angular.module('reg')
       $scope.isOSUStudent = ($scope.user.email.split('@')[1] == 'osu.edu') || ($scope.user.email.split('@')[1] == 'buckeyemail.osu.edu');
 
       // If so, default them to adult: true
-      //if ($scope.isOSUStudent){
-      //  $scope.user.profile.adult = true;
-      //}
+      if ($scope.isOSUStudent){
+        $scope.user.profile.adult = true;
+      }
 
       // Populate the school dropdown
       populateSchools();
@@ -146,6 +146,15 @@ angular.module('reg')
                 }
               ]
             },
+            resume: {
+              identifier: 'resume',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please choose a file for your resume.'
+                }
+              ]
+            },
             adult: {
               identifier: 'adult',
               rules: [
@@ -159,11 +168,36 @@ angular.module('reg')
         });
       }
 
-
+	 function uploadResume(){
+		 $("#resume").submit(function(e) {
+			//console.log($scope.user.email);
+			e.preventDefault();
+			console.log('test');
+			var formData = new FormData(this);
+			formData.append('email',$scope.user.email);
+			$.ajax({
+				url: "/register/upload",
+				type: 'POST',
+				data: formData,
+				success: function (data) {
+					_updateUser();
+				},
+				error: function () {
+					console.log('err'); // replace with proper error handling
+				},
+				cache: false,
+				contentType: false,
+				processData: false
+			});
+		});
+		$("#resume").submit();
+		 
+	 }
 
       $scope.submitForm = function(){
         if ($('.ui.form').form('is valid')){
-          _updateUser();
+		  uploadResume();
+          //_updateUser();
         }
         else{
           sweetAlert("Uh oh!", "Please Fill The Required Fields", "error");
