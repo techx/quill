@@ -23,7 +23,7 @@ var userArray = require('fs').readFileSync('accepted.txt').toString().split('\n'
           console.log('[' + i + '] processed: ' + email)
           if (i === 0) {
             console.log("Done in one second");
-            setTimeout(() => process.exit(0), 1000);
+            setTimeout(() => process.exit(0), 5000);
           }
         });
       });

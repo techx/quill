@@ -34,12 +34,12 @@ var NODE_ENV = process.env.NODE_ENV;
 
 var aws = require('aws-sdk');
 aws.config.update({
-  region: 'us-west-1',
-  accessKeyId: process.env.AWS_ACCESS,
-  secretAccessKey: process.env.AWS_SECRET
+  region: 'us-west-2',
+  accessKeyId: process.env.AWS_EMAIL_ACCESS,
+  secretAccessKey: process.env.AWS_EMAIL_SECRET
 });
 
-var ses = new AWS.SES({apiVersion: '2010-12-01'});
+var ses = new aws.SES({apiVersion: '2010-12-01'});
 
 var options = {
   host: EMAIL_HOST,
@@ -102,12 +102,11 @@ function sendOne(templateName, options, data, callback){
            }
           },
         Source: EMAIL_CONTACT, /* required */
-        ReplyToAddresses: [
-          EMAIL_CONTACT,
-        ],
       };
 
-      ses.sendEmail(params, callback);
+      ses.sendEmail(params, (err, data) => {
+        callback(err, data);
+      });
 
       // transporter.sendMail({
       //   from: EMAIL_CONTACT,
