@@ -779,7 +779,6 @@ UserController.sendAcceptanceEmailByEmail = function(email, callback) {
          return callback(err);
        }
        Mailer.sendAcceptanceEmail(email, user.status.confirmBy, callback);
-       return callback(err, user);
    });
  };
 
