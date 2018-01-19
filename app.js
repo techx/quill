@@ -7,7 +7,7 @@ var express         = require('express');
 var bodyParser      = require('body-parser');
 var methodOverride  = require('method-override');
 var morgan          = require('morgan');
-var cookieParser    = require('cookie-parser');
+
 var fileUpload      = require('express-fileupload');
 
 var mongoose        = require('mongoose');
@@ -26,7 +26,6 @@ global.__basedir = __dirname;
 mongoose.connect(database);
 
 app.use(morgan('dev'));
-app.use(cookieParser());
 
 app.use(bodyParser.urlencoded({
   extended: true

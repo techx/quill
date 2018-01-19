@@ -406,7 +406,7 @@ UserController.declineById = function (id, callback){
 UserController.verifyByToken = function(token, callback){
   User.verifyEmailVerificationToken(token, function(err, email){
     User.findOneAndUpdate({
-      email: new RegExp('^' + email + '$', 'i')
+      email: email.toLowerCase()
     },{
       $set: {
         'verified': true
