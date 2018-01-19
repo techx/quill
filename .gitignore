@@ -1,6 +1,7 @@
+uploads/
 db/
 node_modules/
 app/client/build/
 app/client/plugins/
 *.log
-.env
+.env*

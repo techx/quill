@@ -196,8 +196,8 @@ angular.module('reg')
                 name: 'Graduation Year',
                 value: user.profile.graduationYear
               },{
-                name: 'Description',
-                value: user.profile.description
+                name: 'Major',
+                value: user.profile.major
               },{
                 name: 'Essay',
                 value: user.profile.essay

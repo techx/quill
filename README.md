@@ -1,3 +1,6 @@
+# MakeOHI/O's Fork of Quill
+In an effort to provide a better hackathon experience, [OHI/O](https://github.com/hackohio) (The Ohio State University's hackathon program) and the [Electronics Club](https://github.com/electronicsosu) are trying something new this year. Thanks to the brilliant and generous students of TechX at MIT, we are adopting their open-source hackathon registration web application. More details about Quill, from its original readme, are below. Our webserver for registration is located at [http://make-oh.io/register/](http://make-oh.io/register/). Fun fact: when any changes are made to this repository of ours, the webserver is automatically updated. Anyone is welcome to make a pull request. Happy hacking!
+
 # Quill
 Registration, for hackers!
 
