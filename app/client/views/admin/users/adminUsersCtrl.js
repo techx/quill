@@ -149,6 +149,28 @@ angular.module('reg')
 
       };
 
+      $scope.sendWaiverEmail = function($event, user, index) {
+        $event.stopPropagation();
+
+        swal({
+          title: "Send Waiver Email",
+          text: "Are you sure you want to send the waiver email to " + user.profile.name + "?",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#DD6B55",
+          confirmButtonText: "Yes, send the waiver email.",
+          closeOnConfirm: false
+          },
+          function(){
+            UserService
+              .sendWaiverEmail(user._id)
+              .success(function(){
+                swal("Waiver Email Sent!", user.profile.name + ' will receive a copy of the waiver email shortly.', "success");
+              });
+          }
+        );
+      }
+
       $scope.markWaiverAsSigned = function($event, user, index) {
         $event.stopPropagation();
 

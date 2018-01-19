@@ -93,6 +93,10 @@ angular.module('reg')
         return $http.post(base + id + '/sign');
       },
 
+      sendWaiverEmail: function(id){
+        return $http.post(base + id + '/sendwaiver');
+      },
+
     };
   }
   ]);

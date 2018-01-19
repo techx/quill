@@ -427,6 +427,14 @@ module.exports = function(router) {
     });
   });
 
+  /**
+   * Send waiver email to the user.
+   */
+  router.post('/users/:id/sendwaiver', isAdmin, function(req, res){
+    var id = req.params.id;
+    UserController.sendWaiverEmail(id, defaultResponse(req, res));
+  });
+
 
   // ---------------------------------------------
   // Settings [ADMIN ONLY!]
