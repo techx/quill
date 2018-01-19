@@ -182,6 +182,14 @@ angular.module('reg')
           requireLogin: false
         }
       })
+      .state('app.mentor', {
+        url: "/mentor",
+        templateUrl: "views/mentor/mentor.html",
+        controller: 'MentorCtrl',
+        data: {
+          requireLogin: false
+        }
+      })
       .state('reset', {
         url: "/reset/:token",
         templateUrl: "views/reset/reset.html",
@@ -265,6 +273,11 @@ angular.module('reg')
         if (toState.name === 'app.apply' && Session.getUserId()) {
           event.preventDefault();
           $state.go('app.application');
+        }
+
+        if (toState.name === 'app.volunteer') {
+          event.preventDefault();
+          $state.go('app.home');
         }
 
       });
