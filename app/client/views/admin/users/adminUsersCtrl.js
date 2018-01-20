@@ -131,7 +131,6 @@ angular.module('reg')
       };
 
       $scope.acceptChecked = function(){
-        console.log($scope.users);
         // Tracking info for mass admit
         var numToAccept = 0;
 
@@ -157,18 +156,18 @@ angular.module('reg')
           closeOnConfirm: false
         }, function() {
           for (let i = 0; i < $scope.users.length; i++){
-            var user = $scope.users[i];
+            const user = $scope.users[i];
             if(user.markedForAcceptance){
               // I just log or err the callbacks but I should like count
               // them up and show a sweet alert or something later
               UserService
                 .admitUser(user._id)
-                .success(function(user){
-                  console.log(user.profile.name + " (" + user.email + ") Admitted!");
-                })
                 .error(function(user){
                   console.error("Couldn't admit " + user.profile.name + " (" + user.email + ")");
                 });
+
+              // Uncheck them
+              user.markedForAcceptance = false;
             }
           }
           // Just say its accepted, Promises are hard rn...
