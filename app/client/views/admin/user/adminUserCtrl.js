@@ -16,7 +16,7 @@ angular.module('reg')
       function populateSchools(){
 
         $http
-          .get('/assets/schools.json')
+          .get('assets/schools.json')
           .then(function(res){
             var schools = res.data;
             var email = $scope.selectedUser.email.split('@')[1];

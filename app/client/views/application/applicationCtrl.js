@@ -13,11 +13,11 @@ angular.module('reg')
       // Set up the user
       $scope.user = currentUser.data;
 
-      // Is the student from MIT?
-      $scope.isMitStudent = $scope.user.email.split('@')[1] == 'mit.edu';
+      // Is the student from OSU?
+      $scope.isOSUStudent = ($scope.user.email.split('@')[1] == 'osu.edu') || ($scope.user.email.split('@')[1] == 'buckeyemail.osu.edu');
 
       // If so, default them to adult: true
-      if ($scope.isMitStudent){
+      if ($scope.isOSUStudent){
         $scope.user.profile.adult = true;
       }
 
@@ -32,7 +32,7 @@ angular.module('reg')
        */
       function populateSchools(){
         $http
-          .get('/assets/schools.json')
+          .get('assets/schools.json')
           .then(function(res){
             var schools = res.data;
             var email = $scope.user.email.split('@')[1];
@@ -44,7 +44,7 @@ angular.module('reg')
           });
 
         $http
-          .get('/assets/schools.csv')
+          .get('assets/schools.csv')
           .then(function(res){ 
             $scope.schools = res.data.split('\n');
             $scope.schools.push('Other');
@@ -128,6 +128,15 @@ angular.module('reg')
                 }
               ]
             },
+            name: {
+              identifier: 'major',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please enter your major.'
+                }
+              ]
+            },
             year: {
               identifier: 'year',
               rules: [
@@ -146,12 +155,21 @@ angular.module('reg')
                 }
               ]
             },
+            resume: {
+              identifier: 'resume',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please choose a file for your resume.'
+                }
+              ]
+            },
             adult: {
               identifier: 'adult',
               rules: [
                 {
                   type: 'allowMinors',
-                  prompt: 'You must be an adult, or an MIT student.'
+                  prompt: 'You must be an adult.'
                 }
               ]
             }
@@ -159,11 +177,39 @@ angular.module('reg')
         });
       }
 
-
+	 function uploadResume(){
+		 $("#resume").submit(function(e) {
+			//console.log($scope.user.email);
+			e.preventDefault();
+			console.log('test');
+			var formData = new FormData(this);
+			formData.append('email',$scope.user.email);
+			$.ajax({
+				url: "/register/upload",
+				type: 'POST',
+				data: formData,
+				success: function (data) {
+					_updateUser();
+				},
+				error: function () {
+					console.log('err'); // replace with proper error handling
+				},
+				cache: false,
+				contentType: false,
+				processData: false
+			});
+		});
+		$("#resume").submit();
+		 
+	 }
 
       $scope.submitForm = function(){
         if ($('.ui.form').form('is valid')){
-          _updateUser();
+		  uploadResume();
+          //_updateUser();
+        }
+        else{
+          sweetAlert("Uh oh!", "Please Fill The Required Fields", "error");
         }
       };
 
