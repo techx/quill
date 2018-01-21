@@ -28,6 +28,12 @@
         {{page}}
       </button>
 
+      <div class="ui divider"></div>
+
+      <button class="ui basic icon button" ng-click="acceptChecked()">
+        <i class="add user icon"></i>
+        Accept Checked
+      </button>
     </div>
     <div id="table-container" class="thirteen wide column">
       <div class="ui header">
@@ -91,6 +97,7 @@
         class="ui celled selectable compact users table">
         <thead>
           <tr>
+            <th></th>
             <th>Name</th>
             <th>E-mail address</th>
             <th>School</th>
@@ -106,6 +113,12 @@
             ng-click="selectUser(user)"
             ng-repeat="user in users"
             ng-class="rowClass(user)">
+            <td>
+              <div class="ui checkbox">
+                <input type="checkbox" ng-model="user.markedForAcceptance" ng-click="$event.stopPropagation()"></input>
+                <label></label>
+              </div>
+            </td>
             <td>
               <strong>
                 {{user.profile.name}}

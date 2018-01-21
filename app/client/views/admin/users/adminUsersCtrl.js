@@ -130,6 +130,51 @@ angular.module('reg')
 
       };
 
+      $scope.acceptChecked = function(){
+        // Tracking info for mass admit
+        var numToAccept = 0;
+
+        // Stupid error handling
+        for (let i = 0; i < $scope.users.length; i++){
+          if($scope.users[i].markedForAcceptance) {
+            numToAccept += 1;
+          }
+        }
+        if (numToAccept == 0){
+          swal("Oops", "No one was checked", "info");
+          return;
+        }
+
+        // Stupid check pt. 2
+        swal({
+          title: "Whoa, wait a minute!",
+          text: "You are about to accept " + numToAccept + " users!",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#DD6B55",
+          confirmButtonText: "Yeah, do it.",
+          closeOnConfirm: false
+        }, function() {
+          for (let i = 0; i < $scope.users.length; i++){
+            const user = $scope.users[i];
+            if(user.markedForAcceptance){
+              // I just log or err the callbacks but I should like count
+              // them up and show a sweet alert or something later
+              UserService
+                .admitUser(user._id)
+                .error(function(user){
+                  console.error("Couldn't admit " + user.profile.name + " (" + user.email + ")");
+                });
+
+              // Uncheck them
+              user.markedForAcceptance = false;
+            }
+          }
+          // Just say its accepted, Promises are hard rn...
+          swal("Accepted", 'All marked users have been accepted', "success");
+        });
+      }
+
       function formatTime(time){
         if (time) {
           return moment(time).format('MMMM Do YYYY, h:mm:ss a');
@@ -299,46 +344,3 @@ angular.module('reg')
       $scope.selectUser = selectUser;
 
     }]);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
