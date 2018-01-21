@@ -162,6 +162,11 @@ angular.module('reg')
               // them up and show a sweet alert or something later
               UserService
                 .admitUser(user._id)
+                .success(function(user){
+                  // Update them on the page
+                  $scope.users[i] = user;
+                  $scope.$apply();
+                })
                 .error(function(user){
                   console.error("Couldn't admit " + user.profile.name + " (" + user.email + ")");
                 });
