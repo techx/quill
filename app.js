@@ -38,12 +38,29 @@ app.use(methodOverride());
 
 app.use('/', express.static(__dirname + '/www/dist'));
 app.use('/register', express.static(__dirname + '/app/client'));
+// Handy Redirects =============================================================
 
-app.use('/sponsorship/vthacks-v-prospectus', express.static(__dirname + '/files/vthacks-v-prospectus.pdf'));
-// Redirect to the pdf
+// Prospectus
+app.use('/sponsorship/vthacks-v-prospectus',
+  express.static(__dirname + '/files/vthacks-v-prospectus.pdf'));
+
 app.get('/sponsorship/prospectus', (req, res) => {
   res.redirect('/sponsorship/vthacks-v-prospectus');
 });
+
+// Bus Interest
+app.get('/bus-interest', (req, res) => {
+  res.status(302);
+  res.redirect('https://docs.google.com/forms/d/e/1FAIpQLSd9jrXiuksvnoPWTdJsK5xBmbEXBo24MT6TY_2mKxpolZnLVw/viewform?usp=sf_link');
+});
+
+// Travel Reimbursement
+app.get('/travel-reimbursement', (req, res) => {
+  res.status(302);
+  res.redirect('https://docs.google.com/forms/d/e/1FAIpQLScaqcQxoD6ayJS6wZpH5hj65pzyR0zPtpMSnX5kCg2qxtOqcA/viewform?usp=sf_link');
+});
+
+
 
 // Routers =====================================================================
 
