@@ -109,6 +109,7 @@ angular.module('reg')
 
         // Semantic-UI form validation
         $('.ui.form').form({
+          inline: true,
           fields: {
             name: {
               identifier: 'name',
