@@ -155,6 +155,7 @@ UserController.createUser = function(email, password, callback) {
     u.password = User.generateHash(password);
     u.save(function(err){
       if (err){
+        // Duplicate key error codes
         if (err.name === 'MongoError' && (err.code === 11000 || err.code === 11001)) {
           return callback({
             message: 'An account for this email already exists.'
