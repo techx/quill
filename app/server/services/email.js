@@ -7,6 +7,11 @@ var emailTemplates = require('email-templates');
 
 var ROOT_URL = process.env.ROOT_URL;
 
+var HACKATHON_NAME = process.env.HACKATHON_NAME;
+var EMAIL_ADDRESS = process.env.EMAIL_ADDRESS;
+var TWITTER_HANDLE = process.env.TWITTER_HANDLE;
+var FACEBOOK_HANDLE = process.env.FACEBOOK_HANDLE;
+
 var EMAIL_HOST = process.env.EMAIL_HOST;
 var EMAIL_USER = process.env.EMAIL_USER;
 var EMAIL_PASS = process.env.EMAIL_PASS;
@@ -48,6 +53,10 @@ function sendOne(templateName, options, data, callback){
     }
 
     data.emailHeaderImage = EMAIL_HEADER_IMAGE;
+    data.emailAddress = EMAIL_ADDRESS;
+    data.hackathonName = HACKATHON_NAME;
+    data.twitterHandle = TWITTER_HANDLE;
+    data.facebookHandle = FACEBOOK_HANDLE;
     template(templateName, data, function(err, html, text){
       if (err) {
         return callback(err);
@@ -79,7 +88,7 @@ controller.sendVerificationEmail = function(email, token, callback) {
 
   var options = {
     to: email,
-    subject: "[HACKMIT] - Verify your email"
+    subject: "["+HACKATHON_NAME+"] - Verify your email"
   };
 
   var locals = {
@@ -116,7 +125,7 @@ controller.sendPasswordResetEmail = function(email, token, callback) {
 
   var options = {
     to: email,
-    subject: "[HACKMIT] - Password reset requested!"
+    subject: "["+HACKATHON_NAME+"] - Password reset requested!"
   };
 
   var locals = {
@@ -157,7 +166,7 @@ controller.sendPasswordChangedEmail = function(email, callback){
 
   var options = {
     to: email,
-    subject: "[HACKMIT] - Your password has been changed!"
+    subject: "["+HACKATHON_NAME+"] - Your password has been changed!"
   };
 
   var locals = {
