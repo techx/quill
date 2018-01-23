@@ -60,7 +60,7 @@ function canRegister(email, password, callback){
         }
       }
       return callback({
-        message: 'Sorry we require a .edu email here. Email us at registration@vthacks.com and we can try to get you registered!'
+        message: " This form requires a .edu email. If you don't have one, email us at registration@vthacks.com and we can set you up with an account."
       }, false);
     });
 
