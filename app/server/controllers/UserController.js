@@ -818,6 +818,41 @@ UserController.markWaiverAsSigned = function(email, callback) {
   callback);
 };
 
+UserController.sendWaiverEmail = function(id, callback) {
+  User.findById(id, function(err, user){
+
+    if(err || !user){
+      return callback(err);
+    }
+
+    if (typeof user.confirmation.signatureLiability === 'undefined') {
+      Mailer.sendWaiverEmail(user.email, (err, info) => {
+        if (!err) {
+          User.findOneAndUpdate({
+            '_id': id
+          },
+          {
+            $set: {
+              'lastUpdated': Date.now(),
+              'confirmation.signatureLiability': ''
+            }
+          }, {
+            new: true
+          },
+          callback);
+        } else {
+          return callback(err);
+        }
+      });
+    } else {
+      Mailer.sendWaiverEmail(user.email, (err, info) => {
+        return callback(err, info);
+      });
+    }
+
+  });
+};
+
 UserController.getStats = function(callback){
   return callback(null, Stats.getUserStats());
 };
