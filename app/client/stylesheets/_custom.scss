@@ -1,3 +1,12 @@
 // Branding overrides
 //
 // Copy variables from `_branding.scss` to this file to override default values.
+
+/** BRANDING COLORS
+ * primary (Midnight Blue): sidebar color, admitted dashboard status
+ * secondary (Flame Red): header text, submitted/confirmed/checked-in dashboard status
+ * tertiary (Medium Blue): waitlist/declined dashboard status
+ */
+$primary: #1A2E33;
+$secondary: #FF3F46;
+$tertiary: #528CA5;
