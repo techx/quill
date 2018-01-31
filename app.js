@@ -61,6 +61,11 @@ app.get('/travel-reimbursement', (req, res) => {
 });
 
 
+// Volunteer Form
+app.get('/volunteering', (req, res) => {
+  res.status(302);
+  res.redirect('https://goo.gl/zyvVxd');
+});
 
 // Routers =====================================================================
 
