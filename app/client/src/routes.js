@@ -190,6 +190,21 @@ angular.module('reg')
           requireLogin: false
         }
       })
+      .state('app.live', {
+        url: "/live",
+        redirectTo: 'app.schedule',
+        data: {
+          requireLogin: false
+        }
+      })
+      .state('app.schedule', {
+        url: "/live/schedule",
+        templateUrl: "views/live/schedule.html",
+        controller: 'ScheduleCtrl',
+        data: {
+          requireLogin: false
+        }
+      })
       .state('reset', {
         url: "/reset/:token",
         templateUrl: "views/reset/reset.html",
@@ -235,11 +250,17 @@ angular.module('reg')
          document.body.scrollTop = document.documentElement.scrollTop = 0;
       });
 
-      $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
+      $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState) {
         var requireLogin = toState.data.requireLogin;
         var requireAdmin = toState.data.requireAdmin;
         var requireVerified = toState.data.requireVerified;
         var requireAdmitted = toState.data.requireAdmitted;
+        $rootScope.fromState = fromState;
+
+        if (toState.redirectTo) {
+          event.preventDefault();
+          $state.go(toState.redirectTo, toParams, {location: 'replace'})
+        }
 
         if (!$rootScope.fadeOut) {
           event.preventDefault();
@@ -278,6 +299,11 @@ angular.module('reg')
         if (toState.name === 'app.volunteer') {
           event.preventDefault();
           $state.go('app.home');
+        }
+
+        if (toState.name === 'app.live') {
+          event.preventDefault();
+          $state.go('app.schedule');
         }
 
       });
