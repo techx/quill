@@ -6,11 +6,32 @@ var mongoose   = require('mongoose'),
 
 var profile = {
 
-  // Basic info
-  name: {
+  // Personal Info
+  firstName: {
     type: String,
     min: 1,
     max: 100,
+  },
+
+  lastName: {
+    type: String,
+    min: 1,
+    max: 100,
+  },
+
+  phoneNumber: String,
+
+  email: {
+    type: String,
+    min: 1,
+    max: 100,
+  },
+
+  gender: {
+    type: String,
+    enum : {
+      values: 'M F N'.split(' ')
+    }
   },
 
   adult: {
@@ -19,84 +40,95 @@ var profile = {
     default: false,
   },
 
+
+  shirtSize: {
+    type: String,
+    enum: {
+      values: 'XS S M L XL XXL'.split(' ')
+    }
+  },
+
+  emergencyContact: {
+    name: String,
+    workNumber: String,
+    cellNumber: String,
+    relationship: {
+      type: String,
+      min: 1,
+      max: 100, 
+    },
+  },
+
+//School Information
   school: {
     type: String,
     min: 1,
     max: 150,
   },
 
-  graduationYear: {
+  schoolYear: {
     type: String,
     enum: {
-      values: '2016 2017 2018 2019'.split(' '),
+      values: 'High-School Freshman Sophomore Junior Senior'.split(' '),
     }
   },
 
-  description: {
-    type: String,
-    min: 0,
-    max: 300
-  },
+  major: String,
 
-  essay: {
-    type: String,
-    min: 0,
-    max: 1500
-  },
+//Additional Logistics
 
-  // Optional info for demographics
-  gender: {
+  dietaryRestrictions: {
     type: String,
-    enum : {
-      values: 'M F O N'.split(' ')
+    enum: {
+      values: 'Halal Kosher Vegan Vegetarian Gluten-Free'.split(' '),
     }
   },
+
+  needsReimbursement: Boolean,
+
+  reimbursementYes: {
+    type: String,
+    min: 0,
+    max: 150
+  },
+
+//Bitcamp
+
+  amtHackathons: {
+    type: String,
+    enum: {
+      values: '0 1-5 6-10 11-15 16-20 20+'.split(' '),
+    }
+  },
+  whyBitcamp: {
+    type: String,
+    min: 0,
+    max: 250
+  },
+
+  buildBitcamp: {
+    type: String,
+    min: 0,
+    max: 100
+  },
+
+//Professional
+  interestedIn: {
+    type: String,
+    enum: {
+      values: 'Internship Full-Time  None '.split(' '),
+    }
+  },
+
+//Legal
+
+signatureCodeOfConduct: String
 
 };
 
 // Only after confirmed
 var confirmation = {
-  phoneNumber: String,
-  dietaryRestrictions: [String],
-  shirtSize: {
-    type: String,
-    enum: {
-      values: 'XS S M L XL XXL WXS WS WM WL WXL WXXL'.split(' ')
-    }
-  },
-  wantsHardware: Boolean,
-  hardware: String,
 
-  major: String,
-  github: String,
-  twitter: String,
-  website: String,
-  resume: String,
-
-  needsReimbursement: Boolean,
-  address: {
-    name: String,
-    line1: String,
-    line2: String,
-    city: String,
-    state: String,
-    zip: String,
-    country: String
-  },
-  receipt: String,
-
-  hostNeededFri: Boolean,
-  hostNeededSat: Boolean,
-  genderNeutral: Boolean,
-  catFriendly: Boolean,
-  smokingFriendly: Boolean,
-  hostNotes: String,
-
-  notes: String,
-
-  signatureLiability: String,
-  signaturePhotoRelease: String,
-  signatureCodeOfConduct: String,
 };
 
 var status = {
