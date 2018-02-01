@@ -30,7 +30,7 @@
 
       <div class="ui divider"></div>
 
-      <button class="ui basic icon button" ng-click="acceptChecked()">
+      <button class="ui basic icon button" ng-click="acceptChecked()" ng-show="user.admin">
         <i class="add user icon"></i>
         Accept Checked
       </button>
@@ -213,7 +213,8 @@
 
               <button
                 class="accept ui circular mini basic green icon button"
-                ng-click="acceptUser($event, user, $index)">
+                ng-click="acceptUser($event, user, $index)"
+                ng-show="user.admin">
                 <i class="add user icon"></i>
               </button>
 

@@ -35,6 +35,25 @@ module.exports = function(router) {
     });
   }
 
+  function isVolunteerOrAdmin(req, res, next) {
+    var token = getToken(req);
+
+    UserController.getByToken(token, function(err, user){
+      if (err) {
+        return res.status(500).send(err);
+      }
+
+      if (user && (user.volunteer || user.admin)){
+        return next();
+      }
+
+      return res.status(401).send({
+        message: 'volunteers or Admins Only!'
+      });
+
+    });
+  }
+
   /**
    * [Users API Only]
    *
@@ -121,7 +140,7 @@ module.exports = function(router) {
    * GET - Get all users, or a page at a time.
    * ex. Paginate with ?page=0&size=100
    */
-  router.get('/users', isAdmin, function(req, res){
+  router.get('/users', isVolunteerOrAdmin, function(req, res){
     var query = req.query;
 
     if (query.page && query.size){
@@ -255,18 +274,18 @@ module.exports = function(router) {
   });
 
   /**
-   * Check in a user. ADMIN ONLY, DUH
+   * Check in a user. Hey volunteers can help!
    */
-  router.post('/users/:id/checkin', isAdmin, function(req, res){
+  router.post('/users/:id/checkin', isVolunteerOrAdmin, function(req, res){
     var id = req.params.id;
     var user = req.user;
     UserController.checkInById(id, user, defaultResponse(req, res));
   });
 
   /**
-   * Check in a user. ADMIN ONLY, DUH
+   * Check out a user. Hey volunteers can help!
    */
-  router.post('/users/:id/checkout', isAdmin, function(req, res){
+  router.post('/users/:id/checkout', isVolunteerOrAdmin, function(req, res){
     var id = req.params.id;
     var user = req.user;
     UserController.checkOutById(id, user, defaultResponse(req, res));
