@@ -28,6 +28,17 @@
 		}
 	}
 
+	.navbar-live {
+		position: absolute;
+		background: none;
+		transition: all .2s ease;
+
+		.logo-header {
+			margin-top: 0;
+			top: 20px;
+		}
+	}
+
 	.logo-header {
 		animation: fadein .5s both;
 		animation-delay: .15s;
@@ -59,6 +70,13 @@
 		margin-top: -1px;
 	}
 
+	.logo-header_live {
+		font-weight: 500;
+		font-size: 1.9em;
+		padding-left: 130px;
+		letter-spacing: 0.06em;
+	}
+
 	.navbar-menu {
 		display: flex;
 		flex: 1 0 auto;
@@ -74,6 +92,10 @@
 		line-height: 2em;
 		border-bottom: 1px solid rgba(255,255,255,0);
 		transition: all .2s ease;
+
+		i {
+			margin-left: 1px;
+		}
 	}
 
 	.menu-item+.menu-item:not(.menu-item--sponsor) {

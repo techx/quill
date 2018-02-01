@@ -1,0 +1,106 @@
+<div id="schedule" ng-class="{ 'fade-out': fadeOut }">
+  <!-- <div id="bg-tint" ng-style="{ 'opacity' : tintOpacity }"></div> -->
+
+  <section id="hero" class="center">
+    <div class="logo-header-container ui grid mobile only tablet only">
+      <div class="logo-header logo-cog">
+        <img src="../assets/images/logo-cog.svg">
+      </div>
+      <div class="logo-header">
+        <img src="../assets/images/logo-anteater.svg">
+      </div>
+    </div>
+    
+    <div class="countdown-container">
+      <span class="countdown-segment">
+        <span class="countdown countdown--bold" ng-style="{ 'opacity' : countdownOpacity }">
+          {{ hours }}
+        </span>
+        <span class="countdown" ng-style="{ 'opacity' : countdownOpacity }">
+          Hours
+        </span>
+      </span>
+      <span class="countdown-segment">
+        <span class="countdown countdown--bold countdown--fixed" ng-style="{ 'opacity' : countdownOpacity }">
+          {{ minutes }}
+        </span>
+        <span class="countdown" ng-style="{ 'opacity' : countdownOpacity }">
+          Min
+        </span>
+      </span>
+      <span class="countdown-segment">
+        <span class="countdown countdown--bold countdown--fixed" ng-style="{ 'opacity' : countdownOpacity }">
+          {{ seconds }}
+        </span>
+        <span class="countdown" ng-style="{ 'opacity' : countdownOpacity }">
+          Sec
+        </span>
+      </span>
+    </div>
+
+    <div class="hero-border">
+      <svg version="1.1" id="circle" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1920 380" xml:space="preserve" preserveAspectRatio="none">
+        <path fill="#f2f1f7" d="M0,309c0,0,340,70.8,960,70.8c620,0.2,960-70.8,960-70.8v71H0" transform="translate(0 1)"></path>
+      </svg>
+    </div>
+  </section>
+
+  <section id="schedule-container">
+    <div class="schedule-box ui stackable three column grid">
+      <div class="column">
+        <div class="title">
+          Friday
+        </div>
+        <div class="schedule-list">
+          <div class="schedule" ng-repeat="event in schedule.friday">
+            <span class="schedule-title">
+              {{ event.name }}
+            </span>
+            <span class="schedule-time">
+              {{ event.time }}
+            </span>
+            <span class="schedule-location">
+              {{ event.location }}
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="title">
+          Saturday
+        </div>
+        <div class="schedule-list">
+          <div class="schedule" ng-repeat="event in schedule.saturday">
+            <span class="schedule-title">
+              {{ event.name }}
+            </span>
+            <span class="schedule-time">
+              {{ event.time }}
+            </span>
+            <span class="schedule-location">
+              {{ event.location }}
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="title">
+          Sunday
+        </div>
+        <div class="schedule-list">
+          <div class="schedule" ng-repeat="event in schedule.sunday">
+            <span class="schedule-title">
+              {{ event.name }}
+            </span>
+            <span class="schedule-time">
+              {{ event.time }}
+            </span>
+            <span class="schedule-location">
+              {{ event.location }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

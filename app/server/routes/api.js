@@ -611,7 +611,7 @@ module.exports = function(router) {
       }
     })
   });
-   
+
   /* [ADMIN ONLY]
    * {
    *   allowMinors: Boolean
