@@ -251,7 +251,7 @@ module.exports = function(router) {
     var id = req.params.id;
     var user = req.user;
     UserController.admitUser(id, user, function(err, user) {
-      defaultResponse(err, user);
+      defaultResponse(req, res);
       UserController.sendConfirmationEmailById(id, defaultResponse(req, res));
     });
   });
