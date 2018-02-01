@@ -103,13 +103,13 @@ var profile = {
   whyBitcamp: {
     type: String,
     min: 0,
-    max: 250
+    max: 2500
   },
 
   buildBitcamp: {
     type: String,
     min: 0,
-    max: 100
+    max: 1000
   },
 
 //Professional
