@@ -1,0 +1,19 @@
+version: '2.0'
+services:
+  mongodb:
+    image: mongo:3.2.17
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
+    volumes:
+      - ./data/db:/data/db
+  quill:
+    build: .
+    depends_on:
+      - mongodb
+    volumes:
+      - ./:/quill
+      - /quill/node_modules
+    ports:
+      - 80:3000
+    command: gulp server

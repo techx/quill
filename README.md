@@ -1,3 +1,10 @@
+# Bitcamp Changes
+To use the docker-compose, just run the following:
+Optionally, run `npm run config` to create a new .env file
+Install docker & docker-compose
+Run `docker-compose up`, which will spin up an instance of mongodb and run the server
+Note that the docker-compose will map the application port to 80, so you should use the app just by going to localhost or localhost:80
+
 # Quill
 Registration, for hackers!
 
