@@ -250,8 +250,10 @@ module.exports = function(router) {
     // Accept the hacker. Admin only
     var id = req.params.id;
     var user = req.user;
-    UserController.admitUser(id, user, defaultResponse(req, res));
-    UserController.sendConfirmationEmailById(id, function() {});
+    UserController.admitUser(id, user, function(err, user) {
+      defaultResponse(err, user);
+      UserController.sendConfirmationEmailById(id, defaultResponse(req, res));
+    });
   });
 
   /**
