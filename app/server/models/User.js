@@ -69,7 +69,7 @@ var profile = {
   schoolYear: {
     type: String,
     enum: {
-      values: 'High-School Freshman Sophomore Junior Senior'.split(' '),
+      values: 'High-School Freshman Sophomore Junior Senior Graduate'.split(' '),
     }
   },
 
