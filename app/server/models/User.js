@@ -69,11 +69,22 @@ var profile = {
   schoolYear: {
     type: String,
     enum: {
-      values: 'High-School Freshman Sophomore Junior Senior Graduate'.split(' '),
+      values: 'High-School Freshman Sophomore Junior Senior Graduated'.split(' '),
     }
   },
 
-  major: String,
+  major: {
+    type: String,
+    min: 1,
+    max: 100,
+  },
+
+  minor: {
+    type: String,
+    min: 1,
+    max: 100,
+  },
+
 
 //Additional Logistics
 
@@ -120,9 +131,43 @@ var profile = {
     }
   },
 
+  github: {
+    type: String,
+    min: 0,
+    max: 100
+  },
+
+  devpost: {
+    type: String,
+    min: 0,
+    max: 100
+  },
+
+  website: {
+    type: String,
+    min: 0,
+    max: 100
+  },
+
 //Legal
 
-signatureCodeOfConduct: String
+  mlhCOC: { //code of conduct
+    type: Boolean,
+    required: true,
+    default: false,
+  },
+
+  mlhTAC: { //terms and conditions
+    type: Boolean,
+    required: true,
+    default: false,
+  },
+
+  bitcampWaiver: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
 
 };
 
