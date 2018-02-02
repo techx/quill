@@ -31,6 +31,12 @@ angular.module('reg')
           $scope.showLiveNavbar = false;
         }
 
+        if (newPath === 'app.checkin') {
+          $scope.showCheckInNavbar = true;
+        } else {
+          $scope.showCheckInNavbar = false;
+        }
+
         $scope.isLoggedIn = !!$rootScope.currentUser;
 
         if ($scope.isLoggedIn) {

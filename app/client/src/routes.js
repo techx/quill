@@ -166,6 +166,14 @@ angular.module('reg')
         templateUrl: "views/admin/settings/settings.html",
         controller: 'AdminSettingsCtrl',
       })
+      .state('app.checkin', {
+        url: "/checkin",
+        templateUrl: "views/checkin/checkin.html",
+        controller: 'CheckinCtrl',
+        data: {
+          requireAdmin: true
+        }
+      })
       .state('app.sponsor', {
         url: "/sponsor",
         templateUrl: "views/sponsor/sponsor.html",
