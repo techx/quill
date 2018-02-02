@@ -235,6 +235,14 @@ angular.module('reg')
         data: {
           requireLogin: false
         }
+      })
+      .state('slackinvite', {
+        url: "/slackinvite",
+        redirectTo: 'https://join.slack.com/t/hackuci2018/shared_invite/enQtMzA3MTk4ODk5NTA2LTRmYzA3NGI5MDVkNjVlZDJkZDY4Njg5ZDYwZjlhMjM1NTY3YWUzMGM3YzBlZDNhMWRjZGNmZTAxZjYzY2RmOTY',
+        external: true,
+        data: {
+          requireLogin: false
+        }
       });
 
     $locationProvider.html5Mode({
@@ -246,11 +254,13 @@ angular.module('reg')
     '$rootScope',
     '$state',
     '$timeout',
+    '$window',
     'Session',
     function(
       $rootScope,
       $state,
       $timeout,
+      $window,
       Session ){
 
       $rootScope.$on('$stateChangeSuccess', function() {
@@ -259,6 +269,11 @@ angular.module('reg')
       });
 
       $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState) {
+        if (toState.external) {
+          event.preventDefault();
+          $window.open(toState.redirectTo, '_self');
+        }
+
         var requireLogin = toState.data.requireLogin;
         var requireAdmin = toState.data.requireAdmin;
         var requireVerified = toState.data.requireVerified;
