@@ -78,9 +78,9 @@ angular.module('reg')
 
         if (schedulePosition <= originalSchedulePosition) {
           // if ((schedulePosition - countdownPosition) >= 0) {
-            $scope.$apply(function() {
-              $scope.countdownOpacity = (schedulePosition - countdownPosition) / (originalSchedulePosition - countdownPosition);
-            })
+          $scope.$apply(function() {
+            $scope.countdownOpacity = (schedulePosition - countdownPosition) / (originalSchedulePosition - countdownPosition);
+          })
           //   $scope.tintOpacity = (1 - $scope.countdownOpacity) / 100 * 25;
           // } else {
           //   $scope.tintOpacity = (1 - $scope.countdownOpacity) / 100 * 25;
