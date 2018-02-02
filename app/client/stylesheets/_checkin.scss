@@ -1,0 +1,35 @@
+#checkin {
+  padding-left: 4em;
+  padding-right: 4em;
+  padding: calc(4em + 75px) 4em 4em 4em;
+
+  .search-container {
+    .field {
+      width: 85%;
+      display: inline-block;
+    }
+
+    .register-btn {
+      width: 13.6%;
+      margin-left: 1%;
+      margin-right: 0;
+    }
+  }
+
+  #table-container {
+    margin-bottom: 1em;
+  }
+
+  .pagination {
+    button {
+      margin-bottom: .5em;
+    }
+  }
+}
+
+#registration-modal {
+  .ui.page.grid {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}

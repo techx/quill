@@ -166,6 +166,14 @@ angular.module('reg')
         templateUrl: "views/admin/settings/settings.html",
         controller: 'AdminSettingsCtrl',
       })
+      .state('app.checkin', {
+        url: "/checkin",
+        templateUrl: "views/checkin/checkin.html",
+        controller: 'CheckinCtrl',
+        data: {
+          requireAdmin: true
+        }
+      })
       .state('app.sponsor', {
         url: "/sponsor",
         templateUrl: "views/sponsor/sponsor.html",
@@ -186,6 +194,21 @@ angular.module('reg')
         url: "/mentor",
         templateUrl: "views/mentor/mentor.html",
         controller: 'MentorCtrl',
+        data: {
+          requireLogin: false
+        }
+      })
+      .state('app.live', {
+        url: "/live",
+        redirectTo: 'app.schedule',
+        data: {
+          requireLogin: false
+        }
+      })
+      .state('app.schedule', {
+        url: "/live/schedule",
+        templateUrl: "views/live/schedule.html",
+        controller: 'ScheduleCtrl',
         data: {
           requireLogin: false
         }
@@ -212,6 +235,14 @@ angular.module('reg')
         data: {
           requireLogin: false
         }
+      })
+      .state('slackinvite', {
+        url: "/slackinvite",
+        redirectTo: 'https://join.slack.com/t/hackuci2018/shared_invite/enQtMzA3MTk4ODk5NTA2LTRmYzA3NGI5MDVkNjVlZDJkZDY4Njg5ZDYwZjlhMjM1NTY3YWUzMGM3YzBlZDNhMWRjZGNmZTAxZjYzY2RmOTY',
+        external: true,
+        data: {
+          requireLogin: false
+        }
       });
 
     $locationProvider.html5Mode({
@@ -223,11 +254,13 @@ angular.module('reg')
     '$rootScope',
     '$state',
     '$timeout',
+    '$window',
     'Session',
     function(
       $rootScope,
       $state,
       $timeout,
+      $window,
       Session ){
 
       $rootScope.$on('$stateChangeSuccess', function() {
@@ -235,11 +268,22 @@ angular.module('reg')
          document.body.scrollTop = document.documentElement.scrollTop = 0;
       });
 
-      $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
+      $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState) {
+        if (toState.external) {
+          event.preventDefault();
+          $window.open(toState.redirectTo, '_self');
+        }
+
         var requireLogin = toState.data.requireLogin;
         var requireAdmin = toState.data.requireAdmin;
         var requireVerified = toState.data.requireVerified;
         var requireAdmitted = toState.data.requireAdmitted;
+        $rootScope.fromState = fromState;
+
+        if (toState.redirectTo) {
+          event.preventDefault();
+          $state.go(toState.redirectTo, toParams, {location: 'replace'})
+        }
 
         if (!$rootScope.fadeOut) {
           event.preventDefault();
@@ -278,6 +322,11 @@ angular.module('reg')
         if (toState.name === 'app.volunteer') {
           event.preventDefault();
           $state.go('app.home');
+        }
+
+        if (toState.name === 'app.live') {
+          event.preventDefault();
+          $state.go('app.schedule');
         }
 
       });

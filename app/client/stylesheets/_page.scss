@@ -2,6 +2,7 @@
   padding: calc(4em + 100px) 2em 4em 2em;
 
   &:not(.modals) {
+    background: #fff;
     animation: fadein .5s both;
     animation-delay: .2s;
   }

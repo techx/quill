@@ -10,6 +10,7 @@ angular.module('reg')
     'EVENT_INFO',
     function($rootScope, $scope, $state, settings, Utils, AuthService, Session, EVENT_INFO){
       var transparentNavbarViews = ['app.home', 'app.login', 'app.sponsor', 'app.mentor']
+      var liveViews = ['app.live', 'app.schedule']
 
       var Settings = settings.data;
 
@@ -22,6 +23,18 @@ angular.module('reg')
           $scope.transparentNavbar = true;
         } else {
           $scope.transparentNavbar = false;
+        }
+
+        if (liveViews.includes(newPath)) {
+          $scope.showLiveNavbar = true;
+        } else {
+          $scope.showLiveNavbar = false;
+        }
+
+        if (newPath === 'app.checkin') {
+          $scope.showCheckInNavbar = true;
+        } else {
+          $scope.showCheckInNavbar = false;
         }
 
         $scope.isLoggedIn = !!$rootScope.currentUser;

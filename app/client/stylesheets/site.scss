@@ -57,12 +57,15 @@ $brand-tertiary: $tertiary;
 @import 'confirmation';
 @import 'volunteer';
 @import 'mentor';
+@import 'schedule';
+@import 'checkin';
 
 html,
 body {
   height: 100% !important;
   width: 100%;
   font-size: 1.02em;
+  background: #f2f1f7;
 }
 
 body {

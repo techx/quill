@@ -722,8 +722,7 @@ UserController.admitUserByEmail = function(email, user, callback){
  */
 UserController.checkInById = function(id, user, callback){
   User.findOneAndUpdate({
-    _id: id,
-    verified: true
+    _id: id
   },{
     $set: {
       'status.checkedIn': true,
@@ -745,8 +744,7 @@ UserController.checkInById = function(id, user, callback){
  */
 UserController.checkOutById = function(id, user, callback){
   User.findOneAndUpdate({
-    _id: id,
-    verified: true
+    _id: id
   },{
     $set: {
       'status.checkedIn': false

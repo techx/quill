@@ -1,6 +1,10 @@
 angular.module('reg')
     .constant('EVENT_INFO', {
         NAME: 'HackUCI 2018',
+        START_DATE: 'Feb 2, 2018',
+        START_TIME: '21:00',
+        END_DATE: 'Feb 4, 2018',
+        END_TIME: '10:00',
     })
     .constant('DASHBOARD', {
         UNVERIFIED: 'You should have received an email asking you verify your email. Click the link in the email and you can start your application!',

@@ -4,7 +4,8 @@ angular.module('reg')
     '$scope',
     'settings',
     'Utils',
-    function($rootScope, $scope, settings, Utils){
+    'EVENT_INFO',
+    function($rootScope, $scope, settings, Utils, EVENT_INFO){
       var Settings = settings.data;
-      $scope.regIsOpen = Utils.isRegOpen(Settings)
+      $scope.regIsOpen = Utils.isRegOpen(Settings);
     }]);
