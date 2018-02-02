@@ -23,6 +23,7 @@ angular.module('reg')
       // -------------------------------
       // All this just for dietary restriction checkboxes fml
 
+      // TODO: clean up this control file
       var dietaryRestrictions = {
         'Vegetarian': false,
         'Vegan': false,
