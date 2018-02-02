@@ -1,0 +1,335 @@
+<div id="checkin" class="page" ng-class="{ 'fade-out': fadeOut }">
+  <div class="search-container ui form">
+    <div class="field">
+      <div class="ui icon fluid input">
+        <input type="text"
+                placeholder="Search..."
+                ng-model="queryText"
+                ng-model-options="{debounce: 300}">
+          <i class="search icon"></i>
+      </div>
+    </div>
+    <div
+      ng-click="openRegisterModal()"
+      class="register-btn ui purple button">
+      New User
+    </div>
+
+    <div id="registration-modal" class="ui modal">
+      <i class="close icon"></i>
+      <div class="header">
+        Register User
+      </div>
+      <div class="content">
+        <div class="ui stackable page grid">
+          <div class="column">
+            <form class="ui form">
+              <div class="two fields">
+                <div class="field">
+                  <label>
+                    First Name
+                    <span class="required">*</span>
+                  </label>
+                  <input type="text"
+                          name="name"
+                          ng-model="newUser.profile.firstname">
+                </div>
+      
+                <div class="field">
+                  <label>
+                    Last Name
+                    <span class="required">*</span>
+                  </label>
+                  <input type="text"
+                          name="name"
+                          ng-model="newUser.profile.lastname">
+                </div>
+              </div>
+
+              <div class="fields">
+                <div class="eleven wide field">
+                  <label>
+                    Email
+                    <span class="required">*</span>
+                  </label>
+                  <input type="email"
+                          name="email"
+                          ng-model="newUser.email">
+                </div>
+      
+                <div class="five wide field">
+                  <label>
+                    Gender
+                    <span class="required">*</span>
+                  </label>
+                  <select
+                    name="gender"
+                    ng-model="newUser.profile.gender">
+                    <option value="">Gender</option>
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                    <option value="O">Other</option>
+                    <option value="N">I prefer not to answer.</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="two fields">
+                <div class="field">
+                  <label>
+                    Password
+                    <span class="required">*</span>
+                  </label>
+                  <input type="password"
+                          name="password"
+                          ng-model="newUser.password" required>
+                </div>
+                <div class="field">
+                  <label>
+                    Confirm Password
+                      <span class="required">*</span>
+                  </label>
+                  <input type="password"
+                          name="confirmPassword"
+                          ng-model="confirmPassword" required>
+                </div>
+              </div>
+
+              <div class="field" ng-show="autoFilledSchool">
+                <label>
+                  School
+                    <span class="required">*</span>
+                </label>
+                <input class="ui input"
+                        disabled="disabled"
+                        ng-show="autoFilledSchool"
+                        ng-model="newUser.profile.school">
+              </div>
+        
+              <div class="field" ng-show="!autoFilledSchool">
+                <label> School
+                  <span class="required">*</span>
+                </label>
+                <div id="school" class="ui search">
+                  <div class="ui input">
+                    <input class="prompt" type="text" placeholder="School" name="school" ng-model="newUser.profile.school">
+                  </div>
+                  <div class="results"></div>
+                </div>
+              </div>
+        
+              <div class="two fields">
+                <div class="field">
+                  <label>
+                    Major
+                      <span class="required">*</span>
+                  </label>
+                  <select
+                    name="major"
+                    ng-model="newUser.profile.major">
+                    <option value="">Major</option>
+                    <option value="AE">Aerospace Engineering</option>
+                    <option value="AP">Applied Physics</option>
+                    <option value="BE">Biomedical Engineering</option>
+                    <option value="BIM">Business Information Management</option>
+                    <option value="CME">Chemical Engineering</option>
+                    <option value="CH">Chemistry</option>
+                    <option value="CVE">Civil Engineering</option>
+                    <option value="CE">Computer Engineering</option>
+                    <option value="CGS">Computer Game Science</option>
+                    <option value="CS">Computer Science</option>
+                    <option value="CSE">Computer Science and Engineering</option>
+                    <option value="DS">Data Science</option>
+                    <option value="ESS">Earth System Science</option>
+                    <option value="EE">Electrical Engineering</option>
+                    <option value="ENG">Engineering</option>
+                    <option value="ENE">Environmental Engineering</option>
+                    <option value="ENS">Environmental Science</option>
+                    <option value="INF">Informatics</option>
+                    <option value="MSE">Materials Science Engineering</option>
+                    <option value="MAT">Mathematics</option>
+                    <option value="MCE">Mechanical Engineering</option>
+                    <option value="PHY">Physics</option>
+                    <option value="SE">Software Engineering</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+      
+                <div class="field">
+                  <label>
+                    Graduation Year
+                      <span class="required">*</span>
+                  </label>
+                  <select
+                    name="year"
+                    ng-model="newUser.profile.graduationYear">
+                    <option value="">Graduation Year</option>
+                    <option value="2018">2018</option>
+                    <option value="2019">2019</option>
+                    <option value="2020">2020</option>
+                    <option value="2021">2021</option>
+                    <option value="later">Later than 2021</option>
+                  </select>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="actions">
+        <div class="ui black deny button">
+          Cancel
+        </div>
+        <button
+          type="submit"
+          ng-class="{'disabled': submitButtonDisabled}"
+          ng-click="submitForm()"
+          class="ui positive right labeled icon button">
+          Confirm
+          <i class="checkmark icon"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="table-container" class="sixteen wide column">
+    <div class="ui long user modal">
+      <i class="close icon"></i>
+      <div class="header">
+        {{selectedUser.profile.name ? selectedUser.profile.name : selectedUser.email}}
+        <span
+          ng-show="selectedUser.admin">
+          (Admin)
+        </span>
+      </div>
+      <div class="content">
+
+        <div>
+          <div class="ui header">
+            Status:
+            <div
+              class="ui label">
+              {{selectedUser.status.name.toUpperCase()}}
+            </div>
+          </div>
+          <p>
+            <strong> Admitted by: </strong> {{selectedUser.status.admittedBy ? selectedUser.status.admittedBy : 'N/A'}}
+          </p>
+        </div>
+
+        <div ng-repeat="section in selectedUser.sections">
+          <div class="ui divider"></div>
+
+          <h3> {{section.title}} </h3>
+
+          <p ng-repeat="field in section.fields">
+            <strong> {{field.name}}: </strong>
+
+            <span ng-show="field.type === 'boolean'">
+              <i class="red circle remove icon" ng-show="!field.value"></i>
+              <i class="green circle check icon" ng-show="field.value"></i>
+            </span>
+
+            <a ng-if="field.type === 'link'" ng-href="{{field.value}}" target="_blank">{{field.text}}</a>
+
+            <a href="#" ng-if="field.type === 'click'" ng-click="resolveClick(field.value)">{{field.text}}</a>
+
+            <span ng-if="field.type == null">
+              {{field.value}}
+            </span>
+          </p>
+
+        </div>
+
+      </div>
+
+      <div class="actions">
+        <div class="ui positive right labeled icon button">
+          Nothing
+          <i class="checkmark icon"></i>
+        </div>
+      </div>
+    </div>
+
+    <table
+      class="ui celled selectable compact users table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>E-mail address</th>
+          <th>School</th>
+          <th>S</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          ng-repeat="user in users"
+          ng-class="rowClass(user)">
+          <td>
+            <strong>
+              {{user.profile.name}}
+              &nbsp;
+
+            </strong>
+          </td>
+          <td>{{user.email}}</td>
+          <td>{{user.profile.school}}</td>
+
+          <!-- Signed waiver documents -->
+          <td
+            class="collapsing">
+
+            <span ng-if="user.status.confirmed">
+              <i
+                ng-if="user.confirmation.signatureLiability"
+                class="fa-pencil-square-o icon">
+              </i>
+            </span>
+
+          </td>
+
+          <td>{{getStatus(user)}}</td>
+
+          <td
+            class="right aligned collapsing">
+
+            <button
+              ng-if="!user.admin"
+              ng-click="toggleCheckIn($event, user, $index)"
+              class="ui circular mini basic green icon button">
+
+              <i
+                ng-if="!user.status.checkedIn && !user.admin"
+                class="checkmark icon"></i>
+
+              <i
+                ng-if="user.status.checkedIn"
+                class="green flag icon"></i>
+
+            </button>
+
+            <button
+              ng-if="user.admin"
+              class="ui circular mini basic green icon disabled button">
+              <i class="green flag disabled icon"></i>
+            </button>
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+  <div class="pagination">
+    <button
+      ng-repeat="page in pages"
+      ng-class="page == currentPage ? 'active pink' : ''"
+      ng-click="goToPage(page)"
+      class="ui icon basic page button">
+      {{page}}
+    </button>
+  </div>
+</div>

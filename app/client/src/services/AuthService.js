@@ -73,6 +73,20 @@ angular.module('reg')
           });
       };
 
+      authService.createAccount = function(email, password, onSuccess, onFailure) {
+        return $http
+          .post('/auth/register', {
+            email: email,
+            password: password
+          })
+          .success(function(data){
+            return onSuccess(data.user);
+          })
+          .error(function(data){
+            return onFailure(data);
+          });
+      };
+
       authService.verify = function(token, onSuccess, onFailure) {
         return $http
           .get('/auth/verify/' + token)
