@@ -1,3 +1,63 @@
 // Branding overrides
-//
-// Copy variables from `_branding.scss` to this file to override default values.
+// Custom CSS to bitcampify MIT's app
+// 2018 David Ng
+
+// Vars (bp stands for bitcamp)
+$bp-dark-brown: #7F6C5F;
+$bp-medium-brown: #A58D7C;
+$bp-light-brown: #E5D8CE;
+
+$bp-cloud-white: #FFFFFF;
+
+$bp-flame-red: #FF3F46;
+$bp-bitcamp-orange: #FF6F3F;
+$bp-yellow-orange: #FFAF3F;
+$bp-yellow: #FFEF3F;
+
+$bp-midnight-blue: #1A2E33;
+$bp-medium-blue: #528CA5;
+$bp-sky-blue: #CBF2FF;
+
+/** MAIN BRANDING COLORS
+ * primary (Midnight Blue): sidebar color, admitted dashboard status
+ * secondary (Flame Red): header text, submitted/confirmed/checked-in dashboard status
+ * tertiary (Medium Blue): waitlist/declined dashboard status
+ */
+
+$primary: $bp-midnight-blue;
+$secondary: $bp-medium-blue;
+$tertiary: $bp-medium-blue;
+
+/** ASSET URLS
+ * login-bg: image for login splash page
+ */
+
+$login-bg: url('../assets/images/BitcampBanner3.jpg');
+
+// OVERRIDE Login screen variables
+$login-bg-color: $bp-cloud-white;
+$login-color: $bp-bitcamp-orange;
+$register-color: $bp-medium-blue;
+
+div#sidebar {
+  img.logo {
+    width: 100%;
+  }
+
+}
+
+div.tab {
+  img.toggle {
+    width: 100%;
+    height: 100%;
+    opacity: .8;
+  }
+}
+
+// OVERRIDE Semantic css
+.ui.red.button, .ui.red.buttons .button {
+  background-color: $bp-bitcamp-orange;
+  &:hover {
+    background-color: $bp-yellow-orange;
+  }
+}
