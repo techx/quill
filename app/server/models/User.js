@@ -88,12 +88,7 @@ var profile = {
 
 //Additional Logistics
 
-  dietaryRestrictions: {
-    type: String,
-    enum: {
-      values: 'Halal Kosher Vegan Vegetarian Gluten-Free'.split(' '),
-    }
-  },
+  dietaryRestrictions: [String],
 
   needsReimbursement: Boolean,
 
@@ -114,7 +109,7 @@ var profile = {
   whyBitcamp: {
     type: String,
     min: 0,
-    max: 2500
+    max: 250
   },
 
   buildBitcamp: {
@@ -149,8 +144,7 @@ var profile = {
     max: 100
   },
 
-//Legal
-
+  //Legal
   mlhCOC: { //code of conduct
     type: Boolean,
     required: true,
@@ -168,6 +162,13 @@ var profile = {
     required: true,
     default: false,
   },
+
+  // Additional
+  additional: {
+    type: String,
+    min: 0,
+    max: 1000,
+  }
 
 };
 

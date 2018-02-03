@@ -11,7 +11,8 @@ angular.module('reg')
     function($scope, $rootScope, $state, $http, currentUser, Settings, Session, UserService){
 
       // Set up the user
-      $scope.user = currentUser.data;
+      var user = currentUser.data;
+      $scope.user = user;
 
       // Is the student from MIT?
       $scope.isMitStudent = $scope.user.email.split('@')[1] == 'mit.edu';
@@ -20,6 +21,25 @@ angular.module('reg')
       if ($scope.isMitStudent){
         $scope.user.profile.adult = true;
       }
+
+      var dietaryRestrictions = {
+        'Vegetarian': false,
+        'Vegan': false,
+        'Halal': false,
+        'Kosher': false,
+        'Nut Allergy': false,
+        'Gluten Free': false,
+      };
+
+      if (user.profile.dietaryRestrictions){
+        user.profile.dietaryRestrictions.forEach(function(restriction){
+          if (restriction in dietaryRestrictions){
+            dietaryRestrictions[restriction] = true;
+          }
+        });
+      }
+
+      $scope.dietaryRestrictions = dietaryRestrictions;
 
       // Populate the school dropdown
       populateSchools();
@@ -68,6 +88,16 @@ angular.module('reg')
       }
 
       function _updateUser(e){
+        var profile = $scope.user.profile;
+        // Get the dietary restrictions as an array
+        var drs = [];
+        Object.keys($scope.dietaryRestrictions).forEach(function(key){
+          if ($scope.dietaryRestrictions[key]){
+            drs.push(key);
+          }
+        });
+        profile.dietaryRestrictions = drs;
+
         UserService
           .updateProfile(Session.getUserId(), $scope.user.profile)
           .success(function(data){
