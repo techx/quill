@@ -135,7 +135,8 @@ angular.module('reg')
           }
         },
         data: {
-          requireAdmin: true
+          requireAdmin: true,
+          requireOwner: true
         }
       })
       .state('app.admin.stats', {
@@ -278,6 +279,7 @@ angular.module('reg')
         var requireAdmin = toState.data.requireAdmin;
         var requireVerified = toState.data.requireVerified;
         var requireAdmitted = toState.data.requireAdmitted;
+        var requireOwner = toState.data.requireOwner;
         $rootScope.fromState = fromState;
 
         if (toState.redirectTo) {
@@ -302,6 +304,11 @@ angular.module('reg')
         if (requireAdmin && !Session.getUser().admin) {
           event.preventDefault();
           $state.go('app.dashboard');
+        }
+
+        if (requireOwner && !Session.getUser().owner) {
+          event.preventDefault();
+          $state.go('app.checkin');
         }
 
         if (requireVerified && !Session.getUser().verified) {
