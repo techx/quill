@@ -671,8 +671,7 @@ UserController.admitUser = function(id, user, callback){
   Settings.getRegistrationTimes(function(err, times){
     User
       .findOneAndUpdate({
-        _id: id,
-        verified: true
+        _id: id
       },{
         $set: {
           'status.admitted': true,
