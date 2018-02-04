@@ -201,7 +201,14 @@ angular.module('reg')
       })
       .state('app.live', {
         url: "/live",
-        redirectTo: 'app.schedule',
+        redirectTo: 'app.expo',
+        data: {
+          requireLogin: false
+        }
+      })
+      .state('app.expoRedirect', {
+        url: "/expo",
+        redirectTo: 'app.expo',
         data: {
           requireLogin: false
         }
