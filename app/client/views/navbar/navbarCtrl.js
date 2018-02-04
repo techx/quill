@@ -10,7 +10,7 @@ angular.module('reg')
     'EVENT_INFO',
     function($rootScope, $scope, $state, settings, Utils, AuthService, Session, EVENT_INFO){
       var transparentNavbarViews = ['app.home', 'app.login', 'app.sponsor', 'app.mentor']
-      var liveViews = ['app.live', 'app.schedule']
+      var liveViews = ['app.live', 'app.schedule', 'app.expo']
 
       var Settings = settings.data;
 
