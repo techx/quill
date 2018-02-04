@@ -112,6 +112,12 @@
         ng-if="currentUser.verified && currentUser.admin">
         ADMIN
       </a>
+      <a
+        ui-sref-active="menu-item-active"
+        ui-sref="app.expo"
+        class="menu-item menu-item--sponsor">
+        EXPO
+      </a>
     </div>
   </div>
 
@@ -253,6 +259,13 @@
         ng-if="currentUser.verified && currentUser.admin"
         ng-click="onMenuClick()">
         ADMIN
+      </a>
+      <a
+        ui-sref-active="menu-item-active"
+        ui-sref="app.expo"
+        class="menu-item"
+        ng-click="onMenuClick()">
+        EXPO
       </a>
     </div>
   </div>

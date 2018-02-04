@@ -201,7 +201,14 @@ angular.module('reg')
       })
       .state('app.live', {
         url: "/live",
-        redirectTo: 'app.schedule',
+        redirectTo: 'app.expo',
+        data: {
+          requireLogin: false
+        }
+      })
+      .state('app.expoRedirect', {
+        url: "/expo",
+        redirectTo: 'app.expo',
         data: {
           requireLogin: false
         }
@@ -210,6 +217,14 @@ angular.module('reg')
         url: "/live/schedule",
         templateUrl: "views/live/schedule.html",
         controller: 'ScheduleCtrl',
+        data: {
+          requireLogin: false
+        }
+      })
+      .state('app.expo', {
+        url: "/live/expo",
+        templateUrl: "views/live/expo.html",
+        controller: 'ExpoCtrl',
         data: {
           requireLogin: false
         }
@@ -333,7 +348,7 @@ angular.module('reg')
 
         if (toState.name === 'app.live') {
           event.preventDefault();
-          $state.go('app.schedule');
+          $state.go('app.expo');
         }
 
       });

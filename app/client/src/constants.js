@@ -5,6 +5,10 @@ angular.module('reg')
         START_TIME: '21:00',
         END_DATE: 'Feb 4, 2018',
         END_TIME: '10:00',
+        EXPO_START_DATE: 'Feb 4, 2018',
+        EXPO_START_TIME: '12:00',
+        EXPO_END_DATE: 'Feb 4, 2018',
+        EXPO_END_TIME: '14:30',
     })
     .constant('DASHBOARD', {
         UNVERIFIED: 'You should have received an email asking you verify your email. Click the link in the email and you can start your application!',
