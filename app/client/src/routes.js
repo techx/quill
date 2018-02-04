@@ -214,6 +214,14 @@ angular.module('reg')
           requireLogin: false
         }
       })
+      .state('app.expo', {
+        url: "/live/expo",
+        templateUrl: "views/live/expo.html",
+        controller: 'ExpoCtrl',
+        data: {
+          requireLogin: false
+        }
+      })
       .state('reset', {
         url: "/reset/:token",
         templateUrl: "views/reset/reset.html",
@@ -333,7 +341,7 @@ angular.module('reg')
 
         if (toState.name === 'app.live') {
           event.preventDefault();
-          $state.go('app.schedule');
+          $state.go('app.expo');
         }
 
       });
