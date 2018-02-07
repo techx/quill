@@ -4,6 +4,11 @@ angular.module('reg')
     'UserService',
     function($scope, UserService){
       $scope.loading = true;
+      $scope.user = {};
 
-      $scope.user = UserService.getCurrentUser();
-    }]);
+      UserService
+      .getCurrentUser()
+      .success(function(data){
+        $scope.user = data;
+      });
+}]);

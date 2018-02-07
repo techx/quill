@@ -153,6 +153,9 @@ angular.module('reg')
         url: "/admin/email",
         templateUrl: "views/admin/email/email.html",
         controller: 'AdminEmailCtrl',
+        data: {
+          requireAdmin: true
+        },
       })
       .state('app.mlhterms', {
         url: "/mlh-terms-and-conditions",
