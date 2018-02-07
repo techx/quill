@@ -125,14 +125,6 @@ function calculateStats(){
           newStats.demo.year[user.profile.schoolYear] += 1;
         }
 
-        // Grab the team name if there is one
-        // if (user.teamCode && user.teamCode.length > 0){
-        //   if (!newStats.teams[user.teamCode]){
-        //     newStats.teams[user.teamCode] = [];
-        //   }
-        //   newStats.teams[user.teamCode].push(user.profile.name);
-        // }
-
         // Count shirt sizes
         if (user.profile.shirtSize in newStats.shirtSizes){
           newStats.shirtSizes[user.profile.shirtSize] += 1;
