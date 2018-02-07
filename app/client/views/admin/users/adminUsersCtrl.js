@@ -16,9 +16,10 @@ angular.module('reg')
       $('.ui.dimmer').remove();
       // Populate the size of the modal for when it appears, with an arbitrary user.
       $scope.selectedUser = {};
-      $scope.selectedUser.sections = generateSections({status: '', confirmation: {
-        dietaryRestrictions: []
-      }, profile: ''});
+      $scope.selectedUser.sections = generateSections({status: '', confirmation: '', profile: {
+        dietaryRestrictions: [],
+        emergencyContact: []
+      }});
 
       function updatePage(data){
         $scope.users = data.users;
@@ -67,7 +68,7 @@ angular.module('reg')
         if (!user.status.checkedIn){
           swal({
             title: "Whoa, wait a minute!",
-            text: "You are about to check in " + user.profile.name + "!",
+            text: "You are about to check in " + user.profile.firstName + " " + user.profile.lastName + "!",
             type: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
@@ -79,7 +80,7 @@ angular.module('reg')
                 .checkIn(user._id)
                 .success(function(user){
                   $scope.users[index] = user;
-                  swal("Accepted", user.profile.name + ' has been checked in.', "success");
+                  swal("Accepted", user.profile.firstName + ' ' + user.profile.lastName + ' has been checked in.', "success");
                 });
             }
           );
@@ -88,7 +89,7 @@ angular.module('reg')
             .checkOut(user._id)
             .success(function(user){
               $scope.users[index] = user;
-              swal("Accepted", user.profile.name + ' has been checked out.', "success");
+              swal("Accepted", user.profile.firstName + ' ' + user.profile.lastName + ' has been checked out.', "success");
             });
         }
       };
@@ -98,7 +99,7 @@ angular.module('reg')
 
         swal({
           title: "Whoa, wait a minute!",
-          text: "You are about to accept " + user.profile.name + "!",
+          text: "You are about to accept " + user.profile.firstName + ' ' + user.profile.lastName + "!",
           type: "warning",
           showCancelButton: true,
           confirmButtonColor: "#DD6B55",
@@ -121,7 +122,7 @@ angular.module('reg')
                   .admitUser(user._id)
                   .success(function(user){
                     $scope.users[index] = user;
-                    swal("Accepted", user.profile.name + ' has been admitted.', "success");
+                    swal("Accepted", user.profile.firstName + ' ' + user.profile.lastName + ' has been admitted.', "success");
                   });
 
               });
@@ -175,117 +176,134 @@ angular.module('reg')
               },{
                 name: 'Email',
                 value: user.email
-              },{
-                name: 'Team',
-                value: user.teamCode || 'None'
               }
             ]
           },{
             name: 'Profile',
             fields: [
               {
-                name: 'Name',
-                value: user.profile.name
+                name: 'First Name',
+                value: user.profile.firstName
+              },{
+                name: 'Last Name',
+                value: user.profile.lastName
+              },{
+                name: 'Phone Number',
+                value: user.profile.phoneNumber
               },{
                 name: 'Gender',
                 value: user.profile.gender
               },{
-                name: 'School',
-                value: user.profile.school
-              },{
-                name: 'Graduation Year',
-                value: user.profile.graduationYear
-              },{
-                name: 'Description',
-                value: user.profile.description
-              },{
-                name: 'Essay',
-                value: user.profile.essay
-              }
-            ]
-          },{
-            name: 'Confirmation',
-            fields: [
-              {
-                name: 'Phone Number',
-                value: user.confirmation.phoneNumber
-              },{
-                name: 'Dietary Restrictions',
-                value: user.confirmation.dietaryRestrictions.join(', ')
+                name: 'Adult',
+                value: user.profile.adult,
               },{
                 name: 'Shirt Size',
-                value: user.confirmation.shirtSize
+                value: user.profile.shirtSize,
+              }
+            ]
+          },{
+            name: 'Emergency Contact',
+            fields: [
+              {
+                name: 'Name',
+                value: user.profile.emergencyContact.name
+              }, {
+                name: 'Work Number',
+                value: user.profile.emergencyContact.workNumber
+              }, {
+                name: 'Cell Number',
+                value: user.profile.emergencyContact.cellNumber
+              }, {
+                name: 'Relationship',
+                value: user.profile.emergencyContact.relationship
+              }
+            ]
+          },{
+            name: 'School',
+            fields: [
+              {
+                name: 'School Name',
+                value: user.profile.school
+              },{
+                name: 'School Year',
+                value: user.profile.schoolYear
               },{
                 name: 'Major',
-                value: user.confirmation.major
+                value: user.profile.major
               },{
-                name: 'Github',
-                value: user.confirmation.github
-              },{
-                name: 'Website',
-                value: user.confirmation.website
-              },{
-                name: 'Needs Hardware',
-                value: user.confirmation.wantsHardware,
-                type: 'boolean'
-              },{
-                name: 'Hardware Requested',
-                value: user.confirmation.hardware
+                name: 'Minor',
+                value: user.profile.minor
               }
             ]
           },{
-            name: 'Hosting',
+            name: 'Logistics',
             fields: [
               {
-                name: 'Needs Hosting Friday',
-                value: user.confirmation.hostNeededFri,
-                type: 'boolean'
+                name: 'Dietary Restrictions',
+                value: user.profile.dietaryRestrictions.join(', ')
               },{
-                name: 'Needs Hosting Saturday',
-                value: user.confirmation.hostNeededSat,
-                type: 'boolean'
-              },{
-                name: 'Gender Neutral',
-                value: user.confirmation.genderNeutral,
-                type: 'boolean'
-              },{
-                name: 'Cat Friendly',
-                value: user.confirmation.catFriendly,
-                type: 'boolean'
-              },{
-                name: 'Smoking Friendly',
-                value: user.confirmation.smokingFriendly,
-                type: 'boolean'
-              },{
-                name: 'Hosting Notes',
-                value: user.confirmation.hostNotes
-              }
-            ]
-          },{
-            name: 'Travel',
-            fields: [
-              {
                 name: 'Needs Reimbursement',
-                value: user.confirmation.needsReimbursement,
+                value: user.profile.needsReimbursement,
                 type: 'boolean'
               },{
-                name: 'Received Reimbursement',
-                value: user.confirmation.needsReimbursement && user.status.reimbursementGiven
+                name: 'Reimbursement Location',
+                value: user.profile.reimbursementYes,
+              }
+            ]
+          },{
+            name: 'Bitcamp',
+            fields: [
+              {
+                name: 'Number of Hackathons',
+                value: user.profile.amtHackathons,
+              }, {
+                name: 'Why Bitcamp',
+                value: user.profile.whyBitcamp
               },{
-                name: 'Address',
-                value: user.confirmation.address ? [
-                  user.confirmation.address.line1,
-                  user.confirmation.address.line2,
-                  user.confirmation.address.city,
-                  ',',
-                  user.confirmation.address.state,
-                  user.confirmation.address.zip,
-                  ',',
-                  user.confirmation.address.country,
-                ].join(' ') : ''
+                name: 'Build at Bitcamp',
+                value: user.profile.buildBitcamp
+              }
+            ]
+          },{
+            name: 'Professional',
+            fields: [
+              {
+                name: "Interested In",
+                value: user.profile.interestedIn
               },{
-                name: 'Additional Notes',
-                value: user.confirmation.notes
+                name: "Github",
+                value: user.profile.github
+              },{
+                name: "Devpost",
+                value: user.profile.devpost
+              },{
+                name: "Website",
+                value: user.profile.website
+              }
+            ]
+          },{
+            name: 'Legal',
+            fields: [
+              {
+                name: 'Code of Conduct',
+                value: user.profile.mlhCOC,
+                type: 'boolean'
+              },{
+                name: 'Terms and Conditions',
+                value: user.profile.mlhTAC,
+                type: 'boolean'
+              },{
+                name: 'Waiver',
+                value: user.profile.bitcampWaiver,
+                type: 'boolean'
+              }
+            ]
+          },{
+            name: 'Additional',
+            fields: [
+              {
+                name: 'Anything Else',
+                value: user.profile.additional
               }
             ]
           }

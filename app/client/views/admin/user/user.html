@@ -1,7 +1,7 @@
 <div class="ui top attached segment">
 
   <div class="ui header">
-    {{selectedUser.profile.name ? selectedUser.profile.name : selectedUser.email}}
+    {{selectedUser.profile.firstName && selectedUser.profile.lastName ? selectedUser.profile.firstName + " " + selectedUser.profile.lastName : selectedUser.email}}
     <span
       ng-show="selectedUser.admin">
       (Admin)
@@ -83,10 +83,17 @@
       </div>
 
       <div class="field">
-        <label> Full Name </label>
+        <label> First Name </label>
         <input type="text"
                name="name"
-               ng-model="selectedUser.profile.name">
+               ng-model="selectedUser.profile.firstName">
+      </div>
+
+      <div class="field">
+        <label> Last Name </label>
+        <input type="text"
+               name="name"
+               ng-model="selectedUser.profile.lastName"
       </div>
 
       <div class="field" ng-show="autoFilledSchool">
