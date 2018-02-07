@@ -239,11 +239,15 @@ function buildStatusQueries(statusFilters) {
     if (statusFilters.hasOwnProperty(key)) {
       // Convert to boolean
       const hasStatus = (statusFilters[key] === 'true');
+      const inclusion = (key.indexOf('not', 0) == -1);
+      // Remove the not
+      if (key.indexOf('not', 0)  != -1){ key = key.substring(3); }
       if (hasStatus) {
         var q = {};
         // Verified is a prop on user object
         var queryKey = (key === 'verified' ? key : 'status.' + key);
-        q[queryKey] = true;
+        console.log(queryKey + ":" + inclusion);
+        q[queryKey] = inclusion;
         queries.push(q);
       }
     }

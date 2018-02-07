@@ -24,17 +24,67 @@
               <div class="ui checkbox">
                   <input 
                   type="checkbox"
-                  name="completedProfile"
+                  name="notCompletedProfile"
+                  ng-model="statusFilters.notcompletedProfile"
+                  ng-change="applyStatusFilter()">
+                  <label>Hasn't Completed Profile</label>
+              </div>
+          </div>
+          <div class="field">
+            <div class="ui checkbox">
+              <input
+              type="checkbox"
+              name="notVerified"
+              ng-model="statusFilters.notverified"
+              ng-change="applyStatusFilter()">
+              <label>Not Verified</label>
+            </div>
+          </div>
+          <div class="field">
+              <div class="ui checkbox">
+                  <input
+                  type="checkbox"
+                  name="notAdmitted"
+                  ng-model="statusFilters.notadmitted"
+                  ng-change="applyStatusFilter()">
+                  <label>Not Admitted</label>
+              </div>
+          </div>
+          <div class="field">
+              <div class="ui checkbox">
+                  <input
+                  type="checkbox"
+                  name="notConfirmed"
+                  ng-model="statusFilters.notconfirmed"
+                  ng-change="applyStatusFilter()">
+                  <label>Not Confirmed</label>
+              </div>
+          </div>
+          <div class="field">
+              <div class="ui checkbox">
+                  <input
+                  type="checkbox"
+                  name="notCompletedProfile"
                   ng-model="statusFilters.completedProfile"
                   ng-change="applyStatusFilter()">
                   <label>Completed Profile</label>
               </div>
           </div>
           <div class="field">
+            <div class="ui checkbox">
+              <input
+              type="checkbox"
+              name="notVerified"
+              ng-model="statusFilters.verified"
+              ng-change="applyStatusFilter()">
+              <label>Verified</label>
+            </div>
+          </div>
+          <div class="field">
               <div class="ui checkbox">
                   <input 
                   type="checkbox"
-                  name="admitted"
+                  name="notAdmitted"
                   ng-model="statusFilters.admitted"
                   ng-change="applyStatusFilter()">
                   <label>Admitted</label>
@@ -44,7 +94,7 @@
               <div class="ui checkbox">
                   <input 
                   type="checkbox"
-                  name="confirmed"
+                  name="notConfirmed"
                   ng-model="statusFilters.confirmed"
                   ng-change="applyStatusFilter()">
                   <label>Confirmed</label>
@@ -78,16 +128,6 @@
                   ng-model="statusFilters.reimbursementGiven"
                   ng-change="applyStatusFilter()">
                   <label>Reimbursement Given</label>
-              </div>
-          </div>
-          <div class="field">
-              <div class="ui checkbox">
-                  <input 
-                  type="checkbox"
-                  name="verified"
-                  ng-model="statusFilters.verified"
-                  ng-change="applyStatusFilter()">
-                  <label>Verified</label>
               </div>
           </div>
         </div>
