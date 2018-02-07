@@ -11,25 +11,26 @@
         <div class="divided title">Personal Details</div>
         <div class="field">
           <label>Email</label>
-          <input type="email" disabled="disabled" ng-model="user.email">
+          <input type="email" name="email" disabled="disabled" ng-model="user.email">
         </div>
         <div class="field">
           <label>First Name</label>
-          <input type="text" ng-model="user.profile.firstName">
+          <input type="text" name="firstName" ng-model="user.profile.firstName">
         </div>
         <div class="field">
           <label>Last Name</label>
-          <input type="text" ng-model="user.profile.lastName">
+          <input type="text" name="lastName" ng-model="user.profile.lastName">
         </div>
         <div class="field">
           <label>What's your phone number? (required)</label>
           <p>We need this in case we need to get ahold of you!</p>
-          <input required type="tel" ng-model="user.profile.phoneNumber"
+          <input required type="tel" name="phoneNumber"
+                  ng-model="user.profile.phoneNumber"
                   placeholder="(123) - 555 - 1234">
         </div>
         <div class="field">
           <label>Gender</label>
-          <select ng-model="user.profile.gender">
+          <select name="gender" ng-model="user.profile.gender">
             <option value="">Gender</option>
             <option value="M">Male</option>
             <option value="F">Female</option>
@@ -51,7 +52,7 @@
             </strong>
           </p>
           <div class="ui checkbox">
-            <input type="checkbox" id="adult" ng-model="user.profile.adult">
+            <input type="checkbox" name="adult" id="adult" ng-model="user.profile.adult">
             <label for="adult">I am 18 or older OR I am part of the officially-sanctioned bitcamp minor program.</label>
           </div>
         </div>
@@ -59,7 +60,7 @@
         <div class="field">
           <label>Shirt Size (required)</label>
           <p>Let's get you some swag!</p>
-          <select required ng-model="user.profile.shirtSize">
+          <select required name="shirtSize" ng-model="user.profile.shirtSize">
             <option value="">Shirt Size</option>
             <option value="XS">X-Small</option>
             <option value="S">Small</option>
@@ -74,19 +75,19 @@
         <div class="divided title">Emergency Contact</div>
         <div class="field">
           <label>Name</label>
-          <input type="text" ng-model="user.profile.emergencyContact.name">
+          <input type="text" name="emName" ng-model="user.profile.emergencyContact.name">
         </div>
         <div class="field">
           <label>Work Phone</label>
-          <input type="text" ng-model="user.profile.emergencyContact.workNumber">
+          <input type="text" name="emWorkPhone" ng-model="user.profile.emergencyContact.workNumber">
         </div>
         <div class="field">
           <label>Cell Phone</label>
-          <input type="text" ng-model="user.profile.emergencyContact.cellNumber">
+          <input type="text" name="emCellPhone" ng-model="user.profile.emergencyContact.cellNumber">
         </div>
         <div class="field">
           <label>Relationship</label>
-          <input type="text" ng-model="user.profile.emergencyContact.relationship">
+          <input type="text" name="relation" ng-model="user.profile.emergencyContact.relationship">
         </div>
 
         <!-- SCHOOL -->
@@ -96,6 +97,7 @@
           <label> School </label>
           <input class="ui input"
                  disabled="disabled"
+                 name="school"
                  ng-show="autoFilledSchool"
                  ng-model="user.profile.school">
         </div>
@@ -128,6 +130,7 @@
         <div class="field">
           <label>Major(s)</label>
           <input type="text"
+                 name="major"
                   placeholder="e.g, Computer Science, Finance"
                   ng-model="user.profile.major">
         </div>
@@ -182,6 +185,7 @@
         <div class="field">
           <label>Why are you interested in attending Bitcamp?</label>
           <input type="text" ng-model="user.profile.whyBitcamp"
+                  name="whyBitcamp"
                   placeholder="Learning a new language, creating a hack to address a specific problem, etc." />
         </div>
         <div class="field">
@@ -223,7 +227,7 @@
         <div class="field">
           <label>Code of Conduct</label>
           <div class="ui checkbox">
-            <input type="checkbox" ng-model="user.profile.mlhCOC">
+            <input type="checkbox" name="mlhCOC" ng-model="user.profile.mlhCOC">
           <label>
                 I have read and agree to the terms of the Major League Hacking 
                 <a target="_blank" href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf">Code of Conduct</a>
@@ -233,7 +237,7 @@
         <div class="field">
           <label>Terms and Conditions</label>
           <div class="ui checkbox">
-            <input type="checkbox" ng-model="user.profile.mlhTAC">
+            <input type="checkbox" name="mlhTAC" ng-model="user.profile.mlhTAC">
             <label>
                 I have read and agree to the terms of both the 
                   <a target="_blank" href="https://github.com/MLH/mlh-policies/blob/master/prize-terms-and-conditions/contest-terms.md">
@@ -251,7 +255,7 @@
         <div class="field">
           <label>Waiver</label>
           <div class="ui checkbox">
-            <input type="checkbox" ng-model="user.profile.bitcampWaiver">
+            <input type="checkbox" name="bitcampWaiver" ng-model="user.profile.bitcampWaiver">
             <label>
               Please confirm that you agree to the terms of the Bitcamp Waiver.
             </label>

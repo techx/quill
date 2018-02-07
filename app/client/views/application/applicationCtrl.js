@@ -140,12 +140,21 @@ angular.module('reg')
         // Semantic-UI form validation
         $('.ui.form').form({
           fields: {
-            name: {
-              identifier: 'name',
+            firstName: {
+              identifier: 'firstName',
               rules: [
                 {
                   type: 'empty',
-                  prompt: 'Please enter your name.'
+                  prompt: 'Please enter your first name.'
+                }
+              ]
+            },
+            lastName: {
+              identifier: 'lastName',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please enter your last name.'
                 }
               ]
             },
@@ -181,10 +190,64 @@ angular.module('reg')
               rules: [
                 {
                   type: 'allowMinors',
-                  prompt: 'You must be an adult, or an MIT student.'
+                  prompt: 'You must be an adult, or a UMD student.'
                 }
               ]
-            }
+            },
+            phoneNumber: {
+              identifier: 'phoneNumber',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please enter your phone number.'
+                }
+              ]
+            },
+            shirtSize: {
+              identifier: 'shirtSize',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please enter your shirt size.'
+                }
+              ]
+            },
+            major: {
+              identifier: 'major',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please enter your major.'
+                }
+              ]
+            },
+            mlhCOC: {
+              identifier: 'mlhCOC',
+              rules: [
+                {
+                  type: 'checked',
+                  prompt: 'Please accpet the code of conduct.'
+                }
+              ]
+            },
+            mlhTAC: {
+              identifier: 'mlhTAC',
+              rules: [
+                {
+                  type: 'checked',
+                  prompt: 'Please accpet the terms and conditions.'
+                }
+              ]
+            },
+            bitcampWaiver: {
+              identifier: 'bitcampWavier',
+              rules: [
+                {
+                  type: 'checked',
+                  prompt: 'Please accpet the Bitcamp wavier.'
+                }
+              ]
+            },
           }
         });
       }
