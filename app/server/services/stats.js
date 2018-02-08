@@ -19,10 +19,12 @@ function calculateStats(){
       },
       schools: {},
       year: {
-        '2016': 0,
-        '2017': 0,
-        '2018': 0,
-        '2019': 0,
+        'High-School': 0,
+        'Freshman': 0,
+        'Sophomore': 0,
+        'Junior': 0,
+        'Senior': 0,
+        'Graduated': 0,
       }
     },
 
@@ -46,30 +48,13 @@ function calculateStats(){
       'L': 0,
       'XL': 0,
       'XXL': 0,
-      'WXS': 0,
-      'WS': 0,
-      'WM': 0,
-      'WL': 0,
-      'WXL': 0,
-      'WXXL': 0,
       'None': 0
     },
 
     dietaryRestrictions: {},
 
-    hostNeededFri: 0,
-    hostNeededSat: 0,
-    hostNeededUnique: 0,
-
-    hostNeededFemale: 0,
-    hostNeededMale: 0,
-    hostNeededOther: 0,
-    hostNeededNone: 0,
-
     reimbursementTotal: 0,
     reimbursementMissing: 0,
-
-    wantsHardware: 0,
 
     checkedIn: 0
   };
@@ -115,14 +100,11 @@ function calculateStats(){
         newStats.declined += user.status.declined ? 1 : 0;
 
         // Count the number of people who need reimbursements
-        newStats.reimbursementTotal += user.confirmation.needsReimbursement ? 1 : 0;
+        newStats.reimbursementTotal += user.profile.needsReimbursement ? 1 : 0;
 
         // Count the number of people who still need to be reimbursed
-        newStats.reimbursementMissing += user.confirmation.needsReimbursement &&
+        newStats.reimbursementMissing += user.profile.needsReimbursement &&
           !user.status.reimbursementGiven ? 1 : 0;
-
-        // Count the number of people who want hardware
-        newStats.wantsHardware += user.confirmation.wantsHardware ? 1 : 0;
 
         // Count schools
         if (!newStats.demo.schools[email]){
@@ -138,41 +120,19 @@ function calculateStats(){
         newStats.demo.schools[email].confirmed += user.status.confirmed ? 1 : 0;
         newStats.demo.schools[email].declined += user.status.declined ? 1 : 0;
 
-        // Count graduation years
-        if (user.profile.graduationYear){
-          newStats.demo.year[user.profile.graduationYear] += 1;
+        // Count school years
+        if (user.profile.schoolYear){
+          newStats.demo.year[user.profile.schoolYear] += 1;
         }
-
-        // Grab the team name if there is one
-        // if (user.teamCode && user.teamCode.length > 0){
-        //   if (!newStats.teams[user.teamCode]){
-        //     newStats.teams[user.teamCode] = [];
-        //   }
-        //   newStats.teams[user.teamCode].push(user.profile.name);
-        // }
 
         // Count shirt sizes
-        if (user.confirmation.shirtSize in newStats.shirtSizes){
-          newStats.shirtSizes[user.confirmation.shirtSize] += 1;
+        if (user.profile.shirtSize in newStats.shirtSizes){
+          newStats.shirtSizes[user.profile.shirtSize] += 1;
         }
 
-        // Host needed counts
-        newStats.hostNeededFri += user.confirmation.hostNeededFri ? 1 : 0;
-        newStats.hostNeededSat += user.confirmation.hostNeededSat ? 1 : 0;
-        newStats.hostNeededUnique += user.confirmation.hostNeededFri || user.confirmation.hostNeededSat ? 1 : 0;
-
-        newStats.hostNeededFemale
-          += (user.confirmation.hostNeededFri || user.confirmation.hostNeededSat) && user.profile.gender == "F" ? 1 : 0;
-        newStats.hostNeededMale
-          += (user.confirmation.hostNeededFri || user.confirmation.hostNeededSat) && user.profile.gender == "M" ? 1 : 0;
-        newStats.hostNeededOther
-          += (user.confirmation.hostNeededFri || user.confirmation.hostNeededSat) && user.profile.gender == "O" ? 1 : 0;
-        newStats.hostNeededNone
-          += (user.confirmation.hostNeededFri || user.confirmation.hostNeededSat) && user.profile.gender == "N" ? 1 : 0;
-
         // Dietary restrictions
-        if (user.confirmation.dietaryRestrictions){
-          user.confirmation.dietaryRestrictions.forEach(function(restriction){
+        if (user.profile.dietaryRestrictions){
+          user.profile.dietaryRestrictions.forEach(function(restriction){
             if (!newStats.dietaryRestrictions[restriction]){
               newStats.dietaryRestrictions[restriction] = 0;
             }

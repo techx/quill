@@ -2,35 +2,102 @@
   <div class="divided title">
     Application
   </div>
-
   <div class="ui stackable page grid">
     <div class="column">
-      <div class="ui form"
-            ng-class="{'loading': loading}">
-
-        <div class="divided title">Basic Information</div>
-
+      <div class="ui form" ng-class="{'loading': loading}">
         <fieldset ng-disabled="regIsClosed">
 
+        <!-- PERSONAL INFORMATION -->
+        <div class="divided title">Personal Details</div>
         <div class="field">
-          <label> Email </label>
-          <input type="email"
-                 name="email"
-                 disabled="disabled"
-                 ng-model="user.email">
+          <label>Email</label>
+          <input type="email" name="email" disabled="disabled" ng-model="user.email">
+        </div>
+        <div class="field">
+          <label>First Name</label>
+          <input type="text" name="firstName" ng-model="user.profile.firstName">
+        </div>
+        <div class="field">
+          <label>Last Name</label>
+          <input type="text" name="lastName" ng-model="user.profile.lastName">
+        </div>
+        <div class="field">
+          <label>What's your phone number? (required)</label>
+          <p>We need this in case we need to get ahold of you!</p>
+          <input required type="tel" name="phoneNumber"
+                  ng-model="user.profile.phoneNumber"
+                  placeholder="(123) - 555 - 1234">
+        </div>
+        <div class="field">
+          <label>Gender</label>
+          <select name="gender" ng-model="user.profile.gender">
+            <option value="">Gender</option>
+            <option value="M">Male</option>
+            <option value="F">Female</option>
+            <option value="O">Other</option>
+            <option value="N">I prefer not to answer</option>
+          </select>
+        </div>
+
+        <!-- TODO: hide for UMD students, or remove hide altogether -->
+        <div class="field"
+            ng-hide="isMitStudent">
+          <p>
+            Because of limitations imposed by UMD, we are not legally allowed to host
+            non-UMD minors (those under 18) for Bitcamp. Checking the box below affirms that you are or will be 18 years or older by April 6th, 2018.
+          </p>
+          <p>
+            <strong>
+            We will be checking ID. If you are a non-UMD minor, you will be turned away at the door.
+            </strong>
+          </p>
+          <div class="ui checkbox">
+            <input type="checkbox" name="adult" id="adult" ng-model="user.profile.adult">
+            <label for="adult">I am 18 or older OR I am part of the officially-sanctioned bitcamp minor program.</label>
+          </div>
         </div>
 
         <div class="field">
-          <label> Full Name </label>
-          <input type="text"
-                 name="name"
-                 ng-model="user.profile.name">
+          <label>Shirt Size (required)</label>
+          <p>Let's get you some swag!</p>
+          <select required name="shirtSize" ng-model="user.profile.shirtSize">
+            <option value="">Shirt Size</option>
+            <option value="XS">X-Small</option>
+            <option value="S">Small</option>
+            <option value="M">Medium</option>
+            <option value="L">Large</option>
+            <option value="XL">X-Large</option>
+            <option value="XXL">XX-Large</option>
+          </select>
         </div>
+
+        <!-- TODO: add emergency contact -->
+        <div class="divided title">Emergency Contact</div>
+        <div class="field">
+          <label>Name</label>
+          <input type="text" name="emName" ng-model="user.profile.emergencyContact.name">
+        </div>
+        <div class="field">
+          <label>Work Phone</label>
+          <input type="text" name="emWorkPhone" ng-model="user.profile.emergencyContact.workNumber">
+        </div>
+        <div class="field">
+          <label>Cell Phone</label>
+          <input type="text" name="emCellPhone" ng-model="user.profile.emergencyContact.cellNumber">
+        </div>
+        <div class="field">
+          <label>Relationship</label>
+          <input type="text" name="relation" ng-model="user.profile.emergencyContact.relationship">
+        </div>
+
+        <!-- SCHOOL -->
+        <div class="divided title">School</div>
 
         <div class="field" ng-show="autoFilledSchool">
           <label> School </label>
           <input class="ui input"
                  disabled="disabled"
+                 name="school"
                  ng-show="autoFilledSchool"
                  ng-model="user.profile.school">
         </div>
@@ -46,68 +113,168 @@
         </div>
 
         <div class="field">
-          <label>Graduation Year</label>
+          <label>Year In School</label>
           <select
             name="year"
-            ng-model="user.profile.graduationYear">
+            ng-model="user.profile.schoolYear">
             <option value="">Graduation Year</option>
-            <option value="2016">2016</option>
-            <option value="2017">2017</option>
-            <option value="2018">2018</option>
-            <option value="2019">2019</option>
+            <option value="High-School">High School</option>
+            <option value="Freshman">Freshman</option>
+            <option value="Sophomore">Sophomore</option>
+            <option value="Junior">Junior</option>
+            <option value="Senior">Senior</option>
+            <option value="Grad-Student">Grad Student</option>
+            <option value="Graduated">Graduated</option>
           </select>
         </div>
 
         <div class="field">
-          <label>Gender</label>
-          <select
-            name="gender"
-            ng-model="user.profile.gender">
-            <option value="">Gender</option>
-            <option value="M">Male</option>
-            <option value="F">Female</option>
-            <option value="O">Other</option>
-            <option value="N">I prefer not to answer.</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label>I would describe myself as a...</label>
+          <label>Major(s)</label>
           <input type="text"
-                 placeholder="Designer, Data Scientist, iOS Wizard, Hacker Extraordinaire"
-                 ng-model="user.profile.description">
+                 name="major"
+                  placeholder="e.g, Computer Science, Finance"
+                  ng-model="user.profile.major">
         </div>
 
         <div class="field">
-          <label>
-              What would you like to learn or get out of HackMIT? (optional)
-          </label>
-          <textarea ng-model="user.profile.essay">
-          </textarea>
+          <label>Minor(s)</label>
+          <input type="text"
+                  placeholder=""
+                  ng-model="user.profile.minor">
+        </div>
+        
+        <!-- LOGISTICS -->
+        <div class="divided title">Logistics</div>
+        <div class="field">
+          <label>Dietary Restrictions</label>
+          <p>If your restriction is not included here, please let us know in the additional notes at the bottom. We'll make sure you get fed :)</p>
+        </div>
+        <div class="inline fields">
+          <div class="field" ng-repeat="(key, value) in dietaryRestrictions">
+            <div class="ui checkbox">
+              <input type="checkbox" ng-model="dietaryRestrictions[key]" />
+              <label>{{key}}</label>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <p><strong>Will you need a travel reimbursement?</strong></p>
+          <div class="ui checkbox">
+            <input type="checkbox" ng-model="user.profile.needsReimbursement">
+            <label>Yes, I will need a travel reimbursement</label>
+          </div>
+        </div>
+        <div class="field">
+            <label>If you need a travel reimbursement, where are you coming from?</label>
+            <input type="text" placeholder="e.g, Regina, Saskatchewan, Canada" ng-model="user.profile.reimbursementYes">
         </div>
 
-        <div class="field"
-             ng-hide="isMitStudent">
-          <p>
-            Because of limitations imposed by MIT, we are not legally allowed to host
-            non-MIT minors (those under 18) for HackMIT 2015. Checking the box below affirms that you are or will be 18 years or older by September 19th, 2015.
-          </p>
-          <p>
-            <strong>
-            We will be checking ID. If you are a non-MIT minor, you will be turned away at the door.
-            </strong>
-          </p>
+        <!-- BITCAMP -->
+        <div class="divided title">Bitcamp</div>
+        <div class="field">
+          <label>How many hackathons have you attended?</label>
+          <select name="Number Hackthons" ng-model="user.profile.amtHackathons">
+            <option value="">Select an option...</option>
+            <option value="0">0</option>
+            <option value="1-5">1-5</option>
+            <option value="6-10">6-10</option>
+            <option value="11-15">11-15</option>
+            <option value="16-20">16-20</option>
+            <option value="20+">20+</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Why are you interested in attending Bitcamp?</label>
+          <input type="text" ng-model="user.profile.whyBitcamp"
+                  name="whyBitcamp"
+                  placeholder="Learning a new language, creating a hack to address a specific problem, etc." />
+        </div>
+        <div class="field">
+          <label>What are you interested in doing or building at Bitcamp?</label>
+          <textarea ng-model="user.profile.buildBitcamp"/>
+        </div>
+
+        <!-- PROFESSIONAL -->
+        <div class="divided title">Professional</div>
+        <div class="field">
+          <label>Are You Interested in Employment Opportunities?</label>
+          <select ng-model="user.profile.interestedIn">
+            <option value="">Select an option...</option>
+            <option value="None">None</option>
+            <option value="Internship">Internship</option>
+            <option value="Full-Time">Full Time</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Resume (required)</label>
+          <p>Upload a resume outlining any skills or experience you'd like to share. PDF preferred!</p>
+          <a class="ui red button" target="_blank" href="https://www.dropbox.com/request/5LTOYVl3Gebh8uam9IUz">Upload</a>
+        </div>
+        <div class="field">
+          <label>Github</label>
+          <input type="text" ng-model="user.profile.github" placeholder="https://github.com/foobar">
+        </div>
+        <div class="field">
+          <label>Devpost</label>
+          <input type="text" ng-model="user.profile.devpost" placeholder="https://devpost.com/foobar">
+        </div>
+        <div class="field">
+          <label>Website</label>
+          <input type="text" ng-model="user.profile.website" placeholder="https://www.example.com">
+        </div>
+
+        <!-- LEGAL -->
+        <div class="divided title">Legal</div>
+        <div class="field">
+          <label>Code of Conduct</label>
           <div class="ui checkbox">
-            <input type="checkbox" id="adult" ng-model="user.profile.adult">
-            <label for="adult">I am 18 or older.</label>
+            <input type="checkbox" name="mlhCOC" ng-model="user.profile.mlhCOC">
+          <label>
+                I have read and agree to the terms of the Major League Hacking 
+                <a target="_blank" href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf">Code of Conduct</a>
+            </label>
           </div>
+        </div>
+        <div class="field">
+          <label>Terms and Conditions</label>
+          <div class="ui checkbox">
+            <input type="checkbox" name="mlhTAC" ng-model="user.profile.mlhTAC">
+            <label>
+                I have read and agree to the terms of both the 
+                  <a target="_blank" href="https://github.com/MLH/mlh-policies/blob/master/prize-terms-and-conditions/contest-terms.md">
+                    MLH Contest Terms and Conditions
+                  </a>
+                and the 
+                  <a target="_blank" href="https://mlh.io/privacy">
+                    MLH Privacy Policy.
+                  </a>
+                Please note that you may receive pre and post-event informational e-mails and occasional messages about hackathons 
+                from MLH as per the MLH Privacy Policy.
+          </label>
+          </div>
+        </div>
+        <div class="field">
+          <label>Waiver</label>
+          <div class="ui checkbox">
+            <input type="checkbox" name="bitcampWaiver" ng-model="user.profile.bitcampWaiver">
+            <label>
+              Please confirm that you agree to the terms detailed in the <a href="http://bit.camp/terms-code-waiver.pdf">Bitcamp Terms, Code of Conduct, and Release Waiver</a>.
+            </label>
+          </div>
+          </div>
+
+        <!-- EXTRA -->
+        <div class="divided title">Additional Info</div>
+        <div class="field">
+            <label>Is there anything else we should know?</label>
+            <textarea ng-model="user.profile.additional"/>
         </div>
 
         <br>
-
+        
         <div class="field" ng-hide="regIsClosed">
           <button type="submit"
-                  class="fluid ui purple button"
+                  class="fluid ui red button"
                   ng-click="submitForm()">
             Submit
           </button>

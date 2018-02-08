@@ -1,3 +1,17 @@
+# Bitcamp Changes
+To use the docker-compose, just run the following:
+* Install docker and docker-compose
+* Run `npm run config` to create a new .env file, or just run `cp .env.config .env`
+* Run `docker-compose up`, which will spin up an instance of mongodb and run the server
+    - Linux users might need to run docker with sudo
+* In your .env file, set the database URI to `DATABASE='mongodb:27017'`
+
+## Running Quill for Bitcamp in Production
+* Create a docker-compose.override.yml file
+* In the override file, add the environment variables `MONGO_INITDB_ROOT_USERNAME` and `MONGO_INITDB_ROOT_PASSWORD`
+  to the mongodb service and update the database URI to `<username>:<password>@mongodb:27017` in .env
+* In the override file, add the port mapping `80:3000` to the quill service
+
 # Quill
 Registration, for hackers!
 

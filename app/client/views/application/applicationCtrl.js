@@ -11,7 +11,8 @@ angular.module('reg')
     function($scope, $rootScope, $state, $http, currentUser, Settings, Session, UserService){
 
       // Set up the user
-      $scope.user = currentUser.data;
+      var user = currentUser.data;
+      $scope.user = user;
 
       // Is the student from MIT?
       $scope.isMitStudent = $scope.user.email.split('@')[1] == 'mit.edu';
@@ -20,6 +21,25 @@ angular.module('reg')
       if ($scope.isMitStudent){
         $scope.user.profile.adult = true;
       }
+
+      var dietaryRestrictions = {
+        'Vegetarian': false,
+        'Vegan': false,
+        'Halal': false,
+        'Kosher': false,
+        'Nut Allergy': false,
+        'Gluten Free': false,
+      };
+
+      if (user.profile.dietaryRestrictions){
+        user.profile.dietaryRestrictions.forEach(function(restriction){
+          if (restriction in dietaryRestrictions){
+            dietaryRestrictions[restriction] = true;
+          }
+        });
+      }
+
+      $scope.dietaryRestrictions = dietaryRestrictions;
 
       // Populate the school dropdown
       populateSchools();
@@ -68,6 +88,16 @@ angular.module('reg')
       }
 
       function _updateUser(e){
+        var profile = $scope.user.profile;
+        // Get the dietary restrictions as an array
+        var drs = [];
+        Object.keys($scope.dietaryRestrictions).forEach(function(key){
+          if ($scope.dietaryRestrictions[key]){
+            drs.push(key);
+          }
+        });
+        profile.dietaryRestrictions = drs;
+
         UserService
           .updateProfile(Session.getUserId(), $scope.user.profile)
           .success(function(data){
@@ -111,12 +141,21 @@ angular.module('reg')
         $('.ui.form').form({
           inline: true,
           fields: {
-            name: {
-              identifier: 'name',
+            firstName: {
+              identifier: 'firstName',
               rules: [
                 {
                   type: 'empty',
-                  prompt: 'Please enter your name.'
+                  prompt: 'Please enter your first name.'
+                }
+              ]
+            },
+            lastName: {
+              identifier: 'lastName',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please enter your last name.'
                 }
               ]
             },
@@ -152,10 +191,64 @@ angular.module('reg')
               rules: [
                 {
                   type: 'allowMinors',
-                  prompt: 'You must be an adult, or an MIT student.'
+                  prompt: 'You must be an adult, or a UMD student.'
                 }
               ]
-            }
+            },
+            phoneNumber: {
+              identifier: 'phoneNumber',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please enter your phone number.'
+                }
+              ]
+            },
+            shirtSize: {
+              identifier: 'shirtSize',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please enter your shirt size.'
+                }
+              ]
+            },
+            major: {
+              identifier: 'major',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please enter your major.'
+                }
+              ]
+            },
+            mlhCOC: {
+              identifier: 'mlhCOC',
+              rules: [
+                {
+                  type: 'checked',
+                  prompt: 'Please accpet the code of conduct.'
+                }
+              ]
+            },
+            mlhTAC: {
+              identifier: 'mlhTAC',
+              rules: [
+                {
+                  type: 'checked',
+                  prompt: 'Please accpet the terms and conditions.'
+                }
+              ]
+            },
+            bitcampWaiver: {
+              identifier: 'bitcampWavier',
+              rules: [
+                {
+                  type: 'checked',
+                  prompt: 'Please accpet the Bitcamp wavier.'
+                }
+              ]
+            },
           }
         });
       }
