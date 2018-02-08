@@ -69,7 +69,7 @@ var profile = {
   schoolYear: {
     type: String,
     enum: {
-      values: 'High-School Freshman Sophomore Junior Senior Graduated'.split(' '),
+      values: 'High-School Freshman Sophomore Junior Senior Grad-Student Graduated'.split(' '),
     }
   },
 
@@ -411,7 +411,7 @@ schema.statics.validateProfile = function(profile, cb){
     profile.lastName.length > 0 &&
     profile.adult &&
     profile.school.length > 0 &&
-    ['High-School', 'Freshman', 'Sophomore', 'Junior', 'Senior', 'Graduated'].indexOf(profile.schoolYear) > -1 &&
+    ['High-School', 'Freshman', 'Sophomore', 'Junior', 'Senior', 'Grad-Student', 'Graduated'].indexOf(profile.schoolYear) > -1 &&
     ['M', 'F', 'O', 'N'].indexOf(profile.gender) > -1
     ));
 };
