@@ -72,7 +72,7 @@
         </div>
 
         <!-- TODO: add emergency contact -->
-        <div class="divided title">Emergency Contact</div>
+        <div class="divided title pad-top">Emergency Contact</div>
         <div class="field">
           <label>Name</label>
           <input type="text" name="emName" ng-model="user.profile.emergencyContact.name">
@@ -91,13 +91,13 @@
         </div>
 
         <!-- SCHOOL -->
-        <div class="divided title">School</div>
+        <div class="divided title pad-top">School</div>
 
         <div class="field" ng-show="!autoFilledSchool">
           <label> School </label>
           <div id="school" class="ui search">
             <div class="ui input">
-              <input class="prompt" type="text" placeholder="School" name="school" ng-model="user.profile.school">                
+              <input class="prompt" type="text" placeholder="School" name="school" ng-model="user.profile.school">
             </div>
             <div class="results"></div>
           </div>
@@ -133,9 +133,9 @@
                   placeholder=""
                   ng-model="user.profile.minor">
         </div>
-        
+
         <!-- LOGISTICS -->
-        <div class="divided title">Logistics</div>
+        <div class="divided title pad-top">Logistics</div>
         <div class="field">
           <label>Dietary Restrictions</label>
           <p>If your restriction is not included here, please let us know in the additional notes at the bottom. We'll make sure you get fed :)</p>
@@ -161,7 +161,7 @@
         </div>
 
         <!-- BITCAMP -->
-        <div class="divided title">Bitcamp</div>
+        <div class="divided title pad-top">Bitcamp</div>
         <div class="field">
           <label>How many hackathons have you attended?</label>
           <select name="Number Hackthons" ng-model="user.profile.amtHackathons">
@@ -186,7 +186,7 @@
         </div>
 
         <!-- PROFESSIONAL -->
-        <div class="divided title">Professional</div>
+        <div class="divided title pad-top">Professional</div>
         <div class="field">
           <label>Are You Interested in Employment Opportunities?</label>
           <select ng-model="user.profile.interestedIn">
@@ -215,13 +215,13 @@
         </div>
 
         <!-- LEGAL -->
-        <div class="divided title">Legal</div>
+        <div class="divided title pad-top">Legal</div>
         <div class="field">
           <label>Code of Conduct</label>
           <div class="ui checkbox">
             <input type="checkbox" name="mlhCOC" ng-model="user.profile.mlhCOC">
           <label>
-                I have read and agree to the terms of the Major League Hacking 
+                I have read and agree to the terms of the Major League Hacking
                 <a target="_blank" href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf">Code of Conduct</a>
             </label>
           </div>
@@ -231,15 +231,15 @@
           <div class="ui checkbox">
             <input type="checkbox" name="mlhTAC" ng-model="user.profile.mlhTAC">
             <label>
-                I have read and agree to the terms of both the 
+                I have read and agree to the terms of both the
                   <a target="_blank" href="https://github.com/MLH/mlh-policies/blob/master/prize-terms-and-conditions/contest-terms.md">
                     MLH Contest Terms and Conditions
                   </a>
-                and the 
+                and the
                   <a target="_blank" href="https://mlh.io/privacy">
                     MLH Privacy Policy.
                   </a>
-                Please note that you may receive pre and post-event informational e-mails and occasional messages about hackathons 
+                Please note that you may receive pre and post-event informational e-mails and occasional messages about hackathons
                 from MLH as per the MLH Privacy Policy.
           </label>
           </div>
@@ -255,14 +255,14 @@
           </div>
 
         <!-- EXTRA -->
-        <div class="divided title">Additional Info</div>
+        <div class="divided title pad-top">Additional Info</div>
         <div class="field">
             <label>Is there anything else we should know?</label>
             <textarea ng-model="user.profile.additional"/>
         </div>
 
         <br>
-        
+
         <div class="field" ng-hide="regIsClosed">
           <button type="submit"
                   class="fluid ui red button"
