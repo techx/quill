@@ -210,6 +210,16 @@ var status = {
     required: true,
     default: false,
   },
+  waitlisted: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
+  didNotConfirm: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
   checkedIn: {
     type: Boolean,
     required: true,
