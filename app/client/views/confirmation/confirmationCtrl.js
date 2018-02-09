@@ -36,7 +36,7 @@ angular.module('reg')
               title: "Woo!",
               text: "You're confirmed!",
               type: "success",
-              confirmButtonColor: "#e76482"
+              confirmButtonColor: "#FF6F3F"
             }, function(){
               $state.go('app.dashboard');
             });

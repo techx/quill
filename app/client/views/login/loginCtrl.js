@@ -50,7 +50,7 @@ angular.module('reg')
           title: "Don't Sweat!",
           text: "An email should be sent to you shortly.",
           type: "success",
-          confirmButtonColor: "#e76482"
+          confirmButtonColor: "#FF6F3F"
         });
       };
 
