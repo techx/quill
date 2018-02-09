@@ -6,12 +6,29 @@
     <div class="column">
       <div class="ui form">
         <fieldset ng-disabled="pastConfirmation">
-
+          <div class="divided title">Trails</div>
+          <div class="field">
+            <label>Are you interested in our <a target="_blank" href="http://bit.camp/#trails">Trails Program</a>?</label>
+            <div class="ui checkbox">
+              <input type="checkbox" ng-model="user.confirmation.interestedTrails">
+              <label>Yes, I am interested in the Trails Program</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>If yes, which trail are you most interesed in?</label>
+            <select name="Number Hackthons" ng-model="user.confirmation.trailChoice">
+              <option value="">Select a trail...</option>
+              <option value="Design">Design</option>
+              <option value="Venture">Venture</option>
+              <option value="Scout">Scout</option>
+            </select>
+          </div>
+          
           <div class="divided title">Everything Else</div>
           <div class="field">
             <label>Additional Notes</label>
             <p>If there's anything else you need to let us know, tell us here!</p>
-            <textarea ng-model="user.confirmation.notes"/>
+            <textarea ng-model="user.confirmation.confirmationAdditional"/>
           </div>
           <div class="field" ng-hide="regIsClosed">
             <button type="submit" class="fluid ui red button" ng-click="submitForm()">Submit</button>

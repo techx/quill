@@ -174,7 +174,18 @@ var profile = {
 
 // Only after confirmed
 var confirmation = {
-
+  interestedTrails: Boolean,
+  trailChoice: {
+    type: String,
+    enum: {
+      values: 'Design Venture Scout'.split(' '),
+    },
+  },
+  confirmationAdditional: {
+    type: String,
+    min: 0,
+    max: 1000,
+  },
 };
 
 var status = {
