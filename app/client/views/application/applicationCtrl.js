@@ -14,14 +14,6 @@ angular.module('reg')
       var user = currentUser.data;
       $scope.user = user;
 
-      // Is the student from MIT?
-      $scope.isMitStudent = $scope.user.email.split('@')[1] == 'mit.edu';
-
-      // If so, default them to adult: true
-      if ($scope.isMitStudent){
-        $scope.user.profile.adult = true;
-      }
-
       var dietaryRestrictions = {
         'Vegetarian': false,
         'Vegan': false,
