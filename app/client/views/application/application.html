@@ -10,26 +10,26 @@
         <!-- PERSONAL INFORMATION -->
         <div class="divided title">Personal Details</div>
         <div class="field">
-          <label>Email</label>
+          <label>Email*</label>
           <input type="email" name="email" disabled="disabled" ng-model="user.email">
         </div>
         <div class="field">
-          <label>First Name</label>
+          <label>First Name*</label>
           <input type="text" name="firstName" ng-model="user.profile.firstName">
         </div>
         <div class="field">
-          <label>Last Name</label>
+          <label>Last Name*</label>
           <input type="text" name="lastName" ng-model="user.profile.lastName">
         </div>
         <div class="field">
-          <label>What's your phone number? (required)</label>
+          <label>Phone Number*</label>
           <p>We need this in case we need to get ahold of you!</p>
           <input required type="tel" name="phoneNumber"
                   ng-model="user.profile.phoneNumber"
                   placeholder="(123) - 555 - 1234">
         </div>
         <div class="field">
-          <label>Gender</label>
+          <label>Gender*</label>
           <select name="gender" ng-model="user.profile.gender">
             <option value="">Gender</option>
             <option value="M">Male</option>
@@ -40,16 +40,10 @@
         </div>
 
         <!-- TODO: hide for UMD students, or remove hide altogether -->
-        <div class="field"
-            ng-hide="isMitStudent">
+        <div class="field" ng-hide="isMitStudent">
+          <label>Age Requirement*</label>
           <p>
-            Because of limitations imposed by UMD, we are not legally allowed to host
-            non-UMD minors (those under 18) for Bitcamp. Checking the box below affirms that you are or will be 18 years or older by April 6th, 2018.
-          </p>
-          <p>
-            <strong>
-            We will be checking ID. If you are a non-UMD minor, you will be turned away at the door.
-            </strong>
+            Because of limitations imposed by UMD, we are not legally allowed to host non-UMD minors (those under 18) for Bitcamp. <strong>We will be checking ID. If you are a non-UMD minor, you will be turned away at the door.</strong> Checking the box below affirms that you are or will be 18 years or older by April 6th, 2018.
           </p>
           <div class="ui checkbox">
             <input type="checkbox" name="adult" id="adult" ng-model="user.profile.adult">
@@ -58,7 +52,7 @@
         </div>
 
         <div class="field">
-          <label>Shirt Size (required)</label>
+          <label>Shirt Size*</label>
           <p>Let's get you some swag!</p>
           <select required name="shirtSize" ng-model="user.profile.shirtSize">
             <option value="">Shirt Size</option>
@@ -104,7 +98,7 @@
         </div>
 
         <div class="field">
-          <label>Year In School</label>
+          <label>Year In School*</label>
           <select
             name="year"
             ng-model="user.profile.schoolYear">
@@ -120,7 +114,7 @@
         </div>
 
         <div class="field">
-          <label>Major(s)</label>
+          <label>Major(s)*</label>
           <input type="text"
                  name="major"
                   placeholder="e.g, Computer Science, Finance"
@@ -197,7 +191,7 @@
           </select>
         </div>
         <div class="field">
-          <label>Resume (required)</label>
+          <label>Resume</label>
           <p>Upload a resume outlining any skills or experience you'd like to share. PDF preferred!</p>
           <a class="ui red button" target="_blank" href="https://www.dropbox.com/request/5LTOYVl3Gebh8uam9IUz">Upload</a>
         </div>
@@ -217,7 +211,7 @@
         <!-- LEGAL -->
         <div class="divided title pad-top">Legal</div>
         <div class="field">
-          <label>Code of Conduct</label>
+          <label>Major League Hacking Code of Conduct*</label>
           <div class="ui checkbox">
             <input type="checkbox" name="mlhCOC" ng-model="user.profile.mlhCOC">
           <label>
@@ -227,7 +221,7 @@
           </div>
         </div>
         <div class="field">
-          <label>Terms and Conditions</label>
+          <label>Major League Hacking Terms and Conditions*</label>
           <div class="ui checkbox">
             <input type="checkbox" name="mlhTAC" ng-model="user.profile.mlhTAC">
             <label>
@@ -245,11 +239,11 @@
           </div>
         </div>
         <div class="field">
-          <label>Waiver</label>
+          <label>Bitcamp Terms, Code of Conduct, and Release Waiver*</label>
           <div class="ui checkbox">
             <input type="checkbox" name="bitcampWaiver" ng-model="user.profile.bitcampWaiver">
             <label>
-              Please confirm that you agree to the terms detailed in the <a href="http://bit.camp/terms-code-waiver.pdf">Bitcamp Terms, Code of Conduct, and Release Waiver</a>.
+              I have read and agree to the terms of the <a href="http://bit.camp/terms-code-waiver.pdf">Bitcamp Terms, Code of Conduct, and Release Waiver</a>.
             </label>
           </div>
           </div>
