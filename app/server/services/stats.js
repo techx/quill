@@ -28,7 +28,6 @@ function calculateStats(){
       }
     },
 
-    teams: {},
     verified: 0,
     submitted: 0,
     admitted: 0,
@@ -167,17 +166,6 @@ function calculateStats(){
             });
           });
         newStats.demo.schools = schools;
-
-        // Likewise, transform the teams into an array of objects
-        // var teams = [];
-        // _.keys(newStats.teams)
-        //   .forEach(function(key){
-        //     teams.push({
-        //       name: key,
-        //       users: newStats.teams[key]
-        //     });
-        //   });
-        // newStats.teams = teams;
 
         console.log('Stats updated!');
         newStats.lastUpdated = new Date();

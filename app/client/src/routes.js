@@ -88,22 +88,6 @@ angular.module('reg')
           }
         }
       })
-      .state('app.team', {
-        url: "/team",
-        templateUrl: "views/team/team.html",
-        controller: 'TeamCtrl',
-        data: {
-          requireVerified: true
-        },
-        resolve: {
-          currentUser: function(UserService){
-            return UserService.getCurrentUser();
-          },
-          settings: function(SettingsService){
-            return SettingsService.getPublicSettings();
-          }
-        }
-      })
       .state('app.admin', {
         views: {
           '': {

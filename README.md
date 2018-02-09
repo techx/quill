@@ -43,9 +43,6 @@ Statuses:
 
 The Application tab takes users to their registration or confirmation form. 
 
-### Team Registration
-Hackathons commonly allow participants to register and be admitted as a team. The Team tab allows users to create or join a team with other users.
-
 ## Quill for Admins
 Admins can view stats, look through applications, or edit settings from the Admin panel.
 
