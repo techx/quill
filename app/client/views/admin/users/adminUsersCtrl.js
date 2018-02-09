@@ -206,16 +206,16 @@ angular.module('reg')
             fields: [
               {
                 name: 'Name',
-                value: user.profile.emergencyContact.name
+                value: (user.profile.emergencyContact || {}).name
               }, {
                 name: 'Work Number',
-                value: user.profile.emergencyContact.workNumber
+                value: (user.profile.emergencyContact || {}).workNumber
               }, {
                 name: 'Cell Number',
-                value: user.profile.emergencyContact.cellNumber
+                value: (user.profile.emergencyContact || {}).cellNumber
               }, {
                 name: 'Relationship',
-                value: user.profile.emergencyContact.relationship
+                value: (user.profile.emergencyContact || {}).relationship
               }
             ]
           },{
@@ -304,6 +304,21 @@ angular.module('reg')
               {
                 name: 'Anything Else',
                 value: user.profile.additional
+              }
+            ]
+          },{
+            name: 'Confirmation',
+            fields: [
+              {
+                name: "Interested in Trails?",
+                value: (user.confirmation || {}).interestedTrails,
+                type: 'boolean',
+              },{
+                name: "Trail Choice",
+                value: (user.confirmation || {}).trailChoice,
+              },{
+                name: "Confirmation Notes",
+                value: (user.confirmation || {}).confirmationAdditional,
               }
             ]
           }
