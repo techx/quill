@@ -240,11 +240,11 @@ angular.module('reg')
               ]
             },
             bitcampWaiver: {
-              identifier: 'bitcampWavier',
+              identifier: 'bitcampWaiver',
               rules: [
                 {
                   type: 'checked',
-                  prompt: 'Please accpet the Bitcamp wavier.'
+                  prompt: 'Please accpet the Bitcamp waiver.'
                 }
               ]
             },
