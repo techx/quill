@@ -194,7 +194,7 @@ angular.module('reg')
                   prompt: 'Please enter your phone number.'
                 },
                 {
-                  type: 'regExp[/^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$/]',
+                  type: 'regExp[/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/]',
                   prompt: 'Please enter a valid phone number.'
                 }
               ]
