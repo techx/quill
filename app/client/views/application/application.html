@@ -43,11 +43,11 @@
         <div class="field">
           <label>Age Requirement*</label>
           <p>
-            Because of limitations imposed by UMD, we are not legally allowed to host non-UMD minors (those under 18) for Bitcamp. <strong>We will be checking ID. If you are a non-UMD minor, you will be turned away at the door.</strong> Checking the box below affirms that you are or will be 18 years or older by April 6th, 2018.
+            Because of limitations imposed by UMD, we are not allowed to host non-UMD minors (those under 18). <strong>We will be checking ID. If you are a minor not currently attending UMD, you will be turned away at the door.</strong> Checking the box below confirms that you are or will be 18 years or older by April 6th, 2018, or currently attend the University of Maryland.
           </p>
           <div class="ui checkbox">
             <input type="checkbox" name="adult" id="adult" ng-model="user.profile.adult">
-            <label for="adult">I am 18 or older OR I am part of the officially-sanctioned bitcamp minor program.</label>
+            <label for="adult">I am or will be 18 years or older by April 6th, 2018, or currently attend the University of Maryland.</label>
           </div>
         </div>
 
@@ -98,11 +98,11 @@
         </div>
 
         <div class="field">
-          <label>Year In School*</label>
+          <label>Year in School*</label>
           <select
             name="year"
             ng-model="user.profile.schoolYear">
-            <option value="">Graduation Year</option>
+            <option value="">Year in School</option>
             <option value="High-School">High School</option>
             <option value="Freshman">Freshman</option>
             <option value="Sophomore">Sophomore</option>
