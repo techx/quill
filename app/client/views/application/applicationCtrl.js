@@ -222,7 +222,7 @@ angular.module('reg')
               rules: [
                 {
                   type: 'checked',
-                  prompt: 'Please accpet the code of conduct.'
+                  prompt: 'Please accept the code of conduct.'
                 }
               ]
             },
@@ -231,7 +231,7 @@ angular.module('reg')
               rules: [
                 {
                   type: 'checked',
-                  prompt: 'Please accpet the terms and conditions.'
+                  prompt: 'Please accept the terms and conditions.'
                 }
               ]
             },
@@ -240,7 +240,7 @@ angular.module('reg')
               rules: [
                 {
                   type: 'checked',
-                  prompt: 'Please accpet the Bitcamp waiver.'
+                  prompt: 'Please accept the Bitcamp waiver.'
                 }
               ]
             },
