@@ -6,26 +6,34 @@
     <div class="column">
       <div class="ui form">
         <fieldset ng-disabled="pastConfirmation">
-          <div class="divided title">Trails</div>
           <div class="field">
-            <label>Are you interested in our <a target="_blank" href="http://bit.camp/#trails">Trails Program</a>?</label>
-            <div class="ui checkbox">
-              <input type="checkbox" ng-model="user.confirmation.interestedTrails">
-              <label>Yes, I am interested in the Trails Program</label>
-            </div>
+            <p><strong>We're glad that you'll be joining us on April 6-8, 2018 at the Xfinity Center! We just need to ask you a few more things and you'll be set for Bitcamp 2018.</strong></p>
+            <br>
+          </div>
+
+          <div class="field">
+            <strong>We're introducing <a target="_blank" href="http://bit.camp/#trails">Bitcamp Trails</a>,* a new program for our fifth anniversary!</strong>
+            <ul>
+              <li><strong>Hacker Trail:</strong> Your traditional hackathon experience, eligible for all non-Trail prizes.<br></li>
+              <li><strong>Design Trail:</strong> Act as a mentor and contributor to multiple teams at the event, while developing a portfolio of your designs (your Bitfolio) which will be judged for the “Best Bitfolio” prize. *You will be contacted to apply to this. If not accepted, you will be able to select an alternate Trail to participate in.<br></li>
+              <li><strong>Venture Trail:</strong> Entrepreneurship-focused Trail eligible for the “Best Potential Startup” prize in addition to all traditional prizes.<br></li>
+              <li><strong>Scout Trail:</strong> Beginner trail that provides guidance through the 36 hours, eligible for the “Best Scout Hack” prize in addition to all traditional prizes (half or majority of the team must be comprised of hackers who have attended 0-5 hackathons).</li>
+            </ul>
+
+            <strong><p>*Check out our <a target="_blank" href="https://medium.com/@bitcmp/mark-your-trail-at-bitcamp-2018-997584495ef6">Medium post</a> for more information!</p></strong>
           </div>
           <div class="field">
-            <label>If yes, which trail are you most interesed in?</label>
-            <select name="Number Hackthons" ng-model="user.confirmation.trailChoice">
-              <option value="">Select a trail...</option>
+            <label>Which Bitcamp Trail are you interested in (this doesn't lock you in, just helps us get an idea of the numbers)?</label>
+            <select name="Trail Choice" ng-model="user.confirmation.trailChoice">
+              <option value="">Hacker</option>
+              <!-- <option value="Hacker">Hacker</option> -->
               <option value="Design">Design</option>
               <option value="Venture">Venture</option>
               <option value="Scout">Scout</option>
             </select>
           </div>
 
-          <div class="divided title pad-top">Everything Else</div>
-          <div class="field">
+          <div class="field" style="padding-top: 2em;">
             <label>Additional Notes</label>
             <p>If there's anything else you need to let us know, tell us here!</p>
             <textarea ng-model="user.confirmation.confirmationAdditional"/>
