@@ -67,6 +67,10 @@ app.get('/volunteering', (req, res) => {
   res.redirect('https://goo.gl/zyvVxd');
 });
 
+app.get('*', (req, res) => {
+  res.status(404).redirect('/404');
+});
+
 // Routers =====================================================================
 
 var apiRouter = express.Router();
