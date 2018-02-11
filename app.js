@@ -37,6 +37,7 @@ app.use(bodyParser.json());
 app.use(methodOverride());
 
 app.use('/', express.static(__dirname + '/www/dist'));
+app.use('/404', express.static(__dirname + '/www/dist'));
 app.use('/register', express.static(__dirname + '/app/client'));
 // Handy Redirects =============================================================
 
@@ -65,6 +66,10 @@ app.get('/travel-reimbursement', (req, res) => {
 app.get('/volunteering', (req, res) => {
   res.status(302);
   res.redirect('https://goo.gl/zyvVxd');
+});
+
+app.get('*', (req, res) => {
+  res.status(404).redirect('/404');
 });
 
 // Routers =====================================================================
