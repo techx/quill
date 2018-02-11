@@ -97,7 +97,7 @@
         class="ui celled selectable compact users table">
         <thead>
           <tr>
-            <th ng-if="selectedUser.admin"></th>
+            <th ng-if="currentUser.admin"></th>
             <th>Name</th>
             <th>E-mail address</th>
             <th>School</th>
@@ -113,7 +113,7 @@
             ng-click="selectUser(user)"
             ng-repeat="user in users"
             ng-class="rowClass(user)">
-            <td ng-if="selectedUser.admin">
+            <td ng-if="currentUser.admin">
               <div class="ui checkbox">
                 <input type="checkbox" ng-model="user.markedForAcceptance" ng-click="$event.stopPropagation()"></input>
                 <label></label>
