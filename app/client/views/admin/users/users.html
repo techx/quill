@@ -104,7 +104,7 @@
             <th>Grad</th>
             <th>V/S/A/C</th>
             <th>$</th>
-            <th></th>
+            <th ng-if="currentUser.admin"></th>
             <th></th>
           </tr>
         </thead>
@@ -200,6 +200,7 @@
             </td>
 
             <td
+              ng-show="currentUser.admin"
               class="collapsing">
               <button
                 ng-click="goUser($event, user)"
