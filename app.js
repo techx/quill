@@ -68,10 +68,6 @@ app.get('/volunteering', (req, res) => {
   res.redirect('https://goo.gl/zyvVxd');
 });
 
-app.get('*', (req, res) => {
-  res.status(404).redirect('/404');
-});
-
 // Routers =====================================================================
 
 var apiRouter = express.Router();
@@ -83,6 +79,10 @@ require('./app/server/routes/auth')(authRouter);
 app.use('/auth', authRouter);
 
 require('./app/server/routes')(app);
+
+app.get('*', (req, res) => {
+  res.status(404).redirect('/404');
+});
 
 // listen (start app with node server.js) ======================================
 app.listen(port);
