@@ -39,6 +39,7 @@ app.use(methodOverride());
 app.use('/', express.static(__dirname + '/www/dist'));
 app.use('/404', express.static(__dirname + '/www/dist'));
 app.use('/register', express.static(__dirname + '/app/client'));
+app.use('/files', express.static(__dirname + '/files'));
 // Handy Redirects =============================================================
 
 // Prospectus
@@ -68,6 +69,12 @@ app.get('/volunteering', (req, res) => {
   res.redirect('https://goo.gl/zyvVxd');
 });
 
+// Slack
+app.get('/slack', (req, res) => {
+  res.status(302);
+  res.redirect('https://goo.gl/gyuEGx');
+});
+
 // Routers =====================================================================
 
 var apiRouter = express.Router();
@@ -77,8 +84,6 @@ app.use('/api', apiRouter);
 var authRouter = express.Router();
 require('./app/server/routes/auth')(authRouter);
 app.use('/auth', authRouter);
-
-require('./app/server/routes')(app);
 
 app.get('*', (req, res) => {
   res.status(404).redirect('/404');
