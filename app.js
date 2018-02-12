@@ -85,8 +85,6 @@ var authRouter = express.Router();
 require('./app/server/routes/auth')(authRouter);
 app.use('/auth', authRouter);
 
-require('./app/server/routes')(app);
-
 app.get('*', (req, res) => {
   res.status(404).redirect('/404');
 });
