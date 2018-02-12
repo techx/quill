@@ -1,9 +1,13 @@
 <div id="admin" class="page">
-  <div class="divided title">
+  <div class="divided title" ng-show="user.admin">
   GOD MODE
   </div>
+  <div class="divided title" ng-show="user.volunteer">
+  DEMI-GOD MODE
+  </div>
 
-  <div class="ui three item menu">
+
+  <div class="ui three item menu" ng-show="user.admin">
     <a
       class="item"
       ui-sref="app.admin.stats"

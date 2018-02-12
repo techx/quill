@@ -180,6 +180,12 @@ var schema = new mongoose.Schema({
     default: false,
   },
 
+  volunteer: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
+
   timestamp: {
     type: Number,
     required: true,

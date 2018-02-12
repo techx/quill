@@ -109,13 +109,16 @@ angular.module('reg')
           }
         },
         data: {
-          requireAdmin: true
+          requireVolunteerOrAdmin: true
         }
       })
       .state('app.admin.stats', {
         url: "/admin",
         templateUrl: "views/admin/stats/stats.html",
-        controller: 'AdminStatsCtrl'
+        controller: 'AdminStatsCtrl',
+        data: {
+          requireAdmin: true
+        }
       })
       .state('app.admin.users', {
         url: "/admin/users?" +
@@ -123,7 +126,10 @@ angular.module('reg')
           '&size' +
           '&query',
         templateUrl: "views/admin/users/users.html",
-        controller: 'AdminUsersCtrl'
+        controller: 'AdminUsersCtrl',
+        data: {
+          requireVolunteerOrAdmin: true
+        }
       })
       .state('app.admin.user', {
         url: "/admin/users/:id",
@@ -133,6 +139,9 @@ angular.module('reg')
           'user': function($stateParams, UserService){
             return UserService.get($stateParams.id);
           }
+        },
+        data: {
+          requireAdmin: true
         }
       })
       .state('app.admin.settings', {
@@ -144,6 +153,9 @@ angular.module('reg')
         url: "/admin/email",
         templateUrl: "views/admin/email/email.html",
         controller: 'AdminEmailCtrl',
+        data: {
+          requireAdmin: true
+        },
       })
       .state('app.mlhterms', {
         url: "/mlh-terms-and-conditions",
@@ -195,6 +207,7 @@ angular.module('reg')
       $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
         var requireLogin = toState.data.requireLogin;
         var requireAdmin = toState.data.requireAdmin;
+        var requireVolunteerOrAdmin = toState.data.requireVolunteerOrAdmin;
         var requireVerified = toState.data.requireVerified;
         var requireAdmitted = toState.data.requireAdmitted;
 
@@ -206,6 +219,11 @@ angular.module('reg')
         }
 
         if (requireAdmin && !Session.getUser().admin) {
+          event.preventDefault();
+          $state.go('app.dashboard');
+        }
+
+        if (requireVolunteerOrAdmin && !Session.getUser().volunteer && !Session.getUser().admin){
           event.preventDefault();
           $state.go('app.dashboard');
         }
