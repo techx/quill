@@ -91,6 +91,7 @@ module.exports = function(router) {
     return function(err, data){
       if (err){
         // SLACK ALERT!
+
         if (process.env.NODE_ENV === 'production'){
           request
             .post(process.env.SLACK_HOOK,
@@ -110,13 +111,10 @@ module.exports = function(router) {
                     "``` \n"
                   })
                 }
-              },
-              function (error, response, body) {
-                return res.status(500).send({
-                  message: "Your error has been recorded, we'll get right on it!"
-                });
               }
             );
+
+            return res.status(500).send(err);
         } else {
           return res.status(500).send(err);
         }
