@@ -96,7 +96,7 @@
           <i class="child icon"></i>
           <div class="content">
             <strong>
-              Unisex shirt sizes:
+              Shirt sizes:
             </strong> :
               XS ({{stats.shirtSizes['XS']}})
               S ({{stats.shirtSizes['S']}})
@@ -104,21 +104,6 @@
               L ({{stats.shirtSizes['L']}})
               XL ({{stats.shirtSizes['XL']}})
               XXL ({{stats.shirtSizes['XXL']}})
-          </div>
-        </div>
-
-        <div class="item">
-          <i class="child icon"></i>
-          <div class="content">
-            <strong>
-              Women's shirt sizes:
-            </strong> :
-              XS ({{stats.shirtSizes['WXS']}})
-              S ({{stats.shirtSizes['WS']}})
-              M ({{stats.shirtSizes['WM']}})
-              L ({{stats.shirtSizes['WL']}})
-              XL ({{stats.shirtSizes['WXL']}})
-              XXL ({{stats.shirtSizes['WXXL']}})
           </div>
         </div>
 
@@ -139,17 +124,6 @@
             <strong>
               Still Need Reimbursement:
             </strong>{{stats.reimbursementMissing}}
-          </div>
-        </div>
-
-        <div class="ui divider"></div>
-
-        <div class="item">
-          <i class="plug icon"></i>
-          <div class="content">
-            <strong>
-              Need/Want Hardware:
-            </strong>{{stats.wantsHardware}}
           </div>
         </div>
 
@@ -213,16 +187,22 @@
     <div class="ui divider"></div>
       <div class="ui list">
         <div class="item">
-          <strong>Fresh:</strong> {{stats.demo.year['2019']}} ({{stats.demo.year['2019'] / stats.total * 100 | number: 1}}%)
+          <strong>Highschool:</strong> {{stats.demo.year['High-School']}} ({{stats.demo.year['High-School'] / stats.total * 100 | number: 1}}%)
         </div>
         <div class="item">
-          <strong>Soph:</strong> {{stats.demo.year['2018']}} ({{stats.demo.year['2018'] / stats.total * 100 | number: 1}}%)
+          <strong>Fresh:</strong> {{stats.demo.year['Freshman']}} ({{stats.demo.year['Freshman'] / stats.total * 100 | number: 1}}%)
         </div>
         <div class="item">
-         <strong>Junior:</strong> {{stats.demo.year['2017']}} ({{stats.demo.year['2017'] / stats.total * 100 | number: 1}}%)
+          <strong>Soph:</strong> {{stats.demo.year['Sophomore']}} ({{stats.demo.year['Sophomore'] / stats.total * 100 | number: 1}}%)
         </div>
         <div class="item">
-          <strong>Senior:</strong> {{stats.demo.year['2016']}} ({{stats.demo.year['2016'] / stats.total * 100 | number: 1}}%)
+         <strong>Junior:</strong> {{stats.demo.year['Junior']}} ({{stats.demo.year['Junior'] / stats.total * 100 | number: 1}}%)
+        </div>
+        <div class="item">
+          <strong>Senior:</strong> {{stats.demo.year['Senior']}} ({{stats.demo.year['Senior'] / stats.total * 100 | number: 1}}%)
+        </div>
+        <div class="item">
+          <strong>Graduated:</strong> {{stats.demo.year['Graduated']}} ({{stats.demo.year['Graduated'] / stats.total * 100 | number: 1}}%)
         </div>
       </div>
     <div class="ui divider"></div>
@@ -251,23 +231,4 @@
       </div>
     </div>
   </div>
-
-<!--   <div
-    class="ui purple segment"
-    ng-class="{'loading': loading}">
-    <div class="ui header">
-      Team Names
-    </div>
-    <div class="ui list">
-      <div
-        class="item"
-        ng-repeat="team in stats.teams | orderBy: 'name'">
-        <div class="header">
-          {{team.name}}
-        </div>
-        {{team.users.join(', ')}}
-      </div>
-    </div>
-  </div> -->
-
 </div>

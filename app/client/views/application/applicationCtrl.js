@@ -11,15 +11,27 @@ angular.module('reg')
     function($scope, $rootScope, $state, $http, currentUser, Settings, Session, UserService){
 
       // Set up the user
-      $scope.user = currentUser.data;
+      var user = currentUser.data;
+      $scope.user = user;
 
-      // Is the student from MIT?
-      $scope.isMitStudent = $scope.user.email.split('@')[1] == 'mit.edu';
+      var dietaryRestrictions = {
+        'Vegetarian': false,
+        'Vegan': false,
+        'Halal': false,
+        'Kosher': false,
+        'Nut Allergy': false,
+        'Gluten Free': false,
+      };
 
-      // If so, default them to adult: true
-      if ($scope.isMitStudent){
-        $scope.user.profile.adult = true;
+      if (user.profile.dietaryRestrictions){
+        user.profile.dietaryRestrictions.forEach(function(restriction){
+          if (restriction in dietaryRestrictions){
+            dietaryRestrictions[restriction] = true;
+          }
+        });
       }
+
+      $scope.dietaryRestrictions = dietaryRestrictions;
 
       // Populate the school dropdown
       populateSchools();
@@ -45,29 +57,39 @@ angular.module('reg')
 
         $http
           .get('/assets/schools.csv')
-          .then(function(res){ 
+          .then(function(res){
             $scope.schools = res.data.split('\n');
             $scope.schools.push('Other');
 
             var content = [];
 
-            for(i = 0; i < $scope.schools.length; i++) {                                          
-              $scope.schools[i] = $scope.schools[i].trim(); 
+            for(i = 0; i < $scope.schools.length; i++) {
+              $scope.schools[i] = $scope.schools[i].trim();
               content.push({title: $scope.schools[i]})
             }
 
             $('#school.ui.search')
               .search({
                 source: content,
-                cache: true,     
-                onSelect: function(result, response) {                                    
+                cache: true,
+                onSelect: function(result, response) {
                   $scope.user.profile.school = result.title.trim();
-                }        
-              })             
-          });          
+                }
+              })
+          });
       }
 
       function _updateUser(e){
+        var profile = $scope.user.profile;
+        // Get the dietary restrictions as an array
+        var drs = [];
+        Object.keys($scope.dietaryRestrictions).forEach(function(key){
+          if ($scope.dietaryRestrictions[key]){
+            drs.push(key);
+          }
+        });
+        profile.dietaryRestrictions = drs;
+
         UserService
           .updateProfile(Session.getUserId(), $scope.user.profile)
           .success(function(data){
@@ -75,7 +97,7 @@ angular.module('reg')
               title: "Awesome!",
               text: "Your application has been saved.",
               type: "success",
-              confirmButtonColor: "#e76482"
+              confirmButtonColor: "#FF6F3F"
             }, function(){
               $state.go('app.dashboard');
             });
@@ -111,12 +133,21 @@ angular.module('reg')
         $('.ui.form').form({
           inline: true,
           fields: {
-            name: {
-              identifier: 'name',
+            firstName: {
+              identifier: 'firstName',
               rules: [
                 {
                   type: 'empty',
-                  prompt: 'Please enter your name.'
+                  prompt: 'Please enter your first name.'
+                }
+              ]
+            },
+            lastName: {
+              identifier: 'lastName',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please enter your last name.'
                 }
               ]
             },
@@ -152,10 +183,68 @@ angular.module('reg')
               rules: [
                 {
                   type: 'allowMinors',
-                  prompt: 'You must be an adult, or an MIT student.'
+                  prompt: 'You must be an adult, or a UMD student.'
                 }
               ]
-            }
+            },
+            phoneNumber: {
+              identifier: 'phoneNumber',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please enter your phone number.'
+                },
+                {
+                  type: 'regExp[/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/]',
+                  prompt: 'Please enter a valid phone number.'
+                }
+              ]
+            },
+            shirtSize: {
+              identifier: 'shirtSize',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please enter your shirt size.'
+                }
+              ]
+            },
+            major: {
+              identifier: 'major',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please enter your major.'
+                }
+              ]
+            },
+            mlhCOC: {
+              identifier: 'mlhCOC',
+              rules: [
+                {
+                  type: 'checked',
+                  prompt: 'Please accept the code of conduct.'
+                }
+              ]
+            },
+            mlhTAC: {
+              identifier: 'mlhTAC',
+              rules: [
+                {
+                  type: 'checked',
+                  prompt: 'Please accept the terms and conditions.'
+                }
+              ]
+            },
+            bitcampWaiver: {
+              identifier: 'bitcampWaiver',
+              rules: [
+                {
+                  type: 'checked',
+                  prompt: 'Please accept the Bitcamp waiver.'
+                }
+              ]
+            },
           }
         });
       }

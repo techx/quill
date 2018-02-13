@@ -50,23 +50,6 @@ angular.module('reg')
         return $http.post(base + id + '/decline');
       },
 
-      // ------------------------
-      // Team
-      // ------------------------
-      joinOrCreateTeam: function(code){
-        return $http.put(base + Session.getUserId() + '/team', {
-          code: code
-        });
-      },
-
-      leaveTeam: function(){
-        return $http.delete(base + Session.getUserId() + '/team');
-      },
-
-      getMyTeammates: function(){
-        return $http.get(base + Session.getUserId() + '/team');
-      },
-
       // -------------------------
       // Admin Only
       // -------------------------
