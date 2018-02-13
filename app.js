@@ -85,9 +85,9 @@ var authRouter = express.Router();
 require('./app/server/routes/auth')(authRouter);
 app.use('/auth', authRouter);
 
-app.get('*', (req, res) => {
-  res.status(404).redirect('/404');
-});
+// app.get('*', (req, res) => {
+//   res.status(404).redirect('/404');
+// });
 
 // listen (start app with node server.js) ======================================
 app.listen(port);
