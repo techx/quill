@@ -187,6 +187,7 @@ var schema = new mongoose.Schema({
   email: {
       type: String,
       required: true,
+      unique: true,
       validate: [
         validator.isEmail,
         'Invalid Email',

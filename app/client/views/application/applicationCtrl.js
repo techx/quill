@@ -183,6 +183,7 @@ angular.module('reg')
 
         // Semantic-UI form validation
         $('.ui.form').form({
+          inline: true,
           fields: {
             name: {
               identifier: 'name',
@@ -276,6 +277,9 @@ angular.module('reg')
         if ($('.ui.form').form('is valid')){
           $scope.submitButtonDisabled = true;
           _updateUser();
+        }
+        else{
+          sweetAlert("Uh oh!", "Please Fill The Required Fields", "error");
         }
       };
 
