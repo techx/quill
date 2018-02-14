@@ -75,6 +75,12 @@ app.get('/slack', (req, res) => {
   res.redirect('https://goo.gl/gyuEGx');
 });
 
+// Minors form
+app.get('/minors-form', (req, res) => {
+  res.status(302);
+  res.redirect('/files/minors-form.pdf');
+});
+
 // Routers =====================================================================
 
 var apiRouter = express.Router();
