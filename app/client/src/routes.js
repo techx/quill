@@ -90,7 +90,8 @@ angular.module('reg')
         templateUrl: "views/team/team.html",
         controller: 'TeamCtrl',
         data: {
-          requireVerified: true
+          requireVerified: true,
+          requireAdmin: true
         },
         resolve: {
           currentUser: function(UserService){
