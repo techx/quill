@@ -87,6 +87,18 @@ app.get('/minors-form', (req, res) => {
   res.redirect('/files/minors-form.pdf');
 });
 
+// Minors form
+app.get('/vthacks-minors', (req, res) => {
+  res.status(302);
+  res.redirect('/files/minors-form.pdf');
+});
+
+// Participant info form
+app.get('/participant-info', (req, res) => {
+  res.status(302);
+  res.redirect('/files/participant-info.pdf');
+});
+
 // Routers =====================================================================
 
 var apiRouter = express.Router();
