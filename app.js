@@ -99,6 +99,11 @@ app.get('/participant-info', (req, res) => {
   res.redirect('/files/participant-info.pdf');
 });
 
+app.get('/waitlist', (req, res) => {
+  res.status(302);
+  res.redirect('https://goo.gl/forms/Vb6oJFeM2NL7dG0J2');
+});
+
 // Routers =====================================================================
 
 var apiRouter = express.Router();
