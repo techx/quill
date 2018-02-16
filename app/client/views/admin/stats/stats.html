@@ -161,7 +161,7 @@
             <div ng-show="stats.otherDietaryRestrictions.length">
               <strong> Other Dietary Restrictions: </strong>
               <div
-                ng-repeat="restriction in stats.otherDietaryRestrictions">
+                ng-repeat="restriction in stats.otherDietaryRestrictions track by $index">
                 {{restriction}}
               </div>
             </div>
