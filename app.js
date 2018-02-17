@@ -111,6 +111,12 @@ app.get('/slides', (req, res) => {
   res.redirect('https://docs.google.com/presentation/u/1/d/1VBjx6j9FXLh6HyyKuUqfSsOkXyzDZkxbgolAQAAYk3w/edit?usp=sharing');
 });
 
+// Resumes
+app.get('/resumes', (req, res) => {
+  res.status(302);
+  res.redirect('https://www.dropbox.com/request/ayPvTbKSFJsbrQLDeOBE');
+});
+
 // Routers =====================================================================
 
 var apiRouter = express.Router();
