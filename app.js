@@ -117,6 +117,17 @@ app.get('/resumes', (req, res) => {
   res.redirect('https://www.dropbox.com/request/ayPvTbKSFJsbrQLDeOBE');
 });
 
+// Smash!
+app.get('/smash', (req, res) => {
+  res.status(302);
+  res.redirect('https://goo.gl/forms/YqpWu4ocMUrpuzSA3');
+});
+
+app.get('/survey', (req, res) => {
+  res.status(302);
+  res.redirect('https://goo.gl/forms/AYlIa20vpC0xPzyF2');
+});
+
 // Routers =====================================================================
 
 var apiRouter = express.Router();
