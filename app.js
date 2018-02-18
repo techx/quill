@@ -128,6 +128,11 @@ app.get('/survey', (req, res) => {
   res.redirect('https://goo.gl/forms/AYlIa20vpC0xPzyF2');
 });
 
+app.get('/reimbursement', (req, res) => {
+  res.status(302);
+  res.redirect('https://goo.gl/forms/DLkT66u0X5i2Oy8O2');
+});
+
 // Routers =====================================================================
 
 var apiRouter = express.Router();
