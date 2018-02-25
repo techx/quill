@@ -36,7 +36,6 @@
 		background-position: center center;
 		height: calc(100% + 49px);
     animation: fadein .5s both;
-    animation-delay: .001s;
 	}
 
 	#hero::before {
@@ -434,7 +433,6 @@
 		background-position: center center;
 		height: calc(45vh + 49px);
     animation: fadein .5s both;
-    animation-delay: .01s;
 	}
 
 	#hero::before {
