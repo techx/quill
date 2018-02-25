@@ -6,7 +6,7 @@
     <div class="logo-header" ui-sref="app.home" ng-if="!showHackNavbar">
       <img src="../assets/images/logo-anteater.svg">
     </div>
-    <div class="logo-header logo-hack" ui-sref="app.recruitment" ng-if="showHackNavbar">
+    <div class="logo-header logo-hack" ui-sref="app.recruit" ng-if="showHackNavbar">
       <img src="../assets/images/logo-hack.png">
     </div>
 
@@ -131,7 +131,7 @@
 
     <div class="navbar-menu" ng-if="showHackNavbar">
       <a
-        ui-sref="app.recruitment"
+        ui-sref="app.recruit"
         ui-sref-active="menu-item-active"
         class="menu-item">
         WELCOME
@@ -319,7 +319,7 @@
 
     <div class="navbar-mobile-menu" ng-if="showHackNavbar">
         <a
-          ui-sref="app.recruitment"
+          ui-sref="app.recruit"
           ui-sref-active="menu-item-active"
           class="menu-item"
           ng-click="onMenuClick()">

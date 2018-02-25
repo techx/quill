@@ -1,5 +1,5 @@
 angular.module('reg')
-  .controller('JoinCtrl', [
+  .controller('RecruitCtrl', [
     '$rootScope',
     '$scope',
     function($rootScope, $scope){
