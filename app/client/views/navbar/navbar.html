@@ -1,10 +1,13 @@
 <div id="navbar" ng-class="transparentNavbar ? 'position-absolute' : 'position-fixed'">
   <div class="navbar ui grid computer only no-margin" ng-class="{'navbar-transparent': transparentNavbar, 'navbar-live': showLiveNavbar}">
-    <div class="logo-header logo-cog" ui-sref="app.home">
+    <div class="logo-header logo-cog" ui-sref="app.home" ng-if="!showHackNavbar">
       <img src="../assets/images/logo-cog.svg">
     </div>
-    <div class="logo-header" ui-sref="app.home">
+    <div class="logo-header" ui-sref="app.home" ng-if="!showHackNavbar">
       <img src="../assets/images/logo-anteater.svg">
+    </div>
+    <div class="logo-header logo-hack" ui-sref="app.recruitment" ng-if="showHackNavbar">
+      <img src="../assets/images/logo-hack.png">
     </div>
 
     <div class="logo-header_live center" ng-if="showLiveNavbar">
@@ -15,7 +18,7 @@
       CHECK-IN
     </div>
 
-    <div class="navbar-menu" ng-if="!showLiveNavbar && !showCheckInNavbar">
+    <div class="navbar-menu" ng-if="!showLiveNavbar && !showCheckInNavbar && !showHackNavbar">
       <a
         ui-sref="app.home"
         ui-sref-active="menu-item-active"
@@ -76,6 +79,12 @@
         ng-if="isLoggedIn">
         LOGOUT
       </a>
+      <a
+        ui-sref-active="menu-item-active"
+        ui-sref="app.schedule"
+        class="menu-item menu-item--sponsor">
+        LIVE
+      </a>
     </div>
 
     <div class="navbar-menu" ng-if="showLiveNavbar">
@@ -119,6 +128,45 @@
         EXPO
       </a>
     </div>
+
+    <div class="navbar-menu" ng-if="showHackNavbar">
+      <a
+        ui-sref="app.recruitment"
+        ui-sref-active="menu-item-active"
+        class="menu-item">
+        WELCOME
+      </a>
+      <a
+        ui-sref="app.logistics"
+        ui-sref-active="menu-item-active"
+        class="menu-item">
+        LOGISTICS
+      </a>
+      <a
+        ui-sref="app.corporate"
+        ui-sref-active="menu-item-active"
+        class="menu-item">
+        CORPORATE
+      </a>
+      <a
+        ui-sref="app.marketing"
+        ui-sref-active="menu-item-active"
+        class="menu-item">
+        MARKETING
+      </a>
+      <a
+        ui-sref="app.technology"
+        ui-sref-active="menu-item-active"
+        class="menu-item">
+        TECHNOLOGY
+      </a>
+      <a
+        ui-sref-active="menu-item-active"
+        ui-sref="app.home"
+        class="menu-item menu-item--sponsor">
+        EVENT
+      </a>
+    </div>
   </div>
 
   <div class="navbar-mobile ui grid mobile only tablet only no-margin" ng-class="{'navbar-mobile-transparent' : transparentNavbar || showLiveNavbar}">
@@ -142,7 +190,7 @@
     </div>
   </div>
   <div class="content">
-    <div class="navbar-mobile-menu" ng-if="!showLiveNavbar">
+    <div class="navbar-mobile-menu" ng-if="!showLiveNavbar && !showHackNavbar">
       <a
         ui-sref="app.home"
         ui-sref-active="menu-item-active"
@@ -268,5 +316,50 @@
         EXPO
       </a>
     </div>
+
+    <div class="navbar-mobile-menu" ng-if="showHackNavbar">
+        <a
+          ui-sref="app.recruitment"
+          ui-sref-active="menu-item-active"
+          class="menu-item"
+          ng-click="onMenuClick()">
+          WELCOME
+        </a>
+        <a
+          ui-sref="app.logistics"
+          ui-sref-active="menu-item-active"
+          class="menu-item"
+          ng-click="onMenuClick()">
+          LOGISTICS
+        </a>
+        <a
+          ui-sref="app.corporate"
+          ui-sref-active="menu-item-active"
+          class="menu-item"
+          ng-click="onMenuClick()">
+          CORPORATE
+        </a>
+        <a
+          ui-sref="app.marketing"
+          ui-sref-active="menu-item-active"
+          class="menu-item"
+          ng-click="onMenuClick()">
+          MARKETING
+        </a>
+        <a
+          ui-sref="app.technology"
+          ui-sref-active="menu-item-active"
+          class="menu-item"
+          ng-click="onMenuClick()">
+          TECHNOLOGY
+        </a>
+        <a
+          ui-sref-active="menu-item-active"
+          ui-sref="app.home"
+          class="menu-item"
+          ng-click="onMenuClick()">
+          EVENT
+        </a>
+      </div>
   </div>
 </div>

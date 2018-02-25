@@ -3,7 +3,7 @@ var User = require('../models/User');
 var Settings = require('../models/Settings');
 var Mailer = require('../services/email');
 var Stats = require('../services/stats');
-var Waiver = require('../services/waiver');
+// var Waiver = require('../services/waiver');
 
 var validator = require('validator');
 var moment = require('moment');

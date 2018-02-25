@@ -22,7 +22,8 @@
 		content: '';
 		background-image: linear-gradient(to bottom right, #02ccba 0%, #3d99be 31%, #9848d5 100%);
 		opacity: 0.8;
-		width: 100%;
+    width: 100%;
+    left: 0;
 		height: calc(45vh + 50px);
 		position: fixed;
   }
@@ -70,7 +71,7 @@
 
 	.hero-border svg {
 		width: 100%;
-		height: calc(45% + 50px);
+		height: calc(45% + 51px);
 		position: absolute;
 		vertical-align: bottom;
   }
