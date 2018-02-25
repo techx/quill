@@ -229,42 +229,42 @@ angular.module('reg')
           requireLogin: false
         }
       })
-      .state('app.recruitment', {
-        url: "/join",
-        templateUrl: "views/join/join.html",
-        controller: 'JoinCtrl',
+      .state('app.recruit', {
+        url: "/recruit",
+        templateUrl: "views/recruit/recruit.html",
+        controller: 'RecruitCtrl',
         data: {
           requireLogin: false
         }
       })
       .state('app.logistics', {
-        url: "/join/logistics",
-        templateUrl: "views/join/logistics.html",
-        controller: 'JoinCtrl',
+        url: "/recruit/logistics",
+        templateUrl: "views/recruit/logistics.html",
+        controller: 'RecruitCtrl',
         data: {
           requireLogin: false
         }
       })
       .state('app.corporate', {
-        url: "/join/corporate",
-        templateUrl: "views/join/corporate.html",
-        controller: 'JoinCtrl',
+        url: "/recruit/corporate",
+        templateUrl: "views/recruit/corporate.html",
+        controller: 'RecruitCtrl',
         data: {
           requireLogin: false
         }
       })
       .state('app.marketing', {
-        url: "/join/marketing",
-        templateUrl: "views/join/marketing.html",
-        controller: 'JoinCtrl',
+        url: "/recruit/marketing",
+        templateUrl: "views/recruit/marketing.html",
+        controller: 'RecruitCtrl',
         data: {
           requireLogin: false
         }
       })
       .state('app.technology', {
-        url: "/join/technology",
-        templateUrl: "views/join/technology.html",
-        controller: 'JoinCtrl',
+        url: "/recruit/technology",
+        templateUrl: "views/recruit/technology.html",
+        controller: 'RecruitCtrl',
         data: {
           requireLogin: false
         }

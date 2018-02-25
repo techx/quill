@@ -1,4 +1,4 @@
-#join {
+#recruit {
 	height: 100%;
 	font-family: 'Rubik', sans-serif;
 
@@ -696,7 +696,7 @@
 					background: #fc6076;
 					font-weight: 300;
 					font-size: 0.55em;
-					padding: 1.1% 2%;
+					padding: 15px 25px;
 					border: none;
 					border-radius: 25px;
 					box-shadow: 0 2px 16px rgba(24,51,59,.35);
@@ -733,12 +733,6 @@
 			padding: 20% 0;
 
 			#footer-content {
-				.button-container {
-					.btn {
-						padding: 3.5% 7%;
-					}
-				}
-				
 				a {
 					padding: 0 2.5%;
 				}
