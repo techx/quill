@@ -592,6 +592,10 @@
 
 				#break-content {
 					width: 90%;
+
+					.title {
+						line-height: 1.2em;
+					}
 				}
 			}
 		}
@@ -670,8 +674,12 @@
 				padding: 8%;
 				
 				.job {
+					.job-title {
+						line-height: 1.1em;
+					}
+
 					.body {
-						padding: 1em 0 0 0;
+						padding: .75em 0 0 0;
 					}
 				}
       }
