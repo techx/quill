@@ -9,8 +9,9 @@ angular.module('reg')
     'Session',
     'EVENT_INFO',
     function($rootScope, $scope, $state, settings, Utils, AuthService, Session, EVENT_INFO){
-      var transparentNavbarViews = ['app.home', 'app.login', 'app.sponsor', 'app.mentor']
+      var transparentNavbarViews = ['app.home', 'app.login', 'app.sponsor', 'app.mentor', 'app.recruit', 'app.logistics', 'app.corporate', 'app.marketing', 'app.technology']
       var liveViews = ['app.live', 'app.schedule', 'app.expo']
+      var hackViews = ['app.recruit', 'app.logistics', 'app.corporate', 'app.marketing', 'app.technology']
 
       var Settings = settings.data;
 
@@ -29,6 +30,12 @@ angular.module('reg')
           $scope.showLiveNavbar = true;
         } else {
           $scope.showLiveNavbar = false;
+        }
+
+        if (hackViews.includes(newPath)) {
+          $scope.showHackNavbar = true;
+        } else {
+          $scope.showHackNavbar = false;
         }
 
         if (newPath === 'app.checkin') {

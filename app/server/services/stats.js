@@ -267,9 +267,9 @@ function calculateStats(){
 
 }
 
-// Calculate once every minute.
+// Calculate once every 5 minutes.
 calculateStats();
-setInterval(calculateStats, 60000);
+setInterval(calculateStats, 300000);
 
 var Stats = {};
 

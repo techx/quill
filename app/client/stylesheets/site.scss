@@ -60,13 +60,14 @@ $brand-tertiary: $tertiary;
 @import 'schedule';
 @import 'checkin';
 @import 'expo';
+@import 'recruit';
 
 html,
 body {
   height: 100% !important;
   width: 100%;
   font-size: 1.02em;
-  background: #f2f1f7;
+  // background: #f2f1f7;
 }
 
 body {

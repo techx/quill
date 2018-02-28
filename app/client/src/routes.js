@@ -229,6 +229,46 @@ angular.module('reg')
           requireLogin: false
         }
       })
+      .state('app.recruit', {
+        url: "/recruit",
+        templateUrl: "views/recruit/recruit.html",
+        controller: 'RecruitCtrl',
+        data: {
+          requireLogin: false
+        }
+      })
+      .state('app.logistics', {
+        url: "/recruit/logistics",
+        templateUrl: "views/recruit/logistics.html",
+        controller: 'RecruitCtrl',
+        data: {
+          requireLogin: false
+        }
+      })
+      .state('app.corporate', {
+        url: "/recruit/corporate",
+        templateUrl: "views/recruit/corporate.html",
+        controller: 'RecruitCtrl',
+        data: {
+          requireLogin: false
+        }
+      })
+      .state('app.marketing', {
+        url: "/recruit/marketing",
+        templateUrl: "views/recruit/marketing.html",
+        controller: 'RecruitCtrl',
+        data: {
+          requireLogin: false
+        }
+      })
+      .state('app.technology', {
+        url: "/recruit/technology",
+        templateUrl: "views/recruit/technology.html",
+        controller: 'RecruitCtrl',
+        data: {
+          requireLogin: false
+        }
+      })
       .state('reset', {
         url: "/reset/:token",
         templateUrl: "views/reset/reset.html",
@@ -248,14 +288,6 @@ angular.module('reg')
       .state('404', {
         url: "/404",
         templateUrl: "views/404.html",
-        data: {
-          requireLogin: false
-        }
-      })
-      .state('slackinvite', {
-        url: "/slackinvite",
-        redirectTo: 'https://join.slack.com/t/hackuci2018/shared_invite/enQtMzA3MTk4ODk5NTA2LTRmYzA3NGI5MDVkNjVlZDJkZDY4Njg5ZDYwZjlhMjM1NTY3YWUzMGM3YzBlZDNhMWRjZGNmZTAxZjYzY2RmOTY',
-        external: true,
         data: {
           requireLogin: false
         }
