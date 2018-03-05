@@ -81,7 +81,8 @@ angular.module('reg')
         templateUrl: "views/application/application.html",
         controller: 'ApplicationCtrl',
         data: {
-          requireVerified: true
+          requireVerified: true,
+          requireNotAdmitted: true,
         },
         resolve: {
           currentUser: function(UserService){
@@ -103,6 +104,20 @@ angular.module('reg')
           currentUser: function(UserService){
             return UserService.getCurrentUser();
           }
+        }
+      })
+      .state('app.liability', {
+        url: "/forms/liability",
+        templateUrl: "views/forms/liability.html",
+        data: {
+          requireAdmitted: true
+        }
+      })
+      .state('app.photoRelease', {
+        url: "/forms/photoRelease",
+        templateUrl: "views/forms/photo.html",
+        data: {
+          requireAdmitted: true
         }
       })
       .state('app.team', {
@@ -197,6 +212,7 @@ angular.module('reg')
       var requireAdmin = transition.to().data.requireAdmin;
       var requireVerified = transition.to().data.requireVerified;
       var requireAdmitted = transition.to().data.requireAdmitted;
+      var requireNotAdmitted = transition.to().data.requireNotAdmitted;
 
       if (requireLogin && !Session.getToken()) {
         return transition.router.stateService.target("login");
@@ -211,6 +227,10 @@ angular.module('reg')
       }
 
       if (requireAdmitted && !Session.getUser().status.admitted) {
+        return transition.router.stateService.target("app.dashboard");
+      }
+
+      if (requireNotAdmitted && Session.getUser().status.admitted) {
         return transition.router.stateService.target("app.dashboard");
       }
     });

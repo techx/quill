@@ -65,9 +65,9 @@
           <i class="green circle check icon"></i>
           <div class="content">
             <strong>
-              Confirmed (MIT)
+              Confirmed (UT)
             </strong> :
-            {{stats.confirmedMit}}
+            {{stats.confirmedUT}}
           </div>
         </div>
         <div class="item">
@@ -79,7 +79,6 @@
               {{stats.declined}}
           </div>
         </div>
-
         <div class="item">
           <i class="green flag icon"></i>
           <div class="content">
@@ -90,6 +89,7 @@
           </div>
         </div>
 
+        
         <div class="ui divider"></div>
 
         <div class="item">
@@ -167,8 +167,49 @@
             </span>
           </div>
         </div>
-
       </div>
+    </div>
+  </div>
+
+  <div
+    class="ui blue segment"
+    ng-class="{'loading': loading}">
+    <div class="ui header">
+      Additional Data
+    </div>
+    <div class="ui list">
+
+        <strong>How they heard about the event:</strong>
+        <div 
+          class="item"
+          ng-repeat="media in stats.socialMedia | orderBy: '-count'">
+          <div class="content">
+            <strong>{{media.name}}</strong> : {{media.count}} ({{media.count / stats.total * 100 | number: 1}}%)
+          </div>
+        </div>
+
+        <div class="ui divider"></div>
+
+        <strong>What type of workshops they would most like to see:</strong>
+        <div
+          class="item"
+          ng-repeat="workshop in stats.workshops | orderBy: '-count'">
+          <div class="content">
+            <strong>{{workshop.name}}</strong> : {{workshop.count}} ({{workshop.count / stats.total * 100 | number: 1}}%)
+          </div>
+        </div>
+
+        <div class="ui divider"></div>
+       
+        <strong>What platforms they like hacking on:</strong>
+        <div
+          class="item"
+          ng-repeat="platform in stats.platforms | orderBy: '-count'">
+          <div class="content">
+            <strong>{{platform.name}}</strong> : {{platform.count}} ({{platform.count / stats.total * 100 | number: 1}}%)
+          </div>
+        </div>
+
     </div>
   </div>
 
@@ -211,18 +252,35 @@
       </div>
     </div>
     <div class="ui divider"></div>
+        <div class="ui list">
+            <div class="item">
+              <div class="content">
+                <strong>
+                  First Time Hackers:
+                </strong>{{stats.firstTimeHackers}} ({{stats.firstTimeHackers / stats.total * 100 | number: 1}}%)
+              </div>
+            </div>
+            <div class="item">
+              <div class="content">
+                <strong>
+                  Veteran Hackers:
+                </strong>{{stats.veteranHackers}} ({{stats.veteranHackers / stats.total * 100 | number: 1}}%)
+              </div>
+        </div>
+    </div>
+    <div class="ui divider"></div>
       <div class="ui list">
         <div class="item">
-          <strong>Fresh:</strong> {{stats.demo.year['2019']}} ({{stats.demo.year['2019'] / stats.total * 100 | number: 1}}%)
+          <strong>Fresh:</strong> {{stats.demo.year['2021']}} ({{stats.demo.year['2021'] / stats.total * 100 | number: 1}}%)
         </div>
         <div class="item">
-          <strong>Soph:</strong> {{stats.demo.year['2018']}} ({{stats.demo.year['2018'] / stats.total * 100 | number: 1}}%)
+          <strong>Soph:</strong> {{stats.demo.year['2020']}} ({{stats.demo.year['2020'] / stats.total * 100 | number: 1}}%)
         </div>
         <div class="item">
-         <strong>Junior:</strong> {{stats.demo.year['2017']}} ({{stats.demo.year['2017'] / stats.total * 100 | number: 1}}%)
+         <strong>Junior:</strong> {{stats.demo.year['2019']}} ({{stats.demo.year['2019'] / stats.total * 100 | number: 1}}%)
         </div>
         <div class="item">
-          <strong>Senior:</strong> {{stats.demo.year['2016']}} ({{stats.demo.year['2016'] / stats.total * 100 | number: 1}}%)
+          <strong>Senior:</strong> {{stats.demo.year['2018']}} ({{stats.demo.year['2018'] / stats.total * 100 | number: 1}}%)
         </div>
       </div>
     <div class="ui divider"></div>

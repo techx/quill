@@ -162,7 +162,6 @@ angular.module('reg')
             if (!value) {
               return;
             }
-
             UserService
               .admitUser(user._id)
               .then(response => {

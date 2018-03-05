@@ -9,3 +9,9 @@ app/client/build/
 # macOS
 .DS_Store
 .python-version
+
+# HackTX specific
+app/client/plugins/
+*.log
+.env
+.idea/

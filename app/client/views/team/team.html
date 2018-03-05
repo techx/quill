@@ -70,7 +70,7 @@
           <p
             ng-repeat="user in teammates"
             class="item">
-            {{user.profile.name || 'Somebody (has not filled out their profile!)'}}
+          {{user.profile.name || 'Somebody (has not filled out their profile!)'}} ({{user.email}}) [{{ user.status.name }}]
           </p>
 
           <div

@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>*|MC:SUBJECT|*</title>
+  </head>
+    <body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0">
+      <center>
+          <table align="center" border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="bodyTable">
+              <tr>
+                  <td align="center" valign="top" id="bodyCell">
+                      <!-- BEGIN TEMPLATE // -->
+                      <table border="0" cellpadding="0" cellspacing="0" id="templateContainer">
+                          <tr>
+                              <td align="center" valign="top">
+                                  <!-- BEGIN HEADER // -->
+                                    <table border="0" cellpadding="0" cellspacing="0" width="100%" id="templateHeader">
+                                        <tr>
+                                            <td valign="top" class="headerContent">
+                                              <img src="{{ emailHeaderImage }}" style="max-width:600px;" id="headerImage" mc:label="header_image" mc:edit="header_image" mc:allowdesigner mc:allowtext />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <!-- // END HEADER -->
+                                </td>
+                            </tr>
+                          <tr>
+                              <td align="center" valign="top">
+                                  <!-- BEGIN BODY // -->
+                                    <table border="0" cellpadding="0" cellspacing="0" width="100%" id="templateBody">
+                                        <tr>
+                                            <td valign="top" style="text-align: center" class="bodyContent" mc:edit="body_content00">
+                                                <h1>Verify Your Email</h1>
+                                                <h3>Thanks for signing up for {{ hackathonName }}!</h3>
+                                                To verify your email, click the button below.
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <a href="{{verifyUrl}}" class="pink button">
+                                                  Verify Me
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td valign="top" style="text-align: center" class="bodyContent" mc:edit="body_content00">
+                                              Thanks,
+                                              <br />
+                                              The {{ hackathonName }} Team
+                                            </td>
+                                        </tr>
+
+
+                                    </table>
+                                    <!-- // END BODY -->
+                                </td>
+                            </tr>
+                          <tr>
+                              <td align="center" valign="top">
+                                  <!-- BEGIN FOOTER // -->
+                                    <table border="0" cellpadding="0" cellspacing="0" width="100%" id="templateFooter">
+                                        <tr>
+                                            <td valign="top" class="footerContent" mc:edit="footer_content00">
+                                                <a href="https://twitter.com/{{ twitterHandle }}">Follow on Twitter</a>&nbsp;&nbsp;&nbsp;<a href="https://facebook.com/{{ facebookHandle }}">Like on Facebook</a>&nbsp;&nbsp;&nbsp;
+                                                <a href="mailto:{{ emailAddress }}">Email Us</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td valign="top" class="footerContent" style="padding-top:0;" mc:edit="footer_content01">
+                                                <em>Copyright &copy; {{ hackathonName }} 2018, All rights reserved.</em>
+                                                <br />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <!-- // END FOOTER -->
+                                </td>
+                            </tr>
+                        </table>
+                        <!-- // END TEMPLATE -->
+                    </td>
+                </tr>
+            </table>
+        </center>
+    </body>
+</html>

@@ -2,8 +2,12 @@ var path = require('path');
 var nodemailer = require('nodemailer');
 var smtpTransport = require('nodemailer-smtp-transport');
 
+var request = require('request');
+var moment = require('moment');
+
 var templatesDir = path.join(__dirname, '../templates');
 var Email = require('email-templates');
+var qr_generator = require('./qr-generator');
 
 var ROOT_URL = process.env.ROOT_URL;
 
@@ -25,13 +29,13 @@ if(EMAIL_HEADER_IMAGE.indexOf("https") == -1){
 var NODE_ENV = process.env.NODE_ENV;
 
 var options = {
-  host: EMAIL_HOST,
-  port: EMAIL_PORT,
-  secure: true,
-  auth: {
-    user: EMAIL_USER,
-    pass: EMAIL_PASS
-  }
+    host: EMAIL_HOST,
+    port: EMAIL_PORT,
+    secure: true,
+    auth: {
+        user: EMAIL_USER,
+        pass: EMAIL_PASS
+    }
 };
 
 var transporter = nodemailer.createTransport(smtpTransport(options));
@@ -189,6 +193,90 @@ controller.sendPasswordChangedEmail = function(email, callback){
       console.log(info.message);
     }
     if (callback){
+      callback(err, info);
+    }
+  });
+
+};
+
+/**
+ * Send an acceptance email.
+ * @param  {[type]}   email    [description]
+ * @param  {Function} callback [description]
+ */
+controller.sendAcceptanceEmail = function(email, confirmBy, callback) {
+
+  var options = {
+    to: email,
+    subject: "["+HACKATHON_NAME+"] - Application Update"
+  };
+
+  date = new Date(confirmBy);
+  // Hack for timezone
+  var confirmDeadline = moment(date).format('dddd, MMMM Do YYYY, h:mm a') +
+    " " + date.toTimeString().split(' ')[2];
+
+  var locals = {
+    title: 'Congratulations!',
+    subtitle: '',
+    description: 'Woohoo! You have been accepted to ' + HACKATHON_NAME +  '. We can\'t wait to see you get hacking!',
+    confirmDeadline: confirmDeadline,
+    actionUrl: ROOT_URL,
+    actionName: "Go to Your Dashboard"
+  };
+
+  /**
+   * Eamil-verify takes a few template values:
+   * {
+   *   verifyUrl: the url that the user must visit to verify their account
+   * }
+   */
+  sendOne('email-acceptance', options, locals, function(err, info){
+    if (err){
+      console.log(err);
+    }
+    if (info){
+      console.log(info.message);
+    }
+    if (callback) {
+      callback(err, info);
+    }
+  });
+
+};
+
+/**
+ * Send a confirmation email.
+ * @param  {[type]}   email    [description]
+ * @param  {Function} callback [description]
+ */
+controller.sendConfirmationEmail = function(user, callback) {
+
+  var options = {
+    to: user.email,
+    subject: "["+HACKATHON_NAME+"] - Attendance Confirmation"
+  };
+
+  var locals = {
+    title: 'You\'re all set for ' + HACKATHON_NAME + '!',
+    subtitle: '',
+    qr_payload: encodeURIComponent(qr_generator.generateCheckInPayload(user))
+  };
+
+  /**
+   * Eamil-verify takes a few template values:
+   * {
+   *   verifyUrl: the url that the user must visit to verify their account
+   * }
+   */
+  sendOne('email-confirmation', options, locals, function(err, info){
+    if (err){
+      console.log(err);
+    }
+    if (info){
+      console.log(info.message);
+    }
+    if (callback) {
       callback(err, info);
     }
   });

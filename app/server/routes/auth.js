@@ -95,6 +95,7 @@ module.exports = function(router){
         });
       });
   });
+  
 
   /**
    * Reset user's password.
