@@ -88,6 +88,20 @@ angular.module('reg')
           }
         }
       })
+      .state('app.liability', {
+        url: "/forms/liability",
+        templateUrl: "views/forms/liability.html",
+        data: {
+          requireAdmitted: true
+        }
+      })
+      .state('app.photoRelease', {
+        url: "/forms/photoRelease",
+        templateUrl: "views/forms/photo.html",
+        data: {
+          requireAdmitted: true
+        }
+      })
       .state('app.team', {
         url: "/team",
         templateUrl: "views/team/team.html",

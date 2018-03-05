@@ -19,10 +19,10 @@ function calculateStats(){
       },
       schools: {},
       year: {
-        '2016': 0,
-        '2017': 0,
         '2018': 0,
         '2019': 0,
+        '2020': 0,
+        '2021': 0,
       }
     },
 
@@ -31,7 +31,7 @@ function calculateStats(){
     submitted: 0,
     admitted: 0,
     confirmed: 0,
-    confirmedMit: 0,
+    confirmedUT: 0,
     declined: 0,
 
     confirmedFemale: 0,
@@ -56,6 +56,7 @@ function calculateStats(){
     },
 
     dietaryRestrictions: {},
+    socialMedia: {},
 
     hostNeededFri: 0,
     hostNeededSat: 0,
@@ -71,7 +72,12 @@ function calculateStats(){
 
     wantsHardware: 0,
 
-    checkedIn: 0
+    checkedIn: 0,
+
+    platforms: {},
+    workshops: {},
+    firstTimeHackers: 0,
+    veteranHackers: 0,
   };
 
   User
@@ -104,7 +110,7 @@ function calculateStats(){
         newStats.confirmed += user.status.confirmed ? 1 : 0;
 
         // Count confirmed that are mit
-        newStats.confirmedMit += user.status.confirmed && email === "mit.edu" ? 1 : 0;
+        newStats.confirmedUT += user.status.confirmed && email === "utexas.edu" ? 1 : 0;
 
         newStats.confirmedFemale += user.status.confirmed && user.profile.gender == "F" ? 1 : 0;
         newStats.confirmedMale += user.status.confirmed && user.profile.gender == "M" ? 1 : 0;
@@ -180,6 +186,45 @@ function calculateStats(){
           });
         }
 
+        // Social media/How they hear about us
+        if (user.profile.socialMedia) {
+          user.profile.socialMedia.forEach(function(media) {
+            if (!newStats.socialMedia[media]) {
+              newStats.socialMedia[media] = 0;
+            }
+            newStats.socialMedia[media] += 1;
+          });
+        }
+
+        // Platforms
+        if (user.confirmation.platforms) {
+          user.confirmation.platforms.forEach(function(platform) {
+            if (!newStats.platforms[platform]) {
+              newStats.platforms[platform] = 0;
+            }
+            newStats.platforms[platform] += 1;
+          })
+        }
+
+        // Workshops
+        if (user.confirmation.workshops) {
+          var workshop = user.confirmation.workshops;
+          if (!newStats.workshops[workshop]) {
+            newStats.workshops[workshop] = 0;
+          }
+          newStats.workshops[workshop] += 1;
+        }
+
+        // First Time Hackers
+        if (user.confirmation.firstHackathon) {
+            if (user.confirmation.firstHackathon === "yes") {
+                newStats.firstTimeHackers += 1;
+            }
+            else {
+                newStats.veteranHackers += 1;
+            }
+        }
+
         // Count checked in
         newStats.checkedIn += user.status.checkedIn ? 1 : 0;
 
@@ -195,6 +240,39 @@ function calculateStats(){
             });
           });
         newStats.dietaryRestrictions = restrictions;
+
+        // Transform social media into a series of objects
+        var socialMedia = [];
+        _.keys(newStats.socialMedia)
+          .forEach(function(key) {
+            socialMedia.push({
+              name: key,
+              count: newStats.socialMedia[key],
+            });
+          });
+        newStats.socialMedia = socialMedia;
+
+        // Transform platforms into a series of objects
+        var platforms = [];
+        _.keys(newStats.platforms)
+          .forEach(function(key) {
+            platforms.push({
+              name: key,
+              count: newStats.platforms[key],
+            });
+          });
+        newStats.platforms = platforms;
+
+        // Transform workshops into a series of objects
+        var workshops = [];
+        _.keys(newStats.workshops)
+          .forEach(function(key) {
+            workshops.push({
+              name: key,
+              count: newStats.workshops[key],
+            });
+          });
+        newStats.workshops = workshops;
 
         // Transform schools into an array of objects
         var schools = [];

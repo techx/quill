@@ -40,6 +40,10 @@
 
   }
 
+  .item img {
+    max-width: 100%;
+  }
+
   .note {
     font-size: .8em;
     text-align: center;
@@ -73,6 +77,10 @@
     .close {
       color: white;
       font-size: 2em;
+    }
+
+    img {
+    max-width: 100%;
     }
   }
 

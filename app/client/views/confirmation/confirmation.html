@@ -89,9 +89,6 @@
             <label>
               What kind of hardware would be useful for you?
             </label>
-            <p>
-              We will have a hardware checkout, and we'll try our best to provide things that would be useful to you - however, we can't guarantee everything. We will publish a list of available hardware closer to the day of the event.
-            </p>
             <input type="text" ng-model="user.confirmation.hardware">
           </div>
 
@@ -132,7 +129,7 @@
             </p>
             <a
               target="_blank"
-              href="https://go.hackmit.org/skill-sheets"
+              href="https://www.dropbox.com/request/kqieLgNd08ShwmG7X2eD"
               class="ui pink button">
               Upload
             </a>
@@ -141,176 +138,40 @@
           <br>
           <br>
 
-          <div class="divided title">Hosting Details</div>
-
-          <p>
-            Would you like us to find you a host? We can match you with someone so you can catch some zzz's the night before and/or the night of the event!
-          </p>
+          <div class="divided title">Emergency Contact</div>
 
           <div class="field">
-            <div class="ui checkbox">
-              <input type="checkbox" ng-model="user.confirmation.hostNeededFri">
-              <label>
-                <strong>
-                  I would like a host for Friday, Sept. 18th.
-                </strong>
-              </label>
-            </div>
+            <label> Full Name </label>
+            <input type="text"
+                   name="contactName"
+                   ng-model="user.confirmation.contactName"
+                   placeholder="John Smith"
+                   required>
           </div>
 
           <div class="field">
-            <div class="ui checkbox">
-              <input type="checkbox" ng-model="user.confirmation.hostNeededSat">
-              <label>
-                <strong>
-                I would like a host for Saturday, Sept. 19th.
-                </strong>
-              </label>
-            </div>
-          </div>
-
-          <div
-            ng-show="user.confirmation.hostNeededFri || user.confirmation.hostNeededSat">
-
-            <div class="field">
-              <div class="ui checkbox">
-                <input type="checkbox" ng-model="user.confirmation.genderNeutral">
-                <label> I would be okay with gender neutral housing. </label>
-              </div>
-            </div>
-
-            <div class="field">
-              <div class="ui checkbox">
-                <input type="checkbox" ng-model="user.confirmation.smokingFriendly">
-                <label> I would be okay in housing with smoking-friendly policies. </label>
-              </div>
-            </div>
-
-            <div class="field">
-              <div class="ui checkbox">
-                <input type="checkbox" ng-model="user.confirmation.catFriendly">
-                <label> I would be okay in housing that has cats. Meow! </label>
-              </div>
-            </div>
-
-
-            <div class="field">
-              <label>
-                Let us know if there's anything else we should know about matching you with a host.
-              </label>
-              <textarea
-                name="hostNotes"
-                ng-model="user.confirmation.hostNotes">
-              </textarea>
-            </div>
-
-          </div>
-
-          <br>
-          <br>
-
-          <div class="divided title">Travel</div>
-
-          <div class="field">
-            <p>
-              As a reminder, our reimbursement policy is as follows:
-            </p>
-            <ul>
-              <li> Up to $100 from within Massachusetts </li>
-              <li> Up to $200 from anywhere else in North America </li>
-              <li> Up to $500 from outside North America </li>
-            </ul>
-            <p>
-              We’ll also be sending buses free of charge to Princeton, NJ; New York, NY; New Haven, CT; and Providence, RI. Again, we only reimburse the minimum-cost travel path. Head back to the dashboard to read our full travel policy.
-            </p>
+            <label> Phone Number </label>
+            <input type="tel"
+                   name="contactPhone"
+                   ng-model="user.confirmation.contactPhone"
+                   placeholder="(123) - 555 - 1234"
+                   required>
           </div>
 
           <div class="field">
-            <label> Will you be needing travel reimbursement? </label>
-            <div class="ui checkbox">
-              <input type="checkbox" ng-model="user.confirmation.needsReimbursement">
-              <label> I will be needing travel reimbursement. </label>
-            </div>
-          </div>
-
-          <div
-            ng-show="user.confirmation.needsReimbursement">
-
-            <div class="ui header">
-              Mailing Address
-            </div>
-
-            <p>
-              Travel reimbursement is processed and sent by check after the event. To expedite the reimbursement process and ensure that you receive your reimbursement as quickly as possible, make sure that your mailing address is accurate and you upload your receipts.
-            </p>
-
-            <div class="field">
-              <label>Full Name</label>
-              <input type="text"
-                     name="name"
-                     ng-model="user.confirmation.address.name">
-            </div>
-
-            <div class="field">
-              <label> Address Line 1 - Street address, P.O. box, company name, c/o </label>
-              <input
-                type="text"
-                name="addressLine1"
-                ng-model="user.confirmation.address.line1">
-            </div>
-
-            <div class="field">
-              <label> Address Line 2 - Apartment, suite, unit, building, floor, etc. </label>
-              <input
-                type="text"
-                name="addressLine2"
-                ng-model="user.confirmation.address.line2">
-            </div>
-
-            <div class="four fields">
-              <div class="field">
-                <label> City </label>
-                <input
-                  type="text"
-                  name="city"
-                  ng-model="user.confirmation.address.city">
-              </div>
-              <div class="field">
-                <label> State/Province/Region </label>
-                <input
-                  type="text"
-                  name="state"
-                  ng-model="user.confirmation.address.state">
-              </div>
-              <div class="field">
-                <label> ZIP </label>
-                <input
-                  type="text"
-                  name="zip"
-                  ng-model="user.confirmation.address.zip">
-              </div>
-              <div class="field">
-                <label> Country </label>
-                <input
-                  type="text"
-                  name="country"
-                  ng-model="user.confirmation.address.country">
-              </div>
-            </div>
-
-            <div class="field">
-              <label> Travel Receipt </label>
-              <p>
-                So that we can process your reimbursement faster, please name your receipt: <strong>{{fileName}}</strong>
-              </p>
-              <a
-                target="_blank"
-                href="https://go.hackmit.org/travel-receipts"
-                class="ui pink button">
-                Upload Receipt
-              </a>
-            </div>
-
+            <label> Relationship to you </label>
+            <select
+              name="contactRelationship"
+              ng-model="user.confirmation.contactRelationship"
+              required>
+              <option value="">Relationship</option>
+              <option value="Parent">Parent</option>
+              <option value="FamilyMember">Family Member</option>
+              <option value="SignificantOther">Significant Other</option>
+              <option value="Friend">Friend</option>
+              <option value="Roommate">Roommate</option>
+              <option value="Other">Other</option>
+            </select>
           </div>
 
           <br>
@@ -318,20 +179,20 @@
 
           <div class="divided title">Legal</div>
 
+          <p>
+            By continuing to complete this form, you agree that your electronic signature is the legally binding equivalent to your handwritten signature. Whenever you execute an electronic signature, it has the same validity and meaning as your handwritten signature. You will not, at any time in the future, repudiate the meaning of your electronic signature or claim that your electronic signature is not legally binding.
+          </p>
+
           <div class="field">
-            <label> Liability Waiver </label>
+            <label>Release and Indemnification Agreement</label>
             <p>
-              <a
-                target="_blank"
-                href="https://go.hackmit.org/liability-waiver">
-                Liability Waiver
-              </a>
+                <a target="_blank" href="/forms/liability">Release and Indemnification Agreement</a>
             </p>
             <p>
-              For legal reasons, our university asks that you read and accept the terms of our liability waiver. Again, as we mentioned in the original lottery application - you <strong> must </strong> be 18 years or older or an MIT undergraduate by the day of the event, or <strong> we will refuse you admission at the door. We will be checking ID. </strong>
+                For legal reason, we ask you to read and accept the terms of our liability waiver. Again, as mentioned in the application process - you <strong> must </strong> be 18 years or older by the day of the event, or <strong> we will refuse you admission at the door. We will be checking ID. </strong>
             </p>
             <p>
-              By writing my name below, I affirm that I have read and accepted the terms of the liability waiver above, and will be either an MIT undergraduate or 18 years or older at the time of the event.
+                By writing my name below, I affirm that I have read and accepted the terms of the liability waiver above, and will be 18 years or older at the time of the event.
             </p>
             <input type="text"
                    name="signatureLiabilityWaiver"
@@ -340,19 +201,15 @@
           </div>
 
           <div class="field">
-            <label> Photo Release </label>
+            <label>Photo Release</label>
             <p>
-              <a
-                target="_blank"
-                href="https://go.hackmit.org/photo-release">
-                Photo Release
-              </a>
+                <a target="_blank" href="/forms/photoRelease">Photograph Release Form</a>
             </p>
             <p>
-              Signing this photo release means if we take photos or photos of you, we can share it with the world.
+                Signing this photo release means if we take photos or photos of you, we can share it with the world.
             </p>
             <p>
-              By writing my name below, I affirm that I have read and accepted the terms of the photo release above.
+                By writing my name below, I affirm that I have read and accepted the terms of the photo release above.             
             </p>
             <input type="text"
                    name="signaturePhotoRelease"
@@ -365,7 +222,7 @@
             <p>
               <a
                 target="_blank"
-                href="https://go.hackmit.org/code-of-conduct">
+                href="https://guide.mlh.io/CONDUCT.md">
                 Hacker Code of Conduct
               </a>
             </p>
@@ -373,7 +230,7 @@
               It is extremely important to us that attendees follow a set of guidelines to make the event fun for everyone involved. Please read through and make sure you understand what we will be expecting of you.
             </p>
             <p>
-              By writing my name below, I affirm that I have read and will abide by the code of conduct detailed above.
+              By writing my name below, I affirm that I have read and will abide by the MLH code of conduct detailed above.
             </p>
             <input type="text"
                    name="signatureCodeOfConduct"
@@ -385,6 +242,53 @@
           <br>
 
           <div class="divided title">everything else</div>
+
+          <div class="field">
+            <label> We're hosting this event for you, so let us know what you want to see!</label>
+            <p>
+              Give us some ideas of what kind of workshops you'd like to see. Do you want to learn how to build workout Android app? How to survive a 12-hour hackathon? How to use APIs? We want to create the best event experience and that depends on you telling us what you want : )
+            </p>
+          </div>
+
+          <div class="field">
+            <label> If accepted, will WholesomeHacks be your first hackathon? </label>
+            <select
+              name="firstHackathon"
+              ng-model="user.confirmation.firstHackathon">
+              <option value="">Select an option</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+
+          <div class="field">
+              <label> What platforms do you like to hack on? </label>
+          </div>
+
+          <div class="inline fields">
+            <div class="field" ng-repeat="(key, value) in platforms">
+                <div class="ui checkbox">
+                  <input type="checkbox" ng-model="platforms[key]">
+                  <label>{{key}}</label>
+                </div>
+            </div>
+          </div>
+
+          <div class="field">
+              <label> What type of workshops would you like to see the most? </label>
+              <select name="workshops" ng-model="user.confirmation.workshops">
+                <option value=""> Workshop </option>
+                <option value="MobileApps"> Mobile Apps </option>
+                <option value="APIs"> How to Use APIs </option>
+                <option value="Hackathon101"> Hackathon 101: How to survive an invention marathon </option>
+                <option value="Blockchain"> How to build a Dapp using a Blockchain </option>
+              </select>
+          </div>
+
+          <div class="field">
+            <label> What are you nervous about (i.e. finding a team, learning a new API)? How could we help? </label>
+            <textarea ng-model="user.confirmation.help"></textarea>
+          </div>
 
           <div class="field">
             <label>

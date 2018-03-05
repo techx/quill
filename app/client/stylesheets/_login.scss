@@ -2,8 +2,6 @@
   height: 100%;
   width: 100%;
   background-color: $login-bg-color;
-  background: $login-bg; 
-  background-size: cover;
 
   > .container {
     position: relative;
@@ -18,12 +16,7 @@
       margin: 0 auto;
 
       .logo {
-        max-width: 100px;
         margin: .5rem auto 1rem auto;
-        img {
-          width: 100px;
-          height: 100px;
-        }
       }
 
       .button {

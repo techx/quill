@@ -4,6 +4,7 @@
   "version": "0.0.1",
   "private": "true",
   "dependencies": {
+    "@sendgrid/mail": "^6.2.1",
     "async": "^1.4.2",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.8.4",
@@ -11,6 +12,7 @@
     "dotenv": "^1.2.0",
     "email-templates": "^2.0.1",
     "express": "^4.9.8",
+    "fs": "0.0.1-security",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
     "gulp-minify-css": "^1.2.0",
@@ -25,9 +27,8 @@
     "moment": "^2.10.3",
     "mongoose": "^4.1.2",
     "morgan": "^1.6.1",
-    "nodemailer": "^1.4.0",
-    "nodemailer-smtp-transport": "^1.0.3",
     "passport-local": "^1.0.0",
+    "qr-image": "^3.2.0",
     "request": "^2.60.0",
     "underscore": "^1.8.3",
     "validator": "^3.40.1"

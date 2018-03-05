@@ -13,17 +13,36 @@ angular.module('reg')
       // Set up the user
       $scope.user = currentUser.data;
 
-      // Is the student from MIT?
-      $scope.isMitStudent = $scope.user.email.split('@')[1] == 'mit.edu';
+      // Is the student from UT?
+      $scope.isUtStudent = $scope.user.email.split('@')[1] == 'utexas.edu';
 
       // If so, default them to adult: true
-      if ($scope.isMitStudent){
+      if ($scope.isUtStudent){
         $scope.user.profile.adult = true;
       }
+    
+       var socialMedia = {
+        'Facebook': false,
+        'Twitter': false,
+        'School Club': false,
+        'Website': false,
+        'Friend': false
+      };
 
+      if ($scope.user.profile.socialMedia){
+        $scope.user.profile.socialMedia.forEach(function(media){
+          if (media in socialMedia){
+            socialMedia[media] = true;
+          }
+        });
+      }
+
+      $scope.socialMedia = socialMedia;
+     
       // Populate the school dropdown
       populateSchools();
       _setupForm();
+
 
       $scope.regIsClosed = Date.now() > Settings.data.timeClose;
 
@@ -68,6 +87,16 @@ angular.module('reg')
       }
 
       function _updateUser(e){
+        var profile = $scope.user.profile;
+        // Get the dietary restrictions as an array
+        var drs = [];
+        Object.keys($scope.socialMedia).forEach(function(key){
+          if ($scope.socialMedia[key]){
+            drs.push(key);
+          }
+        });
+        profile.socialMedia = drs;
+
         UserService
           .updateProfile(Session.getUserId(), $scope.user.profile)
           .success(function(data){
@@ -129,12 +158,12 @@ angular.module('reg')
                 }
               ]
             },
-            year: {
-              identifier: 'year',
+            eid: {
+              identifier: 'uteid',
               rules: [
                 {
                   type: 'empty',
-                  prompt: 'Please select your graduation year.'
+                  prompt: 'Please type your UT EID or put N/A if not a UT student.'
                 }
               ]
             },
@@ -147,12 +176,30 @@ angular.module('reg')
                 }
               ]
             },
+            year: {
+              identifier: 'year',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please select your graduation year.'
+                }
+              ]
+            },
+            firstHackathon: {
+              identifier: 'firstHackathon',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please select yes or no.'
+                }
+              ]
+            },
             adult: {
               identifier: 'adult',
               rules: [
                 {
                   type: 'allowMinors',
-                  prompt: 'You must be an adult, or an MIT student.'
+                  prompt: 'You must be an adult to attend this event.'
                 }
               ]
             }
