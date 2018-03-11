@@ -26,8 +26,7 @@ angular.module('reg')
       var dietaryRestrictions = {
         'Vegetarian': false,
         'Vegan': false,
-        'Halal': false,
-        'Kosher': false,
+        'Lactose': false,
         'Nut Allergy': false
       };
 

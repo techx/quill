@@ -65,7 +65,7 @@ var confirmation = {
     }
   },
   wantsHardware: Boolean,
-  hardware: String,
+  //hardware: String,
 
   major: String,
   github: String,
@@ -73,6 +73,7 @@ var confirmation = {
   website: String,
   resume: String,
 
+/*
   needsReimbursement: Boolean,
   address: {
     name: String,
@@ -91,7 +92,7 @@ var confirmation = {
   catFriendly: Boolean,
   smokingFriendly: Boolean,
   hostNotes: String,
-
+*/
   notes: String,
 
   signatureLiability: String,
