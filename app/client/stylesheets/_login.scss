@@ -2,7 +2,7 @@
   height: 100%;
   width: 100%;
   background-color: $login-bg-color;
-  background: $login-bg; 
+  background: $login-bg;
   background-size: cover;
 
   > .container {
@@ -18,7 +18,7 @@
       margin: 0 auto;
 
       .logo {
-        max-width: 100px;
+        max-width: 200px;
         margin: .5rem auto 1rem auto;
         img {
           width: 100px;
