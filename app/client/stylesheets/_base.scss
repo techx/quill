@@ -12,6 +12,7 @@
 
     transition: padding-left $sidebar-transition-time;
 
+    position: absolute;
     > .container {
       padding: 36px;
     }
