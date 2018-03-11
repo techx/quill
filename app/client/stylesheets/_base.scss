@@ -7,12 +7,11 @@
     width: 100%;
     min-height: 100%;
     padding-left: $sidebar-width;
-    background: $login-bg;
+    background: $login-bg no-repeat top center fixed;
     box-shadow: 0 0 8px rgba(0,0,0,.4);
 
     transition: padding-left $sidebar-transition-time;
 
-    position: absolute;
     > .container {
       padding: 36px;
     }
