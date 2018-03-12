@@ -15,7 +15,7 @@ angular.module('reg')
       var user = currentUser.data;
       $scope.user = user;
       $scope.timeClose = Utils.formatTime(Settings.timeClose);
-      $scope.timeConfirm = Utils.formatTime(Settings.timeConfirm);
+      $scope.timeConfirm = Utils.formatTime(Settings.confirmBy);
 
       $scope.DASHBOARD = DASHBOARD;
 
@@ -24,7 +24,7 @@ angular.module('reg')
           $scope.DASHBOARD[msg] = $scope.DASHBOARD[msg].replace('[APP_DEADLINE]', Utils.formatTime(Settings.timeClose));
         }
         if ($scope.DASHBOARD[msg].includes('[CONFIRM_DEADLINE]')) {
-          $scope.DASHBOARD[msg] = $scope.DASHBOARD[msg].replace('[CONFIRM_DEADLINE]', Utils.formatTime(user.status.timeConfirm));
+          $scope.DASHBOARD[msg] = $scope.DASHBOARD[msg].replace('[CONFIRM_DEADLINE]', Utils.formatTime(Settings.timeConfirm));
         }
       }
 
@@ -32,7 +32,7 @@ angular.module('reg')
       var regIsOpen = $scope.regIsOpen = Utils.isRegOpen(Settings);
 
       // Is it past the user's confirmation time?
-      var pastConfirmation = $scope.pastConfirmation = Utils.isAfter(user.status.timeConfirm);
+      var pastConfirmation = $scope.pastConfirmation = Utils.isAfter(Settings.timeConfirm);
 
       $scope.dashState = function(status){
         var user = $scope.user;
