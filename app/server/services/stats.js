@@ -19,10 +19,10 @@ function calculateStats(){
       },
       schools: {},
       year: {
-        'Freshman': 0,
-        'Sophomore': 0,
-        'Junior': 0,
-        'Senior': 0,
+        '2018': 0,
+        '2019': 0,
+        '2020': 0,
+        '2021': 0,
       }
     },
 
