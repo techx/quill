@@ -3,7 +3,7 @@ angular.module('reg')
   '$http',
   function($http){
 
-    var base = '' + '/api/settings/';
+    var base = '/api/settings/';
 
     return {
       getPublicSettings: function(){
