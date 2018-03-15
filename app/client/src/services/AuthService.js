@@ -8,6 +8,8 @@ angular.module('reg')
     function($http, $rootScope, $state, $window, Session) {
       var authService = {};
 
+      var base = '';
+
       function loginSuccess(data, cb){
         // Winner winner you get a token
         Session.create(data.token, data.user);
@@ -26,7 +28,7 @@ angular.module('reg')
 
       authService.loginWithPassword = function(email, password, onSuccess, onFailure) {
         return $http
-          .post('/auth/login', {
+          .post(base + '/auth/login', {
             email: email,
             password: password
           })
@@ -40,7 +42,7 @@ angular.module('reg')
 
       authService.loginWithToken = function(token, onSuccess, onFailure){
         return $http
-          .post('/auth/login', {
+          .post(base + '/auth/login', {
             token: token
           })
           .success(function(data){
@@ -61,7 +63,7 @@ angular.module('reg')
 
       authService.register = function(email, password, onSuccess, onFailure) {
         return $http
-          .post('/auth/register', {
+          .post(base + '/auth/register', {
             email: email,
             password: password
           })
@@ -75,7 +77,7 @@ angular.module('reg')
 
       authService.verify = function(token, onSuccess, onFailure) {
         return $http
-          .get('/auth/verify/' + token)
+          .get(base + '/auth/verify/' + token)
           .success(function(user){
             Session.setUser(user);
             if (onSuccess){
@@ -91,21 +93,21 @@ angular.module('reg')
 
       authService.resendVerificationEmail = function(onSuccess, onFailure){
         return $http
-          .post('/auth/verify/resend', {
+          .post(base + '/auth/verify/resend', {
             id: Session.getUserId()
           });
       };
 
       authService.sendResetEmail = function(email){
         return $http
-          .post('/auth/reset', {
+          .post( base + '/auth/reset', {
             email: email
           });
       };
 
       authService.resetPassword = function(token, pass, onSuccess, onFailure){
         return $http
-          .post('/auth/reset/password', {
+          .post( base + '/auth/reset/password', {
             token: token,
             password: pass
           })

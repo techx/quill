@@ -3,7 +3,7 @@ angular.module('reg')
   '$http',
   function($http){
 
-    var base = '/api/settings/';
+    var base = '' + '/api/settings/';
 
     return {
       getPublicSettings: function(){
@@ -44,8 +44,8 @@ angular.module('reg')
         });
       },
       updateAllowMinors: function(allowMinors){
-        return $http.put(base + 'minors', { 
-          allowMinors: allowMinors 
+        return $http.put(base + 'minors', {
+          allowMinors: allowMinors
         });
       },
     };

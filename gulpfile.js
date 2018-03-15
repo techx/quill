@@ -57,7 +57,7 @@ gulp.task('sass', function () {
     .pipe(gulp.dest('app/client/build'));
 });
 
-gulp.task('build', ['js', 'sass'], function(){
+gulp.task('build', ['js', 'sass', 'inject-base-href'], function(){
   // Yup, build the js and sass.
 });
 
@@ -70,7 +70,7 @@ gulp.task('watch', ['js', 'sass'], function () {
     .watch('app/client/stylesheets/**/*.scss', ['sass']);
 });
 
-gulp.task('server', ['watch'], function(){
+gulp.task('server', ['watch', 'inject-base-href'], function(){
   nodemon({
     script: 'app.js',
     env: { 'NODE_ENV': process.env.NODE_ENV || 'DEV' },
