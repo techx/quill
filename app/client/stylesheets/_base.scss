@@ -1,5 +1,5 @@
 #base {
-  background: $login-bg-color;
+  background: url('https://s3.amazonaws.com/mesahacks-assets/mesahacks_bg.png');
   width: 100%;
   height: 100%;
 
@@ -7,7 +7,7 @@
     width: 100%;
     min-height: 100%;
     padding-left: $sidebar-width;
-    background: white;
+    //background: url('https://s3.amazonaws.com/mesahacks-assets/mesahacks_bg.png');
     box-shadow: 0 0 8px rgba(0,0,0,.4);
 
     transition: padding-left $sidebar-transition-time;
