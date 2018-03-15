@@ -1,7 +1,7 @@
 require('dotenv').load({silent: true});
 
 var gulp = require('gulp');
-var replace = require('gulp-relace');
+var replace = require('gulp-replace');
 var ifElse = require('gulp-if-else');
 var url = require("url");
 var root_path = url.parse(process.env.ROOT_URL).pathname;
