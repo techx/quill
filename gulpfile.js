@@ -1,6 +1,10 @@
 require('dotenv').load({silent: true});
 
 var gulp = require('gulp');
+var replace = require('gulp-relace');
+var ifElse = require('gulp-if-else');
+var url = require("url");
+var root_path = url.parse(process.env.ROOT_URL).pathname;
 var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var concat = require('gulp-concat');
@@ -22,25 +26,26 @@ gulp.task('default', function(){
   console.log('yo. use gulp watch or something');
 });
 
+gulp.task('inject-base-href', function() {
+  return gulp.src('app/client/src/index.html')
+    .pipe(replace('<base href="/">', function(match) {
+      console.log('Replace called on', match);
+        return '<base href="' + root_path + '/">'
+     }
+     ))
+    .pipe(gulp.dest('app/client'));
+});
+
 gulp.task('js', function () {
-  if (environment !== 'dev'){
-    // Minify for non-development
-    gulp.src(['app/client/src/**/*.js', 'app/client/views/**/*.js'])
-      .pipe(sourcemaps.init())
-        .pipe(concat('app.js'))
-        .pipe(ngAnnotate())
-        .on('error', swallowError)
-        .pipe(uglify())
-      .pipe(gulp.dest('app/client/build'));
-  } else {
-    gulp.src(['app/client/src/**/*.js', 'app/client/views/**/*.js'])
-      .pipe(sourcemaps.init())
-        .pipe(concat('app.js'))
-        .pipe(ngAnnotate())
-        .on('error', swallowError)
-      .pipe(sourcemaps.write())
-      .pipe(gulp.dest('app/client/build'));
-  }
+  console.log(root_path);
+  gulp.src(['app/client/src/**/*.js', 'app/client/views/**/*.js'])
+    .pipe(replace('var base = \'\'', 'var base = \'' + root_path + '\''))
+    .pipe(sourcemaps.init())
+      .pipe(concat('app.js'))
+      .pipe(ngAnnotate())
+      .on('error', swallowError)
+      .pipe( ifElse(environment !== 'dev', uglify, sourcemaps.write) )
+    .pipe(gulp.dest('app/client/build'));
 
 });
 

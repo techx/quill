@@ -10,12 +10,16 @@ var morgan          = require('morgan');
 
 var mongoose        = require('mongoose');
 var port            = process.env.PORT || 3000;
+var url             = require("url");
+var root_path       = url.parse(process.env.ROOT_URL).pathname;
 var database        = process.env.DATABASE || process.env.MONGODB_URI || "mongodb://localhost:27017";
 
 var settingsConfig  = require('./config/settings');
 var adminConfig     = require('./config/admin');
 
 var app             = express();
+
+global.__basedir = __dirname;
 
 // Connect to mongodb
 mongoose.connect(database);
@@ -29,17 +33,17 @@ app.use(bodyParser.json());
 
 app.use(methodOverride());
 
-app.use(express.static(__dirname + '/app/client'));
+app.use(root_path, express.static(__dirname + '/app/client'));
 
 // Routers =====================================================================
 
 var apiRouter = express.Router();
 require('./app/server/routes/api')(apiRouter);
-app.use('/register/api', apiRouter);
+app.use(root_path + '/api', apiRouter);
 
 var authRouter = express.Router();
 require('./app/server/routes/auth')(authRouter);
-app.use('/register/auth', authRouter);
+app.use(root_path + '/auth', authRouter);
 
 require('./app/server/routes')(app);
 
