@@ -7,7 +7,7 @@ angular.module('reg')
         INCOMPLETE_TITLE: 'You still need to complete your application!',
         INCOMPLETE: 'If you do not complete your application before the [APP_DEADLINE], you will not be able to join us for MesaHacks!',
         SUBMITTED_TITLE: 'Your application has been submitted!',
-        SUBMITTED: 'Feel free to edit it at any time. However, once registration is closed, you will not be able to edit it any further.\nPlease make sure your information is accurate before registration is closed!',
+        SUBMITTED: 'Thanks for submitting an application! Make sure you check back often to see if your application has been accepted.Feel free to edit your application at any time. However, once registration is closed, you will not be able to edit it any further.\nPlease make sure your information is accurate before registration is closed!',
         CLOSED_AND_INCOMPLETE_TITLE: 'Unfortunately, registration has closed.',
         CLOSED_AND_INCOMPLETE: 'Because you have not completed your profile in time, you will not be able to attend MesaHacks this year.',
         ADMITTED_AND_CAN_CONFIRM_TITLE: 'You must confirm by [CONFIRM_DEADLINE].',
