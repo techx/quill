@@ -1,4 +1,5 @@
 # MesaHacks 2018 Registration
+San Diego Mesa College Computer Science Club's fork of HackMIT's Quill regisration system.
 
 # Quill
 Registration, for hackers!
