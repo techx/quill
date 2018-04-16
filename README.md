@@ -1,3 +1,6 @@
+# MesaHacks 2018 Registration
+San Diego Mesa College Computer Science Club's fork of HackMIT's Quill regisration system.
+
 # Quill
 Registration, for hackers!
 
@@ -27,7 +30,7 @@ Statuses:
 ### Application
 ![Application](./docs/images/screenshots/application.png)
 
-The Application tab takes users to their registration or confirmation form. 
+The Application tab takes users to their registration or confirmation form.
 
 ### Team Registration
 Hackathons commonly allow participants to register and be admitted as a team. The Team tab allows users to create or join a team with other users.
@@ -36,7 +39,7 @@ Hackathons commonly allow participants to register and be admitted as a team. Th
 Admins can view stats, look through applications, or edit settings from the Admin panel.
 
 ### Stats
-![Stats](./docs/images/screenshots/stats.png) 
+![Stats](./docs/images/screenshots/stats.png)
 
 The Stats tab summarizes useful registration statistics on the number of users in each stage of the process, demographic information, and miscellaneous event preferences like shirt sizes, dietary restrictions, or reimbursement requests.
 
@@ -52,7 +55,7 @@ The Users tab displays a table of users where admins can:
 6. Admit users manually
 7.  Mark users as checked-in at the event day-of
 
-### Settings 
+### Settings
 ![Settings](./docs/images/screenshots/settings.png)
 
 On the Settings tab, admins can easily control their event application timeline by setting registration / confirmation deadlines. They can also write custom waitlist, acceptance, and confirmation copy that users will see on their dashboard throughout the application process. The custom copy is interpreted as Markdown, so HTML and images can be added.
@@ -83,12 +86,12 @@ gulp server
 
 # Customizing for your event
 
-###### _If you're using Quill for your event, please add yourself to this [list][users]. It takes less than a minute, but knowing that our software is helping real events keeps us going ♥_ 
+###### _If you're using Quill for your event, please add yourself to this [list][users]. It takes less than a minute, but knowing that our software is helping real events keeps us going ♥_
 ### Copy
 If you’d like to customize the text that users see on their dashboards, edit them at `client/src/constants.js`.
 
 ### Branding / Assets
-Customize the color scheme and hosted assets by editing `client/stylesheets/_custom.scss`. Don’t forget to use your own email banner, favicon, and logo (color/white) in the `assets/images/` folder as well! 
+Customize the color scheme and hosted assets by editing `client/stylesheets/_custom.scss`. Don’t forget to use your own email banner, favicon, and logo (color/white) in the `assets/images/` folder as well!
 
 ### Application questions
 If you want to change the application questions, edit:
@@ -98,7 +101,7 @@ If you want to change the application questions, edit:
 
 If you want stats for your new fields:
 - Recalculate them in `server/services/stats.js`
-- Display them on the admin panel by editing `client/views/admin/stats/` 
+- Display them on the admin panel by editing `client/views/admin/stats/`
 
 ### Email Templates
 To customize the verification and confirmation emails for your event, put your new email templates in `server/templates/` and edit `server/services/email.js`

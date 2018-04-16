@@ -233,7 +233,7 @@ angular.module('reg')
                 value: user.confirmation.hardware
               }
             ]
-          },{
+          }/*,{
             name: 'Hosting',
             fields: [
               {
@@ -289,52 +289,10 @@ angular.module('reg')
               }
             ]
           }
+          */
         ];
       }
 
       $scope.selectUser = selectUser;
 
     }]);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

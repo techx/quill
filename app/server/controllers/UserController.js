@@ -9,7 +9,7 @@ var moment = require('moment');
 
 var UserController = {};
 
-var maxTeamSize = process.env.TEAM_MAX_SIZE || 4;
+var maxTeamSize = process.env.TEAM_MAX_SIZE || 5;
 
 
 // Tests a string if it ends with target s

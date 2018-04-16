@@ -28,7 +28,7 @@ var profile = {
   graduationYear: {
     type: String,
     enum: {
-      values: '2016 2017 2018 2019'.split(' '),
+      values: 'Freshman Sophomore Junior Senior'.split(' '),
     }
   },
 
@@ -65,7 +65,7 @@ var confirmation = {
     }
   },
   wantsHardware: Boolean,
-  hardware: String,
+  //hardware: String,
 
   major: String,
   github: String,
@@ -73,6 +73,7 @@ var confirmation = {
   website: String,
   resume: String,
 
+/*
   needsReimbursement: Boolean,
   address: {
     name: String,
@@ -91,7 +92,7 @@ var confirmation = {
   catFriendly: Boolean,
   smokingFriendly: Boolean,
   hostNotes: String,
-
+*/
   notes: String,
 
   signatureLiability: String,
@@ -333,7 +334,7 @@ schema.statics.validateProfile = function(profile, cb){
     profile.name.length > 0 &&
     profile.adult &&
     profile.school.length > 0 &&
-    ['2016', '2017', '2018', '2019'].indexOf(profile.graduationYear) > -1 &&
+    ['Freshman', 'Sophomore', 'Junior', 'Senior'].indexOf(profile.graduationYear) > -1 &&
     ['M', 'F', 'O', 'N'].indexOf(profile.gender) > -1
     ));
 };
