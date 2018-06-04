@@ -113,6 +113,7 @@ If you have any questions about this software, please contact [quill@hackmit.org
 By:
 - Rees Draminski
 - I-Shiun Kuo
+- Pranav Maniktala
 
 # License
 Copyright (c) 2015-2016 Edwin Zhang (https://github.com/ehzhang). Released under AGPLv3. See [`LICENSE.txt`][license] for details.
