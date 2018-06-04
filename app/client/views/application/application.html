@@ -39,7 +39,7 @@
           <label> School </label>
           <div id="school" class="ui search">
             <div class="ui input">
-              <input class="prompt" type="text" placeholder="School" name="school" ng-model="user.profile.school">                
+              <input class="prompt" type="text" placeholder="School" name="school" ng-model="user.profile.school">
             </div>
             <div class="results"></div>
           </div>
@@ -51,10 +51,14 @@
             name="year"
             ng-model="user.profile.graduationYear">
             <option value="">Graduation Year</option>
-            <option value="2016">2016</option>
-            <option value="2017">2017</option>
-            <option value="2018">2018</option>
-            <option value="2019">2019</option>
+            <script>
+              var graduationYears = document.scripts[document.scripts.length - 1].parentNode;
+
+              var y = new Date().getFullYear();
+
+              for (var i = 0; i < 5; i++)
+                graduationYears.innerHTML += '<option value="'  + (y + i) + '">' + (y + i) + '</option>';
+            </script>
           </select>
         </div>
 
@@ -80,7 +84,7 @@
 
         <div class="field">
           <label>
-              What would you like to learn or get out of HackMIT? (optional)
+              What would you like to learn or get out of {{ EVENT_INFO.SHORT_NAME }}? (optional)
           </label>
           <textarea ng-model="user.profile.essay">
           </textarea>
@@ -89,12 +93,12 @@
         <div class="field"
              ng-hide="isMitStudent">
           <p>
-            Because of limitations imposed by MIT, we are not legally allowed to host
-            non-MIT minors (those under 18) for HackMIT 2015. Checking the box below affirms that you are or will be 18 years or older by September 19th, 2015.
+            Because of limitations imposed by {{ EVENT_INFO.SCHOOL }}, we must know if you are a
+            non-{{ EVENT_INFO.SCHOOL }} minor (those under 18) for {{ EVENT_INFO.NAME }}. Checking the box below affirms that you are or will be 18 years or older by {{ EVENT_INFO.START_DATE }}.
           </p>
           <p>
             <strong>
-            We will be checking ID. If you are a non-MIT minor, you will be turned away at the door.
+            We will be checking ID. If you are a non-{{ EVENT_INFO.SCHOOL }} minor, you will be turned away at the door.
             </strong>
           </p>
           <div class="ui checkbox">

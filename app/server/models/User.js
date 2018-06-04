@@ -4,6 +4,15 @@ var mongoose   = require('mongoose'),
     jwt        = require('jsonwebtoken');
     JWT_SECRET = process.env.JWT_SECRET;
 
+var graduationYears = (function() {
+  var yearsArray = [], currentYear = new Date().getFullYear();
+
+  for (var i = 0; i < 5; i++)
+    yearsArray.push(currentYear + i + '');
+
+    return yearsArray;
+})();
+
 var profile = {
 
   // Basic info
@@ -28,7 +37,7 @@ var profile = {
   graduationYear: {
     type: String,
     enum: {
-      values: '2016 2017 2018 2019'.split(' '),
+      values: graduationYears,
     }
   },
 
@@ -61,7 +70,7 @@ var confirmation = {
   shirtSize: {
     type: String,
     enum: {
-      values: 'XS S M L XL XXL WXS WS WM WL WXL WXXL'.split(' ')
+      values: 'XS S M L XL XXL'.split(' ')
     }
   },
   wantsHardware: Boolean,
@@ -73,24 +82,17 @@ var confirmation = {
   website: String,
   resume: String,
 
-  needsReimbursement: Boolean,
-  address: {
-    name: String,
-    line1: String,
-    line2: String,
-    city: String,
-    state: String,
-    zip: String,
-    country: String
-  },
-  receipt: String,
-
-  hostNeededFri: Boolean,
-  hostNeededSat: Boolean,
-  genderNeutral: Boolean,
-  catFriendly: Boolean,
-  smokingFriendly: Boolean,
-  hostNotes: String,
+  // needsReimbursement: Boolean,
+  // address: {
+  //   name: String,
+  //   line1: String,
+  //   line2: String,
+  //   city: String,
+  //   state: String,
+  //   zip: String,
+  //   country: String
+  // },
+  // receipt: String,
 
   notes: String,
 
@@ -333,7 +335,7 @@ schema.statics.validateProfile = function(profile, cb){
     profile.name.length > 0 &&
     profile.adult &&
     profile.school.length > 0 &&
-    ['2016', '2017', '2018', '2019'].indexOf(profile.graduationYear) > -1 &&
+    graduationYears.indexOf(profile.graduationYear) > -1 &&
     ['M', 'F', 'O', 'N'].indexOf(profile.gender) > -1
     ));
 };

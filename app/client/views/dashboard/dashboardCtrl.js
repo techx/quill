@@ -26,6 +26,9 @@ angular.module('reg')
         if ($scope.DASHBOARD[msg].includes('[CONFIRM_DEADLINE]')) {
           $scope.DASHBOARD[msg] = $scope.DASHBOARD[msg].replace('[CONFIRM_DEADLINE]', Utils.formatTime(user.status.confirmBy));
         }
+        if ($scope.DASHBOARD[msg].includes('[EVENT_NAME]')) {
+          $scope.DASHBOARD[msg] = $scope.DASHBOARD[msg].replace('[EVENT_NAME]', EVENT_INFO.NAME);
+        }
       }
 
       // Is registration open?
