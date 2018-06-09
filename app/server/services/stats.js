@@ -27,7 +27,7 @@ function calculateStats(){
     },
 
     teams: {},
-    verified: 1,
+    verified: 0,
     submitted: 0,
     admitted: 0,
     confirmed: 0,
