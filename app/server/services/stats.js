@@ -18,13 +18,7 @@ function calculateStats(){
         N: 0
       },
       schools: {},
-      year: {
-        '2018': 0;
-        '2019': 0,
-        '2020': 0,
-        '2021': 0,
-        '2022': 0,
-      }
+      year: {}
     },
 
     teams: {},
@@ -32,7 +26,7 @@ function calculateStats(){
     submitted: 0,
     admitted: 0,
     confirmed: 0,
-    confirmedMit: 0,
+    confirmedUMBC: 0,
     declined: 0,
 
     confirmedFemale: 0,
@@ -58,22 +52,25 @@ function calculateStats(){
 
     dietaryRestrictions: {},
 
-    hostNeededFri: 0,
-    hostNeededSat: 0,
-    hostNeededUnique: 0,
-
-    hostNeededFemale: 0,
-    hostNeededMale: 0,
-    hostNeededOther: 0,
-    hostNeededNone: 0,
-
-    reimbursementTotal: 0,
-    reimbursementMissing: 0,
+    // reimbursementTotal: 0,
+    // reimbursementMissing: 0,
 
     wantsHardware: 0,
 
     checkedIn: 0
   };
+
+  var graduationYears = (function() {
+    var yearsArray = [], currentYear = new Date().getFullYear();
+
+    for (var i = 0; i < 5; i++)
+      yearsArray.push(currentYear + i + '');
+
+      return yearsArray;
+  })();
+
+  for (var gradYear of graduationYears)
+    newStats.demo.year[gradYear] = 0;
 
   User
     .find({})
@@ -104,8 +101,8 @@ function calculateStats(){
         // Count confirmed
         newStats.confirmed += user.status.confirmed ? 1 : 0;
 
-        // Count confirmed that are mit
-        newStats.confirmedMit += user.status.confirmed && email === "mit.edu" ? 1 : 0;
+        // Count confirmed that are UMBC
+        newStats.confirmedUMBC += user.status.confirmed && email === "umbc.edu" ? 1 : 0;
 
         newStats.confirmedFemale += user.status.confirmed && user.profile.gender == "F" ? 1 : 0;
         newStats.confirmedMale += user.status.confirmed && user.profile.gender == "M" ? 1 : 0;
@@ -156,20 +153,6 @@ function calculateStats(){
         if (user.confirmation.shirtSize in newStats.shirtSizes){
           newStats.shirtSizes[user.confirmation.shirtSize] += 1;
         }
-
-        // Host needed counts
-        newStats.hostNeededFri += user.confirmation.hostNeededFri ? 1 : 0;
-        newStats.hostNeededSat += user.confirmation.hostNeededSat ? 1 : 0;
-        newStats.hostNeededUnique += user.confirmation.hostNeededFri || user.confirmation.hostNeededSat ? 1 : 0;
-
-        newStats.hostNeededFemale
-          += (user.confirmation.hostNeededFri || user.confirmation.hostNeededSat) && user.profile.gender == "F" ? 1 : 0;
-        newStats.hostNeededMale
-          += (user.confirmation.hostNeededFri || user.confirmation.hostNeededSat) && user.profile.gender == "M" ? 1 : 0;
-        newStats.hostNeededOther
-          += (user.confirmation.hostNeededFri || user.confirmation.hostNeededSat) && user.profile.gender == "O" ? 1 : 0;
-        newStats.hostNeededNone
-          += (user.confirmation.hostNeededFri || user.confirmation.hostNeededSat) && user.profile.gender == "N" ? 1 : 0;
 
         // Dietary restrictions
         if (user.confirmation.dietaryRestrictions){
