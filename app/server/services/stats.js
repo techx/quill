@@ -18,13 +18,7 @@ function calculateStats(){
         N: 0
       },
       schools: {},
-      year: {
-        '2018': 0,
-        '2019': 0,
-        '2020': 0,
-        '2021': 0,
-        '2022': 0,
-      }
+      year: {}
     },
 
     teams: {},
