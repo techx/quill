@@ -18,12 +18,15 @@
           {{user.status.name}}
         </div>
 
+        <center ng-cloak="!user.status.confirmed">
+          <div id="qrcode"></div>
+        </center>
+
         <div
           class="declined state"
           ng-if="dashState('admittedAndCannotConfirm')">
           Expired Admission
         </div>
-
 
         <div
           ng-if="showWaitlist"

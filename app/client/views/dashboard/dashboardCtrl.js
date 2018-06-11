@@ -37,6 +37,12 @@ angular.module('reg')
       // Is it past the user's confirmation time?
       var pastConfirmation = $scope.pastConfirmation = Utils.isAfter(user.status.confirmBy);
 
+      // Create checkin URL for user
+      angular.element(document).ready(function () {
+        var url = "localhost:3000/admin/users/" + user._id;
+        new QRCode(document.getElementById("qrcode"), url);
+      });
+
       $scope.dashState = function(status){
         var user = $scope.user;
         switch (status) {
@@ -77,7 +83,6 @@ angular.module('reg')
             sweetAlert('Your email has been sent.');
           });
       };
-
 
       // -----------------------------------------------------
       // Text!

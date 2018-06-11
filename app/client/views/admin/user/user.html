@@ -11,6 +11,26 @@
 </div>
 
 <div class="ui botom attached segment">
+  <div>
+    <div class="ui header">
+      Actions
+    </div>
+
+    <button
+      ng-click="toggleCheckIn($event, user, $index)"
+      class="ui circular mini basic green icon button">
+
+      <i
+        ng-if="!selectedUser.status.checkedIn"
+        class="flag outline icon"></i>
+
+      <i
+        ng-if="selectedUser.status.checkedIn"
+        class="green flag icon"></i>
+    </button>
+  </div>
+
+  <div class="ui divider"></div>
 
   <div>
     <p>
@@ -239,78 +259,7 @@
         <input type="text" ng-model="selectedUser.confirmation.hardware">
       </div>
 
-      <div class="ui divider"></div>
-
-      <div class="ui header">
-        Hosting
-      </div>
-
-      <div class="field">
-        <strong> Needs Hosting Friday </strong>
-        <i
-          ng-if="selectedUser.confirmation.hostNeededFri"
-          class="green check circle icon">
-        </i>
-        <i
-          ng-if="!selectedUser.confirmation.hostNeededFri"
-          class="red remove circle icon">
-        </i>
-      </div>
-
-      <div class="field">
-        <strong> Needs Hosting Saturday </strong>
-        <i
-          ng-if="selectedUser.confirmation.hostNeededSat"
-          class="green check circle icon">
-        </i>
-        <i
-          ng-if="!selectedUser.confirmation.hostNeededSat"
-          class="red remove circle icon">
-        </i>
-      </div>
-
-      <div class="field">
-        <strong> Gender Neutral </strong>
-        <i
-          ng-if="selectedUser.confirmation.genderNeutral"
-          class="green check circle icon">
-        </i>
-        <i
-          ng-if="!selectedUser.confirmation.genderNeutral"
-          class="red remove circle icon">
-        </i>
-      </div>
-
-      <div class="field">
-        <strong> Cat Friendly </strong>
-        <i
-          ng-if="selectedUser.confirmation.catFriendly"
-          class="green check circle icon">
-        </i>
-        <i
-          ng-if="!selectedUser.confirmation.catFriendly"
-          class="red remove circle icon">
-        </i>
-      </div>
-
-      <div class="field">
-        <strong> Smoking Friendly </strong>
-        <i
-          ng-if="selectedUser.confirmation.smokingFriendly"
-          class="green check circle icon">
-        </i>
-        <i
-          ng-if="!selectedUser.confirmation.smokingFriendly"
-          class="red remove circle icon">
-        </i>
-      </div>
-
-      <div class="field">
-        <label> Hosting Notes </label>
-        <textarea ng-model="selectedUser.confirmation.hostNotes"></textarea>
-      </div>
-
-      <div class="ui divider"></div>
+      <!-- <div class="ui divider"></div>
 
       <div class="ui header">
         Travel
@@ -326,9 +275,9 @@
           ng-if="!selectedUser.confirmation.needsReimbursement"
           class="red remove circle icon">
         </i>
-      </div>
+      </div> -->
 
-      <div class="field">
+      <!-- <div class="field">
         <label>Full Name</label>
         <input type="text"
                name="name"
@@ -390,7 +339,7 @@
       <div class="field">
         <label> Additional Notes </label>
         <textarea ng-model="selectedUser.confirmation.notes"></textarea>
-      </div>
+      </div> -->
 
     </fieldset>
 
