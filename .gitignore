@@ -2,6 +2,10 @@ db/
 node_modules/
 app/client/build/
 app/client/plugins/
+typings/
 *.log
 .env
 .DS_Store
+.vscode
+.eslintrc.js
+tsd.json
