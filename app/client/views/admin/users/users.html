@@ -33,6 +33,14 @@
       <div class="ui header">
         Users
       </div>
+
+      <p>
+        <b>Key: </b><br/>
+        V = Verified, S = Submitted, A = Accepted, C = Confirmed<br/>
+        <i class="add user icon"></i>: Accept User / Allow User to come to HackUMBC<br/>
+        <i class="flag icon"></i>: Check-in the User to HackUMBC
+      </p>
+
       <div class="ui long user modal">
         <i class="close icon"></i>
         <div class="header">
@@ -45,6 +53,10 @@
         <div class="content">
 
           <div>
+            <P>
+              <button ng-click="goUser($event, selectedUser)">Goto Page</button>
+            </P>
+
             <div class="ui header">
               Status:
               <div
@@ -97,7 +109,6 @@
             <th>Grad</th>
             <th>V/S/A/C</th>
             <!-- <th>$</th> -->
-            <th></th>
             <th></th>
           </tr>
         </thead>
@@ -186,18 +197,10 @@
               </span>
             </td> -->
 
-            <td
-              class="collapsing">
-              <button
-                ng-click="goUser($event, user)"
-                class="ui circular mini basic icon button">
-                <i class="linkify icon"></i>
-              </button>
-            </td>
+
 
             <td
               class="right aligned collapsing">
-
               <button
                 class="accept ui circular mini basic green icon button"
                 ng-click="acceptUser($event, user, $index)">

@@ -56,6 +56,9 @@ angular.module('reg')
       $scope.goUser = function($event, user){
         $event.stopPropagation();
 
+        $('.long.user.modal')
+          .modal('hide');
+
         $state.go('app.admin.user', {
           id: user._id
         });

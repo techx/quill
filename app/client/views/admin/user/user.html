@@ -130,10 +130,14 @@
           name="year"
           ng-model="selectedUser.profile.graduationYear">
           <option value="">Graduation Year</option>
-          <option value="2016">2016</option>
-          <option value="2017">2017</option>
-          <option value="2018">2018</option>
-          <option value="2019">2019</option>
+          <script>
+            var graduationYears = document.scripts[document.scripts.length - 1].parentNode;
+
+            var y = new Date().getFullYear();
+
+            for (var i = 0; i < 5; i++)
+              graduationYears.innerHTML += '<option value="'  + (y + i) + '">' + (y + i) + '</option>';
+          </script>
         </select>
       </div>
 
