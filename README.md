@@ -58,6 +58,28 @@ The Users tab displays a table of users where admins can:
 On the Settings tab, admins can easily control their event application timeline by setting registration / confirmation deadlines. They can also write custom waitlist, acceptance, and confirmation copy that users will see on their dashboard throughout the application process. The custom copy is interpreted as Markdown, so HTML and images can be added.
 
 # Setup
+### Requirements
+
+| Requirement                                 | Version |
+| ------------------------------------------- | ------- |
+| [GCC 4.6](https://gcc.gnu.org) | `4.6+` |
+| [Node.js](http://nodejs.org)                | `8.0+`  |
+| [MongoDB](www.mongodb.com/) | `3.0+`  |
+
+> _Updating to the latest releases is recommended_.
+
+Run the following commands to check the current installed versions:
+
+```shell
+gcc --version
+node -v
+mongo --version
+```
+How to upgrade to latest releases:
+- GCC: https://wiki.gentoo.org/wiki/Upgrading_GCC
+- Node.js: https://nodejs.org/en/download/
+- MongoDB: https://docs.mongodb.com/manual/administration/install-community/
+
 ### Quick deploy with Heroku
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
