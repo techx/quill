@@ -96,9 +96,8 @@ var confirmation = {
 
   notes: String,
 
-  signatureLiability: String,
-  signaturePhotoRelease: String,
   signatureCodeOfConduct: String,
+  signatureMLHMemberEvent: String
 };
 
 var status = {

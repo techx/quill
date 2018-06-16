@@ -28,7 +28,8 @@ angular.module('reg')
         'Vegan': false,
         'Halal': false,
         'Kosher': false,
-        'Nut Allergy': false
+        'Nut Allergy': false,
+        'Gluten-Free': false
       };
 
       if (user.confirmation.dietaryRestrictions){
@@ -93,26 +94,17 @@ angular.module('reg')
                 }
               ]
             },
-            signatureLiability: {
-              identifier: 'signatureLiabilityWaiver',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please type your digital signature.'
-                }
-              ]
-            },
-            signaturePhotoRelease: {
-              identifier: 'signaturePhotoRelease',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please type your digital signature.'
-                }
-              ]
-            },
             signatureCodeOfConduct: {
               identifier: 'signatureCodeOfConduct',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please type your digital signature.'
+                }
+              ]
+            },
+            signatureMLHMemberEvent: {
+              identifier: 'signatureMLHMemberEvent',
               rules: [
                 {
                   type: 'empty',

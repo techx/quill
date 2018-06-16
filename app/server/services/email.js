@@ -14,8 +14,7 @@ var FACEBOOK_HANDLE = process.env.FACEBOOK_HANDLE;
 
 var EMAIL_HOST = process.env.EMAIL_HOST;
 var EMAIL_USER = process.env.EMAIL_USER;
-var EMAIL_CLIENT_ID = process.env.EMAIL_CLIENT_ID;
-var EMAIL_CLIENT_SECRET = process.env.EMAIL_CLIENT_SECRET;
+var EMAIL_PASS = process.env.EMAIL_PASS;
 var EMAIL_PORT = process.env.EMAIL_PORT;
 var EMAIL_CONTACT = process.env.EMAIL_CONTACT;
 var EMAIL_HEADER_IMAGE = process.env.EMAIL_HEADER_IMAGE;
@@ -30,11 +29,8 @@ var options = {
   port: EMAIL_PORT,
   secure: true,
   auth: {
-    type: 'OAuth2',
-    // user: EMAIL_USER,
-    client_Id: EMAIL_CLIENT_ID,
-    client_Secret: EMAIL_CLIENT_SECRET,
-    access_type: "offline"
+    user: EMAIL_USER,
+    pass: EMAIL_PASS
   }
 };
 
