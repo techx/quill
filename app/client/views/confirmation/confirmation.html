@@ -41,12 +41,14 @@
               ng-repeat="(key, value) in dietaryRestrictions">
 
               <div class="ui checkbox">
-                <input type="checkbox" ng-model="dietaryRestrictions[key]" />
+                <input type="checkbox" name="{{key}}" ng-model="dietaryRestrictions[key]" />
                 <label>{{key}}</label>
               </div>
-
             </div>
           </div>
+
+          <input ng-model="otherDietaryRestrictions" ng-hide="dietaryRestrictions['Other'] == false" placeholder="Other">
+          <br><br>
 
           <div class="field">
             <label> Shirt Size (required) </label>
@@ -104,29 +106,22 @@
           </div>
 
           <div class="field">
-            <label> Github </label>
+            <label> Website </label>
+            <p>Personal site or GitHub link.</p>
             <input type="text"
-                   name="github"
-                   placeholder="https://github.com/foobar"
-                   ng-model="user.confirmation.github">
+                   name="website"
+                   placeholder="https://mywebsite.com"
+                   ng-model="user.confirmation.website">
           </div>
 
           <div class="field">
-            <label> Twitter </label>
-            <input type="text"
-                   name="twitter"
-                   placeholder="https://twitter.com/foobar"
-                   ng-model="user.confirmation.twitter">
-          </div>
-
-          <div class="field">
-            <label> Skill Sheet (required) </label>
+            <label> Resume (required) </label>
             <p>
-              Upload a document outlining any skills or experience you'd like to share (ex. resume). PDF preferred!
+              Upload a resume outlining any skills or experience you'd like to share. PDF preferred!
             </p>
             <a
               target="_blank"
-              href="https://go.hackmit.org/skill-sheets"
+              href="https://driveuploader.com/upload/QSUBGhmyk8/"
               class="ui pink button">
               Upload
             </a>
