@@ -73,12 +73,11 @@ var confirmation = {
       values: 'XS S M L XL XXL'.split(' ')
     }
   },
+  
   wantsHardware: Boolean,
   hardware: String,
 
   major: String,
-  github: String,
-  twitter: String,
   website: String,
   resume: String,
 

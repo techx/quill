@@ -29,13 +29,18 @@ angular.module('reg')
         'Halal': false,
         'Kosher': false,
         'Nut Allergy': false,
-        'Gluten-Free': false
+        'Gluten-Free': false,
+        'Other': false
       };
 
       if (user.confirmation.dietaryRestrictions){
         user.confirmation.dietaryRestrictions.forEach(function(restriction){
           if (restriction in dietaryRestrictions){
             dietaryRestrictions[restriction] = true;
+          }
+          else {
+            dietaryRestrictions['Other'] = true;
+            $scope.otherDietaryRestrictions = restriction;
           }
         });
       }
@@ -50,7 +55,10 @@ angular.module('reg')
         var drs = [];
         Object.keys($scope.dietaryRestrictions).forEach(function(key){
           if ($scope.dietaryRestrictions[key]){
-            drs.push(key);
+            if (key == "Other")
+              drs.push($scope.otherDietaryRestrictions);
+            else
+              drs.push(key);
           }
         });
         confirmation.dietaryRestrictions = drs;

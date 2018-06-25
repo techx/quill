@@ -41,12 +41,14 @@
               ng-repeat="(key, value) in dietaryRestrictions">
 
               <div class="ui checkbox">
-                <input type="checkbox" ng-model="dietaryRestrictions[key]" />
+                <input type="checkbox" name="{{key}}" ng-model="dietaryRestrictions[key]" />
                 <label>{{key}}</label>
               </div>
-
             </div>
           </div>
+
+          <input ng-model="otherDietaryRestrictions" ng-hide="dietaryRestrictions['Other'] == false" placeholder="Other">
+          <br><br>
 
           <div class="field">
             <label> Shirt Size (required) </label>
@@ -104,19 +106,12 @@
           </div>
 
           <div class="field">
-            <label> Github </label>
+            <label> Website </label>
+            <p>Personal site or GitHub link.</p>
             <input type="text"
-                   name="github"
-                   placeholder="https://github.com/foobar"
-                   ng-model="user.confirmation.github">
-          </div>
-
-          <div class="field">
-            <label> Twitter </label>
-            <input type="text"
-                   name="twitter"
-                   placeholder="https://twitter.com/foobar"
-                   ng-model="user.confirmation.twitter">
+                   name="website"
+                   placeholder="https://mywebsite.com"
+                   ng-model="user.confirmation.website">
           </div>
 
           <div class="field">
