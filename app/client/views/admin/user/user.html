@@ -75,10 +75,10 @@
         <input type="text" ng-model="selectedUser.email" />
       </div>
 
-      <div class="field">
+       <!-- <div class="field">
         <label> Team </label>
         <input type="text" ng-model="selectedUser.teamCode" />
-      </div>
+      </div> -->
 
     </fieldset>
 
@@ -163,21 +163,21 @@
 
       <div class="field">
         <label>
-            What would you like to learn or get out of HackMIT? (optional)
+            What would you like to learn or get out of HackUMBC? (optional)
         </label>
         <textarea ng-model="selectedUser.profile.essay">
         </textarea>
       </div>
 
       <div class="field"
-           ng-hide="isMitStudent">
+           ng-hide="isUMBCStudent">
         <p>
-          Because of limitations imposed by MIT, we are not legally allowed to host
-          non-MIT minors (those under 18) for HackMIT 2015. Checking the box below affirms that you are or will be 18 years or older by September 19th, 2015.
+          Because of limitations imposed by UMBC, we are not legally allowed to host
+          non-UMBC minors (those under 18) for HackUMBC 2018. Checking the box below affirms that you are or will be 18 years or older by October 20th, 2018.
         </p>
         <p>
           <strong>
-          We will be checking ID. If you are a non-MIT minor, you will be turned away at the door.
+          We will be checking ID. If you are a non-UMBC minor, you will be turned away at the door.
           </strong>
         </p>
         <div class="ui checkbox">
