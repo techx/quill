@@ -25,6 +25,6 @@
     "sweetalert": "~1.0.1",
     "moment": "~2.10.3",
     "showdown": "~1.2.1",
-    "qrcode": "latest"
+    "angular-qrcode": "latest"
   }
 }

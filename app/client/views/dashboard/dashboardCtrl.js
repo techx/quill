@@ -40,7 +40,14 @@ angular.module('reg')
       // Create checkin URL for user
       angular.element(document).ready(function () {
         var url = "http://register.hackumbc.org/admin/users/" + user._id;
-        new QRCode(document.getElementById("qrcode"), url);
+        
+        var typeNumber = 4;
+        var errorCorrectionLevel = 'L';
+        var qr = qrcode(typeNumber, errorCorrectionLevel);
+        qr.addData(url);
+        qr.make();
+
+        document.getElementById('qrcode').innerHTML = qr.createImgTag(6);
       });
 
       $scope.dashState = function(status){
