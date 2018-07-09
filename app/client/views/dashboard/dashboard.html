@@ -18,7 +18,7 @@
           {{user.status.name}}
         </div>
 
-        <center ng-cloak="!user.status.confirmed">
+        <center ng-cloak ng-hide="!user.status.confirmed">
           <div id="qrcode"></div>
         </center>
 

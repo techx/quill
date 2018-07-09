@@ -175,7 +175,44 @@ controller.sendPasswordChangedEmail = function(email, callback){
   };
 
   /**
-   * Eamil-verify takes a few template values:
+   * Email-verify takes a few template values:
+   * {
+   *   verifyUrl: the url that the user must visit to verify their account
+   * }
+   */
+  sendOne('email-basic', options, locals, function(err, info){
+    if (err){
+      console.log(err);
+    }
+    if (info){
+      console.log(info.message);
+    }
+    if (callback){
+      callback(err, info);
+    }
+  });
+
+};
+
+/**
+ * Send a admittance email.
+ * @param  {[type]}   email    [description]
+ * @param  {Function} callback [description]
+ */
+controller.sendAdmittanceEmail = function(email, callback){
+
+  var options = {
+    to: email,
+    subject: "["+HACKATHON_NAME+"] - You've been admitted!"
+  };
+
+  var locals = {
+    title: 'HackUMBC Admittance',
+    body: "Congratulations, you've been admitted! Login into http://register.hackumbc.org to confirm your spot.",
+  };
+
+  /**
+   * Email-verify takes a few template values:
    * {
    *   verifyUrl: the url that the user must visit to verify their account
    * }

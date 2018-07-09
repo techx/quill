@@ -644,8 +644,17 @@ UserController.admitUser = function(id, user, callback){
         }
       }, {
         new: true
-      },
-      callback);
+      }, function(err, user) {
+        if (err || !user){
+          return callback(err);
+        }
+
+        // Send admittance email
+        Mailer.sendAdmittanceEmail(user.email);
+
+        // Return callback
+        return callback(null, user);
+      });
   });
 };
 
