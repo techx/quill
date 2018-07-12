@@ -4,6 +4,7 @@ var smtpTransport = require('nodemailer-smtp-transport');
 
 var templatesDir = path.join(__dirname, '../templates');
 var emailTemplates = require('email-templates');
+var qrcode = require('../../client/plugins/qrcode-generator/js/qrcode.js')
 
 var ROOT_URL = process.env.ROOT_URL;
 
@@ -218,6 +219,48 @@ controller.sendAdmittanceEmail = function(email, callback){
    * }
    */
   sendOne('email-basic', options, locals, function(err, info){
+    if (err){
+      console.log(err);
+    }
+    if (info){
+      console.log(info.message);
+    }
+    if (callback){
+      callback(err, info);
+    }
+  });
+
+};
+
+/**
+ * Send a confirmation email.
+ * @param  {[type]}   email    [description]
+ * @param  {Function} callback [description]
+ */
+controller.sendConfirmationEmail = function(user, callback){
+
+  var options = {
+    to: user.email,
+    subject: "["+HACKATHON_NAME+"] - You've confirmed your spot!"
+  };
+
+  var url = "http://register.hackumbc.org/admin/users/" + user._id;
+
+  var typeNumber = 4;
+  var errorCorrectionLevel = 'L';
+  var qr = qrcode(typeNumber, errorCorrectionLevel);
+  qr.addData(url);
+  qr.make();
+
+  var qrCodeHTML = qr.createTableTag(4);
+
+  var locals = {
+    title: 'HackUMBC Confirmation Email',
+    body: "Congratulations, you've confirmed your spot! Here is your QR Code to be used at registration at the day of the event, but it can also be accessed at http://register.hackumbc.org as well.",
+    qrcode: qrCodeHTML
+  };
+
+  sendOne('email-confirmation', options, locals, function(err, info){
     if (err){
       console.log(err);
     }

@@ -354,7 +354,17 @@ UserController.updateConfirmationById = function (id, confirmation, callback){
       }, {
         new: true
       },
-      callback);
+      function(err, user) {
+        if (err || !user){
+          return callback(err);
+        }
+
+        // Send admittance email
+        Mailer.sendConfirmationEmail(user);
+
+        // Return callback
+        return callback(null, user);
+      });
 
   });
 };
