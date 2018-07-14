@@ -8,7 +8,9 @@ angular.module('reg')
     'settings',
     'Session',
     'UserService',
-    function($scope, $rootScope, $state, $http, currentUser, Settings, Session, UserService){
+    'EVENT_INFO',
+    function($scope, $rootScope, $state, $http, currentUser, Settings, Session, UserService, EVENT_INFO){
+      $scope.EVENT_INFO = EVENT_INFO;
 
       // Set up the user
       $scope.user = currentUser.data;

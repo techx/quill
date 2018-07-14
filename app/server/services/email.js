@@ -11,6 +11,7 @@ var HACKATHON_NAME = process.env.HACKATHON_NAME;
 var EMAIL_ADDRESS = process.env.EMAIL_ADDRESS;
 var TWITTER_HANDLE = process.env.TWITTER_HANDLE;
 var FACEBOOK_HANDLE = process.env.FACEBOOK_HANDLE;
+var YEAR = process.env.YEAR;
 
 var EMAIL_HOST = process.env.EMAIL_HOST;
 var EMAIL_USER = process.env.EMAIL_USER;
@@ -57,6 +58,8 @@ function sendOne(templateName, options, data, callback){
     data.hackathonName = HACKATHON_NAME;
     data.twitterHandle = TWITTER_HANDLE;
     data.facebookHandle = FACEBOOK_HANDLE;
+    data.year = YEAR;
+    
     template(templateName, data, function(err, html, text){
       if (err) {
         return callback(err);

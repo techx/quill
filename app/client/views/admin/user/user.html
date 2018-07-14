@@ -139,7 +139,7 @@
 
       <div class="field">
         <label>
-            What would you like to learn or get out of HackMIT? (optional)
+            What would you like to learn or get out of {{ EVENT_INFO.NAME }}? (optional)
         </label>
         <textarea ng-model="selectedUser.profile.essay">
         </textarea>
@@ -148,8 +148,9 @@
       <div class="field"
            ng-hide="isMitStudent">
         <p>
-          Because of limitations imposed by MIT, we are not legally allowed to host
-          non-MIT minors (those under 18) for HackMIT 2015. Checking the box below affirms that you are or will be 18 years or older by September 19th, 2015.
+          Because of limitations imposed by {{ EVENT_INFO.SCHOOL_NAME_LONG }}, we are not legally allowed to host
+            non-{{ EVENT_INFO.SCHOOL_NAME_SHORT }} minors (those under 18) for {{ EVENT_INFO.NAME }}.
+            Checking the box below affirms that you are or will be 18 years or older by September 19th, {{ EVENT_INFO.YEAR }}.
         </p>
         <p>
           <strong>
