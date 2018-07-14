@@ -2,7 +2,7 @@ require('dotenv').load({silent: true});
 
 var gulp = require('gulp');
 var sass = require('gulp-sass');
-var minifyCss = require('gulp-minify-css');
+var cleanCSS = require('gulp-clean-css');
 var concat = require('gulp-concat');
 var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
@@ -48,7 +48,7 @@ gulp.task('sass', function () {
   gulp.src('app/client/stylesheets/site.scss')
     .pipe(sass())
       .on('error', sass.logError)
-    .pipe(minifyCss())
+    .pipe(cleanCSS())
     .pipe(gulp.dest('app/client/build'));
 });
 
