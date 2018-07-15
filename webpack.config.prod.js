@@ -2,7 +2,6 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const path = require('path');
-const uglify = require('uglify-es');
 const webpack = require('webpack');
 
 // Assets
@@ -48,6 +47,10 @@ module.exports = {
                     use:      ["css-loader", "less-loader"]
                 })
             },
+            {
+                test: /\.(ttf|eot|svg|png|otf|woff|woff2)?$/,
+                loader: 'ignore-loader'
+            }
         ]
     },
     plugins: [

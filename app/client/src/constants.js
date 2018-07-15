@@ -1,4 +1,4 @@
-const year = 2019;
+const year = 2018;
 const eventName = `Hack MIT ${year}`;
 
 angular.module('reg')

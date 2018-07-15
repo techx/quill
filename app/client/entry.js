@@ -1,6 +1,6 @@
 // For Webpack to actually do its thing
 
-// CS
+// CSS
 import './stylesheets/site.less';
 
 // JS
