@@ -1,51 +1,75 @@
 {
   "name": "hackmit-reg",
   "description": "mean stack registration system",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "private": "true",
   "dependencies": {
+    "@babel/core": "^7.0.0-beta.53",
+    "@babel/preset-env": "^7.0.0-beta.53",
+    "angular": "~1.4.1",
+    "angular-animate": "~1.4.1",
+    "angular-ui-router": "~0.2.15",
+    "animate.css": "~3.6.1",
     "async": "^2.6.1",
+    "babel-loader": "^8.0.0-beta.4",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.3",
-    "bower": "^1.8.0",
+    "concurrently": "^3.6.0",
+    "copy-webpack-plugin": "^4.5.2",
+    "css-loader": "^1.0.0",
     "dotenv": "^1.2.0",
     "email-templates": "^2.0.1",
     "express": "^4.9.8",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "handlebars": "^4.0.11",
+    "jquery": "~2.1.4",
     "jsonwebtoken": "5.0.4",
+    "less": "^3.7.1",
+    "less-loader": "^4.1.0",
     "method-override": "^2.3.5",
-    "moment": "^2.10.3",
+    "moment": "~2.10.3",
     "mongoose": "^4.1.2",
     "morgan": "^1.6.1",
     "nodemailer": "^1.4.0",
     "nodemailer-smtp-transport": "^1.0.3",
+    "nodemon": "^1.2.1",
     "passport-local": "^1.0.0",
     "request": "^2.60.0",
+    "semantic-ui": "~2.0.0",
+    "semantic-ui-sass": "^2.3.1",
+    "showdown": "~1.2.1",
+    "style-loader": "^0.21.0",
+    "sweetalert": "~1.0.1",
+    "uglify-es": "^3.3.9",
     "underscore": "^1.8.3",
-    "validator": "^3.40.1"
+    "validator": "^3.40.1",
+    "webpack": "^4.16.0",
+    "webpack-cli": "^3.0.8",
+    "webpack-merge-and-include-globally": "^2.0.11",
+    "webpack-watched-glob-entries-plugin": "^2.1.2"
   },
   "scripts": {
+    "build": "./node_modules/.bin/webpack --progress --mode=production --config webpack.config.prod.js",
+    "config": "cp .env.config .env",
+    "dev": "./node_modules/.bin/concurrently 'npm run watch:server' 'npm run watch:client'",
     "mongo": "mongod --dbpath db",
     "start": "node app.js",
-    "dev": "nodemon app.js",
-    "watch": "./node_modules/.bin/gulp server",
-    "prod": "./node_modules/.bin/gulp build && node app.js",
-    "config": "cp .env.config .env",
-    "postinstall": "bower install && gulp build"
-  },
-  "devDependencies": {
-    "gulp": "^3.9.0",
-    "gulp-browserify": "^0.5.1",
-    "gulp-clean-css": "^3.9.4",
-    "gulp-concat": "^2.6.0",
-    "gulp-ng-annotate": "^1.0.0",
-    "gulp-nodemon": "^2.0.3",
-    "gulp-sass": "^2.0.1",
-    "gulp-sourcemaps": "^1.5.2",
-    "gulp-uglify": "^1.2.0",
-    "nodemon": "^1.2.1"
+    "watch:client": "./node_modules/.bin/webpack --progress --mode=development --watch --config webpack.config.dev.js",
+    "watch:server": "./node_modules/.bin/nodemon app.js",
+    "webpack": "./node_modules/.bin/webpack --progress --mode=development --config webpack.config.dev.js"
   },
   "engines": {
     "node": "7.4.0"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "webpack.*.js",
+      "package.json",
+      "app/client/build/*"
+    ]
+  },
+  "devDependencies": {
+    "ng-annotate-loader": "^0.6.1",
+    "optimize-css-assets-webpack-plugin": "^4.0.3"
   }
 }

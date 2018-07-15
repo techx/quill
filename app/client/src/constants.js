@@ -1,5 +1,5 @@
-var year = 2018;
-var eventName = `HackMIT ${year}`;
+const year = 2019;
+const eventName = `Hack MIT ${year}`;
 
 angular.module('reg')
     .constant('EVENT_INFO', {

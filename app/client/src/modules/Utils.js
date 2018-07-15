@@ -9,12 +9,11 @@ angular.module('reg')
           return Date.now() > time;
         },
         formatTime: function(time){
-
           if (!time){
             return "Invalid Date";
           }
 
-          date = new Date(time);
+          var date = new Date(time);
           // Hack for timezone
           return moment(date).format('dddd, MMMM Do YYYY, h:mm a') +
             " " + date.toTimeString().split(' ')[2];
