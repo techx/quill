@@ -53,6 +53,13 @@ var profile = {
     max: 1500
   },
 
+  heardAboutUs: {
+    type: String,
+    enum: {
+      values: ['Facebook', 'Instagram', 'Twitter', 'A friend']
+    }
+  },
+
   // Optional info for demographics
   gender: {
     type: String,
