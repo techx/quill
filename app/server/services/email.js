@@ -244,20 +244,20 @@ controller.sendConfirmationEmail = function(user, callback){
     subject: "["+HACKATHON_NAME+"] - You've confirmed your spot!"
   };
 
-  var url = "http://register.hackumbc.org/admin/users/" + user._id;
+  // var url = "http://register.hackumbc.org/admin/users/" + user._id;
 
-  var typeNumber = 4;
-  var errorCorrectionLevel = 'L';
-  var qr = qrcode(typeNumber, errorCorrectionLevel);
-  qr.addData(url);
-  qr.make();
+  // var typeNumber = 4;
+  // var errorCorrectionLevel = 'L';
+  // var qr = qrcode(typeNumber, errorCorrectionLevel);
+  // qr.addData(url);
+  // qr.make();
 
-  var qrCodeHTML = qr.createTableTag(4);
+  // var qrCodeHTML = qr.createTableTag(4);
 
   var locals = {
     title: 'HackUMBC Confirmation Email',
-    body: "Congratulations, you've confirmed your spot! Here is your QR Code to be used at registration at the day of the event, but it can also be accessed at http://register.hackumbc.org as well.",
-    qrcode: qrCodeHTML
+    body: "Congratulations, you've confirmed your spot! To check into the event, use your QR Code on the signup dashboard.",
+    // qrcode: qrCodeHTML
   };
 
   sendOne('email-confirmation', options, locals, function(err, info){
