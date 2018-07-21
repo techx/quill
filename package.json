@@ -1,5 +1,5 @@
 {
-  "name": "hackmit-reg",
+  "name": "hackumbc-reg",
   "description": "mean stack registration system",
   "version": "0.0.1",
   "private": "true",
@@ -53,5 +53,19 @@
   },
   "engines": {
     "node": "7.4.0"
-  }
+  },
+  "main": "app.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/umbchackers/quill.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/umbchackers/quill/issues"
+  },
+  "homepage": "https://github.com/umbchackers/quill#readme"
 }
