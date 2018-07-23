@@ -9,6 +9,9 @@ angular.module('reg')
       $scope.pages = [];
       $scope.users = [];
 
+      $scope.sortType = 'name'; // set the default sort type
+      $scope.sortReverse  = false;
+
       // Semantic-UI moves modal content into a dimmer at the top level.
       // While this is usually nice, it means that with our routing will generate
       // multiple modals if you change state. Kill the top level dimmer node on initial load
@@ -221,9 +224,6 @@ angular.module('reg')
               },{
                 name: 'Major',
                 value: user.confirmation.major
-              },{
-                name: 'Github',
-                value: user.confirmation.github
               },{
                 name: 'Website',
                 value: user.confirmation.website

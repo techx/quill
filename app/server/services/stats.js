@@ -131,6 +131,7 @@ function calculateStats(){
             declined: 0,
           };
         }
+        
         newStats.demo.schools[email].submitted += user.status.completedProfile ? 1 : 0;
         newStats.demo.schools[email].admitted += user.status.admitted ? 1 : 0;
         newStats.demo.schools[email].confirmed += user.status.confirmed ? 1 : 0;

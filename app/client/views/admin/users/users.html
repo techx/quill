@@ -103,10 +103,26 @@
         class="ui celled selectable compact users table">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>E-mail address</th>
-            <th>School</th>
-            <th>Grad</th>
+            <th ng-click="sortType = 'name'; sortReverse = !sortReverse">
+              Name
+              <span ng-show="sortType == 'name' && !sortReverse">&#9660;</span>
+              <span ng-show="sortType == 'name' && sortReverse">&#9650;</span>
+            </th>
+            <th ng-click="sortType = 'email'; sortReverse = !sortReverse">
+              Email
+              <span ng-show="sortType == 'email' && !sortReverse">&#9660;</span>
+              <span ng-show="sortType == 'email' && sortReverse">&#9650;</span>
+            </th>
+            <th ng-click="sortType = 'school'; sortReverse = !sortReverse">
+              School
+              <span ng-show="sortType == 'school' && !sortReverse">&#9660;</span>
+              <span ng-show="sortType == 'school' && sortReverse">&#9650;</span>
+            </th>
+            <th ng-click="sortType = 'graduationYear'; sortReverse = !sortReverse">
+              Grad
+              <span ng-show="sortType == 'graduationYear' && !sortReverse">&#9660;</span>
+              <span ng-show="sortType == 'graduationYear' && sortReverse">&#9650;</span>
+            </th>
             <th>V/S/A/C</th>
             <!-- <th>$</th> -->
             <th></th>
@@ -115,7 +131,7 @@
         <tbody>
           <tr
             ng-click="selectUser(user)"
-            ng-repeat="user in users"
+            ng-repeat="user in users | orderBy:sortType:sortReverse"
             ng-class="rowClass(user)">
             <td>
               <strong>
