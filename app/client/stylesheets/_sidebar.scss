@@ -10,7 +10,7 @@
   @include transition-duration($sidebar-transition-time);
 
   .item {
-    width: 100%;
+    width: 0%;
     padding: 16px;
     transition-duration: .1s;
     transition: border-left, .5s, linear;
@@ -36,6 +36,10 @@
     &.logo {
       opacity: 1;
       padding: 48px;
+    }
+    &.resize {
+      width: 20px;
+      height: auto;
     }
 
   }
@@ -75,6 +79,8 @@
       font-size: 2em;
     }
   }
+
+
 
 }
 
