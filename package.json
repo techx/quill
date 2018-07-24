@@ -1,7 +1,7 @@
 {
-  "name": "hackmit-reg",
-  "description": "mean stack registration system",
-  "version": "0.1.0",
+  "name": "bigredhacks-reg",
+  "description": "BigRedHacks' Hackathon management system. Fork of techx_quill.",
+  "version": "0.2.0",
   "private": "true",
   "dependencies": {
     "angular": "~1.4.1",
@@ -64,7 +64,8 @@
     "webpack": "./node_modules/.bin/webpack --progress --mode=development --config webpack.config.dev.js"
   },
   "engines": {
-    "node": "7.4.0"
+    "node": "9.11.1",
+    "npm": "6.2.0"
   },
   "nodemonConfig": {
     "ignore": [
