@@ -1,0 +1,16 @@
+{
+    "extends": "airbnb-base",
+    "rules": {
+        "brace-style": ["error", "stroustrup"],
+        "indent": [
+            "error", 4, {
+                "SwitchCase": 1
+            }
+        ],
+        "quotes": [
+            "error", "double", {
+                "allowTemplateLiterals": true
+            }
+        ]
+    }
+}

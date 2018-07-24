@@ -1,3 +1,21 @@
 {
-    "autoInstall": true
+    "autoInstall": true,
+    "permission": false,
+    "components": [],
+    "base": "semantic/",
+    "paths": {
+        "source": {
+            "definitions": "src/definitions/",
+            "site": "src/site/",
+            "themes": "src/themes/"
+        },
+        "output": {
+            "packaged": "dist/",
+            "uncompressed": "dist/components/",
+            "compressed": "dist/components/",
+            "themes": "dist/themes/"
+        },
+        "clean": "dist/"
+    },
+    "version": "2.3.3"
 }
