@@ -2,14 +2,10 @@ var app = angular.module('reg', [
   'ui.router',
 ]);
 
-app
-  .config([
-    '$httpProvider',
-    function($httpProvider){
-      // Add auth token to Authorization header
-      $httpProvider.interceptors.push('AuthInterceptor');
-    }])
-  .run([
+app.config(['$httpProvider', function($httpProvider) {
+    // Add auth token to Authorization header
+    $httpProvider.interceptors.push('AuthInterceptor');
+  }]).run([
     'AuthService',
     'Session',
     function(AuthService, Session){
@@ -18,4 +14,4 @@ app
       if (token){
         AuthService.loginWithToken(token);
       }
-  }]);
+    }]);

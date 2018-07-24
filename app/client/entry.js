@@ -21,6 +21,7 @@ import './views/admin/adminCtrl';
 import './views/application/applicationCtrl';
 import './views/confirmation/confirmationCtrl';
 import './views/dashboard/dashboardCtrl';
+import './views/home/homeCtrl';
 import './views/login/loginCtrl';
 import './views/reset/resetCtrl';
 import './views/sidebar/sidebarCtrl';

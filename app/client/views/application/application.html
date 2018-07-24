@@ -14,25 +14,17 @@
 
         <div class="field">
           <label> Email </label>
-          <input type="email"
-                 name="email"
-                 disabled="disabled"
-                 ng-model="user.email">
+          <input type="email" name="email" disabled="disabled" ng-model="user.email">
         </div>
 
         <div class="field">
           <label> Full Name </label>
-          <input type="text"
-                 name="name"
-                 ng-model="user.profile.name">
+          <input type="text" name="name" ng-model="user.profile.name">
         </div>
 
         <div class="field" ng-show="autoFilledSchool">
           <label> School </label>
-          <input class="ui input"
-                 disabled="disabled"
-                 ng-show="autoFilledSchool"
-                 ng-model="user.profile.school">
+          <input class="ui input" disabled="disabled" ng-show="autoFilledSchool" ng-model="user.profile.school">
         </div>
 
         <div class="field" ng-show="!autoFilledSchool">
@@ -73,9 +65,8 @@
 
         <div class="field">
           <label>I would describe myself as a...</label>
-          <input type="text"
-                 placeholder="Designer, Data Scientist, iOS Wizard, Hacker Extraordinaire"
-                 ng-model="user.profile.description">
+          <input type="text" placeholder="Designer, Data Scientist, iOS Wizard, Hacker Extraordinaire"
+            ng-model="user.profile.description">
         </div>
 
         <div class="field">
@@ -87,7 +78,7 @@
         </div>
 
         <div class="field"
-             ng-hide="isMitStudent">
+          ng-hide="isCornellStudent">
           <p>
             Because of limitations imposed by {{ EVENT_INFO.SCHOOL_NAME_LONG }}, we are not legally allowed to host
             non-{{ EVENT_INFO.SCHOOL_NAME_SHORT }} minors (those under 18) for {{ EVENT_INFO.NAME }}.
@@ -108,8 +99,8 @@
 
         <div class="field" ng-hide="regIsClosed">
           <button type="submit"
-                  class="fluid ui purple button"
-                  ng-click="submitForm()">
+            class="fluid ui purple button"
+            ng-click="submitForm()">
             Submit
           </button>
         </div>

@@ -13,6 +13,14 @@ angular.module('reg')
 
     // Set up de states
     $stateProvider
+      .state('home', {
+        url: "/",
+        templateUrl: "views/home/home.html",
+        controller: 'HomeCtrl',
+        data: {
+          requireLogin: false
+        }
+      })
       .state('login', {
         url: "/login",
         templateUrl: "views/login/login.html",
@@ -39,7 +47,6 @@ angular.module('reg')
                 return SettingsService.getPublicSettings();
               }
             }
-
           }
         },
         data: {
@@ -47,7 +54,7 @@ angular.module('reg')
         }
       })
       .state('app.dashboard', {
-        url: "/",
+        url: "/dashboard",
         templateUrl: "views/dashboard/dashboard.html",
         controller: 'DashboardCtrl',
         resolve: {
@@ -170,7 +177,6 @@ angular.module('reg')
     $locationProvider.html5Mode({
       enabled: true,
     });
-
   }])
   .run([
     '$rootScope',
@@ -182,7 +188,7 @@ angular.module('reg')
       Session ){
 
       $rootScope.$on('$stateChangeSuccess', function() {
-         document.body.scrollTop = document.documentElement.scrollTop = 0;
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
       });
 
       $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
