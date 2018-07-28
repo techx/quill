@@ -1,6 +1,6 @@
-var Settings = require('../models/Settings');
+const Settings = require("../models/Settings");
 
-var SettingsController = {};
+const SettingsController = {};
 
 /**
  * Update any field in the settings.
@@ -8,13 +8,12 @@ var SettingsController = {};
  * @param  {Any}      value    Value to replace it to
  * @param  {Function} callback args(err, settings)
  */
-SettingsController.updateField = function(field, value, callback){
-  var update = {};
-  update[field] = value;
-  Settings
-    .findOneAndUpdate({},{
-      $set: update
-    }, {new: true}, callback);
+SettingsController.updateField = function (field, value, callback) {
+    const update = {};
+    update[field] = value;
+    Settings.findOneAndUpdate({}, {
+        $set: update,
+    }, { new: true }, callback);
 };
 
 /**
@@ -22,15 +21,14 @@ SettingsController.updateField = function(field, value, callback){
  * @param  {[type]}   emails   [description]
  * @param  {Function} callback args(err, settings)
  */
-SettingsController.updateWhitelistedEmails = function(emails, callback){
-  Settings
-    .findOneAndUpdate({},{
-      $set: {
-        whitelistedEmails: emails
-      }
-    }, {new: true})
-    .select('whitelistedEmails')
-    .exec(callback);
+SettingsController.updateWhitelistedEmails = function (emails, callback) {
+    Settings.findOneAndUpdate({}, {
+        $set: {
+            whitelistedEmails: emails,
+        },
+    }, { new: true })
+        .select("whitelistedEmails")
+        .exec(callback);
 };
 
 /**
@@ -38,8 +36,8 @@ SettingsController.updateWhitelistedEmails = function(emails, callback){
  * Whitelist emails are by default not included in settings.
  * @param  {Function} callback args(err, emails)
  */
-SettingsController.getWhitelistedEmails = function(callback){
-  Settings.getWhitelistedEmails(callback);
+SettingsController.getWhitelistedEmails = function (callback) {
+    Settings.getWhitelistedEmails(callback);
 };
 
 /**
@@ -49,35 +47,34 @@ SettingsController.getWhitelistedEmails = function(callback){
  * @param  {Number}   close    Close time in ms
  * @param  {Function} callback args(err, settings)
  */
-SettingsController.updateRegistrationTimes = function(open, close, callback){
-  var updatedTimes = {};
+SettingsController.updateRegistrationTimes = function (open, close, callback) {
+    const updatedTimes = {};
 
-  if (close <= open){
-    return callback({
-      message: "Registration cannot close before or at exactly the same time it opens."
-    });
-  }
+    if (close <= open) {
+        return callback({
+            message: "Registration cannot close before or at exactly the same time it opens.",
+        });
+    }
 
-  if (open){
-    updatedTimes.timeOpen = open;
-  }
+    if (open) {
+        updatedTimes.timeOpen = open;
+    }
 
-  if (close){
-    updatedTimes.timeClose = close;
-  }
+    if (close) {
+        updatedTimes.timeClose = close;
+    }
 
-  Settings
-    .findOneAndUpdate({},{
-      $set: updatedTimes
-    }, {new: true}, callback);
+    Settings.findOneAndUpdate({}, {
+        $set: updatedTimes,
+    }, { new: true }, callback);
 };
 
 /**
  * Get the open and close time for registration.
  * @param  {Function} callback args(err, times : {timeOpen, timeClose})
  */
-SettingsController.getRegistrationTimes = function(callback){
-  Settings.getRegistrationTimes(callback);
+SettingsController.getRegistrationTimes = function (callback) {
+    Settings.getRegistrationTimes(callback);
 };
 
 /**
@@ -85,8 +82,8 @@ SettingsController.getRegistrationTimes = function(callback){
  * @param  {Function} callback [description]
  * @return {[type]}            [description]
  */
-SettingsController.getPublicSettings = function(callback){
-  Settings.getPublicSettings(callback);
+SettingsController.getPublicSettings = function (callback) {
+    Settings.getPublicSettings(callback);
 };
 
 module.exports = SettingsController;
