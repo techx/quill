@@ -1,18 +1,15 @@
-angular.module('reg')
-  .controller('AdminStatsCtrl',[
-    '$scope',
-    'UserService',
-    function($scope, UserService){
+import moment from "moment";
 
-      UserService
-        .getStats()
-        .success(function(stats){
-          $scope.stats = stats;
-          $scope.loading = false;
+angular.module("reg").controller("AdminStatsCtrl", [
+    "$scope",
+    "UserService",
+    function ($scope, UserService) {
+        UserService.getStats().success((stats) => {
+            $scope.stats = stats;
+            $scope.loading = false;
         });
 
-      $scope.fromNow = function(date){
-        return moment(date).fromNow();
-      };
-
+        $scope.fromNow = function (date) {
+            return moment(date).fromNow();
+        };
     }]);

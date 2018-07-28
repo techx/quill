@@ -11,6 +11,9 @@
             "error", "double", {
                 "allowTemplateLiterals": true
             }
-        ]
+        ],
+        "func-names": "off",
+        "no-underscore-dangle": "off",
+        "prefer-destructuring": "warn"
     }
 }

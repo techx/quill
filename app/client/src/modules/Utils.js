@@ -1,23 +1,22 @@
-angular.module('reg')
-  .factory('Utils', [
-    function(){
-      return {
-        isRegOpen: function(settings){
-          return Date.now() > settings.timeOpen && Date.now() < settings.timeClose;
-        },
-        isAfter: function(time){
-          return Date.now() > time;
-        },
-        formatTime: function(time){
-          if (!time){
-            return "Invalid Date";
-          }
+import moment from "moment";
 
-          var date = new Date(time);
-          // Hack for timezone
-          return moment(date).format('dddd, MMMM Do YYYY, h:mm a') +
-            " " + date.toTimeString().split(' ')[2];
+angular.module("reg").factory("Utils", [
+    function () {
+        return {
+            isRegOpen(settings) {
+                return Date.now() > settings.timeOpen && Date.now() < settings.timeClose;
+            },
+            isAfter(time) {
+                return Date.now() > time;
+            },
+            formatTime(time) {
+                if (!time) {
+                    return "Invalid Date";
+                }
 
-        }
-      };
+                const date = new Date(time);
+                // Hack for timezone
+                return `${moment(date).format("dddd, MMMM Do YYYY, h:mm a")} ${date.toTimeString().split(" ")[2]}`;
+            },
+        };
     }]);

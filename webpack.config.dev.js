@@ -10,8 +10,8 @@ module.exports = {
     mode: "development",
     entry: path.resolve(__dirname, "app/client/entry.js"),
     output: {
-        path: path.resolve(`${__dirname}/app/client/build/`),
-        filename: "app.js",
+        path: path.resolve(`${__dirname}/app/client/dist/`),
+        filename: "js/app.js",
     },
     module: {
         rules: [
@@ -56,13 +56,18 @@ module.exports = {
         new CopyWebpackPlugin(
             Assets.map(asset => ({
                 from: path.resolve(__dirname, `./node_modules/${asset}`),
-                to: path.resolve(__dirname, "./app/client/plugins"),
+                to: path.resolve(__dirname, "./app/client/dist/plugins"),
             })),
         ),
         new ExtractTextPlugin({
             // Output for CSS
-            filename: "site.css",
+            filename: "css/site.css",
         }),
+        // new webpack.ProvidePlugin({
+        //     jQuery: "jquery",
+        //     $: "jquery",
+        //     jquery: "jquery",
+        // }),
     ],
     optimization: {
         minimize: false,

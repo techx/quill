@@ -1,14 +1,12 @@
-// Load the dotfiles.
-require("dotenv").load({ silent: true });
-
-const express = require("express");
-
 // Middleware!
 const bodyParser = require("body-parser");
+const express = require("express");
 const methodOverride = require("method-override");
+const mongoose = require("mongoose");
 const morgan = require("morgan");
 
-const mongoose = require("mongoose");
+// Load the dotfiles.
+require("dotenv").load({ silent: true });
 
 const port = process.env.PORT || 3000;
 const database = process.env.DATABASE || process.env.MONGODB_URI || "mongodb://localhost:27017";

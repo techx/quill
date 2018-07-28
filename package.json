@@ -56,7 +56,7 @@
   "scripts": {
     "build": "./node_modules/.bin/webpack --progress --mode=production --config webpack.config.prod.js",
     "config": "cp .env.config .env",
-    "dev": "./node_modules/.bin/concurrently 'npm run watch:server' 'npm run watch:client'",
+    "start:dev": "./node_modules/.bin/concurrently 'npm run watch:server' 'npm run watch:client'",
     "mongo": "mongod --dbpath db",
     "start": "node app.js",
     "watch:client": "./node_modules/.bin/webpack --progress --mode=development --watch --config webpack.config.dev.js",
@@ -71,7 +71,8 @@
     "ignore": [
       "webpack.*.js",
       "package.json",
-      "app/client/build/*"
+      "package-lock.json",
+      "app/client/*"
     ]
   }
 }

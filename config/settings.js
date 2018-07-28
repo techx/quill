@@ -1,10 +1,8 @@
-var Settings = require('../app/server/models/Settings');
+const Settings = require("../app/server/models/Settings");
 
-Settings
-  .findOne({})
-  .exec(function(err, settings){
-    if (!settings){
-      var settings = new Settings();
-      settings.save();
+Settings.findOne({}).exec((err, settings) => {
+    if (!settings) {
+        var settings = new Settings();
+        settings.save();
     }
-  });
+});

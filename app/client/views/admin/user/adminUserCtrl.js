@@ -1,48 +1,41 @@
-angular.module('reg')
-  .controller('AdminUserCtrl',[
-    '$scope',
-    '$http',
-    'user',
-    'UserService',
-    'EVENT_INFO',
-    function($scope, $http, User, UserService, EVENT_INFO){
-      $scope.EVENT_INFO = EVENT_INFO;
+import sweetAlert from "sweetalert";
 
-      $scope.selectedUser = User.data;
+angular.module("reg").controller("AdminUserCtrl", [
+    "$scope",
+    "$http",
+    "user",
+    "UserService",
+    "EVENT_INFO",
+    function ($scope, $http, User, UserService, EVENT_INFO) {
+        $scope.EVENT_INFO = EVENT_INFO;
 
-      // Populate the school dropdown
-      populateSchools();
+        $scope.selectedUser = User.data;
 
-      /**
-       * TODO: JANK WARNING
-       */
-      function populateSchools(){
+        // Populate the school dropdown
+        populateSchools();
 
-        $http
-          .get('/assets/schools.json')
-          .then(function(res){
-            var schools = res.data;
-            var email = $scope.selectedUser.email.split('@')[1];
+        /**
+             * TODO: JANK WARNING
+             */
+        function populateSchools() {
+            $http.get("/assets/schools.json").then((res) => {
+                const schools = res.data;
+                const email = $scope.selectedUser.email.split("@")[1];
 
-            if (schools[email]){
-              $scope.selectedUser.profile.school = schools[email].school;
-              $scope.autoFilledSchool = true;
-            }
-
-          });
-      }
+                if (schools[email]) {
+                    $scope.selectedUser.profile.school = schools[email].school;
+                    $scope.autoFilledSchool = true;
+                }
+            });
+        }
 
 
-      $scope.updateProfile = function(){
-        UserService
-          .updateProfile($scope.selectedUser._id, $scope.selectedUser.profile)
-          .success(function(data){
-            $selectedUser = data;
-            swal("Updated!", "Profile updated.", "success");
-          })
-          .error(function(){
-            swal("Oops, you forgot something.");
-          });
-      };
-
+        $scope.updateProfile = function () {
+            UserService.updateProfile($scope.selectedUser._id, $scope.selectedUser.profile).success((data) => {
+                $selectedUser = data;
+                sweetAlert("Updated!", "Profile updated.", "success");
+            }).error(() => {
+                sweetAlert("Oops, you forgot something.");
+            });
+        };
     }]);
