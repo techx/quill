@@ -1,5 +1,5 @@
-@import url(http://fonts.googleapis.com/css?family=Montserrat:700);
-@import url(http://fonts.googleapis.com/css?family=Lato:400);
+@import url(http://fonts.googleapis.com/css?family=Roboto:700);
+@import url(http://fonts.googleapis.com/css?family=Roboto:400);
 
 /* /\/\/\/\/\/\/\/\/ CLIENT-SPECIFIC STYLES /\/\/\/\/\/\/\/\/ */
 #outlook a{padding:0;} /* Force Outlook to provide a "view in browser" message */
@@ -60,7 +60,7 @@ body, #bodyTable{
 h1{
   /*@editable*/ color:#202020 !important;
   display:block;
-  /*@editable*/ font-family:'Montserrat', Helvetica;
+  /*@editable*/ font-family:'Roboto', Helvetica;
   /*@editable*/ font-size:26px;
   /*@editable*/ font-style:normal;
   /*@editable*/ font-weight:700;
@@ -82,7 +82,7 @@ h1{
 h2{
   /*@editable*/ color:#404040 !important;
   display:block;
-  /*@editable*/ font-family:'Montserrat', Helvetica;
+  /*@editable*/ font-family:'Roboto', Helvetica;
   /*@editable*/ font-size:20px;
   /*@editable*/ font-style:normal;
   /*@editable*/ font-weight:700;
@@ -104,7 +104,7 @@ h2{
 h3{
   /*@editable*/ color:#606060 !important;
   display:block;
-  /*@editable*/ font-family:'Montserrat', Helvetica;
+  /*@editable*/ font-family:'Roboto', Helvetica;
   /*@editable*/ font-size:16px;
   /*@editable*/ font-weight:normal;
   /*@editable*/ line-height:100%;
@@ -125,7 +125,7 @@ h3{
 h4{
   /*@editable*/ color:#808080 !important;
   display:block;
-  /*@editable*/ font-family:'Montserrat', Helvetica;
+  /*@editable*/ font-family:'Roboto', Helvetica;
   /*@editable*/ font-size:14px;
   /*@editable*/ font-style:italic;
   /*@editable*/ font-weight:normal;
@@ -158,7 +158,7 @@ h4{
 */
 .preheaderContent{
   /*@editable*/ color:#808080;
-  /*@editable*/ font-family:'Montserrat', Helvetica;
+  /*@editable*/ font-family:'Roboto', Helvetica;
   /*@editable*/ font-size:10px;
   /*@editable*/ line-height:125%;
   /*@editable*/ text-align:left;
@@ -194,7 +194,7 @@ h4{
 */
 .headerContent{
   /*@editable*/ color:#505050;
-  /*@editable*/ font-family:'Montserrat', Helvetica;
+  /*@editable*/ font-family:'Roboto', Helvetica;
   /*@editable*/ font-size:20px;
   /*@editable*/ font-weight:bold;
   /*@editable*/ line-height:100%;
@@ -243,7 +243,7 @@ h4{
 */
 .bodyContent{
   /*@editable*/ color:#505050;
-  /*@editable*/ font-family:'Lato', Helvetica;
+  /*@editable*/ font-family:'Roboto', Helvetica;
   /*@editable*/ font-size:14px;
   /*@editable*/ line-height:150%;
   padding-top:36px;
@@ -298,7 +298,7 @@ h4{
 */
 .footerContent{
   /*@editable*/ color:#808080;
-  /*@editable*/ font-family:'Lato', Helvetica;
+  /*@editable*/ font-family:'Roboto', Helvetica;
   /*@editable*/ font-size:10px;
   /*@editable*/ line-height:150%;
   padding-top:20px;

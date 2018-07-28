@@ -4,20 +4,23 @@
 @import 'normalize.css';
 
 // Pages
+@import '_base';
+
+@import '_admin';
+@import '_application';
 @import '_branding';
 @import '_custom';
-@import '_login';
-@import '_base';
-@import '_sidebar';
-@import '_page';
 @import '_dashboard';
-@import '_application';
-@import '_verify';
+@import '_login';
+@import '_home';
+@import '_page';
+@import '_sidebar';
 @import '_team';
-@import '_admin';
 
-@font-body: 'Lato', 'Helvetica Neue', 'Helvetica', sans-serif;
-@font-header: 'Montserrat', 'Helvetica Neue', 'Helvetica', sans-serif;
+@import '_verify';
+
+@font-body: 'Roboto', 'Helvetica Neue', 'Helvetica', sans-serif;
+@font-header: 'Roboto', 'Helvetica Neue', 'Helvetica', sans-serif;
 
 // Login screen variables
 @login-bg-color: @secondary;
@@ -66,7 +69,7 @@ body {
 
 body {
   margin: 0;
-  font-family: 'Lato', 'Helvetica Neue', 'Helvetica', sans-serif;
+  font-family: 'Roboto', 'Helvetica Neue', 'Helvetica', sans-serif;
   font-weight: 300;
 
   > .container {

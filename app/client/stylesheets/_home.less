@@ -1,0 +1,191 @@
+// https://www.youtube.com/watch?v=-irWoRkJF_g
+// Not a god person but...
+// "I think it'd piss God off if anyone ever walked by the color purple in a field and not notice."
+// "He said: 'Look what I made for you.'"
+
+@purple: #2C0735;
+@star-red: #FE1736;
+
+#home.page {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+
+.row {
+    margin: auto;
+    padding: 2em 0;
+    position: relative;
+    width: 80%;
+
+    &.faq, &.top {
+        padding: 0;
+    }
+
+    &:nth-child(odd) {
+        background-color: @purple;
+
+        .row-header {
+            color: white;
+        }
+    }
+    &:nth-child(even) {
+        background-color: white;
+
+        .row-header {
+            color: @purple;
+        }
+    }
+    .row-content {
+        display: flex;
+        flex-grow: 0;
+        flex-shrink: 0;
+        flex-direction: row;
+
+        div {
+            padding: 0 2.5%;
+            width: 50%;
+        }
+    }
+    .row-header {
+        font-family: 'Poppins', Arial, sans-serif;
+        font-size: 30px;
+        padding: 30px 0;
+    }
+}
+
+// Stars source: https://codepen.io/keithclark/pen/zqcEd
+.starfield-container.row {
+    height: 500px;
+    width: 100%;
+
+    &.faq, &.faq .starfield {
+        height: auto;
+        padding: 2em 0;
+    }
+
+    .starfield {
+        background-color: @purple;
+        height: 500px;
+        left:0; 
+        position:absolute; 
+        top:0; 
+        width:100%; 
+        z-index: 1;
+    
+        .top-container {
+            align-content: center;
+            color: white;
+            display: flex;
+            font-family: 'Poppins', Arial, sans-serif;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+    
+            .top-buttons {
+                .button {
+                    background-color:  @purple;
+                    border: 1px solid white;
+                    color: white;
+                    display: inline-block;
+                    margin: 0 20px;
+                    min-width: 150px;
+                    padding: 5px 20px;
+                    transition: 0.3s;
+    
+                    &:hover {
+                        background-color: white;
+                        color:  @purple;
+                    }
+                }
+            }
+    
+            .top-img {
+                display: block;
+                margin: auto;
+                max-height: 600px;
+                width: 500px;
+            }
+    
+            .top-text {
+                font-size: 30px;
+                font-weight: bold;
+
+                p {
+                    margin: 0;
+                    padding: 5px 0;
+                }
+            }
+        }
+    
+        .space, .stars {
+            overflow: hidden;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: -1;
+        }
+    
+        .stars {
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, @star-red, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 40px 70px, @star-red, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 50px 160px, @star-red, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 90px 40px, @star-red, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 130px 80px, @star-red, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 160px 120px, @star-red, rgba(0,0,0,0));
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            animation: zoom 5s infinite;
+            opacity: 0;
+        }
+    
+        .stars:nth-child(1) {
+            background-position: 50% 50%;
+            animation-delay: 0s;
+        }
+        .stars:nth-child(2) {
+            background-position: 20% 60%;
+            animation-delay: 1s;
+        }
+        .stars:nth-child(3) {
+            background-position: -20% -30%;
+            animation-delay: 2s;
+        }
+        .stars:nth-child(4) {
+            background-position: 40% -80%;
+            animation-delay: 3s;
+        }
+        .stars:nth-child(5) {
+            background-position: -20% 30%;
+            animation-delay: 4s;
+        }
+    
+        @keyframes zoom {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+                animation-timing-function: ease-in;
+            } 
+            85% {
+                opacity: 1;
+                transform: scale(2.8);
+                animation-timing-function: linear;
+            }
+            100% {
+                opacity: 0;
+                transform: scale(3.5);
+            }
+        }
+    }
+}
+
+.accordion {
+    margin: auto;
+
+    .content, .title {
+        color: @purple;
+    }
+}
