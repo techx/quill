@@ -19,9 +19,9 @@ module.exports = function (router) {
    *
    */
     router.post("/login", (req, res, next) => {
-        const email = req.body.email;
-        const password = req.body.password;
-        const token = req.body.token;
+        const {
+            email, password, token,
+        } = req.body;
 
         if (token) {
             UserController.loginWithToken(token,
@@ -60,9 +60,9 @@ module.exports = function (router) {
    */
     router.post("/register", (req, res, next) => {
         // Register with an email and password
-        const email = req.body.email;
-        const password = req.body.password;
-
+        const {
+            email, password,
+        } = req.body;
         UserController.createUser(email, password, (err, user) => {
             if (err) {
                 return res.status(400).send(err);

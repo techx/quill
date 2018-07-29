@@ -24,6 +24,7 @@ import "./views/confirmation/confirmationCtrl";
 import "./views/dashboard/dashboardCtrl";
 import "./views/home/homeCtrl";
 import "./views/login/loginCtrl";
+import "./views/register/registerCtrl";
 import "./views/reset/resetCtrl";
 import "./views/sidebar/sidebarCtrl";
 import "./views/team/teamCtrl";

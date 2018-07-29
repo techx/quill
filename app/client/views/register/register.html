@@ -1,0 +1,66 @@
+<div id="login">
+    <div class="container">
+        <div class="content">
+            <div class="ui segment">
+                <div class="logo">
+                    <img src="assets/images/logo-color.svg">
+                </div>
+
+                <div class="ui divider"></div>
+
+                <div class="ui small error message"
+                    ng-show="error">
+                    {{error}}
+                </div>
+
+                <div ng-show="loginState === 'register'">
+                    <div class="ui login-password form">
+                    <form ng-submit="register()">
+                        <div class="field">
+                            <label>College Email</label>
+                            <input type="email"
+                                id='email'
+                                placeholder="foo@bar.edu"
+                                ng-model="email">
+                        </div>
+                        <div class="field">
+                            <label>Password</label>
+                            <input type="password"
+                                id='password'
+                                placeholder="Password (at least 6 characters)"
+                                minlength="6"
+                                ng-model="password" 
+                                required>
+                        </div>
+                        <div class="field">
+                            <label>Confirm Password</label>
+                            <input type="password"
+                                id='confirm_password'
+                                placeholder="Confirm Password"
+                                minlength="6"
+                                ng-model="confirm_password"
+                                required>
+                        </div>
+                        <div class="field">
+                        <button id="register-password"
+                            type="submit"
+                            class="fluid ui register button">
+                            Register
+                        </button>
+                        </div>
+                    </form>
+                    </div>
+        
+                    <div class="ui form" ng-show="regIsOpen">
+                        <div class="ui divider"></div>
+                        <div class="field">
+                            <a href="/login" class="fluid ui login button">
+                            Already have an account? Login!
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

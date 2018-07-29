@@ -34,13 +34,6 @@ angular.module("reg").controller("LoginCtrl", [
             );
         };
 
-        $scope.register = function () {
-            resetError();
-            AuthService.register(
-                $scope.email, $scope.password, onSuccess, onError,
-            );
-        };
-
         $scope.setLoginState = function (state) {
             $scope.loginState = state;
         };
