@@ -12,13 +12,13 @@
     padding: 0;
 }
 
-.row {
+div.row {
     margin: auto;
-    padding: 2em 0;
+    padding: 4em 0;
     position: relative;
     width: 80%;
 
-    &.faq, &.top {
+    &#faq, &#top {
         padding: 0;
     }
 
@@ -59,27 +59,29 @@
     height: 500px;
     width: 100%;
 
-    &.faq, &.faq .starfield {
+    &#faq, &#faq .starfield {
         height: auto;
         padding: 2em 0;
+        position: relative;
     }
 
     .starfield {
+        align-items: center;
         background-color: @purple;
+        display: flex;
         height: 500px;
-        left:0; 
-        position:absolute; 
-        top:0; 
-        width:100%; 
+        justify-content: center;
+        left: 0; 
+        position: absolute; 
+        top: 0; 
+        width: 100%; 
         z-index: 1;
     
         .top-container {
-            align-content: center;
             color: white;
             display: flex;
             font-family: 'Poppins', Arial, sans-serif;
             flex-direction: column;
-            justify-content: center;
             text-align: center;
     
             .top-buttons {
@@ -104,7 +106,8 @@
                 display: block;
                 margin: auto;
                 max-height: 600px;
-                width: 500px;
+                width: 60%;
+                max-width: 600px;
             }
     
             .top-text {
@@ -182,10 +185,69 @@
     }
 }
 
-.accordion {
-    margin: auto;
+.row#faq {
+    .accordion {
+        margin: auto;
+        width: 70%;
 
-    .content, .title {
-        color: @purple;
+        .content, .title {
+            color: @purple;
+            letter-spacing: unset;
+            text-align: left;
+            text-transform: unset;
+        }
+
+        .title {
+            display: flex;
+            justify-content: space-between;
+
+            &.active {
+                i.icon::before {
+                    content: "\f056";
+                }
+            }
+        }
     }
+
+    .starfield {
+        display: block;
+    }
+
+    .top-text {
+        margin-left: 10%;
+        text-align: left;
+    }
+}
+
+.row#sponsors {
+    .row-content {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-around;
+
+        a {
+            flex: 1 1 33.33%;
+            
+            img {
+                max-height: 300px;
+                max-width: 300px;
+            }
+        }
+    }
+
+    .sponsor-cta {
+        font-size: 25px;
+        text-align: center;
+    }
+}
+
+#mlh-trust-badge {
+    display: block;
+    max-width: 100px;
+    min-width: 60px;
+    position: fixed;
+    right: 50px;
+    top: 0;
+    width: 10%;
+    z-index: 10000;
 }
