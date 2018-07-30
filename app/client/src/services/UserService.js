@@ -1,4 +1,3 @@
-                    return $http.get(base);
 angular.module("reg").factory("UserService", [
     "$http",
     "Session",
