@@ -49,12 +49,22 @@ module.exports = function (router) {
                 return res.status(500).send(err);
             }
 
-            if (user._id === userId || user.admin) {
+            let tokenizedUserId;
+            if (typeof user === "object" && user._id.toString) {
+                tokenizedUserId = user._id.toString();
+            }
+            else if (typeof user._id === "string") {
+                tokenizedUserId = user._id;
+            }
+
+            if (tokenizedUserId === userId || user.admin) {
                 return next();
             }
-            return res.status(400).send({
-                message: "Token does not match user id.",
-            });
+            else {
+                return res.status(400).send({
+                    message: "Token does not match user id.",
+                });
+            }
         });
     }
 

@@ -1,91 +1,91 @@
-angular.module("reg")
-    .factory("UserService", [
-        "$http",
-        "Session",
-        function ($http, Session) {
-            const users = "/api/users";
-            const base = `${users}/`;
-
-            return {
-
-                // ----------------------
-                // Basic Actions
-                // ----------------------
-                getCurrentUser() {
-                    return $http.get(base + Session.getUserId());
-                },
-
-                get(id) {
-                    return $http.get(base + id);
-                },
-
-                getAll() {
                     return $http.get(base);
-                },
+angular.module("reg").factory("UserService", [
+    "$http",
+    "Session",
+    function ($http, Session) {
+        const users = "/api/users";
+        const base = `${users}/`;
 
-                getPage(page, size, text) {
-                    return $http.get(`${users}?${$.param(
-                        {
-                            text,
-                            page: page || 0,
-                            size: size || 50,
-                        },
-                    )}`);
-                },
+        return {
 
-                updateProfile(id, profile) {
-                    return $http.put(`${base + id}/profile`, {
-                        profile,
-                    });
-                },
+            // ----------------------
+            // Basic Actions
+            // ----------------------
+            getCurrentUser() {
+                return $http.get(base + Session.getUserId());
+            },
 
-                updateConfirmation(id, confirmation) {
-                    return $http.put(`${base + id}/confirm`, {
-                        confirmation,
-                    });
-                },
+            get(id) {
+                return $http.get(base + id);
+            },
 
-                declineAdmission(id) {
-                    return $http.post(`${base + id}/decline`);
-                },
+            getAll() {
+                return $http.get(base);
+            },
 
-                // ------------------------
-                // Team
-                // ------------------------
-                joinOrCreateTeam(code) {
-                    return $http.put(`${base + Session.getUserId()}/team`, {
-                        code,
-                    });
-                },
+            getPage(page, size, text) {
+                return $http.get(`${users}?${$.param(
+                    {
+                        text,
+                        page: page || 0,
+                        size: size || 50,
+                    },
+                )}`);
+            },
 
-                leaveTeam() {
-                    return $http.delete(`${base + Session.getUserId()}/team`);
-                },
+            updateProfile(id, profile) {
+                return $http.put(`${base + id}/profile`, {
+                    profile,
+                });
+            },
 
-                getMyTeammates() {
-                    return $http.get(`${base + Session.getUserId()}/team`);
-                },
+            updateConfirmation(id, confirmation) {
+                return $http.put(`${base + id}/confirm`, {
+                    confirmation,
+                });
+            },
 
-                // -------------------------
-                // Admin Only
-                // -------------------------
+            declineAdmission(id) {
+                return $http.post(`${base + id}/decline`);
+            },
 
-                getStats() {
-                    return $http.get(`${base}stats`);
-                },
+            // ------------------------
+            // Team
+            // ------------------------
+            joinOrCreateTeam(code) {
+                return $http.put(`${base + Session.getUserId()}/team`, {
+                    code,
+                });
+            },
 
-                admitUser(id) {
-                    return $http.post(`${base + id}/admit`);
-                },
+            leaveTeam() {
+                return $http.delete(`${base + Session.getUserId()}/team`);
+            },
 
-                checkIn(id) {
-                    return $http.post(`${base + id}/checkin`);
-                },
+            getMyTeammates() {
+                return $http.get(`${base + Session.getUserId()}/team`);
+            },
 
-                checkOut(id) {
-                    return $http.post(`${base + id}/checkout`);
-                },
+            // -------------------------
+            // Admin Only
+            // -------------------------
 
-            };
-        },
-    ]);
+            getStats() {
+                return $http.get(`${base}stats`);
+            },
+
+            admitUser(id) {
+                return $http.post(`${base + id}/admit`);
+            },
+
+            checkIn(id) {
+                return $http.post(`${base + id}/checkin`);
+            },
+
+            checkOut(id) {
+                return $http.post(`${base + id}/checkout`);
+            },
+
+        };
+    },
+]);

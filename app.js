@@ -34,7 +34,7 @@ const checkVariables = [
 
 const allVariablesDefined = checkVariables.filter(curVariable => typeof curVariable === "undefined");
 if (allVariablesDefined.length > 0) {
-    throw new Error(`Please make sure you have specified the following environment variables: ${allVariablesDefined.join(",")}`);
+    throw new Error(`Please make sure you have specified the following environment variables: ${allVariablesDefined.join(", ")}`);
 }
 
 const settingsConfig = require("./config/settings");
