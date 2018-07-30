@@ -20,6 +20,7 @@ angular.module("reg").controller("LoginCtrl", [
         }
 
         function onError(data) {
+            console.log(data);
             $scope.error = data.message;
         }
 

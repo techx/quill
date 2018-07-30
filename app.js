@@ -11,6 +11,32 @@ require("dotenv").load({ silent: true });
 const port = process.env.PORT || 3000;
 const database = process.env.DATABASE || process.env.MONGODB_URI || "mongodb://localhost:27017";
 
+// Check for required variables before initializing
+const {
+    ADMIN_EMAIL,
+    ADMIN_PASSWORD,
+    EMAIL_ADDRESS,
+    EMAIL_CONTACT,
+    NODE_ENV,
+    ROOT_URL,
+    JWT_SECRET,
+} = process.env;
+
+const checkVariables = [
+    ADMIN_EMAIL,
+    ADMIN_PASSWORD,
+    EMAIL_ADDRESS,
+    EMAIL_CONTACT,
+    NODE_ENV,
+    ROOT_URL,
+    JWT_SECRET,
+];
+
+const allVariablesDefined = checkVariables.filter(curVariable => typeof curVariable === "undefined");
+if (allVariablesDefined.length > 0) {
+    throw new Error(`Please make sure you have specified the following environment variables: ${allVariablesDefined.join(",")}`);
+}
+
 const settingsConfig = require("./config/settings");
 const adminConfig = require("./config/admin");
 
@@ -45,5 +71,6 @@ app.use("/auth", authRouter);
 require("./app/server/routes")(app);
 
 // listen (start app with node server.js) ======================================
-app.listen(port);
-console.log(`App listening on port ${port}`);
+app.listen(port, (err) => {
+    console.log(`App listening on port ${port}`);
+});

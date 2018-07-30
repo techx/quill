@@ -1,3 +1,5 @@
+const bcrypt = require("bcrypt-nodejs");
+
 const {
     ADMIN_EMAIL,
     ADMIN_PASSWORD,
@@ -11,7 +13,7 @@ User.findOne({ email: ADMIN_EMAIL }).exec((err, user) => {
     if (!user) {
         const u = new User();
         u.email = ADMIN_EMAIL;
-        u.password = ADMIN_PASSWORD;
+        u.password = bcrypt.hashSync(ADMIN_PASSWORD, bcrypt.genSaltSync(10));
         u.admin = true;
         u.verified = true;
         u.save((err) => {
@@ -19,5 +21,9 @@ User.findOne({ email: ADMIN_EMAIL }).exec((err, user) => {
                 console.log(err);
             }
         });
+    }
+    else {
+        // console.log(user, user.password);
+        // user.remove(err => console.log(err, "removed"));
     }
 });
