@@ -18,10 +18,11 @@ function calculateStats() {
             },
             schools: {},
             year: {
-                2016: 0,
-                2017: 0,
                 2018: 0,
                 2019: 0,
+                2020: 0,
+                2021: 0,
+                2022: 0,
             },
         },
 
@@ -55,15 +56,6 @@ function calculateStats() {
         },
 
         dietaryRestrictions: {},
-
-        hostNeededFri: 0,
-        hostNeededSat: 0,
-        hostNeededUnique: 0,
-
-        hostNeededFemale: 0,
-        hostNeededMale: 0,
-        hostNeededOther: 0,
-        hostNeededNone: 0,
 
         reimbursementTotal: 0,
         reimbursementMissing: 0,
@@ -150,20 +142,6 @@ function calculateStats() {
             if (user.confirmation.shirtSize in newStats.shirtSizes) {
                 newStats.shirtSizes[user.confirmation.shirtSize] += 1;
             }
-
-            // Host needed counts
-            newStats.hostNeededFri += user.confirmation.hostNeededFri ? 1 : 0;
-            newStats.hostNeededSat += user.confirmation.hostNeededSat ? 1 : 0;
-            newStats.hostNeededUnique += user.confirmation.hostNeededFri || user.confirmation.hostNeededSat ? 1 : 0;
-
-            newStats.hostNeededFemale
-                += (user.confirmation.hostNeededFri || user.confirmation.hostNeededSat) && user.profile.gender == "F" ? 1 : 0;
-            newStats.hostNeededMale
-                += (user.confirmation.hostNeededFri || user.confirmation.hostNeededSat) && user.profile.gender == "M" ? 1 : 0;
-            newStats.hostNeededOther
-                += (user.confirmation.hostNeededFri || user.confirmation.hostNeededSat) && user.profile.gender == "O" ? 1 : 0;
-            newStats.hostNeededNone
-                += (user.confirmation.hostNeededFri || user.confirmation.hostNeededSat) && user.profile.gender == "N" ? 1 : 0;
 
             // Dietary restrictions
             if (user.confirmation.dietaryRestrictions) {

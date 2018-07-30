@@ -1,92 +1,91 @@
-angular.module('reg')
-  .factory('UserService', [
-  '$http',
-  'Session',
-  function($http, Session){
+angular.module("reg")
+    .factory("UserService", [
+        "$http",
+        "Session",
+        function ($http, Session) {
+            const users = "/api/users";
+            const base = `${users}/`;
 
-    var users = '/api/users';
-    var base = users + '/';
+            return {
 
-    return {
+                // ----------------------
+                // Basic Actions
+                // ----------------------
+                getCurrentUser() {
+                    return $http.get(base + Session.getUserId());
+                },
 
-      // ----------------------
-      // Basic Actions
-      // ----------------------
-      getCurrentUser: function(){
-        return $http.get(base + Session.getUserId());
-      },
+                get(id) {
+                    return $http.get(base + id);
+                },
 
-      get: function(id){
-        return $http.get(base + id);
-      },
+                getAll() {
+                    return $http.get(base);
+                },
 
-      getAll: function(){
-        return $http.get(base);
-      },
+                getPage(page, size, text) {
+                    return $http.get(`${users}?${$.param(
+                        {
+                            text,
+                            page: page || 0,
+                            size: size || 50,
+                        },
+                    )}`);
+                },
 
-      getPage: function(page, size, text){
-        return $http.get(users + '?' + $.param(
-          {
-            text: text,
-            page: page ? page : 0,
-            size: size ? size : 50
-          })
-        );
-      },
+                updateProfile(id, profile) {
+                    return $http.put(`${base + id}/profile`, {
+                        profile,
+                    });
+                },
 
-      updateProfile: function(id, profile){
-        return $http.put(base + id + '/profile', {
-          profile: profile
-        });
-      },
+                updateConfirmation(id, confirmation) {
+                    return $http.put(`${base + id}/confirm`, {
+                        confirmation,
+                    });
+                },
 
-      updateConfirmation: function(id, confirmation){
-        return $http.put(base + id + '/confirm', {
-          confirmation: confirmation
-        });
-      },
+                declineAdmission(id) {
+                    return $http.post(`${base + id}/decline`);
+                },
 
-      declineAdmission: function(id){
-        return $http.post(base + id + '/decline');
-      },
+                // ------------------------
+                // Team
+                // ------------------------
+                joinOrCreateTeam(code) {
+                    return $http.put(`${base + Session.getUserId()}/team`, {
+                        code,
+                    });
+                },
 
-      // ------------------------
-      // Team
-      // ------------------------
-      joinOrCreateTeam: function(code){
-        return $http.put(base + Session.getUserId() + '/team', {
-          code: code
-        });
-      },
+                leaveTeam() {
+                    return $http.delete(`${base + Session.getUserId()}/team`);
+                },
 
-      leaveTeam: function(){
-        return $http.delete(base + Session.getUserId() + '/team');
-      },
+                getMyTeammates() {
+                    return $http.get(`${base + Session.getUserId()}/team`);
+                },
 
-      getMyTeammates: function(){
-        return $http.get(base + Session.getUserId() + '/team');
-      },
+                // -------------------------
+                // Admin Only
+                // -------------------------
 
-      // -------------------------
-      // Admin Only
-      // -------------------------
+                getStats() {
+                    return $http.get(`${base}stats`);
+                },
 
-      getStats: function(){
-        return $http.get(base + 'stats');
-      },
+                admitUser(id) {
+                    return $http.post(`${base + id}/admit`);
+                },
 
-      admitUser: function(id){
-        return $http.post(base + id + '/admit');
-      },
+                checkIn(id) {
+                    return $http.post(`${base + id}/checkin`);
+                },
 
-      checkIn: function(id){
-        return $http.post(base + id + '/checkin');
-      },
+                checkOut(id) {
+                    return $http.post(`${base + id}/checkout`);
+                },
 
-      checkOut: function(id){
-        return $http.post(base + id + '/checkout');
-      },
-
-    };
-  }
-  ]);
+            };
+        },
+    ]);

@@ -1,45 +1,27 @@
+const emailTemplates = require("email-templates");
 const path = require("path");
-const nodemailer = require("nodemailer");
-const smtpTransport = require("nodemailer-smtp-transport");
+const sgMail = require("@sendgrid/mail");
 
 const templatesDir = path.join(__dirname, "../templates");
-const emailTemplates = require("email-templates");
 
-const ROOT_URL = process.env.ROOT_URL;
+const {
+    EMAIL_ADDRESS,
+    FACEBOOK_HANDLE,
+    HACKATHON_NAME,
+    ROOT_URL,
+    TWITTER_HANDLE,
+    YEAR,
 
-const HACKATHON_NAME = process.env.HACKATHON_NAME;
-const EMAIL_ADDRESS = process.env.EMAIL_ADDRESS;
-const TWITTER_HANDLE = process.env.TWITTER_HANDLE;
-const FACEBOOK_HANDLE = process.env.FACEBOOK_HANDLE;
-const YEAR = process.env.YEAR;
+    EMAIL_CONTACT,
+    EMAIL_HEADER_IMAGE,
 
-const EMAIL_HOST = process.env.EMAIL_HOST;
-const EMAIL_USER = process.env.EMAIL_USER;
-const EMAIL_PASS = process.env.EMAIL_PASS;
-const EMAIL_PORT = process.env.EMAIL_PORT;
-const EMAIL_CONTACT = process.env.EMAIL_CONTACT;
-let EMAIL_HEADER_IMAGE = process.env.EMAIL_HEADER_IMAGE;
-if (EMAIL_HEADER_IMAGE.indexOf("https") == -1) {
-    EMAIL_HEADER_IMAGE = ROOT_URL + EMAIL_HEADER_IMAGE;
-}
+    NODE_ENV,
+    SENDGRID_API_KEY,
+} = process.env;
 
-const NODE_ENV = process.env.NODE_ENV;
-
-const options = {
-    host: EMAIL_HOST,
-    port: EMAIL_PORT,
-    secure: true,
-    auth: {
-        user: EMAIL_USER,
-        pass: EMAIL_PASS,
-    },
-};
-
-const transporter = nodemailer.createTransport(smtpTransport(options));
+sgMail.setApiKey(SENDGRID_API_KEY);
 
 const controller = {};
-
-controller.transporter = transporter;
 
 function sendOne(templateName, options, data, callback) {
     if (NODE_ENV === "dev") {
@@ -59,22 +41,25 @@ function sendOne(templateName, options, data, callback) {
         data.facebookHandle = FACEBOOK_HANDLE;
         data.year = YEAR;
 
-        template(templateName, data, (err, html, text) => {
-            if (err) {
-                return callback(err);
+        template(templateName, data, (templateErr, html, text) => {
+            if (templateErr) {
+                return callback(templateErr);
             }
+            else {
+                const msg = {
+                    subject: options.subject,
+                    to: options.to,
+                    from: EMAIL_CONTACT,
+                    html,
+                    text,
+                };
 
-            transporter.sendMail({
-                from: EMAIL_CONTACT,
-                to: options.to,
-                subject: options.subject,
-                html,
-                text,
-            }, (err, info) => {
-                if (callback) {
-                    callback(err, info);
-                }
-            });
+                sgMail.send(msg, false, (sendErr, results) => {
+                    if (callback) {
+                        return callback(sendErr, results);
+                    }
+                });
+            }
         });
     });
 }
@@ -131,7 +116,7 @@ controller.sendPasswordResetEmail = function (email, token, callback) {
         title: "Password Reset Request",
         subtitle: "",
         description: "Somebody (hopefully you!) has requested that your password be reset. If "
-      + "this was not you, feel free to disregard this email. This link will expire in one hour.",
+            + "this was not you, feel free to disregard this email. This link will expire in one hour.",
         actionUrl: `${ROOT_URL}/reset/${token}`,
         actionName: "Reset Password",
     };
@@ -185,7 +170,7 @@ controller.sendPasswordChangedEmail = function (email, callback) {
             console.log(info.message);
         }
         if (callback) {
-            callback(err, info);
+            return callback(err, info);
         }
     });
 };

@@ -4,6 +4,7 @@
   "version": "0.2.0",
   "private": "true",
   "dependencies": {
+    "@sendgrid/mail": "^6.3.1",
     "angular": "~1.4.1",
     "angular-animate": "~1.4.1",
     "angular-ui-router": "~0.2.15",
@@ -22,8 +23,6 @@
     "moment": "~2.22.2",
     "mongoose": "^4.1.2",
     "morgan": "^1.9.0",
-    "nodemailer": "^1.4.0",
-    "nodemailer-smtp-transport": "^1.0.3",
     "passport-local": "^1.0.0",
     "request": "^2.87.0",
     "semantic-ui-css": "^2.3.3",

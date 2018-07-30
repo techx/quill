@@ -44,6 +44,8 @@ const profile = {
         max: 1500,
     },
 
+    resume: String,
+
     // Optional info for demographics
     gender: {
         type: String,
@@ -51,7 +53,6 @@ const profile = {
             values: "M F O N".split(" "),
         },
     },
-
 };
 
 // Only after confirmed
@@ -71,7 +72,6 @@ const confirmation = {
     github: String,
     twitter: String,
     website: String,
-    resume: String,
 
     needsReimbursement: Boolean,
     address: {
@@ -84,13 +84,6 @@ const confirmation = {
         country: String,
     },
     receipt: String,
-
-    hostNeededFri: Boolean,
-    hostNeededSat: Boolean,
-    genderNeutral: Boolean,
-    catFriendly: Boolean,
-    smokingFriendly: Boolean,
-    hostNotes: String,
 
     notes: String,
 
@@ -143,6 +136,10 @@ const status = {
     confirmBy: {
         type: Number,
     },
+    reimbursementRequested: {
+        type: Number,
+        default: 0,
+    },
     reimbursementGiven: {
         type: Boolean,
         default: false,
@@ -151,7 +148,6 @@ const status = {
 
 // define the schema for our admin model
 const schema = new mongoose.Schema({
-
     email: {
         type: String,
         required: true,
@@ -328,10 +324,10 @@ schema.statics.getByToken = function (token, callback) {
 schema.statics.validateProfile = function (profile, cb) {
     return cb(!(
         profile.name.length > 0
-    && profile.adult
-    && profile.school.length > 0
-    && ["2016", "2017", "2018", "2019"].indexOf(profile.graduationYear) > -1
-    && ["M", "F", "O", "N"].indexOf(profile.gender) > -1
+            && profile.adult
+            && profile.school.length > 0
+            && ["2018", "2019", "2020", "2021", "2022"].indexOf(profile.graduationYear) > -1
+            && ["M", "F", "O", "N"].indexOf(profile.gender) > -1
     ));
 };
 

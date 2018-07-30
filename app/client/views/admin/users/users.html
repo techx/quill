@@ -9,9 +9,9 @@
         <div class="field">
           <div class="ui icon fluid input">
             <input type="text"
-                   placeholder="Search..."
-                   ng-model="queryText"
-                   ng-model-options="{debounce: 300}">
+              placeholder="Search..."
+              ng-model="queryText"
+              ng-model-options="{debounce: 300}">
               <i class="search icon"></i>
           </div>
         </div>
@@ -33,6 +33,7 @@
       <div class="ui header">
         Users
       </div>
+      <div>V/S/A/C = <b>V</b>erified Email/<b>S</b>ubmitted Application/<b>A</b>ccepted User/<b>C</b>onfirmed User</div>
       <div class="ui long user modal">
         <i class="close icon"></i>
         <div class="header">
@@ -80,9 +81,9 @@
         </div>
 
         <div class="actions">
-          <div class="ui positive right labeled icon button">
-            Nothing
-            <i class="checkmark icon"></i>
+          <div class="ui negative right labeled icon button">
+            Close
+            <i class="x icon"></i>
           </div>
         </div>
       </div>
@@ -96,7 +97,6 @@
             <th>School</th>
             <th>Grad</th>
             <th>V/S/A/C</th>
-            <th>Host</th>
             <th>$</th>
             <th></th>
             <th></th>
@@ -126,71 +126,60 @@
               <!-- Verified -->
               <i
                 ng-if="user.verified"
-                class="green check circle icon">
+                class="green check circle icon"
+                alt="Verified email">
               </i>
               <i
                 ng-if="!user.verified"
-                class="red remove circle icon">
+                class="red remove circle icon"
+                alt="Unverified email">
               </i>
 
               <!-- Submitted -->
               <i
                 ng-if="user.status.completedProfile"
-                class="green check circle icon">
+                class="green check circle icon"
+                alt="Completed profile">
               </i>
               <i
                 ng-if="!user.status.completedProfile"
-                class="red remove circle icon">
+                class="red remove circle icon"
+                alt="Has not completed profile">
               </i>
 
               <!-- Admitted -->
               <i
                 ng-if="user.status.admitted"
-                class="green check circle icon">
+                class="green check circle icon"
+                alt="Admitted">
               </i>
               <i
                 ng-if="!user.status.admitted"
-                class="thin circle icon">
+                class="thin circle icon"
+                alt="Not admitted">
               </i>
 
               <!-- Confirmed -->
               <i
                 ng-if="!user.status.admitted"
-                class="circle thin icon">
+                class="circle thin icon"
+                alt="Not admitted">
               </i>
               <i
                 ng-if="user.status.admitted && user.status.confirmed"
-                class="green check circle icon">
+                class="green check circle icon"
+                alt="Confirmed">
               </i>
               <i
                 ng-if="user.status.admitted && !user.status.confirmed && !user.status.declined"
-                class="question icon">
+                class="question icon"
+                alt="Admitted, neither confirmed nor denied">
               </i>
               <i
                 ng-if="user.status.admitted && user.status.declined"
-                class="red remove circle icon">
+                class="red remove circle icon"
+                alt="Admitted, user declined">
               </i>
-
-            </td>
-
-            <!-- Host -->
-            <td
-              class="collapsing">
-
-              <span ng-if="user.status.confirmed">
-                <i
-                  ng-if="user.confirmation.hostNeededFri"
-                  class="home icon">
-                </i>
-                <i
-                  ng-if="!user.confirmation.hostNeededFri && user.confirmation.hostNeededSat"
-                  class="no icon">
-                </i>
-                <i
-                  ng-if="user.confirmation.hostNeededSat"
-                  class="home icon">
-                </i>
-              </span>
 
             </td>
 
@@ -232,20 +221,16 @@
 
                 <i
                   ng-if="!user.status.checkedIn"
-                  class="flag outline icon"></i>
+                  class="flag icon"></i>
 
                 <i
                   ng-if="user.status.checkedIn"
                   class="green flag icon"></i>
-
               </button>
-
             </td>
           </tr>
         </tbody>
       </table>
-
     </div>
   </div>
-
 </div>

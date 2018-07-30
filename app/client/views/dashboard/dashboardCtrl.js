@@ -54,14 +54,14 @@ angular.module("reg").controller("DashboardCtrl", [
                     return !regIsOpen && user.status.completedProfile && !user.status.admitted;
                 case "admittedAndCanConfirm":
                     return !pastConfirmation
-                          && user.status.admitted
-                          && !user.status.confirmed
-                          && !user.status.declined;
+                        && user.status.admitted
+                        && !user.status.confirmed
+                        && !user.status.declined;
                 case "admittedAndCannotConfirm":
                     return pastConfirmation
-                          && user.status.admitted
-                          && !user.status.confirmed
-                          && !user.status.declined;
+                        && user.status.admitted
+                        && !user.status.confirmed
+                        && !user.status.declined;
                 case "confirmed":
                     return user.status.admitted && user.status.confirmed && !user.status.declined;
                 case "declined":

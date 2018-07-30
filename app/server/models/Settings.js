@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const validator = require("validator");
 
 /**
  * Settings Schema!
@@ -13,7 +12,7 @@ const schema = new mongoose.Schema({
     status: String,
     timeOpen: {
         type: Number,
-        default: 0,
+        default: 0, // Date of applications opening
     },
     timeClose: {
         type: Number,
@@ -39,6 +38,7 @@ const schema = new mongoose.Schema({
     },
     allowMinors: {
         type: Boolean,
+        default: false,
     },
 });
 
