@@ -67,6 +67,24 @@ var profile = {
       values: 'M F O N'.split(' ')
     }
   },
+  
+   //Additional questions
+  question1: {
+    type: String,
+    max: 100
+  },
+
+  question2: {
+    type: String,
+    enum: {
+      values: ['UMBC', 'UMBC2']
+    }
+  },
+
+  question3: {
+    type: String,
+    max: 100
+  }
 
 };
 

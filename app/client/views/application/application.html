@@ -90,6 +90,30 @@
           </textarea>
         </div>
 
+        <!--Bonus Questions-->
+        <div class="divided title">Bonus Questions</div>
+        <div class="field">
+          <label>What is your favorite city in the world?</label>
+          <input type="text"
+                 name="name"
+                 ng-model="user.profile.question1">
+        </div>
+        <div class="field">
+          <label>Whats the best school in the world?</label>
+          <select
+            name="question2"
+            ng-model="user.profile.question2">
+            <option value="UMBC">UMBC</option>
+            <option value="UMBC2">That school that beat UVA in March Madness</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>How are you doing today?</label>
+          <input type="text"
+                 name="name"
+                 ng-model="user.profile.question3">
+        </div>
+
         <div class="field"
              ng-hide="isMitStudent">
           <p>

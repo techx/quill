@@ -149,6 +149,30 @@ angular.module('reg')
                 }
               ]
             },
+            question1: {
+              identifier: 'question1',
+              rules: [
+                {
+                  type: empty,
+                }
+              ]
+            },
+            question2: {
+              identifier: 'question2',
+              rules: [
+                {
+                  type: empty,
+                }
+              ]
+            },
+            question3: {
+              identifier: 'question3',
+              rules: [
+                {
+                  type: empty,
+                }
+              ]
+            },
             adult: {
               identifier: 'adult',
               rules: [
