@@ -10,7 +10,7 @@
   @include transition-duration($sidebar-transition-time);
 
   .item {
-    width: 0%;
+    width: 100%;
     padding: 16px;
     transition-duration: .1s;
     transition: border-left, .5s, linear;
@@ -38,7 +38,7 @@
       padding: 48px;
     }
     &.resize {
-      width: 40px;
+      width: 100%;
       height: auto;
     }
 

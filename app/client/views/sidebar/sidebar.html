@@ -1,7 +1,7 @@
 <div id="sidebar"
      ng-class="{open: showSidebar}">
   <div ui-sref="app.dashboard"
-       class="logo item">
+       class="resize item">
     <img class="resize item" src="assets/images/logo.svg">
   </div>
 
@@ -56,6 +56,6 @@
 
 <div class="tab"
   ng-click="toggleSidebar()">
-  <img class=logoTab ng-show="!showSidebar" src="assets/images/logo.svg" />
+  <img ng-show="!showSidebar" src="assets/images/logo.svg" />
   <span class="close" ng-show="showSidebar">&#x2715</span>
 </div>
