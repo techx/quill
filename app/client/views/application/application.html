@@ -13,6 +13,13 @@
         <fieldset ng-disabled="regIsClosed">
 
         <div class="field">
+          <label> Full Name </label>
+          <input type="text"
+                name="name"
+                ng-model="user.profile.name">
+        </div>
+
+        <div class="field">
           <label> Email </label>
           <input type="email"
                  name="email"
@@ -21,11 +28,11 @@
         </div>
 
         <div class="field">
-          <label> Full Name </label>
-          <input type="text"
-                 name="name"
-                 ng-model="user.profile.name">
-        </div>
+          <label> Date of Birth </label>
+          <input type="date"
+                  name="birthdate"
+                  ng-model="user.profile.birthdate">
+        </div>        
 
         <div class="field" ng-show="autoFilledSchool">
           <label> School </label>
@@ -33,6 +40,17 @@
                  disabled="disabled"
                  ng-show="autoFilledSchool"
                  ng-model="user.profile.school">
+        </div>
+
+        <div class="field">
+          <label> Race/Ethnicity </label>
+          <small> Please select all that apply. </small>
+
+          <style>.select2-search__field {display:none}</style>
+          <select name="race" id="race" ng-model="user.profile.race" multiple="multiple">
+            <option ng-repeat="race in ['American Indian', 'Asian / Pacific Islander', 'Black or African American', 'Hispanic', 'White / Caucasian', 'Prefer Not to Answer']">{{race}}</option>
+          </select>
+          <script>$("#race").select2();</script>
         </div>
 
         <div class="field" ng-show="!autoFilledSchool">
@@ -46,13 +64,21 @@
         </div>
 
         <div class="field">
-          <label>Graduation Year</label>
+          <label> Major </label> 
+          <input class="ui input"
+                 name="major"
+                 ng-model="user.profile.major">
+        </div>
+
+        <div class="field">
+          <label> Graduation Year </label>
           <select
             name="year"
+            id="gradYears"
             ng-model="user.profile.graduationYear">
             <option value="">Graduation Year</option>
             <script>
-              var graduationYears = document.scripts[document.scripts.length - 1].parentNode;
+              var graduationYears = document.getElementById("gradYears");
 
               var y = new Date().getFullYear();
 

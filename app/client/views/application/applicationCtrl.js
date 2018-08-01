@@ -15,6 +15,9 @@ angular.module('reg')
 
       $scope.EVENT_INFO = EVENT_INFO;
 
+      // Convert stored birthdate to a format that Angular can understand
+      $scope.user.profile.birthdate = new Date(currentUser.data.profile.birthdate);
+
       // Is the student from UMBC?
       $scope.isUMBCStudent = $scope.user.email.split('@')[1] == 'umbc.edu';
 
@@ -70,6 +73,8 @@ angular.module('reg')
       }
 
       function _updateUser(e){
+        console.log($scope.user.profile)
+
         UserService
           .updateProfile(Session.getUserId(), $scope.user.profile)
           .success(function(data){
@@ -122,12 +127,30 @@ angular.module('reg')
                 }
               ]
             },
+            race: {
+              identifier: 'race',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please select your race/ethnicity.'
+                }
+              ]
+            },
             school: {
               identifier: 'school',
               rules: [
                 {
                   type: 'empty',
                   prompt: 'Please enter your school name.'
+                }
+              ]
+            },
+            major: {
+              identifier: 'major',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please enter your major.'
                 }
               ]
             },
@@ -146,30 +169,6 @@ angular.module('reg')
                 {
                   type: 'empty',
                   prompt: 'Please select a gender.'
-                }
-              ]
-            },
-            question1: {
-              identifier: 'question1',
-              rules: [
-                {
-                  type: empty,
-                }
-              ]
-            },
-            question2: {
-              identifier: 'question2',
-              rules: [
-                {
-                  type: empty,
-                }
-              ]
-            },
-            question3: {
-              identifier: 'question3',
-              rules: [
-                {
-                  type: empty,
                 }
               ]
             },
