@@ -217,25 +217,30 @@
 
             <td
               class="right aligned collapsing">
-              <button title="Accept User" 
-                class="accept ui circular mini basic green icon button"
-                ng-click="acceptUser($event, user, $index)">
-                <i class="add user icon"></i>
-              </button>
+              <div class="tooltip">
+                <button
+                  class="accept ui circular mini basic green icon button"
+                  ng-click="acceptUser($event, user, $index)">
+                  <i class="add user icon"></i>
+                </button>
+                <span class="tooltiptext">Accept</span>
+              </div>
+              <div class="tooltip">
+                <button
+                  ng-click="toggleCheckIn($event, user, $index)"
+                  class="ui circular mini basic green icon button">
 
-              <button title="Check-in User"
-                ng-click="toggleCheckIn($event, user, $index)"
-                class="ui circular mini basic green icon button">
+                  <i
+                    ng-if="!user.status.checkedIn"
+                    class="flag outline icon"></i>
 
-                <i
-                  ng-if="!user.status.checkedIn"
-                  class="flag outline icon"></i>
+                  <i
+                    ng-if="user.status.checkedIn"
+                    class="green flag icon"></i>
 
-                <i
-                  ng-if="user.status.checkedIn"
-                  class="green flag icon"></i>
-
-              </button>
+                </button>
+                <span class="tooltiptext">Check-in</span>
+              </div>
 
             </td>
           </tr>
