@@ -22,6 +22,10 @@ var profile = {
     max: 100,
   },
 
+  birthdate: {
+    type: Date
+  },
+
   adult: {
     type: Boolean,
     required: true,
@@ -34,11 +38,17 @@ var profile = {
     max: 150,
   },
 
+  major: String,
+
   graduationYear: {
     type: String,
     enum: {
       values: graduationYears,
     }
+  },
+
+  race: {
+    type: [String],
   },
 
   description: {
@@ -67,8 +77,8 @@ var profile = {
       values: 'M F O N'.split(' ')
     }
   },
-  
-   //Additional questions
+
+  // Bonus questions
   question1: {
     type: String,
     max: 100
@@ -85,7 +95,6 @@ var profile = {
     type: String,
     max: 100
   }
-
 };
 
 // Only after confirmed
@@ -102,7 +111,6 @@ var confirmation = {
   wantsHardware: Boolean,
   hardware: String,
 
-  major: String,
   website: String,
   resume: String,
 
