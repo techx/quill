@@ -181,10 +181,11 @@ angular.module('reg')
               },{
                 name: 'Email',
                 value: user.email
-              },{
-                name: 'Team',
-                value: user.teamCode || 'None'
-              }
+              },
+              // {
+              //   name: 'Team',
+              //   value: user.teamCode || 'None'
+              // }
             ]
           },{
             name: 'Profile',
@@ -192,6 +193,9 @@ angular.module('reg')
               {
                 name: 'Name',
                 value: user.profile.name
+              },{
+                name: 'Birthdate',
+                value: formatTime(user.profile.birthdate)
               },{
                 name: 'Gender',
                 value: user.profile.gender
@@ -203,10 +207,10 @@ angular.module('reg')
                 value: user.profile.graduationYear
               },{
                 name: 'Description',
-                value: user.profile.description
+                value: user.profile.description || "N/A"
               },{
                 name: 'Essay',
-                value: user.profile.essay
+                value: user.profile.essay || "N/A"
               }
             ]
           },{
@@ -222,18 +226,19 @@ angular.module('reg')
                 name: 'Shirt Size',
                 value: user.confirmation.shirtSize
               },{
-                name: 'Major',
-                value: user.confirmation.major
-              },{
                 name: 'Website',
-                value: user.confirmation.website
+                value: user.confirmation.website || "N/A"
               },{
                 name: 'Needs Hardware',
                 value: user.confirmation.wantsHardware,
                 type: 'boolean'
               },{
                 name: 'Hardware Requested',
-                value: user.confirmation.hardware
+                value: user.confirmation.hardware || "N/A"
+              },{
+                name: 'Interested in Volunteering',
+                value: user.confirmation.volunteer,
+                type: 'boolean'
               }
             ]
           }

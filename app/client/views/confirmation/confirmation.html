@@ -15,7 +15,7 @@
           <div class="field">
             <label> What's your phone number? (required) </label>
             <p>
-              We need this in case we need to get ahold of you!
+              We need this in case we have to urgently contact you!
             </p>
             <input type="tel"
                    name="phone"
@@ -27,9 +27,6 @@
           <div class="field">
             <label> Dietary Restrictions </label>
 
-            <p>
-              If your restriction is not included here, please let us know in the additional notes at the bottom.
-            </p>
             <p>
               We'll make sure you get fed :)
             </p>
@@ -256,10 +253,17 @@
 
           <div class="divided title">everything else</div>
 
+          <div class="field" ng-show="isUMBCStudent">
+            <label> Being a Hackathon Volunteer </label>
+
+            <div class="ui checkbox">
+              <input type="checkbox" ng-model="user.confirmation.volunteer">
+              <label> I am interested in being a volunteer for HackUMBC, and would like to receive more information about it. </label>
+            </div>
+          </div>
+
           <div class="field">
-            <label>
-              Additional Notes
-            </label>
+            <label> Additional Notes </label>
             <p>
               If there's anything else you need to let us know, tell us here!
             </p>

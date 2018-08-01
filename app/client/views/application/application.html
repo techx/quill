@@ -48,7 +48,7 @@
 
           <style>.select2-search__field {display:none}</style>
           <select name="race" id="race" ng-model="user.profile.race" multiple="multiple">
-            <option ng-repeat="race in ['American Indian', 'Asian / Pacific Islander', 'Black or African American', 'Hispanic', 'White / Caucasian', 'Prefer Not to Answer']">{{race}}</option>
+            <option ng-repeat="race in ['Asian / Pacific Islander', 'Black or African American', 'Hispanic', 'Native American', 'White / Caucasian', 'Prefer Not to Answer']">{{race}}</option>
           </select>
           <script>$("#race").select2();</script>
         </div>
@@ -125,12 +125,12 @@
                  ng-model="user.profile.question1">
         </div>
         <div class="field">
-          <label>Whats the best school in the world?</label>
+          <label>Who's the best school in the universe?</label>
           <select
             name="question2"
             ng-model="user.profile.question2">
             <option value="UMBC">UMBC</option>
-            <option value="UMBC2">That school that beat UVA in March Madness</option>
+            <option value="UMBC2">That school that upset #1 Seed UVA in March Madness</option>
           </select>
         </div>
         <div class="field">
@@ -153,7 +153,7 @@
           </p>
           <div class="ui checkbox">
             <input type="checkbox" id="adult" ng-model="user.profile.adult">
-            <label for="adult">I am 18 or older.</label>
+            <label for="adult">By checking here, I acknowledge that I understand that to attend HackUMBC, I must be 18 years of age or older.</label>
           </div>
         </div>
 

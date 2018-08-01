@@ -126,6 +126,7 @@ var confirmation = {
   // },
   // receipt: String,
 
+  volunteer: Boolean,
   notes: String,
 
   signatureCodeOfConduct: String,
