@@ -176,11 +176,11 @@ var status = {
   },
   confirmBy: {
     type: Number
-  },
-  reimbursementGiven: {
+  }
+  /*reimbursementGiven: {
     type: Boolean,
     default: false
-  }
+  }*/
 };
 
 // define the schema for our admin model
