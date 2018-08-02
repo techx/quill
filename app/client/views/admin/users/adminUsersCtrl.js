@@ -192,19 +192,22 @@ angular.module('reg')
             fields: [
               {
                 name: 'Name',
-                value: user.profile.name
+                value: user.profile.name || "N/A"
+              },{
+                name: 'Phone Number',
+                value: user.profile.phoneNumber || "N/A"
               },{
                 name: 'Birthdate',
-                value: formatTime(user.profile.birthdate)
+                value: formatTime(user.profile.birthdate) || "N/A"
               },{
                 name: 'Gender',
-                value: user.profile.gender
+                value: user.profile.gender || "N/A"
               },{
                 name: 'School',
-                value: user.profile.school
+                value: user.profile.school || "N/A"
               },{
                 name: 'Graduation Year',
-                value: user.profile.graduationYear
+                value: user.profile.graduationYear || "N/A"
               },{
                 name: 'Description',
                 value: user.profile.description || "N/A"
@@ -217,14 +220,11 @@ angular.module('reg')
             name: 'Confirmation',
             fields: [
               {
-                name: 'Phone Number',
-                value: user.confirmation.phoneNumber
-              },{
                 name: 'Dietary Restrictions',
-                value: user.confirmation.dietaryRestrictions.join(', ')
+                value: user.confirmation.dietaryRestrictions.join(', ') || "N/A"
               },{
                 name: 'Shirt Size',
-                value: user.confirmation.shirtSize
+                value: user.confirmation.shirtSize || "N/A"
               },{
                 name: 'Website',
                 value: user.confirmation.website || "N/A"
