@@ -113,7 +113,7 @@ function calculateStats(){
         newStats.declined += user.status.declined ? 1 : 0;
 
         // Count the number of people who need reimbursements
-        newStats.reimbursementTotal += user.confirmation.needsReimbursement ? 1 : 0;
+        //newStats.reimbursementTotal += user.confirmation.needsReimbursement ? 1 : 0;
 
         // Count the number of people who still need to be reimbursed
         newStats.reimbursementMissing += user.confirmation.needsReimbursement &&
@@ -131,6 +131,7 @@ function calculateStats(){
             declined: 0,
           };
         }
+        
         newStats.demo.schools[email].submitted += user.status.completedProfile ? 1 : 0;
         newStats.demo.schools[email].admitted += user.status.admitted ? 1 : 0;
         newStats.demo.schools[email].confirmed += user.status.confirmed ? 1 : 0;

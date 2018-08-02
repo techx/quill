@@ -9,6 +9,9 @@ angular.module('reg')
       $scope.pages = [];
       $scope.users = [];
 
+      $scope.sortType = 'name'; // set the default sort type
+      $scope.sortReverse  = false;
+
       // Semantic-UI moves modal content into a dimmer at the top level.
       // While this is usually nice, it means that with our routing will generate
       // multiple modals if you change state. Kill the top level dimmer node on initial load
@@ -178,10 +181,11 @@ angular.module('reg')
               },{
                 name: 'Email',
                 value: user.email
-              },{
-                name: 'Team',
-                value: user.teamCode || 'None'
-              }
+              },
+              // {
+              //   name: 'Team',
+              //   value: user.teamCode || 'None'
+              // }
             ]
           },{
             name: 'Profile',
@@ -189,6 +193,9 @@ angular.module('reg')
               {
                 name: 'Name',
                 value: user.profile.name
+              },{
+                name: 'Birthdate',
+                value: formatTime(user.profile.birthdate)
               },{
                 name: 'Gender',
                 value: user.profile.gender
@@ -200,10 +207,10 @@ angular.module('reg')
                 value: user.profile.graduationYear
               },{
                 name: 'Description',
-                value: user.profile.description
+                value: user.profile.description || "N/A"
               },{
                 name: 'Essay',
-                value: user.profile.essay
+                value: user.profile.essay || "N/A"
               }
             ]
           },{
@@ -219,21 +226,19 @@ angular.module('reg')
                 name: 'Shirt Size',
                 value: user.confirmation.shirtSize
               },{
-                name: 'Major',
-                value: user.confirmation.major
-              },{
-                name: 'Github',
-                value: user.confirmation.github
-              },{
                 name: 'Website',
-                value: user.confirmation.website
+                value: user.confirmation.website || "N/A"
               },{
                 name: 'Needs Hardware',
                 value: user.confirmation.wantsHardware,
                 type: 'boolean'
               },{
                 name: 'Hardware Requested',
-                value: user.confirmation.hardware
+                value: user.confirmation.hardware || "N/A"
+              },{
+                name: 'Interested in Volunteering',
+                value: user.confirmation.volunteer,
+                type: 'boolean'
               }
             ]
           }

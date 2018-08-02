@@ -22,6 +22,10 @@ var profile = {
     max: 100,
   },
 
+  birthdate: {
+    type: Date
+  },
+
   adult: {
     type: Boolean,
     required: true,
@@ -34,11 +38,17 @@ var profile = {
     max: 150,
   },
 
+  major: String,
+
   graduationYear: {
     type: String,
     enum: {
       values: graduationYears,
     }
+  },
+
+  race: {
+    type: [String],
   },
 
   description: {
@@ -68,6 +78,23 @@ var profile = {
     }
   },
 
+  // Bonus questions
+  question1: {
+    type: String,
+    max: 100
+  },
+
+  question2: {
+    type: String,
+    enum: {
+      values: ['UMBC', 'UMBC2']
+    }
+  },
+
+  question3: {
+    type: String,
+    max: 100
+  }
 };
 
 // Only after confirmed
@@ -84,7 +111,6 @@ var confirmation = {
   wantsHardware: Boolean,
   hardware: String,
 
-  major: String,
   website: String,
   resume: String,
 
@@ -100,6 +126,7 @@ var confirmation = {
   // },
   // receipt: String,
 
+  volunteer: Boolean,
   notes: String,
 
   signatureCodeOfConduct: String,
@@ -149,11 +176,11 @@ var status = {
   },
   confirmBy: {
     type: Number
-  },
-  reimbursementGiven: {
+  }
+  /*reimbursementGiven: {
     type: Boolean,
     default: false
-  }
+  }*/
 };
 
 // define the schema for our admin model

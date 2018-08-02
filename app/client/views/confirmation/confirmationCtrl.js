@@ -12,6 +12,8 @@ angular.module('reg')
       var user = currentUser.data;
       $scope.user = user;
 
+      $scope.isUMBCStudent = $scope.user.email.split('@')[1] == 'umbc.edu';
+
       $scope.pastConfirmation = Date.now() > user.status.confirmBy;
 
       $scope.formatTime = Utils.formatTime;
