@@ -1,58 +1,56 @@
-angular.module('reg')
-  .controller('TeamCtrl', [
-    '$scope',
-    'currentUser',
-    'settings',
-    'Utils',
-    'UserService',
-    'TEAM',
-    function($scope, currentUser, settings, Utils, UserService, TEAM){
-      // Get the current user's most recent data.
-      var Settings = settings.data;
+angular.module("reg").controller("TeamCtrl", [
+    "$scope",
+    "currentUser",
+    "settings",
+    "Utils",
+    "UserService",
+    "TEAM",
+    function ($scope, currentUser, settings, Utils, UserService, TEAM) {
+        // Get the current user's most recent data.
+        const Settings = settings.data;
 
-      $scope.regIsOpen = Utils.isRegOpen(Settings);
+        $scope.regIsOpen = Utils.isRegOpen(Settings);
 
-      $scope.user = currentUser.data;
+        $scope.user = currentUser.data;
 
-      $scope.TEAM = TEAM;
+        $scope.TEAM = TEAM;
 
-      function _populateTeammates() {
-        UserService
-          .getMyTeammates()
-          .success(function(users){
-            $scope.error = null;
-            $scope.teammates = users;
-          });
-      }
+        function _populateTeammates() {
+            UserService
+                .getMyTeammates()
+                .success((users) => {
+                    $scope.error = null;
+                    $scope.teammates = users;
+                });
+        }
 
-      if ($scope.user.teamCode){
-        _populateTeammates();
-      }
-
-      $scope.joinTeam = function(){
-        UserService
-          .joinOrCreateTeam($scope.code)
-          .success(function(user){
-            $scope.error = null;
-            $scope.user = user;
+        if ($scope.user.teamCode) {
             _populateTeammates();
-          })
-          .error(function(res){
-            $scope.error = res.message;
-          });
-      };
+        }
 
-      $scope.leaveTeam = function(){
-        UserService
-          .leaveTeam()
-          .success(function(user){
-            $scope.error = null;
-            $scope.user = user;
-            $scope.teammates = [];
-          })
-          .error(function(res){
-            $scope.error = res.data.message;
-          });
-      };
+        $scope.joinTeam = function () {
+            UserService
+                .joinOrCreateTeam($scope.code)
+                .success((user) => {
+                    $scope.error = null;
+                    $scope.user = user;
+                    _populateTeammates();
+                })
+                .error((res) => {
+                    $scope.error = res.message;
+                });
+        };
 
+        $scope.leaveTeam = function () {
+            UserService
+                .leaveTeam()
+                .success((user) => {
+                    $scope.error = null;
+                    $scope.user = user;
+                    $scope.teammates = [];
+                })
+                .error((res) => {
+                    $scope.error = res.data.message;
+                });
+        };
     }]);
