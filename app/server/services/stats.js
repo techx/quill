@@ -137,6 +137,13 @@ function calculateStats(){
         newStats.demo.schools[email].confirmed += user.status.confirmed ? 1 : 0;
         newStats.demo.schools[email].declined += user.status.declined ? 1 : 0;
 
+        // Remove the user from lower status counts if they are confirmed
+        newStats.demo.schools[email].submitted -= user.status.confirmed ? 1 : 0;
+        newStats.demo.schools[email].admitted -= user.status.confirmed ? 1 : 0;
+
+        // Remove the user from lower status count if they are admitted
+        newStats.demo.schools[email].submitted -= (user.status.admitted && !user.status.confirmed) ? 1 : 0;
+
         // Count graduation years
         if (user.profile.graduationYear){
           newStats.demo.year[user.profile.graduationYear] += 1;
