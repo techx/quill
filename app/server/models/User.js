@@ -32,6 +32,8 @@ var profile = {
     default: false,
   },
 
+  phoneNumber: String,
+
   school: {
     type: String,
     min: 1,
@@ -99,7 +101,6 @@ var profile = {
 
 // Only after confirmed
 var confirmation = {
-  phoneNumber: String,
   dietaryRestrictions: [String],
   shirtSize: {
     type: String,

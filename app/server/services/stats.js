@@ -17,6 +17,7 @@ function calculateStats(){
         O: 0,
         N: 0
       },
+      race: {},
       schools: {},
       year: {}
     },
@@ -116,8 +117,8 @@ function calculateStats(){
         //newStats.reimbursementTotal += user.confirmation.needsReimbursement ? 1 : 0;
 
         // Count the number of people who still need to be reimbursed
-        newStats.reimbursementMissing += user.confirmation.needsReimbursement &&
-          !user.status.reimbursementGiven ? 1 : 0;
+        // newStats.reimbursementMissing += user.confirmation.needsReimbursement &&
+        //   !user.status.reimbursementGiven ? 1 : 0;
 
         // Count the number of people who want hardware
         newStats.wantsHardware += user.confirmation.wantsHardware ? 1 : 0;
@@ -136,6 +137,13 @@ function calculateStats(){
         newStats.demo.schools[email].admitted += user.status.admitted ? 1 : 0;
         newStats.demo.schools[email].confirmed += user.status.confirmed ? 1 : 0;
         newStats.demo.schools[email].declined += user.status.declined ? 1 : 0;
+
+        // Remove the user from lower status counts if they are confirmed
+        newStats.demo.schools[email].submitted -= user.status.confirmed ? 1 : 0;
+        newStats.demo.schools[email].admitted -= user.status.confirmed ? 1 : 0;
+
+        // Remove the user from lower status count if they are admitted
+        newStats.demo.schools[email].submitted -= (user.status.admitted && !user.status.confirmed) ? 1 : 0;
 
         // Count graduation years
         if (user.profile.graduationYear){
@@ -165,6 +173,13 @@ function calculateStats(){
           });
         }
 
+        user.profile.race.forEach(function(ethnicity) {
+          if (!newStats.demo.race[ethnicity]) {
+            newStats.demo.race[ethnicity] = 0;
+          }
+          newStats.demo.race[ethnicity] += 1;
+        })
+
         // Count checked in
         newStats.checkedIn += user.status.checkedIn ? 1 : 0;
 
@@ -187,7 +202,8 @@ function calculateStats(){
           .forEach(function(key){
             schools.push({
               email: key,
-              count: newStats.demo.schools[key].submitted,
+              count: (newStats.demo.schools[key].submitted + newStats.demo.schools[key].admitted +    newStats.demo.schools[key].confirmed
+              ),
               stats: newStats.demo.schools[key]
             });
           });
