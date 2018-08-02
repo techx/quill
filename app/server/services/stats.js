@@ -17,6 +17,7 @@ function calculateStats(){
         O: 0,
         N: 0
       },
+      race: {},
       schools: {},
       year: {}
     },
@@ -116,8 +117,8 @@ function calculateStats(){
         //newStats.reimbursementTotal += user.confirmation.needsReimbursement ? 1 : 0;
 
         // Count the number of people who still need to be reimbursed
-        newStats.reimbursementMissing += user.confirmation.needsReimbursement &&
-          !user.status.reimbursementGiven ? 1 : 0;
+        // newStats.reimbursementMissing += user.confirmation.needsReimbursement &&
+        //   !user.status.reimbursementGiven ? 1 : 0;
 
         // Count the number of people who want hardware
         newStats.wantsHardware += user.confirmation.wantsHardware ? 1 : 0;
@@ -172,6 +173,13 @@ function calculateStats(){
           });
         }
 
+        user.profile.race.forEach(function(ethnicity) {
+          if (!newStats.demo.race[ethnicity]) {
+            newStats.demo.race[ethnicity] = 0;
+          }
+          newStats.demo.race[ethnicity] += 1;
+        })
+
         // Count checked in
         newStats.checkedIn += user.status.checkedIn ? 1 : 0;
 
@@ -194,7 +202,8 @@ function calculateStats(){
           .forEach(function(key){
             schools.push({
               email: key,
-              count: newStats.demo.schools[key].submitted,
+              count: (newStats.demo.schools[key].submitted + newStats.demo.schools[key].admitted +    newStats.demo.schools[key].confirmed
+              ),
               stats: newStats.demo.schools[key]
             });
           });

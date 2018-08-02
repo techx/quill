@@ -95,15 +95,6 @@ angular.module('reg')
                 }
               ]
             },
-            phone: {
-              identifier: 'phone',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please enter a phone number.'
-                }
-              ]
-            },
             signatureCodeOfConduct: {
               identifier: 'signatureCodeOfConduct',
               rules: [

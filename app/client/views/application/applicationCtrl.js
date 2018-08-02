@@ -136,6 +136,15 @@ angular.module('reg')
                 }
               ]
             },
+            phone: {
+              identifier: 'phone',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please enter a phone number.'
+                }
+              ]
+            },
             school: {
               identifier: 'school',
               rules: [
