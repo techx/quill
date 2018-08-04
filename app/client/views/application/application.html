@@ -152,8 +152,10 @@
                  ng-model="user.profile.question3">
         </div>
 
+        <div class="divided title">Legal</div>
+
         <div class="field"
-             ng-hide="isMitStudent">
+             ng-hide="isUMBCStudent">
           <p>
             Because of limitations imposed by {{ EVENT_INFO.SCHOOL }}, we must know if you are a
             non-{{ EVENT_INFO.SCHOOL }} minor (those under 18) for {{ EVENT_INFO.NAME }}. Checking the box below affirms that you are or will be 18 years or older by {{ EVENT_INFO.START_DATE }}.
@@ -168,6 +170,34 @@
             <label for="adult">By checking here, I acknowledge that I understand that to attend HackUMBC, I must be 18 years of age or older.</label>
           </div>
         </div>
+
+          <div class="field">
+            <label> MLH Code of Conduct </label>
+            <p>
+              I will at all times abide by and conform to the Major League Hacking Code of Conduct while at the event (<a href="http://mlh.io/code-of-conduct">http://mlh.io/code-of-conduct</a>)
+            </p>
+            <p>
+              By writing my name below, I affirm that I have read and will abide by the code of conduct detailed above.
+            </p>
+            <input type="text"
+                   name="signatureCodeOfConduct"
+                   placeholder="Your Full Legal Name"
+                   ng-model="user.profile.signatureCodeOfConduct">
+          </div>
+
+          <div class="field">
+            <label> MLH Member Event Confirmation </label>
+            <p>
+              We participate in Major League Hacking (MLH) as a MLH Member Event. You authorize us to share certain application/registration information for event administration, ranking, MLH administration, and occasional messages about hackathons in line with the <a href="https://mlh.io/privacy">MLH Privacy Policy</a>.
+            </p>
+            <p>
+              By writing my name below, I affirm that I understand that my data will be shared with MLH in accordance to their <a href="https://mlh.io/privacy">Privacy Policy</a>.
+            </p>
+            <input type="text"
+                   name="signatureLiabilityWaiver"
+                   placeholder="Your Full Legal Name"
+                   ng-model="user.profile.signatureMLHMemberEvent">
+          </div>
 
         <br>
 

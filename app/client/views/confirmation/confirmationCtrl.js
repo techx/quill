@@ -95,24 +95,6 @@ angular.module('reg')
                 }
               ]
             },
-            signatureCodeOfConduct: {
-              identifier: 'signatureCodeOfConduct',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please type your digital signature.'
-                }
-              ]
-            },
-            signatureMLHMemberEvent: {
-              identifier: 'signatureMLHMemberEvent',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please type your digital signature.'
-                }
-              ]
-            },
           }
         });
       }
