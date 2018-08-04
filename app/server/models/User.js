@@ -96,7 +96,10 @@ var profile = {
   question3: {
     type: String,
     max: 100
-  }
+  },
+
+  signatureCodeOfConduct: String,
+  signatureMLHMemberEvent: String
 };
 
 // Only after confirmed
@@ -128,10 +131,7 @@ var confirmation = {
   // receipt: String,
 
   volunteer: Boolean,
-  notes: String,
-
-  signatureCodeOfConduct: String,
-  signatureMLHMemberEvent: String
+  notes: String
 };
 
 var status = {
