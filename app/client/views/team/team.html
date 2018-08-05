@@ -31,8 +31,20 @@
             <input
               class="ui input"
               type="text"
-              placeholder="Choose your team name..."
-              ng-model="code">
+              placeholder="Choose your team name"
+              ng-model="code"
+              required>
+          </div>
+
+          <div class="field">
+            <input
+              class="ui input"
+              type="password"
+              placeholder="Choose a 4 digit team password"
+              ng-model="password"
+              minlength="4"
+              maxlength="4"
+              required>
           </div>
 
           <div class="field">
@@ -45,8 +57,7 @@
 
         </div>
 
-        <div
-          ng-show="user.teamCode">
+        <div ng-show="user.teamCode">
           <div class="form">
             <div class="title">
               Your Team Name:
@@ -67,19 +78,26 @@
             </div>
           </div>
 
-          <p
-            ng-repeat="user in teammates"
-            class="item">
+          <p ng-repeat="user in teammates" class="item">
             {{user.profile.name || 'Somebody (has not filled out their profile!)'}}
           </p>
 
-          <div
-            ng-show="regIsOpen">
+          <div class="ui divider"></div>
+
+          <div class="form">
+            <div class="title">
+              Your Team Password:
+            </div>
+          </div>
+          <br>
+          <div class="subheader">
+            {{user.teamPassword}}
+          </div>
+
+          <div ng-show="regIsOpen">
             <div class="ui divider"></div>
 
-            <button
-              class="ui fluid red button"
-              ng-click="leaveTeam()">Leave Team</button>
+            <button class="ui fluid red button" ng-click="leaveTeam()">Leave Team</button>
           </div>
         </div>
       </div>

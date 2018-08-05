@@ -11,6 +11,8 @@ angular.module("reg").controller("ApplicationCtrl", [
     "UserService",
     "EVENT_INFO",
     function ($scope, $rootScope, $state, $http, currentUser, Settings, Session, UserService, EVENT_INFO) {
+        const user = currentUser.data;
+
         $scope.EVENT_INFO = EVENT_INFO;
 
         // Set up the user
@@ -29,6 +31,27 @@ angular.module("reg").controller("ApplicationCtrl", [
         _setupForm();
 
         $scope.regIsClosed = Date.now() > Settings.data.timeClose;
+
+        // -------------------------------
+        // All this just for dietary restriction checkboxes
+
+        const dietaryRestrictions = {
+            Vegetarian: false,
+            Vegan: false,
+            Halal: false,
+            Kosher: false,
+            "Nut Allergy": false,
+        };
+
+        if (user.confirmation.dietaryRestrictions) {
+            user.confirmation.dietaryRestrictions.forEach((restriction) => {
+                if (restriction in dietaryRestrictions) {
+                    dietaryRestrictions[restriction] = true;
+                }
+            });
+        }
+
+        $scope.dietaryRestrictions = dietaryRestrictions;
 
         /**
          * TODO: JANK WARNING
@@ -66,18 +89,30 @@ angular.module("reg").controller("ApplicationCtrl", [
         }
 
         function _updateUser(e) {
-            UserService.updateProfile(Session.getUserId(), $scope.user.profile).success((data) => {
-                sweetAlert({
-                    title: "Awesome!",
-                    text: "Your application has been saved.",
-                    type: "success",
-                    confirmButtonColor: "#e76482",
-                }, () => {
-                    $state.go("app.dashboard");
-                });
-            }).error((res) => {
-                sweetAlert("Uh oh!", "Something went wrong.", "error");
+            const updateProfile = new Promise((resolve, reject) => {
+                UserService.updateProfile(Session.getUserId(), $scope.user.profile)
+                    .success(resolve)
+                    .error(reject);
             });
+            const updateConfirm = new Promise((resolve, reject) => {
+                UserService.updateConfirmation(Session.getUserId(), $scope.user.confirmation)
+                    .success(resolve)
+                    .error(reject);
+            });
+            Promise.all([updateProfile, updateConfirm])
+                .then((data) => {
+                    sweetAlert({
+                        title: "Awesome!",
+                        text: "Your application has been saved.",
+                        type: "success",
+                        confirmButtonColor: "#e76482",
+                    }, () => {
+                        $state.go("app.dashboard");
+                    });
+                })
+                .error((err) => {
+                    sweetAlert("Uh oh!", "Something went wrong.", "error");
+                });
         }
 
         function isMinor() {
@@ -148,6 +183,42 @@ angular.module("reg").controller("ApplicationCtrl", [
                             {
                                 type: "allowMinors",
                                 prompt: "You must be an adult or an Cornell student.",
+                            },
+                        ],
+                    },
+                    shirt: {
+                        identifier: "shirt",
+                        rules: [
+                            {
+                                type: "empty",
+                                prompt: "Please give us a shirt size!",
+                            },
+                        ],
+                    },
+                    phone: {
+                        identifier: "phone",
+                        rules: [
+                            {
+                                type: "empty",
+                                prompt: "Please enter a phone number.",
+                            },
+                        ],
+                    },
+                    privacyPolicy: {
+                        identifier: "privacyPolicy",
+                        rules: [
+                            {
+                                type: "empty",
+                                prompt: "Please type your digital signature.",
+                            },
+                        ],
+                    },
+                    signatureCodeOfConduct: {
+                        identifier: "signatureCodeOfConduct",
+                        rules: [
+                            {
+                                type: "empty",
+                                prompt: "Please type your digital signature.",
                             },
                         ],
                     },

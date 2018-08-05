@@ -204,10 +204,17 @@ module.exports = function (router) {
    * }
    */
     router.put("/users/:id/team", isOwnerOrAdmin, (req, res) => {
-        const code = req.body.code;
-        const id = req.params.id;
+        const {
+            body: {
+                code,
+                password,
+            },
+            params: {
+                id,
+            },
+        } = req;
 
-        UserController.createOrJoinTeam(id, code, defaultResponse(req, res));
+        UserController.createOrJoinTeam(id, code, password, defaultResponse(req, res));
     });
 
     /**

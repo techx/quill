@@ -53,6 +53,18 @@ const profile = {
             values: "M F O N".split(" "),
         },
     },
+
+    race: {
+        type: String,
+        enum: {
+            values: `American Indian or Alaskan Native,
+            Asian / Pacific Islander,
+            Black or African American,
+            Hispanic,
+            White / Caucasian,
+            Multiple ethnicity / Other`.split(","),
+        },
+    },
 };
 
 // Only after confirmed
@@ -87,8 +99,7 @@ const confirmation = {
 
     notes: String,
 
-    signatureLiability: String,
-    signaturePhotoRelease: String,
+    privacyPolicy: String,
     signatureCodeOfConduct: String,
 };
 
@@ -185,6 +196,11 @@ const schema = new mongoose.Schema({
         type: String,
         min: 0,
         max: 140,
+    },
+
+    teamPassword: {
+        type: Number,
+        required: true,
     },
 
     verified: {

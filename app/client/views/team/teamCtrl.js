@@ -30,7 +30,7 @@ angular.module("reg").controller("TeamCtrl", [
 
         $scope.joinTeam = function () {
             UserService
-                .joinOrCreateTeam($scope.code)
+                .joinOrCreateTeam($scope.code, $scope.password)
                 .success((user) => {
                     $scope.error = null;
                     $scope.user = user;

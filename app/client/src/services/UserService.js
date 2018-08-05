@@ -51,9 +51,9 @@ angular.module("reg").factory("UserService", [
             // ------------------------
             // Team
             // ------------------------
-            joinOrCreateTeam(code) {
+            joinOrCreateTeam(code, password) {
                 return $http.put(`${base + Session.getUserId()}/team`, {
-                    code,
+                    code, password,
                 });
             },
 

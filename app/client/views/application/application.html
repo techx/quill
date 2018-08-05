@@ -105,6 +105,285 @@
 
           <br>
 
+          <div class="field">
+            <label>What's your phone number? (required)</label>
+            <p>
+              We need this in case we need to get ahold of you!
+            </p>
+            <input type="tel"
+              name="phone"
+              ng-model="user.confirmation.phoneNumber"
+              placeholder="(123) - 555 - 1234"
+              required>
+          </div>
+
+          <div class="field">
+            <label>Dietary Restrictions</label>
+
+            <p>
+              If your restriction is not included here, please let us know in the additional notes at the bottom.
+            </p>
+            <p>
+              We'll make sure you get fed :)
+            </p>
+
+          </div>
+
+          <div class="inline fields">
+            <div class="field"
+              ng-repeat="(key, value) in dietaryRestrictions">
+
+              <div class="ui checkbox">
+                <input type="checkbox" ng-model="dietaryRestrictions[key]" />
+                <label>{{key}}</label>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Shirt Size (required)</label>
+            <p>
+              Let's get you some swag!
+            </p>
+            <select
+              name="shirt"
+              ng-model="user.confirmation.shirtSize"
+              required>
+              <option value="">Shirt Size</option>
+              <option value="XS">Unisex X-Small</option>
+              <option value="S">Unisex Small</option>
+              <option value="M">Unisex Medium</option>
+              <option value="L">Unisex Large</option>
+              <option value="XL">Unisex X-Large</option>
+              <option value="XXL">Unisex XX-Large</option>
+              <option value="WXS">Women's X-Small</option>
+              <option value="WS">Women's Small</option>
+              <option value="WM">Women's Medium</option>
+              <option value="WL">Women's Large</option>
+              <option value="WXL">Women's X-Large</option>
+              <option value="WXXL">Women's XX-Large</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>
+              Will you be needing hardware?
+            </label>
+            <div class="ui checkbox">
+              <input type="checkbox" ng-model="user.confirmation.wantsHardware">
+              <label>Yes, I would like to use hardware in my hack.</label>
+            </div>
+          </div>
+
+          <div
+            class="field"
+            ng-show="user.confirmation.wantsHardware">
+            <label>
+              What kind of hardware would be useful for you?
+            </label>
+            <p>
+              We will have a hardware checkout, and we'll try our best to provide things that would be useful to you - however, we can't guarantee everything. We will publish a list of available hardware closer to the day of the event.
+            </p>
+            <input type="text" ng-model="user.confirmation.hardware">
+          </div>
+
+          <br>
+          <br>
+
+          <div class="divided title"> Skills & Accomplishments </div>
+
+          <div class="field">
+            <label>What are you studying?</label>
+            <input type="text"
+              name="study"
+              placeholder="Computer Science, Information Science, Basket Weaving, etc."
+              ng-model="user.confirmation.major">
+          </div>
+
+          <div class="field">
+            <label>GitHub</label>
+            <input type="text"
+              name="github"
+              placeholder="https://github.com/foobar"
+              ng-model="user.confirmation.github">
+          </div>
+
+          <div class="field">
+            <label>Twitter</label>
+            <input type="text"
+              name="twitter"
+              placeholder="https://twitter.com/foobar"
+              ng-model="user.confirmation.twitter">
+          </div>
+
+          <br>
+          <br>
+
+          <br>
+          <br>
+
+          <div class="divided title">Travel</div>
+
+          <div class="field">
+            <p>
+              As a reminder, our reimbursement policy is as follows:
+            </p>
+            <ul>
+              <li> Up to $100 from within New York </li>
+              <li> Up to $200 from anywhere else in North America </li>
+              <li> Up to $500 from outside North America </li>
+            </ul>
+            <h2>
+              UPDATE WITH WHERE BUSES ARE GOING! LET SHEA KNOW!!!
+            </h2>
+          </div>
+
+          <div class="field">
+            <label>Will you be needing travel reimbursement?</label>
+            <div class="ui checkbox">
+              <input type="checkbox" ng-model="user.confirmation.needsReimbursement">
+              <label>I will be needing travel reimbursement.</label>
+            </div>
+          </div>
+
+          <div
+            ng-show="user.confirmation.needsReimbursement">
+
+            <div class="ui header">
+              Mailing Address
+            </div>
+
+            <p>
+              Travel reimbursement is processed and sent by check after the event. To expedite the reimbursement process and ensure that you receive your reimbursement as quickly as possible, make sure that your mailing address is accurate and you upload your receipts.
+            </p>
+
+            <div class="field">
+              <label>Full Name</label>
+              <input type="text"
+                name="name"
+                ng-model="user.confirmation.address.name">
+            </div>
+
+            <div class="field">
+              <label>Address Line 1 - Street address, P.O. box, company name, c/o</label>
+              <input
+                type="text"
+                name="addressLine1"
+                ng-model="user.confirmation.address.line1">
+            </div>
+
+            <div class="field">
+              <label>Address Line 2 - Apartment, suite, unit, building, floor, etc.</label>
+              <input
+                type="text"
+                name="addressLine2"
+                ng-model="user.confirmation.address.line2">
+            </div>
+
+            <div class="four fields">
+              <div class="field">
+                <label>City</label>
+                <input
+                  type="text"
+                  name="city"
+                  ng-model="user.confirmation.address.city">
+              </div>
+              <div class="field">
+                <label>State/Province/Region</label>
+                <input
+                  type="text"
+                  name="state"
+                  ng-model="user.confirmation.address.state">
+              </div>
+              <div class="field">
+                <label>ZIP</label>
+                <input
+                  type="text"
+                  name="zip"
+                  ng-model="user.confirmation.address.zip">
+              </div>
+              <div class="field">
+                <label>Country</label>
+                <input
+                  type="text"
+                  name="country"
+                  ng-model="user.confirmation.address.country">
+              </div>
+            </div>
+          </div>
+
+          <br>
+          <br>
+
+          <div class="divided title">Legal</div>
+
+          <div class="field">
+            <label>Privacy Policy</label>
+            <p>
+              <a
+                target="_blank"
+                href="https://mlh.io/privacy">
+                MLH Privacy Policy
+              </a>
+            </p>
+            <p>
+              I authorize you to share my application/registration information for event administration, 
+              ranking, MLH administration, pre- and post-event informational e-mails, and occasional 
+              messages about hackathons in-line with the MLH Privacy Policy. I further I agree to the 
+              terms of both the MLH Contest Terms and Conditions and the MLH Privacy Policy.
+            </p>
+            <p>
+              By writing my name below, I affirm that I have read and accepted the terms of the photo release above.
+            </p>
+            <input type="text"
+              name="privacyPolicy"
+              placeholder="Your Full Legal Name"
+              ng-model="user.confirmation.privacyPolicy"
+              required>
+          </div>
+
+          <div class="field">
+            <label>Code of Conduct</label>
+            <p>
+              <a
+                target="_blank"
+                href="http://mlh.io/code-of-conduct">
+                MLH Code of Conduct
+              </a>
+            </p>
+            <p>
+              It is extremely important to us that attendees follow a set of guidelines to make the 
+              event fun for everyone involved. Please read through and make sure you understand what 
+              we will be expecting of you.
+            </p>
+            <p>
+              By writing my name below, I affirm that I have read and will abide by the code of conduct 
+              detailed above.
+            </p>
+            <input type="text"
+              name="signatureCodeOfConduct"
+              placeholder="Your Full Legal Name"
+              ng-model="user.confirmation.signatureCodeOfConduct"
+              required>
+          </div>
+
+          <br>
+          <br>
+
+          <div class="divided title">everything else</div>
+
+          <div class="field">
+            <label>
+              Additional Notes
+            </label>
+            <p>
+              If there's anything else you need to let us know, tell us here!
+            </p>
+            <textarea
+              ng-model="user.confirmation.notes"></textarea>
+          </div>
+
           <div class="field" ng-hide="regIsClosed">
             <button type="submit"
               class="fluid ui purple button"

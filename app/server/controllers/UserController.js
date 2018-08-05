@@ -422,7 +422,7 @@ UserController.getTeammates = function (id, callback) {
  * @param  {String}   code     Code of the proposed team
  * @param  {Function} callback args(err, users)
  */
-UserController.createOrJoinTeam = function (id, code, callback) {
+UserController.createOrJoinTeam = function (id, code, password, callback) {
     if (!code) {
         return callback({
             message: "Please enter a team name.",
@@ -438,14 +438,30 @@ UserController.createOrJoinTeam = function (id, code, callback) {
     User.find({
         teamCode: code,
     })
-        .select("profile.name")
+        .select("profile.name teamPassword")
         .exec((err, users) => {
+            // If there are any users, check if the password of this team matches the existing password
+            if (users.length > 0 && parseInt(users[0].teamPassword) !== parseInt(password)) {
+                return callback({
+                    message: "Incorrect password specified to join this team.",
+                });
+            }
+
             // Check to see if this team is joinable (< team max size)
-            if (users.length >= maxTeamSize) {
+            if (users.length && users.length >= maxTeamSize) {
                 return callback({
                     message: "Team is full.",
                 });
             }
+
+            // Validate password type and length
+            if (isNaN(password) || password.length !== 4) {
+                return callback({
+                    message: "Please enter a valid four digit password.",
+                });
+            }
+
+            console.log(password, typeof password, "setting password");
 
             // Otherwise, we can add that person to the team.
             User.findOneAndUpdate({
@@ -454,6 +470,7 @@ UserController.createOrJoinTeam = function (id, code, callback) {
             }, {
                 $set: {
                     teamCode: code,
+                    teamPassword: password,
                 },
             }, {
                 new: true,
@@ -473,6 +490,7 @@ UserController.leaveTeam = function (id, callback) {
     }, {
         $set: {
             teamCode: null,
+            teamPassword: null,
         },
     }, {
         new: true,
