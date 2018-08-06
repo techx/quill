@@ -25,8 +25,26 @@ angular.module('reg')
           });
       }
 
+      function getTeams() {
+        UserService
+          .getAll()
+          .success(function(users) {
+            var teams = [];
+
+            users.forEach(function(user) {
+              if (user.teamCode) 
+                teams.push(user.teamCode);
+            });
+
+            $scope.teams = teams;
+          });
+      }
+
       if ($scope.user.teamCode){
         _populateTeammates();
+      }
+      else {
+       getTeams();
       }
 
       $scope.joinTeam = function(){
