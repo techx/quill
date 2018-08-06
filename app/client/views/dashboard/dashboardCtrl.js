@@ -26,6 +26,9 @@ angular.module('reg')
         if ($scope.DASHBOARD[msg].includes('[CONFIRM_DEADLINE]')) {
           $scope.DASHBOARD[msg] = $scope.DASHBOARD[msg].replace('[CONFIRM_DEADLINE]', Utils.formatTime(user.status.confirmBy));
         }
+        if ($scope.DASHBOARD[msg].includes('[EVENT_NAME]')) {
+          $scope.DASHBOARD[msg] = $scope.DASHBOARD[msg].replace('[EVENT_NAME]', EVENT_INFO.NAME);
+        }
       }
 
       // Is registration open?
@@ -33,6 +36,19 @@ angular.module('reg')
 
       // Is it past the user's confirmation time?
       var pastConfirmation = $scope.pastConfirmation = Utils.isAfter(user.status.confirmBy);
+
+      // Create checkin URL for user
+      angular.element(document).ready(function () {
+        var url = "http://register.hackumbc.org/admin/users/" + user._id;
+        
+        var typeNumber = 4;
+        var errorCorrectionLevel = 'L';
+        var qr = qrcode(typeNumber, errorCorrectionLevel);
+        qr.addData(url);
+        qr.make();
+
+        document.getElementById('qrcode').innerHTML = qr.createImgTag(6);
+      });
 
       $scope.dashState = function(status){
         var user = $scope.user;
@@ -74,7 +90,6 @@ angular.module('reg')
             sweetAlert('Your email has been sent.');
           });
       };
-
 
       // -----------------------------------------------------
       // Text!

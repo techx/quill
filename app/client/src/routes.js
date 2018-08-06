@@ -138,6 +138,11 @@ angular.module('reg')
           }
         }
       })
+      .state('app.bugReport', {
+        url: "/bug-report",
+        templateUrl: "views/bug-report/bug-report.html",
+        controller: 'BugReportCtrl'
+      })
       .state('app.admin.settings', {
         url: "/admin/settings",
         templateUrl: "views/admin/settings/settings.html",

@@ -18,12 +18,15 @@
           {{user.status.name}}
         </div>
 
+        <center ng-cloak ng-hide="!user.status.confirmed">
+          <div id="qrcode"></div>
+        </center>
+
         <div
           class="declined state"
           ng-if="dashState('admittedAndCannotConfirm')">
           Expired Admission
         </div>
-
 
         <div
           ng-if="showWaitlist"
@@ -112,7 +115,7 @@
             Edit your application
           </div>
 
-          <div
+<!--           <div
             class="ui pink button"
             ng-show="!user.teamCode"
             ui-sref="app.team">
@@ -124,7 +127,7 @@
             ng-show="user.teamCode"
             ui-sref="app.team">
             View your Team
-          </div>
+          </div> -->
 
         </div>
 
@@ -154,12 +157,12 @@
             View your application
           </div>
 
-          <div
+<!--           <div
             class="ui pink button"
             ng-show="user.teamCode"
             ui-sref="app.team">
             View your Team
-          </div>
+          </div> -->
         </div>
 
         <div
@@ -188,10 +191,10 @@
             Confirm your spot
           </div>
 
-          <div class="ui red button"
+<!--           <div class="ui red button"
                ng-click="declineAdmission()">
             Sorry, I can't make it
-          </div>
+          </div> -->
 
         </div>
 
@@ -233,10 +236,10 @@
             {{pastConfirmation ? 'View' : 'Edit'}} your confirmation information
           </div>
 
-          <div class="ui red button"
+<!--           <div class="ui red button"
                ng-click="declineAdmission()">
             Sorry, I can't make it
-          </div>
+          </div> -->
 
         </div>
 

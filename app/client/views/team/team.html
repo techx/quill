@@ -2,90 +2,101 @@
   <div class="divided title">
     Team
   </div>
-  <div class="ui stackable centered page grid">
-    <div class="column">
-      <div
-        class="ui error message"
-        ng-show="error">
-        {{error}}
-      </div>
 
-      <div class="ui segment">
-        <div
-          ng-show="!user.teamCode && !regIsOpen">
-          <p>
-            {{ TEAM.NO_TEAM_REG_CLOSED }}
-          </p>
-        </div>
-        <div
-          class="ui form"
-          ng-show="!user.teamCode && regIsOpen">
-
-          <div class="title">
-            Join or Create a Team
-          </div>
-
-          <br>
-
-          <div class="field">
-            <input
-              class="ui input"
-              type="text"
-              placeholder="Choose your team name..."
-              ng-model="code">
-          </div>
-
-          <div class="field">
-            <button
-              class="ui fluid pink button"
-              ng-click="joinTeam()">
-              Join or Create Team
-            </button>
-          </div>
-
-        </div>
-
-        <div
-          ng-show="user.teamCode">
-          <div class="form">
-            <div class="title">
-              Your Team Name:
-            </div>
-          </div>
-          <br>
-          <div class="subheader">
-            {{user.teamCode}}
-          </div>
-
-          <br />
-
-          <div class="ui divider"></div>
-
-          <div class="form">
-            <div class="title">
-              Your Team:
-            </div>
-          </div>
-
-          <p
-            ng-repeat="user in teammates"
-            class="item">
-            {{user.profile.name || 'Somebody (has not filled out their profile!)'}}
-          </p>
-
-          <div
-            ng-show="regIsOpen">
-            <div class="ui divider"></div>
-
-            <button
-              class="ui fluid red button"
-              ng-click="leaveTeam()">Leave Team</button>
-          </div>
-
-        </div>
-
-      </div>
-    </div>
+  <div
+    class="ui error message"
+    ng-show="error">
+      {{error}}
+  </div>
+     
+  <div ng-show="!user.teamCode && !regIsOpen">
+    <p>
+      {{ TEAM.NO_TEAM_REG_CLOSED }}
+    </p>
   </div>
 
+  <div class="ui grid" ng-show="!user.teamCode && regIsOpen">
+    <div class="eight wide column">
+      <div class="ui form">
+        <div class="title">
+          Join or Create a Team
+        </div>
+      
+        <br>
+      
+        <div class="field">
+          <input
+            class="ui input"
+            type="text"
+            placeholder="Choose your team name..."
+            ng-model="code">
+        </div>
+      
+        <div class="field">
+          <button
+            class="ui fluid pink button"
+            ng-click="joinTeam()">
+              Join or Create Team
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="eight wide column">
+
+      <div class="title">
+        Team List
+      </div>
+
+      <div class="ui relaxed divided list">
+        <div class="item" ng-repeat="team in teams">
+          <div class="content">
+            <a class="header">{{team}}</a>
+            <div class="description">Teammates</div>
+          </div>
+        </div>
+      </div>
+            
+    </div>
+
+  </div>
+
+  <div
+    ng-show="user.teamCode">
+
+    <div class="form">
+      <div class="title">
+        Your Team Name:
+      </div>
+    </div>
+
+    <br>
+    
+    <div class="subheader">
+      {{user.teamCode}}
+    </div>
+
+    <br>
+
+    <div class="ui divider"></div>
+
+    <div class="form">
+      <div class="title">
+        Your Team:
+      </div>
+    </div>
+
+    <p
+      ng-repeat="user in teammates"
+      class="item">
+        {{user.profile.name || 'Somebody (has not filled out their profile!)'}}
+    </p>
+
+    <div ng-show="regIsOpen">
+      <div class="ui divider"></div>
+        <button
+          class="ui fluid red button"
+          ng-click="leaveTeam()">Leave Team</button>
+    </div>
+  </div>
 </div>

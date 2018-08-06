@@ -4,6 +4,7 @@ var smtpTransport = require('nodemailer-smtp-transport');
 
 var templatesDir = path.join(__dirname, '../templates');
 var emailTemplates = require('email-templates');
+var qrcode = require('../../client/plugins/qrcode-generator/js/qrcode.js')
 
 var ROOT_URL = process.env.ROOT_URL;
 
@@ -175,12 +176,91 @@ controller.sendPasswordChangedEmail = function(email, callback){
   };
 
   /**
-   * Eamil-verify takes a few template values:
+   * Email-verify takes a few template values:
    * {
    *   verifyUrl: the url that the user must visit to verify their account
    * }
    */
   sendOne('email-basic', options, locals, function(err, info){
+    if (err){
+      console.log(err);
+    }
+    if (info){
+      console.log(info.message);
+    }
+    if (callback){
+      callback(err, info);
+    }
+  });
+
+};
+
+/**
+ * Send a admittance email.
+ * @param  {[type]}   email    [description]
+ * @param  {Function} callback [description]
+ */
+controller.sendAdmittanceEmail = function(email, callback){
+
+  var options = {
+    to: email,
+    subject: "["+HACKATHON_NAME+"] - You've been admitted!"
+  };
+
+  var locals = {
+    title: 'HackUMBC Admittance',
+    body: "Congratulations, you've been admitted! Login into http://register.hackumbc.org to confirm your spot.",
+  };
+
+  /**
+   * Email-verify takes a few template values:
+   * {
+   *   verifyUrl: the url that the user must visit to verify their account
+   * }
+   */
+  sendOne('email-basic', options, locals, function(err, info){
+    if (err){
+      console.log(err);
+    }
+    if (info){
+      console.log(info.message);
+    }
+    if (callback){
+      callback(err, info);
+    }
+  });
+
+};
+
+/**
+ * Send a confirmation email.
+ * @param  {[type]}   email    [description]
+ * @param  {Function} callback [description]
+ */
+controller.sendConfirmationEmail = function(user, callback){
+
+  var options = {
+    to: user.email,
+    subject: "["+HACKATHON_NAME+"] - You've confirmed your spot!"
+  };
+
+  // var url = "http://register.hackumbc.org/admin/users/" + user._id;
+
+  // var typeNumber = 4;
+  // var errorCorrectionLevel = 'L';
+  // var qr = qrcode(typeNumber, errorCorrectionLevel);
+  // qr.addData(url);
+  // qr.make();
+
+  // var qrCodeHTML = qr.createTableTag(4);
+
+  var locals = {
+    title: 'HackUMBC Confirmation Email',
+    body: "Congratulations, you've confirmed your spot! To check into the event, use your QR Code on the signup dashboard.",
+    // qrcode: qrCodeHTML
+  };
+
+  sendOne('email-confirmation', options, locals, function(err, info){
     if (err){
       console.log(err);
     }

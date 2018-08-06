@@ -13,6 +13,13 @@
         <fieldset ng-disabled="regIsClosed">
 
         <div class="field">
+          <label> Full Name </label>
+          <input type="text"
+                name="name"
+                ng-model="user.profile.name">
+        </div>
+
+        <div class="field">
           <label> Email </label>
           <input type="email"
                  name="email"
@@ -21,11 +28,23 @@
         </div>
 
         <div class="field">
-          <label> Full Name </label>
-          <input type="text"
-                 name="name"
-                 ng-model="user.profile.name">
+          <label> What's your phone number? (required) </label>
+          <p>
+            We need this in case we have to urgently contact you!
+          </p>
+          <input type="tel"
+                 name="phone"
+                 ng-model="user.profile.phoneNumber"
+                 placeholder="(123) - 555 - 1234"
+                 required>
         </div>
+
+        <div class="field">
+          <label> Date of Birth </label>
+          <input type="date"
+                  name="birthdate"
+                  ng-model="user.profile.birthdate">
+        </div>        
 
         <div class="field" ng-show="autoFilledSchool">
           <label> School </label>
@@ -35,26 +54,49 @@
                  ng-model="user.profile.school">
         </div>
 
+        <div class="field">
+          <label> Race/Ethnicity </label>
+          <small> Please select all that apply. </small>
+
+          <style>.select2-search__field {display:none}</style>
+          <select name="race" id="race" ng-model="user.profile.race" multiple="multiple">
+            <option ng-repeat="race in ['Asian / Pacific Islander', 'Black or African American', 'Hispanic', 'Native American', 'White / Caucasian', 'Prefer Not to Answer']">{{race}}</option>
+          </select>
+          <script>$("#race").select2();</script>
+        </div>
+
         <div class="field" ng-show="!autoFilledSchool">
           <label> School </label>
           <div id="school" class="ui search">
             <div class="ui input">
-              <input class="prompt" type="text" placeholder="School" name="school" ng-model="user.profile.school">                
+              <input class="prompt" type="text" placeholder="School" name="school" ng-model="user.profile.school">
             </div>
             <div class="results"></div>
           </div>
         </div>
 
         <div class="field">
-          <label>Graduation Year</label>
+          <label> Major </label> 
+          <input class="ui input"
+                 name="major"
+                 ng-model="user.profile.major">
+        </div>
+
+        <div class="field">
+          <label> Graduation Year </label>
           <select
             name="year"
+            id="gradYears"
             ng-model="user.profile.graduationYear">
             <option value="">Graduation Year</option>
-            <option value="2016">2016</option>
-            <option value="2017">2017</option>
-            <option value="2018">2018</option>
-            <option value="2019">2019</option>
+            <script>
+              var graduationYears = document.getElementById("gradYears");
+
+              var y = new Date().getFullYear();
+
+              for (var i = 0; i < 5; i++)
+                graduationYears.innerHTML += '<option value="'  + (y + i) + '">' + (y + i) + '</option>';
+            </script>
           </select>
         </div>
 
@@ -80,28 +122,82 @@
 
         <div class="field">
           <label>
-              What would you like to learn or get out of HackMIT? (optional)
+              What would you like to learn or get out of {{ EVENT_INFO.SHORT_NAME }}? (optional)
           </label>
           <textarea ng-model="user.profile.essay">
           </textarea>
         </div>
 
+        <!--Bonus Questions-->
+        <div class="divided title">Bonus Questions</div>
+        <div class="field">
+          <label>What is your favorite city in the world?</label>
+          <input type="text"
+                 name="name"
+                 ng-model="user.profile.question1">
+        </div>
+        <div class="field">
+          <label>Who's the best school in the universe?</label>
+          <select
+            name="question2"
+            ng-model="user.profile.question2">
+            <option value="UMBC">UMBC</option>
+            <option value="UMBC2">That school that upset #1 Seed UVA in March Madness</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>How are you doing today?</label>
+          <input type="text"
+                 name="name"
+                 ng-model="user.profile.question3">
+        </div>
+
+        <div class="divided title">Legal</div>
+
         <div class="field"
-             ng-hide="isMitStudent">
+             ng-hide="isUMBCStudent">
           <p>
-            Because of limitations imposed by MIT, we are not legally allowed to host
-            non-MIT minors (those under 18) for HackMIT 2015. Checking the box below affirms that you are or will be 18 years or older by September 19th, 2015.
+            Because of limitations imposed by {{ EVENT_INFO.SCHOOL }}, we must know if you are a
+            non-{{ EVENT_INFO.SCHOOL }} minor (those under 18) for {{ EVENT_INFO.NAME }}. Checking the box below affirms that you are or will be 18 years or older by {{ EVENT_INFO.START_DATE }}.
           </p>
           <p>
             <strong>
-            We will be checking ID. If you are a non-MIT minor, you will be turned away at the door.
+            We will be checking ID. If you are a non-{{ EVENT_INFO.SCHOOL }} minor, you will be turned away at the door.
             </strong>
           </p>
           <div class="ui checkbox">
             <input type="checkbox" id="adult" ng-model="user.profile.adult">
-            <label for="adult">I am 18 or older.</label>
+            <label for="adult">By checking here, I acknowledge that I understand that to attend HackUMBC, I must be 18 years of age or older.</label>
           </div>
         </div>
+
+          <div class="field">
+            <label> MLH Code of Conduct </label>
+            <p>
+              I will at all times abide by and conform to the Major League Hacking Code of Conduct while at the event (<a href="http://mlh.io/code-of-conduct">http://mlh.io/code-of-conduct</a>)
+            </p>
+            <p>
+              By writing my name below, I affirm that I have read and will abide by the code of conduct detailed above.
+            </p>
+            <input type="text"
+                   name="signatureCodeOfConduct"
+                   placeholder="Your Full Legal Name"
+                   ng-model="user.profile.signatureCodeOfConduct">
+          </div>
+
+          <div class="field">
+            <label> MLH Member Event Confirmation </label>
+            <p>
+              We participate in Major League Hacking (MLH) as a MLH Member Event. You authorize us to share certain application/registration information for event administration, ranking, MLH administration, and occasional messages about hackathons in line with the <a href="https://mlh.io/privacy">MLH Privacy Policy</a>.
+            </p>
+            <p>
+              By writing my name below, I affirm that I understand that my data will be shared with MLH in accordance to their <a href="https://mlh.io/privacy">Privacy Policy</a>.
+            </p>
+            <input type="text"
+                   name="signatureLiabilityWaiver"
+                   placeholder="Your Full Legal Name"
+                   ng-model="user.profile.signatureMLHMemberEvent">
+          </div>
 
         <br>
 
@@ -112,6 +208,8 @@
             Submit
           </button>
         </div>
+
+        <p>Found a bug? Let us know at <a href="mailto:team@hackumbc.org">team@hackumbc.org</a>.</p>
 
         </fieldset>
       </div>

@@ -13,7 +13,7 @@ var schema = new mongoose.Schema({
   status: String,
   timeOpen: {
     type: Number,
-    default: 0
+    default: Date.now()
   },
   timeClose: {
     type: Number,

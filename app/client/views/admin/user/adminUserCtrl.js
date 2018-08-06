@@ -29,7 +29,6 @@ angular.module('reg')
           });
       }
 
-
       $scope.updateProfile = function(){
         UserService
           .updateProfile($scope.selectedUser._id, $scope.selectedUser.profile)
@@ -40,6 +39,36 @@ angular.module('reg')
           .error(function(){
             swal("Oops, you forgot something.");
           });
+      };
+
+      $scope.toggleCheckIn = function($event, user, index) {
+        $event.stopPropagation();
+
+        if (!$scope.selectedUser.status.checkedIn){
+          swal({
+            title: "Whoa, wait a minute!",
+            text: "You are about to check in " + $scope.selectedUser.profile.name + "!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, check them in.",
+            closeOnConfirm: false
+            },
+            function(){
+              UserService
+                .checkIn($scope.selectedUser._id)
+                .success(function(user){
+                  swal("Accepted", $scope.selectedUser.profile.name + ' has been checked in.', "success");
+                });
+            }
+          );
+        } else {
+          UserService
+            .checkOut($scope.selectedUser._id)
+            .success(function(user){
+              swal("Accepted", $scope.selectedUser.profile.name + ' has been checked out.', "success");
+            });
+        }
       };
 
     }]);

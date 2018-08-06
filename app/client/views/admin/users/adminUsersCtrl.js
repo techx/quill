@@ -9,6 +9,9 @@ angular.module('reg')
       $scope.pages = [];
       $scope.users = [];
 
+      $scope.sortType = 'name'; // set the default sort type
+      $scope.sortReverse  = false;
+
       // Semantic-UI moves modal content into a dimmer at the top level.
       // While this is usually nice, it means that with our routing will generate
       // multiple modals if you change state. Kill the top level dimmer node on initial load
@@ -55,6 +58,9 @@ angular.module('reg')
 
       $scope.goUser = function($event, user){
         $event.stopPropagation();
+
+        $('.long.user.modal')
+          .modal('hide');
 
         $state.go('app.admin.user', {
           id: user._id
@@ -175,166 +181,98 @@ angular.module('reg')
               },{
                 name: 'Email',
                 value: user.email
-              },{
-                name: 'Team',
-                value: user.teamCode || 'None'
-              }
+              },
+              // {
+              //   name: 'Team',
+              //   value: user.teamCode || 'None'
+              // }
             ]
           },{
             name: 'Profile',
             fields: [
               {
                 name: 'Name',
-                value: user.profile.name
+                value: user.profile.name || "N/A"
+              },{
+                name: 'Phone Number',
+                value: user.profile.phoneNumber || "N/A"
+              },{
+                name: 'Birthdate',
+                value: formatTime(user.profile.birthdate) || "N/A"
               },{
                 name: 'Gender',
-                value: user.profile.gender
+                value: user.profile.gender || "N/A"
               },{
                 name: 'School',
-                value: user.profile.school
+                value: user.profile.school || "N/A"
               },{
                 name: 'Graduation Year',
-                value: user.profile.graduationYear
+                value: user.profile.graduationYear || "N/A"
               },{
                 name: 'Description',
-                value: user.profile.description
+                value: user.profile.description || "N/A"
               },{
                 name: 'Essay',
-                value: user.profile.essay
+                value: user.profile.essay || "N/A"
               }
             ]
           },{
             name: 'Confirmation',
             fields: [
               {
-                name: 'Phone Number',
-                value: user.confirmation.phoneNumber
-              },{
                 name: 'Dietary Restrictions',
-                value: user.confirmation.dietaryRestrictions.join(', ')
+                value: user.confirmation.dietaryRestrictions.join(', ') || "N/A"
               },{
                 name: 'Shirt Size',
-                value: user.confirmation.shirtSize
-              },{
-                name: 'Major',
-                value: user.confirmation.major
-              },{
-                name: 'Github',
-                value: user.confirmation.github
+                value: user.confirmation.shirtSize || "N/A"
               },{
                 name: 'Website',
-                value: user.confirmation.website
+                value: user.confirmation.website || "N/A"
               },{
                 name: 'Needs Hardware',
                 value: user.confirmation.wantsHardware,
                 type: 'boolean'
               },{
                 name: 'Hardware Requested',
-                value: user.confirmation.hardware
-              }
-            ]
-          },{
-            name: 'Hosting',
-            fields: [
-              {
-                name: 'Needs Hosting Friday',
-                value: user.confirmation.hostNeededFri,
+                value: user.confirmation.hardware || "N/A"
+              },{
+                name: 'Interested in Volunteering',
+                value: user.confirmation.volunteer,
                 type: 'boolean'
-              },{
-                name: 'Needs Hosting Saturday',
-                value: user.confirmation.hostNeededSat,
-                type: 'boolean'
-              },{
-                name: 'Gender Neutral',
-                value: user.confirmation.genderNeutral,
-                type: 'boolean'
-              },{
-                name: 'Cat Friendly',
-                value: user.confirmation.catFriendly,
-                type: 'boolean'
-              },{
-                name: 'Smoking Friendly',
-                value: user.confirmation.smokingFriendly,
-                type: 'boolean'
-              },{
-                name: 'Hosting Notes',
-                value: user.confirmation.hostNotes
-              }
-            ]
-          },{
-            name: 'Travel',
-            fields: [
-              {
-                name: 'Needs Reimbursement',
-                value: user.confirmation.needsReimbursement,
-                type: 'boolean'
-              },{
-                name: 'Received Reimbursement',
-                value: user.confirmation.needsReimbursement && user.status.reimbursementGiven
-              },{
-                name: 'Address',
-                value: user.confirmation.address ? [
-                  user.confirmation.address.line1,
-                  user.confirmation.address.line2,
-                  user.confirmation.address.city,
-                  ',',
-                  user.confirmation.address.state,
-                  user.confirmation.address.zip,
-                  ',',
-                  user.confirmation.address.country,
-                ].join(' ') : ''
-              },{
-                name: 'Additional Notes',
-                value: user.confirmation.notes
               }
             ]
           }
+          // ,{
+          //   name: 'Travel',
+          //   fields: [
+          //     {
+          //       name: 'Needs Reimbursement',
+          //       value: user.confirmation.needsReimbursement,
+          //       type: 'boolean'
+          //     },{
+          //       name: 'Received Reimbursement',
+          //       value: user.confirmation.needsReimbursement && user.status.reimbursementGiven
+          //     },{
+          //       name: 'Address',
+          //       value: user.confirmation.address ? [
+          //         user.confirmation.address.line1,
+          //         user.confirmation.address.line2,
+          //         user.confirmation.address.city,
+          //         ',',
+          //         user.confirmation.address.state,
+          //         user.confirmation.address.zip,
+          //         ',',
+          //         user.confirmation.address.country,
+          //       ].join(' ') : ''
+          //     },{
+          //       name: 'Additional Notes',
+          //       value: user.confirmation.notes
+          //     }
+          //   ]
+          // }
         ];
       }
 
       $scope.selectUser = selectUser;
 
     }]);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

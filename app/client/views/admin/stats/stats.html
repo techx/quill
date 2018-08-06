@@ -65,9 +65,9 @@
           <i class="green circle check icon"></i>
           <div class="content">
             <strong>
-              Confirmed (MIT)
+              Confirmed (UMBC)
             </strong> :
-            {{stats.confirmedMit}}
+            {{stats.confirmedUMBC}}
           </div>
         </div>
         <div class="item">
@@ -96,8 +96,8 @@
           <i class="child icon"></i>
           <div class="content">
             <strong>
-              Unisex shirt sizes:
-            </strong> :
+              Shirt Sizes:
+            </strong>
               XS ({{stats.shirtSizes['XS']}})
               S ({{stats.shirtSizes['S']}})
               M ({{stats.shirtSizes['M']}})
@@ -107,7 +107,7 @@
           </div>
         </div>
 
-        <div class="item">
+<!--         <div class="item">
           <i class="child icon"></i>
           <div class="content">
             <strong>
@@ -120,9 +120,9 @@
               XL ({{stats.shirtSizes['WXL']}})
               XXL ({{stats.shirtSizes['WXXL']}})
           </div>
-        </div>
+        </div> -->
 
-        <div class="ui divider"></div>
+        <!-- <div class="ui divider"></div>
 
         <div class="item">
           <i class="green money icon"></i>
@@ -140,7 +140,7 @@
               Still Need Reimbursement:
             </strong>{{stats.reimbursementMissing}}
           </div>
-        </div>
+        </div> -->
 
         <div class="ui divider"></div>
 
@@ -178,6 +178,7 @@
     <div class="ui header">
       Demographics
     </div>
+
     <div class="ui list">
       <div class="item">
         <i class="users icon"></i>
@@ -210,22 +211,21 @@
         </div>
       </div>
     </div>
+
+    <p>
+      <span ng-repeat="(key, val) in stats.demo.race"><b>{{key}}: </b>{{val}} ({{stats.demo.race[key] / stats.total * 100 | number:1}}%)<br></span>
+    </p>
+
     <div class="ui divider"></div>
-      <div class="ui list">
-        <div class="item">
-          <strong>Fresh:</strong> {{stats.demo.year['2019']}} ({{stats.demo.year['2019'] / stats.total * 100 | number: 1}}%)
+
+    <div class="ui list">
+        <div class="item" ng-repeat="(key, val) in stats.demo.year">
+          <strong >{{key}}: </strong>{{val}}
         </div>
-        <div class="item">
-          <strong>Soph:</strong> {{stats.demo.year['2018']}} ({{stats.demo.year['2018'] / stats.total * 100 | number: 1}}%)
-        </div>
-        <div class="item">
-         <strong>Junior:</strong> {{stats.demo.year['2017']}} ({{stats.demo.year['2017'] / stats.total * 100 | number: 1}}%)
-        </div>
-        <div class="item">
-          <strong>Senior:</strong> {{stats.demo.year['2016']}} ({{stats.demo.year['2016'] / stats.total * 100 | number: 1}}%)
-        </div>
-      </div>
+    </div>
+
     <div class="ui divider"></div>
+
     <div class="ui list">
       <div
         class="item"
@@ -233,6 +233,12 @@
         <div class="content">
           <strong>{{school.email}}</strong> : {{school.count}} ({{school.count / stats.total * 100 | number: 1}}%)
           <p>
+          <div class="ui blue mini label">
+            Registered: {{school.stats.registered}}
+          </div>
+          <div class="ui orange mini label">
+            Verified: {{school.stats.verified}}
+          </div>
           <div class="ui purple mini label">
             Submitted: {{school.stats.submitted}}
           </div>
@@ -242,9 +248,9 @@
           <div class="ui green mini label">
             Confirmed: {{school.stats.confirmed}}
           </div>
-          <div class="ui red mini label">
+          <!-- <div class="ui red mini label">
             Declined: {{school.stats.declined}}
-          </div>
+          </div> -->
           </p>
           <div class="ui divider"></div>
         </div>
