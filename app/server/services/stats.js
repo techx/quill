@@ -144,17 +144,10 @@ function calculateStats(){
         // If the user is nothing, they are "registered"
         newStats.demo.schools[email].registered += (!user.verified && ! user.status.completedProfile && !user.status.admitted && !user.status.confirmed) ? 1 : 0;
 
-        // Remove the user from lower status counts if they are confirmed
-        newStats.demo.schools[email].verified -= user.status.confirmed ? 1 : 0;
-        newStats.demo.schools[email].submitted -= user.status.confirmed ? 1 : 0;
+        // Remove the user from lower status counts
+        newStats.demo.schools[email].verified -= (user.status.completedProfile || user.status.submitted || user.status.admitted || user.status.confirmed) ? 1 : 0;
+        newStats.demo.schools[email].submitted -= (user.status.admitted || user.status.confirmed) ? 1 : 0;
         newStats.demo.schools[email].admitted -= user.status.confirmed ? 1 : 0;
-
-        // Remove the user from lower status count if they are admitted
-        newStats.demo.schools[email].verified -= (user.status.admitted && !user.status.confirmed) ? 1 : 0;
-        newStats.demo.schools[email].submitted -= (user.status.admitted && !user.status.confirmed) ? 1 : 0;
-
-        // Remove the user from lower status count if they are submitted
-        newStats.demo.schools[email].verified -= (user.status.submitted && !user.status.admitted && !user.status.confirmed) ? 1 : 0;
 
         // Count graduation years
         if (user.profile.graduationYear){
@@ -213,7 +206,7 @@ function calculateStats(){
           .forEach(function(key){
             schools.push({
               email: key,
-              count: (newStats.demo.schools[key].registered + newStats.demo.schools[key].verified + newStats.demo.schools[key].submitted + newStats.demo.schools[key].admitted +    newStats.demo.schools[key].confirmed
+              count: (newStats.demo.schools[key].registered + newStats.demo.schools[key].verified + newStats.demo.schools[key].submitted + newStats.demo.schools[key].admitted + newStats.demo.schools[key].confirmed
               ),
               stats: newStats.demo.schools[key]
             });
