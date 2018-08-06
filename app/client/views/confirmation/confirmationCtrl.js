@@ -12,6 +12,8 @@ angular.module('reg')
       var user = currentUser.data;
       $scope.user = user;
 
+      $scope.isUMBCStudent = $scope.user.email.split('@')[1] == 'umbc.edu';
+
       $scope.pastConfirmation = Date.now() > user.status.confirmBy;
 
       $scope.formatTime = Utils.formatTime;
@@ -28,13 +30,19 @@ angular.module('reg')
         'Vegan': false,
         'Halal': false,
         'Kosher': false,
-        'Nut Allergy': false
+        'Nut Allergy': false,
+        'Gluten-Free': false,
+        'Other': false
       };
 
       if (user.confirmation.dietaryRestrictions){
         user.confirmation.dietaryRestrictions.forEach(function(restriction){
           if (restriction in dietaryRestrictions){
             dietaryRestrictions[restriction] = true;
+          }
+          else {
+            dietaryRestrictions['Other'] = true;
+            $scope.otherDietaryRestrictions = restriction;
           }
         });
       }
@@ -49,7 +57,10 @@ angular.module('reg')
         var drs = [];
         Object.keys($scope.dietaryRestrictions).forEach(function(key){
           if ($scope.dietaryRestrictions[key]){
-            drs.push(key);
+            if (key == "Other")
+              drs.push($scope.otherDietaryRestrictions);
+            else
+              drs.push(key);
           }
         });
         confirmation.dietaryRestrictions = drs;
@@ -81,42 +92,6 @@ angular.module('reg')
                 {
                   type: 'empty',
                   prompt: 'Please give us a shirt size!'
-                }
-              ]
-            },
-            phone: {
-              identifier: 'phone',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please enter a phone number.'
-                }
-              ]
-            },
-            signatureLiability: {
-              identifier: 'signatureLiabilityWaiver',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please type your digital signature.'
-                }
-              ]
-            },
-            signaturePhotoRelease: {
-              identifier: 'signaturePhotoRelease',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please type your digital signature.'
-                }
-              ]
-            },
-            signatureCodeOfConduct: {
-              identifier: 'signatureCodeOfConduct',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please type your digital signature.'
                 }
               ]
             },

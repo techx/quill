@@ -33,6 +33,14 @@
       <div class="ui header">
         Users
       </div>
+
+      <p>
+        <b>Key: </b><br/>
+        V = Verified, S = Submitted, A = Accepted, C = Confirmed<br/>
+        <i class="add user icon"></i>: Accept User / Allow User to come to HackUMBC<br/>
+        <i class="flag icon"></i>: Check-in the User to HackUMBC
+      </p>
+
       <div class="ui long user modal">
         <i class="close icon"></i>
         <div class="header">
@@ -45,6 +53,10 @@
         <div class="content">
 
           <div>
+<!--             <P>
+              <button ng-click="goUser($event, selectedUser)">Goto Page</button>
+            </P> -->
+
             <div class="ui header">
               Status:
               <div
@@ -91,21 +103,35 @@
         class="ui celled selectable compact users table">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>E-mail address</th>
-            <th>School</th>
-            <th>Grad</th>
+            <th ng-click="sortType = 'name'; sortReverse = !sortReverse">
+              Name
+              <span ng-show="sortType == 'name' && !sortReverse">&#9660;</span>
+              <span ng-show="sortType == 'name' && sortReverse">&#9650;</span>
+            </th>
+            <th ng-click="sortType = 'email'; sortReverse = !sortReverse">
+              Email
+              <span ng-show="sortType == 'email' && !sortReverse">&#9660;</span>
+              <span ng-show="sortType == 'email' && sortReverse">&#9650;</span>
+            </th>
+            <th ng-click="sortType = 'school'; sortReverse = !sortReverse">
+              School
+              <span ng-show="sortType == 'school' && !sortReverse">&#9660;</span>
+              <span ng-show="sortType == 'school' && sortReverse">&#9650;</span>
+            </th>
+            <th ng-click="sortType = 'graduationYear'; sortReverse = !sortReverse">
+              Grad
+              <span ng-show="sortType == 'graduationYear' && !sortReverse">&#9660;</span>
+              <span ng-show="sortType == 'graduationYear' && sortReverse">&#9650;</span>
+            </th>
             <th>V/S/A/C</th>
-            <th>Host</th>
-            <th>$</th>
-            <th></th>
+            <!-- <th>$</th> -->
             <th></th>
           </tr>
         </thead>
         <tbody>
           <tr
             ng-click="selectUser(user)"
-            ng-repeat="user in users"
+            ng-repeat="user in users | orderBy:sortType:sortReverse"
             ng-class="rowClass(user)">
             <td>
               <strong>
@@ -173,28 +199,7 @@
 
             </td>
 
-            <!-- Host -->
-            <td
-              class="collapsing">
-
-              <span ng-if="user.status.confirmed">
-                <i
-                  ng-if="user.confirmation.hostNeededFri"
-                  class="home icon">
-                </i>
-                <i
-                  ng-if="!user.confirmation.hostNeededFri && user.confirmation.hostNeededSat"
-                  class="no icon">
-                </i>
-                <i
-                  ng-if="user.confirmation.hostNeededSat"
-                  class="home icon">
-                </i>
-              </span>
-
-            </td>
-
-            <td
+            <!-- <td
               class="collapsing">
               <span ng-if="user.status.confirmed">
                 <i
@@ -206,39 +211,36 @@
                   class="green money icon">
                 </i>
               </span>
-            </td>
+            </td> -->
 
-            <td
-              class="collapsing">
-              <button
-                ng-click="goUser($event, user)"
-                class="ui circular mini basic icon button">
-                <i class="linkify icon"></i>
-              </button>
-            </td>
+
 
             <td
               class="right aligned collapsing">
+              <div class="tooltip">
+                <button
+                  class="accept ui circular mini basic green icon button"
+                  ng-click="acceptUser($event, user, $index)">
+                  <i class="add user icon"></i>
+                </button>
+                <span class="tooltiptext">Accept</span>
+              </div>
+              <div class="tooltip">
+                <button
+                  ng-click="toggleCheckIn($event, user, $index)"
+                  class="ui circular mini basic green icon button">
 
-              <button
-                class="accept ui circular mini basic green icon button"
-                ng-click="acceptUser($event, user, $index)">
-                <i class="add user icon"></i>
-              </button>
+                  <i
+                    ng-if="!user.status.checkedIn"
+                    class="flag outline icon"></i>
 
-              <button
-                ng-click="toggleCheckIn($event, user, $index)"
-                class="ui circular mini basic green icon button">
+                  <i
+                    ng-if="user.status.checkedIn"
+                    class="green flag icon"></i>
 
-                <i
-                  ng-if="!user.status.checkedIn"
-                  class="flag outline icon"></i>
-
-                <i
-                  ng-if="user.status.checkedIn"
-                  class="green flag icon"></i>
-
-              </button>
+                </button>
+                <span class="tooltiptext">Check-in</span>
+              </div>
 
             </td>
           </tr>

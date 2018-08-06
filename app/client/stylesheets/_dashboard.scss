@@ -1,9 +1,6 @@
 #dashboard {
   .status {
     text-align: center;
-    p {
-      text-align: left;
-    }
     .button {
       margin-top: 12px;
     }
@@ -60,7 +57,7 @@
   .description {
     margin-bottom: 24px;
     .markdown {
-      text-align: left;
+      text-align: center;
       margin-bottom: 24px;
     }
   }
