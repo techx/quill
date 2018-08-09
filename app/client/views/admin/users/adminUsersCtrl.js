@@ -136,7 +136,7 @@ angular.module('reg')
         if (!user.admin){
           swal({
             title: "Whoa, wait a minute!",
-            text: "You are about make " + user.profile.name + " and admin!",
+            text: "You are about make " + user.profile.name + " an admin!",
             type: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
