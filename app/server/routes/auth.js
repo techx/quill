@@ -162,35 +162,39 @@ module.exports = function(router){
     */
     router.post('/sso',
       function(req, res, next){
-        // TODO(revalo): Check if url is a whitelisted url.
-
-        // Check if the redirectURL is valid and secure.
-        if (req.body.redirectURL == null ||
-            !req.body.redirectURL.startsWith('https:')) {
+        // Check if the redirectURL is valid.
+        if (req.body.redirectURL == null) {
           return res.status(400).send('Looks like your SSO app made an error.');
         }
 
-        UserController.loginWithToken(req.body.token, function(err, token, user){
-
-          if (err || !user){
-            return res.status(400).send(err);
+        // Check if redirectURL is whitelisted.
+        SettingsController.getWhitelistedDomains(function(err, domains) {
+          if (domains == null || domains.indexOf(req.body.redirectURL) < 0) {
+            return res.status(400).send('SSO Domain not Whitelisted.');
           }
-
-          // We can't single sign on unverified users.
-          if (!user.verified && !user.admin) res.status(400).send('You need to verify your email.');
-          
-          // At this point, user is valid. Let's construct and sign an SSO
-          // token to be used by the other app.
-          ssoToken = jwt.sign({
-            id: user._id
-          }, process.env.SSO_SECRET, {
-            expiresIn: 30
-          });
-
-          return res.json({
-            'redirectURL': req.body.redirectURL + '?token=' + ssoToken
-          });
   
+          UserController.loginWithToken(req.body.token, function(err, token, user){
+  
+            if (err || !user){
+              return res.status(400).send(err);
+            }
+  
+            // We can't single sign on unverified users.
+            if (!user.verified && !user.admin) res.status(400).send('You need to verify your email.');
+            
+            // At this point, user is valid. Let's construct and sign an SSO
+            // token to be used by the other app.
+            ssoToken = jwt.sign({
+              id: user._id
+            }, process.env.SSO_SECRET, {
+              expiresInSeconds: 30
+            });
+  
+            return res.json({
+              'redirectURL': req.body.redirectURL + '?token=' + ssoToken
+            });
+    
+          });
         });
     });
 

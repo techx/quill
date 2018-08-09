@@ -39,6 +39,21 @@ angular.module('reg')
           });
       };
 
+      SettingsService
+        .getWhitelistedDomains()
+        .success(function(domains){
+          $scope.domains = domains.join(", ");
+        });
+
+      $scope.updateDomains = function(){
+        SettingsService
+          .updateWhitelistedDomains($scope.domains.replace(/ /g, '').split(','))
+          .success(function(settings){
+            swal('Domain whitelist updated.');
+            $scope.domains = settings.whitelistedDomains.join(", ");
+          });
+      };
+
       // Registration Times -----------------------------
 
       $scope.formatDate = function(date){

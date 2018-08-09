@@ -389,4 +389,28 @@ module.exports = function(router) {
     SettingsController.updateWhitelistedEmails(emails, defaultResponse(req, res));
   });
 
+  /**
+   * Get the whitelisted domains.
+   *
+   * res: {
+   *   domains: [String]
+   * }
+   */
+  router.get('/settings/sso/whitelist', isAdmin, function(req, res){
+    SettingsController.getWhitelistedDomains(defaultResponse(req, res));
+  });
+
+  /**
+   * [ADMIN ONLY]
+   * {
+   *   domains: [String]
+   * }
+   * res: Settings
+   *
+   */
+  router.put('/settings/sso/whitelist', isAdmin, function(req, res){
+    var domains = req.body.domains;
+    SettingsController.updateWhitelistedDomains(domains, defaultResponse(req, res));
+  });
+
 };

@@ -37,6 +37,11 @@ var schema = new mongoose.Schema({
   confirmationText: {
     type: String
   },
+  whitelistedDomains: {
+    type: [String],
+    select: false,
+    default: [],
+  }
 });
 
 /**
@@ -67,6 +72,19 @@ schema.statics.getRegistrationTimes = function(callback){
         timeClose: settings.timeClose,
         timeConfirm: settings.timeConfirm
       });
+    });
+};
+
+/**
+ * Get the list of whitelisted domains.
+ * @param  {Function} callback args(err, domains)
+ */
+schema.statics.getWhitelistedDomains = function(callback){
+  this
+    .findOne({})
+    .select('whitelistedDomains')
+    .exec(function(err, settings){
+      return callback(err, settings.whitelistedDomains);
     });
 };
 

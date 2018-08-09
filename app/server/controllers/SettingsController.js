@@ -89,4 +89,28 @@ SettingsController.getPublicSettings = function(callback){
   Settings.getPublicSettings(callback);
 };
 
+/**
+ * Update the list of whitelisted domains for SSO.
+ * @param  {[type]}   domains   [description]
+ * @param  {Function} callback args(err, settings)
+ */
+SettingsController.updateWhitelistedDomains = function(domains, callback){
+  Settings
+    .findOneAndUpdate({},{
+      $set: {
+        whitelistedDomains: domains
+      }
+    }, {new: true})
+    .select('whitelistedDomains')
+    .exec(callback);
+};
+
+/**
+ * Get the list of whitelisted domains for SSO.
+ * @param  {Function} callback args(err, domains)
+ */
+SettingsController.getWhitelistedDomains = function(callback){
+  Settings.getWhitelistedDomains(callback);
+};
+
 module.exports = SettingsController;

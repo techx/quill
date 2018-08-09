@@ -107,6 +107,44 @@
   </div>
 </div>
 
+<!-- SSO Whitelist -->
+<div
+  ng-class="{'loading': loading}"
+  class="ui green segment">
+
+  <div class="ui header">
+    Whitelisted SSO URLs
+  </div>
+
+  <div class="ui warning message">
+    <div class="header">
+      Warning
+    </div>
+    Please only use HTTPS unless debugging.
+  </div>
+
+  <div class="ui form">
+   <div
+      class="ui label"
+      ng-repeat="domain in domains.replace(' ','').split(',')">
+      {{domain}}
+    </div>
+    <br>
+    <br>
+    <div class="field">
+      <textarea class="ui input" type="text" ng-model="domains">
+      </textarea>
+    </div>
+    <div class="field">
+      <div
+        class="ui green button"
+        ng-click="updateDomains()">
+        Update
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Waitlist Text Editor -->
 <div
   ng-class="{'loading': loading}"

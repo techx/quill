@@ -28,6 +28,14 @@ angular.module('reg')
           emails: emails
         });
       },
+      getWhitelistedDomains: function(){
+        return $http.get(base + 'sso/whitelist');
+      },
+      updateWhitelistedDomains: function(domains){
+        return $http.put(base + 'sso/whitelist', {
+          domains: domains
+        });
+      },
       updateWaitlistText: function(text){
         return $http.put(base + 'waitlist', {
           text: text
