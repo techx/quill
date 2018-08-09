@@ -156,4 +156,63 @@ module.exports = function(router){
       });
     });
 
+
+   /**
+    * Handle single-sign on logic.
+    */
+    router.post('/sso',
+      function(req, res, next){
+        // TODO(revalo): Check if url is a whitelisted url.
+
+        // Check if the redirectURL is valid and secure.
+        if (req.body.redirectURL == null ||
+            !req.body.redirectURL.startsWith('https:')) {
+          return res.status(400).send('Looks like your SSO app made an error.');
+        }
+
+        UserController.loginWithToken(req.body.token, function(err, token, user){
+
+          if (err || !user){
+            return res.status(400).send(err);
+          }
+
+          // We can't single sign on unverified users.
+          if (!user.verified && !user.admin) res.status(400).send('You need to verify your email.');
+          
+          // At this point, user is valid. Let's construct and sign an SSO
+          // token to be used by the other app.
+          ssoToken = jwt.sign({
+            id: user._id
+          }, process.env.SSO_SECRET, {
+            expiresIn: 30
+          });
+
+          return res.json({
+            'redirectURL': req.body.redirectURL + '?token=' + ssoToken
+          });
+  
+        });
+    });
+
+   /**
+    * Exchange an SSO token for user information.
+    */
+    router.post('/sso/exchange',
+      function(req, res, next){
+        var token = req.body.token;
+        var payload;
+
+        try {
+          payload = jwt.verify(token, process.env.SSO_SECRET);
+        } catch(err) {
+          return res.status(400).send('Invalid SSO Token.')
+        }
+
+        // SSO Token is valid, let's fetch user information.
+        var id = payload.id;
+        UserController.getById(id, function(err, data) {
+          res.json(data);
+        });
+    });
+
 };

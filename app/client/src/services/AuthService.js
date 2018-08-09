@@ -53,6 +53,23 @@ angular.module('reg')
           });
       };
 
+      authService.doSSO = function(token, redirectURL, callback){
+        return $http
+          .post('/auth/sso', {
+            token: token,
+            redirectURL: redirectURL,
+          })
+          .success(function(data){
+            callback(null, data.redirectURL)
+          })
+          .error(function(data, statusCode){
+            if (statusCode === 400){
+              Session.destroy();
+              callback(data, null);
+            }
+          });
+      };
+
       authService.logout = function(callback) {
         // Clear the session
         Session.destroy(callback);

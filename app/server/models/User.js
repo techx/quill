@@ -262,7 +262,7 @@ schema.methods.generateTempAuthToken = function(){
   return jwt.sign({
     id: this._id
   }, JWT_SECRET, {
-    expiresInMinutes: 60,
+    expiresIn: '60m',
   });
 };
 
