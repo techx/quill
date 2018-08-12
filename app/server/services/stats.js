@@ -144,7 +144,7 @@ function calculateStats() {
             }
 
             // Dietary restrictions
-            if (user.profile.dietaryRestrictions) {
+            if (user.profile.dietaryRestrictions instanceof Array) {
                 user.profile.dietaryRestrictions.forEach((restriction) => {
                     if (!newStats.dietaryRestrictions[restriction]) {
                         newStats.dietaryRestrictions[restriction] = 0;

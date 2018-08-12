@@ -43,7 +43,7 @@ angular.module("reg").controller("ApplicationCtrl", [
             "Nut Allergy": false,
         };
 
-        if (user.profile.dietaryRestrictions) {
+        if (user.profile.dietaryRestrictions instanceof Array) {
             user.profile.dietaryRestrictions.forEach((restriction) => {
                 if (restriction in dietaryRestrictions) {
                     dietaryRestrictions[restriction] = true;

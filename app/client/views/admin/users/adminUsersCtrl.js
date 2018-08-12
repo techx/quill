@@ -200,7 +200,9 @@ angular.module("reg").controller("AdminUsersCtrl", [
                             value: user.profile.phoneNumber,
                         }, {
                             name: "Dietary Restrictions",
-                            value: user.profile.dietaryRestrictions.join(", "),
+                            value: user.profile.dietaryRestrictions instanceof Array
+                                ? user.profile.dietaryRestrictions.join(", ")
+                                : "None",
                         }, {
                             name: "Shirt Size",
                             value: user.profile.shirtSize,
