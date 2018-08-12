@@ -139,6 +139,7 @@ angular.module("reg").controller("AdminUsersCtrl", [
 
         function selectUser(user) {
             $scope.selectedUser = user;
+            console.log(user);
             $scope.selectedUser.sections = generateSections(user);
             $(".long.user.modal").modal("show");
         }
@@ -196,29 +197,29 @@ angular.module("reg").controller("AdminUsersCtrl", [
                     fields: [
                         {
                             name: "Phone Number",
-                            value: user.confirmation.phoneNumber,
+                            value: user.profile.phoneNumber,
                         }, {
                             name: "Dietary Restrictions",
-                            value: user.confirmation.dietaryRestrictions.join(", "),
+                            value: user.profile.dietaryRestrictions.join(", "),
                         }, {
                             name: "Shirt Size",
-                            value: user.confirmation.shirtSize,
+                            value: user.profile.shirtSize,
                         }, {
                             name: "Major",
-                            value: user.confirmation.major,
+                            value: user.profile.major,
                         }, {
                             name: "GitHub",
-                            value: user.confirmation.github,
+                            value: user.profile.github,
                         }, {
                             name: "Website",
-                            value: user.confirmation.website,
+                            value: user.profile.website,
                         }, {
                             name: "Needs Hardware",
-                            value: user.confirmation.wantsHardware,
+                            value: user.profile.wantsHardware,
                             type: "boolean",
                         }, {
                             name: "Hardware Requested",
-                            value: user.confirmation.hardware,
+                            value: user.profile.hardware,
                         },
                     ],
                 }, {
@@ -226,26 +227,26 @@ angular.module("reg").controller("AdminUsersCtrl", [
                     fields: [
                         {
                             name: "Needs Reimbursement",
-                            value: user.confirmation.needsReimbursement,
+                            value: user.profile.needsReimbursement,
                             type: "boolean",
                         }, {
                             name: "Received Reimbursement",
-                            value: user.confirmation.needsReimbursement && user.status.reimbursementGiven,
+                            value: user.profile.needsReimbursement && user.status.reimbursementGiven,
                         }, {
                             name: "Address",
-                            value: user.confirmation.address ? [
-                                user.confirmation.address.line1,
-                                user.confirmation.address.line2,
-                                user.confirmation.address.city,
+                            value: user.profile.address ? [
+                                user.profile.address.line1,
+                                user.profile.address.line2,
+                                user.profile.address.city,
                                 ",",
-                                user.confirmation.address.state,
-                                user.confirmation.address.zip,
+                                user.profile.address.state,
+                                user.profile.address.zip,
                                 ",",
-                                user.confirmation.address.country,
+                                user.profile.address.country,
                             ].join(" ") : "",
                         }, {
                             name: "Additional Notes",
-                            value: user.confirmation.notes,
+                            value: user.profile.notes,
                         },
                     ],
                 },

@@ -19,7 +19,7 @@
             </p>
             <input type="tel"
               name="phone"
-              ng-model="user.confirmation.phoneNumber"
+              ng-model="user.profile.phoneNumber"
               placeholder="(123) - 555 - 1234"
               required>
           </div>
@@ -55,7 +55,7 @@
             </p>
             <select
               name="shirt"
-              ng-model="user.confirmation.shirtSize"
+              ng-model="user.profile.shirtSize"
               required>
               <option value="">Shirt Size</option>
               <option value="XS">Unisex X-Small</option>
@@ -78,21 +78,21 @@
               Will you be needing hardware?
            </label>
             <div class="ui checkbox">
-              <input type="checkbox" ng-model="user.confirmation.wantsHardware">
+              <input type="checkbox" ng-model="user.profile.wantsHardware">
               <label>Yes, I would like to use hardware in my hack.</label>
             </div>
           </div>
 
           <div
             class="field"
-            ng-show="user.confirmation.wantsHardware">
+            ng-show="user.profile.wantsHardware">
             <label>
               What kind of hardware would be useful for you?
            </label>
             <p>
               We will have a hardware checkout, and we'll try our best to provide things that would be useful to you - however, we can't guarantee everything. We will publish a list of available hardware closer to the day of the event.
             </p>
-            <input type="text" ng-model="user.confirmation.hardware">
+            <input type="text" ng-model="user.profile.hardware">
           </div>
 
           <br>
@@ -105,7 +105,7 @@
             <input type="text"
               name="study"
               placeholder="Computer Science, Information Science, Basket Weaving, etc."
-              ng-model="user.confirmation.major">
+              ng-model="user.profile.major">
           </div>
 
           <div class="field">
@@ -113,7 +113,7 @@
             <input type="text"
                    name="github"
                    placeholder="https://github.com/foobar"
-                   ng-model="user.confirmation.github">
+                   ng-model="user.profile.github">
           </div>
 
           <div class="field">
@@ -121,7 +121,7 @@
             <input type="text"
               name="twitter"
               placeholder="https://twitter.com/foobar"
-              ng-model="user.confirmation.twitter">
+              ng-model="user.profile.twitter">
           </div>
 
           <br>
@@ -149,13 +149,13 @@
           <div class="field">
             <label>Will you be needing travel reimbursement?</label>
             <div class="ui checkbox">
-              <input type="checkbox" ng-model="user.confirmation.needsReimbursement">
+              <input type="checkbox" ng-model="user.profile.needsReimbursement">
               <label>I will be needing travel reimbursement.</label>
             </div>
           </div>
 
           <div
-            ng-show="user.confirmation.needsReimbursement">
+            ng-show="user.profile.needsReimbursement">
 
             <div class="ui header">
               Mailing Address
@@ -169,7 +169,7 @@
               <label>Full Name</label>
               <input type="text"
                 name="name"
-                ng-model="user.confirmation.address.name">
+                ng-model="user.profile.address.name">
             </div>
 
             <div class="field">
@@ -177,7 +177,7 @@
               <input
                 type="text"
                 name="addressLine1"
-                ng-model="user.confirmation.address.line1">
+                ng-model="user.profile.address.line1">
             </div>
 
             <div class="field">
@@ -185,7 +185,7 @@
               <input
                 type="text"
                 name="addressLine2"
-                ng-model="user.confirmation.address.line2">
+                ng-model="user.profile.address.line2">
             </div>
 
             <div class="four fields">
@@ -194,28 +194,28 @@
                 <input
                   type="text"
                   name="city"
-                  ng-model="user.confirmation.address.city">
+                  ng-model="user.profile.address.city">
               </div>
               <div class="field">
                 <label>State/Province/Region</label>
                 <input
                   type="text"
                   name="state"
-                  ng-model="user.confirmation.address.state">
+                  ng-model="user.profile.address.state">
               </div>
               <div class="field">
                 <label>ZIP</label>
                 <input
                   type="text"
                   name="zip"
-                  ng-model="user.confirmation.address.zip">
+                  ng-model="user.profile.address.zip">
               </div>
               <div class="field">
                 <label>Country</label>
                 <input
                   type="text"
                   name="country"
-                  ng-model="user.confirmation.address.country">
+                  ng-model="user.profile.address.country">
               </div>
             </div>
           </div>
@@ -249,7 +249,7 @@
             <input type="text"
               name="signatureLiabilityWaiver"
               placeholder="Your Full Legal Name"
-              ng-model="user.confirmation.signatureLiability">
+              ng-model="user.profile.signatureLiability">
           </div>
 
           <div class="field">
@@ -270,7 +270,7 @@
             <input type="text"
               name="signaturePhotoRelease"
               placeholder="Your Full Legal Name"
-              ng-model="user.confirmation.signaturePhotoRelease">
+              ng-model="user.profile.signaturePhotoRelease">
           </div>
 
           <div class="field">
@@ -291,7 +291,7 @@
             <input type="text"
                    name="signatureCodeOfConduct"
                    placeholder="Your Full Legal Name"
-                   ng-model="user.confirmation.signatureCodeOfConduct">
+                   ng-model="user.profile.signatureCodeOfConduct">
           </div>
 
           <br>
@@ -307,7 +307,7 @@
               If there's anything else you need to let us know, tell us here!
             </p>
             <textarea
-              ng-model="user.confirmation.notes"></textarea>
+              ng-model="user.profile.notes"></textarea>
           </div>
 
           <div class="field" ng-hide="regIsClosed">
