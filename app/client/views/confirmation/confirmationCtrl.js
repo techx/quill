@@ -31,8 +31,8 @@ angular.module("reg").controller("ConfirmationCtrl", [
             "Nut Allergy": false,
         };
 
-        if (user.confirmation.dietaryRestrictions) {
-            user.confirmation.dietaryRestrictions.forEach((restriction) => {
+        if (user.profile.dietaryRestrictions instanceof Array) {
+            user.profile.dietaryRestrictions.forEach((restriction) => {
                 if (restriction in dietaryRestrictions) {
                     dietaryRestrictions[restriction] = true;
                 }
@@ -44,7 +44,7 @@ angular.module("reg").controller("ConfirmationCtrl", [
         // -------------------------------
 
         function _updateUser(e) {
-            const confirmation = $scope.user.confirmation;
+            const confirmation = $scope.user.profile;
             // Get the dietary restrictions as an array
             const drs = [];
             Object.keys($scope.dietaryRestrictions).forEach((key) => {
@@ -54,7 +54,7 @@ angular.module("reg").controller("ConfirmationCtrl", [
             });
             confirmation.dietaryRestrictions = drs;
 
-            UserService.updateConfirmation(user._id, confirmation).success((data) => {
+            UserService.updateConfirmation(user._id, confirmation, true).success((data) => {
                 sweetAlert({
                     title: "Woo!",
                     text: "You're confirmed!",

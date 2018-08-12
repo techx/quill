@@ -38,9 +38,10 @@ angular.module("reg").factory("UserService", [
                 });
             },
 
-            updateConfirmation(id, confirmation) {
+            updateConfirmation(id, confirmation, confirmUser) {
                 return $http.put(`${base + id}/confirm`, {
                     confirmation,
+                    confirmUser,
                 });
             },
 

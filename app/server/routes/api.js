@@ -170,10 +170,13 @@ module.exports = function (router) {
    * PUT - Update a specific user's confirmation information.
    */
     router.put("/users/:id/confirm", isOwnerOrAdmin, (req, res) => {
-        const confirmation = req.body.confirmation;
+        const {
+            confirmation,
+            confirmUser,
+        } = req.body;
         const id = req.params.id;
 
-        UserController.updateConfirmationById(id, confirmation, defaultResponse(req, res));
+        UserController.updateConfirmationById(id, confirmation, confirmUser, defaultResponse(req, res));
     });
 
     /**

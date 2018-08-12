@@ -65,10 +65,7 @@ const profile = {
             Multiple ethnicity / Other`.split(","),
         },
     },
-};
 
-// Only after confirmed
-const confirmation = {
     phoneNumber: String,
     dietaryRestrictions: [String],
     shirtSize: {
@@ -224,13 +221,6 @@ const schema = new mongoose.Schema({
    * Profile validation will exist here.
    */
     profile,
-
-    /**
-   * Confirmation information
-   *
-   * Extension of the user model, but can only be edited after acceptance.
-   */
-    confirmation,
 
     status,
 

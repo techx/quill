@@ -308,7 +308,7 @@ UserController.updateProfileById = function (id, profile, callback) {
  * @param  {Object}   confirmation  Confirmation object
  * @param  {Function} callback      Callback with args (err, user)
  */
-UserController.updateConfirmationById = function (id, confirmation, callback) {
+UserController.updateConfirmationById = function (id, confirmation, confirmUser, callback) {
     User.findById(id, (err, user) => {
         if (err || !user) {
             return callback(err);
@@ -333,7 +333,7 @@ UserController.updateConfirmationById = function (id, confirmation, callback) {
             $set: {
                 lastUpdated: Date.now(),
                 confirmation,
-                "status.confirmed": true,
+                "status.confirmed": confirmUser,
             },
         }, {
             new: true,

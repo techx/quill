@@ -14,6 +14,8 @@ angular.module("reg").controller("AdminUserCtrl", [
         // Populate the school dropdown
         populateSchools();
 
+        console.log($scope.selectedUser);
+
         /**
              * TODO: JANK WARNING
              */

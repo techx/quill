@@ -113,10 +113,11 @@ div.row {
             .top-text {
                 font-size: 30px;
                 font-weight: bold;
+                letter-spacing: 2px;
 
                 p {
                     margin: 0;
-                    padding: 5px 0;
+                    padding: 0;
                 }
             }
         }
@@ -221,18 +222,35 @@ div.row {
 
 .row#sponsors {
     .row-content {
+        align-items: center;
         display: flex;
         flex-flow: row wrap;
         justify-content: space-around;
 
-        a {
-            flex: 1 1 33.33%;
-            
-            img {
+        &.sponsor-ultra {
+            a img {
+                max-height: 500px;
+                max-width: 500px;
+            }
+        }
+
+        &.sponsor-mega {
+            a img {
                 max-height: 300px;
                 max-width: 300px;
             }
         }
+
+        &.sponsor-supporter {
+            a img {
+                max-height: 150px;
+                max-width: 150px;
+            }
+        }
+    }
+    
+    .row-content + .row-content {
+        padding-top: 20px;
     }
 
     .sponsor-cta {

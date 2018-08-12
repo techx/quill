@@ -43,8 +43,8 @@ angular.module("reg").controller("ApplicationCtrl", [
             "Nut Allergy": false,
         };
 
-        if (user.confirmation.dietaryRestrictions) {
-            user.confirmation.dietaryRestrictions.forEach((restriction) => {
+        if (user.profile.dietaryRestrictions instanceof Array) {
+            user.profile.dietaryRestrictions.forEach((restriction) => {
                 if (restriction in dietaryRestrictions) {
                     dietaryRestrictions[restriction] = true;
                 }
@@ -73,7 +73,7 @@ angular.module("reg").controller("ApplicationCtrl", [
 
                 const content = [];
 
-                for (i = 0; i < $scope.schools.length; i++) {
+                for (let i = 0; i < $scope.schools.length; i++) {
                     $scope.schools[i] = $scope.schools[i].trim();
                     content.push({ title: $scope.schools[i] });
                 }
@@ -89,18 +89,8 @@ angular.module("reg").controller("ApplicationCtrl", [
         }
 
         function _updateUser(e) {
-            const updateProfile = new Promise((resolve, reject) => {
-                UserService.updateProfile(Session.getUserId(), $scope.user.profile)
-                    .success(resolve)
-                    .error(reject);
-            });
-            const updateConfirm = new Promise((resolve, reject) => {
-                UserService.updateConfirmation(Session.getUserId(), $scope.user.confirmation)
-                    .success(resolve)
-                    .error(reject);
-            });
-            Promise.all([updateProfile, updateConfirm])
-                .then((data) => {
+            UserService.updateProfile(Session.getUserId(), $scope.user.profile)
+                .success(() => {
                     sweetAlert({
                         title: "Awesome!",
                         text: "Your application has been saved.",
@@ -110,7 +100,7 @@ angular.module("reg").controller("ApplicationCtrl", [
                         $state.go("app.dashboard");
                     });
                 })
-                .error((err) => {
+                .error(() => {
                     sweetAlert("Uh oh!", "Something went wrong.", "error");
                 });
         }

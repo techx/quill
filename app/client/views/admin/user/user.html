@@ -194,13 +194,13 @@
 
       <div class="field">
         <label>Phone</label>
-        <input type="tel" ng-model="selectedUser.confirmation.phoneNumber" />
+        <input type="tel" ng-model="selecteduser.profile.phoneNumber" />
       </div>
 
       <div class="field">
         <label>Dietary Restrictions</label>
         <input
-          type="text" ng-model="selectedUser.confirmation.dietaryRestrictions" />
+          type="text" ng-model="selecteduser.profile.dietaryRestrictions" />
       </div>
 
       <div class="field">
@@ -230,7 +230,7 @@
           Needs Hardware
        </label>
         <div class="ui checkbox">
-          <input type="checkbox" ng-model="selectedUser.confirmation.wantsHardware">
+          <input type="checkbox" ng-model="selecteduser.profile.wantsHardware">
           <label>Yup, I need hardware</label>
         </div>
       </div>
@@ -239,7 +239,7 @@
         <label>
           Hardware
         </label>
-        <input type="text" ng-model="selectedUser.confirmation.hardware">
+        <input type="text" ng-model="selecteduser.profile.hardware">
       </div>
 
       <div class="ui divider"></div>
@@ -251,11 +251,11 @@
       <div class="field">
         <strong> Needs Reimbursement</strong>
         <i
-          ng-if="selectedUser.confirmation.needsReimbursement"
+          ng-if="selecteduser.profile.needsReimbursement"
           class="green check circle icon">
         </i>
         <i
-          ng-if="!selectedUser.confirmation.needsReimbursement"
+          ng-if="!selecteduser.profile.needsReimbursement"
           class="red remove circle icon">
         </i>
       </div>
@@ -264,7 +264,7 @@
         <label>Full Name</label>
         <input type="text"
           name="name"
-          ng-model="selectedUser.confirmation.address.name">
+          ng-model="selecteduser.profile.address.name">
       </div>
 
       <div class="field">
@@ -272,7 +272,7 @@
         <input
           type="text"
           name="addressLine1"
-          ng-model="selectedUser.confirmation.address.line1">
+          ng-model="selecteduser.profile.address.line1">
       </div>
 
       <div class="field">
@@ -280,7 +280,7 @@
         <input
           type="text"
           name="addressLine2"
-          ng-model="selectedUser.confirmation.address.line2">
+          ng-model="selecteduser.profile.address.line2">
       </div>
 
       <div class="four fields">
@@ -289,39 +289,39 @@
           <input
             type="text"
             name="city"
-            ng-model="selectedUser.confirmation.address.city">
+            ng-model="selecteduser.profile.address.city">
         </div>
         <div class="field">
           <label>State/Province/Region</label>
           <input
             type="text"
             name="state"
-            ng-model="selectedUser.confirmation.address.state">
+            ng-model="selecteduser.profile.address.state">
         </div>
         <div class="field">
           <label>ZIP</label>
           <input
             type="text"
             name="zip"
-            ng-model="selectedUser.confirmation.address.zip">
+            ng-model="selecteduser.profile.address.zip">
         </div>
         <div class="field">
           <label>Country</label>
           <input
             type="text"
             name="country"
-            ng-model="selectedUser.confirmation.address.country">
+            ng-model="selecteduser.profile.address.country">
         </div>
       </div>
 
       <div class="field">
         <label>Receipt</label>
-        <input type="url" ng-model="selectedUser.confirmation.receipt" />
+        <input type="url" ng-model="selecteduser.profile.receipt" />
       </div>
 
       <div class="field">
         <label>Additional Notes</label>
-        <textarea ng-model="selectedUser.confirmation.notes"></textarea>
+        <textarea ng-model="selecteduser.profile.notes"></textarea>
       </div>
 
     </fieldset>
