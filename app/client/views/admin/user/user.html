@@ -140,14 +140,14 @@
 
       <div class="field">
         <label>Resume</label>
-        <input type="url" ng-model="selectedUser.profile.resume" />
+        <input type="url" ng-model="selectedUser.profile.resume" required />
       </div>
 
       <div class="field">
         <label>
-          What would you like to learn or get out of {{ EVENT_INFO.NAME }}? (optional)
+          What would you like to learn or get out of {{ EVENT_INFO.NAME }}?
         </label>
-        <textarea ng-model="selectedUser.profile.essay">
+        <textarea ng-model="selectedUser.profile.essay" required>
         </textarea>
       </div>
 

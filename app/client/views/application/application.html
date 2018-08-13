@@ -78,9 +78,9 @@
 
           <div class="field">
             <label>
-              What would you like to learn or get out of {{ EVENT_INFO.NAME }}? (optional)
+              What would you like to learn or get out of {{ EVENT_INFO.NAME }}?
             </label>
-            <textarea ng-model="user.profile.essay">
+            <textarea ng-model="user.profile.essay" required>
             </textarea>
           </div>
 
@@ -226,17 +226,18 @@
           <div class="divided title">Travel</div>
 
           <div class="field">
-            <p>
-              As a reminder, our reimbursement policy is as follows:
-            </p>
+            <p>As a reminder, our reimbursement policy is as follows:</p>
             <ul>
               <li> Up to $100 from within New York </li>
               <li> Up to $200 from anywhere else in North America </li>
               <li> Up to $500 from outside North America </li>
             </ul>
-            <h2>
-              UPDATE WITH WHERE BUSES ARE GOING! LET SHEA KNOW!!!
-            </h2>
+            <p>We will have buses travelling to the following locations:</p>
+            <ul>
+              <li>UIUC/Purdue (Midwest Route)</li>
+              <li>BU/RPI (Boston Route)</li>
+              <li>Buffalo/RIT (Upstate Route) </li>
+            </ul>
           </div>
 
           <div class="field">
