@@ -435,6 +435,13 @@ UserController.createOrJoinTeam = function (id, code, password, callback) {
         });
     }
 
+    // Validate password type and length
+    if (isNaN(password) || password.length !== 4) {
+        return callback({
+            message: "Please enter a valid four digit password.",
+        });
+    }
+
     User.find({
         teamCode: code,
     })
@@ -453,15 +460,6 @@ UserController.createOrJoinTeam = function (id, code, password, callback) {
                     message: "Team is full.",
                 });
             }
-
-            // Validate password type and length
-            if (isNaN(password) || password.length !== 4) {
-                return callback({
-                    message: "Please enter a valid four digit password.",
-                });
-            }
-
-            console.log(password, typeof password, "setting password");
 
             // Otherwise, we can add that person to the team.
             User.findOneAndUpdate({

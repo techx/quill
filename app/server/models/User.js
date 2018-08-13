@@ -197,7 +197,6 @@ const schema = new mongoose.Schema({
 
     teamPassword: {
         type: Number,
-        required: true,
     },
 
     verified: {
