@@ -1,5 +1,4 @@
 const path = require("path");
-const User = require("./models/User");
 
 const indexLocation = path.resolve(__dirname, "../client/index.html");
 

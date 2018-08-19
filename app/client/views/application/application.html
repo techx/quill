@@ -7,26 +7,25 @@
     <div class="column">
       <div class="ui form"
         ng-class="{'loading': loading}">
-
         <div class="divided title">Basic Information</div>
 
         <fieldset ng-disabled="regIsClosed">
-          <div class="field">
+          <div class="field required">
             <label>Email</label>
             <input type="email" name="email" disabled="disabled" ng-model="user.email">
           </div>
 
-          <div class="field">
+          <div class="field required">
             <label>Full Name</label>
             <input type="text" name="name" ng-model="user.profile.name" required>
           </div>
 
-          <div class="field" ng-show="autoFilledSchool">
+          <div class="field required" ng-show="autoFilledSchool">
             <label>School</label>
             <input class="ui input" disabled="disabled" ng-show="autoFilledSchool" ng-model="user.profile.school">
           </div>
 
-          <div class="field" ng-show="!autoFilledSchool">
+          <div class="field required" ng-show="!autoFilledSchool">
             <label>School</label>
             <div id="school" class="ui search">
               <div class="ui input">
@@ -36,7 +35,7 @@
             </div>
           </div>
 
-          <div class="field">
+          <div class="field required">
             <label>Graduation Year</label>
             <select
               name="year"
@@ -51,7 +50,7 @@
             </select>
           </div>
 
-          <div class="field">
+          <div class="field required">
             <label>Gender</label>
             <select
               name="gender"
@@ -65,18 +64,18 @@
             </select>
           </div>
 
-          <div class="field">
+          <div class="field required">
             <label>I would describe myself as a...</label>
             <input type="text" placeholder="Designer, Data Scientist, iOS Wizard, Hacker Extraordinaire"
               ng-model="user.profile.description" required>
           </div>
 
-          <div class="field">
+          <div class="field required">
             <label>Resume (Google Docs, Dropbox, Website, or Portfolio link please)</label>
-            <input type="text" ng-model="user.profile.resume" required>
+            <input id="resume" type="text" ng-model="user.profile.resume" required>
           </div>
 
-          <div class="field">
+          <div class="field required">
             <label>
               What would you like to learn or get out of {{ EVENT_INFO.NAME }}?
             </label>
@@ -84,7 +83,7 @@
             </textarea>
           </div>
 
-          <div class="field"
+          <div class="field required"
             ng-hide="isCornellStudent">
             <p>
               Because of limitations imposed by {{ EVENT_INFO.SCHOOL_NAME_LONG }}, we are not legally 
@@ -105,8 +104,8 @@
 
           <br>
 
-          <div class="field">
-            <label>What's your phone number? (required)</label>
+          <div class="field required">
+            <label>What's your phone number?</label>
             <p>
               We need this in case we need to get ahold of you!
             </p>
@@ -141,7 +140,7 @@
             </div>
           </div>
 
-          <div class="field">
+          <div class="field required">
             <label>Shirt Size (required)</label>
             <p>
               Let's get you some swag!
@@ -166,7 +165,7 @@
             </select>
           </div>
 
-          <div class="field">
+          <div class="field required">
             <label>
               Will you be needing hardware?
             </label>
@@ -193,7 +192,7 @@
 
           <div class="divided title"> Skills & Accomplishments </div>
 
-          <div class="field">
+          <div class="field required">
             <label>What are you studying?</label>
             <input type="text"
               name="study"
@@ -319,7 +318,7 @@
 
           <div class="divided title">Legal</div>
 
-          <div class="field">
+          <div class="field required">
             <label>Privacy Policy</label>
             <p>
               <a
@@ -344,7 +343,7 @@
               required>
           </div>
 
-          <div class="field">
+          <div class="field required">
             <label>Code of Conduct</label>
             <p>
               <a

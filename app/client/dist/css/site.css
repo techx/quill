@@ -465,6 +465,15 @@ th {
 #admin table.users tr.admin:hover {
   background: #ffffff !important;
 }
+#application label {
+  margin: 0;
+}
+#application label + p {
+  color: #808080;
+}
+#application .field + .field {
+  margin: 1em 0;
+}
 #application #school .title {
   text-align: left;
   text-transform: none;
@@ -720,6 +729,9 @@ div.row .row-header {
     transform: scale(3.5);
   }
 }
+.row#faq {
+  font-family: "Roboto", Arial, sans-serif;
+}
 .row#faq .accordion {
   margin: auto;
   width: 70%;
@@ -785,7 +797,7 @@ div.row .row-header {
   padding-bottom: 4em;
 }
 .page .title {
-  font-family: 'Roboto', 'Helvetica Neue', 'Helvetica', sans-serif;
+  font-family: 'Poppins', 'Helvetica Neue', 'Helvetica', sans-serif;
   text-transform: uppercase;
   font-size: 2.5em;
   text-align: center;
@@ -977,6 +989,7 @@ input {
 }
 .ui.button {
   border-radius: 0;
+  font-family: "Roboto", Arial, sans-serif;
 }
 .ui.button.primary {
   background: #2C0735;

@@ -2,7 +2,6 @@ const request = require("request");
 const UserController = require("../controllers/UserController");
 const SettingsController = require("../controllers/SettingsController");
 
-
 module.exports = function (router) {
     function getToken(req) {
         return req.headers["x-access-token"];
@@ -358,12 +357,12 @@ module.exports = function (router) {
     });
 
     /**
-   * Get the whitelisted emails.
-   *
-   * res: {
-   *   emails: [String]
-   * }
-   */
+    * Get the whitelisted emails.
+    *
+    * res: {
+    *   emails: [String]
+    * }
+    */
     router.get("/settings/whitelist", isAdmin, (req, res) => {
         SettingsController.getWhitelistedEmails(defaultResponse(req, res));
     });

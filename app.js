@@ -58,11 +58,13 @@ app.use(express.static(`${__dirname}/app/client`));
 
 // Routers =====================================================================
 
+// API Router
 const apiRouter = express.Router();
 require("./app/server/routes/api")(apiRouter);
 
 app.use("/api", apiRouter);
 
+// Auth Router
 const authRouter = express.Router();
 require("./app/server/routes/auth")(authRouter);
 
