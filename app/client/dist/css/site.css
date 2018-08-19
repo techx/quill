@@ -546,7 +546,6 @@ th {
   height: 100%;
   width: 100%;
   background-color: #C0CCDA;
-  background: url('https://s3.amazonaws.com/hackmit-assets/tintedphoto_1920_1080_low.jpg');
   background-size: cover;
   display: flex;
   justify-content: center;
