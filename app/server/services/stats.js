@@ -17,12 +17,21 @@ function calculateStats(){
         O: 0,
         N: 0
       },
+      ethnicity: {
+        AIAN: 0,
+        API: 0,
+        BAA: 0,
+        H: 0,
+        WC: 0,
+        MCO: 0,
+        N: 0
+      },
       schools: {},
       year: {
-        '2016': 0,
-        '2017': 0,
-        '2018': 0,
-        '2019': 0,
+        'senior': 0,
+        'junior': 0,
+        'soph': 0,
+        'fresh': 0,
       }
     },
 
@@ -90,6 +99,9 @@ function calculateStats(){
 
         // Add to the gender
         newStats.demo.gender[user.profile.gender] += 1;
+
+        // Add to the ethnicity
+        newStats.demo.ethnicity[user.profile.ethnicity] += 1;
 
         // Count verified
         newStats.verified += user.verified ? 1 : 0;

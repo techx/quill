@@ -211,6 +211,30 @@
       </div>
     </div>
     <div class="ui divider"></div>
+    <div class="ui list">
+        <div class="item">
+          <strong>American Indian or Alaskan Native:</strong> {{stats.demo.ethnicity['AIAN']}} ({{stats.demo.ethnicity['AIAN'] / stats.total * 100 | number: 1}}%)
+        </div>
+        <div class="item">
+          <strong>Asian / Pacific Islander:</strong> {{stats.demo.ethnicity['API']}} ({{stats.demo.ethnicity['API']/ stats.total * 100 | number: 1}}%)
+        </div>
+        <div class="item">
+         <strong>Black or African American:</strong> {{stats.demo.ethnicity['BAA']}} ({{stats.demo.ethnicity['BAA'] / stats.total * 100 | number: 1}}%)
+        </div>
+        <div class="item">
+          <strong>Hispanic:</strong> {{stats.demo.ethnicity['H']}} ({{stats.demo.ethnicity['H'] / stats.total * 100 | number: 1}}%)
+        </div>
+        <div class="item">
+          <strong>White / Caucasian:</strong> {{stats.demo.ethnicity['WC']}} ({{stats.demo.ethnicity['WC'] / stats.total * 100 | number: 1}}%)
+        </div>
+        <div class="item">
+          <strong>Multiple ethnicity / Other not listed:</strong> {{stats.demo.ethnicity['MCO']}} ({{stats.demo.ethnicity['MCO'] / stats.total * 100 | number: 1}}%)
+        </div>
+        <div class="item">
+          <strong>Did not respond:</strong> {{stats.demo.ethnicity['N']}} ({{stats.demo.ethnicity['N'] / stats.total * 100 | number: 1}}%)
+        </div>
+      </div>
+    <div class="ui divider"></div>
       <div class="ui list">
         <div class="item">
           <strong>Fresh:</strong> {{stats.demo.year['2019']}} ({{stats.demo.year['2019'] / stats.total * 100 | number: 1}}%)

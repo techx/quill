@@ -129,6 +129,15 @@ angular.module('reg')
                 }
               ]
             },
+            major: {
+              identifier: 'major',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please enter your major.'
+                }
+              ]
+            },
             year: {
               identifier: 'year',
               rules: [
@@ -153,6 +162,24 @@ angular.module('reg')
                 {
                   type: 'allowMinors',
                   prompt: 'You must be an adult, or an MIT student.'
+                }
+              ]
+            },
+            readCodeOfConduct: {
+              identifier: 'readCodeOfConduct',
+              rules: [
+                {
+                  type: 'checked',
+                  prompt: 'You must agree to the MLH Code of Conduct.'
+                }
+              ]
+            },
+            discloseMLHAffiliation: {
+              identifier: 'discloseMLHAffiliation',
+              rules: [
+                {
+                  type: 'checked',
+                  prompt: 'You must agree to the MLH Terms and Conditions and Privacy Policy.'
                 }
               ]
             }
