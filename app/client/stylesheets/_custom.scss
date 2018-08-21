@@ -1,3 +1,18 @@
 // Branding overrides
 //
 // Copy variables from `_branding.scss` to this file to override default values.
+/** BRANDING COLORS
+ * primary (default pink): sidebar color, admitted dashboard status
+ * secondary (default purple): header text, submitted/confirmed/checked-in dashboard status
+ * tertiary (default blue): waitlist/declined dashboard status
+ */
+
+$primary: #F05352;
+$secondary: #2FB5E3;
+$tertiary: #282561;
+
+/** ASSET URLS
+ * login-bg: image for login splash page 
+ */
+
+$login-bg: url('../client/assets/images/Quill_login.jpg');
