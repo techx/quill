@@ -13,10 +13,17 @@
 }
 
 div.row {
-    margin: auto;
-    padding: 4em 0;
+    color: #3C4858;
+    font-size: 20px;
+    line-height: 1.5;
+    margin: 0 auto;
+    padding: 120px 15px;
     position: relative;
-    width: 80%;
+    width: 1000px;
+
+    @media @small {
+        width: 100%;
+    }
 
     &#faq, &#top {
         padding: 0;
@@ -37,14 +44,31 @@ div.row {
         }
     }
     .row-content {
+        align-items: center;
         display: flex;
+        flex-flow: row wrap;
         flex-grow: 0;
         flex-shrink: 0;
-        flex-direction: row;
+        justify-content: center;
 
         div {
-            padding: 0 2.5%;
             width: 50%;
+
+            &:first-child {
+                padding-left: 0;
+                padding-right: 5%;
+            }
+            &:last-child {
+                padding-left: 5%;
+                padding-right: 0;
+            }
+            
+            @media @small {
+                &:first-child, &:last-child {
+                    padding: 20px 0 0;
+                    width: 70%;
+                }
+            }
         }
     }
     .row-header {
@@ -56,7 +80,7 @@ div.row {
 
 // Stars source: https://codepen.io/keithclark/pen/zqcEd
 .starfield-container.row {
-    height: 500px;
+    height: 800px;
     width: 100%;
 
     &#faq, &#faq .starfield {
@@ -69,7 +93,7 @@ div.row {
         align-items: center;
         background-color: @purple;
         display: flex;
-        height: 500px;
+        height: 800px;
         justify-content: center;
         left: 0; 
         position: absolute; 
@@ -80,7 +104,7 @@ div.row {
         .top-container {
             color: white;
             display: flex;
-            font-family: 'Poppins', Arial, sans-serif;
+            font-family: "Roboto", Arial, sans-serif;
             flex-direction: column;
             text-align: center;
     
@@ -103,11 +127,11 @@ div.row {
             }
     
             .top-img {
-                display: block;
                 margin: auto;
-                max-height: 600px;
-                width: 60%;
-                max-width: 600px;
+                display: block;
+                margin: 30px auto;
+                max-width: 800px;
+                width: 100%;
             }
     
             .top-text {
@@ -201,6 +225,7 @@ div.row {
 
         .title {
             display: flex;
+            font-family: "Roboto", Arial, sans-serif;
             justify-content: space-between;
 
             &.active {
@@ -248,6 +273,27 @@ div.row {
                 max-width: 150px;
             }
         }
+        @media @small {
+            a img {
+                display: block;
+                margin: auto;
+            }
+            &.sponsor-ultra {
+                a img {
+                    max-width: 100%;
+                }
+            }
+            &.sponsor-mega {
+                a img {
+                    max-width: 90%;
+                }
+            }
+            &.sponsor-supporter {
+                a img {
+                    max-width: 80%;
+                }
+            }
+        }
     }
     
     .row-content + .row-content {
@@ -256,6 +302,7 @@ div.row {
 
     .sponsor-cta {
         font-size: 25px;
+        margin-top: 50px;
         text-align: center;
     }
 }
@@ -269,4 +316,8 @@ div.row {
     top: 0;
     width: 10%;
     z-index: 10000;
+
+    @media @small {
+        display: none;
+    }
 }

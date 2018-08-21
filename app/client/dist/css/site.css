@@ -580,10 +580,18 @@ th {
   padding: 0;
 }
 div.row {
-  margin: auto;
-  padding: 4em 0;
+  color: #3C4858;
+  font-size: 20px;
+  line-height: 1.5;
+  margin: 0 auto;
+  padding: 120px 15px;
   position: relative;
-  width: 80%;
+  width: 1000px;
+}
+@media screen and (max-width: 800px) {
+  div.row {
+    width: 100%;
+  }
 }
 div.row#faq,
 div.row#top {
@@ -602,14 +610,30 @@ div.row:nth-child(even) .row-header {
   color: #2C0735;
 }
 div.row .row-content {
+  align-items: center;
   display: flex;
+  flex-flow: row wrap;
   flex-grow: 0;
   flex-shrink: 0;
-  flex-direction: row;
+  justify-content: center;
 }
 div.row .row-content div {
-  padding: 0 2.5%;
   width: 50%;
+}
+div.row .row-content div:first-child {
+  padding-left: 0;
+  padding-right: 5%;
+}
+div.row .row-content div:last-child {
+  padding-left: 5%;
+  padding-right: 0;
+}
+@media screen and (max-width: 800px) {
+  div.row .row-content div:first-child,
+  div.row .row-content div:last-child {
+    padding: 20px 0 0;
+    width: 70%;
+  }
 }
 div.row .row-header {
   font-family: 'Poppins', Arial, sans-serif;
@@ -617,7 +641,7 @@ div.row .row-header {
   padding: 30px 0;
 }
 .starfield-container.row {
-  height: 500px;
+  height: 800px;
   width: 100%;
 }
 .starfield-container.row#faq,
@@ -630,7 +654,7 @@ div.row .row-header {
   align-items: center;
   background-color: #2C0735;
   display: flex;
-  height: 500px;
+  height: 800px;
   justify-content: center;
   left: 0;
   position: absolute;
@@ -641,7 +665,7 @@ div.row .row-header {
 .starfield-container.row .starfield .top-container {
   color: white;
   display: flex;
-  font-family: 'Poppins', Arial, sans-serif;
+  font-family: "Roboto", Arial, sans-serif;
   flex-direction: column;
   text-align: center;
 }
@@ -660,11 +684,11 @@ div.row .row-header {
   color: #2C0735;
 }
 .starfield-container.row .starfield .top-container .top-img {
-  display: block;
   margin: auto;
-  max-height: 600px;
-  width: 60%;
-  max-width: 600px;
+  display: block;
+  margin: 30px auto;
+  max-width: 800px;
+  width: 100%;
 }
 .starfield-container.row .starfield .top-container .top-text {
   font-size: 30px;
@@ -744,6 +768,7 @@ div.row .row-header {
 }
 .row#faq .accordion .title {
   display: flex;
+  font-family: "Roboto", Arial, sans-serif;
   justify-content: space-between;
 }
 .row#faq .accordion .title.active i.icon::before {
@@ -774,11 +799,27 @@ div.row .row-header {
   max-height: 150px;
   max-width: 150px;
 }
+@media screen and (max-width: 800px) {
+  .row#sponsors .row-content a img {
+    display: block;
+    margin: auto;
+  }
+  .row#sponsors .row-content.sponsor-ultra a img {
+    max-width: 100%;
+  }
+  .row#sponsors .row-content.sponsor-mega a img {
+    max-width: 90%;
+  }
+  .row#sponsors .row-content.sponsor-supporter a img {
+    max-width: 80%;
+  }
+}
 .row#sponsors .row-content + .row-content {
   padding-top: 20px;
 }
 .row#sponsors .sponsor-cta {
   font-size: 25px;
+  margin-top: 50px;
   text-align: center;
 }
 #mlh-trust-badge {
@@ -790,6 +831,11 @@ div.row .row-header {
   top: 0;
   width: 10%;
   z-index: 10000;
+}
+@media screen and (max-width: 800px) {
+  #mlh-trust-badge {
+    display: none;
+  }
 }
 .page {
   padding-top: 2em;
