@@ -79,25 +79,38 @@
           </select>
         </div>
 
-          <div class="field">
-            <label>Ethnic Identity (optional)</label>
-            <select
-              name="ethnicity"
-              ng-model="user.profile.ethnicity">
-              <option value="">Identity</option>
-              <option value="AIAN">American Indian or Alaskan Native</option>
-              <option value="API">Asian / Pacific Islander</option>
-              <option value="BAA">Black or African American</option>
-              <option value="H">Hispanic</option>
-              <option value="WC">White / Caucasian</option>
-              <option value="MCO">Multiple ethnicity / Other not listed</option>
-              <option value="N">I prefer not to answer.</option>
-            </select>
-          </div>
+        <div class="field">
+          <label>Ethnic Identity</label>
+          <select
+            name="ethnicity"
+            ng-model="user.profile.ethnicity">
+            <option value="">Identity</option>
+            <option value="AIAN">American Indian or Alaskan Native</option>
+            <option value="API">Asian / Pacific Islander</option>
+            <option value="BAA">Black or African American</option>
+            <option value="H">Hispanic</option>
+            <option value="WC">White / Caucasian</option>
+            <option value="MCO">Multiple ethnicity / Other not listed</option>
+            <option value="N">I prefer not to answer.</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>If you are interested in taking a bus to BostonHacks 2018, indicate here which city you would be able to be picked up from. (optional)</label>
+          <select
+            name="busLocation"
+            ng-model="user.profile.busLocation">
+            <option value="">Bus Location</option>
+            <option value="NYC">New York City</option>
+            <option value="Philadelphia">Philadelphia</option>
+            <option value="Montreal">Montreal</option>
+            <option value="Toronto">Toronto</option>
+          </select>
+        </div>
 
         <div class="field">
           <label>
-              Anything else you'd like us to know?
+              Anything else you'd like us to know? (optional)
           </label>
           <textarea ng-model="user.profile.essay">
           </textarea>

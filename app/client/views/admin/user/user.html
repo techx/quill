@@ -109,7 +109,7 @@
           <input type="text"
                  name="study"
                  placeholder="Computer Science, Product Design, Basket Weaving, etc."
-                 ng-model="user.profile.major">
+                 ng-model="selectedUser.profile.major">
       </div>
 
       <div class="field">
@@ -139,24 +139,37 @@
       </div>
 
       <div class="field">
-            <label>Ethnic Identity (optional)</label>
-            <select
-              name="ethnicity"
-              ng-model="selectedUser.profile.ethnicity">
-              <option value="">Identity</option>
-              <option value="AIAN">American Indian or Alaskan Native</option>
-              <option value="API">Asian / Pacific Islander</option>
-              <option value="BAA">Black or African American</option>
-              <option value="H">Hispanic</option>
-              <option value="WC">White / Caucasian</option>
-              <option value="MCO">Multiple ethnicity / Other not listed</option>
-              <option value="N">I prefer not to answer.</option>
-            </select>
-          </div>
+        <label>Ethnic Identity</label>
+        <select
+          name="ethnicity"
+          ng-model="selectedUser.profile.ethnicity">
+          <option value="">Identity</option>
+          <option value="AIAN">American Indian or Alaskan Native</option>
+          <option value="API">Asian / Pacific Islander</option>
+          <option value="BAA">Black or African American</option>
+          <option value="H">Hispanic</option>
+          <option value="WC">White / Caucasian</option>
+          <option value="MCO">Multiple ethnicity / Other not listed</option>
+          <option value="N">I prefer not to answer.</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>If you are interested in taking a bus to BostonHacks 2018, indicate here which city you would be able to be picked up from. (optional)</label>
+        <select
+          name="busLocation"
+          ng-model="selectedUser.profile.busLocation">
+          <option value="">Bus Location</option>
+          <option value="NYC">New York City</option>
+          <option value="Philadelphia">Philadelphia</option>
+          <option value="Montreal">Montreal</option>
+          <option value="Toronto">Toronto</option>
+        </select>
+      </div>
 
       <div class="field">
         <label>
-            Anything else you'd like us to know?
+            Anything else you'd like us to know? (optional)
         </label>
         <textarea ng-model="selectedUser.profile.essay">
         </textarea>
@@ -170,7 +183,7 @@
             </strong>
           </p>
           <div class="ui checkbox">
-            <input type="checkbox" id="adult" ng-model="user.profile.adult">
+            <input type="checkbox" id="adult" ng-model="selectedUser.profile.adult">
             <label for="adult">I am 18 or older.</label>
           </div>
         </div>
@@ -182,7 +195,7 @@
             </strong>
           </p>
           <div class="ui checkbox">
-            <input type="checkbox" id="readCodeOfConduct" ng-model="user.profile.readCodeOfConduct">
+            <input type="checkbox" id="readCodeOfConduct" ng-model="selectedUser.profile.readCodeOfConduct">
             <label for="readCodeOfConduct">I have read and agree to the MLH Code of Conduct</label>
           </div>
         </div>
@@ -194,7 +207,7 @@
             </strong>
           </p>
           <div class="ui checkbox">
-            <input type="checkbox" id="discloseMLHAffiliation" ng-model="user.profile.discloseMLHAffiliation">
+            <input type="checkbox" id="discloseMLHAffiliation" ng-model="selectedUser.profile.discloseMLHAffiliation">
             <label for="discloseMLHAffiliation">I authorize you to share my application/registration information for event administration, ranking, MLH administration, pre- and post-event informational e-mails, and occasional messages about hackathons in-line with the MLH Privacy Policy. I further I agree to the terms of both the MLH Contest Terms and Conditions and the MLH Privacy Policy.</label>
           </div>
         </div>

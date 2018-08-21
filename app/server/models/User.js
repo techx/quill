@@ -75,6 +75,13 @@ var profile = {
     enum : {
       values: 'AIAN API BAA H WC MCO N'.split(' ')
     }
+  },
+
+  busLocation: {
+    type: String,
+    enum : {
+      values: 'NYC Philadelphia Montreal Toronto'.split(' ')
+    }
   }
 
 };

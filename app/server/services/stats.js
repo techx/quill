@@ -26,12 +26,18 @@ function calculateStats(){
         MCO: 0,
         N: 0
       },
+      busLocation: {
+        NYC: 0,
+        Philadelphia: 0,
+        Montreal: 0,
+        Toronto: 0
+      },
       schools: {},
       year: {
-        'senior': 0,
-        'junior': 0,
-        'soph': 0,
-        'fresh': 0,
+        senior: 0,
+        junior: 0,
+        soph: 0,
+        fresh: 0
       }
     },
 
@@ -102,6 +108,9 @@ function calculateStats(){
 
         // Add to the ethnicity
         newStats.demo.ethnicity[user.profile.ethnicity] += 1;
+
+        // Add to the bus location
+        newStats.demo.busLocation[user.profile.busLocation] += 1;
 
         // Count verified
         newStats.verified += user.verified ? 1 : 0;

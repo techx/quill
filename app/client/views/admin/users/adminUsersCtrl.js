@@ -193,6 +193,9 @@ angular.module('reg')
                 name: 'Ethnicity',
                 value: user.profile.ethnicity
               },{
+                name: 'Bus Location',
+                value: user.profile.busLocation
+              },{
                 name: 'School',
                 value: user.profile.school
               },{

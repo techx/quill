@@ -237,18 +237,33 @@
     <div class="ui divider"></div>
       <div class="ui list">
         <div class="item">
-          <strong>Fresh:</strong> {{stats.demo.year['2019']}} ({{stats.demo.year['2019'] / stats.total * 100 | number: 1}}%)
+          <strong>Fresh:</strong> {{stats.demo.year['fresh']}} ({{stats.demo.year['fresh'] / stats.total * 100 | number: 1}}%)
         </div>
         <div class="item">
-          <strong>Soph:</strong> {{stats.demo.year['2018']}} ({{stats.demo.year['2018'] / stats.total * 100 | number: 1}}%)
+          <strong>Soph:</strong> {{stats.demo.year['soph']}} ({{stats.demo.year['soph'] / stats.total * 100 | number: 1}}%)
         </div>
         <div class="item">
-         <strong>Junior:</strong> {{stats.demo.year['2017']}} ({{stats.demo.year['2017'] / stats.total * 100 | number: 1}}%)
+         <strong>Junior:</strong> {{stats.demo.year['junior']}} ({{stats.demo.year['junior'] / stats.total * 100 | number: 1}}%)
         </div>
         <div class="item">
-          <strong>Senior:</strong> {{stats.demo.year['2016']}} ({{stats.demo.year['2016'] / stats.total * 100 | number: 1}}%)
+          <strong>Senior:</strong> {{stats.demo.year['senior']}} ({{stats.demo.year['senior'] / stats.total * 100 | number: 1}}%)
         </div>
       </div>
+    <div class="ui divider"></div>
+    <div class="ui list">
+      <div class="item">
+        <strong>NYC Bus:</strong> {{stats.demo.busLocation['NYC']}} ({{stats.demo.busLocation['NYC'] / stats.total * 100 | number: 1}}%)
+      </div>
+      <div class="item">
+        <strong>Philadelphia Bus:</strong> {{stats.demo.busLocation['Philadelphia']}} ({{stats.demo.busLocation['Philadelphia'] / stats.total * 100 | number: 1}}%)
+      </div>
+      <div class="item">
+        <strong>Montreal Bus:</strong> {{stats.demo.busLocation['Montreal']}} ({{stats.demo.busLocation['Montreal'] / stats.total * 100 | number: 1}}%)
+      </div>
+      <div class="item">
+        <strong>Toronto Bus:</strong> {{stats.demo.busLocation['Toronto']}} ({{stats.demo.busLocation['Toronto'] / stats.total * 100 | number: 1}}%)
+      </div>
+    </div>
     <div class="ui divider"></div>
     <div class="ui list">
       <div
