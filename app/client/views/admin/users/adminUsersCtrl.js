@@ -190,16 +190,22 @@ angular.module('reg')
                 name: 'Gender',
                 value: user.profile.gender
               },{
+                name: 'Ethnicity',
+                value: user.profile.ethnicity
+              },{
+                name: 'Bus Location',
+                value: user.profile.busLocation
+              },{
                 name: 'School',
                 value: user.profile.school
+              },{
+                name: 'Major',
+                value: user.profile.major
               },{
                 name: 'Graduation Year',
                 value: user.profile.graduationYear
               },{
-                name: 'Description',
-                value: user.profile.description
-              },{
-                name: 'Essay',
+                name: 'Anything Else',
                 value: user.profile.essay
               }
             ]
@@ -215,9 +221,6 @@ angular.module('reg')
               },{
                 name: 'Shirt Size',
                 value: user.confirmation.shirtSize
-              },{
-                name: 'Major',
-                value: user.confirmation.major
               },{
                 name: 'Github',
                 value: user.confirmation.github

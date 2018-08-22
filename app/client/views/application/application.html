@@ -46,15 +46,23 @@
         </div>
 
         <div class="field">
+          <label> Major </label>
+          <input type="text"
+                 name="study"
+                 placeholder="Computer Science, Product Design, Basket Weaving, etc."
+                 ng-model="user.profile.major">
+        </div>
+
+        <div class="field">
           <label>Graduation Year</label>
           <select
             name="year"
             ng-model="user.profile.graduationYear">
             <option value="">Graduation Year</option>
-            <option value="2016">2016</option>
-            <option value="2017">2017</option>
-            <option value="2018">2018</option>
-            <option value="2019">2019</option>
+            <option value="senior">2018</option>
+            <option value="junior">2019</option>
+            <option value="soph">2020</option>
+            <option value="fresh">2021</option>
           </select>
         </div>
 
@@ -72,15 +80,37 @@
         </div>
 
         <div class="field">
-          <label>I would describe myself as a...</label>
-          <input type="text"
-                 placeholder="Designer, Data Scientist, iOS Wizard, Hacker Extraordinaire"
-                 ng-model="user.profile.description">
+          <label>Ethnic Identity</label>
+          <select
+            name="ethnicity"
+            ng-model="user.profile.ethnicity">
+            <option value="">Identity</option>
+            <option value="AIAN">American Indian or Alaskan Native</option>
+            <option value="API">Asian / Pacific Islander</option>
+            <option value="BAA">Black or African American</option>
+            <option value="H">Hispanic</option>
+            <option value="WC">White / Caucasian</option>
+            <option value="MCO">Multiple ethnicity / Other not listed</option>
+            <option value="N">I prefer not to answer.</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>If you are interested in taking a bus to BostonHacks 2018, indicate here which city you would be able to be picked up from. (optional)</label>
+          <select
+            name="busLocation"
+            ng-model="user.profile.busLocation">
+            <option value="">Bus Location</option>
+            <option value="NYC">New York City</option>
+            <option value="Philadelphia">Philadelphia</option>
+            <option value="Montreal">Montreal</option>
+            <option value="Toronto">Toronto</option>
+          </select>
         </div>
 
         <div class="field">
           <label>
-              What would you like to learn or get out of HackMIT? (optional)
+              Anything else you'd like us to know? (optional)
           </label>
           <textarea ng-model="user.profile.essay">
           </textarea>
@@ -89,17 +119,37 @@
         <div class="field"
              ng-hide="isMitStudent">
           <p>
-            Because of limitations imposed by MIT, we are not legally allowed to host
-            non-MIT minors (those under 18) for HackMIT 2015. Checking the box below affirms that you are or will be 18 years or older by September 19th, 2015.
-          </p>
-          <p>
             <strong>
-            We will be checking ID. If you are a non-MIT minor, you will be turned away at the door.
+            Unfortunately, for legal reasons we are unable to host minors at BostonHacks 2018. If you are under 18, you will be turned away at the door.
             </strong>
           </p>
           <div class="ui checkbox">
             <input type="checkbox" id="adult" ng-model="user.profile.adult">
             <label for="adult">I am 18 or older.</label>
+          </div>
+        </div>
+
+        <div class="field">
+          <p>
+            <strong>
+            BostonHacks is a safe and friendly hacker space. We thusly ask that you agree to the <a href="http://mlh.io/code-of-conduct">MLH Code of Conduct</a>.
+            </strong>
+          </p>
+          <div class="ui checkbox">
+            <input type="checkbox" id="readCodeOfConduct" ng-model="user.profile.readCodeOfConduct">
+            <label for="readCodeOfConduct">I have read and agree to the MLH Code of Conduct</label>
+          </div>
+        </div>
+
+        <div class="field">
+          <p>
+            <strong>
+              As an MLH-affiliated event, we also ask you to agree to the <a href="https://github.com/MLH/mlh-policies/blob/master/prize-terms-and-conditions/contest-terms.md">MLH Contest Terms and Conditions</a> and the <a href="https://mlh.io/privacy">MLH Privacy Policy</a>.
+            </strong>
+          </p>
+          <div class="ui checkbox">
+            <input type="checkbox" id="discloseMLHAffiliation" ng-model="user.profile.discloseMLHAffiliation">
+            <label for="discloseMLHAffiliation">I authorize you to share my application/registration information for event administration, ranking, MLH administration, pre- and post-event informational e-mails, and occasional messages about hackathons in-line with the MLH Privacy Policy. I further I agree to the terms of both the MLH Contest Terms and Conditions and the MLH Privacy Policy.</label>
           </div>
         </div>
 
