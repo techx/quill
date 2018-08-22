@@ -584,7 +584,7 @@ div.row {
   font-size: 20px;
   line-height: 1.5;
   margin: 0 auto;
-  padding: 120px 15px;
+  padding: 115px 15px;
   position: relative;
   width: 1000px;
 }
@@ -593,7 +593,6 @@ div.row {
     width: 100%;
   }
 }
-div.row#faq,
 div.row#top {
   padding: 0;
 }
@@ -610,7 +609,7 @@ div.row:nth-child(even) .row-header {
   color: #2C0735;
 }
 div.row .row-content {
-  align-items: center;
+  align-items: flex-start;
   display: flex;
   flex-flow: row wrap;
   flex-grow: 0;
@@ -647,7 +646,6 @@ div.row .row-header {
 .starfield-container.row#faq,
 .starfield-container.row#faq .starfield {
   height: auto;
-  padding: 2em 0;
   position: relative;
 }
 .starfield-container.row .starfield {
@@ -670,16 +668,25 @@ div.row .row-header {
   text-align: center;
 }
 .starfield-container.row .starfield .top-container .top-buttons .button {
-  background-color: #2C0735;
   border: 1px solid white;
+  border-radius: 2px;
   color: white;
   display: inline-block;
+  font-size: 20px;
+  letter-spacing: 2px;
   margin: 0 20px;
   min-width: 150px;
   padding: 5px 20px;
+  text-align: center;
+  text-transform: uppercase;
   transition: 0.3s;
+  width: 250px;
 }
-.starfield-container.row .starfield .top-container .top-buttons .button:hover {
+.starfield-container.row .starfield .top-container .top-buttons .button.login {
+  background-color: #2C0735;
+  color: #FFFFFF;
+}
+.starfield-container.row .starfield .top-container .top-buttons .button.register {
   background-color: white;
   color: #2C0735;
 }
@@ -759,27 +766,41 @@ div.row .row-header {
   margin: auto;
   width: 70%;
 }
-.row#faq .accordion .content,
-.row#faq .accordion .title {
+.row#faq .accordion .question {
+  background-color: white;
+  border-radius: 3px;
+}
+.row#faq .accordion .question .content,
+.row#faq .accordion .question .title {
   color: #2C0735;
   letter-spacing: unset;
   text-align: left;
   text-transform: unset;
 }
-.row#faq .accordion .title {
+.row#faq .accordion .question .content {
+  padding: 15px;
+}
+.row#faq .accordion .question .title {
   display: flex;
   font-family: "Roboto", Arial, sans-serif;
+  padding-left: 15px;
+  padding-right: 15px;
   justify-content: space-between;
 }
-.row#faq .accordion .title.active i.icon::before {
+.row#faq .accordion .question .title i.icon::before {
+  color: #FE1736;
+}
+.row#faq .accordion .question .title.active i.icon::before {
   content: "\F056";
+}
+.row#faq .accordion .question + .question {
+  margin-top: 15px;
+}
+.row#faq .row-header {
+  text-align: left;
 }
 .row#faq .starfield {
   display: block;
-}
-.row#faq .top-text {
-  margin-left: 10%;
-  text-align: left;
 }
 .row#sponsors .row-content {
   align-items: center;
@@ -1015,6 +1036,9 @@ body {
 body > .container {
   width: 100%;
   height: 100%;
+}
+input {
+  font-family: "Roboto", Arial, sans-serif !important;
 }
 /**
  * SweetAlert Overrides

@@ -4,6 +4,6 @@ angular.module("reg").controller("HomeCtrl", [
     "$state",
     function ($scope, $http, $state) {
         $scope.showSidebar = false;
-        $(".ui.styled.accordion").accordion();
+        $(".ui.accordion").accordion();
     },
 ]);

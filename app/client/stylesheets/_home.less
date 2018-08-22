@@ -17,7 +17,7 @@ div.row {
     font-size: 20px;
     line-height: 1.5;
     margin: 0 auto;
-    padding: 120px 15px;
+    padding: 115px 15px;
     position: relative;
     width: 1000px;
 
@@ -25,7 +25,7 @@ div.row {
         width: 100%;
     }
 
-    &#faq, &#top {
+    &#top {
         padding: 0;
     }
 
@@ -44,7 +44,7 @@ div.row {
         }
     }
     .row-content {
-        align-items: center;
+        align-items: flex-start;
         display: flex;
         flex-flow: row wrap;
         flex-grow: 0;
@@ -85,7 +85,6 @@ div.row {
 
     &#faq, &#faq .starfield {
         height: auto;
-        padding: 2em 0;
         position: relative;
     }
 
@@ -110,16 +109,25 @@ div.row {
     
             .top-buttons {
                 .button {
-                    background-color:  @purple;
                     border: 1px solid white;
+                    border-radius: 2px;
                     color: white;
                     display: inline-block;
+                    font-size: 20px;
+                    letter-spacing: 2px;
                     margin: 0 20px;
                     min-width: 150px;
                     padding: 5px 20px;
+                    text-align: center;
+                    text-transform: uppercase;
                     transition: 0.3s;
-    
-                    &:hover {
+                    width: 250px;
+
+                    &.login {
+                        background-color:  @purple;
+                        color: #FFFFFF;
+                    }
+                    &.register {
                         background-color: white;
                         color:  @purple;
                     }
@@ -216,33 +224,50 @@ div.row {
         margin: auto;
         width: 70%;
 
-        .content, .title {
-            color: @purple;
-            letter-spacing: unset;
-            text-align: left;
-            text-transform: unset;
-        }
+        .question {
+            background-color: white;
+            border-radius: 3px;
 
-        .title {
-            display: flex;
-            font-family: "Roboto", Arial, sans-serif;
-            justify-content: space-between;
+            .content, .title {
+                color: @purple;
+                letter-spacing: unset;
+                text-align: left;
+                text-transform: unset;
+            }
 
-            &.active {
+            .content {
+                padding: 15px;
+            }
+    
+            .title {
+                display: flex;
+                font-family: "Roboto", Arial, sans-serif;
+                padding-left: 15px;
+                padding-right: 15px;
+                justify-content: space-between;
+    
                 i.icon::before {
-                    content: "\f056";
+                    color: #FE1736
+                }
+    
+                &.active {
+                    i.icon::before {
+                        content: "\f056";
+                    }
                 }
             }
         }
+        .question + .question {
+            margin-top: 15px;
+        }
+    }
+
+    .row-header {
+        text-align: left;
     }
 
     .starfield {
         display: block;
-    }
-
-    .top-text {
-        margin-left: 10%;
-        text-align: left;
     }
 }
 
