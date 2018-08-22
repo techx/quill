@@ -47,7 +47,7 @@
     "gulp-concat": "^2.6.0",
     "gulp-ng-annotate": "^1.0.0",
     "gulp-nodemon": "^2.0.3",
-    "gulp-sass": "^2.0.1",
+    "gulp-sass": "3.0.0",
     "gulp-sourcemaps": "^1.5.2",
     "gulp-uglify": "^1.2.0",
     "nodemon": "^1.2.1"
