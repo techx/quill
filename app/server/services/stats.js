@@ -34,10 +34,12 @@ function calculateStats(){
       },
       schools: {},
       year: {
-        senior: 0,
-        junior: 0,
-        soph: 0,
-        fresh: 0
+
+        '2019': 0,
+        '2020': 0,
+        '2021': 0,
+        '2022': 0,
+
       }
     },
 

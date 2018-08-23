@@ -118,10 +118,12 @@
           name="year"
           ng-model="selectedUser.profile.graduationYear">
           <option value="">Graduation Year</option>
-          <option value="senior">2018</option>
-          <option value="junior">2019</option>
-          <option value="soph">2020</option>
-          <option value="fresh">2021</option>
+
+          <option value="2019">2019</option>
+          <option value="2020">2020</option>
+          <option value="2021">2021</option>
+          <option value="2022">2022</option>
+
         </select>
       </div>
 
@@ -169,13 +171,16 @@
 
       <div class="field">
         <label>
+
             Anything else you'd like us to know? (optional)
+
         </label>
         <textarea ng-model="selectedUser.profile.essay">
         </textarea>
       </div>
 
       <div class="field"
+
              ng-hide="isMitStudent">
           <p>
             <strong>
@@ -210,6 +215,7 @@
             <input type="checkbox" id="discloseMLHAffiliation" ng-model="selectedUser.profile.discloseMLHAffiliation">
             <label for="discloseMLHAffiliation">I authorize you to share my application/registration information for event administration, ranking, MLH administration, pre- and post-event informational e-mails, and occasional messages about hackathons in-line with the MLH Privacy Policy. I further I agree to the terms of both the MLH Contest Terms and Conditions and the MLH Privacy Policy.</label>
           </div>
+
         </div>
 
       <div class="field">

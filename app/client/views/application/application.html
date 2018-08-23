@@ -59,10 +59,12 @@
             name="year"
             ng-model="user.profile.graduationYear">
             <option value="">Graduation Year</option>
-            <option value="senior">2018</option>
-            <option value="junior">2019</option>
-            <option value="soph">2020</option>
-            <option value="fresh">2021</option>
+
+            <option value="2019">2019</option>
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+
           </select>
         </div>
 
@@ -110,7 +112,9 @@
 
         <div class="field">
           <label>
+
               Anything else you'd like us to know? (optional)
+
           </label>
           <textarea ng-model="user.profile.essay">
           </textarea>
@@ -119,8 +123,10 @@
         <div class="field"
              ng-hide="isMitStudent">
           <p>
+
             <strong>
             Unfortunately, for legal reasons we are unable to host minors at BostonHacks 2018. If you are under 18, you will be turned away at the door.
+
             </strong>
           </p>
           <div class="ui checkbox">

@@ -46,7 +46,9 @@ var profile = {
   graduationYear: {
     type: String,
     enum: {
-      values: 'senior junior soph fresh'.split(' ')
+
+      values: '2019 2020 2021 2022'.split(' '),
+
     }
   },
 
@@ -367,8 +369,9 @@ schema.statics.validateProfile = function(profile, cb){
     profile.discloseMLHAffiliation &&
     profile.ethnicity &&
     profile.school.length > 0 &&
+
     profile.major.length > 0 &&
-    ['senior', 'junior', 'soph', 'fresh'].indexOf(profile.graduationYear) > -1 &&
+    ['2019', '2020', '2021', '2022'].indexOf(profile.graduationYear) > -1 &&
     ['M', 'F', 'O', 'N'].indexOf(profile.gender) > -1
     ));
 };

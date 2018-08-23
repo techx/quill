@@ -18,21 +18,21 @@
       margin: 0 auto;
 
       .logo {
-        max-width: 100px;
+        max-width: 200px;
         margin: .5rem auto 1rem auto;
         img {
-          width: 100px;
-          height: 100px;
+          width: 200px;
+          height: 200px;
         }
       }
 
       .button {
         color: white;
         &.login {
-          background: $login-color;
+          background: #282561;
         }
         &.register {
-          background: $register-color
+          background: #F05
         }
       }
 
