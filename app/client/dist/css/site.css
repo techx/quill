@@ -460,10 +460,10 @@ th {
   cursor: pointer;
 }
 #admin table.users tr.admin {
-  background: #ffffff !important;
+  background: #cb53e8 !important;
 }
 #admin table.users tr.admin:hover {
-  background: #ffffff !important;
+  background: #c43ce5 !important;
 }
 #application label {
   margin: 0;
@@ -484,6 +484,12 @@ th {
  * secondary (default purple): header text, submitted/confirmed/checked-in dashboard status
  * tertiary (default blue): waitlist/declined dashboard status
  */
+.ui.purple.button {
+  background-color: #ff8865 !important;
+}
+.ui.pink.button {
+  background-color: #77174E !important;
+}
 /** ASSET URLS
  * login-bg: image for login splash page 
  */
@@ -515,22 +521,24 @@ th {
   color: black;
 }
 #dashboard .status .state.submitted {
-  background: #ffffff;
+  background: #77138f;
+  color: white;
 }
 #dashboard .status .state.waitlist {
-  background: #FF9064;
+  background: #ff8865;
 }
 #dashboard .status .state.admitted {
-  background: #2C0735;
+  background: #FF556A;
+  color: white;
 }
 #dashboard .status .state.confirmed {
-  background: #C0CCDA;
+  background: #2C0735;
 }
 #dashboard .status .state.checked.in {
-  background: #C0CCDA;
+  background: #2C0735;
 }
 #dashboard .status .state.declined {
-  background: #FF9064;
+  background: #ff8865;
 }
 #dashboard .segment {
   padding: 36px 36px 12px 36px;
@@ -545,7 +553,7 @@ th {
 #login {
   height: 100%;
   width: 100%;
-  background-color: #C0CCDA;
+  background-color: #2C0735;
   background-size: cover;
   display: flex;
   justify-content: center;
@@ -566,13 +574,16 @@ th {
   color: white;
 }
 #login > .container > .content .button.login {
-  background: #2C0735;
+  background: #FF556A;
 }
 #login > .container > .content .button.register {
-  background: #FF9064;
+  background: #ff8865;
 }
 #login > .container > .content .forgot {
   text-align: center;
+}
+#login > .container > .content .forgot .ui.button {
+  background-color: #77174E;
 }
 #home.page {
   display: flex;
@@ -867,7 +878,7 @@ div.row .row-header {
   text-transform: uppercase;
   font-size: 2.5em;
   text-align: center;
-  color: #C0CCDA;
+  color: #2C0735;
   letter-spacing: 8px;
   font-weight: 700;
 }
@@ -876,7 +887,7 @@ div.row .row-header {
   width: 200px;
   display: block;
   margin: 1em auto 2em;
-  border-bottom: 4px solid #C0CCDA;
+  border-bottom: 4px solid #2C0735;
 }
 .page .title.small {
   font-size: 1em;
@@ -1061,25 +1072,26 @@ input {
   font-family: "Roboto", Arial, sans-serif;
 }
 .ui.button.primary {
-  background: #2C0735;
+  background: #FF556A;
+  color: white;
 }
 .ui.button.primary:hover {
-  background: #370943;
+  background: #ff6477;
 }
 .ui.button.primary:active {
-  background: #210527;
+  background: #ff465d;
 }
 .ui.button.secondary {
-  background: #C0CCDA;
+  background: #2C0735;
 }
 .ui.button.secondary:hover {
-  background: #cad4e0;
+  background: #370943;
 }
 .ui.button.secondary:active {
-  background: #b6c4d4;
+  background: #210527;
 }
 .ui.button.secondary:focus {
-  background: #C0CCDA;
+  background: #2C0735;
 }
 .ui.form select {
   height: 2.5em;
