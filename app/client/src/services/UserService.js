@@ -24,12 +24,13 @@ angular.module('reg')
         return $http.get(base);
       },
 
-      getPage: function(page, size, text){
+      getPage: function(page, size, text, statusFilters){
         return $http.get(users + '?' + $.param(
           {
             text: text,
             page: page ? page : 0,
-            size: size ? size : 50
+            size: size ? size : 50,
+            statusFilters: statusFilters ? statusFilters : {}
           })
         );
       },
