@@ -13,7 +13,7 @@ angular.module('reg')
     .constant('DASHBOARD', {
         UNVERIFIED: 'You should have received an email asking you verify your email. Click the link in the email and you can start your application!',
         INCOMPLETE_TITLE: 'You still need to complete your application!',
-        INCOMPLETE: 'If you do not complete your application before the [APP_DEADLINE], you will not be considered for the admissions!',
+        INCOMPLETE: 'If you do not complete your application before the [APP_DEADLINE], you will not be considered for admissions!',
         SUBMITTED_TITLE: 'Your application has been submitted!',
         SUBMITTED: 'Feel free to edit it at any time. However, once registration is closed, you will not be able to edit it any further.\nPlease make sure your information is accurate before registration is closed!',
         CLOSED_AND_INCOMPLETE_TITLE: 'Unfortunately, registration has closed, and the selection process has begun.',
