@@ -1,0 +1,781 @@
+#recruit {
+	height: 100%;
+	font-family: 'Rubik', sans-serif;
+
+	/* Global */
+	button, .btn {
+		color: white;
+		font-weight: 300;
+		border: 1px solid white;
+		padding: 1.75% 4%;
+		margin: 0 5px;
+		border-radius: 4px;
+		letter-spacing: 0.12em;
+		transition: all .3s ease;
+	}
+
+	button:hover, .btn:hover {
+		text-decoration: none;
+		color: #6B8DD6;
+		border: 1px solid white;
+	}
+
+	button:focus, .btn:focus {
+		outline: none;
+	}
+
+	.title {
+		font-size: 2.8em;
+		font-weight: 700;
+	}
+
+	/* Hero */
+	#hero {
+		background-image: url('../assets/images/bg_recruitment.jpg');
+		background-size: cover;
+		background-position: center center;
+		height: calc(100% + 49px);
+    animation: fadein .5s both;
+	}
+
+	#hero::before {
+		content: '';
+		background-image: linear-gradient(to bottom right, #02ccba 0%, #3d99be 31%, #9848d5 100%);
+		opacity: 0.8;
+		width: 100%;
+		height: calc(100% + 50px);
+		position: absolute;
+	}
+
+	.hero-content {
+		height: 100%;
+		position: relative;
+		color: white;
+		z-index: 3;
+
+		> div {
+			margin-top: -50px;
+		}
+	}
+
+	.logo-header-container {
+		height: 50px;
+		margin-top: 0;
+		margin-bottom: 2%;
+		animation: fadein .5s both;
+		animation-delay: .15s;
+	}
+
+	.logo-header {
+		height: 50px;
+		position: absolute;
+		left: 0;
+		right: 0;
+		width: 100%;
+		text-align: center;
+		transition: all .2s ease;
+	}
+
+	.logo-header>img {
+		height: 100%;
+	}
+
+	.hero-title {
+		font-size: 5em;
+		line-height: 1.1em;
+		font-weight: 700;
+		text-align: center;
+		display: block;
+		padding-bottom: 3.5%;
+		animation: fadein .5s both;
+		animation-delay: .3s;
+	}
+
+	.hero-description-container {
+		text-align: center;
+		padding-top: 1.5%;
+	}
+
+	.hero-description {
+		font-weight: 300;
+		font-size: 1.5em;
+		letter-spacing: 0.12em;
+		text-align: center;
+		margin-top: 0;
+		display: inline-block;
+		animation: fadein .5s both;
+		animation-delay: .45s;
+	}
+
+	.hero-button-container {
+		text-align: center;
+		margin-top: 10%;
+		animation: fadein .5s both;
+		animation-delay: .6s;
+
+		.btn {
+			background: #fc6076;
+			border: none;
+			padding: 2.5% 5%;
+			border-radius: 25px;
+			box-shadow: 0 2px 16px rgba(24,51,59,.35);
+		}
+
+		.btn:hover {
+			color: white;
+			background: #fb465e;
+		}
+
+		.btn--coming-soon {
+			cursor: default;
+			background: rgba(252, 96, 118, 0.9);
+		}
+
+		.btn--coming-soon:hover {
+			background: #fc6076;
+		}
+	}
+
+	.hero-border {
+		width: 100%;
+		height: 225px;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		z-index: 2;
+	}
+
+	.hero-border svg {
+		width: 100%;
+		height: calc(100% + 50px);
+		position: absolute;
+		vertical-align: bottom;
+	}
+
+	/* Info */
+	#info {
+		padding: 6% 0;
+    background: #fff;
+    
+    #info-content {
+      width: 80%;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+    
+    .info-card {
+      .card-icon>img {
+        width: 5em;
+      }
+    
+      .card-title {
+        font-weight: 500;
+        font-size: 1.5em;
+        letter-spacing: 0.04em;
+        padding-top: 4%;
+        padding-bottom: 4%;
+        background-image: linear-gradient(to bottom right, #02ccba 0%, #3d99be 31%, #9848d5 100%);
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+      }
+    
+      .card-description {
+        font-weight: 300;
+        font-size: 0.8em;
+        letter-spacing: 0.02em;
+      }
+    }
+	}
+
+	/* Who We Are */
+	#whoweare {
+		background-image: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%);
+		color: white;
+		padding: 6% 0;
+
+    #whoweare-content {
+      width: 85%;
+      
+      .title {
+        text-align: center;
+      }
+
+      .whoweare-description {
+        font-weight: 300;
+        letter-spacing: .06em;
+        padding-top: 2.5%;
+        text-align: center;
+        font-size: 1.2em;
+        line-height: 1.6em;
+      }
+
+      hr {
+        width: 10%;
+        border-top: 1px solid #eee;
+        margin-top: 4%;
+        margin-bottom: 5%;
+      }
+    }
+	}
+
+	/* Mobile */
+	@media (max-width: 767px) {
+		#whoweare {
+			#whoweare-content {
+				.whoweare-description {
+					letter-spacing: 0.025em;
+					line-height: 1.55em;
+				}
+			}
+		}
+	}
+
+	/* Committee */
+	#committee {
+    padding: 7% 0;
+    background: #fff;
+
+    #committee-content {
+      width: 80%;
+      margin-left: auto;
+      margin-right: auto;
+
+      .title {
+        text-align: center;
+        padding-bottom: 5%;
+        color: #2c3e50;
+      }
+
+      .committee-card {
+        height: 185px;
+        border-radius: 3px;
+        color: white;
+        font-size: 1.5em;
+        letter-spacing: 0.04em;
+        background: rgba(95, 39, 205,0.9);
+        position: relative;
+        z-index: 100;
+
+        &:before {
+          background: linear-gradient(to bottom right, #02ccba 0%, #3d99be 31%, #9848d5 100%);
+          content: '';    
+          display: block;
+          height: 100%;
+          position: absolute;
+          top: 0; left: 0;
+          opacity: 0;
+          width: 100%;
+          z-index: -100;
+          transition: all .2s ease;
+				}
+				
+				&:after {
+					// background: #5f27cd;
+					background: #575fcf;
+          content: '';    
+          display: block;
+          height: 100%;
+          position: absolute;
+          top: 0; left: 0;
+          opacity: 0.25;
+          width: 100%;
+          z-index: -100;
+          transition: all .2s ease;
+        }
+
+        &:hover {
+          &:before {
+						opacity: .65; 
+						box-shadow: 0 2px 16px rgba(24,51,59,.35);
+          }
+				}
+				
+				&.committee-card--logistics {
+					background: url('../assets/images/logistics.png');
+					background-position: center center;
+					background-size: cover;
+					background-repeat: no-repeat;
+				}
+
+				&.committee-card--corporate {
+					background: url('../assets/images/corporate.png');
+					background-position: center top;
+					background-size: cover;
+					background-repeat: no-repeat;
+				}
+
+				&.committee-card--marketing {
+					background: url('../assets/images/marketing.png');
+					background-position: center center;
+					background-size: cover;
+					background-repeat: no-repeat;
+				}
+
+				&.committee-card--technology {
+					background: url('../assets/images/technology.png');
+					background-position: center center;
+					background-size: cover;
+					background-repeat: no-repeat;
+				}
+      }
+    }
+  }
+  
+	/* Footer */
+	#footer {
+		background-image: linear-gradient(-225deg, #2CD8D5 0%, #6B8DD6 48%, #8E37D7 100%);
+		color: white;
+		text-align: center;
+		padding: 6% 0;
+	}
+
+	#footer-content {
+		font-size: 2em;
+		width: 100%;
+	}
+
+	#footer-content>a {
+		color: rgba(255,255,255,0.95);
+		padding: 0 1%;
+		transition: all .2s ease;
+	}
+
+	#footer-content>a:hover {
+		color: rgba(255,255,255,1);
+	}
+
+	/* Mobile */
+	@media (max-width: 767px) {
+		.title {
+			margin-bottom: 5%;
+		}
+
+		.hero-border {
+			height: 100px;
+		}
+
+		.hero-title {
+			display: block;
+			font-size: 2.75em;
+		}
+
+		.hero-description {
+			font-size: 1.2em;
+			margin: 2% 10%;
+		}
+
+
+		.hero-button-container {
+			margin-top: 20%;
+
+			.btn {
+				padding: 5% 10%;
+			}
+		}
+
+		#info, #whoweare {
+			padding: 12.5% 0;
+		}
+
+		#info-content, #whoweare-content {
+			width: 90%;
+		}
+
+		.headline {
+			font-size: 1.7em;
+			padding: 2.5% 0;
+		}
+
+		#committee {
+			padding: 12.5% 0;
+		}
+
+		#footer {
+			padding: 20% 0;
+		}
+
+		#footer-content>a {
+			padding: 0 2.5%;
+		}
+
+		button, .btn {
+			padding: 5% 10%;
+		}
+	}
+
+	/* Tablet */
+	@media (min-width: 768px) and (max-width: 991px) {
+		#info-content, #whoweare-content {
+			width: 90%;
+		}
+
+		#committee-content {
+			width: 85%;
+		}
+	}
+
+	/* Large Screens */
+	@media (min-width: 1650px) {
+		#info-content, #whoweare-content, #committee-content{
+			width: 70%;
+		}
+	}
+}
+
+/* Committee Pages */
+#logistics, #corporate, #marketing, #technology {
+  height: 100%;
+  background: #fff;
+  
+  #hero {
+		background-size: cover;
+		background-position: center center;
+		height: calc(45vh + 49px);
+    animation: fadein .5s both;
+	}
+
+	#hero::before {
+		content: '';
+		background-image: linear-gradient(to bottom right, #02ccba 0%, #3d99be 31%, #9848d5 100%);
+		opacity: 0.8;
+		width: 100%;
+    height: calc(45vh + 50px);
+    left: 0;
+		position: absolute;
+  }
+  
+  .logo-header-container {
+		height: 50px;
+    margin: 0 0 5% 0;
+		animation: fadein .5s both;
+		animation-delay: .15s;
+	}
+
+	.logo-header {
+		height: 50px;
+    position: absolute;
+    top: 115px;
+		left: 0;
+		right: 0;
+		width: 100%;
+		text-align: center;
+		transition: all .2s ease;
+	}
+
+	.logo-header>img {
+		height: 100%;
+	}
+
+  .hero-border {
+		width: 100%;
+    height: 181px;
+		position: absolute;
+    top: calc(45vh - 82px);
+		left: 0;
+		z-index: 2;
+  }
+
+	.hero-border svg {
+		width: 100%;
+		height: calc(45% + 51px);
+		position: absolute;
+		vertical-align: bottom;
+  }
+
+  @media (max-width: 767px) {
+		.hero-border {
+			height: 182px;
+
+			svg {
+				height: calc(45% + 49.5px);
+			}
+    }
+  }
+  
+  .title-container {
+    position: relative;
+    z-index: 2;
+    text-transform: uppercase;
+    color: #fff;
+    font-size: 2.5em;
+    text-align: center;
+    letter-spacing: 8px;
+    margin-top: 1.6em;
+		animation: fadein .5s both;
+    animation-delay: .3s;
+    
+    &:after {
+      content: " ";
+      width: 200px;
+      display: block;
+      margin: .8em auto 0;
+      border-bottom: 3px solid #fff;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .title-container {
+      margin-top: 80px;
+      font-size: 1.35em;
+      letter-spacing: 3px;
+
+      &:after {
+        width: 150px;
+        border-bottom: 2px solid #fff;
+      }
+    }
+  }
+
+  .title {
+    font-weight: 500;
+  }
+
+  #content {
+    .title {
+      font-size: 2em;
+      font-weight: 700;
+      line-height: 1.1em;
+    }
+
+    .body {
+      font-size: 1.05em;
+      letter-spacing: .002em;
+      line-height: 1.55em;
+    }
+
+    .committee-description-container {
+			padding: 5% 10%;
+			
+			.title {
+				text-align: center;
+				padding-bottom: 0.5em;
+				font-weight: 500;
+				animation: fadein .5s both;
+				animation-delay: .4s;
+			}
+
+			.body {
+				animation: fadein .5s both;
+				animation-delay: .55s;
+			}
+    }
+
+		/* Mobile */
+    @media (max-width: 767px) {
+      .committee-description-container {
+				padding: 8%;
+      }
+		}
+
+		#break {
+			background-image: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%);
+			color: white;
+			padding: 3.5% 0;
+			animation: fadein .5s both;
+			animation-delay: .7s;
+
+			#break-content {
+				width: 85%;
+				
+				.title {
+					text-align: center;
+					letter-spacing: 0.03em;
+				}
+			}
+		}
+
+		/* Mobile */
+		@media (max-width: 767px) {
+			#break {
+				padding: 8%;
+
+				#break-content {
+					width: 90%;
+
+					.title {
+						line-height: 1.2em;
+					}
+				}
+			}
+		}
+
+		/* Tablet */
+		@media (min-width: 768px) and (max-width: 991px) {
+			#break {
+				#break-content {
+					width: 90%;
+				}
+			}
+		}
+
+		/* Large Screens */
+		@media (min-width: 1650px) {
+			#break {
+				#break-content {
+					width: 70%;
+				}
+			}
+		}
+
+		.job-container {
+			background: #f2f1f7;
+			padding: 5% 10%;
+			animation: fadein .5s both;
+			animation-delay: .8s;
+
+			.job {
+				&+.job {
+					margin-top: 2em;
+				}
+
+				.job-title {
+					font-size: 1.75em;
+					font-weight: 500;
+					line-height: 1em;
+				}
+
+				.body {
+					padding: 1em 1.75em 0 2.5em;
+
+					span {
+						display: block;
+					}
+
+					span.strong {
+						font-weight: 500;
+					}
+					
+					span+span {
+						padding-top: 1em;
+					}
+
+					.ui.list {
+						margin-top: .5em;
+
+						.item {
+							display: flex;
+							font-size: .95em;
+							line-height: 1.35em;
+
+							i {
+								line-height: 1em;
+								margin-right: .1em;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		/* Mobile */
+    @media (max-width: 767px) {
+      .job-container {
+				padding: 8%;
+				
+				.job {
+					.job-title {
+						line-height: 1.1em;
+					}
+
+					.body {
+						padding: .75em 0 0 0;
+					}
+				}
+      }
+		}
+	}
+	
+	/* Footer */
+	#footer {
+		background-image: linear-gradient(-225deg, #2CD8D5 0%, #6B8DD6 48%, #8E37D7 100%);
+		color: white;
+		text-align: center;
+		padding: 6% 0;
+
+		#footer-content {
+			font-size: 2em;
+			width: 100%;
+
+			.button-container {
+				margin-bottom: 1.8em;
+
+				.btn {
+					background: #fc6076;
+					font-weight: 300;
+					font-size: 0.55em;
+					padding: 15px 25px;
+					border: none;
+					border-radius: 25px;
+					box-shadow: 0 2px 16px rgba(24,51,59,.35);
+					letter-spacing: 0.12em;
+					transition: all .3s ease;
+				}
+		
+				.btn:hover {
+					color: white;
+					text-decoration: none;
+					background: #fb465e;
+				}
+	
+				.btn:focus {
+					outline: none;
+				}
+			}
+
+			a {
+				color: rgba(255,255,255,0.95);
+				padding: 0 1%;
+				transition: all .2s ease;
+			}
+
+			a:hover {
+				color: rgba(255,255,255,1);
+			}
+		}
+	}
+
+	/* Mobile */
+	@media (max-width: 767px) {
+		#footer {
+			padding: 20% 0;
+
+			#footer-content {
+				a {
+					padding: 0 2.5%;
+				}
+			}
+		}
+	}
+}
+
+// Logistics
+#logistics {
+  #hero {
+    background-image: url('../assets/images/hero-logistics.jpg');
+  }
+}
+
+// Corporate
+#corporate {
+  #hero {
+		background-image: url('../assets/images/hero-corporate.jpg');
+		background-position: center top;
+  }
+}
+
+// Marketing
+#marketing {
+	#hero {
+		background-image: url('../assets/images/hero-marketing.jpg');
+		background-position: center 30%;
+  }
+}
+
+// Technology
+#technology {
+	#hero {
+		background-image: url('../assets/images/hero-technology.jpg');
+		background-position: center 35%;
+  }
+}

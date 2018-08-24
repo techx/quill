@@ -4,7 +4,9 @@ angular.module('reg')
     '$state',
     '$stateParams',
     'UserService',
-    function($scope, $state, $stateParams, UserService){
+    '$http',
+    '$window',
+    function($scope, $state, $stateParams, UserService, $http, $window){
 
       $scope.pages = [];
       $scope.users = [];
@@ -20,6 +22,8 @@ angular.module('reg')
         dietaryRestrictions: []
       }, profile: ''});
 
+      $scope.queryText = $stateParams.query;
+
       function updatePage(data){
         $scope.users = data.users;
         $scope.currentPage = data.page;
@@ -33,7 +37,7 @@ angular.module('reg')
       }
 
       UserService
-        .getPage($stateParams.page, $stateParams.size, $stateParams.query)
+        .getPage($stateParams.page, $stateParams.size, $scope.queryText)
         .success(function(data){
           updatePage(data);
         });
@@ -49,7 +53,8 @@ angular.module('reg')
       $scope.goToPage = function(page){
         $state.go('app.admin.users', {
           page: page,
-          size: $stateParams.size || 50
+          size: $stateParams.size || 50,
+          query: $scope.queryText
         });
       };
 
@@ -60,6 +65,20 @@ angular.module('reg')
           id: user._id
         });
       };
+
+      $scope.resolveClick = function(functionKey, data) {
+        $scope[functionKey](data);
+      }
+
+      $scope.openResume = function() {
+        var id = $scope.selectedUser.id;
+        var resumeWindow = $window.open('', '_blank');
+        $http
+          .get('/api/resume/' + id)
+          .then(function(response) {
+            resumeWindow.location.href = '/api/resume/view/' + response.data.token;
+          })
+      }
 
       $scope.toggleCheckIn = function($event, user, index) {
         $event.stopPropagation();
@@ -130,6 +149,53 @@ angular.module('reg')
 
       };
 
+      $scope.sendWaiverEmail = function($event, user, index) {
+        $event.stopPropagation();
+
+        swal({
+          title: "Send Waiver Email",
+          text: "Are you sure you want to send the waiver email to " + user.profile.name + "?",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#DD6B55",
+          confirmButtonText: "Yes, send the waiver email.",
+          closeOnConfirm: false
+          },
+          function(){
+            UserService
+              .sendWaiverEmail(user._id)
+              .success(function(){
+                swal("Waiver Email Sent!", user.profile.name + ' will receive a copy of the waiver email shortly.', "success");
+              });
+          }
+        );
+      }
+
+      $scope.markWaiverAsSigned = function($event, user, index) {
+        $event.stopPropagation();
+
+        if (!user.confirmation.signatureLiability){
+          swal({
+            title: "Whoa, wait a minute!",
+            text: "You are about to mark " + user.profile.name + "'s waiver documents as signed!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, mark them as signed.",
+            closeOnConfirm: false
+            },
+            function(){
+              UserService
+                .markWaiverAsSigned(user._id)
+                .success(function(user){
+                  $scope.users[index] = user;
+                  swal("Marked As Signed", user.profile.name + '\'s waiver documents have been marked as signed.', "success");
+                });
+            }
+          );
+        }
+      }
+
       function formatTime(time){
         if (time) {
           return moment(time).format('MMMM Do YYYY, h:mm:ss a');
@@ -184,8 +250,11 @@ angular.module('reg')
             name: 'Profile',
             fields: [
               {
-                name: 'Name',
-                value: user.profile.name
+                name: 'First Name',
+                value: user.profile.firstname
+              },{
+                name: 'Last Name',
+                value: user.profile.lastname
               },{
                 name: 'Gender',
                 value: user.profile.gender
@@ -193,14 +262,32 @@ angular.module('reg')
                 name: 'School',
                 value: user.profile.school
               },{
+                name: 'Major',
+                value: user.profile.major
+              },{
                 name: 'Graduation Year',
                 value: user.profile.graduationYear
+              },{
+                name: 'LinkedIn',
+                value: user.profile.linkedin,
+                type: 'link',
+                text: user.profile.linkedin
+              },{
+                name: 'Portfolio',
+                value: user.profile.portfolio,
+                type: 'link',
+                text: user.profile.portfolio
               },{
                 name: 'Description',
                 value: user.profile.description
               },{
                 name: 'Essay',
                 value: user.profile.essay
+              },{
+                name: 'Resume',
+                value: 'openResume',
+                type: 'click',
+                text: 'View Resume'
               }
             ]
           },{
@@ -208,7 +295,7 @@ angular.module('reg')
             fields: [
               {
                 name: 'Phone Number',
-                value: user.confirmation.phone
+                value: user.confirmation.phoneNumber
               },{
                 name: 'Dietary Restrictions',
                 value: user.confirmation.dietaryRestrictions.join(', ')
@@ -226,7 +313,7 @@ angular.module('reg')
                 value: user.confirmation.website
               },{
                 name: 'Needs Hardware',
-                value: user.confirmation.needsHardware,
+                value: user.confirmation.wantsHardware,
                 type: 'boolean'
               },{
                 name: 'Hardware Requested',

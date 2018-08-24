@@ -1,4 +1,4 @@
-require('dotenv').load();
+require('dotenv').load({silent: true});
 
 var gulp = require('gulp');
 var sass = require('gulp-sass');

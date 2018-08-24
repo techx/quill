@@ -70,6 +70,10 @@
                 <i class="green circle check icon" ng-show="field.value"></i>
               </span>
 
+              <a ng-if="field.type === 'link'" ng-href="{{field.value}}" target="_blank">{{field.text}}</a>
+
+              <a href="#" ng-if="field.type === 'click'" ng-click="resolveClick(field.value)">{{field.text}}</a>
+
               <span ng-if="field.type == null">
                 {{field.value}}
               </span>
@@ -96,8 +100,8 @@
             <th>School</th>
             <th>Grad</th>
             <th>V/S/A/C</th>
-            <th>Host</th>
-            <th>$</th>
+            <th>S</th>
+            <th>B</th>
             <th></th>
             <th></th>
           </tr>
@@ -173,22 +177,14 @@
 
             </td>
 
-            <!-- Host -->
+            <!-- Signed waiver documents -->
             <td
               class="collapsing">
 
               <span ng-if="user.status.confirmed">
                 <i
-                  ng-if="user.confirmation.hostNeededFri"
-                  class="home icon">
-                </i>
-                <i
-                  ng-if="!user.confirmation.hostNeededFri && user.confirmation.hostNeededSat"
-                  class="no icon">
-                </i>
-                <i
-                  ng-if="user.confirmation.hostNeededSat"
-                  class="home icon">
+                  ng-if="user.confirmation.signatureLiability"
+                  class="fa-pencil-square-o icon">
                 </i>
               </span>
 
@@ -198,12 +194,8 @@
               class="collapsing">
               <span ng-if="user.status.confirmed">
                 <i
-                  ng-if="user.confirmation.needsReimbursement && !user.status.reimbursementGiven"
-                  class="red money icon">
-                </i>
-                <i
-                  ng-if="user.confirmation.needsReimbursement && user.status.reimbursementGiven"
-                  class="green money icon">
+                  ng-if="user.confirmation.needsReimbursement"
+                  class="bus icon">
                 </i>
               </span>
             </td>
@@ -238,6 +230,25 @@
                   ng-if="user.status.checkedIn"
                   class="green flag icon"></i>
 
+              </button>
+
+              <button
+                class="ui circular mini basic green icon button"
+                ng-click="sendWaiverEmail($event, user, $index)">
+                <i class="fa-envelope-o icon"></i>
+              </button>
+
+              <button
+                class="ui circular mini basic green icon button"
+                ng-click="markWaiverAsSigned($event, user, $index)"
+                ng-if="!user.confirmation.signatureLiability">
+                <i class="fa-pencil-square-o icon"></i>
+              </button>
+
+              <button
+                class="ui circular mini basic green icon disabled button"
+                ng-if="user.confirmation.signatureLiability">
+                <i class="fa-pencil-square-o icon"></i>
               </button>
 
             </td>

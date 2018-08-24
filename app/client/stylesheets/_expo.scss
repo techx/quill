@@ -1,0 +1,243 @@
+#expo {
+  height: 100%;
+  background: #f2f1f7;
+
+  #bg-tint {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 998;
+    background: #2c3e50;
+  }
+
+  #hero {
+    width: 100%;
+    height: calc(45vh + 49px);
+    position: fixed;
+    animation: fadein .5s both;
+    animation-delay: .15s;
+	}
+
+	#hero::before {
+		content: '';
+		background-image: linear-gradient(to bottom right, #02ccba 0%, #3d99be 31%, #9848d5 100%);
+		opacity: 0.8;
+    width: 100%;
+    left: 0;
+		height: calc(45vh + 50px);
+		position: fixed;
+  }
+  
+  .logo-header-container {
+		height: 100px;
+    margin: 0 0 5% 0;
+		animation: fadein .5s both;
+		animation-delay: .15s;
+	}
+
+	.logo-header {
+		height: 100px;
+    position: absolute;
+    top: 55px;
+		left: 0;
+		right: 0;
+		width: 100%;
+		text-align: center;
+		transition: all .2s ease;
+	}
+
+	.logo-cog {
+		animation: spin 12s linear infinite;
+	}
+
+	.logo-header>img {
+		height: 100%;
+	}
+
+  .hero-border {
+		width: 100%;
+    height: 181px;
+    position: fixed;
+    top: calc(45vh - 82px);
+		left: 0;
+		z-index: 2;
+  }
+
+  @media (max-width: 767px) {
+		.hero-border {
+			height: 182px;
+    }
+  }
+
+	.hero-border svg {
+		width: 100%;
+		height: calc(45% + 51px);
+		position: absolute;
+		vertical-align: bottom;
+  }
+  
+  .countdown-container {
+    position: relative;
+    z-index: 2;
+    text-transform: uppercase;
+    color: #fff;
+    font-size: 2.5em;
+    text-align: center;
+    letter-spacing: 8px;
+		animation: fadein .5s both;
+    animation-delay: .3s;
+    
+    &:after {
+      content: " ";
+      width: 200px;
+      display: block;
+      margin: 1em auto 0;
+      border-bottom: 3px solid #fff;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .countdown-container {
+      margin-top: 55px;
+      font-size: 1.25em;
+      letter-spacing: 3px;
+
+      &:after {
+        width: 150px;
+        border-bottom: 2px solid #fff;
+      }
+    }
+
+    .countdown-segment {
+      .countdown--fixed {
+        width: 30px;
+      }
+    }
+  }
+
+  .countdown {
+    font-weight: 300;
+  }
+
+  .countdown--bold {
+    font-weight: 500;
+  }
+
+  .countdown--fixed {
+    width: 65px;
+    display: inline-block;
+  }
+
+  /* Schedule */
+  #schedule-container {
+    position: relative;
+    z-index: 1000;
+    background: #f2f1f7;
+    color: #fff;
+		animation: fadein .5s both;
+		animation-delay: .45s;
+
+    .schedule-box {
+      width: 85%;
+      margin: 40vh auto 5% auto;
+      left: 0;
+      right: 0;
+      border-radius: 15px;
+      box-shadow: 0 2px 16px rgba(24,51,59,.35);
+      background: rgba(52, 73, 94, 0.99);
+      position: absolute;
+      z-index: 1000;
+    }
+
+    @media (min-width: 768px) {
+      .schedule-box {
+        padding: 0 1%;
+      }
+
+      .column+.column:after {
+        content : "";
+        position: absolute;
+        left: 0;
+        z-index: 100;
+        top: 25%;
+        width: 1px;
+        height: 50%;
+        background: white;
+        animation: fadein .5s both;
+        animation-delay: .75s;
+      }
+    }
+
+    .title {
+      text-align: center;
+      text-transform: uppercase;
+      font-weight: 500;
+      font-size: 1.25em;
+      letter-spacing: .1em;
+      margin: 2.5% 0 5%;
+      animation: fadein .5s both;
+      animation-delay: .65s;
+    }
+
+    .schedule-list {
+      width: 95%;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 2%;
+
+      .schedule {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 3.5%;
+        animation: fadein .5s both;
+        animation-delay: .75s;
+
+        .schedule-title {
+          width: 65%;
+          font-weight: 400;
+          font-size: 0.95em;
+          letter-spacing: 0.07em;
+          line-height: 1.4em;
+        }
+
+        .schedule-time {
+          width: 35%;
+          text-align: right;
+          color: #02ccba;
+          font-weight: 400;
+          font-size: 0.85em;
+          letter-spacing: 0.02em;
+        }
+
+        .schedule-location {
+          font-size: 0.8em;
+          letter-spacing: 0.05em;
+          line-height: 1.5em;
+          color: rgba(236, 240, 241, 0.9);
+        }
+      }
+    }
+
+    @media (max-width: 767px) {
+      .schedule-list {
+        width: 97%;
+        margin-right: 1%;
+        
+        .schedule {
+          .schedule-title {
+            width: 60%;
+            letter-spacing: 0.04em;
+          }
+
+          .schedule-time {
+            width: 40%;
+          }
+
+          .schedule-location {
+            letter-spacing: 0.03em;
+          }
+        }
+      }
+    }
+  }
+}

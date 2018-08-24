@@ -10,13 +10,15 @@ angular.module('reg')
     'UserService',
     'EVENT_INFO',
     'DASHBOARD',
-    function($rootScope, $scope, $sce, currentUser, settings, Utils, AuthService, UserService, DASHBOARD){
+    function($rootScope, $scope, $sce, currentUser, settings, Utils, AuthService, UserService, EVENT_INFO, DASHBOARD){
       var Settings = settings.data;
       var user = currentUser.data;
       $scope.user = user;
+      $scope.timeClose = Utils.formatTime(Settings.timeClose);
+      $scope.timeConfirm = Utils.formatTime(user.status.confirmBy);
 
       $scope.DASHBOARD = DASHBOARD;
-      
+
       for (var msg in $scope.DASHBOARD) {
         if ($scope.DASHBOARD[msg].includes('[APP_DEADLINE]')) {
           $scope.DASHBOARD[msg] = $scope.DASHBOARD[msg].replace('[APP_DEADLINE]', Utils.formatTime(Settings.timeClose));
@@ -63,13 +65,17 @@ angular.module('reg')
         return false;
       };
 
-      $scope.showWaitlist = !regIsOpen && user.status.completedProfile && !user.status.admitted;
+      $scope.showAppInReview = !regIsOpen && user.status.completedProfile && !user.status.admitted;
+
+      if (user.confirmation.signatureLiability && user.confirmation.signatureLiability !== '') {
+        $scope.hasSignedLiability = true;
+      }
 
       $scope.resendEmail = function(){
         AuthService
           .resendVerificationEmail()
           .then(function(){
-            sweetAlert('Your email has been sent.');
+            sweetAlert('Resend Verification Email', 'Your email has been sent.', 'success');
           });
       };
 
@@ -79,9 +85,15 @@ angular.module('reg')
       // -----------------------------------------------------
       var converter = new showdown.Converter();
       $scope.acceptanceText = $sce.trustAsHtml(converter.makeHtml(Settings.acceptanceText));
-      $scope.confirmationText = $sce.trustAsHtml(converter.makeHtml(Settings.confirmationText));
       $scope.waitlistText = $sce.trustAsHtml(converter.makeHtml(Settings.waitlistText));
 
+      if ($scope.dashState('confirmed')) {
+        if ($scope.hasSignedLiability) {
+          $scope.confirmationText = $sce.trustAsHtml(converter.makeHtml('Your confirmation and waiver documents have been received.<br>We look forward to seeing you at HackUCI!'));
+        } else {
+          $scope.confirmationText = $sce.trustAsHtml(converter.makeHtml('We have received your confirmation. Please take a moment to sign your <a href="https://app.hellosign.com/s/4bf9f65f" target="_blank">waiver documents</a>.'));
+        }
+      }
 
       $scope.declineAdmission = function(){
 

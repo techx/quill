@@ -42,7 +42,12 @@ angular.module('reg')
         return $http.put(base + 'confirmation', {
           text: text
         });
-      }
+      },
+      updateAllowMinors: function(allowMinors){
+        return $http.put(base + 'minors', { 
+          allowMinors: allowMinors 
+        });
+      },
     };
 
   }

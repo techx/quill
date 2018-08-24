@@ -3,6 +3,7 @@ var User = require('../models/User');
 var Settings = require('../models/Settings');
 var Mailer = require('../services/email');
 var Stats = require('../services/stats');
+// var Waiver = require('../services/waiver');
 
 var validator = require('validator');
 var moment = require('moment');
@@ -150,47 +151,35 @@ UserController.createUser = function(email, password, callback) {
       return callback(err);
     }
 
-    User
-      .findOneByEmail(email)
-      .exec(function(err, user){
-
-        if (err) {
-          return callback(err);
-        }
-
-        if (user) {
+    var u = new User();
+    u.email = email;
+    u.password = User.generateHash(password);
+    u.save(function(err){
+      if (err){
+        // Duplicate key error codes
+        if (err.name === 'MongoError' && (err.code === 11000 || err.code === 11001)) {
           return callback({
             message: 'An account for this email already exists.'
           });
-        } else {
-
-          // Make a new user
-          var u = new User();
-          u.email = email;
-          u.password = User.generateHash(password);
-          u.save(function(err){
-            if (err){
-              return callback(err);
-            } else {
-              // yay! success.
-              var token = u.generateAuthToken();
-
-              // Send over a verification email
-              var verificationToken = u.generateEmailVerificationToken();
-              Mailer.sendVerificationEmail(email, verificationToken);
-
-              return callback(
-                null,
-                {
-                  token: token,
-                  user: u
-                }
-              );
-            }
-
-          });
-
         }
+
+        return callback(err);
+      } else {
+        // yay! success.
+        var token = u.generateAuthToken();
+
+        // Send over a verification email
+        var verificationToken = u.generateEmailVerificationToken();
+        Mailer.sendVerificationEmail(email, verificationToken);
+
+        return callback(
+          null,
+          {
+            token: token,
+            user: u
+          }
+        );
+      }
 
     });
   });
@@ -227,6 +216,7 @@ UserController.getPage = function(query, callback){
     queries.push({ email: re });
     queries.push({ 'profile.name': re });
     queries.push({ 'teamCode': re });
+    queries.push({ 'profile.school': re });
 
     findQuery.$or = queries;
   }
@@ -251,6 +241,7 @@ UserController.getPage = function(query, callback){
         }
 
         return callback(null, {
+          query: searchText,
           users: users,
           page: page,
           size: size,
@@ -309,8 +300,7 @@ UserController.updateProfileById = function (id, profile, callback){
     });
 
     User.findOneAndUpdate({
-      _id: id,
-      verified: true
+      _id: id
     },
       {
         $set: {
@@ -353,7 +343,6 @@ UserController.updateConfirmationById = function (id, confirmation, callback){
     // You can only confirm acceptance if you're admitted and haven't declined.
     User.findOneAndUpdate({
       '_id': id,
-      'verified': true,
       'status.admitted': true,
       'status.declined': {$ne: true}
     },
@@ -365,8 +354,30 @@ UserController.updateConfirmationById = function (id, confirmation, callback){
         }
       }, {
         new: true
-      },
-      callback);
+      }, function(err, user){
+        if (!err && user && typeof user.confirmation.signatureLiability === 'undefined') {
+          Mailer.sendWaiverEmail(user.email, (err, info) => {
+            if (!err) {
+              User.findOneAndUpdate({
+                '_id': id
+              },
+              {
+                $set: {
+                  'lastUpdated': Date.now(),
+                  'confirmation.signatureLiability': ''
+                }
+              }, {
+                new: true
+              },
+              callback);
+            } else {
+              return callback(err, user);
+            }
+          });
+        } else {
+          return callback(err, user);
+        }
+      });
 
   });
 };
@@ -405,16 +416,18 @@ UserController.declineById = function (id, callback){
  */
 UserController.verifyByToken = function(token, callback){
   User.verifyEmailVerificationToken(token, function(err, email){
-    User.findOneAndUpdate({
-      email: new RegExp('^' + email + '$', 'i')
-    },{
-      $set: {
-        'verified': true
-      }
-    }, {
-      new: true
-    },
-    callback);
+    if (email) {
+      User.findOneAndUpdate({
+        email: email.toLowerCase()
+      },{
+        $set: {
+          'verified': true
+        }
+      }, {
+        new: true
+      },
+      callback);
+    }
   });
 };
 
@@ -646,8 +659,33 @@ UserController.admitUser = function(id, user, callback){
   Settings.getRegistrationTimes(function(err, times){
     User
       .findOneAndUpdate({
-        _id: id,
-        verified: true
+        _id: id
+      },{
+        $set: {
+          'status.admitted': true,
+          'status.admittedBy': user.email,
+          'status.confirmBy': times.timeConfirm
+        }
+      }, {
+        new: true
+      },
+      callback);
+  });
+};
+
+/**
+ * [ADMIN ONLY]
+ *
+ * Admit a user.
+ * @param  {String}   email    Email of the admit
+ * @param  {String}   user     User doing the admitting
+ * @param  {Function} callback args(err, user)
+ */
+UserController.admitUserByEmail = function(email, user, callback){
+  Settings.getRegistrationTimes(function(err, times){
+    User
+      .findOneAndUpdate({
+        email: email
       },{
         $set: {
           'status.admitted': true,
@@ -671,8 +709,7 @@ UserController.admitUser = function(id, user, callback){
  */
 UserController.checkInById = function(id, user, callback){
   User.findOneAndUpdate({
-    _id: id,
-    verified: true
+    _id: id
   },{
     $set: {
       'status.checkedIn': true,
@@ -694,8 +731,7 @@ UserController.checkInById = function(id, user, callback){
  */
 UserController.checkOutById = function(id, user, callback){
   User.findOneAndUpdate({
-    _id: id,
-    verified: true
+    _id: id
   },{
     $set: {
       'status.checkedIn': false
@@ -710,6 +746,97 @@ UserController.checkOutById = function(id, user, callback){
 /**
  * [ADMIN ONLY]
  */
+ /**
+  * Send the acceptance email to the participant by their ID.
+  * @param  {[type]}   ID    [description]
+  * @param  {Function} callback [description]
+  */
+UserController.sendAcceptanceEmailById = function(id, callback) {
+   User.findOne(
+     {
+       _id: id,
+       verified: true
+     },
+     function(err, user) {
+       if (err || !user) {
+         return callback(err);
+       }
+       Mailer.sendAcceptanceEmail(user.email, callback);
+       return callback(err, user);
+   });
+ };
+
+ /**
+ * [ADMIN ONLY]
+ */
+ /**
+  * Send the acceptance email to the participant by their email.
+  * @param  {[type]}   ID    [description]
+  * @param  {Function} callback [description]
+  */
+UserController.sendAcceptanceEmailByEmail = function(email, callback) {
+   email = email.toLowerCase();
+   User.findOne(
+     {
+       email: email
+     },
+     function(err, user) {
+       if (err || !user) {
+         return callback(err || 'no user');
+       }
+       Mailer.sendAcceptanceEmail(email, user.status.confirmBy, callback);
+   });
+ };
+
+UserController.markWaiverAsSigned = function(email, callback) {
+  User.findOneAndUpdate({
+    'email': email,
+    'status.admitted': true
+  },{
+    $set: {
+      'lastUpdated': Date.now(),
+      'confirmation.signatureLiability': Date.now()
+    }
+  }, {
+    new: true
+  },
+  callback);
+};
+
+UserController.sendWaiverEmail = function(id, callback) {
+  User.findById(id, function(err, user){
+
+    if(err || !user){
+      return callback(err);
+    }
+
+    if (typeof user.confirmation.signatureLiability === 'undefined') {
+      Mailer.sendWaiverEmail(user.email, (err, info) => {
+        if (!err) {
+          User.findOneAndUpdate({
+            '_id': id
+          },
+          {
+            $set: {
+              'lastUpdated': Date.now(),
+              'confirmation.signatureLiability': ''
+            }
+          }, {
+            new: true
+          },
+          callback);
+        } else {
+          return callback(err);
+        }
+      });
+    } else {
+      Mailer.sendWaiverEmail(user.email, (err, info) => {
+        return callback(err, info);
+      });
+    }
+
+  });
+};
 
 UserController.getStats = function(callback){
   return callback(null, Stats.getUserStats());

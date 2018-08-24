@@ -16,7 +16,7 @@ angular.module('reg')
 
       $scope.TEAM = TEAM;
 
-      if ($scope.user.teamCode){
+      function _populateTeammates() {
         UserService
           .getMyTeammates()
           .success(function(users){
@@ -25,17 +25,39 @@ angular.module('reg')
           });
       }
 
+      if ($scope.user.teamCode){
+        _populateTeammates();
+      }
+
+      $('.ui.form')
+        .form({
+          fields: {
+            name: {
+              identifier: 'name',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please enter your team name.'
+                }
+              ]
+            }
+          }
+        })
+      ;
+
       $scope.joinTeam = function(){
-        UserService
-          .joinOrCreateTeam($scope.code)
-          .success(function(user){
-            $scope.error = null;
-            $scope.user = user;
-            _populateTeammates();
-          })
-          .error(function(res){
-            $scope.error = res.message;
-          });
+        if ($('.ui.form').form('is valid')) {
+          UserService
+            .joinOrCreateTeam($scope.code)
+            .success(function(user){
+              $scope.error = null;
+              $scope.user = user;
+              _populateTeammates();
+            })
+            .error(function(res){
+              $scope.error = res.message;
+            });
+        }
       };
 
       $scope.leaveTeam = function(){

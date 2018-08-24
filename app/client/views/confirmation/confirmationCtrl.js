@@ -16,6 +16,35 @@ angular.module('reg')
 
       $scope.formatTime = Utils.formatTime;
 
+      $scope.showTransportation = user.profile.school === 'University of California-Los Angeles' ||
+                                  user.profile.school === 'The University of California, Los Angeles' ||
+                                  user.profile.school === 'UCLA' ||
+                                  user.profile.school === 'University of California-San Diego' ||
+                                  user.profile.school === 'The University of California, San Diego' ||
+                                  user.profile.school === 'University of Southern California'
+
+      if ($scope.showTransportation) {
+        if (user.confirmation.needsReimbursement) {
+          $scope.user.confirmation.needsReimbursement = '1';
+        } else {
+          $scope.user.confirmation.needsReimbursement = '0';
+        }
+      }
+
+      $scope.$watch("user.confirmation.needsReimbursement", function(value) {
+        if (value === '1') {
+          $scope.showTransportationMessage = true;
+        } else {
+          $scope.showTransportationMessage = false;
+        }
+      })
+
+      if (user.confirmation.signatureLiability && user.confirmation.signatureLiability !== '') {
+        $scope.hasSignedLiability = true;
+      }
+
+      $scope.showButtonLoading = false;
+
       _setupForm();
 
       $scope.fileName = user._id + "_" + user.profile.name.split(" ").join("_");
@@ -44,6 +73,7 @@ angular.module('reg')
       // -------------------------------
 
       function _updateUser(e){
+        $scope.showButtonLoading = true;
         var confirmation = $scope.user.confirmation;
         // Get the dietary restrictions as an array
         var drs = [];
@@ -57,6 +87,7 @@ angular.module('reg')
         UserService
           .updateConfirmation(user._id, confirmation)
           .success(function(data){
+            $scope.showButtonLoading = false;
             sweetAlert({
               title: "Woo!",
               text: "You're confirmed!",
@@ -67,6 +98,7 @@ angular.module('reg')
             });
           })
           .error(function(res){
+            $scope.showButtonLoading = false;
             sweetAlert("Uh oh!", "Something went wrong.", "error");
           });
       }

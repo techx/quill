@@ -52,12 +52,12 @@
 
       <div class="field">
         <label> Email </label>
-        <input type="text" ng-model="selectedUser.email" />
+        <input type="text" ng-model="selectedUser.email" disabled/>
       </div>
 
       <div class="field">
         <label> Team </label>
-        <input type="text" ng-model="selectedUser.teamCode" />
+        <input type="text" ng-model="selectedUser.teamCode" disabled/>
       </div>
 
     </fieldset>
@@ -74,19 +74,54 @@
        Profile
       </div>
 
-      <div class="field">
-        <label> Email </label>
-        <input type="email"
-               name="email"
-               disabled="disabled"
-               ng-model="selectedUser.email">
+      <div class="two fields">
+        <div class="field">
+          <label>
+            First Name
+            <span class="required">*</span>
+          </label>
+          <input type="text"
+                 name="name"
+                 ng-model="selectedUser.profile.firstname">
+        </div>
+
+        <div class="field">
+          <label>
+            Last Name
+            <span class="required">*</span>
+          </label>
+          <input type="text"
+                 name="name"
+                 ng-model="selectedUser.profile.lastname">
+        </div>
       </div>
 
-      <div class="field">
-        <label> Full Name </label>
-        <input type="text"
-               name="name"
-               ng-model="selectedUser.profile.name">
+      <div class="fields">
+        <div class="eleven wide field">
+          <label>
+            Email
+            <span class="required">*</span>
+          </label>
+          <input type="email"
+                 name="email"
+                 ng-model="selectedUser.email" disabled>
+        </div>
+
+        <div class="five wide field">
+          <label>
+            Gender
+            <span class="required">*</span>
+          </label>
+          <select
+            name="gender"
+            ng-model="selectedUser.profile.gender">
+            <option value="">Gender</option>
+            <option value="M">Male</option>
+            <option value="F">Female</option>
+            <option value="O">Other</option>
+            <option value="N">I prefer not to answer.</option>
+          </select>
+        </div>
       </div>
 
       <div class="field" ng-show="autoFilledSchool">
@@ -104,34 +139,83 @@
                ng-model="selectedUser.profile.school">
       </div>
 
-      <div class="field">
-        <label>Graduation Year</label>
-        <select
-          name="year"
-          ng-model="selectedUser.profile.graduationYear">
-          <option value="">Graduation Year</option>
-          <option value="2016">2016</option>
-          <option value="2017">2017</option>
-          <option value="2018">2018</option>
-          <option value="2019">2019</option>
-        </select>
+      <div class="two fields">
+        <div class="field">
+          <label>
+            Major
+             <span class="required">*</span>
+          </label>
+          <select
+            name="major"
+            ng-model="selectedUser.profile.major">
+            <option value="">Major</option>
+            <option value="AE">Aerospace Engineering</option>
+            <option value="AP">Applied Physics</option>
+            <option value="BE">Biomedical Engineering</option>
+            <option value="BIM">Business Information Management</option>
+            <option value="CME">Chemical Engineering</option>
+            <option value="CH">Chemistry</option>
+            <option value="CVE">Civil Engineering</option>
+            <option value="CE">Computer Engineering</option>
+            <option value="CGS">Computer Game Science</option>
+            <option value="CS">Computer Science</option>
+            <option value="CSE">Computer Science and Engineering</option>
+            <option value="DS">Data Science</option>
+            <option value="ESS">Earth System Science</option>
+            <option value="EE">Electrical Engineering</option>
+            <option value="ENG">Engineering</option>
+            <option value="ENE">Environmental Engineering</option>
+            <option value="ENS">Environmental Science</option>
+            <option value="INF">Informatics</option>
+            <option value="MSE">Materials Science Engineering</option>
+            <option value="MAT">Mathematics</option>
+            <option value="MCE">Mechanical Engineering</option>
+            <option value="PHY">Physics</option>
+            <option value="SE">Software Engineering</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>
+            Graduation Year
+             <span class="required">*</span>
+          </label>
+          <select
+            name="year"
+            ng-model="selectedUser.profile.graduationYear">
+            <option value="">Graduation Year</option>
+            <option value="2018">2018</option>
+            <option value="2019">2019</option>
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+            <option value="later">Later than 2021</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="two fields">
+        <div class="field">
+          <label> LinkedIn </label>
+          <input type="text"
+                 name="linkedin"
+                 placeholder="http://"
+                 ng-model="selectedUser.profile.linkedin">
+        </div>
+        <div class="field">
+          <label> Portfolio (GitHub, website, etc.) </label>
+          <input type="text"
+                 name="portfolio"
+                 placeholder="http://"
+                 ng-model="selectedUser.profile.portfolio">
+        </div>
       </div>
 
       <div class="field">
-        <label>Gender</label>
-        <select
-          name="gender"
-          ng-model="selectedUser.profile.gender">
-          <option value="">Gender</option>
-          <option value="M">Male</option>
-          <option value="F">Female</option>
-          <option value="O">Other</option>
-          <option value="N">I prefer not to answer.</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label>I would describe myself as a...</label>
+        <label>
+          I would describe myself as a...
+          <span class="required">*</span>
+        </label>
         <input type="text"
                placeholder="Designer, Data Scientist, iOS Wizard, Hacker Extraordinaire"
                ng-model="selectedUser.profile.description">
@@ -139,21 +223,32 @@
 
       <div class="field">
         <label>
-            What would you like to learn or get out of HackMIT? (optional)
+            What would you like to learn or get out of HackUCI?
+            <span class="required">*</span>
         </label>
-        <textarea ng-model="selectedUser.profile.essay">
+        <textarea ng-model="selectedUser.profile.essay"
+          name="essay"
+          placeholder="Please enter your response here (100 chars min, 1500 max)">
         </textarea>
+      </div>
+
+      <div class="field">
+        <label>
+          Resume (PDF)
+          <span class="required">*</span>
+        </label>
+        <button class="ui pink tiny button" ng-click="openResume()">View Resume</button>
       </div>
 
       <div class="field"
            ng-hide="isMitStudent">
         <p>
-          Because of limitations imposed by MIT, we are not legally allowed to host
-          non-MIT minors (those under 18) for HackMIT 2015. Checking the box below affirms that you are or will be 18 years or older by September 19th, 2015.
+          Because of limitations imposed by UCI, we are not legally allowed to host
+          non-UCI minors (those under 18) for HackUCI 2018. Checking the box below affirms that you are or will be 18 years or older by Feburary 2nd, 2018.
         </p>
         <p>
           <strong>
-          We will be checking ID. If you are a non-MIT minor, you will be turned away at the door.
+            We will be checking ID. If you are a non-UCI minor, you will be turned away at the door.
           </strong>
         </p>
         <div class="ui checkbox">

@@ -8,32 +8,19 @@ angular.module('reg')
       $urlRouterProvider,
       $locationProvider) {
 
-    // For any unmatched url, redirect to /state1
+    // For any unmatched url, redirect to /404
     $urlRouterProvider.otherwise("/404");
 
     // Set up de states
     $stateProvider
-      .state('login', {
-        url: "/login",
-        templateUrl: "views/login/login.html",
-        controller: 'LoginCtrl',
-        data: {
-          requireLogin: false
-        },
-        resolve: {
-          'settings': function(SettingsService){
-            return SettingsService.getPublicSettings();
-          }
-        }
-      })
       .state('app', {
         views: {
           '': {
             templateUrl: "views/base.html"
           },
-          'sidebar@app': {
-            templateUrl: "views/sidebar/sidebar.html",
-            controller: 'SidebarCtrl',
+          'navbar@app': {
+            templateUrl: "views/navbar/navbar.html",
+            controller: 'NavbarCtrl',
             resolve: {
               'settings' : function(SettingsService) {
                 return SettingsService.getPublicSettings();
@@ -46,8 +33,47 @@ angular.module('reg')
           requireLogin: true
         }
       })
-      .state('app.dashboard', {
+      .state('app.home', {
         url: "/",
+        templateUrl: "views/home/home.html",
+        controller: 'HomeCtrl',
+        data: {
+          requireLogin: false
+        },
+        resolve: {
+          'settings': function(SettingsService){
+            return SettingsService.getPublicSettings();
+          }
+        }
+      })
+      .state('app.login', {
+        url: "/login",
+        templateUrl: "views/login/login.html",
+        controller: 'LoginCtrl',
+        data: {
+          requireLogin: false
+        },
+        resolve: {
+          'settings': function(SettingsService){
+            return SettingsService.getPublicSettings();
+          }
+        }
+      })
+      .state('app.apply', {
+        url: "/apply",
+        templateUrl: "views/apply/apply.html",
+        controller: 'ApplyCtrl',
+        data: {
+          requireLogin: false
+        },
+        resolve: {
+          settings: function(SettingsService){
+            return SettingsService.getPublicSettings();
+          }
+        },
+      })
+      .state('app.dashboard', {
+        url: "/dashboard",
         templateUrl: "views/dashboard/dashboard.html",
         controller: 'DashboardCtrl',
         resolve: {
@@ -76,6 +102,9 @@ angular.module('reg')
         url: "/confirmation",
         templateUrl: "views/confirmation/confirmation.html",
         controller: 'ConfirmationCtrl',
+        data: {
+          requireAdmitted: true
+        },
         resolve: {
           currentUser: function(UserService){
             return UserService.getCurrentUser();
@@ -106,7 +135,8 @@ angular.module('reg')
           }
         },
         data: {
-          requireAdmin: true
+          requireAdmin: true,
+          requireOwner: true
         }
       })
       .state('app.admin.stats', {
@@ -136,6 +166,108 @@ angular.module('reg')
         url: "/admin/settings",
         templateUrl: "views/admin/settings/settings.html",
         controller: 'AdminSettingsCtrl',
+      })
+      .state('app.checkin', {
+        url: "/checkin",
+        templateUrl: "views/checkin/checkin.html",
+        controller: 'CheckinCtrl',
+        data: {
+          requireAdmin: true
+        }
+      })
+      .state('app.sponsor', {
+        url: "/sponsor",
+        templateUrl: "views/sponsor/sponsor.html",
+        controller: 'SponsorCtrl',
+        data: {
+          requireLogin: false
+        }
+      })
+      .state('app.volunteer', {
+        url: "/volunteer",
+        templateUrl: "views/volunteer/volunteer.html",
+        controller: 'VolunteerCtrl',
+        data: {
+          requireLogin: false
+        }
+      })
+      .state('app.mentor', {
+        url: "/mentor",
+        templateUrl: "views/mentor/mentor.html",
+        controller: 'MentorCtrl',
+        data: {
+          requireLogin: false
+        }
+      })
+      .state('app.live', {
+        url: "/live",
+        redirectTo: 'app.expo',
+        data: {
+          requireLogin: false
+        }
+      })
+      .state('app.expoRedirect', {
+        url: "/expo",
+        redirectTo: 'app.expo',
+        data: {
+          requireLogin: false
+        }
+      })
+      .state('app.schedule', {
+        url: "/live/schedule",
+        templateUrl: "views/live/schedule.html",
+        controller: 'ScheduleCtrl',
+        data: {
+          requireLogin: false
+        }
+      })
+      .state('app.expo', {
+        url: "/live/expo",
+        templateUrl: "views/live/expo.html",
+        controller: 'ExpoCtrl',
+        data: {
+          requireLogin: false
+        }
+      })
+      .state('app.recruit', {
+        url: "/recruit",
+        templateUrl: "views/recruit/recruit.html",
+        controller: 'RecruitCtrl',
+        data: {
+          requireLogin: false
+        }
+      })
+      .state('app.logistics', {
+        url: "/recruit/logistics",
+        templateUrl: "views/recruit/logistics.html",
+        controller: 'RecruitCtrl',
+        data: {
+          requireLogin: false
+        }
+      })
+      .state('app.corporate', {
+        url: "/recruit/corporate",
+        templateUrl: "views/recruit/corporate.html",
+        controller: 'RecruitCtrl',
+        data: {
+          requireLogin: false
+        }
+      })
+      .state('app.marketing', {
+        url: "/recruit/marketing",
+        templateUrl: "views/recruit/marketing.html",
+        controller: 'RecruitCtrl',
+        data: {
+          requireLogin: false
+        }
+      })
+      .state('app.technology', {
+        url: "/recruit/technology",
+        templateUrl: "views/recruit/technology.html",
+        controller: 'RecruitCtrl',
+        data: {
+          requireLogin: false
+        }
       })
       .state('reset', {
         url: "/reset/:token",
@@ -169,24 +301,51 @@ angular.module('reg')
   .run([
     '$rootScope',
     '$state',
+    '$timeout',
+    '$window',
     'Session',
     function(
       $rootScope,
       $state,
+      $timeout,
+      $window,
       Session ){
 
       $rootScope.$on('$stateChangeSuccess', function() {
+         $rootScope.fadeOut = false;
          document.body.scrollTop = document.documentElement.scrollTop = 0;
       });
 
-      $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
+      $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState) {
+        if (toState.external) {
+          event.preventDefault();
+          $window.open(toState.redirectTo, '_self');
+        }
+
         var requireLogin = toState.data.requireLogin;
         var requireAdmin = toState.data.requireAdmin;
         var requireVerified = toState.data.requireVerified;
+        var requireAdmitted = toState.data.requireAdmitted;
+        var requireOwner = toState.data.requireOwner;
+        $rootScope.fromState = fromState;
+
+        if (toState.redirectTo) {
+          event.preventDefault();
+          $state.go(toState.redirectTo, toParams, {location: 'replace'})
+        }
+
+        if (!$rootScope.fadeOut) {
+          event.preventDefault();
+          $rootScope.fadeOut = true;
+
+          $timeout(function() {
+            $state.go(toState.name, toParams);
+          }, 100);
+        }
 
         if (requireLogin && !Session.getToken()) {
           event.preventDefault();
-          $state.go('login');
+          $state.go('app.login');
         }
 
         if (requireAdmin && !Session.getUser().admin) {
@@ -194,9 +353,34 @@ angular.module('reg')
           $state.go('app.dashboard');
         }
 
-        if (requireVerified && !Session.getUser().verified){
+        if (requireOwner && !Session.getUser().owner) {
+          event.preventDefault();
+          $state.go('app.checkin');
+        }
+
+        if (requireVerified && !Session.getUser().verified) {
           event.preventDefault();
           $state.go('app.dashboard');
+        }
+
+        if (requireAdmitted && !Session.getUser().status.admitted) {
+          event.preventDefault();
+          $state.go('app.dashboard');
+        }
+
+        if (toState.name === 'app.apply' && Session.getUserId()) {
+          event.preventDefault();
+          $state.go('app.application');
+        }
+
+        if (toState.name === 'app.volunteer') {
+          event.preventDefault();
+          $state.go('app.home');
+        }
+
+        if (toState.name === 'app.live') {
+          event.preventDefault();
+          $state.go('app.expo');
         }
 
       });

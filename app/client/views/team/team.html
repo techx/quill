@@ -1,4 +1,4 @@
-<div id="team" class="page">
+<div id="team" class="page" ng-class="{ 'fade-out': fadeOut }">
   <div class="divided title">
     Team
   </div>
@@ -31,6 +31,8 @@
             <input
               class="ui input"
               type="text"
+              id="name"
+              name="name"
               placeholder="Choose your team name..."
               ng-model="code">
           </div>
