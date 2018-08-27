@@ -16,7 +16,10 @@ angular.module("reg").factory("Utils", [
 
                 const date = new Date(time);
                 // Hack for timezone
-                return `${moment(date).format("dddd, MMMM Do YYYY, h:mm a")} ${date.toTimeString().split(" ")[2]}`;
+                const [,,
+                    tz1, tz2, tz3,
+                ] = date.toTimeString().split(" ");
+                return `${moment(date).format("dddd, MMMM Do YYYY, h:mm a")} ${tz1} ${tz2} ${tz3}`;
             },
         };
     }]);
