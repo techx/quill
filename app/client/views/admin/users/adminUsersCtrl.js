@@ -202,11 +202,15 @@ angular.module('reg')
                 name: 'Major',
                 value: user.profile.major
               },{
-                name: 'Graduation Year',
+                name: 'Class Standing',
                 value: user.profile.graduationYear
               },{
                 name: 'Anything Else',
                 value: user.profile.essay
+              },
+              {
+                name: 'Birth Date',
+                value: user.profile.birthdate
               }
             ]
           },{

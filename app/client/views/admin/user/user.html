@@ -113,17 +113,17 @@
       </div>
 
       <div class="field">
-        <label>Graduation Year</label>
+        <label>Class Standing</label>
         <select
           name="year"
           ng-model="selectedUser.profile.graduationYear">
-          <option value="">Graduation Year</option>
-
-          <option value="2019">2019</option>
-          <option value="2020">2020</option>
-          <option value="2021">2021</option>
-          <option value="2022">2022</option>
-
+            <option value="highschool">High School</option>
+            <option value="fresh">Freshman</option>
+            <option value="soph">Sophomore</option>
+            <option value="junior">Junior</option>
+            <option value="senior">Senior</option>
+            <option value="master">Masters</option>
+            <option value="phd">PhD</option>
         </select>
       </div>
 
@@ -138,6 +138,13 @@
           <option value="O">Other</option>
           <option value="N">I prefer not to answer.</option>
         </select>
+      </div>
+
+       <div class="field">
+        <label>Birth Date</label>
+        <input type = "date" name = "birth date" 
+        ng-model="user.profile.birthdate">
+        
       </div>
 
       <div class="field">

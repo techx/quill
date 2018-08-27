@@ -30,12 +30,16 @@ var profile = {
     required: true,
     default: false
   },
+  birthdate: {
+    type: Date
+  },
 
   school: {
     type: String,
     min: 1,
     max: 150
   },
+  
 
   major: {
     type: String,
@@ -47,7 +51,7 @@ var profile = {
     type: String,
     enum: {
 
-      values: '2019 2020 2021 2022'.split(' '),
+      values: 'highschool fresh soph junior senior master phd'.split(' '),
 
     }
   },
@@ -369,9 +373,8 @@ schema.statics.validateProfile = function(profile, cb){
     profile.discloseMLHAffiliation &&
     profile.ethnicity &&
     profile.school.length > 0 &&
-
     profile.major.length > 0 &&
-    ['2019', '2020', '2021', '2022'].indexOf(profile.graduationYear) > -1 &&
+    ['highschool', 'fresh', 'soph', 'junior', 'senior', 'master', 'phd'].indexOf(profile.graduationYear) > -1 &&
     ['M', 'F', 'O', 'N'].indexOf(profile.gender) > -1
     ));
 };

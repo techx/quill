@@ -35,10 +35,13 @@ function calculateStats(){
       schools: {},
       year: {
 
-        '2019': 0,
-        '2020': 0,
-        '2021': 0,
-        '2022': 0,
+        'highschool': 0,
+        'fresh': 0,
+        'soph': 0,
+        'junior': 0,
+        'senior': 0,
+        'master': 0,
+        'phd': 0,
 
       }
     },

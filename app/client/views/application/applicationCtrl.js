@@ -160,8 +160,8 @@ angular.module('reg')
               identifier: 'adult',
               rules: [
                 {
-                  type: 'allowMinors',
-                  prompt: 'You must be an adult, or an MIT student.'
+                  type: 'checked',
+                  prompt: 'You must be an adult, or a BU student.'
                 }
               ]
             },
