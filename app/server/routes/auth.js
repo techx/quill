@@ -118,12 +118,14 @@ module.exports = function (router) {
         if (id) {
             UserController.sendVerificationEmailById(id, (err, user) => {
                 if (err || !user) {
-                    return res.status(400).send();
+                    console.log(err, user);
+                    return res.status(400).send(err);
                 }
                 return res.status(200).send();
             });
         }
         else {
+            console.log("no id");
             return res.status(400).send();
         }
     });
