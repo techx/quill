@@ -39,7 +39,7 @@
           <label> School </label>
           <div id="school" class="ui search">
             <div class="ui input">
-              <input class="prompt" type="text" placeholder="School" name="school" ng-model="user.profile.school">                
+              <input class="prompt" type="text" placeholder="School" name="school" ng-model="user.profile.school">
             </div>
             <div class="results"></div>
           </div>
@@ -75,7 +75,7 @@
           <select
             name="gender"
             ng-model="user.profile.gender">
-            <option value="">Gender</option>
+            <option selected disabled hidden>Gender</option>
             <option value="M">Male</option>
             <option value="F">Female</option>
             <option value="O">Other</option>
@@ -85,9 +85,10 @@
 
       <div class="field">
         <label>Birth Date </label>
-        <input type = "date" 
+        <input type = "date"
+        name="birthdate"
         ng-model="user.profile.birthdate">
-        
+
       </div>
 
         <div class="field">
@@ -95,7 +96,7 @@
           <select
             name="ethnicity"
             ng-model="user.profile.ethnicity">
-            <option value="">Identity</option>
+            <option selected disabled hidden>Ethnicity</option>
             <option value="AIAN">American Indian or Alaskan Native</option>
             <option value="API">Asian / Pacific Islander</option>
             <option value="BAA">Black or African American</option>
@@ -125,7 +126,7 @@
               Anything else you'd like us to know? (optional)
 
           </label>
-          <textarea ng-model="user.profile.essay">
+          <textarea name="essay" ng-model="user.profile.essay">
           </textarea>
         </div>
 
