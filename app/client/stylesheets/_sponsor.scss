@@ -207,12 +207,20 @@
 		text-align: center;
 	}
 
+	.winners-list {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: space-around
+	}
 	.winners-list>div {
 		padding: 3.5% 0;
 		border-bottom: 1px solid transparent;
 		transition: all .2s ease;
 	}
-
+	.prize-category-icon{
+		color: white;
+	}
 	.winners-list>div:hover {
 		border-bottom: 1px solid white;
 	}
@@ -299,6 +307,10 @@
 		margin-right: auto;
 	}
 
+	#sponsorship-packet {
+		text-decoration: underline;
+		font-weight: bold;
+	}
 	#sponsorship>.title {
 		text-align: center;
 		line-height: 1em;

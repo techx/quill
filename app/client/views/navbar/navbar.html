@@ -40,6 +40,12 @@
         LOGIN
       </a>
       <a
+        ui-sref-active="menu-item-active"  
+        ui-sref="app.sponsor"
+        class="menu-item">
+        SPONSORS
+      </a>
+      <a
         ui-sref-active="menu-item-active"
         ui-sref="app.apply"
         ng-if="!isLoggedIn && regIsOpen"
