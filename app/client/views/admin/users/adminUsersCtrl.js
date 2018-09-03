@@ -29,6 +29,15 @@ angular.module("reg").controller("AdminUsersCtrl", [
 
       var p = [];
       for (var i = 0; i < data.totalPages; i++) {
+        for (i = 0; i < data.users.length; i++) {
+          if (data.users[i].profile) {
+            if (data.users[i].profile.birthdate) {
+              data.users[i].profile.birthdate = formatDate(
+                data.users[i].profile.birthdate
+              );
+            }
+          }
+        }
         p.push(i);
       }
       $scope.pages = p;

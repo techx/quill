@@ -20,6 +20,11 @@ angular.module("reg").controller("ApplicationCtrl", [
     // Set up the user
     $scope.user = currentUser.data;
 
+    // Formatting for the birthday so it shows on the UI.
+    $scope.user.profile.birthdate = new Date(
+      currentUser.data.profile.birthdate
+    );
+
     // Is the student from MIT?
     $scope.isBUStudent = $scope.user.email.split("@")[1] == "bu.edu";
 
