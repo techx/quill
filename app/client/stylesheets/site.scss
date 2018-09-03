@@ -1,12 +1,17 @@
-@import 'branding';
+
 @import 'custom';
 $font-body: 'Lato', 'Helvetica Neue', 'Helvetica', sans-serif;
 $font-header: 'Montserrat', 'Helvetica Neue', 'Helvetica', sans-serif;
+
+$primary: #F05352;
+$secondary: #2FB5E3;
+$tertiary: #282561;
 
 // Login screen variables
 $login-bg-color: $secondary;
 $login-color: $primary;
 $register-color: $tertiary;
+
 
 $status-unverified-color: rgb(82, 82, 82);
 $status-incomplete-color: #F5F5F5;

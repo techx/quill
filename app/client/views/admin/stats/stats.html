@@ -65,7 +65,7 @@
           <i class="green circle check icon"></i>
           <div class="content">
             <strong>
-              Confirmed (MIT)
+              Confirmed (BU)
             </strong> :
             {{stats.confirmedMit}}
           </div>
@@ -236,19 +236,26 @@
       </div>
     <div class="ui divider"></div>
       <div class="ui list">
-        <div class="item">
-
-          <strong>Fresh:</strong> {{stats.demo.year['2022']}} ({{stats.demo.year['2022'] / stats.total * 100 | number: 1}}%)
+      	<div class="item">
+          <strong>Highschool:</strong> {{stats.demo.year['highschool']}} ({{stats.demo.year['highschool'] / stats.total * 100 | number: 1}}%)
         </div>
         <div class="item">
-          <strong>Soph:</strong> {{stats.demo.year['2021']}} ({{stats.demo.year['2021'] / stats.total * 100 | number: 1}}%)
+          <strong>Fresh:</strong> {{stats.demo.year['fresh']}} ({{stats.demo.year['fresh'] / stats.total * 100 | number: 1}}%)
         </div>
         <div class="item">
-         <strong>Junior:</strong> {{stats.demo.year['2020']}} ({{stats.demo.year['2020'] / stats.total * 100 | number: 1}}%)
+          <strong>Soph:</strong> {{stats.demo.year['soph']}} ({{stats.demo.year['soph'] / stats.total * 100 | number: 1}}%)
         </div>
         <div class="item">
-          <strong>Senior:</strong> {{stats.demo.year['2019']}} ({{stats.demo.year['2019'] / stats.total * 100 | number: 1}}%)
-
+         <strong>Junior:</strong> {{stats.demo.year['junior']}} ({{stats.demo.year['junior'] / stats.total * 100 | number: 1}}%)
+        </div>
+        <div class="item">
+          <strong>Senior:</strong> {{stats.demo.year['senior']}} ({{stats.demo.year['senior'] / stats.total * 100 | number: 1}}%)
+        </div>
+        <div class="item">
+          <strong>Master:</strong> {{stats.demo.year['master']}} ({{stats.demo.year['master'] / stats.total * 100 | number: 1}}%)
+        </div>
+        <div class="item">
+          <strong>PhD:</strong> {{stats.demo.year['phd']}} ({{stats.demo.year['phd'] / stats.total * 100 | number: 1}}%)
         </div>
       </div>
     <div class="ui divider"></div>

@@ -39,7 +39,7 @@
           <label> School </label>
           <div id="school" class="ui search">
             <div class="ui input">
-              <input class="prompt" type="text" placeholder="School" name="school" ng-model="user.profile.school">                
+              <input class="prompt" type="text" placeholder="School" name="school" ng-model="user.profile.school">
             </div>
             <div class="results"></div>
           </div>
@@ -54,16 +54,18 @@
         </div>
 
         <div class="field">
-          <label>Graduation Year</label>
+          <label>Class Standing</label>
           <select
             name="year"
             ng-model="user.profile.graduationYear">
-            <option value="">Graduation Year</option>
 
-            <option value="2019">2019</option>
-            <option value="2020">2020</option>
-            <option value="2021">2021</option>
-            <option value="2022">2022</option>
+            <option value="highschool">High School</option>
+            <option value="fresh">Freshman</option>
+            <option value="soph">Sophomore</option>
+            <option value="junior">Junior</option>
+            <option value="senior">Senior</option>
+            <option value="master">Masters</option>
+            <option value="phd">PhD</option>
 
           </select>
         </div>
@@ -73,7 +75,7 @@
           <select
             name="gender"
             ng-model="user.profile.gender">
-            <option value="">Gender</option>
+            <option selected disabled hidden>Gender</option>
             <option value="M">Male</option>
             <option value="F">Female</option>
             <option value="O">Other</option>
@@ -81,12 +83,20 @@
           </select>
         </div>
 
+      <div class="field">
+        <label>Birth Date </label>
+        <input type = "date"
+        name="birthdate"
+        ng-model="user.profile.birthdate">
+
+      </div>
+
         <div class="field">
           <label>Ethnic Identity</label>
           <select
             name="ethnicity"
             ng-model="user.profile.ethnicity">
-            <option value="">Identity</option>
+            <option selected disabled hidden>Ethnicity</option>
             <option value="AIAN">American Indian or Alaskan Native</option>
             <option value="API">Asian / Pacific Islander</option>
             <option value="BAA">Black or African American</option>
@@ -116,7 +126,7 @@
               Anything else you'd like us to know? (optional)
 
           </label>
-          <textarea ng-model="user.profile.essay">
+          <textarea name="essay" ng-model="user.profile.essay">
           </textarea>
         </div>
 
