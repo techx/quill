@@ -122,8 +122,12 @@ angular.module("reg").controller("ConfirmationCtrl", [
         }
 
         $scope.submitForm = function () {
+            $(".ui.form").form("validate form");
             if ($(".ui.form").form("is valid")) {
                 _updateUser();
+            }
+            else {
+                sweetAlert("Uh oh!", "Please fill out the required fields.", "error");
             }
         };
     }]);

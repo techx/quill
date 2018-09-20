@@ -1248,6 +1248,7 @@ th {
 }
 #dashboard .status .state.confirmed {
   background: #2C0735;
+  color: white;
 }
 #dashboard .status .state.checked.in {
   background: #2C0735;
@@ -1537,6 +1538,10 @@ div.row .row-header {
 .row#sponsors .row-content.sponsor-ultra a img {
   max-height: 500px;
   max-width: 500px;
+}
+.row#sponsors .row-content.sponsor-supreme a img {
+  max-height: 400px;
+  max-width: 400px;
 }
 .row#sponsors .row-content.sponsor-mega a img {
   max-height: 300px;

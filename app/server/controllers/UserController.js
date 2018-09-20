@@ -46,22 +46,16 @@ function canRegister(email, password, callback) {
             });
         }
 
-        return callback(null, true);
-
-        // // Check for emails.
-        // Settings.getWhitelistedEmails((err, emails) => {
-        //     if (err || !emails) {
-        //         return callback(err);
-        //     }
-        //     for (let i = 0; i < emails.length; i++) {
-        //         if (validator.isEmail(email) && endsWith(emails[i], email)) {
-        //             return callback(null, true);
-        //         }
-        //     }
-        //     return callback({
-        //         message: "Not a valid educational email.",
-        //     }, false);
-        // });
+        User.findOne({ email }, (err, user) => {
+            if (!err) {
+                if (user) {
+                    return callback("There is already a user with this email.");
+                }
+                else {
+                    return callback(null, true);
+                }
+            }
+        });
     });
 }
 
@@ -87,11 +81,22 @@ UserController.loginWithPassword = function (email, password, callback) {
         });
     }
 
-    if (!validator.isEmail(email)) {
+    try {
+        if (!validator.isEmail(email)) {
+            return callback({
+                message: "Invalid email",
+            });
+        }
+    }
+    catch (error) {
+        console.log(error);
+        console.log(email);
         return callback({
             message: "Invalid email",
         });
     }
+
+    console.log(email, "email");
 
     User
         .findOneByEmail(email)
@@ -148,6 +153,7 @@ UserController.createUser = function (email, password, callback) {
         u.password = User.generateHash(password);
         u.save((err) => {
             if (err) {
+                console.log(err);
                 // Duplicate key error codes
                 if (err.name === "MongoError" && (err.code === 11000 || err.code === 11001)) {
                     return callback({
