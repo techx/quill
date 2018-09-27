@@ -1,4 +1,8 @@
+const asyncMap = require("async/map");
+const flat = require("flat");
+const papaparse = require("papaparse");
 const request = require("request");
+const UserModel = require("../models/User");
 const UserController = require("../controllers/UserController");
 const SettingsController = require("../controllers/SettingsController");
 
@@ -391,5 +395,22 @@ module.exports = function (router) {
     router.put("/settings/minors", isAdmin, (req, res) => {
         const allowMinors = req.body.allowMinors;
         SettingsController.updateField("allowMinors", allowMinors, defaultResponse(req, res));
+    });
+
+    router.get("/csv", isAdmin, (req, res) => {
+        UserModel.find({}).lean().exec((err, users) => {
+            asyncMap(users, (user, cb) => {
+                const flattenedUser = flat(user);
+                return cb(null, flattenedUser);
+            }, (err, parsedUsers) => {
+                const content = papaparse.unparse({
+                    data: parsedUsers,
+                    fields: Object.keys(parsedUsers[256]),
+                }, {
+                    delimiter: ",",
+                });
+                return res.end(content);
+            });
+        });
     });
 };

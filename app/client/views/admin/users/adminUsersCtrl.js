@@ -119,6 +119,17 @@ angular.module("reg").controller("AdminUsersCtrl", [
             });
         };
 
+        $scope.downloadCSV = function () {
+            UserService.downloadCSV().success((content) => {
+                const now = new moment().format("MMMM Do YYYY, h:mm:ss a");
+                const hiddenElement = document.createElement("a");
+                hiddenElement.href = `data:attachment/csv,${encodeURI(content)}`;
+                hiddenElement.target = "_blank";
+                hiddenElement.download = `BigRedHacks_${now}.csv`;
+                hiddenElement.click();
+            });
+        };
+
         function formatTime(time) {
             if (time) {
                 return moment(time).format("MMMM Do YYYY, h:mm:ss a");

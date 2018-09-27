@@ -10,6 +10,9 @@ angular.module("reg").factory("UserService", [
             // ----------------------
             // Basic Actions
             // ----------------------
+            downloadCSV() {
+                return $http.get("/api/csv");
+            },
             getCurrentUser() {
                 return $http.get(base + Session.getUserId());
             },
