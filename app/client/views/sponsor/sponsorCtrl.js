@@ -21,6 +21,6 @@ angular.module('reg')
 		}
 
 		$scope.sponsor = function() {
-			$window.open("https://squareup.com/store/hackuci", "_blank");
+			$window.open("https://s3-us-west-1.amazonaws.com/hackuci2019/Hack2019SponsorshipPackage.pdf", "_blank");
 		}
 	}]);

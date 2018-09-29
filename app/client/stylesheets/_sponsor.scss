@@ -207,12 +207,20 @@
 		text-align: center;
 	}
 
+	.winners-list {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: space-around
+	}
 	.winners-list>div {
 		padding: 3.5% 0;
 		border-bottom: 1px solid transparent;
 		transition: all .2s ease;
 	}
-
+	.prize-category-icon{
+		color: white;
+	}
 	.winners-list>div:hover {
 		border-bottom: 1px solid white;
 	}
@@ -297,8 +305,15 @@
 		width: 80%;
 		margin-left: auto;
 		margin-right: auto;
+		display:flex; 
+		flex-direction:column; 
+		justify-content:space-around
 	}
 
+	#sponsorship-packet {
+		text-decoration: underline;
+		font-weight: bold;
+	}
 	#sponsorship>.title {
 		text-align: center;
 		line-height: 1em;
@@ -466,6 +481,10 @@
 
 		#footer-content>button {
 			padding: 2.5% 5%;
+		}
+		
+		.winners-list {
+			flex-direction: column;
 		}
 	}
 
