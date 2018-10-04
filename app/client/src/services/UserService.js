@@ -81,6 +81,10 @@ angular.module("reg").factory("UserService", [
                 return $http.post(`${base + id}/admit`);
             },
 
+            admitUserAndTeammates(id) {
+                return $http.post(`${base + id}/admitTeam`);
+            },
+
             checkIn(id) {
                 return $http.post(`${base + id}/checkin`);
             },

@@ -119,6 +119,35 @@ angular.module("reg").controller("AdminUsersCtrl", [
             });
         };
 
+        $scope.acceptUserAndTeam = function ($event, user, index) {
+            $event.stopPropagation();
+            sweetAlert({
+                title: "Whoa, wait a minute!",
+                text: `You are about to accept ${user.profile.name} and their team!`,
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, accept them.",
+                closeOnConfirm: false,
+            }, () => {
+                sweetAlert({
+                    title: "Are you sure?",
+                    text: "Your account will be logged as having accepted this user and their team. "
+                + "Remember, this power is a privilege.",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Yes, accept this user.",
+                    closeOnConfirm: false,
+                }, () => {
+                    UserService.admitUserAndTeammates(user._id).success(() => {
+                        $scope.users[index] = user;
+                        sweetAlert("Accepted", `${user.profile.name} and their team has been admitted. Reload the page to confirm the team is accepted.`, "success");
+                    });
+                });
+            });
+        };
+
         $scope.downloadCSV = function () {
             UserService.downloadCSV().success((content) => {
                 const now = new moment().format("MMMM Do YYYY, h:mm:ss a");

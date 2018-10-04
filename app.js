@@ -9,7 +9,7 @@ const morgan = require("morgan");
 require("dotenv").load({ silent: true });
 
 const port = process.env.PORT || 3000;
-const database = process.env.DATABASE || process.env.MONGODB_URI || "mongodb://localhost:27017";
+const database = process.env.DATABASE || process.env.MONGODB_URI || "mongodb://localhost:27017/bigredhacks";
 
 // Check for required variables before initializing
 const {

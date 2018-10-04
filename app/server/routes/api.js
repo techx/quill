@@ -1,3 +1,4 @@
+const asyncEach = require("async/each");
 const asyncMap = require("async/map");
 const flat = require("flat");
 const papaparse = require("papaparse");
@@ -263,6 +264,24 @@ module.exports = function (router) {
         const id = req.params.id;
         const user = req.user;
         UserController.admitUser(id, user, defaultResponse(req, res));
+    });
+
+    /**
+   * Admit a user and their teammates. ADMIN ONLY, DUH
+   */
+    router.post("/users/:id/admitTeam", isAdmin, (req, res) => {
+        const id = req.params.id;
+        const user = req.user;
+        UserController.getTeammates(id, (err, results) => {
+            if (!err) {
+                asyncEach(results, (teamMember, asyncCB) => {
+                    UserController.admitUser(teamMember.id, user, asyncCB);
+                }, defaultResponse(req, res));
+            }
+            else {
+                return res.status(500).send({ err });
+            }
+        });
     });
 
     /**
