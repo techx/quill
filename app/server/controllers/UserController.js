@@ -694,6 +694,49 @@ UserController.checkOutById = function(id, user, callback){
   callback);
 };
 
+/**
+ * [ADMIN ONLY]
+ *
+ * Make user an admin
+ * @param  {String}   userId   User id of the user being made admin
+ * @param  {String}   user     User making this person admin
+ * @param  {Function} callback args(err, user)
+ */
+UserController.makeAdminById = function(id, user, callback){
+  User.findOneAndUpdate({
+    _id: id,
+    verified: true
+  },{
+    $set: {
+      'admin': true
+    }
+  }, {
+    new: true
+  },
+  callback);
+};
+
+/**
+ * [ADMIN ONLY]
+ *
+ * Make user an admin
+ * @param  {String}   userId   User id of the user being made admin
+ * @param  {String}   user     User making this person admin
+ * @param  {Function} callback args(err, user)
+ */
+UserController.removeAdminById = function(id, user, callback){
+  User.findOneAndUpdate({
+    _id: id,
+    verified: true
+  },{
+    $set: {
+      'admin': false
+    }
+  }, {
+    new: true
+  },
+  callback);
+};
 
 /**
  * [ADMIN ONLY]

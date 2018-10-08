@@ -148,8 +148,60 @@ angular.module("reg").controller("AdminUsersCtrl", [
                   "success"
                 );
               });
+
+
+          });
+
+      };
+
+      $scope.toggleAdmin = function($event, user, index) {
+        $event.stopPropagation();
+
+        if (!user.admin){
+          swal({
+            title: "Whoa, wait a minute!",
+            text: "You are about make " + user.profile.name + " an admin!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, make them an admin.",
+            closeOnConfirm: false
+            },
+            function(){
+              UserService
+                .makeAdmin(user._id)
+                .success(function(user){
+                  $scope.users[index] = user;
+                  swal("Made", user.profile.name + ' an admin.', "success");
+                });
             }
           );
+        } else {
+          UserService
+            .removeAdmin(user._id)
+            .success(function(user){
+              $scope.users[index] = user;
+              swal("Removed", user.profile.name + ' as admin', "success");
+            });
+        }
+      };
+
+      function formatTime(time){
+        if (time) {
+          return moment(time).format('MMMM Do YYYY, h:mm:ss a');
+        }
+      }
+
+      $scope.rowClass = function(user) {
+        if (user.admin){
+          return 'admin';
+        }
+        if (user.status.confirmed) {
+          return 'positive';
+        }
+        if (user.status.admitted && !user.status.confirmed) {
+          return 'warning';
+
         }
       );
     };
