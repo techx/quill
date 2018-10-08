@@ -12,24 +12,22 @@ var profile = {
     min: 1,
     max: 100
   },
+  otherPickup: {
+    type: String,
+    min: 1,
+    max: 100
+  },
 
   adult: {
     type: Boolean,
     required: true,
     default: false
   },
-
-  readCodeOfConduct: {
-    type: Boolean,
-    required: true,
-    default: false
-  },
-
-  discloseMLHAffiliation: {
-    type: Boolean,
-    required: true,
-    default: false
-  },
+  github: String,
+  twitter: String,
+  website: String,
+  resume: String,
+  
   birthdate: {
     type: Date
   },
@@ -86,7 +84,7 @@ var profile = {
   busLocation: {
     type: String,
     enum : {
-      values: 'NYC Philadelphia Montreal Toronto'.split(' ')
+      values: 'NYC Philadelphia Montreal Toronto Other'.split(' ')
     }
   }
 
@@ -105,10 +103,7 @@ var confirmation = {
   wantsHardware: Boolean,
   hardware: String,
 
-  github: String,
-  twitter: String,
-  website: String,
-  resume: String,
+  
 
   needsReimbursement: Boolean,
   address: {
@@ -369,8 +364,6 @@ schema.statics.validateProfile = function(profile, cb){
   return cb(!(
     profile.name.length > 0 &&
     profile.adult &&
-    profile.readCodeOfConduct &&
-    profile.discloseMLHAffiliation &&
     profile.ethnicity &&
     profile.school.length > 0 &&
     profile.major.length > 0 &&

@@ -173,9 +173,47 @@
           <option value="Philadelphia">Philadelphia</option>
           <option value="Montreal">Montreal</option>
           <option value="Toronto">Toronto</option>
-        </select>
-      </div>
+          <option value ="Other">Other</option>
+          </select>
+        </div>
 
+        <div class="field">
+          <label> If you selected "Other", please put in where you would prefer to be picked up from </label>
+          <input type="text"
+                 name="otherlocation"
+                 ng-model="user.profile.otherPickup">
+        </div>
+        <div class="divided title"> Skills & Accomplishments </div>
+
+          <div class="field">
+            <label> Github </label>
+            <input type="text"
+                   name="github"
+                   placeholder="https://github.com/foobar"
+                   ng-model="user.profile.github">
+          </div>
+
+          <div class="field">
+            <label> Twitter </label>
+            <input type="text"
+                   name="twitter"
+                   placeholder="https://twitter.com/foobar"
+                   ng-model="user.profile.twitter">
+          </div>
+
+          <div class="field">
+            <label> Skill Sheet (required) </label>
+            <p>
+              Upload a document outlining any skills or experience you'd like to share (ex. resume). PDF preferred!
+            </p>
+            <a
+              target="_blank"
+              href="https://go.hackmit.org/skill-sheets"
+              class="ui pink button">
+              Upload
+            </a>
+          </div>
+        
       <div class="field">
         <label>
 
@@ -200,30 +238,9 @@
           </div>
         </div>
 
-        <div class="field">
-          <p>
-            <strong>
-            BostonHacks is a safe and friendly hacker space. We thusly ask that you agree to the <a href="http://mlh.io/code-of-conduct">MLH Code of Conduct</a>.
-            </strong>
-          </p>
-          <div class="ui checkbox">
-            <input type="checkbox" id="readCodeOfConduct" ng-model="selectedUser.profile.readCodeOfConduct">
-            <label for="readCodeOfConduct">I have read and agree to the MLH Code of Conduct</label>
-          </div>
-        </div>
+        
 
-        <div class="field">
-          <p>
-            <strong>
-              As an MLH-affiliated event, we also ask you to agree to the <a href="https://github.com/MLH/mlh-policies/blob/master/prize-terms-and-conditions/contest-terms.md">MLH Contest Terms and Conditions</a> and the <a href="https://mlh.io/privacy">MLH Privacy Policy</a>.
-            </strong>
-          </p>
-          <div class="ui checkbox">
-            <input type="checkbox" id="discloseMLHAffiliation" ng-model="selectedUser.profile.discloseMLHAffiliation">
-            <label for="discloseMLHAffiliation">I authorize you to share my application/registration information for event administration, ranking, MLH administration, pre- and post-event informational e-mails, and occasional messages about hackathons in-line with the MLH Privacy Policy. I further I agree to the terms of both the MLH Contest Terms and Conditions and the MLH Privacy Policy.</label>
-          </div>
-
-        </div>
+       
 
       <div class="field">
         <div
