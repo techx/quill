@@ -836,6 +836,10 @@ div.row .row-header {
   max-height: 150px;
   max-width: 150px;
 }
+.row#sponsors .row-content.sponsor-assistant a img {
+  max-height: 125px;
+  max-width: 125px;
+}
 @media screen and (max-width: 800px) {
   .row#sponsors .row-content a img {
     display: block;
@@ -849,6 +853,9 @@ div.row .row-header {
   }
   .row#sponsors .row-content.sponsor-supporter a img {
     max-width: 80%;
+  }
+  .row#sponsors .row-content.sponsor-assistant a img {
+    max-width: 70%;
   }
 }
 .row#sponsors .row-content + .row-content {
