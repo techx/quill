@@ -80,15 +80,6 @@ angular.module("reg").controller("ApplicationCtrl", [
     }
 
     function _updateUser(e) {
-      if (!resumeSubmitted) {
-        sweetAlert({
-          title: "Whoops!",
-          text: "Your application is missing a resume.",
-          type: "error",
-          confirmButtonColor: "#e76482"
-        });
-        return;
-      }
       $scope.user.profile.resumeSubmitted = true;
       UserService.updateProfile(Session.getUserId(), $scope.user.profile)
         .success(function(data) {
