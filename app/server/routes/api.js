@@ -417,14 +417,22 @@ module.exports = function (router) {
     });
 
     router.get("/csv", isAdmin, (req, res) => {
-        UserModel.find({}).lean().exec((err, users) => {
+        UserModel.find({
+            "profile.name": {
+                $exists: true,
+                $ne: null,
+            },
+            "status.confirmed": true,
+        }).lean().exec((err, users) => {
             asyncMap(users, (user, cb) => {
+                user._id._bsontype = undefined;
+                user._id.id = undefined;
                 const flattenedUser = flat(user);
                 return cb(null, flattenedUser);
             }, (err, parsedUsers) => {
                 const content = papaparse.unparse({
                     data: parsedUsers,
-                    fields: Object.keys(parsedUsers[256]),
+                    fields: Object.keys(parsedUsers[0]),
                 }, {
                     delimiter: ",",
                 });
