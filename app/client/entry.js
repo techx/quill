@@ -4,7 +4,7 @@
 import "./stylesheets/site.less";
 import "sweetalert/dist/sweetalert.css";
 
-// JS
+
 import "./src/app";
 import "./src/constants";
 import "./src/routes";
@@ -23,6 +23,7 @@ import "./views/application/applicationCtrl";
 import "./views/confirmation/confirmationCtrl";
 import "./views/dashboard/dashboardCtrl";
 import "./views/home/homeCtrl";
+import "./views/live/liveCtrl";
 import "./views/login/loginCtrl";
 import "./views/register/registerCtrl";
 import "./views/reset/resetCtrl";

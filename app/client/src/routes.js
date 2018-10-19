@@ -12,6 +12,14 @@ angular.module("reg").config([
 
         // Set up de states
         $stateProvider
+            .state("live", {
+                url: "/live",
+                templateUrl: "views/live/live.html",
+                controller: "LiveCtrl",
+                data: {
+                    requireLogin: false,
+                },
+            })
             .state("home", {
                 url: "/",
                 templateUrl: "views/home/home.html",

@@ -1266,6 +1266,16 @@ th {
   text-align: left;
   margin-bottom: 24px;
 }
+#live.page {
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+}
+iframe {
+  margin: 4%;
+  height: 700px;
+  width: 90%;
+}
 #login {
   height: 100%;
   width: 100%;

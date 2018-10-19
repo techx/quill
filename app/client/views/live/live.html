@@ -1,0 +1,71 @@
+<div id="live" class="page">
+    <div class="ui grid">
+        <div class="row">
+            <div class="column fluid">
+                <!-- small logo up top -->
+                <img src="/assets/images/header.png">
+            </div>
+        </div>
+        <div class="row">
+            <div class="column four wide">
+                <div class="ui menu secondary fluid vertical">
+                    <div class="item">
+                        <div class="header">Hacking ends in...</div>
+                        <div ng-repeat="match in matches">
+                            <div class="counter">
+                                <timer end-time="match.time">{{days}} days, {{hours}} hours, {{minutes}} minutes, {{seconds}} seconds.</timer>
+                            </div> 
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="header">Devpost</div>
+                        <div class="menu">
+                            <div class="item">Submit projects to <a href="https://brhfa18.devpost.com">Devpost</a> before Sunday at 8 AM sharp!</div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="header">Hardware Booth</div>
+                        <div class="menu">
+                            <div class="item">Located in a place</div>
+                        </div> 
+                    </div>
+                    <div class="item">
+                        <div class="header">Information</div>
+                        <div class="menu">
+                            <div class="item">WiFi: Cornell-Visitor</div>
+                            <div class="item">Hacking Ends: 10/21, 8:00 AM</div>
+                            <div class="item">campus police: <a href="tel:6072551111">(607) 255-1111</a></div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="header">Maps</div>
+                        <div class="menu">
+                            <div class="item"><a href="/assets/images/PSBMap.png" target="_blank">Cornell Map of PSB/Kennedy</a></div>
+                            <div class="item"><a href="/assets/images/CornellMap.png" target="_blank">Physical Science Building</a></div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="header">Slack</div>
+                        <div class="menu">
+                            <div class="item"><a href="https://join.slack.com/t/brhfa18/shared_invite/enQtNDU3NTMwMjA0NzU5LWY2YzYyMzZlNzA3ZDBkYjlhMTA1YTQ4NmQ1ZWRhNWQ1NTMxNTk2NTkyMzY4ZGFmYmNhY2RjNWQ0YjU0MWNmNzM">Join the Slack for announcements, mentorship, team matching, and more!</a></div>
+                        </div>
+                        
+                    </div>
+                    <div class="item">
+                        <div class="header">Social Media</div>
+                        <div class="menu">
+                            <div class="item"><a href="https://www.facebook.com/bigredhacks" target="_blank">Facebook</a></div>
+                            <div class="item"><a href="https://instagram.com/bigredhacks" target="_blank">Instagram</a></div>
+                            <div class="item">Snapchat - Use our geofilter!</div>
+                            <div class="item"><a href="https://twitter.com/@bigredhacks">Twitter</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="column twelve wide">
+                <div class="ui header">Schedule</div>
+                <iframe src="https://calendar.google.com/calendar/b/1/embed?showNav=0&amp;showTabs=0&amp;showTz=0&amp;mode=AGENDA&amp;height=600&amp;wkst=1&amp;bgcolor=%23ffffff&amp;src=cornell.edu_8a4q42djm8v13gla1lquu1a3so%40group.calendar.google.com&amp;color=%237A367A&amp;ctz=America%2FNew_York" style="border:solid 1px #777" frameborder="0" scrolling="no"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
