@@ -14,7 +14,7 @@
         <div
           class="state"
           ng-class="user.status.name"
-          ng-if="!showWaitlist && !dashState('admittedAndCannotConfirm')">
+          ng-if="showWaitlist && !dashState('admittedAndCannotConfirm')">
           {{user.status.name}}
         </div>
 
@@ -25,11 +25,11 @@
         </div>
 
 
-        <div
+        <!-- <div
           ng-if="showWaitlist"
           class="waitlist state">
           On waitlist
-        </div>
+        </div> -->
 
         <div class="ui divider"></div>
 
@@ -142,18 +142,25 @@
 
         <div
           ng-if="dashState('closedAndSubmitted')"
-          class="description" >
+          class="description" 
+          >
 
-          <div
-            class="markdown"
-            ng-bind-html="waitlistText">
-          </div>
+          <!-- <div class="state ng-binding ng-scope submitted" ng-class="user.status.name" >
+          submitted
+          </div> -->
 
           <div class="ui purple button"
                ui-sref="app.application">
             View your application
           </div>
 
+          <div
+            class="ui pink button"
+            ng-show="!user.teamCode"
+            ui-sref="app.team">
+            Create or join a team
+          </div>
+          
           <div
             class="ui pink button"
             ng-show="user.teamCode"
