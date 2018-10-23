@@ -30,7 +30,10 @@
     }
     /* Hero */
     #hero {
-        background-image: url('../assets/images/hero.jpg');
+        background: black;
+        background-image: url('../assets/images/landing_pg_bg_viv.png');
+        background-image: url('../assets/images/landing_pg_bg_viv.png'), linear-gradient(to right, #2a2a2a, #191919);
+        
         background-size: cover;
         background-position: center center;
         height: calc(100% + 49px);
@@ -38,8 +41,8 @@
 
     #hero::before {
         content: '';
-        background-image: linear-gradient(to bottom right, #02ccba 0%, #3d99be 31%, #9848d5 100%);
-        opacity: 0.8;
+        background: black;
+        opacity: 0;
         width: 100%;
         height: calc(100% + 50px);
         position: absolute;
