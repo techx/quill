@@ -15,7 +15,7 @@ angular
     CLOSED_AND_INCOMPLETE_TITLE: "Unfortunately, registration has closed.",
     CLOSED_AND_INCOMPLETE:
       "Because you have not completed your profile in time, you will not be eligible for admission.",
-    ADMITTED_AND_CAN_CONFIRM_TITLE: "You must confirm by [CONFIRM_DEADLINE]).",
+    ADMITTED_AND_CAN_CONFIRM_TITLE: "",
     ADMITTED_AND_CANNOT_CONFIRM_TITLE:
       "Your confirmation deadline of [CONFIRM_DEADLINE]) has passed.",
     ADMITTED_AND_CANNOT_CONFIRM:
