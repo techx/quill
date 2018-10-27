@@ -4,6 +4,7 @@
   "version": "0.0.1",
   "private": "true",
   "dependencies": {
+    "@sendgrid/mail": "^6.3.1",
     "async": "^1.4.2",
     "aws-sdk": "^2.141.0",
     "bcrypt-nodejs": "0.0.3",
