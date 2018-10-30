@@ -1,7 +1,7 @@
 var _ = require('underscore');
 var User = require('../models/User');
 var Settings = require('../models/Settings');
-var Mailer = require('../services/email');
+var Mailer = require('../services/sendgrid_email');
 var Stats = require('../services/stats');
 // var Waiver = require('../services/waiver');
 
