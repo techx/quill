@@ -95,19 +95,19 @@
             <input type="text" ng-model="user.confirmation.hardware">
           </div>
 
-        
-         
+
+
 
           <br>
           <br>
 
-         
 
 
-         
 
 
-            
+
+
+
 
           <div class="divided title">Travel</div>
 
@@ -121,7 +121,7 @@
               <li> Toronto Bus</li>
             </ul> -->
             <p>
-             This year, we will be providing buses for NYC, Montreal, Toronto, and Waterloo. If you intend to take one of the buses for the event, please buy a ticket in the link below. All tickets will be reimbursed after you have submitted your project for the event! 
+             This year, we will be providing buses for NYC, Montreal, Toronto, and Waterloo. If you intend to take one of the buses for the event, please buy a ticket in the link below. All tickets will be reimbursed after you have submitted your project for the event!
             </p>
             <p>
             Disclaimer: IF YOU ARE COMING FROM CANADA, PLEASE HAVE YOUR PASSPORT!! OTHERWISE WE CANNOT HELP YOU
@@ -197,7 +197,7 @@
               </div>
             </div>
 
-            <div class="field">
+            <!-- <div class="field">
               <label> Travel Receipt </label>
               <p>
                 So that we can process your reimbursement faster, please name your receipt: <strong>{{fileName}}</strong>
@@ -210,14 +210,14 @@
               </a>
             </div>
 
-          </div>
+          </div> -->
 
           <br>
           <br>
 
-          <div class="divided title">Legal</div>
+          <!-- <div class="divided title">Legal</div> -->
 
-          <div class="field">
+          <!-- <div class="field">
             <label> Liability Waiver </label>
             <p>
               <a
@@ -236,9 +236,9 @@
                    name="signatureLiabilityWaiver"
                    placeholder="Your Full Legal Name"
                    ng-model="user.confirmation.signatureLiability">
-          </div>
+          </div> -->
 
-          <div class="field">
+          <!-- <div class="field">
             <label> Photo Release </label>
             <p>
               <a
@@ -257,9 +257,9 @@
                    name="signaturePhotoRelease"
                    placeholder="Your Full Legal Name"
                    ng-model="user.confirmation.signaturePhotoRelease">
-          </div>
+          </div> -->
 
-          <div class="field">
+          <!-- <div class="field">
             <label> Code of Conduct </label>
             <p>
               <a
@@ -278,7 +278,7 @@
                    name="signatureCodeOfConduct"
                    placeholder="Your Full Legal Name"
                    ng-model="user.confirmation.signatureCodeOfConduct">
-          </div>
+          </div> -->
 
           <br>
           <br>
@@ -297,6 +297,9 @@
           </div>
 
           <div class="field" ng-hide="regIsClosed">
+            <p>
+              By clicking submit, you give us permission to take and post pictures of you during the event!
+            </p>
             <button type="submit"
                     class="fluid ui purple button"
                     ng-click="submitForm()">
