@@ -1,24 +1,45 @@
 <div id="home">
     <section id="hero">
-        <div class="hero-content center">
-            <div ng-class="{ 'fade-out': fadeOut }">
-                <div class="logo-header-container ui grid mobile only tablet only">
-                    <div class="logo-header logo-cog">
-                        <img src="../assets/images/logo-cog.svg">
+        <div class="landing-page-logo-container">
+            <img class="before-logo"src="../../assets/images/landing_pg_bg_no_logo_viv.png" >
+            <img class="after-logo"src="../../assets/images/landing_pg_bg_viv.png">
+            <div class="hero-content center">
+                    <div ng-class="{ 'fade-out': fadeOut }">
+                        <div class="logo-header-container ui grid mobile only tablet only">
+                            <div class="logo-header logo-cog">
+                                <img src="../assets/images/logo-cog.svg">
+                            </div>
+                            <div class="logo-header">
+                                <img src="../assets/images/logo-anteater.svg">
+                            </div>
+                        </div>
+                        <span class="hero-title">HackUCI 2019</span>
+                        <div class="hero-button-container">
+                            <a href="" target="_blank" class="btn">
+                                <i class="" aria-hidden="true"></i>
+                                COMING SOON
+                            </a>
+                            <!-- <a ui-sref="app.recruit" class="btn">
+                                <i class="fa fa-rocket" aria-hidden="true"></i>
+                                TEAM OPENINGS
+                            </a>-->
+                            <!-- <a ui-sref="app.expo" class="btn">
+                                <i class="fa fa-rocket" aria-hidden="true"></i>
+                                LIVE
+                            </a> -->
+                            <!-- <a ui-sref="app.apply" class="btn" ng-if="regIsOpen">
+                                <i class="fa fa-rocket" aria-hidden="true"></i>
+                                APPLY
+                            </a>
+                            <a class="btn btn--coming-soon" ng-if="!regIsOpen">
+                                <i class="fa fa-rocket" aria-hidden="true"></i>
+                                REGISTRATION CLOSED
+                            </a> -->
+                        </div>
                     </div>
-                    <div class="logo-header">
-                        <img src="../assets/images/logo-anteater.svg">
-                    </div>
-                </div>
-                <div>Hello world</div>
-                <div class="hero-button-container">
-                    <a href="" target="_blank" class="btn">
-                        <i class="fa fa-flag" aria-hidden="true"></i>
-                        COMING SOON
-                    </a>
-                </div>
             </div>
         </div>
+        
         <div class="hero-border">
             <svg version="1.1" id="circle" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1920 380" xml:space="preserve" preserveAspectRatio="none">
             <path fill="#fff" d="M0,309c0,0,340,70.8,960,70.8c620,0.2,960-70.8,960-70.8v71H0" transform="translate(0 1)"></path>
@@ -40,7 +61,7 @@
         </div>
     </section>
 
-    <section id="faq" class="center">
+    <section id="faq" class="center" >
         <div id="faq-content">
             <div class="title">
                 FAQs

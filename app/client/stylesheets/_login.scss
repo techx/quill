@@ -1,13 +1,13 @@
 #login {
   height: calc(100% + 49px);
   width: 100%;
-  background-image: url('../assets/images/hero.jpg');
+  background-image: url('../assets/images/triangles.png'), linear-gradient(to right, #2a2a2a, #191919);
   background-size: cover;
   background-position: center center;
 
   &::before {
     content: '';
-    background-image: linear-gradient(to bottom right, #02ccba 0%, #3d99be 31%, #9848d5 100%);
+    
     opacity: 0.8;
     width: 100%;
     height: calc(100% + 50px);
