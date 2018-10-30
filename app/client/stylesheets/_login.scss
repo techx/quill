@@ -7,12 +7,18 @@
 
   &::before {
     content: '';
-    
-    opacity: 0.8;
+    background-image: linear-gradient(to right, #2a2a2a, #191919);
+    animation: fadeOut 0.8s ease-in 0.5s forwards;  
+    opacity: 1;
     width: 100%;
     height: calc(100% + 50px);
     position: absolute;
   }
+  
+	@keyframes fadeOut {
+		0% {opacity: 1;}
+		100% {opacity: 0;}
+	}
 
   > .container {
     position: relative;

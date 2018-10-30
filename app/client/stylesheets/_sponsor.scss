@@ -376,16 +376,14 @@
 
 	#footer-content>button {
 		color: white;
-		background: linear-gradient(to right, #6fd3f4, #d3a1ff, #f2b3f5);
-		border: 1px solid linear-gradient(to right, #6fd3f4, #d3a1ff, #f2b3f5);
 		font-weight: 300;
-
 		padding: 1% 2%;
 		border-radius: 5px;
 		letter-spacing: 0.05em;
 		font-size: 1.1em;
-		background-color: transparent;
+		background: #9b92e3;
 		transition: all .2s ease;
+		border: none;
 	}
 
 	#footer-content>button:hover {
