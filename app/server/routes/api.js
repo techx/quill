@@ -422,7 +422,9 @@ module.exports = function (router) {
                 $exists: true,
                 $ne: null,
             },
-            "status.confirmed": true,
+            "status.checkInTime": {
+                $exists: true,
+            },
         }).lean().exec((err, users) => {
             asyncMap(users, (user, cb) => {
                 user._id._bsontype = undefined;
