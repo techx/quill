@@ -49,6 +49,7 @@
             opacity: 0;
             animation: fadeIn 0.5s ease-in 0.5s forwards;
         }
+
         .after-logo {
             position: absolute;
             top:0; 
@@ -383,10 +384,21 @@
             padding: 5% 10%;
         }
 
-        
-
         .hero-button-container {
-            animation: 0.5 fadein both;
+            animation: fadein 0.5s ease-in both  0.5s;  
+        }
+
+        .before-logo {
+            visibility: hidden;
+        }
+
+        .after-logo {
+            visibility: hidden;
+        }
+
+        .landing-page-logo-container {
+            background-image: url('../assets/images/triangles.png');
+            background-size:cover;
         }
     }
     /* Tablet */
@@ -406,8 +418,12 @@
             padding-bottom: 0 !important;
         }
 
-        .hero-title {
-            display:block
+        // .hero-title {
+        //     display:block
+        // }
+
+        .logo-header {
+            display: none;
         }
 
     }
