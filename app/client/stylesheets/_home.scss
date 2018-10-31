@@ -30,51 +30,21 @@
     }
     /* Hero */
     #hero {
-        background-image: linear-gradient(to right, #2a2a2a, #191919);
+        background-image: url('../assets/images/hero.jpg');
         background-size: cover;
         background-position: center center;
         height: calc(100% + 49px);
-
-        .landing-page-logo-container {
-            position:relative;
-            top:0; 
-            left:0;
-        }
-
-        .before-logo {
-            position:relative;
-            top:0; 
-            left:0; 
-            width: 100%;
-            opacity: 0;
-            animation: fadeIn 0.5s ease-in 0.5s forwards;
-        }
-
-        .after-logo {
-            position: absolute;
-            top:0; 
-            left:0;
-            width: 100%;
-            opacity: 0;
-            animation: fadeIn 0.8s ease-in 0.8s forwards;
-        }
-
-        @keyframes fadeIn {
-            0% {opacity: 0;}
-            100% {opacity: 1;}
-        }
     }
 
-    // #hero::before {
-    //     content: '';
-    //     background-image: linear-gradient(to right, #2a2a2a, #191919);
-    //     background-size: cover;
-    //     background-position: center center;
-    //     width: 100%;
-    //     height: calc(100% + 50px);
-    //     position: absolute;
-    // }
-    
+    #hero::before {
+        content: '';
+        background-image: linear-gradient(to bottom right, #02ccba 0%, #3d99be 31%, #9848d5 100%);
+        opacity: 0.8;
+        width: 100%;
+        height: calc(100% + 50px);
+        position: absolute;
+    }
+
     .hero-content {
         height: 100%;
         position: relative;
@@ -82,7 +52,7 @@
         z-index: 3;
 
         > div {
-            margin-top: -150px;
+            margin-top: -50px;
         }
     }
 
@@ -120,7 +90,6 @@
         display: block;
         animation: fadein .5s both;
         animation-delay: .3s;
-        display:none;
     }
 
     .hero-description-container {
@@ -134,34 +103,36 @@
         letter-spacing: 0.12em;
         text-align: center;
         display: inline-block;
-        animation: fadein .5s both 1s;
+        animation: fadein .5s both;
         animation-delay: .45s;
     }
 
     .hero-button-container {
         text-align: center;
-        animation: fadein 1s ease-in both  1s;
-        
+        margin-top: 10%;
+        animation: fadein .5s both;
+        animation-delay: .6s;
+
         .btn {
-            background:  #9b92e3;
+            background: #fc6076;
             border: none;
-            padding: 10% 7%;
+            padding: 2.5% 5%;
             border-radius: 25px;
-            box-shadow: 0 2px 16px rgba(12, 123, 156, 0.35);
-            width:350px;
+            box-shadow: 0 2px 16px rgba(24,51,59,.35);
         }
 
         .btn:hover {
             color: white;
+            background: #fb465e;
         }
 
         .btn--coming-soon {
             cursor: default;
-            background: #9b92e3;
+            background: rgba(252, 96, 118, 0.9);
         }
 
         .btn--coming-soon:hover {
-            background: #9b92e3;
+            background: #fc6076;
         }
     }
 
@@ -204,8 +175,7 @@
     }
     /* FAQs */
     #faq {
-        background-image:url("../assets/images/triangles.png"), linear-gradient(to right, #2a2a2a, #191919);
-        background-position: center center;
+        background-image: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%);
         color: white;
         padding: 5% 0 3% 0;
     }
@@ -284,8 +254,7 @@
     }
     /* Footer */
     #footer {
-        background-image:url("../assets/images/triangles.png"), linear-gradient(to right, #2a2a2a, #191919);
-        background-position: center;
+        background-image: linear-gradient(-225deg, #2CD8D5 0%, #6B8DD6 48%, #8E37D7 100%);
         color: white;
         text-align: center;
         padding: 6% 0;
@@ -325,6 +294,7 @@
             font-size: 1.2em;
             margin: 2% 10%;
         }
+
 
         .hero-button-container {
             margin-top: 20%;
@@ -381,23 +351,6 @@
         button, .btn {
             padding: 5% 10%;
         }
-
-        .hero-button-container {
-            animation: fadein 0.5s ease-in both  0.5s;  
-        }
-
-        .before-logo {
-            visibility: hidden;
-        }
-
-        .after-logo {
-            visibility: hidden;
-        }
-
-        .landing-page-logo-container {
-            background-image: url('../assets/images/triangles.png');
-            background-size:cover;
-        }
     }
     /* Tablet */
     @media (min-width: 768px) and (max-width: 991px) {
@@ -415,15 +368,6 @@
             padding-top: 0 !important;
             padding-bottom: 0 !important;
         }
-
-        // .hero-title {
-        //     display:block
-        // }
-
-        .logo-header {
-            display: none;
-        }
-
     }
     /* Large Screens */
     @media (min-width: 1650px) {

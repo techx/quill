@@ -95,9 +95,6 @@
 	.menu-item {
 		color: rgba(255,255,255,0.95);
 		cursor: pointer;
-		font-family: 'Open Sans', sans-serif;
-		font-weight: 300;
-		font-size: 1.2em;
 		line-height: 2em;
 		border-bottom: 1px solid rgba(255,255,255,0);
 		transition: all .2s ease;
@@ -107,29 +104,18 @@
 		}
 	}
 
-	#menu-item-home {
-		color: #6fd3f4;
-	}
-
-	#menu-item-login {
-		color: #d3a1ff;
-	}
-
-	#menu-item-sponsor {
-		color: #f2b3f5;
-	}
 	.menu-item+.menu-item:not(.menu-item--sponsor) {
 		margin-left: 3%;
 	}
 
 	.menu-item:hover {
-		color: inherit;
-		border-bottom: 1px solid;
+		color: rgba(255,255,255,1);
+		border-bottom: 1px solid rgba(255,255,255,0.95);
 	}
 
 	.menu-item-active {
-		color: inherit;
-		border-bottom: 1px solid;
+		color: rgba(255,255,255,1);
+		border-bottom: 1px solid rgba(255,255,255,1);
 	}
 
 	.menu-item--sponsor {

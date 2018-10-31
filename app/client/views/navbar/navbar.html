@@ -22,8 +22,7 @@
       <a
         ui-sref="app.home"
         ui-sref-active="menu-item-active"
-        class="menu-item"
-        id="menu-item-home" >
+        class="menu-item">
         HOME
       </a>
       <a
@@ -37,25 +36,22 @@
         ui-sref="app.login"
         ui-sref-active="menu-item-active"
         class="menu-item"
-        ng-if="!isLoggedIn"
-        id="menu-item-login">
-        
+        ng-if="!isLoggedIn">
         LOGIN
       </a>
       <a
         ui-sref-active="menu-item-active"  
         ui-sref="app.sponsor"
-        class="menu-item"
-        id="menu-item-sponsor">
+        class="menu-item">
         SPONSORS
       </a>
-      <!-- <a
+      <a
         ui-sref-active="menu-item-active"
         ui-sref="app.apply"
         ng-if="!isLoggedIn && regIsOpen"
         class="menu-item">
         APPLY
-      </a> -->
+      </a>
       <a
         ui-sref-active="menu-item-active"
         ui-sref="app.application"
