@@ -1,7 +1,7 @@
 #login {
   height: calc(100% + 49px);
   width: 100%;
-  background-image: url('../assets/images/triangles.png'), linear-gradient(to right, #2a2a2a, #191919);
+  background-image: url('../assets/images/login_pg_viv.png'), linear-gradient(to right, #2a2a2a, #191919);
   background-size: cover;
   background-position: center center;
 
@@ -75,6 +75,7 @@
       }
 
       .ui.login-password .field:nth-child(1) {
+        
         animation: fadein .5s both;
         animation-delay: .3s;
       }
@@ -115,19 +116,19 @@
           transition: background .2s ease;
 
         &.login {
-          background: rgba(61,153,190,0.95);
+          background: #83a8db;
         }
 
         &.login:hover {
-          background: rgba(61,153,190,1);
+          background: #92c0ff;
         }
 
         &.register {
-          background: rgba(2,204,186,0.95);
+          background: #9398e1;
         }
 
         &.register:hover {
-          background: rgba(2,204,186,1);
+          background: #b5baff;
         }
       }
 
@@ -138,6 +139,11 @@
         letter-spacing: 0.07em;
         animation: fadein .5s both;
         animation-delay: .5s;
+        color: #83a8db;
+
+        #forgot-password {
+          color: #83a8db;
+        }
       }
 
     }
