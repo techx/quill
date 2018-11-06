@@ -12,7 +12,7 @@
     "email-templates": "^5.0.2",
     "express": "^4.16.4",
     "handlebars": "^4.0.12",
-    "jsonwebtoken": "^8.3.0",
+    "jsonwebtoken": "5.0.4",
     "method-override": "^3.0.0",
     "moment": "^2.22.2",
     "mongoose": "^4.1.2",
@@ -35,7 +35,6 @@
   },
   "devDependencies": {
     "gulp": "^4.0.0",
-    "gulp-browserify": "^0.5.1",
     "gulp-clean-css": "^3.10.0",
     "gulp-concat": "^2.6.1",
     "gulp-ng-annotate": "^2.1.0",
