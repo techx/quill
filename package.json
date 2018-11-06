@@ -9,7 +9,7 @@
     "body-parser": "^1.8.4",
     "bower": "^1.8.0",
     "dotenv": "^1.2.0",
-    "email-templates": "^2.0.1",
+    "email-templates": "^5.0.2",
     "express": "^4.9.8",
     "gulp-clean-css": "^3.10.0",
     "gulp-concat": "^2.6.1",

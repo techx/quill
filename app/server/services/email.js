@@ -3,7 +3,7 @@ var nodemailer = require('nodemailer');
 var smtpTransport = require('nodemailer-smtp-transport');
 
 var templatesDir = path.join(__dirname, '../templates');
-var emailTemplates = require('email-templates');
+var Email = require('email-templates');
 
 var ROOT_URL = process.env.ROOT_URL;
 
@@ -40,40 +40,41 @@ var controller = {};
 
 controller.transporter = transporter;
 
-function sendOne(templateName, options, data, callback){
-
+function sendOne(templateName, options, data, callback) {
   if (NODE_ENV === "dev") {
     console.log(templateName);
     console.log(JSON.stringify(data, "", 2));
   }
 
-  emailTemplates(templatesDir, function(err, template){
-    if (err) {
-      return callback(err);
+  const email = new Email({
+    message: {
+      from: EMAIL_ADDRESS
+    },
+    send: true,
+    transport: transporter
+  });
+
+  data.emailHeaderImage = EMAIL_HEADER_IMAGE;
+  data.emailAddress = EMAIL_ADDRESS;
+  data.hackathonName = HACKATHON_NAME;
+  data.twitterHandle = TWITTER_HANDLE;
+  data.facebookHandle = FACEBOOK_HANDLE;
+
+  email.send({
+    locals: data,
+    message: {
+      subject: options.subject,
+      to: options.to
+    },
+    template: path.join(__dirname, "..", "emails", templateName),
+  }).then(res => {
+    if (callback) {
+      callback(undefined, res)
     }
-
-    data.emailHeaderImage = EMAIL_HEADER_IMAGE;
-    data.emailAddress = EMAIL_ADDRESS;
-    data.hackathonName = HACKATHON_NAME;
-    data.twitterHandle = TWITTER_HANDLE;
-    data.facebookHandle = FACEBOOK_HANDLE;
-    template(templateName, data, function(err, html, text){
-      if (err) {
-        return callback(err);
-      }
-
-      transporter.sendMail({
-        from: EMAIL_CONTACT,
-        to: options.to,
-        subject: options.subject,
-        html: html,
-        text: text
-      }, function(err, info){
-        if(callback){
-          callback(err, info);
-        }
-      });
-    });
+  }).catch(err => {
+    if (callback) {
+      callback(err, undefined);
+    }
   });
 }
 
