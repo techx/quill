@@ -2,7 +2,7 @@ require('dotenv').load({silent: true});
 
 var gulp = require('gulp');
 var sass = require('gulp-sass');
-var minifyCss = require('gulp-minify-css');
+var cleanCss = require('gulp-clean-css');
 var concat = require('gulp-concat');
 var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
@@ -22,7 +22,7 @@ gulp.task('default', function(){
   console.log('yo. use gulp watch or something');
 });
 
-gulp.task('js', function () {
+gulp.task('js', function (done) {
   if (environment !== 'dev'){
     // Minify for non-development
     gulp.src(['app/client/src/**/*.js', 'app/client/views/**/*.js'])
@@ -42,30 +42,33 @@ gulp.task('js', function () {
       .pipe(gulp.dest('app/client/build'));
   }
 
+  done();
 });
 
-gulp.task('sass', function () {
+gulp.task('sass', function(done) {
   gulp.src('app/client/stylesheets/site.scss')
     .pipe(sass())
       .on('error', sass.logError)
-    .pipe(minifyCss())
+    .pipe(cleanCss())
     .pipe(gulp.dest('app/client/build'));
+
+  done();
 });
 
-gulp.task('build', ['js', 'sass'], function(){
+gulp.task('build', gulp.series('js', 'sass', function(done) {
   // Yup, build the js and sass.
-});
+  done();
+}));
 
-gulp.task('watch', ['js', 'sass'], function () {
-  gulp
-    .watch('app/client/src/**/*.js', ['js']);
-  gulp
-    .watch('app/client/views/**/*.js', ['js']);
-  gulp
-    .watch('app/client/stylesheets/**/*.scss', ['sass']);
-});
+gulp.task('watch', gulp.series('js', 'sass', function(done) {
+  gulp.watch('app/client/src/**/*.js', gulp.series('js'));
+  gulp.watch('app/client/views/**/*.js', gulp.series('js'));
+  gulp.watch('app/client/stylesheets/**/*.scss', gulp.series('sass'));
 
-gulp.task('server', ['watch'], function(){
+  done();
+}));
+
+gulp.task('server', gulp.series('watch', function(done) {
   nodemon({
     script: 'app.js',
     env: { 'NODE_ENV': process.env.NODE_ENV || 'DEV' },
@@ -73,4 +76,6 @@ gulp.task('server', ['watch'], function(){
       'app/server'
     ]
   });
-});
+
+  done();
+}));
