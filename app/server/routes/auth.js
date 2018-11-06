@@ -1,6 +1,4 @@
 var _         = require('underscore');
-var jwt       = require('jsonwebtoken');
-var validator = require('validator');
 
 var SettingsController = require('../controllers/SettingsController');
 var UserController = require('../controllers/UserController');
