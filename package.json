@@ -27,6 +27,7 @@
     "nodemailer": "^4.6.8",
     "nodemailer-smtp-transport": "^2.7.4",
     "request": "^2.88.0",
+    "semantic-ui": "^2.4.2",
     "showdown": "^1.8.7",
     "sweetalert": "^2.1.2",
     "underscore": "^1.9.1",
@@ -43,7 +44,7 @@
     "postinstall": "bower install && gulp build"
   },
   "devDependencies": {
-    "gulp": "^4.0.0",
+    "gulp": "^3.9.1",
     "gulp-clean-css": "^3.10.0",
     "gulp-concat": "^2.6.1",
     "gulp-ng-annotate": "^2.1.0",

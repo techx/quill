@@ -28,7 +28,7 @@ gulp.task('default', function(){
   console.log('yo. use gulp watch or something');
 });
 
-gulp.task('js', function (done) {
+gulp.task('js', function () {
   if (environment !== 'dev'){
     // Minify for non-development
     gulp.src(['app/client/src/**/*.js', 'app/client/views/**/*.js'])
@@ -71,34 +71,27 @@ gulp.task('js', function (done) {
       .pipe(sourcemaps.write())
       .pipe(gulp.dest('app/client/build'));
   }
-
-  done();
 });
 
-gulp.task('sass', function(done) {
+gulp.task('sass', function() {
   gulp.src('app/client/stylesheets/site.scss')
     .pipe(sass())
       .on('error', sass.logError)
     .pipe(cleanCss())
     .pipe(gulp.dest('app/client/build'));
-
-  done();
 });
 
-gulp.task('build', gulp.series('js', 'sass', function(done) {
+gulp.task('build', ['js', 'sass'], function() {
   // Yup, build the js and sass.
-  done();
-}));
+});
 
-gulp.task('watch', gulp.series('js', 'sass', function(done) {
-  gulp.watch('app/client/src/**/*.js', gulp.series('js'));
-  gulp.watch('app/client/views/**/*.js', gulp.series('js'));
-  gulp.watch('app/client/stylesheets/**/*.scss', gulp.series('sass'));
+gulp.task('watch', ['js', 'sass'], function() {
+  gulp.watch('app/client/src/**/*.js', ['js']);
+  gulp.watch('app/client/views/**/*.js', ['js']);
+  gulp.watch('app/client/stylesheets/**/*.scss', ['sass']);
+});
 
-  done();
-}));
-
-gulp.task('server', gulp.series('watch', function(done) {
+gulp.task('server', ['watch'], function() {
   nodemon({
     script: 'app.js',
     env: { 'NODE_ENV': process.env.NODE_ENV || 'DEV' },
@@ -106,6 +99,4 @@ gulp.task('server', gulp.series('watch', function(done) {
       'app/server'
     ]
   });
-
-  done();
-}));
+});

@@ -1,3 +1,6 @@
+const $ = require('jquery');
+const semantic = require('../../../semantic/dist/semantic.min.js');
+
 var angular = require('angular');
 var uiRouter = require('angular-ui-router');
 

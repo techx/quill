@@ -1,5 +1,4 @@
 const angular = require('angular');
-const $ = require('jquery');
 
 angular.module('reg')
   .controller('ApplicationCtrl', [
@@ -11,7 +10,7 @@ angular.module('reg')
     'Settings',
     'Session',
     'UserService',
-    function($scope, $rootScope, $state, $http, currentUser, Settings, Session, UserService){
+    function($scope, $rootScope, $state, $http, currentUser, Settings, Session, UserService) {
 
       // Set up the user
       $scope.user = currentUser.data;
