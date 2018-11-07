@@ -1,8 +1,9 @@
 angular.module('reg')
+  .service('Settings', function() {})
   .controller('SidebarCtrl', [
     '$rootScope',
     '$scope',
-    'settings',
+    'Settings',
     'Utils',
     'AuthService',
     'Session',

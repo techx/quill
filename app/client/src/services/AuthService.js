@@ -30,11 +30,10 @@ angular.module('reg')
             email: email,
             password: password
           })
-          .success(function(data){
-            loginSuccess(data, onSuccess);
-          })
-          .error(function(data){
-            loginFailure(data, onFailure);
+          .then(response => {
+            loginSuccess(response.data, onSuccess);
+          }, response => {
+            loginFailure(response.data, onFailure);
           });
       };
 
@@ -43,11 +42,10 @@ angular.module('reg')
           .post('/auth/login', {
             token: token
           })
-          .success(function(data){
-            loginSuccess(data, onSuccess);
-          })
-          .error(function(data, statusCode){
-            if (statusCode === 400){
+          .then(response => {
+            loginSuccess(response.data, onSuccess);
+          }, response => {
+            if (response.status === 400) {
               Session.destroy(loginFailure);
             }
           });
@@ -65,26 +63,24 @@ angular.module('reg')
             email: email,
             password: password
           })
-          .success(function(data){
-            loginSuccess(data, onSuccess);
-          })
-          .error(function(data){
-            loginFailure(data, onFailure);
+          .then(response => {
+            loginSuccess(response.data, onSuccess);
+          }, response => {
+            loginFailure(response.data, onFailure);
           });
       };
 
       authService.verify = function(token, onSuccess, onFailure) {
         return $http
           .get('/auth/verify/' + token)
-          .success(function(user){
-            Session.setUser(user);
-            if (onSuccess){
-              onSuccess(user);
+          .then(response => {
+            Session.setUser(response.data);
+            if (onSuccess) {
+              onSuccess(response.data);
             }
-          })
-          .error(function(data){
+          }, response => {
             if (onFailure) {
-              onFailure(data);
+              onFailure(response.data);
             }
           });
       };
@@ -109,8 +105,7 @@ angular.module('reg')
             token: token,
             password: pass
           })
-          .success(onSuccess)
-          .error(onFailure);
+          .then(onSuccess, onFailure);
       };
 
       return authService;
