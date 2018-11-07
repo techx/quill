@@ -41,36 +41,25 @@ gulp.task('js', function () {
   } else {
     var b = browserify({
         entries: 'app/client/src/app.js',
-        // entries: ['./app/client/src/**/*.js', './app/client/views/**/*.js'],
         debug: true,
-        // require: ['./node_modules'],
-        // require: ['./app/client/src/interceptors', './app/client/src/modules', './app/client/src/services'],
-        // require: ['./app/client/src/**/*.js', './app/client/views/**/*.js'],
         transform: [browserifyNgAnnotate]
     });
 
-    // gulp.src(['app/client/src/**/*.js', 'app/client/views/**/*.js'])
-    //   // transform file objects using gulp-tap plugin
-    //   .pipe(tap(function (file) {
-    //
-    //     log.info('bundling ' + file.path);
-    //
-    //     // replace file contents with browserify's bundle stream
-    //     file.contents = browserify(file.path, {debug: true}).bundle();
-    //
-    //   }))
-
-      // transform streaming contents into buffer contents (because gulp-sourcemaps does not support streaming contents)
-    return b.bundle()
+    // transform streaming contents into buffer contents (because gulp-sourcemaps does not support streaming contents)
+    b.bundle()
       .pipe(source('app.js'))
       .pipe(buffer())
       .pipe(sourcemaps.init({loadMaps: true}))
-        // .pipe(concat('app.js'))
-        .pipe(ngAnnotate())
-        .on('error', swallowError)
+      .pipe(ngAnnotate())
+      .on('error', swallowError)
       .pipe(sourcemaps.write())
       .pipe(gulp.dest('app/client/build'));
   }
+});
+
+gulp.task('semantic', function() {
+  gulp.src(['semantic/dist/semantic.min.css', 'semantic/dist/semantic.min.js'])
+    .pipe(gulp.dest('app/client/semantic'));
 });
 
 gulp.task('sass', function() {
