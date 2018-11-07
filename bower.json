@@ -16,19 +16,18 @@
     "tests"
   ],
   "dependencies": {
-    "semantic-ui": "~2.0.0",
-    "jquery": "~2.1.4",
-    "animate.css": "~3.3.0",
+    "semantic-ui": "~2.4.1",
+    "jquery": "~3.3.1",
+    "animate.css": "~3.7.0",
     "angular": "~1.7.5",
     "angular-ui-router": "~1.0.20",
     "angular-animate": "~1.7.5",
-    "sweetalert": "~1.0.1",
-    "moment": "~2.10.3",
-    "showdown": "~1.2.1"
+    "sweetalert": "~2.1.2",
+    "moment": "~2.22.2",
+    "showdown": "~1.8.7"
   },
   "resolutions": {
-    "angular-animate": "~1.7.5",
-    "angular": "~1.7.5",
-    "angular-ui-router": "~1.0.20"
+    "jquery": "~3.3.1",
+    "sweetalert": "~2.1.2"
   }
 }
