@@ -1,3 +1,13 @@
+const angular = require('angular');
+const SettingsService = require('./services/SettingsService.js');
+const UserService = require('./services/UserService.js');
+
+const ApplicationCtrl = require('../views/application/ApplicationCtrl.js');
+const DashboardCtrl = require('../views/dashboard/DashboardCtrl.js');
+const LoginCtrl = require('../views/login/LoginCtrl.js');
+const SidebarCtrl = require('../views/sidebar/SidebarCtrl.js');
+const TeamCtrl = require('../views/team/TeamCtrl.js');
+
 angular.module('reg')
   .config([
     '$stateProvider',

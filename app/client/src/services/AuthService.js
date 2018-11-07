@@ -1,3 +1,5 @@
+var angular = require('angular');
+
 angular.module('reg')
   .factory('AuthService', [
     '$http',

@@ -22,12 +22,7 @@
     "angular": "~1.7.5",
     "angular-ui-router": "~1.0.20",
     "angular-animate": "~1.7.5",
-    "sweetalert": "~2.1.2",
     "moment": "~2.22.2",
     "showdown": "~1.8.7"
-  },
-  "resolutions": {
-    "jquery": "~3.3.1",
-    "sweetalert": "~2.1.2"
   }
 }

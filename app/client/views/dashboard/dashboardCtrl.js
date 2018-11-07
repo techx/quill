@@ -1,3 +1,6 @@
+const angular = require('angular');
+const showdown = require('showdown');
+
 angular.module('reg')
   .controller('DashboardCtrl', [
     '$rootScope',
