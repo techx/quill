@@ -7,10 +7,10 @@ angular.module('reg')
     '$state',
     '$http',
     'currentUser',
-    'Settings',
+    'settings',
     'Session',
     'UserService',
-    function($scope, $rootScope, $state, $http, currentUser, Settings, Session, UserService) {
+    function($scope, $rootScope, $state, $http, currentUser, settings, Session, UserService) {
 
       // Set up the user
       $scope.user = currentUser.data;
@@ -27,7 +27,7 @@ angular.module('reg')
       populateSchools();
       _setupForm();
 
-      $scope.regIsClosed = Date.now() > Settings.data.timeClose;
+      $scope.regIsClosed = Date.now() > settings.data.timeClose;
 
       /**
        * TODO: JANK WARNING
@@ -92,7 +92,7 @@ angular.module('reg')
       }
 
       function minorsAreAllowed() {
-        return Settings.data.allowMinors;
+        return settings.data.allowMinors;
       }
 
       function minorsValidation() {

@@ -45,11 +45,10 @@ angular.module('reg')
             templateUrl: "views/sidebar/sidebar.html",
             controller: 'SidebarCtrl',
             resolve: {
-              'settings' : function(SettingsService) {
+              settings: function(SettingsService) {
                 return SettingsService.getPublicSettings();
               }
             }
-
           }
         },
         data: {
