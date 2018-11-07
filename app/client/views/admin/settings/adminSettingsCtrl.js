@@ -1,3 +1,7 @@
+const moment = require('moment');
+const showdown = require('showdown');
+const swal = require('sweetalert');
+
 angular.module('reg')
   .controller('AdminSettingsCtrl', [
     '$scope',
@@ -8,8 +12,8 @@ angular.module('reg')
       $scope.settings = {};
       SettingsService
         .getPublicSettings()
-        .success(function(settings){
-          updateSettings(settings);
+        .then(response => {
+          updateSettings(response.data);
         });
 
       function updateSettings(settings){
@@ -21,14 +25,14 @@ angular.module('reg')
 
         $scope.settings = settings;
       }
-      
+
       // Additional Options --------------------------------------
 
       $scope.updateAllowMinors = function () {
         SettingsService
           .updateAllowMinors($scope.settings.allowMinors)
-          .success(function (data) {
-            $scope.settings.allowMinors = data.allowMinors;
+          .then(response => {
+            $scope.settings.allowMinors = response.data.allowMinors;
             const successText = $scope.settings.allowMinors ?
               "Minors are now allowed to register." :
               "Minors are no longer allowed to register."
@@ -40,16 +44,16 @@ angular.module('reg')
 
       SettingsService
         .getWhitelistedEmails()
-        .success(function(emails){
-          $scope.whitelist = emails.join(", ");
+        .then(response => {
+          $scope.whitelist = response.data.join(", ");
         });
 
       $scope.updateWhitelist = function(){
         SettingsService
           .updateWhitelistedEmails($scope.whitelist.replace(/ /g, '').split(','))
-          .success(function(settings){
+          .then(response => {
             swal('Whitelist updated.');
-            $scope.whitelist = settings.whitelistedEmails.join(", ");
+            $scope.whitelist = response.data.whitelistedEmails.join(", ");
           });
       };
 
@@ -91,8 +95,8 @@ angular.module('reg')
 
         SettingsService
           .updateRegistrationTimes(open, close)
-          .success(function(settings){
-            updateSettings(settings);
+          .then(response => {
+            updateSettings(response.data);
             swal("Looks good!", "Registration Times Updated", "success");
           });
       };
@@ -104,8 +108,8 @@ angular.module('reg')
 
         SettingsService
           .updateConfirmationTime(confirmBy)
-          .success(function(settings){
-            updateSettings(settings);
+          .then(response => {
+            updateSettings(response.data);
             swal("Sounds good!", "Confirmation Date Updated", "success");
           });
       };
@@ -122,9 +126,9 @@ angular.module('reg')
         var text = $scope.settings.waitlistText;
         SettingsService
           .updateWaitlistText(text)
-          .success(function(data){
+          .then(response => {
             swal("Looks good!", "Waitlist Text Updated", "success");
-            updateSettings(data);
+            updateSettings(response.data);
           });
       };
 
@@ -132,9 +136,9 @@ angular.module('reg')
         var text = $scope.settings.acceptanceText;
         SettingsService
           .updateAcceptanceText(text)
-          .success(function(data){
+          .then(response => {
             swal("Looks good!", "Acceptance Text Updated", "success");
-            updateSettings(data);
+            updateSettings(response.data);
           });
       };
 
@@ -142,9 +146,9 @@ angular.module('reg')
         var text = $scope.settings.confirmationText;
         SettingsService
           .updateConfirmationText(text)
-          .success(function(data){
+          .then(response => {
             swal("Looks good!", "Confirmation Text Updated", "success");
-            updateSettings(data);
+            updateSettings(response.data);
           });
       };
 

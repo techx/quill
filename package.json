@@ -9,7 +9,6 @@
     "async": "^2.6.1",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.3",
-    "bower": "^1.8.0",
     "browserify": "^16.2.3",
     "browserify-ngannotate": "^2.0.0",
     "dotenv": "^6.1.0",
@@ -40,8 +39,7 @@
     "dev": "nodemon app.js",
     "watch": "gulp server",
     "prod": "gulp build && node app.js",
-    "config": "cp .env.config .env",
-    "postinstall": "bower install && gulp build"
+    "config": "cp .env.config .env"
   },
   "devDependencies": {
     "gulp": "^3.9.1",

@@ -2,6 +2,11 @@ const angular = require('angular');
 const SettingsService = require('./services/SettingsService.js');
 const UserService = require('./services/UserService.js');
 
+const AdminCtrl = require('../views/admin/AdminCtrl.js');
+const AdminSettingsCtrl = require('../views/admin/settings/AdminSettingsCtrl.js');
+const AdminStatsCtrl = require('../views/admin/stats/AdminStatsCtrl.js');
+const AdminUserCtrl = require('../views/admin/user/AdminUserCtrl.js');
+const AdminUsersCtrl = require('../views/admin/users/AdminUsersCtrl.js');
 const ApplicationCtrl = require('../views/application/ApplicationCtrl.js');
 const DashboardCtrl = require('../views/dashboard/DashboardCtrl.js');
 const LoginCtrl = require('../views/login/LoginCtrl.js');
