@@ -7,10 +7,8 @@ var browserifyNgAnnotate = require('browserify-ngannotate');
 var buffer = require('gulp-buffer');
 var cleanCss = require('gulp-clean-css');
 var concat = require('gulp-concat');
-var log = require('gulplog');
 var source = require('vinyl-source-stream');
 var sourcemaps = require('gulp-sourcemaps');
-var tap = require('gulp-tap');
 var uglify = require('gulp-uglify');
 var ngAnnotate = require('gulp-ng-annotate');
 
