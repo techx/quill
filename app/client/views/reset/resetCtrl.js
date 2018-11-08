@@ -1,3 +1,5 @@
+const swal = require('sweetalert');
+
 angular.module('reg')
   .controller('ResetCtrl', [
     '$scope',
@@ -22,20 +24,14 @@ angular.module('reg')
         AuthService.resetPassword(
           token,
           $scope.password,
-          function(message){
-            sweetAlert({
-              title: "Neato!",
-              text: "Your password has been changed!",
-              type: "success",
-              confirmButtonColor: "#e76482"
-            }, function(){
-              $state.go('login');
+          message => {
+            swal("Neato!", "Your password has been changed!", "success").then(value => {
+              $state.go("login");
             });
           },
-          function(data){
+          data => {
             $scope.error = data.message;
             $scope.loading = false;
-          });
+        });
       };
-
     }]);

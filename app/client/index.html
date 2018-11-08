@@ -6,36 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title> HackMIT 2015 </title>
 
-    <script src="plugins/jquery/dist/jquery.min.js"></script>
-    <link rel="stylesheet" href="stylesheets/normalize.css">
-
-    <!-- Angular stuff -->
-    <script src="plugins/angular/angular.min.js"></script>
-    <script src="plugins/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="./stylesheets/normalize.css">
 
     <!-- Angular app -->
-    <script src="build/app.js"></script>
+    <script src="./build/app.js"></script>
 
     <!-- Semantic-UI -->
-    <link rel="stylesheet" href="plugins/semantic-ui/dist/semantic.min.css">
-    <script src="plugins/semantic-ui/dist/semantic.min.js"></script>
-
-    <!-- Sweet Alert -->
-    <script src="plugins/sweetalert/dist/sweetalert.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="plugins/sweetalert/dist/sweetalert.css">
-
-    <!-- Moment -->
-    <script src="plugins/moment/min/moment.min.js"></script>
-
-    <!-- showdown! -->
-    <script src="plugins/showdown/dist/showdown.min.js"></script>
+    <link rel="stylesheet" href="./semantic/semantic.min.css" />
 
     <!-- Custom styling -->
-    <link rel="stylesheet" href="build/site.css">
+    <link rel="stylesheet" href="./build/site.css">
     <link href='//fonts.googleapis.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
     <link href='//fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>
 
-      <!-- iOS Web Clip -->
+    <!-- iOS Web Clip -->
     <link rel="apple-touch-icon" href="assets/images/favicon.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
 
@@ -49,7 +34,6 @@
 
       ga('create', 'UA-63828172-10', 'auto');
       ga('send', 'pageview');
-
     </script>
 
     <!-- Facebook Conversion Code for Registrations -->
@@ -68,11 +52,8 @@
     window._fbq.push(['track', '6027741035004', {'value':'0.01','currency':'USD'}]);
     </script>
     <noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6027741035004&amp;cd[value]=0.01&amp;cd[currency]=USD&amp;noscript=1" /></noscript>
-
   </head>
   <body>
-
     <div class="container" id="root-view" ui-view></div>
-
   </body>
 </html>

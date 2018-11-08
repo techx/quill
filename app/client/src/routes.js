@@ -1,3 +1,21 @@
+const angular = require('angular');
+const SettingsService = require('./services/SettingsService.js');
+const UserService = require('./services/UserService.js');
+
+const AdminCtrl = require('../views/admin/AdminCtrl.js');
+const AdminSettingsCtrl = require('../views/admin/settings/AdminSettingsCtrl.js');
+const AdminStatsCtrl = require('../views/admin/stats/AdminStatsCtrl.js');
+const AdminUserCtrl = require('../views/admin/user/AdminUserCtrl.js');
+const AdminUsersCtrl = require('../views/admin/users/AdminUsersCtrl.js');
+const ApplicationCtrl = require('../views/application/ApplicationCtrl.js');
+const ConfirmationCtrl = require('../views/confirmation/ConfirmationCtrl.js');
+const DashboardCtrl = require('../views/dashboard/DashboardCtrl.js');
+const LoginCtrl = require('../views/login/LoginCtrl.js');
+const ResetCtrl = require('../views/reset/ResetCtrl.js');
+const SidebarCtrl = require('../views/sidebar/SidebarCtrl.js');
+const TeamCtrl = require('../views/team/TeamCtrl.js');
+const VerifyCtrl = require('../views/verify/VerifyCtrl.js');
+
 angular.module('reg')
   .config([
     '$stateProvider',
@@ -35,11 +53,10 @@ angular.module('reg')
             templateUrl: "views/sidebar/sidebar.html",
             controller: 'SidebarCtrl',
             resolve: {
-              'settings' : function(SettingsService) {
+              settings: function(SettingsService) {
                 return SettingsService.getPublicSettings();
               }
             }
-
           }
         },
         data: {
@@ -172,45 +189,33 @@ angular.module('reg')
     });
 
   }])
-  .run([
-    '$rootScope',
-    '$state',
-    'Session',
-    function(
-      $rootScope,
-      $state,
-      Session ){
+  .run($transitions => {
+    $transitions.onStart({}, transition => {
+      const Session = transition.injector().get("Session");
 
-      $rootScope.$on('$stateChangeSuccess', function() {
-         document.body.scrollTop = document.documentElement.scrollTop = 0;
-      });
+      var requireLogin = transition.to().data.requireLogin;
+      var requireAdmin = transition.to().data.requireAdmin;
+      var requireVerified = transition.to().data.requireVerified;
+      var requireAdmitted = transition.to().data.requireAdmitted;
 
-      $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
-        var requireLogin = toState.data.requireLogin;
-        var requireAdmin = toState.data.requireAdmin;
-        var requireVerified = toState.data.requireVerified;
-        var requireAdmitted = toState.data.requireAdmitted;
+      if (requireLogin && !Session.getToken()) {
+        return transition.router.stateService.target("login");
+      }
 
-        if (requireLogin && !Session.getToken()) {
-          event.preventDefault();
-          $state.go('login');
-        }
+      if (requireAdmin && !Session.getUser().admin) {
+        return transition.router.stateService.target("app.dashboard");
+      }
 
-        if (requireAdmin && !Session.getUser().admin) {
-          event.preventDefault();
-          $state.go('app.dashboard');
-        }
+      if (requireVerified && !Session.getUser().verified) {
+        return transition.router.stateService.target("app.dashboard");
+      }
 
-        if (requireVerified && !Session.getUser().verified){
-          event.preventDefault();
-          $state.go('app.dashboard');
-        }
+      if (requireAdmitted && !Session.getUser().status.admitted) {
+        return transition.router.stateService.target("app.dashboard");
+      }
+    });
 
-        if (requireAdmitted && !Session.getUser().status.admitted) {
-          event.preventDefault();
-          $state.go('app.dashboard');
-        }
-
-      });
-
-    }]);
+    $transitions.onSuccess({}, transition => {
+      document.body.scrollTop = document.documentElement.scrollTop = 0;
+    });
+  });
