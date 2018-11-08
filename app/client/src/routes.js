@@ -188,45 +188,33 @@ angular.module('reg')
     });
 
   }])
-  .run([
-    '$rootScope',
-    '$state',
-    'Session',
-    function(
-      $rootScope,
-      $state,
-      Session ){
+  .run($transitions => {
+    $transitions.onStart({}, transition => {
+      const Session = transition.injector().get("Session");
 
-      $rootScope.$on('$stateChangeSuccess', function() {
-         document.body.scrollTop = document.documentElement.scrollTop = 0;
-      });
+      var requireLogin = transition.to().data.requireLogin;
+      var requireAdmin = transition.to().data.requireAdmin;
+      var requireVerified = transition.to().data.requireVerified;
+      var requireAdmitted = transition.to().data.requireAdmitted;
 
-      $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
-        var requireLogin = toState.data.requireLogin;
-        var requireAdmin = toState.data.requireAdmin;
-        var requireVerified = toState.data.requireVerified;
-        var requireAdmitted = toState.data.requireAdmitted;
+      if (requireLogin && !Session.getToken()) {
+        return transition.router.stateService.target("login");
+      }
 
-        if (requireLogin && !Session.getToken()) {
-          event.preventDefault();
-          $state.go('login');
-        }
+      if (requireAdmin && !Session.getUser().admin) {
+        return transition.router.stateService.target("app.dashboard");
+      }
 
-        if (requireAdmin && !Session.getUser().admin) {
-          event.preventDefault();
-          $state.go('app.dashboard');
-        }
+      if (requireVerified && !Session.getUser().verified) {
+        return transition.router.stateService.target("app.dashboard");
+      }
 
-        if (requireVerified && !Session.getUser().verified){
-          event.preventDefault();
-          $state.go('app.dashboard');
-        }
+      if (requireAdmitted && !Session.getUser().status.admitted) {
+        return transition.router.stateService.target("app.dashboard");
+      }
+    });
 
-        if (requireAdmitted && !Session.getUser().status.admitted) {
-          event.preventDefault();
-          $state.go('app.dashboard');
-        }
-
-      });
-
-    }]);
+    $transitions.onSuccess({}, transition => {
+      document.body.scrollTop = document.documentElement.scrollTop = 0;
+    });
+  });
