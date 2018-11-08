@@ -38,9 +38,8 @@ angular.module('reg')
           .then(response => {
             $selectedUser = response.data;
             swal("Updated!", "Profile updated.", "success");
-          }, err => {
+          }, response => {
             swal("Oops, you forgot something.");
           });
       };
-
     }]);

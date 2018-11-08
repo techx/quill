@@ -1,4 +1,5 @@
-const angular = require('angular');
+const angular = require("angular");
+const swal = require("sweetalert");
 
 angular.module('reg')
   .controller('ApplicationCtrl', [
@@ -72,18 +73,12 @@ angular.module('reg')
       function _updateUser(e){
         UserService
           .updateProfile(Session.getUserId(), $scope.user.profile)
-          .success(function(data){
-            sweetAlert({
-              title: "Awesome!",
-              text: "Your application has been saved.",
-              type: "success",
-              confirmButtonColor: "#e76482"
-            }, function(){
-              $state.go('app.dashboard');
+          .then(response => {
+            swal("Awesome!", "Your application has been saved.", "success").then(value => {
+              $state.go("app.dashboard");
             });
-          })
-          .error(function(res){
-            sweetAlert("Uh oh!", "Something went wrong.", "error");
+          }, response => {
+            swal("Uh oh!", "Something went wrong.", "error");
           });
       }
 
@@ -162,15 +157,11 @@ angular.module('reg')
         });
       }
 
-
-
       $scope.submitForm = function(){
         if ($('.ui.form').form('is valid')){
           _updateUser();
-        }
-        else{
-          sweetAlert("Uh oh!", "Please Fill The Required Fields", "error");
+        } else {
+          swal("Uh oh!", "Please Fill The Required Fields", "error");
         }
       };
-
     }]);

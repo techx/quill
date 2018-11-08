@@ -74,8 +74,8 @@ angular.module('reg')
       $scope.resendEmail = function(){
         AuthService
           .resendVerificationEmail()
-          .then(function(){
-            sweetAlert('Your email has been sent.');
+          .then(response => {
+            swal("Your email has been sent.");
           });
       };
 
@@ -114,9 +114,9 @@ angular.module('reg')
 
         UserService
           .declineAdmission(user._id)
-          .success(function(user){
-            $rootScope.currentUser = user;
-            $scope.user = user;
+          .then(response => {
+            $rootScope.currentUser = response.data;
+            $scope.user = response.data;
           });
       });
     };

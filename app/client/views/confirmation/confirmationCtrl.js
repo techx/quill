@@ -1,3 +1,5 @@
+const swal = require('sweetalert');
+
 angular.module('reg')
   .controller('ConfirmationCtrl', [
     '$scope',
@@ -56,18 +58,12 @@ angular.module('reg')
 
         UserService
           .updateConfirmation(user._id, confirmation)
-          .success(function(data){
-            sweetAlert({
-              title: "Woo!",
-              text: "You're confirmed!",
-              type: "success",
-              confirmButtonColor: "#e76482"
-            }, function(){
-              $state.go('app.dashboard');
+          .then(response => {
+            swal("Woo!", "You're confirmed!", "success").then(value => {
+              $state.go("app.dashboard");
             });
-          })
-          .error(function(res){
-            sweetAlert("Uh oh!", "Something went wrong.", "error");
+          }, response => {
+            swal("Uh oh!", "Something went wrong.", "error");
           });
       }
 
