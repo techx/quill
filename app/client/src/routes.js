@@ -8,6 +8,7 @@ const AdminStatsCtrl = require('../views/admin/stats/AdminStatsCtrl.js');
 const AdminUserCtrl = require('../views/admin/user/AdminUserCtrl.js');
 const AdminUsersCtrl = require('../views/admin/users/AdminUsersCtrl.js');
 const ApplicationCtrl = require('../views/application/ApplicationCtrl.js');
+const ConfirmationCtrl = require('../views/confirmation/ConfirmationCtrl.js');
 const DashboardCtrl = require('../views/dashboard/DashboardCtrl.js');
 const LoginCtrl = require('../views/login/LoginCtrl.js');
 const ResetCtrl = require('../views/reset/ResetCtrl.js');

@@ -34,7 +34,7 @@ angular.module('reg')
           .joinOrCreateTeam($scope.code)
           .then(response => {
             $scope.error = null;
-            $scope.user = user;
+            $scope.user = response.data;
             _populateTeammates();
           }, response => {
             $scope.error = response.data.message;

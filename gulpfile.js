@@ -58,7 +58,7 @@ gulp.task('js', function () {
 });
 
 gulp.task('semantic', function() {
-  gulp.src(['semantic/dist/semantic.min.css', 'semantic/dist/semantic.min.js'])
+  gulp.src(['semantic/dist/**/*'])
     .pipe(gulp.dest('app/client/semantic'));
 });
 
