@@ -1,6 +1,11 @@
+# Project
 db/
 node_modules/
+semantic/
+
+# Output
 app/client/build/
-app/client/plugins/
-*.log
-.env
+
+# macOS
+.DS_Store
+.python-version
