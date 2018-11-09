@@ -1,5 +1,4 @@
 # Project
-.env
 db/
 node_modules/
 semantic/

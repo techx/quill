@@ -1,4 +1,4 @@
-require('dotenv').load({silent: true});
+require('dotenv').config()
 
 var gulp = require('gulp');
 var sass = require('gulp-sass');
@@ -12,7 +12,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
 var ngAnnotate = require('gulp-ng-annotate');
 
-var environment = process.env.NODE_ENV || "dev";
+var environment = process.env.NODE_ENV;
 
 var nodemon = require('gulp-nodemon');
 
