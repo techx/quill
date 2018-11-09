@@ -27,7 +27,7 @@ Statuses:
 ### Application
 ![Application](./docs/images/screenshots/application.png)
 
-The Application tab takes users to their registration or confirmation form. 
+The Application tab takes users to their registration or confirmation form.
 
 ### Team Registration
 Hackathons commonly allow participants to register and be admitted as a team. The Team tab allows users to create or join a team with other users.
@@ -36,7 +36,7 @@ Hackathons commonly allow participants to register and be admitted as a team. Th
 Admins can view stats, look through applications, or edit settings from the Admin panel.
 
 ### Stats
-![Stats](./docs/images/screenshots/stats.png) 
+![Stats](./docs/images/screenshots/stats.png)
 
 The Stats tab summarizes useful registration statistics on the number of users in each stage of the process, demographic information, and miscellaneous event preferences like shirt sizes, dietary restrictions, or reimbursement requests.
 
@@ -52,7 +52,7 @@ The Users tab displays a table of users where admins can:
 6. Admit users manually
 7.  Mark users as checked-in at the event day-of
 
-### Settings 
+### Settings
 ![Settings](./docs/images/screenshots/settings.png)
 
 On the Settings tab, admins can easily control their event application timeline by setting registration / confirmation deadlines. They can also write custom waitlist, acceptance, and confirmation copy that users will see on their dashboard throughout the application process. The custom copy is interpreted as Markdown, so HTML and images can be added.
@@ -64,52 +64,51 @@ On the Settings tab, admins can easily control their event application timeline 
 ### Requirements
 | Requirement                                 | Version |
 | ------------------------------------------- | ------- |
-| [GCC 4.6](https://gcc.gnu.org) | `4.6+` |
-| [Node.js](http://nodejs.org)                | `8.0+`  |
-| [MongoDB](www.mongodb.com/) | `3.0+`  |
-
-> _Updating to the latest releases is recommended_.
+| [Node.js](http://nodejs.org)                | `10.13+`  |
+| [MongoDB](www.mongodb.com/) | `4.0+`  |
 
 Run the following commands to check the current installed versions:
 
-```shell
-gcc --version
+```bash
 node -v
 mongo --version
 ```
 How to upgrade to latest releases:
-- GCC: https://wiki.gentoo.org/wiki/Upgrading_GCC
 - Node.js: https://nodejs.org/en/download/
 - MongoDB: https://docs.mongodb.com/manual/administration/install-community/
 
 ### Deploying locally
 Getting a local instance of Quill up and running takes less than 5 minutes! Start by setting up the database. Ideally, you should run MongoDB as a daemon with a secure configuration (with most linux distributions, you should be able to install it with your package manager, and it'll be set up as a daemon). Although not recommended for production, when running locally for development, you could do it like this
 
-```
+```bash
 mkdir db
-mongod --dbpath db --bind_ip 127.0.0.1 --nohttpinterface
+mongod --dbpath db --bind_ip 127.0.0.1
 ```
 
 Install the necessary dependencies:
-```
+```bash
 npm install
-bower install
-npm run config
 ```
 
-Edit the configuration file in `.env` for your setup, and then run the application:
+We use `dotenv` to keep track of environment variables, so be sure to stop tracking the `.env` file in Git:
+```bash
+git update-index --assume-unchanged .env
 ```
+
+
+Edit the configuration file in `.env` for your setup, and then run the application:
+```bash
 gulp server
 ```
 
 # Customizing for your event
 
-###### _If you're using Quill for your event, please add yourself to this [list][users]. It takes less than a minute, but knowing that our software is helping real events keeps us going ♥_ 
+###### _If you're using Quill for your event, please add yourself to this [list][users]. It takes less than a minute, but knowing that our software is helping real events keeps us going ♥_
 ### Copy
 If you’d like to customize the text that users see on their dashboards, edit them at `client/src/constants.js`.
 
 ### Branding / Assets
-Customize the color scheme and hosted assets by editing `client/stylesheets/_custom.scss`. Don’t forget to use your own email banner, favicon, and logo (color/white) in the `assets/images/` folder as well! 
+Customize the color scheme and hosted assets by editing `client/stylesheets/_custom.scss`. Don’t forget to use your own email banner, favicon, and logo (color/white) in the `assets/images/` folder as well!
 
 ### Application questions
 If you want to change the application questions, edit:
@@ -119,7 +118,7 @@ If you want to change the application questions, edit:
 
 If you want stats for your new fields:
 - Recalculate them in `server/services/stats.js`
-- Display them on the admin panel by editing `client/views/admin/stats/` 
+- Display them on the admin panel by editing `client/views/admin/stats/`
 
 ### Email Templates
 To customize the verification and confirmation emails for your event, put your new email templates in `server/templates/` and edit `server/services/email.js`
