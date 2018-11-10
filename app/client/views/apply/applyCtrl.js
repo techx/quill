@@ -227,6 +227,18 @@ angular.module('reg')
                 {
                   type: 'match[confirmPassword]',
                   prompt: 'Your passwords do not match.'
+                },
+                {
+                  type: 'minLength[6]',
+                  prompt: 'Your password needs to have at least 6 characters.'
+                },
+                {
+                  type: 'maxLength[32]',
+                  prompt: 'Your password can only have at most 32 characters.'
+                },
+                {
+                  type: 'doesntContain[\" \"]',
+                  prompt: 'No spaces allowed'
                 }
               ]
             },
@@ -301,7 +313,7 @@ angular.module('reg')
               rules: [
                 {
                   type: 'allowMinors',
-                  prompt: 'You must be an adult, or an UCI student.'
+                  prompt: 'You must be an adult.'
                 }
               ]
             }
