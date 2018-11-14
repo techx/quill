@@ -34,7 +34,8 @@
 
 	/* Hero */
 	#hero {
-		background-image: url('../assets/images/hero.jpg');
+		background-image: linear-gradient(to right, #2a2a2a, #191919);
+		background-image: url('../assets/images/triangles.png'), linear-gradient(to right, #2a2a2a, #191919);
 		background-size: cover;
 		background-position: center center;
 		height: calc(100% + 49px);
@@ -42,11 +43,12 @@
 
 	#hero::before {
 		content: '';
-		background-image: linear-gradient(to bottom right, #02ccba 0%, #3d99be 31%, #9848d5 100%);
-		opacity: 0.8;
+		background-image: linear-gradient(to right, #2a2a2a, #191919);
+		opacity: 1;
 		width: 100%;
 		height: calc(100% + 50px);
 		position: absolute;
+		animation: fadeout 0.8s ease-in 0.5s forwards;
 	}
 
 	.hero-content {
@@ -188,7 +190,7 @@
 
 	/* Winners */
 	#winners {
-		background-image: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%);
+		background-image: url('../assets/images/triangles.png'), linear-gradient(to right, #2a2a2a, #191919);
 		color: white;
 		padding: 5% 0 3% 0;
 	}
@@ -222,7 +224,7 @@
 		color: white;
 	}
 	.winners-list>div:hover {
-		border-bottom: 1px solid white;
+		transform: scale(1.08);
 	}
 
 	.card-award-icon>i {
@@ -293,6 +295,7 @@
 
 	#sponsors-list>div:hover {
 		opacity: 1;
+		transform: scale(1.08);
 	}
 
 	#sponsors-list>div>img {
@@ -343,7 +346,7 @@
 
 	/* Footer */
 	#footer {
-		background-image: linear-gradient(-225deg, #2CD8D5 0%, #6B8DD6 48%, #8E37D7 100%);
+		background-image: url('../assets/images/triangles.png'), linear-gradient(to right, #2a2a2a, #191919);
 		color: white;
 		text-align: center;
 		padding: 8% 0;
@@ -369,20 +372,18 @@
 	#footer-content>button {
 		color: white;
 		font-weight: 300;
-		border: 1px solid white;
 		padding: 1% 2%;
 		border-radius: 5px;
 		letter-spacing: 0.05em;
 		font-size: 1.1em;
-		background-color: transparent;
+		background: #9b92e3;
 		transition: all .2s ease;
+		border: none;
 	}
 
 	#footer-content>button:hover {
 		text-decoration: none;
-		background-color: white;
-		color: #6B8DD6;
-		border: 1px solid white;
+		transform: scale(1.08);
 	}
 
 	#footer-content>button:focus {

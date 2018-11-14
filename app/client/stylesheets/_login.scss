@@ -1,23 +1,23 @@
 #login {
   height: calc(100% + 49px);
   width: 100%;
-  background-image: url('../assets/images/hero.jpg');
+  background-image: url('../assets/images/login_bg.png'), linear-gradient(to right, #2a2a2a, #191919);
   background-size: cover;
   background-position: center center;
 
   &::before {
     content: '';
-    background-image: linear-gradient(to bottom right, #02ccba 0%, #3d99be 31%, #9848d5 100%);
-    opacity: 0.8;
+    background-image: linear-gradient(to right, #2a2a2a, #191919);
+    animation: fadeout 0.8s ease-in 0.5s forwards;  
+    opacity: 1;
     width: 100%;
     height: calc(100% + 50px);
     position: absolute;
   }
-
+  
   > .container {
     position: relative;
     top: 50%;
-
     -webkit-transform: translateY(-50%);
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
@@ -106,22 +106,22 @@
         letter-spacing: 0.07em;
         border-radius: 25px;
         box-shadow: 0 2px 16px rgba(24,51,59,.2);
-          transition: background .2s ease;
+        transition: background .2s ease;
 
         &.login {
-          background: rgba(61,153,190,0.95);
+          background: #83a8db;
         }
 
         &.login:hover {
-          background: rgba(61,153,190,1);
+          background: #92c0ff;
         }
 
         &.register {
-          background: rgba(2,204,186,0.95);
+          background: #9398e1;
         }
 
         &.register:hover {
-          background: rgba(2,204,186,1);
+          background: #b5baff;
         }
       }
 
@@ -132,9 +132,12 @@
         letter-spacing: 0.07em;
         animation: fadein .5s both;
         animation-delay: .5s;
-      }
+        color: #83a8db;
 
+        #forgot-password {
+          color: #83a8db;
+        }
+      }
     }
   }
-
 }
