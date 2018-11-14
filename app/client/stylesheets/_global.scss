@@ -43,7 +43,7 @@
 	line-height: 1.2142em;
 	padding: .67861429em 1em;
 	font-size: 1em;
-	background: #fff;
+	background: transparent;
 	border: 1px dashed rgba(34,36,38,.25);
 	color: rgba(0,0,0,.87);
 	cursor: pointer;
@@ -75,6 +75,8 @@
 	}
 
 	.dz-details {
+		z-index: -1;
+
 		>div {
 			padding: 4px 0;
 		}
