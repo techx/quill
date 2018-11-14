@@ -334,38 +334,6 @@ module.exports = function(router) {
   });
 
   /**
-   * Get a user's team member's names. Uses the code associated
-   * with the user making the request.
-   */
-  router.get('/users/:id/team', isOwnerOrAdmin, function(req, res){
-    var id = req.params.id;
-    UserController.getTeammates(id, defaultResponse(req, res));
-  });
-
-  /**
-   * Update a teamcode. Join/Create a team here.
-   * {
-   *   code: STRING
-   * }
-   */
-  router.put('/users/:id/team', isOwnerOrAdmin, function(req, res){
-    var code = req.body.code;
-    var id = req.params.id;
-
-    UserController.createOrJoinTeam(id, code, defaultResponse(req, res));
-
-  });
-
-  /**
-   * Remove a user from a team.
-   */
-  router.delete('/users/:id/team', isOwnerOrAdmin, function(req, res){
-    var id = req.params.id;
-
-    UserController.leaveTeam(id, defaultResponse(req, res));
-  });
-
-  /**
    * Update a user's password.
    * {
    *   oldPassword: STRING,
