@@ -72,13 +72,6 @@
       </a>
       <a
         ui-sref-active="menu-item-active"
-        ui-sref="app.team"
-        ng-if="regIsOpen && currentUser.verified && !currentUser.status.declined"
-        class="menu-item">
-        TEAM
-      </a>
-      <a
-        ui-sref-active="menu-item-active"
         ui-sref="app.admin.stats"
         class="menu-item"
         ng-if="currentUser.verified && currentUser.admin">
@@ -247,14 +240,6 @@
         class="menu-item"
         ng-click="onMenuClick()">
         CONFIRMATION
-      </a>
-      <a
-        ui-sref-active="menu-item-active"
-        ui-sref="app.team"
-        ng-if="currentUser.verified && !currentUser.status.declined"
-        class="menu-item"
-        ng-click="onMenuClick()">
-        TEAM
       </a>
       <a
         ui-sref-active="menu-item-active"
