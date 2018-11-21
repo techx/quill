@@ -45,8 +45,7 @@ angular.module('reg')
       };
 
       $scope.sendResetEmail = function() {
-        var email = $scope.resetEmail;
-        console.log(email);
+        var email = $scope.email;
         var dialouge = {
           title: "Don't Sweat!",
           text: "An email should be sent to you shortly.",
