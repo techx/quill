@@ -53,7 +53,7 @@ angular.module('reg')
           confirmButtonColor: "#e76482"
         };
         if (!re.test(email)) {
-          dialouge = {
+          dialogue = {
             title: "Oops",
             text: "Please enter valid email",
             type: "error",
