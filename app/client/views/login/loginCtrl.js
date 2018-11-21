@@ -60,7 +60,6 @@ angular.module('reg')
             confirmButtonColor: "#e76482"
           };
         } else {
-        {
           AuthService.sendResetEmail(email);
         }
         sweetAlert(dialogue);
