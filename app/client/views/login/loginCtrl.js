@@ -64,7 +64,7 @@ angular.module('reg')
         {
           AuthService.sendResetEmail(email);
         }
-        sweetAlert(dialouge);
+        sweetAlert(dialogue);
       };
 
     }
