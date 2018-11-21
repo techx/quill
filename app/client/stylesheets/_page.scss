@@ -1,8 +1,7 @@
 .page {
   padding: calc(4em + 100px) 2em 4em 2em;
-
+  
   &:not(.modals) {
-    background: #fff;
     animation: fadein .5s both;
     animation-delay: .2s;
   }
@@ -13,15 +12,14 @@
     font-size: 2.5em;
     text-align: center;
     color: $page-header-color;
-    letter-spacing: 8px;
-    font-weight: 700;
+    letter-spacing: 2px;
+    font-weight: 800;
 
     &.divided:after {
         content: " ";
         width: 200px;
         display: block;
-        margin: 1em auto 2em;
-        border-bottom: 4px solid $page-header-color;
+        margin: 3%;
     }
 
     &.small {
