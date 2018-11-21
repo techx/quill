@@ -52,7 +52,7 @@ angular.module('reg')
           type: "success",
           confirmButtonColor: "#e76482"
         };
-        if(!re.test(email))
+        if (!re.test(email)) {
         {
           dialouge = {
             title: "Oops",
