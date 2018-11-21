@@ -46,7 +46,7 @@ angular.module('reg')
 
       $scope.sendResetEmail = function() {
         var email = $scope.email;
-        var dialouge = {
+        var dialogue = {
           title: "Don't Sweat!",
           text: "An email should be sent to you shortly.",
           type: "success",
