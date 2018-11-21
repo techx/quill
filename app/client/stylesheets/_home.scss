@@ -1,418 +1,378 @@
 /* Home */
 #home {
+  height: 100%;
+  font-family: "Rubik", sans-serif;
+  /* Global */
+  button,
+  .btn {
+    color: white;
+    font-weight: 300;
+    border: 1px solid white;
+    padding: 1.75% 4%;
+    margin: 0 5px;
+    border-radius: 4px;
+    letter-spacing: 0.12em;
+    transition: all 0.3s ease;
+  }
+
+  button:hover,
+  .btn:hover {
+    text-decoration: none;
+    color: #6b8dd6;
+    border: 1px solid white;
+  }
+
+  button:focus,
+  .btn:focus {
+    outline: none;
+  }
+
+  .title {
+    font-size: 2.8em;
+    font-weight: 700;
+  }
+
+  /* Hero */
+  #hero {
+    background-image: url("../assets/images/landing_pg_longer_bg_viv.png"),
+      linear-gradient(to right, #2a2a2a, #191919);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: calc(100% + 49px);
+
+    .hero-container {
+      min-width: 30%;
+    }
+  }
+
+  #hero::before {
+    content: "";
+    background-image: linear-gradient(to right, #2a2a2a, #191919);
+    width: 100%;
+    height: calc(100% + 50px);
+    position: absolute;
+    animation: fadeout 0.8s ease-in 0.5s forwards;
+  }
+
+  .hero-content {
     height: 100%;
-    font-family: 'Rubik', sans-serif;
-    /* Global */
-    button, .btn {
-        color: white;
-        font-weight: 300;
-        border: 1px solid white;
-        padding: 1.75% 4%;
-        margin: 0 5px;
-        border-radius: 4px;
-        letter-spacing: 0.12em;
-        transition: all .3s ease;
+    position: relative;
+    color: white;
+    z-index: 3;
+
+    > div {
+      margin-top: -50px;
+    }
+  }
+
+  .logo-header-container {
+    height: 125px;
+    margin-top: 0;
+    margin-bottom: 5%;
+    animation: fadein 0.5s both;
+    animation-delay: 0.15s;
+  }
+
+  .logo-header {
+    height: 125px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    text-align: center;
+    transition: all 0.2s ease;
+  }
+
+  .logo-cog {
+    animation: spin 12s linear infinite;
+  }
+
+  .logo-header > img {
+    height: 100%;
+  }
+
+  .hero-title {
+    font-size: 5em;
+    line-height: 1.1em;
+    font-weight: 700;
+    text-align: center;
+    display: block;
+    animation: fadein 0.5s both;
+    animation-delay: 0.3s;
+  }
+
+  .hero-description-container {
+    text-align: center;
+    padding-top: 1.5%;
+  }
+
+  .hero-description {
+    font-weight: 300;
+    font-size: 1.5em;
+    letter-spacing: 0.12em;
+    text-align: center;
+    display: inline-block;
+    animation: fadein 0.5s both;
+    animation-delay: 0.45s;
+  }
+
+  .hero-button-container {
+    text-align: center;
+    margin-top: 65vh;
+    animation: 1s fadein 1.5s both;
+    animation-delay: 0.6s;
+
+    .btn {
+      background: #8e8bdc;
+      border: none;
+      margin-top: 150%;
+      padding: 3.5% 8%;
+      border-radius: 25px;
+      margin-left: 5%;
+      box-shadow: 0 2px 16px rgba(24, 51, 59, 0.35);
     }
 
-    button:hover, .btn:hover {
-        text-decoration: none;
-        color: #6B8DD6;
-        border: 1px solid white;
+    .btn:hover {
+      color: white;
+      background: #a5a2ff;
     }
 
-    button:focus, .btn:focus {
-        outline: none;
+    .btn--coming-soon {
+      cursor: default;
+      background: rgba(252, 96, 118, 0.9);
     }
 
-    .title {
-        font-size: 2.8em;
-        font-weight: 700;
+    .btn--coming-soon:hover {
+      background: #fc6076;
     }
-    /* Hero */
+  }
+
+  .hero-border {
+    width: 100%;
+    height: 225px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+  }
+
+  .hero-border svg {
+    width: 100%;
+    height: calc(100% + 50px);
+    position: absolute;
+    vertical-align: bottom;
+  }
+  /* Info */
+  #info {
+    padding: 7% 0;
+    background: #e7e7e7;
+  }
+
+  #info-content {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  .headline {
+    font-weight: 300;
+    font-size: 2em;
+    display: inline-block;
+
+    .bold {
+      font-weight: 500;
+    }
+  }
+  /* FAQs */
+  #faq {
+    background: #8e8bdc;
+    color: white;
+    padding: 5% 0 3% 0;
+  }
+
+  #faq-content {
+    width: 85%;
+  }
+
+  #faq-content > .title {
+    text-align: center;
+  }
+
+  .faq-list {
+    padding-top: 4%;
+  }
+
+  .faq-card {
+    width: 100%;
+    border-radius: 5px;
+    text-align: center;
+    padding: 3% 5%;
+  }
+
+  .faq-card-title {
+    font-weight: 500;
+    color: white;
+    font-size: 1.4em;
+    letter-spacing: 0.025em;
+    text-align: left;
+    line-height: 1.25em;
+  }
+
+  .faq-card-description {
+    font-weight: 300;
+    font-size: 0.8em;
+    letter-spacing: 0.07em;
+    padding: 2% 0;
+    color: white;
+    text-align: left;
+  }
+  /* Sponsors */
+  #sponsors {
+    padding: 6% 0 8% 0;
+    background: #e7e7e7;
+    font-size: 1.2em;
+  }
+
+  /* Footer */
+  #footer {
+    background-image: url("../assets/images/footer.png");
+    color: white;
+    text-align: center;
+    padding: 6% 0;
+  }
+
+  #footer-content {
+    font-size: 2em;
+    width: 100%;
+  }
+
+  #footer-content > a {
+    color: rgba(255, 255, 255, 0.95);
+    padding: 0 1%;
+    transition: all 0.2s ease;
+  }
+
+  #footer-content > a:hover {
+    color: rgba(255, 255, 255, 1);
+  }
+  /* Mobile */
+  @media (max-width: 767px) {
     #hero {
-        background-image: linear-gradient(to right, #2a2a2a, #191919);
-        background-size: cover;
-        background-position: center center;
-        height: calc(100% + 49px);
-
-        .landing-page-logo-container {
-            position:relative;
-            top:0; 
-            left:0;
-        }
-
-        .before-logo {
-            position:relative;
-            top:0; 
-            left:0; 
-            width: 100%;
-            opacity: 0;
-            animation: fadein 0.5s ease-in 0.5s forwards;
-        }
-
-        .after-logo {
-            position: absolute;
-            top:0; 
-            left:0;
-            width: 100%;
-            opacity: 0;
-            animation: fadein 0.8s ease-in 0.8s forwards;
-        }
+      background-image: linear-gradient(to right, #2a2a2a, #191919);
     }
-    
-    .hero-content {
-        height: 100%;
-        position: relative;
-        color: white;
-        z-index: 3;
-
-        > div {
-            margin-top: -150px;
-        }
-    }
-
-    .logo-header-container {
-        height: 125px;
-        margin-top: 0;
-        margin-bottom: 5%;
-        animation: fadein .5s both;
-        animation-delay: .15s;
-    }
-
-    .logo-header {
-        height: 125px;
-        position: absolute;
-        left: 0;
-        right: 0;
-        width: 100%;
-        text-align: center;
-        transition: all .2s ease;
-    }
-
-    .logo-cog {
-        animation: spin 12s linear infinite;
-    }
-
-    .logo-header > img {
-        height: 100%;
-    }
-
-    .hero-title {
-        font-size: 5em;
-        line-height: 1.1em;
-        font-weight: 700;
-        text-align: center;
-        display: block;
-        animation: fadein .5s both;
-        animation-delay: .3s;
-        display: none;
-    }
-
-    .hero-description-container {
-        text-align: center;
-        padding-top: 1.5%;
-    }
-
-    .hero-description {
-        font-weight: 300;
-        font-size: 1.5em;
-        letter-spacing: 0.12em;
-        text-align: center;
-        display: inline-block;
-        animation: fadein .5s both 1s;
-        animation-delay: .45s;
-    }
-
-    .hero-button-container {
-        text-align: center;
-        animation: fadein 1s ease-in both 1s;
-        
-        .btn {
-            background: #9b92e3;
-            border: none;
-            padding: 8% 15%;
-            border-radius: 25px;
-            box-shadow: 0 2px 16px rgba(12, 123, 156, 0.35);
-            font-size: 1.32rem;
-            white-space: nowrap;
-            width: 100%;
-            font-weight: normal;
-        }
-
-        .btn:hover {
-            color: white;
-        }
-
-        .btn--coming-soon {
-            cursor: default;
-            background: #9b92e3;
-        }
-
-        .btn--coming-soon:hover {
-            background: #9b92e3;
-        }
+    .title {
+      margin-bottom: 5%;
+      font-size: 2em;
     }
 
     .hero-border {
-        width: 100%;
-        height: 225px;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        z-index: 2;
+      height: 100px;
     }
 
-    .hero-border svg {
-        width: 100%;
-        height: calc(100% + 50px);
-        position: absolute;
-        vertical-align: bottom;
-    }
-    /* Info */
-    #info {
-        padding: 7% 0;
-        background: #fff;
+    .hero-title {
+      display: block;
+      font-size: 2.5em;
     }
 
-    #info-content {
-        width: 80%;
-        margin-left: auto;
-        margin-right: auto;
-        text-align: center;
+    .hero-description {
+      font-size: 1.2em;
+      margin: 2% 10%;
+    }
+
+    .hero-button-container {
+      margin-top: 20%;
+
+      .btn {
+        padding: 5% 10%;
+      }
+    }
+
+    #info,
+    #faq {
+      padding: 12.5% 0;
+    }
+
+    #info-content,
+    #faq-content {
+      width: 90%;
     }
 
     .headline {
-        font-weight: 300;
-        font-size: 2em;
-        display: inline-block;
-
-        .bold {
-            font-weight: 500;
-        }
-    }
-    /* FAQs */
-    #faq {
-        background-image: url('../assets/images/triangles.png'), linear-gradient(to right, #2a2a2a, #191919);
-        background-position: center center;
-        color: white;
-        padding: 5% 0 3% 0;
+      font-size: 1.7em;
+      padding: 2.5% 0;
     }
 
-    #faq-content {
-        width: 85%;
+    #faq-content .column:nth-child(1) {
+      padding-bottom: 0 !important;
     }
 
-    #faq-content > .title {
-        text-align: center;
+    #faq-content .column:nth-child(2) {
+      padding-top: 0 !important;
     }
 
-    .faq-list {
-        padding-top: 4%;
-    }
-
-    .faq-card {
-        width: 100%;
-        border-radius: 5px;
-        text-align: center;
-        padding: 3% 5%;
-    }
-
-    .faq-card-title {
-        font-weight: 500;
-        color: white;
-        font-size: 1.4em;
-        letter-spacing: 0.025em;
-        text-align: left;
-        line-height: 1.25em;
-    }
-
-    .faq-card-description {
-        font-weight: 300;
-        font-size: 0.8em;
-        letter-spacing: 0.07em;
-        padding: 2% 0;
-        color: white;
-        text-align: left;
-    }
-    /* Sponsors */
     #sponsors {
-        padding: 6% 0 8% 0;
-        background: #fff;
+      padding: 12.5% 0 5% 0;
     }
 
-    #sponsors-content {
-        width: 80%;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    #sponsors-content > .title {
-        text-align: center;
-        padding-bottom: 1%;
-        color: #2c3e50;
+    #sponsors-list {
+      margin-top: 5%;
     }
 
     #sponsors-list > a {
-        height: 60px;
-        padding-right: 10px;
-        padding-left: 10px;
-        margin-top: 1%;
-        margin-bottom: 0.5%;
-        opacity: 0.6;
-        transition: opacity .2s ease;
+      height: 110px;
+      text-align: center;
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
     }
 
-    #sponsors-list > a:hover {
-        opacity: 1;
-    }
-
-    #sponsors-list > a > img {
-        width: 100%;
-        padding: 0 7%;
-    }
-    /* Footer */
     #footer {
-        background-image: url('../assets/images/triangles.png'), linear-gradient(to right, #2a2a2a, #191919);
-        background-position: center;
-        color: white;
-        text-align: center;
-        padding: 6% 0;
-    }
-
-    #footer-content {
-        font-size: 2em;
-        width: 100%;
+      padding: 20% 0;
     }
 
     #footer-content > a {
-        color: rgba(255,255,255,0.95);
-        padding: 0 1%;
-        transition: all .2s ease;
+      padding: 0 2.5%;
     }
 
-    #footer-content > a:hover {
-        color: rgba(255,255,255,1);
+    button,
+    .btn {
+      padding: 5% 10%;
     }
-    /* Mobile */
-    @media (max-width: 767px) {
-        .title {
-            margin-bottom: 5%;
-            font-size: 2em;
-        }
-
-        .hero-border {
-            height: 100px;
-        }
-
-        .hero-title {
-            display: block;
-            font-size: 2.75em;
-        }
-
-        .hero-description {
-            font-size: 1.2em;
-            margin: 2% 10%;
-        }
-
-        .hero-button-container {
-            margin-top: 20%;
-
-            .btn {
-                padding: 5% 10%;
-            }
-        }
-
-        #info, #faq {
-            padding: 12.5% 0;
-        }
-
-        #info-content, #faq-content {
-            width: 90%;
-        }
-
-        .headline {
-            font-size: 1.7em;
-            padding: 2.5% 0;
-        }
-
-        #faq-content .column:nth-child(1) {
-            padding-bottom: 0 !important;
-        }
-
-        #faq-content .column:nth-child(2) {
-            padding-top: 0 !important;
-        }
-
-        #sponsors {
-            padding: 12.5% 0 5% 0;
-        }
-
-        #sponsors-list {
-            margin-top: 5%;
-        }
-
-        #sponsors-list > a {
-            height: 110px;
-            text-align: center;
-            padding-top: 0 !important;
-            padding-bottom: 0 !important;
-        }
-
-        #footer {
-            padding: 20% 0;
-        }
-
-        #footer-content > a {
-            padding: 0 2.5%;
-        }
-
-        button, .btn {
-            padding: 5% 10%;
-        }
-
-        .hero-button-container {
-            animation: fadein 0.5s ease-in both 0.5s;  
-        }
-
-        .before-logo {
-            visibility: hidden;
-        }
-
-        .after-logo {
-            visibility: hidden;
-        }
-
-        .landing-page-logo-container {
-            background-image: url('../assets/images/triangles.png');
-            background-size: cover;
-        }
+  }
+  /* Tablet */
+  @media (min-width: 768px) and (max-width: 991px) {
+    #info-content,
+    #faq-content {
+      width: 90%;
     }
-    /* Tablet */
-    @media (min-width: 768px) and (max-width: 991px) {
-        #info-content, #faq-content {
-            width: 90%;
-        }
 
-        #sponsors-content, #sponsorship {
-            width: 85%;
-        }
-
-        #sponsors-list > a {
-            height: 110px;
-            text-align: center;
-            padding-top: 0 !important;
-            padding-bottom: 0 !important;
-        }
-
-        .logo-header {
-            display: none;
-        }
-
+    #sponsors-content,
+    #sponsorship {
+      width: 85%;
     }
-    /* Large Screens */
-    @media (min-width: 1650px) {
-        #info-content, #faq-content, #sponsors-content, #sponsorship {
-            width: 70%;
-        }
+
+    #sponsors-list > a {
+      height: 110px;
+      text-align: center;
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
     }
+
+    .hero-button-container {
+      margin-top: 80vh;
+    }
+  }
+  /* Large Screens */
+  @media (min-width: 1650px) {
+    #info-content,
+    #faq-content,
+    #sponsors-content,
+    #sponsorship {
+      width: 70%;
+    }
+    .hero-button-container {
+      margin-top: 75vh;
+    }
+  }
 }
