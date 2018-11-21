@@ -1,57 +1,128 @@
 {
-    "name": "Quill",
-    "description": "Registration, for hackathons!",
+    "name": "quill",
+    "scripts": {},
     "env": {
-        "NODE_ENV": {
-            "description": "dev or production",
-            "value": "dev"
-        },
-        "JWT_SECRET": {
-            "description": "Long random string used to verify JWT tokens for user authentication",
-            "generator": "secret"
-        },
-        "ROOT_URL": {
-            "description": "Root URL for your registration system",
-            "value": "http://localhost:3000"
-        },
-        "ADMIN_EMAIL": {
-            "description": "Credentials for the admin user created at app initialization",
-            "value": "admin@example.com"
-        },
-        "ADMIN_PASS": "party",
-        "EMAIL_ADDRESS": {
-            "description": "The email address that is included in the 'email us' link at the bottom of emails.",
-            "value": "team@example.com"
-        },
-        "HACKATHON_NAME": "Hackathon",
-        "TWITTER_HANDLE": {
-            "description": "Everything after https://twitter.com/",
-            "value": "hackathon"
-        },
-        "FACEBOOK_HANDLE": {
-            "description": "Everything after https://facebook.com/",
-            "value": "hackathon"
-        },
-        "EMAIL_CONTACT": {
-            "description": "Used to send verification, registration, and confirmation emails",
-            "value": "Hackathon Team <team@example.com>"
-        },
-        "EMAIL_HOST": "smtp.gmail.com",
-        "EMAIL_USER": "foo@bar.com",
-        "EMAIL_PASS": "password",
-        "EMAIL_PORT": "465",
-        "EMAIL_HEADER_IMAGE": "https://s3.amazonaws.com/hackmit-assets/Banner_600.jpg",
-        "TEAM_MAX_SIZE": {
-            "description": "Limits the number of users that can join a team",
-            "value": "4"
-        },
-        "SLACK_HOOK": {
-            "description": "Used to send error messages to your Slack team when the API catches an error",
-            "value": "https://hooks.slack.com/services/your-api-key"
-        }
+      "ACCEPTANCE_EMAIL_TEMPLATE": {
+        "required": true
+      },
+      "ADMIN_EMAIL": {
+        "required": true
+      },
+      "ADMIN_PASS": {
+        "required": true
+      },
+      "AWS_ACCESS": {
+        "required": true
+      },
+      "AWS_EMAIL_ACCESS": {
+        "required": true
+      },
+      "AWS_EMAIL_SECRET": {
+        "required": true
+      },
+      "AWS_S3_BUCKET": {
+        "required": true
+      },
+      "AWS_SECRET": {
+        "required": true
+      },
+      "DATABASE": {
+        "required": true
+      },
+      "EMAIL_ADDRESS": {
+        "required": true
+      },
+      "EMAIL_CONTACT": {
+        "required": true
+      },
+      "EMAIL_HEADER_IMAGE": {
+        "required": true
+      },
+      "EMAIL_HOST": {
+        "required": true
+      },
+      "EMAIL_PASS": {
+        "required": true
+      },
+      "EMAIL_PORT": {
+        "required": true
+      },
+      "EMAIL_USER": {
+        "required": true
+      },
+      "FACEBOOK_HANDLE": {
+        "required": true
+      },
+      "GOOGLE_ID": {
+        "required": true
+      },
+      "GOOGLE_REFRESH_TOKEN": {
+        "required": true
+      },
+      "GOOGLE_SECRET": {
+        "required": true
+      },
+      "GOOGLE_SPREADSHEET_ID": {
+        "required": true
+      },
+      "HACKATHON_NAME": {
+        "required": true
+      },
+      "HELLOSIGN_KEY": {
+        "required": true
+      },
+      "JWT_SECRET": {
+        "required": true
+      },
+      "NODE_ENV": {
+        "required": true
+      },
+      "PASSWORD_CHANGED_EMAIL_TEMPLATE": {
+        "required": true
+      },
+      "PASSWORD_RESET_EMAIL_TEMPLATE": {
+        "required": true
+      },
+      "ROOT_URL": {
+        "required": true
+      },
+      "SENDGRID_API_KEY": {
+        "required": true
+      },
+      "SLACK_HOOK": {
+        "required": true
+      },
+      "SMTP_CLIENT_ID": {
+        "required": true
+      },
+      "SMTP_CLIENT_REFRESH": {
+        "required": true
+      },
+      "SMTP_CLIENT_SECRET": {
+        "required": true
+      },
+      "TEAM_MAX_SIZE": {
+        "required": true
+      },
+      "TWITTER_HANDLE": {
+        "required": true
+      },
+      "VERIFICATION_EMAIL_TEMPLATE": {
+        "required": true
+      },
+      "WAIVER_EMAIL_TEMPLATE": {
+        "required": true
+      }
     },
-    "addons": [
-        "mongolab"
-    ],
-    "keywords": ["quill", "node", "express", "mongo"]
-}
+    "formation": {
+      "web": {
+        "quantity": 1
+      }
+    },
+    "addons": [],
+    "buildpacks": [
+      {
+        "url": "heroku/nodejs"
+      }
+    ]
+  }
