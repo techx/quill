@@ -7,7 +7,7 @@ angular.module('reg')
     'Utils',
     'AuthService',
     function($scope, $http, $state, settings, Utils, AuthService){
-
+      var re = /\S+@\S+\.\S+/;
       // Is registration open?
       var Settings = settings.data;
       $scope.regIsOpen = Utils.isRegOpen(Settings);
@@ -45,14 +45,28 @@ angular.module('reg')
       };
 
       $scope.sendResetEmail = function() {
-        var email = $scope.email;
-        AuthService.sendResetEmail(email);
-        sweetAlert({
+        var email = $scope.resetEmail;
+        console.log(email);
+        var dialouge = {
           title: "Don't Sweat!",
           text: "An email should be sent to you shortly.",
           type: "success",
           confirmButtonColor: "#e76482"
-        });
+        };
+        if(!re.test(email))
+        {
+          dialouge = {
+            title: "Oops",
+            text: "Please enter valid email",
+            type: "error",
+            confirmButtonColor: "#e76482"
+          };
+        }
+        else
+        {
+          AuthService.sendResetEmail(email);
+        }
+        sweetAlert(dialouge);
       };
 
     }
