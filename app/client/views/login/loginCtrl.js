@@ -45,27 +45,23 @@ angular.module('reg')
       };
 
       $scope.sendResetEmail = function() {
-        var email = $scope.email;
-        var dialouge = {
-          title: "Don't Sweat!",
-          text: "An email should be sent to you shortly.",
-          type: "success",
-          confirmButtonColor: "#e76482"
-        };
-        if(!re.test(email))
-        {
-          dialouge = {
-            title: "Oops",
-            text: "Please enter valid email",
-            type: "error",
-            confirmButtonColor: "#e76482"
-          };
+        if(!re.test($scope.email)) {
+          sweetAlert({
+            title: 'Oops',
+            text: 'Please enter valid email',
+            type: 'error',
+            confirmButtonColor: '#e76482'
+          });
         }
-        else
-        {
+        else {
           AuthService.sendResetEmail(email);
+          sweetAlert({
+            title: 'Don\'t Sweat!',
+            text: 'An email should be sent to you shortly.',
+            type: 'success',
+            confirmButtonColor: '#e76482'
+          });
         }
-        sweetAlert(dialouge);
       };
 
     }
