@@ -212,6 +212,15 @@ angular.module('reg')
                 }
               ]
             },
+            description: {
+              identifier: 'description',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please describe yourself in at least a word or two.'
+                }
+              ]
+            },
             essay: {
               identifier: 'essay',
               rules: [
@@ -243,7 +252,7 @@ angular.module('reg')
               rules: [
                 {
                   type: 'allowMinors',
-                  prompt: 'You must be an adult, or an MIT student.'
+                  prompt: 'You must be an adult.'
                 }
               ]
             }
