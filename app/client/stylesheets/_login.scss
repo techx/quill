@@ -143,7 +143,10 @@
     }
   }
 
-  > .reset-container {
-    top: 40%;
+  /* Mobile */
+  @media (max-width: 767px) {
+    > .reset-container {
+      top: 40%;
+    }
   }
 }
