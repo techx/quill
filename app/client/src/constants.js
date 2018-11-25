@@ -1,13 +1,13 @@
 angular.module('reg')
     .constant('EVENT_INFO', {
-        NAME: 'HackUCI 2018',
-        START_DATE: 'Feb 2, 2018',
+        NAME: 'HackUCI 2019',
+        START_DATE: 'Feb 15, 2018',
         START_TIME: '21:00',
-        END_DATE: 'Feb 4, 2018',
+        END_DATE: 'Feb 17, 2018',
         END_TIME: '10:00',
-        EXPO_START_DATE: 'Feb 4, 2018',
+        EXPO_START_DATE: 'Feb 17, 2018',
         EXPO_START_TIME: '12:00',
-        EXPO_END_DATE: 'Feb 4, 2018',
+        EXPO_END_DATE: 'Feb 17, 2018',
         EXPO_END_TIME: '14:30',
     })
     .constant('DASHBOARD', {
