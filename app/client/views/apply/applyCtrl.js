@@ -283,7 +283,7 @@ angular.module('reg')
               rules: [
                 {
                   type: 'empty',
-                  prompt: 'Please describe yourself in at least a word or two'
+                  prompt: 'Please describe yourself in at least a word or two.'
                 }
               ]
             },
