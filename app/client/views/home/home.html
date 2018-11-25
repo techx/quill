@@ -12,7 +12,10 @@
         </div>
         <span class="hero-title ui grid mobile only">HackUCI 2019</span>
         <div class="hero-button-container">
-          <a href="" target="_blank" class="btn"> COMING SOON </a>
+          <a ui-sref="app.apply" class="btn" ng-if="regIsOpen">
+            <i class="fa fa-paper-plane" aria-hidden="true"></i>
+            APPLY
+          </a>
           <!--
             <a ui-sref="app.recruit" class="btn">
                 <i class="fa fa-rocket" aria-hidden="true"></i>
@@ -153,7 +156,7 @@
 
   <section id="sponsors" class="center">
     <div id="sponsors-content">
-      <div class="title">Past Sponsors</div>
+      <div class="title">Current Sponsors</div>
       <div id="sponsors-list" class="ui grid">
         <div
           class="sixteen wide phone eight wide tablet four wide computer column"
