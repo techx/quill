@@ -48,7 +48,7 @@ angular.module('reg')
         if(!re.test($scope.email)) {
           sweetAlert({
             title: 'Oops',
-            text: 'Please enter valid email',
+            text: 'Please enter a valid email address.',
             type: 'error',
             confirmButtonColor: '#e76482'
           });
