@@ -20,11 +20,12 @@ function calculateStats(){
       schools: {},
       majors: {},
       year: {
-        '2018': 0,
         '2019': 0,
         '2020': 0,
         '2021': 0,
-	      'later': 0
+        '2022': 0,
+        'later': 0,
+        'graduate': 0
       }
     },
 

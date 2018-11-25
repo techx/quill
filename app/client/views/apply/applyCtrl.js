@@ -225,10 +225,6 @@ angular.module('reg')
                   prompt: 'Please enter a password.'
                 },
                 {
-                  type: 'match[confirmPassword]',
-                  prompt: 'Your passwords do not match.'
-                },
-                {
                   type: 'minLength[6]',
                   prompt: 'Your password needs to have at least 6 characters.'
                 },
