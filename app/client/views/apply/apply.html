@@ -1,13 +1,17 @@
 <div id="apply" class="page" ng-class="{ 'fade-out': fadeOut }">
-  <div class="divided title">
+
+  <!-- added font and color classes to multiple divs below
+       still need to change the border-bottom color to correspond to their headers and the
+       'Apply' needs to have the gradient color, hex code should be from #7ce0ff to #e2a1e3 -->
+  <div id="apply-header" class="divided title">
     Apply
   </div>
 
-  <div class="ui stackable page grid">
+  <div class="ui stackable page grid bg">
     <div class="column">
       <form class="ui form">
 
-        <div class="divided title">Basic Information</div>
+        <div class="divided title blue font">Basic Information</div>
 
         <fieldset ng-disabled="!regIsOpen">
 
@@ -84,7 +88,7 @@
 
         <br>
 
-        <div class="divided title">School Information</div>
+        <div class="divided title lilac font">School Information</div>
 
         <div class="field" ng-show="autoFilledSchool">
           <label>
@@ -158,16 +162,14 @@
               <option value="2019">2019</option>
               <option value="2020">2020</option>
               <option value="2021">2021</option>
-              <option value="2022">2022</option>
-              <option value="later">Later than 2022</option>
-              <option value="graduate">I am a graduate student</option>
+              <option value="later">Later than 2021</option>
             </select>
           </div>
         </div>
 
         <br>
 
-        <div class="divided title">Profile Information</div>
+        <div class="divided title pink font">Profile Information</div>
 
         <div class="two fields">
           <div class="field">
@@ -189,10 +191,9 @@
         <div class="field">
           <label>
             I would describe myself as a...
-            <span class="required">*</span>
+             <span class="required">*</span>
           </label>
           <input type="text"
-                 name="description"
                  placeholder="Designer, Data Scientist, iOS Wizard, Hacker Extraordinaire"
                  ng-model="user.profile.description">
         </div>
@@ -221,15 +222,15 @@
 
         <div class="field">
           <label>
-            Resume (PDF, 0.5 MB max)
-            <span class="required">*</span>
+            Resume (PDF)
+             <span class="required">*</span>
           </label>
-          <div class="resume-dropzone center"
+          <div class="resume-dropzone center dark-purple-bg"
             ng-class="{ 'resume-uploading': resumeDropzoneIsUploading, 'resume-dropzone-error': resumeDropzoneHasError }"
             id="resume-upload">
             <span ng-show="showResumeDropzoneIcon">
-              <i class="fa fa-upload" aria-hidden="true"></i>
-              DRAG AND DROP
+              <i class="fa fa-upload white" aria-hidden="true"></i>
+              <p>DRAG AND DROP</p>
             </span>
             <div class="fallback">
               <input name="file" type="file" accept="application/pdf" />
@@ -241,11 +242,11 @@
              ng-hide="isUciStudent">
           <p>
             Because of limitations imposed by UCI, we are not legally allowed to host
-            minors (those under 18) for HackUCI 2019. Checking the box below affirms that you are or will be 18 years or older by Feburary 15th, 2019.
+            non-UCI minors (those under 18) for HackUCI 2018. Checking the box below affirms that you are or will be 18 years or older by Feburary 15, 2019.
           </p>
           <p>
             <strong>
-            We will be checking ID. If you are a minor, you will be turned away at the door.
+            We will be checking ID. If you are a non-UCI minor, you will be turned away at the door.
             </strong>
           </p>
           <div class="ui checkbox">
@@ -258,7 +259,7 @@
 
         <div class="field">
           <button type="submit"
-                  class="fluid ui purple button"
+                  class="fluid ui light-purple button"
                   ng-class="{'disabled': submitButtonDisabled}"
                   ng-click="submitForm()">
             Submit

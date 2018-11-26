@@ -1,4 +1,21 @@
 #apply {
+	background: linear-gradient(to right, #2a2a2a, #191919);
+	// set font and color (very light grey) to label and p classes
+	label {
+		color: rgb(228, 228, 228);
+		font-family: 'Lato', sans-serif;
+	}
+
+	p {
+		color: rgb(228, 228, 228);
+		font-family: 'Lato', sans-serif;
+	}
+
+	// set font of headers to Open Sans
+	.font {
+		font-family: 'Open Sans', sans-serif;
+	}
+
 	#school .title {
 		text-align: left;
 		text-transform: none;
@@ -27,5 +44,46 @@
 
 	.ui.checkbox {
 		backface-visibility: unset;
+	}
+
+	// created color classes to override current text and header font/bg colors
+	.white {
+		color: white;
+	}
+
+	> .title {
+		padding: 1%;
+		background-image: linear-gradient(
+		  to right,
+		  #7ce0ff 0%,
+		  #80beef 30%,
+		  #83a8db 40%,
+		  #bb8ce5 60%,
+		  #ce83d1 90%,
+		  #e2a1e3 100%
+		);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+
+	.blue {
+		color: #80beef;
+	}
+
+	.lilac {
+		color: #c2aafe;
+	}
+
+	.pink {
+		color: #e2a1e3;
+	}
+
+	.dark-purple-bg {
+		background: #8e88cf;
+	}
+
+	// changed the background to the gradient dark grey - black
+	.bg {
+		background: linear-gradient(to right, #2a2a2a, #191919);
 	}
 }
