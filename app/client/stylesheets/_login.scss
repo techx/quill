@@ -143,10 +143,15 @@
     }
   }
 
+<<<<<<< HEAD
   /* Mobile */
   @media (max-width: 767px) {
     > .reset-container {
       top: 40%;
     }
+=======
+  > .reset-container {
+    top: 40%;
+>>>>>>> 236b245... align the cog and the reset to be more up
   }
 }
