@@ -187,7 +187,7 @@
   }
   /* FAQs */
   #faq {
-    background: #8e8bdc;
+    background: #7673c9;
     color: white;
     padding: 5% 0 3% 0;
   }
@@ -222,7 +222,7 @@
 
   .faq-card-description {
     font-weight: 300;
-    font-size: 0.8em;
+    font-size: 1em;
     letter-spacing: 0.07em;
     padding: 2% 0;
     color: white;
@@ -238,10 +238,9 @@
     width: 100%;
   }
 
-  #sponsors-content>.title {
+  #sponsors-content> .title {
     text-align: center;
-    color: rgba(0,0,0,.75);
-    font-weight: 300;
+    color: #3e4389;
   }
 
   #sponsors-list {
