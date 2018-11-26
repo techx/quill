@@ -118,6 +118,23 @@
 	#menu-item-sponsor {
 		color: #f2b3f5;
 	}
+
+	#menu-item-sponsor-logged-in {
+		color: #b8bbef
+	}
+
+	#menu-item-dashboard {
+		color: #99cdf7
+	}
+
+	#menu-item-application {
+		color: #c9b0ea
+	}
+	
+	#menu-item-logout {
+		color: #e2a1e3
+	}
+	
 	.menu-item+.menu-item:not(.menu-item--sponsor) {
 		margin-left: 3%;
 	}
