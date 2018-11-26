@@ -105,6 +105,7 @@
   .hero-description-container {
     text-align: center;
     padding-top: 1.5%;
+    margin-top: 65vh;
   }
 
   .hero-description {
@@ -119,7 +120,7 @@
 
   .hero-button-container {
     text-align: center;
-    margin-top: 65vh;
+    margin-top: 8%;
     animation: 1s fadein 1.5s both;
     animation-delay: 0.6s;
 
@@ -392,19 +393,13 @@
       padding-bottom: 0 !important;
     }
 
-    .hero-button-container {
+    .hero-description-container {
       margin-top: 80vh;
     }
   }
   /* Large Screens */
   @media (min-width: 1650px) {
-    #info-content,
-    #faq-content,
-    #sponsors-content,
-    #sponsorship {
-      width: 70%;
-    }
-    .hero-button-container {
+    .hero-description-container {
       margin-top: 75vh;
     }
   }
