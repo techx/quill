@@ -283,7 +283,7 @@
 
   /* Sponsors */
   #sponsors {
-    padding: 3% 5%;
+    padding: 3% 5% 5%;
     background: #e7e7e7;
   }
 
@@ -332,8 +332,8 @@
   }
 
   #sponsorship-packet {
-    text-decoration: underline;
-    font-weight: bold;
+    border-bottom: 2px #273c75 solid;
+    color: #273c75;
   }
 
   #sponsorship > .title {
@@ -380,7 +380,6 @@
   /* Mobile */
   @media (max-width: 767px) {
     #hero {
-      background-image: linear-gradient(to right, #2a2a2a, #191919);
 
       .hero-container {
         min-width: 100%;
@@ -420,6 +419,7 @@
       padding: 12.5% 0;
     }
 
+
     #info-content > .title {
       margin-bottom: 2%;
       padding-bottom: 0;
@@ -431,11 +431,14 @@
 
     #sponsors-list {
       margin: 5%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     #sponsors-list > div {
       height: 70px;
-      width: 50% !important;
+      width: 70% !important;
       text-align: center;
       padding-top: 0 !important;
       padding-bottom: 0 !important;
@@ -484,7 +487,17 @@
     }
 
     .winners-list > div {
-      width: 50%;
+      width: 70%;
+    }
+
+    #winners-content {
+      margin-top: 15%;
+    }
+
+    .winners-list {
+      font-size: 2.4em;
+      flex-direction: column;
+      align-items: center;
     }
 
     .recap-statistics > div {
