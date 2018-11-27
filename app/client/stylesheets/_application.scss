@@ -1,35 +1,62 @@
 #application {
-	#school .title {
-		text-align: left;
-		text-transform: none;
-		letter-spacing: 0;
-	}
-	
-	.required {
-		color: red;
-		font-weight: 500;
-	}
-	
-	.error-red-color {
-		color: red;
-	}
+  background: linear-gradient(to right, #2a2a2a, #191919);
+  color: white;
 
-	.essay-feedback-container {
-		display: flex;
-		flex-direction: row;
-	}
+  > .title {
+    padding: 1%;
+    background-image: linear-gradient(
+      to right,
+      #7ce0ff 0%,
+      #80beef 30%,
+      #83a8db 40%,
+      #bb8ce5 60%,
+      #ce83d1 90%,
+      #e2a1e3 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 
-	.essay-character-count {
-		display: flex;
-		justify-content: flex-end;
-		flex: 1 0 auto;
-	}
+  #school .title {
+    text-align: left;
+    text-transform: none;
+    letter-spacing: 0;
+  }
 
-	button+.resume-dropzone {
-		margin-top: .67861429em;
-	}
+  .required {
+    color: red;
+    font-weight: 500;
+  }
 
-	.ui.checkbox {
-		backface-visibility: unset;
-	}
+  .error-red-color {
+    color: red;
+  }
+
+  .essay-feedback-container {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .essay-character-count {
+    display: flex;
+    justify-content: flex-end;
+    flex: 1 0 auto;
+  }
+
+  button + .resume-dropzone {
+    margin-top: 0.67861429em;
+  }
+
+  .ui.checkbox {
+    backface-visibility: unset;
+  }
+
+  .ui.form .field > label {
+    color: white;
+  }
+
+  .ui.checkbox label,
+  .ui.checkbox + label {
+    color: white;
+  }
 }
