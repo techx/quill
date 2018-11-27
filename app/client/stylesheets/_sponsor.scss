@@ -115,6 +115,7 @@
     text-align: center;
     font-size: 3.5em;
     font-weight:500;
+    animation: 1s fadein 0.5s both;
   }
 
   .hero-title-container {
@@ -126,7 +127,7 @@
     font-weight: lighter;
     text-align: center;
     display: inline-block;
-    animation: fadein 0.5s both;
+    animation: 1s fadein 0.5s both;
     animation-delay: 0.3s;
   }
 
@@ -135,6 +136,7 @@
     border: solid;
     border-color: #9b92e3;
     white-space: nowrap;
+    animation: 1s fadein 0.5s both
   }
 
   .btn:hover {
