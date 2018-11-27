@@ -54,13 +54,15 @@ function sendOne(template, email, templateData, callback) {
 /**
  * Send a verification email to a user, with a verification token to enter.
  * @param  {string|string[]}  email         [Email address(s) to send to]
+ * @param  {string}   firstName
  * @param  {[type]}     token    [description]
  * @param  {Function} callback [description]
  * @return {[type]}            [description]
  */
-emailService.sendVerificationEmail = function (email, token, callback) {
+emailService.sendVerificationEmail = function (email, firstName, token, callback) {
   var verifyUrlData = {
-    url: `${ROOT_URL}/verify/${token}`
+    url: `${ROOT_URL}/verify/${token}`,
+    firstName
   };
   sendOne(VERIFICATION_EMAIL_TEMPLATE, email, verifyUrlData, callback);
 };
@@ -68,23 +70,29 @@ emailService.sendVerificationEmail = function (email, token, callback) {
 /**
  * Send a password recovery email.
  * @param  {string|string[]}  email         [Email address(s) to send to]
+ * @param  {string}   firstName
  * @param  {[type]}   token    [description]
  * @param  {Function} callback [description]
  */
-emailService.sendPasswordResetEmail = function (email, token, callback) {
+emailService.sendPasswordResetEmail = function (email, firstName, token, callback) {
   var resetUrlData = {
-    url: `${ROOT_URL}/reset/${token}`
-  }
+    url: `${ROOT_URL}/reset/${token}`,
+    firstName
+  };
   sendOne(PASSWORD_RESET_EMAIL_TEMPLATE, email, resetUrlData, callback);
 };
 
 /**
  * Send a password recovery email.
  * @param  {string|string[]}  email         [Email address(s) to send to]
+ * @param  {string}   firstName
  * @param  {Function} callback [description]
  */
-emailService.sendPasswordChangedEmail = function (email, callback) {
-  sendOne(PASSWORD_CHANGED_EMAIL_TEMPLATE, email, {}, callback);
+emailService.sendPasswordChangedEmail = function (email, firstName, callback) {
+  var confirmChangeData = {
+    firstName
+  };
+  sendOne(PASSWORD_CHANGED_EMAIL_TEMPLATE, email, confirmChangeData, callback);
 };
 
 /**

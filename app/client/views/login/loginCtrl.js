@@ -54,7 +54,7 @@ angular.module('reg')
           });
         }
         else {
-          AuthService.sendResetEmail(email);
+          AuthService.sendResetEmail($scope.email);
           sweetAlert({
             title: 'Don\'t Sweat!',
             text: 'You will receive an email shortly.',

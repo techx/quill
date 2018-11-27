@@ -159,7 +159,7 @@ UserController.createUser = function(email, password, callback) {
 
         // Send over a verification email
         var verificationToken = u.generateEmailVerificationToken();
-        Mailer.sendVerificationEmail(email, verificationToken);
+        Mailer.sendVerificationEmail(email, u.profile.firstname, verificationToken);
 
         return callback(
           null,
@@ -433,7 +433,7 @@ UserController.sendVerificationEmailById = function(id, callback){
         return callback(err);
       }
       var token = user.generateEmailVerificationToken();
-      Mailer.sendVerificationEmail(user.email, token);
+      Mailer.sendVerificationEmail(user.email, user.profile.firstname, token);
       return callback(err, user);
   });
 };
@@ -453,7 +453,7 @@ UserController.sendPasswordResetEmail = function(email, callback){
       }
 
       var token = user.generateTempAuthToken();
-      Mailer.sendPasswordResetEmail(email, token, callback);
+      Mailer.sendPasswordResetEmail(email, user.profile.firstname, token, callback);
     });
 };
 
@@ -533,7 +533,7 @@ UserController.resetPassword = function(token, password, callback){
           return callback(err);
         }
 
-        Mailer.sendPasswordChangedEmail(user.email);
+        Mailer.sendPasswordChangedEmail(user.email, user.profile.firstname);
         return callback(null, {
           message: 'Password successfully reset!'
         });
