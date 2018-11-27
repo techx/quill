@@ -74,7 +74,7 @@
   .logo-header-container {
     height: 125px;
     margin-top: 0;
-    margin-bottom: 5%;
+    margin-bottom: 1%;
     animation: fadein 0.5s both;
     animation-delay: 0.15s;
   }
@@ -95,6 +95,24 @@
 
   .logo-header > img {
     height: 100%;
+  }
+
+  .title-header{
+    margin: 1% 0% 1%;
+    text-align: center;
+    background-image: linear-gradient(
+		  to right,
+		  #7ce0ff 0%,
+		  #80beef 30%,
+		  #83a8db 40%,
+		  #bb8ce5 60%,
+		  #ce83d1 90%,
+		  #e2a1e3 100%
+		);
+		-webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 3em;
+    font-weight:500;
   }
 
   .hero-title-container {
@@ -380,6 +398,7 @@
   /* Mobile */
   @media (max-width: 767px) {
     #hero {
+      background-image: linear-gradient(to right, #2a2a2a, #191919);
 
       .hero-container {
         min-width: 100%;
@@ -388,6 +407,8 @@
 
     .hero-title-container {
       margin-top: 0;
+      width: 80%;
+      margin: 0 auto;
     }
 
     .title {
@@ -418,7 +439,6 @@
     #winners {
       padding: 12.5% 0;
     }
-
 
     #info-content > .title {
       margin-bottom: 2%;
