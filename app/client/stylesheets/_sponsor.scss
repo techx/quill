@@ -218,7 +218,7 @@
     align-content: center;
     background: #9b92e3;
     color: white;
-    padding: 2% 0 3% 0;
+    padding: 2% 0;
 
     #recap {
       flex: 2;
@@ -235,7 +235,12 @@
     }
   }
 
+  #recap > .title {
+    margin-bottom: 5%;
+  }
+
   #winners-content > .title {
+    margin-bottom: 5%;
     text-align: center;
   }
 
@@ -253,7 +258,7 @@
   }
 
   .winners-list > div {
-    padding: 3.5% 0;
+    padding: 0 0 3.5%;
     border-bottom: 1px solid transparent;
     transition: all 0.2s ease;
   }
