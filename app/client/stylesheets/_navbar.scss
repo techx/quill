@@ -1,240 +1,257 @@
 /* Navbar */
 #navbar {
-	width: 100%;
-	z-index: 999;
-	font-family: 'Rubik', sans-serif;
-	color: white;
-	font-weight: 300;
-	font-size: 0.8em;
-	letter-spacing: 0.07em;
+  width: 100%;
+  z-index: 999;
+  font-family: "Rubik", sans-serif;
+  color: white;
+  font-weight: 300;
+  font-size: 0.8em;
+  letter-spacing: 0.07em;
 
-	.navbar {
-		width: 100%;
-		height: 100px;
-		background: linear-gradient(to right, #2a2a2a, #191919);
-		display: flex;
-		animation: fadein .5s both;
-		animation-delay: .1s;
-	}
+  .navbar {
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(to right, #2a2a2a, #191919);
+    display: flex;
+    animation: fadein 0.5s both;
+    animation-delay: 0.1s;
+  }
 
-	.navbar-transparent {
-		position: absolute;
-		background: none;
-		padding-top: 35px;
-		transition: all .2s ease;
+  .navbar-transparent {
+    position: absolute;
+    background: none;
+    padding-top: 35px;
+    transition: all 0.2s ease;
 
-		.logo-header {
-			margin-top: 0;
-		}
-	}
+    .logo-header {
+      margin-top: 0;
+    }
+  }
 
-	.navbar-live {
-		position: absolute;
-		background: none;
-		transition: all .2s ease;
+  .navbar-live {
+    position: absolute;
+    background: none;
+    transition: all 0.2s ease;
 
-		.logo-header {
-			margin-top: 0;
-			top: 20px;
-		}
-	}
+    .logo-header {
+      margin-top: 0;
+      top: 20px;
+    }
+  }
 
-	.logo-header {
-		animation: fadein .5s both;
-		animation-delay: .15s;
-		width: 65px;
-		height: 65px;
-		top: 35px;
-		left: 50px;
-		padding: 0;
-		position: absolute;
-		cursor: pointer;
-		margin-top: -17.5px;
-		transition: all .2s ease;
-	}
+  .logo-header {
+    animation: fadein 0.5s both;
+    animation-delay: 0.15s;
+    width: 65px;
+    height: 65px;
+    top: 35px;
+    left: 50px;
+    padding: 0;
+    position: absolute;
+    cursor: pointer;
+    margin-top: -17.5px;
+    transition: all 0.2s ease;
+  }
 
-	.logo-cog {
-		animation: spin 12s linear infinite;
-	}
+  .logo-cog {
+    animation: spin 12s linear infinite;
+  }
 
-	.logo-hack {
-		width: initial;
-		height: 32.5px;
-		top: 51.25px;
-	}
+  .logo-hack {
+    width: initial;
+    height: 32.5px;
+    top: 51.25px;
+  }
 
-	.logo-header>img {
-		height: 100%;
-	}
+  .logo-header > img {
+    height: 100%;
+  }
 
-	.logo-header>span {
-		font-weight: 700;
-		font-size: 1.5em;
-		padding-left: 0.5em;
-		letter-spacing: 0.02em;
-		color: white;
-		margin-top: -1px;
-	}
+  .logo-header > span {
+    font-weight: 700;
+    font-size: 1.5em;
+    padding-left: 0.5em;
+    letter-spacing: 0.02em;
+    color: white;
+    margin-top: -1px;
+  }
 
-	.logo-header_live {
-		font-weight: 500;
-		font-size: 1.9em;
-		padding-left: 130px;
-		letter-spacing: 0.06em;
-	}
+  .logo-header_live {
+    font-weight: 500;
+    font-size: 1.9em;
+    padding-left: 130px;
+    letter-spacing: 0.06em;
+  }
 
-	.navbar-menu {
-		display: flex;
-		flex: 1 0 auto;
-		justify-content: flex-end;
-		align-items: center;
-		margin: 0;
-		padding-right: 50px;
-	}
+  .navbar-menu {
+    display: flex;
+    flex: 1 0 auto;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 0;
+    padding-right: 50px;
+  }
 
-	.menu-item {
-		color: rgba(255,255,255,0.95);
-		cursor: pointer;
-		font-family: 'Open Sans', sans-serif;
-		font-weight: 300;
-		font-size: 1.2em;
-		line-height: 2em;
-		border-bottom: 1px solid rgba(255,255,255,0);
-		transition: all .2s ease;
+  .menu-item {
+    color: rgba(255, 255, 255, 0.95);
+    cursor: pointer;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 300;
+    font-size: 1.2em;
+    line-height: 2em;
+    border-bottom: 1px solid rgba(255, 255, 255, 0);
+    transition: all 0.2s ease;
 
-		i {
-			margin-left: 1px;
-		}
-	}
+    i {
+      margin-left: 1px;
+    }
+  }
 
-	#menu-item-home {
-		color: #6fd3f4;
-	}
+  #menu-item-home {
+    color: #6fd3f4;
+  }
 
-	#menu-item-login {
-		color: #d3a1ff;
-	}
+  #menu-item-login {
+    color: #d3a1ff;
+  }
 
-	#menu-item-sponsor {
-		color: #f2b3f5;
-	}
-	.menu-item+.menu-item:not(.menu-item--sponsor) {
-		margin-left: 3%;
-	}
+  #menu-item-sponsor {
+    color: #f2b3f5;
+  }
 
-	.menu-item:hover {
-		color: inherit;
-		border-bottom: 1px solid;
-	}
+  #menu-item-sponsor-logged-in {
+    color: #b8bbef;
+  }
 
-	.menu-item-active {
-		color: inherit;
-		border-bottom: 1px solid;
-	}
+  #menu-item-dashboard {
+    color: #99cdf7;
+  }
 
-	.menu-item--sponsor {
-		border: 1px solid rgba(255,255,255,0.95);
-		border-radius: 25px;
-		padding: 9px 25px;
-		margin-left: 2.5%;
-		background-color: transparent;
-		transition: all .2s ease;
-	}
+  #menu-item-application {
+    color: #c9b0ea;
+  }
 
-	.menu-item--sponsor.menu-item-active {
-		background-color: rgba(255,255,255,0.1);
-	}
+  #menu-item-logout {
+    color: #e2a1e3;
+  }
 
-	.menu-item--sponsor:hover {
-		background-color: white;
-		color: #6B8DD6;
-		border: 1px solid rgba(255,255,255,1);
-	}
+  .menu-item + .menu-item:not(.menu-item--sponsor) {
+    margin-left: 3%;
+  }
 
-	.navbar-mobile {
-		width: 100%;
-		height: 70px;
-		padding: 10px 30px;
-		background: linear-gradient(to right, #2a2a2a, #191919);
-		display: flex;
-		animation: fadein .2s both;
-		transition: all .2s ease;
+  .menu-item:hover {
+    color: inherit;
+    border-bottom: 1px solid;
+  }
 
-		.logo-header {
-			margin-top: 0;
-			height: 50px;
-			top: 10px;
-			left: 10px;
-			right: 0;
-			text-align: center;
-		}
+  .menu-item-active {
+    color: inherit;
+    border-bottom: 1px solid;
+  }
 
-		.navbar-mobile-menu-button {
-			display: flex;
-			flex: 1 0 auto;
-			justify-content: flex-end;
-			align-items: center;
-			padding: 0;
-			font-size: 2em;
-			z-index: 999;
-		}
-	}
+  .menu-item--sponsor {
+    border: 1px solid rgba(255, 255, 255, 0.95);
+    border-radius: 25px;
+    padding: 9px 25px;
+    margin-left: 2.5%;
+    background-color: transparent;
+    transition: all 0.2s ease;
+  }
 
-	.navbar-mobile-transparent {
-		background: none;
-	}
+  .menu-item--sponsor.menu-item-active {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
 
-	/* Mobile */
-	@media (max-width: 767px) {
-		.navbar {
-			justify-content: center;
-		}
-	}
+  .menu-item--sponsor:hover {
+    background-color: white;
+    color: #6b8dd6;
+    border: 1px solid rgba(255, 255, 255, 1);
+  }
+
+  .navbar-mobile {
+    width: 100%;
+    height: 70px;
+    padding: 10px 30px;
+    background: linear-gradient(to right, #2a2a2a, #191919);
+    display: flex;
+    animation: fadein 0.2s both;
+    transition: all 0.2s ease;
+
+    .logo-header {
+      margin-top: 0;
+      height: 50px;
+      top: 10px;
+      left: 10px;
+      right: 0;
+      text-align: center;
+    }
+
+    .navbar-mobile-menu-button {
+      display: flex;
+      flex: 1 0 auto;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 0;
+      font-size: 2em;
+      z-index: 999;
+    }
+  }
+
+  .navbar-mobile-transparent {
+    background: none;
+  }
+
+  /* Mobile */
+  @media (max-width: 767px) {
+    .navbar {
+      justify-content: center;
+    }
+  }
 }
 
 .ui.modals {
-	padding: 0;
+  padding: 0;
 }
 
 #navbar-modal {
-	height: 100%;
-	margin: 0 !important;
-	position: absolute !important;
-	left: 15%;
-	width: 85%;
-	border-radius: 0;
-	top: 0 !important;
+  height: 100%;
+  margin: 0 !important;
+  position: absolute !important;
+  left: 15%;
+  width: 85%;
+  border-radius: 0;
+  top: 0 !important;
 
-	.header {
-		display: flex;
-		padding-left: 30px !important;
-		padding-right: 30px !important;
-		height: 70px;
-		align-items: center;
-		border-radius: 0;
-		color: white;
-		background: linear-gradient(to right, #2a2a2a, #191919);
-	}
+  .header {
+    display: flex;
+    padding-left: 30px !important;
+    padding-right: 30px !important;
+    height: 70px;
+    align-items: center;
+    border-radius: 0;
+    color: white;
+    background: linear-gradient(to right, #2a2a2a, #191919);
+  }
 
-	.content {
-		padding-left: 30px !important;
-		padding-right: 30px !important;
-		font-size: 1.2em;
-	}
+  .content {
+    padding-left: 30px !important;
+    padding-right: 30px !important;
+    font-size: 1.2em;
+  }
 
-	.navbar-mobile-menu-close-button {
-		display: flex;
-		flex: 1 0 auto;
-		justify-content: flex-end;
-		align-item: center;
-		padding: 0;
-		font-size: 1.2em;
-		z-index: 999;
-	}
+  .navbar-mobile-menu-close-button {
+    display: flex;
+    flex: 1 0 auto;
+    justify-content: flex-end;
+    align-item: center;
+    padding: 0;
+    font-size: 1.2em;
+    z-index: 999;
+  }
 
-	.menu-item {
-		display: block;
-		padding-top: 0.5em;
-		padding-bottom: 0.5em;
-	}
+  .menu-item {
+    display: block;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+  }
 }

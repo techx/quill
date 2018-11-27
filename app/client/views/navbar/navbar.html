@@ -30,7 +30,8 @@
         ui-sref="app.dashboard"
         ui-sref-active="menu-item-active"
         class="menu-item"
-        ng-if="isLoggedIn">
+        ng-if="isLoggedIn"
+        id="menu-item-dashboard">
         DASHBOARD
       </a>
       <a
@@ -39,14 +40,13 @@
         class="menu-item"
         ng-if="!isLoggedIn"
         id="menu-item-login">
-        
         LOGIN
       </a>
       <a
         ui-sref-active="menu-item-active"  
         ui-sref="app.sponsor"
         class="menu-item"
-        id="menu-item-sponsor">
+        id="{{isLoggedIn ? 'menu-item-sponsor-logged-in' : 'menu-item-sponsor'}}">
         SPONSORS
       </a>
       <!-- <a
@@ -60,7 +60,8 @@
         ui-sref-active="menu-item-active"
         ui-sref="app.application"
         ng-if="isLoggedIn && !currentUser.status.declined"
-        class="menu-item">
+        class="menu-item"
+        id="menu-item-application">
         APPLICATION
       </a>
       <a
@@ -79,7 +80,8 @@
       </a>
       <a class="menu-item"
         ng-click="logout()"
-        ng-if="isLoggedIn">
+        ng-if="isLoggedIn"
+        id="menu-item-logout">
         LOGOUT
       </a>
       <!-- <a

@@ -1,48 +1,52 @@
 <div id="login">
-  <div class="container">
+  <div class="container reset-container">
     <div class="content">
+      <div class="logo-header-container ui grid mobile only tablet only">
+        <div class="logo-header logo-cog">
+          <img src="../assets/images/logo-cog.svg" />
+        </div>
+        <div class="logo-header">
+          <img src="../assets/images/logo-anteater.svg" />
+        </div>
+      </div>
+
       <div class="ui segment">
-
-        <div class="logo">
-          <img src="assets/images/logo-color.svg">
-        </div>
-
-        <div class="ui divider"></div>
-
-        <div class="ui small error message"
-             ng-show="error">
-          {{error}}
-        </div>
+        <div class="ui small error message" ng-show="error">{{ error }}</div>
 
         <div class="ui login-password form">
           <form ng-submit="changePassword()">
             <div class="field">
-              <label> New Password</label>
-              <input type="password"
-                     id='password'
-                     placeholder="Password (at least 6 characters)"
-                     ng-model="password" required>
+              <label>New Password</label>
+              <input
+                type="password"
+                id="password"
+                placeholder="Password (at least 6 characters)"
+                ng-model="password"
+                required
+              />
             </div>
             <div class="field">
-              <label> Confirm Password</label>
-              <input type="password"
-                     id='confirm'
-                     placeholder="Just making sure you got it!"
-                     ng-model="confirm" required>
+              <label>Confirm Password</label>
+              <input
+                type="password"
+                id="confirm"
+                placeholder="Just making sure you got it!"
+                ng-model="confirm"
+                required
+              />
             </div>
             <div class="field">
-              <button id="reset-password"
-                      type="submit"
-                      class="fluid ui login button">
-                      Reset Password
+              <button
+                id="reset-password"
+                type="submit"
+                class="fluid ui login button"
+              >
+                Reset Password
               </button>
             </div>
-
           </form>
         </div>
-
       </div>
     </div>
-
   </div>
 </div>

@@ -1,270 +1,271 @@
 <div id="apply" class="page" ng-class="{ 'fade-out': fadeOut }">
-  <div class="divided title">
-    Apply
-  </div>
+  <!--
+    added font and color classes to multiple divs below
+    still need to change the border-bottom color to correspond to their headers and the
+    'Apply' needs to have the gradient color, hex code should be from #7ce0ff to #e2a1e3
+  -->
+  <div class="divided title">Apply</div>
 
-  <div class="ui stackable page grid">
+  <div class="ui stackable page grid bg">
     <div class="column">
       <form class="ui form">
-
-        <div class="divided title">Basic Information</div>
+        <div class="divided title blue font">Basic Information</div>
 
         <fieldset ng-disabled="!regIsOpen">
-
-        <div class="two fields">
-          <div class="field">
-            <label>
-              First Name
-              <span class="required">*</span>
-            </label>
-            <input type="text"
-                   name="name"
-                   ng-model="user.profile.firstname">
-          </div>
-
-          <div class="field">
-            <label>
-              Last Name
-              <span class="required">*</span>
-            </label>
-            <input type="text"
-                   name="name"
-                   ng-model="user.profile.lastname">
-          </div>
-        </div>
-
-        <div class="fields">
-          <div class="eleven wide field">
-            <label>
-              Email
-              <span class="required">*</span>
-            </label>
-            <input type="email"
-                   name="email"
-                   ng-model="user.email">
-          </div>
-
-          <div class="five wide field">
-            <label>
-              Gender
-              <span class="required">*</span>
-            </label>
-            <select
-              name="gender"
-              ng-model="user.profile.gender">
-              <option value="">Gender</option>
-              <option value="M">Male</option>
-              <option value="F">Female</option>
-              <option value="O">Other</option>
-              <option value="N">I prefer not to answer.</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="two fields">
-          <div class="field">
-            <label>
-              Password
-              <span class="required">*</span>
-            </label>
-            <input type="password"
-                   name="password"
-                   ng-model="user.password" required>
-          </div>
-          <div class="field">
-            <label>
-              Confirm Password
-               <span class="required">*</span>
-            </label>
-            <input type="password"
-                   name="confirmPassword"
-                   ng-model="confirmPassword" required>
-          </div>
-        </div>
-
-        <br>
-
-        <div class="divided title">School Information</div>
-
-        <div class="field" ng-show="autoFilledSchool">
-          <label>
-            School
-             <span class="required">*</span>
-          </label>
-          <input class="ui input"
-                 disabled="disabled"
-                 ng-show="autoFilledSchool"
-                 ng-model="user.profile.school">
-        </div>
-
-        <div class="field" ng-show="!autoFilledSchool">
-          <label> School
-            <span class="required">*</span>
-          </label>
-          <div id="school" class="ui search">
-            <div class="ui input">
-              <input class="prompt" type="text" placeholder="School" name="school" ng-model="user.profile.school">
+          <div class="two fields">
+            <div class="field">
+              <label> First Name <span class="required">*</span> </label>
+              <input
+                type="text"
+                name="name"
+                ng-model="user.profile.firstname"
+              />
             </div>
-            <div class="results"></div>
-          </div>
-        </div>
 
-        <div class="two fields">
+            <div class="field">
+              <label> Last Name <span class="required">*</span> </label>
+              <input type="text" name="name" ng-model="user.profile.lastname" />
+            </div>
+          </div>
+
+          <div class="fields">
+            <div class="eleven wide field">
+              <label> Email <span class="required">*</span> </label>
+              <input type="email" name="email" ng-model="user.email" />
+            </div>
+
+            <div class="five wide field">
+              <label> Gender <span class="required">*</span> </label>
+              <select name="gender" ng-model="user.profile.gender">
+                <option value="">Gender</option>
+                <option value="M">Male</option>
+                <option value="F">Female</option>
+                <option value="O">Other</option>
+                <option value="N">I prefer not to answer.</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="two fields">
+            <div class="field">
+              <label> Password <span class="required">*</span> </label>
+              <input
+                type="password"
+                name="password"
+                ng-model="user.password"
+                required
+              />
+            </div>
+            <div class="field">
+              <label> Confirm Password <span class="required">*</span> </label>
+              <input
+                type="password"
+                name="confirmPassword"
+                ng-model="confirmPassword"
+                required
+              />
+            </div>
+          </div>
+
+          <br />
+
+          <div class="divided title lilac font">School Information</div>
+
+          <div class="field" ng-show="autoFilledSchool">
+            <label> School <span class="required">*</span> </label>
+            <input
+              class="ui input"
+              disabled="disabled"
+              ng-show="autoFilledSchool"
+              ng-model="user.profile.school"
+            />
+          </div>
+
+          <div class="field" ng-show="!autoFilledSchool">
+            <label> School <span class="required">*</span> </label>
+            <div id="school" class="ui search">
+              <div class="ui input">
+                <input
+                  class="prompt"
+                  type="text"
+                  placeholder="School"
+                  name="school"
+                  ng-model="user.profile.school"
+                />
+              </div>
+              <div class="results"></div>
+            </div>
+          </div>
+
+          <div class="two fields">
+            <div class="field">
+              <label> Major <span class="required">*</span> </label>
+              <select name="major" ng-model="user.profile.major">
+                <option value="">Major</option>
+                <option value="AE">Aerospace Engineering</option>
+                <option value="AP">Applied Physics</option>
+                <option value="BE">Biomedical Engineering</option>
+                <option value="BIM">Business Information Management</option>
+                <option value="CME">Chemical Engineering</option>
+                <option value="CH">Chemistry</option>
+                <option value="CVE">Civil Engineering</option>
+                <option value="CE">Computer Engineering</option>
+                <option value="CGS">Computer Game Science</option>
+                <option value="CS">Computer Science</option>
+                <option value="CSE">Computer Science and Engineering</option>
+                <option value="DS">Data Science</option>
+                <option value="ESS">Earth System Science</option>
+                <option value="EE">Electrical Engineering</option>
+                <option value="ENG">Engineering</option>
+                <option value="ENE">Environmental Engineering</option>
+                <option value="ENS">Environmental Science</option>
+                <option value="INF">Informatics</option>
+                <option value="MSE">Materials Science Engineering</option>
+                <option value="MAT">Mathematics</option>
+                <option value="MCE">Mechanical Engineering</option>
+                <option value="PHY">Physics</option>
+                <option value="SE">Software Engineering</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label> Graduation Year <span class="required">*</span> </label>
+              <select name="year" ng-model="user.profile.graduationYear">
+                <option value="">Graduation Year</option>
+                <option value="2019">2019</option>
+                <option value="2020">2020</option>
+                <option value="2021">2021</option>
+                <option value="2022">2021</option>
+                <option value="later">Later than 2022</option>
+              </select>
+            </div>
+          </div>
+
+          <br />
+
+          <div class="divided title pink font">Profile Information</div>
+
+          <div class="two fields">
+            <div class="field">
+              <label> LinkedIn </label>
+              <input
+                type="text"
+                name="linkedin"
+                placeholder="http://"
+                ng-model="user.profile.linkedin"
+              />
+            </div>
+            <div class="field">
+              <label> Portfolio (GitHub, website, etc.) </label>
+              <input
+                type="text"
+                name="portfolio"
+                placeholder="http://"
+                ng-model="user.profile.portfolio"
+              />
+            </div>
+          </div>
+
           <div class="field">
             <label>
-              Major
-               <span class="required">*</span>
+              I would describe myself as a... <span class="required">*</span>
             </label>
-            <select
-              name="major"
-              ng-model="user.profile.major">
-              <option value="">Major</option>
-              <option value="AE">Aerospace Engineering</option>
-              <option value="AP">Applied Physics</option>
-              <option value="BE">Biomedical Engineering</option>
-              <option value="BIM">Business Information Management</option>
-              <option value="CME">Chemical Engineering</option>
-              <option value="CH">Chemistry</option>
-              <option value="CVE">Civil Engineering</option>
-              <option value="CE">Computer Engineering</option>
-              <option value="CGS">Computer Game Science</option>
-              <option value="CS">Computer Science</option>
-              <option value="CSE">Computer Science and Engineering</option>
-              <option value="DS">Data Science</option>
-              <option value="ESS">Earth System Science</option>
-              <option value="EE">Electrical Engineering</option>
-              <option value="ENG">Engineering</option>
-              <option value="ENE">Environmental Engineering</option>
-              <option value="ENS">Environmental Science</option>
-              <option value="INF">Informatics</option>
-              <option value="MSE">Materials Science Engineering</option>
-              <option value="MAT">Mathematics</option>
-              <option value="MCE">Mechanical Engineering</option>
-              <option value="PHY">Physics</option>
-              <option value="SE">Software Engineering</option>
-              <option value="other">Other</option>
-            </select>
+            <input
+              type="text"
+              placeholder="Designer, Data Scientist, iOS Wizard, Hacker Extraordinaire"
+              ng-model="user.profile.description"
+            />
           </div>
 
-          <div class="field">
+          <div
+            class="field"
+            ng-class="{error: user.profile.essay.length > 1500}"
+          >
             <label>
-              Graduation Year
-               <span class="required">*</span>
-            </label>
-            <select
-              name="year"
-              ng-model="user.profile.graduationYear">
-              <option value="">Graduation Year</option>
-              <option value="2019">2019</option>
-              <option value="2020">2020</option>
-              <option value="2021">2021</option>
-              <option value="2022">2022</option>
-              <option value="later">Later than 2022</option>
-              <option value="graduate">I am a graduate student</option>
-            </select>
-          </div>
-        </div>
-
-        <br>
-
-        <div class="divided title">Profile Information</div>
-
-        <div class="two fields">
-          <div class="field">
-            <label> LinkedIn </label>
-            <input type="text"
-                   name="linkedin"
-                   placeholder="http://"
-                   ng-model="user.profile.linkedin">
-          </div>
-          <div class="field">
-            <label> Portfolio (GitHub, website, etc.) </label>
-            <input type="text"
-                   name="portfolio"
-                   placeholder="http://"
-                   ng-model="user.profile.portfolio">
-          </div>
-        </div>
-
-        <div class="field">
-          <label>
-            I would describe myself as a...
-            <span class="required">*</span>
-          </label>
-          <input type="text"
-                 name="description"
-                 placeholder="Designer, Data Scientist, iOS Wizard, Hacker Extraordinaire"
-                 ng-model="user.profile.description">
-        </div>
-
-        <div class="field" ng-class="{error: user.profile.essay.length > 1500}">
-          <label>
               What would you like to learn or get out of HackUCI?
-               <span class="required">*</span>
-          </label>
+              <span class="required">*</span>
+            </label>
 
-          <textarea ng-model="user.profile.essay"
-            name="essay"
-            placeholder="Please enter your response here (100 chars min, 1500 max)" 
-            ng-class="{'error': user.profile.essay.length > 1500}">
-          </textarea>
+            <textarea
+              ng-model="user.profile.essay"
+              name="essay"
+              placeholder="Please enter your response here (100 chars min, 1500 max)"
+              ng-class="{'error': user.profile.essay.length > 1500}"
+            >
+            </textarea>
 
-          <div class="essay-feedback-container">
-            <span ng-show="activateCharCount && (user.profile.essay.length > 1500 || user.profile.essay.length < 100)" 
-              class="error-red-color">The essay length must be between 100 and 1500 characters.</span>
+            <div class="essay-feedback-container">
+              <span
+                ng-show="activateCharCount && (user.profile.essay.length > 1500 || user.profile.essay.length < 100)"
+                class="error-red-color"
+                >The essay length must be between 100 and 1500 characters.</span
+              >
 
-            <div class="essay-character-count" ng-class="{'error-red-color': user.profile.essay.length > 1500}">            
-              {{user.profile.essay.length}}/1500
+              <div
+                class="essay-character-count"
+                ng-class="{'error-red-color': user.profile.essay.length > 1500}"
+              >
+                {{ user.profile.essay.length }}/1500
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="field">
-          <label>
-            Resume (PDF, 0.5 MB max)
-            <span class="required">*</span>
-          </label>
-          <div class="resume-dropzone center"
-            ng-class="{ 'resume-uploading': resumeDropzoneIsUploading, 'resume-dropzone-error': resumeDropzoneHasError }"
-            id="resume-upload">
-            <span ng-show="showResumeDropzoneIcon">
-              <i class="fa fa-upload" aria-hidden="true"></i>
-              DRAG AND DROP
-            </span>
-            <div class="fallback">
-              <input name="file" type="file" accept="application/pdf" />
+          <div class="field">
+            <label>
+              Resume (PDF, 0.5 MB max) <span class="required">*</span>
+            </label>
+            <div
+              class="resume-dropzone center dark-purple-bg"
+              ng-class="{ 'resume-uploading': resumeDropzoneIsUploading, 'resume-dropzone-error': resumeDropzoneHasError }"
+              id="resume-upload"
+            >
+              <span ng-show="showResumeDropzoneIcon">
+                <i class="fa fa-upload white" aria-hidden="true"></i>
+                <p>DRAG AND DROP</p>
+              </span>
+              <div class="fallback">
+                <input name="file" type="file" accept="application/pdf" />
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="field"
-             ng-hide="isUciStudent">
-          <p>
-            Because of limitations imposed by UCI, we are not legally allowed to host
-            minors (those under 18) for HackUCI 2019. Checking the box below affirms that you are or will be 18 years or older by Feburary 15th, 2019.
-          </p>
-          <p>
-            <strong>
-            We will be checking ID. If you are a minor, you will be turned away at the door.
-            </strong>
-          </p>
-          <div class="ui checkbox">
-            <input type="checkbox" name="adult" id="adult" ng-model="user.profile.adult">
-            <label for="adult">I am 18 or older.</label>
+          <div class="field" ng-hide="isUciStudent">
+            <p>
+              Because of limitations imposed by UCI, we are not legally allowed
+              to host minors (those under 18) for HackUCI 2019. Checking the box
+              below affirms that you are or will be 18 years or older by
+              Feburary 15th, 2019.
+            </p>
+            <p>
+              <strong>
+                We will be checking ID. If you are a minor, you will be turned
+                away at the door.
+              </strong>
+            </p>
+            <div class="ui checkbox">
+              <input
+                type="checkbox"
+                name="adult"
+                id="adult"
+                ng-model="user.profile.adult"
+              />
+              <label for="adult">I am 18 or older.</label>
+            </div>
           </div>
-        </div>
 
-        <br>
+          <br />
 
-        <div class="field">
-          <button type="submit"
-                  class="fluid ui purple button"
-                  ng-class="{'disabled': submitButtonDisabled}"
-                  ng-click="submitForm()">
-            Submit
-          </button>
-        </div>
-
+          <div class="field">
+            <button
+              type="submit"
+              class="fluid ui light-purple button"
+              ng-class="{'disabled': submitButtonDisabled}"
+              ng-click="submitForm()"
+            >
+              Submit
+            </button>
+          </div>
         </fieldset>
 
         <div class="ui error message"></div>
@@ -273,13 +274,17 @@
   </div>
 </div>
 
-<div id="resume-dropzone-preview" class="dz-preview dz-file-preview" style="display:none">
+<div
+  id="resume-dropzone-preview"
+  class="dz-preview dz-file-preview"
+  style="display:none"
+>
   <div class="dz-details">
-    <div class="dz-icon">
-      <i class="fa fa-file" aria-hidden="true"></i>
-    </div>
+    <div class="dz-icon"><i class="fa fa-file" aria-hidden="true"></i></div>
     <div class="dz-filename"><span data-dz-name></span></div>
     <div class="dz-size" data-dz-size></div>
-    <div class="dz-error-message"><span data-dz-errormessage ng-bind="resumeDropzoneErrorMessage"></span></div>
+    <div class="dz-error-message">
+      <span data-dz-errormessage ng-bind="resumeDropzoneErrorMessage"></span>
+    </div>
   </div>
 </div>
