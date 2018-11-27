@@ -38,7 +38,7 @@
   /* Hero */
   #hero {
     background-image: linear-gradient(to right, #2a2a2a, #191919);
-    background-image: url("../assets/images/hero-sponsor.png"),
+    background-image: url("../assets/images/landing_pg_bg_no_logo_viv.png"),
       linear-gradient(to right, #2a2a2a, #191919);
     background-size: cover;
     background-repeat: no-repeat;
@@ -97,9 +97,7 @@
     height: 100%;
   }
 
-  .title-header{
-    margin: 1% 0% 1%;
-    text-align: center;
+  .gradient-description{ 
     background-image: linear-gradient(
 		  to right,
 		  #7ce0ff 0%,
@@ -111,13 +109,16 @@
 		);
 		-webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-size: 3em;
+  }
+  .title-header {
+    margin: 1% 0%;
+    text-align: center;
+    font-size: 3.5em;
     font-weight:500;
   }
 
   .hero-title-container {
     text-align: center;
-    margin-top: 45vh;
   }
 
   .hero-title {
@@ -134,7 +135,6 @@
     border: solid;
     border-color: #9b92e3;
     white-space: nowrap;
-    margin-left: -5%;
   }
 
   .btn:hover {
@@ -410,9 +410,28 @@
       }
     }
 
+    .gradient-description {
+      display: none;
+    }
+
+    #sponsors-description {
+      font-size: 2.8em;
+      background-image: linear-gradient(
+        to right,
+        #7ce0ff 0%,
+        #80beef 30%,
+        #83a8db 40%,
+        #bb8ce5 60%,
+        #ce83d1 90%,
+        #e2a1e3 100%
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
     .hero-title-container {
       margin-top: 0;
-      width: 80%;
+      width: 90%;
       margin: 0 auto;
     }
 
@@ -438,11 +457,6 @@
       .btn {
         padding: 5% 10%;
       }
-    }
-
-    #info,
-    #winners {
-      padding: 12.5% 0;
     }
 
     #info-content > .title {
