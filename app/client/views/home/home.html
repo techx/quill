@@ -2,39 +2,41 @@
   <section id="hero">
     <div class="hero-content center">
       <div ng-class="{ 'fade-out': fadeOut }" class="hero-container">
-        <div class="logo-header-container ui grid mobile only">
-          <div class="logo-header logo-cog">
-            <img src="../assets/images/logo-cog.svg" />
+        <!-- <div class="logo-header-container ui grid computer tablet only center">
+          <div class="logo-header center">
+            <img src="../assets/images/desktop-hack-v-logo.png" />
           </div>
-          <div class="logo-header">
-            <img src="../assets/images/logo-anteater.svg" />
-          </div>
+        </div> -->
+        <div class="hero-description-container">
+          <span class="hero-description ui grid">February 15 - 17, 2019</span> 
         </div>
-        <span class="hero-title ui grid mobile only">HackUCI 2019</span>
         <div class="hero-button-container">
-          <a href="" target="_blank" class="btn"> COMING SOON </a>
-          <!--
-            <a ui-sref="app.recruit" class="btn">
-                <i class="fa fa-rocket" aria-hidden="true"></i>
-                TEAM OPENINGS
-            </a>
-          -->
-          <!--
-            <a ui-sref="app.expo" class="btn">
-                <i class="fa fa-rocket" aria-hidden="true"></i>
-                LIVE
-            </a>
-          -->
-          <!--
             <a ui-sref="app.apply" class="btn" ng-if="regIsOpen">
-                <i class="fa fa-rocket" aria-hidden="true"></i>
-                APPLY
+              <i class="fa fa-paper-plane" aria-hidden="true"></i>
+              APPLY
             </a>
-            <a class="btn btn--coming-soon" ng-if="!regIsOpen">
-                <i class="fa fa-rocket" aria-hidden="true"></i>
-                REGISTRATION CLOSED
-            </a>
-          -->
+            <!--
+              <a ui-sref="app.recruit" class="btn">
+                  <i class="fa fa-rocket" aria-hidden="true"></i>
+                  TEAM OPENINGS
+              </a>
+            -->
+            <!--
+              <a ui-sref="app.expo" class="btn">
+                  <i class="fa fa-rocket" aria-hidden="true"></i>
+                  LIVE
+              </a>
+            -->
+            <!--
+              <a ui-sref="app.apply" class="btn" ng-if="regIsOpen">
+                  <i class="fa fa-rocket" aria-hidden="true"></i>
+                  APPLY
+              </a>
+              <a class="btn btn--coming-soon" ng-if="!regIsOpen">
+                  <i class="fa fa-rocket" aria-hidden="true"></i>
+                  REGISTRATION CLOSED
+              </a>
+            -->
         </div>
       </div>
     </div>
@@ -99,17 +101,6 @@
               event.
             </div>
           </div>
-          <div class="faq-card">
-            <div class="faq-card-title">What should I create?</div>
-            <div class="faq-card-description">
-              You can build whatever you can dream of, whether that be a website
-              with an amazing feature, a phone app, or a rad piece of hardware
-              (Soldering is NOT allowed)! Our only rule is that all code must be
-              written during the hackathon itself. Feel free to use open source
-              libraries and APIs; companies attending may provide their own as
-              well. Impress us!
-            </div>
-          </div>
         </div>
         <div class="column">
           <div class="faq-card">
@@ -130,16 +121,14 @@
             </div>
           </div>
           <div class="faq-card">
-            <div class="faq-card-title">How will hacks be presented?</div>
+            <div class="faq-card-title">What should I create?</div>
             <div class="faq-card-description">
-              On Sunday at 12:30pm, all hackers will have the option to demo
-              their hacks to sponsors and their fellow hackers in an expo event.
-            </div>
-          </div>
-          <div class="faq-card">
-            <div class="faq-card-title">When does the event end?</div>
-            <div class="faq-card-description">
-              The closing ceremony will end at 4pm on Sunday.
+              You can build whatever you can dream of, whether that be a website
+              with an amazing feature, a phone app, or a rad piece of hardware
+              (Soldering is NOT allowed)! Our only rule is that all code must be
+              written during the hackathon itself. Feel free to use open source
+              libraries and APIs; companies attending may provide their own as
+              well. Impress us!
             </div>
           </div>
         </div>
@@ -148,8 +137,35 @@
   </section>
 
   <section id="sponsors" class="center">
-    <div id="sponsors-content" class="center">
-      create &middot; connect &middot; inspire
+    <div id="sponsors-content">
+      <div class="title">Sponsors</div>
+      <div id="sponsors-list" class="ui grid">
+        <div
+          class="sixteen wide phone eight wide tablet four wide computer column"
+        >
+          <img src="../assets/images/sponsors/microsoft.png" />
+        </div>
+        <div
+          class="sixteen wide phone eight wide tablet four wide computer column"
+        >
+          <img src="../assets/images/sponsors/sendgrid.png" />
+        </div>
+        <div
+          class="sixteen wide phone eight wide tablet four wide computer column"
+        >
+          <img src="../assets/images/sponsors/thales.png" />
+        </div>
+        <div
+          class="sixteen wide phone eight wide tablet four wide computer column"
+        >
+          <img src="../assets/images/sponsors/hedera.png" />
+        </div>
+        <div
+        class="sixteen wide phone eight wide tablet four wide computer column"
+        >
+          <img src="../assets/images/sponsors/ardent.png" />
+        </div>
+      </div>
     </div>
   </section>
 
@@ -161,8 +177,8 @@
       <a href="https://www.facebook.com/hackUCIrvine"
         ><i class="fab fa-facebook" aria-hidden="true"></i
       ></a>
-      <a href="https://twitter.com/HackUCI"
-        ><i class="fab fa-twitter" aria-hidden="true"></i
+      <a href="https://www.instagram.com/hackatuci/"
+        ><i class="fab fa-instagram" aria-hidden="true"></i
       ></a>
     </div>
   </section>

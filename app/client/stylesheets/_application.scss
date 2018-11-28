@@ -45,6 +45,7 @@
 
   button + .resume-dropzone {
     margin-top: 0.67861429em;
+    color: white;
   }
 
   .ui.checkbox {
@@ -52,6 +53,15 @@
   }
 
   .ui.form .field > label {
+    color: white;
+  }
+
+  .field > .rounded-border {
+    border: solid #e7e7e7;
+    border-radius: 15px;
+  }
+
+  .white {
     color: white;
   }
 

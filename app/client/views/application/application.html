@@ -202,13 +202,13 @@
               View Resume
             </button>
             <div
-              class="resume-dropzone center"
+              class="resume-dropzone center rounded-border"
               ng-class="{ 'resume-uploading': resumeDropzoneIsUploading, 'resume-dropzone-error': resumeDropzoneHasError }"
               ng-show="showResumeDropzone"
               id="resume-upload"
             >
               <span ng-show="showResumeDropzoneIcon">
-                <i class="fa fa-upload" aria-hidden="true"></i> DRAG AND DROP
+                <i class="fa fa-upload white" aria-hidden="true"></i> DRAG AND DROP
               </span>
               <div class="fallback">
                 <input name="file" type="file" accept="application/pdf" />
