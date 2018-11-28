@@ -38,7 +38,7 @@
   /* Hero */
   #hero {
     background-image: linear-gradient(to right, #2a2a2a, #191919);
-    background-image: url("../assets/images/hero-sponsor.png"),
+    background-image: url("../assets/images/background-triangles-banner.png"),
       linear-gradient(to right, #2a2a2a, #191919);
     background-size: cover;
     background-repeat: no-repeat;
@@ -74,7 +74,7 @@
   .logo-header-container {
     height: 125px;
     margin-top: 0;
-    margin-bottom: 5%;
+    margin-bottom: 1%;
     animation: fadein 0.5s both;
     animation-delay: 0.15s;
   }
@@ -97,9 +97,30 @@
     height: 100%;
   }
 
+  .gradient-description{ 
+    background-image: linear-gradient(
+		  to right,
+		  #7ce0ff 0%,
+		  #80beef 30%,
+		  #83a8db 40%,
+		  #bb8ce5 60%,
+		  #ce83d1 90%,
+		  #e2a1e3 100%
+		);
+		-webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .title-header {
+    margin: 0;
+    text-align: center;
+    font-size: 4.5vmax;
+    font-weight:500;
+    animation: 1s fadein 0.3s both;
+  }
+
   .hero-title-container {
     text-align: center;
-    margin-top: 45vh;
+    margin-top: 3%;
   }
 
   .hero-title {
@@ -107,8 +128,8 @@
     font-weight: lighter;
     text-align: center;
     display: inline-block;
-    animation: fadein 0.5s both;
-    animation-delay: 0.3s;
+    animation: 1s fadein 0.5s both;
+    animation-delay: 0.5s;
   }
 
   .btn {
@@ -116,12 +137,12 @@
     border: solid;
     border-color: #9b92e3;
     white-space: nowrap;
-    margin-left: -5%;
   }
 
   .btn:hover {
-    color: #e7e7e7;
+    color: #fff;
     border: solid;
+    background: #a49af1;
     border-color: #a49af1;
   }
 
@@ -200,7 +221,7 @@
     align-content: center;
     background: #9b92e3;
     color: white;
-    padding: 2% 0 3% 0;
+    padding: 2% 0;
 
     #recap {
       flex: 2;
@@ -217,7 +238,12 @@
     }
   }
 
+  #recap > .title {
+    margin-bottom: 5%;
+  }
+
   #winners-content > .title {
+    margin-bottom: 5%;
     text-align: center;
   }
 
@@ -235,7 +261,7 @@
   }
 
   .winners-list > div {
-    padding: 3.5% 0;
+    padding: 0 0 3.5%;
     border-bottom: 1px solid transparent;
     transition: all 0.2s ease;
   }
@@ -283,7 +309,7 @@
 
   /* Sponsors */
   #sponsors {
-    padding: 3% 5%;
+    padding: 3% 5% 5%;
     background: #e7e7e7;
   }
 
@@ -332,8 +358,8 @@
   }
 
   #sponsorship-packet {
-    text-decoration: underline;
-    font-weight: bold;
+    border-bottom: 2px #273c75 solid;
+    color: #273c75;
   }
 
   #sponsorship > .title {
@@ -387,8 +413,29 @@
       }
     }
 
+    .gradient-description {
+      display: none;
+    }
+
+    #sponsors-description {
+      font-size: 2.8em;
+      background-image: linear-gradient(
+        to right,
+        #7ce0ff 0%,
+        #80beef 30%,
+        #83a8db 40%,
+        #bb8ce5 60%,
+        #ce83d1 90%,
+        #e2a1e3 100%
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
     .hero-title-container {
-      margin-top: 0;
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .title {
@@ -415,11 +462,6 @@
       }
     }
 
-    #info,
-    #winners {
-      padding: 12.5% 0;
-    }
-
     #info-content > .title {
       margin-bottom: 2%;
       padding-bottom: 0;
@@ -431,11 +473,14 @@
 
     #sponsors-list {
       margin: 5%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     #sponsors-list > div {
       height: 70px;
-      width: 50% !important;
+      width: 70% !important;
       text-align: center;
       padding-top: 0 !important;
       padding-bottom: 0 !important;
@@ -484,7 +529,17 @@
     }
 
     .winners-list > div {
-      width: 50%;
+      width: 70%;
+    }
+
+    hr {
+      margin: 5%;
+    }
+
+    .winners-list {
+      font-size: 1.8em;
+      flex-direction: column;
+      align-items: center;
     }
 
     .recap-statistics > div {
@@ -493,6 +548,7 @@
 
     .btn {
       margin: 0 3%;
+      padding: 4%;
     }
   }
 
