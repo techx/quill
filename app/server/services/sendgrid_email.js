@@ -54,15 +54,13 @@ function sendOne(template, email, templateData, callback) {
 /**
  * Send a verification email to a user, with a verification token to enter.
  * @param  {string|string[]}  email         [Email address(s) to send to]
- * @param  {string}   firstName
  * @param  {[type]}     token    [description]
  * @param  {Function} callback [description]
  * @return {[type]}            [description]
  */
-emailService.sendVerificationEmail = function (email, firstName, token, callback) {
+emailService.sendVerificationEmail = function (email, token, callback) {
   var verifyUrlData = {
-    url: `${ROOT_URL}/verify/${token}`,
-    firstName
+    url: `${ROOT_URL}/verify/${token}`
   };
   sendOne(VERIFICATION_EMAIL_TEMPLATE, email, verifyUrlData, callback);
 };

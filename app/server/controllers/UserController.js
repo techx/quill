@@ -433,7 +433,7 @@ UserController.sendVerificationEmailById = function(id, callback){
         return callback(err);
       }
       var token = user.generateEmailVerificationToken();
-      Mailer.sendVerificationEmail(user.email, user.profile.firstname, token);
+      Mailer.sendVerificationEmail(user.email, token);
       return callback(err, user);
   });
 };
