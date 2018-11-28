@@ -2,6 +2,8 @@
 #home {
   height: 100%;
   font-family: "Rubik", sans-serif;
+  background: linear-gradient(to right, #2a2a2a, #191919);
+
   /* Global */
   button,
   .btn {
@@ -9,7 +11,6 @@
     font-weight: 300;
     border: 1px solid white;
     padding: 1.75% 4%;
-    margin: 0 5px;
     border-radius: 4px;
     letter-spacing: 0.12em;
     transition: all 0.3s ease;
@@ -34,12 +35,14 @@
 
   /* Hero */
   #hero {
-    background-image: url("../assets/images/landing_pg_longer_bg_viv.png"),
+    background-image: url("../assets/images/desktop-background.png"),
       linear-gradient(to right, #2a2a2a, #191919);
     background-size: 100%;
     background-repeat: no-repeat;
-    background-position: center center;
+    background-position: center 40%;
     height: calc(100% + 49px);
+    animation: fadein 0.5s both;
+    animation-delay: 0.3s;
 
     .hero-container {
       min-width: 30%;
@@ -48,11 +51,13 @@
 
   #hero::before {
     content: "";
-    background-image: linear-gradient(to right, #2a2a2a, #191919);
+    background-image: url("../assets/images/desktop-hack-v-logo.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center 40%;
     width: 100%;
     height: calc(100% + 50px);
     position: absolute;
-    animation: fadeout 0.8s ease-in 0.5s forwards;
   }
 
   .hero-content {
@@ -62,12 +67,12 @@
     z-index: 3;
 
     > div {
-      margin-top: -50px;
+      margin-top: 10%;
     }
   }
 
   .logo-header-container {
-    height: 125px;
+    height: 200px;
     margin-top: 0;
     margin-bottom: 5%;
     animation: fadein 0.5s both;
@@ -75,7 +80,7 @@
   }
 
   .logo-header {
-    height: 125px;
+    height: 175px;
     position: absolute;
     left: 0;
     right: 0;
@@ -89,7 +94,7 @@
   }
 
   .logo-header > img {
-    height: 100%;
+    height: 130%;
   }
 
   .hero-title {
@@ -104,7 +109,7 @@
 
   .hero-description-container {
     text-align: center;
-    padding-top: 1.5%;
+    padding-top: 25vh;
   }
 
   .hero-description {
@@ -119,7 +124,7 @@
 
   .hero-button-container {
     text-align: center;
-    margin-top: 65vh;
+    margin-top: 8%;
     animation: 1s fadein 1.5s both;
     animation-delay: 0.6s;
 
@@ -129,7 +134,6 @@
       margin-top: 150%;
       padding: 3.5% 8%;
       border-radius: 25px;
-      margin-left: 5%;
       box-shadow: 0 2px 16px rgba(24, 51, 59, 0.35);
     }
 
@@ -187,7 +191,7 @@
   }
   /* FAQs */
   #faq {
-    background: #8e8bdc;
+    background: #7673c9;
     color: white;
     padding: 5% 0 3% 0;
   }
@@ -222,17 +226,53 @@
 
   .faq-card-description {
     font-weight: 300;
-    font-size: 0.8em;
+    font-size: 1em;
     letter-spacing: 0.07em;
     padding: 2% 0;
     color: white;
     text-align: left;
   }
+
   /* Sponsors */
   #sponsors {
-    padding: 6% 0 8% 0;
+    padding: 3% 5% 5%;
     background: #e7e7e7;
-    font-size: 1.2em;
+  }
+
+  #sponsors-content {
+    width: 100%;
+  }
+
+  #sponsors-content> .title {
+    text-align: center;
+    color: #3e4389;
+  }
+
+  #sponsors-list {
+    margin-top: 1%;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  #sponsors-list> div {
+    height: 60px;
+    padding-right: 10px;
+    padding-left: 10px;
+    margin-top: 1%;
+    opacity: 0.87;
+    width: 16.66666667% !important;
+    padding-top: 0;
+    padding-bottom: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  #sponsors-list> div:hover {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+
+  #sponsors-list> div > img {
+    width: 100%;
   }
 
   /* Footer */
@@ -259,14 +299,54 @@
   }
   /* Mobile */
   @media (max-width: 767px) {
+
+    #sponsors-list {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+      padding-bottom: 10%;
+    }
+    
+    #sponsors-content> .title {
+      font-size: 2.4em;
+    }
+
+    .logo-header {
+        width: 80%;
+        margin: 0 auto;
+    }
+    #sponsors-list>div {
+      height: 70px;
+      width: 50%!important;
+      text-align: center;
+      padding-top: 0!important;
+      padding-bottom: 0!important;
+      margin-bottom: 10%;
+    }
+
     #hero {
       background-image: linear-gradient(to right, #2a2a2a, #191919);
+    }
+
+    #hero::before {
+        background-image: url("../assets/images/mobile-landing-page-banner.png");
+        background-size: 60%;
+        background-position: center 35%;
+    }
+    
+    .logo-header-container {
+        margin-bottom: -10%;
+    }
+
+    .logo-header>img {
+        height: 80%;
     }
     .title {
       margin-bottom: 5%;
       font-size: 2em;
     }
-
+    
     .hero-border {
       height: 100px;
     }
@@ -278,15 +358,18 @@
 
     .hero-description {
       font-size: 1.2em;
-      margin: 2% 10%;
+      margin: 5% auto;
     }
 
     .hero-button-container {
-      margin-top: 20%;
-
       .btn {
         padding: 5% 10%;
+        margin-left: 0%;
       }
+    }
+    
+    .hero-description-container {
+      padding-top: 15vh;
     }
 
     #info,
@@ -320,12 +403,16 @@
       margin-top: 5%;
     }
 
-    #sponsors-list > a {
-      height: 110px;
-      text-align: center;
-      padding-top: 0 !important;
-      padding-bottom: 0 !important;
+    #sponsor #sponsors-list>div>img {
+      width: 100%;
     }
+
+    // #sponsors-list > a {
+    //   height: 110px;
+    //   text-align: center;
+    //   padding-top: 0 !important;
+    //   padding-bottom: 0 !important;
+    // }
 
     #footer {
       padding: 20% 0;
@@ -352,27 +439,37 @@
       width: 85%;
     }
 
-    #sponsors-list > a {
-      height: 110px;
+    #sponsors-list > div {
+      height: 40px;
       text-align: center;
       padding-top: 0 !important;
       padding-bottom: 0 !important;
     }
 
-    .hero-button-container {
-      margin-top: 80vh;
+    #sponsors .title {
+      font-size: 1.8em;
+      font-weight: 700;
+    }
+
+    .logo-header > img {
+        height: 90%;
+    }
+
+    .logo-header-container {
+        margin-bottom: -5%;
+    }
+
+    #sponsors-list>div {
+      height: 70px;
+      width: 30%!important;
+      text-align: center;
+      padding-top: 0!important;
+      padding-bottom: 0!important;
+      margin-bottom: 5px;
     }
   }
   /* Large Screens */
   @media (min-width: 1650px) {
-    #info-content,
-    #faq-content,
-    #sponsors-content,
-    #sponsorship {
-      width: 70%;
-    }
-    .hero-button-container {
-      margin-top: 75vh;
-    }
+
   }
 }
