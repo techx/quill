@@ -230,6 +230,12 @@ var schema = new mongoose.Schema({
     select: false
   },
 
+  owner: {
+    type: Boolean,
+    required: true,
+    default: false
+  },
+
   /**
    * User Profile.
    *
