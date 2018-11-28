@@ -115,11 +115,12 @@
     text-align: center;
     font-size: 4.5vmax;
     font-weight:500;
-    animation: 1s fadein 0.5s both;
+    animation: 1s fadein 0.3s both;
   }
 
   .hero-title-container {
     text-align: center;
+    margin-top: 3%;
   }
 
   .hero-title {
@@ -128,7 +129,7 @@
     text-align: center;
     display: inline-block;
     animation: 1s fadein 0.5s both;
-    animation-delay: 0.3s;
+    animation-delay: 0.5s;
   }
 
   .btn {
@@ -136,12 +137,12 @@
     border: solid;
     border-color: #9b92e3;
     white-space: nowrap;
-    animation: 1s fadein 0.5s both
   }
 
   .btn:hover {
-    color: #e7e7e7;
+    color: #fff;
     border: solid;
+    background: #a49af1;
     border-color: #a49af1;
   }
 
@@ -432,9 +433,9 @@
     }
 
     .hero-title-container {
-      margin-top: 0;
       width: 90%;
-      margin: 0 auto;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .title {
@@ -547,6 +548,7 @@
 
     .btn {
       margin: 0 3%;
+      padding: 4%;
     }
   }
 
