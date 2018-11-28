@@ -2,20 +2,10 @@
   background-image: linear-gradient(to right, #2a2a2a, #191919);
   height: 100%;
 
-  .gradiant-text {
-    padding: 1%;
-    background: linear-gradient(
-      to right,
-      #7ce0ff 0%,
-      #80beef 30%,
-      #83a8db 40%,
-      #bb8ce5 60%,
-      #ce83d1 90%,
-      #e2a1e3 100%
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  > .title {
+    color: #83a8db;
   }
+
   .status {
     background: inherit;
     color: white;

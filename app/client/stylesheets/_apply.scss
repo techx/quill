@@ -1,79 +1,68 @@
 #apply {
-	background: linear-gradient(to right, #2a2a2a, #191919);
-	// set font and color (very light grey) to label and p classes
-	label {
-		color: rgb(228, 228, 228);
-		font-family: 'Lato', sans-serif;
-	}
+  background: linear-gradient(to right, #2a2a2a, #191919);
+  // set font and color (very light grey) to label and p classes
+  label {
+    color: rgb(228, 228, 228);
+    font-family: "Lato", sans-serif;
+  }
 
-	p {
-		color: rgb(228, 228, 228);
-		font-family: 'Lato', sans-serif;
-	}
+  p {
+    color: rgb(228, 228, 228);
+    font-family: "Lato", sans-serif;
+  }
 
-	// set font of headers to Open Sans
-	.font {
-		font-family: 'Open Sans', sans-serif;
-	}
+  // set font of headers to Open Sans
+  .font {
+    font-family: "Open Sans", sans-serif;
+  }
 
-	#school .title {
-		text-align: left;
-		text-transform: none;
-		letter-spacing: 0;
-	}
-	
-	.required {
-		color: red;
-		font-weight: 500;
-	}
-	
-	.field > .rounded-border {
-		border: solid #e7e7e7;
-		border-radius: 15px;
-	}
+  #school .title {
+    text-align: left;
+    text-transform: none;
+    letter-spacing: 0;
+  }
 
-	.error-red-color {
-		color: red;
-	}
+  .required {
+    color: red;
+    font-weight: 500;
+  }
 
-	.essay-feedback-container {
-		display: flex;
-		flex-direction: row;
-	}
+  .field > .rounded-border {
+    border: solid #e7e7e7;
+    border-radius: 15px;
+  }
 
-	.essay-character-count {
-		display: flex;
-		justify-content: flex-end;
-		flex: 1 0 auto;
-		color: #e7e7e7;
-	}
+  .error-red-color {
+    color: red;
+  }
 
-	.ui.checkbox {
-		backface-visibility: unset;
-	}
+  .essay-feedback-container {
+    display: flex;
+    flex-direction: row;
+  }
 
-	// created color classes to override current text and header font/bg colors
-	.white {
-		color: white;
-	}
+  .essay-character-count {
+    display: flex;
+    justify-content: flex-end;
+    flex: 1 0 auto;
+    color: #e7e7e7;
+  }
 
-	> .title {
-		padding: 1%;
-		background-image: linear-gradient(
-		  to right,
-		  #7ce0ff 0%,
-		  #80beef 30%,
-		  #83a8db 40%,
-		  #bb8ce5 60%,
-		  #ce83d1 90%,
-		  #e2a1e3 100%
-		);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-	}
+  .ui.checkbox {
+    backface-visibility: unset;
+  }
 
-	// changed the background to the gradient dark grey - black
-	.bg {
-		background: linear-gradient(to right, #2a2a2a, #191919);
-	}
+  // created color classes to override current text and header font/bg colors
+  .white {
+    color: white;
+  }
+
+  > .title {
+    color: #bb8ce5;
+  }
+
+  // changed the background to the gradient dark grey - black
+  .bg {
+    background: linear-gradient(to right, #2a2a2a, #191919);
+  }
 }

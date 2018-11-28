@@ -3,18 +3,7 @@
   color: white;
 
   > .title {
-    padding: 1%;
-    background-image: linear-gradient(
-      to right,
-      #7ce0ff 0%,
-      #80beef 30%,
-      #83a8db 40%,
-      #bb8ce5 60%,
-      #ce83d1 90%,
-      #e2a1e3 100%
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #bb8ce5;
   }
 
   #school .title {
