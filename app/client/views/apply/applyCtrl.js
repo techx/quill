@@ -76,13 +76,6 @@ angular.module('reg')
           if ($scope.user.email && $scope.user.email.includes('@')) {
             var domain = $scope.user.email.split('@')[1];
 
-            // Is the student from UCI?
-            $scope.isUciStudent = domain === 'uci.edu';
-            // If so, default them to adult: true
-            if ($scope.isUciStudent) {
-              $scope.user.profile.adult = true;
-            }
-
             if ($scope.schoolList[domain]) {
               $scope.user.profile.school = $scope.schoolList[domain].school;
               $scope.autoFilledSchool = true;
