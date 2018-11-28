@@ -92,14 +92,14 @@
 
 	.dz-details {
 		z-index: -1;
-
+		color: white;
+		
 		>div {
 			padding: 4px 0;
 		}
 
 		i {
 			font-size: 2em;
-			color: rgba(0,0,0,0.75);
 		}
 
 		span[data-dz-name] {

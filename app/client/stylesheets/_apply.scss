@@ -26,6 +26,11 @@
 		color: red;
 		font-weight: 500;
 	}
+	
+	.field > .rounded-border {
+		border: solid #e7e7e7;
+		border-radius: 15px;
+	}
 
 	.error-red-color {
 		color: red;
