@@ -159,7 +159,7 @@ UserController.createUser = function(email, password, callback) {
 
         // Send over a verification email
         var verificationToken = u.generateEmailVerificationToken();
-        Mailer.sendVerificationEmail(email, u.profile.firstname, verificationToken);
+        Mailer.sendVerificationEmail(email, verificationToken);
 
         return callback(
           null,
