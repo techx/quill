@@ -405,6 +405,14 @@
 
   /* Mobile */
   @media (max-width: 767px) {
+    #sponsor {
+      width: 100%;
+    }
+    
+    .logo-header-container {
+      width: 100%
+    }
+    
     #hero {
       background-image: linear-gradient(to right, #2a2a2a, #191919);
 
@@ -468,6 +476,7 @@
     }
 
     #sponsors {
+      width: 100%;
       padding: 12.5% 0 5% 0;
     }
 
