@@ -93,7 +93,7 @@
       </div>
     </div>
   </section>
-
+  
   <section id="sponsors" class="center">
     <div id="sponsors-content">
       <div class="title">Past Sponsors</div>
@@ -347,145 +347,102 @@
     </div>
   </section>
 
-  <div class="ui modal" id="contactModal">
-    <div class="header">
-      <span class="modal-title">Sponsorship Information</span>
-      <div class="close-button">
-        <i class="fa fa-times close" aria-hidden="true"></i>
-      </div>
-    </div>
-    <div class="content">
-      <form
-        class="ui grid"
-        action="https://formspree.io/hackuci@gmail.com"
-        method="POST"
-      >
-        <div
-          class="eight wide phone eight wide tablet eight wide computer column"
-        >
-          <span>Name</span>
-          <input type="text" name="Name" placeholder="Jane Doe" />
-        </div>
-        <div
-          class="eight wide phone eight wide tablet eight wide computer column"
-        >
-          <span>Email</span>
-          <input
-            type="email"
-            name="_replyto"
-            placeholder="hello@yourcompany.com"
-          />
-        </div>
-        <div
-          class="eight wide phone eight wide tablet eight wide computer column"
-        >
-          <span>Phone</span>
-          <input type="number" name="Phone" placeholder="949-555-6789" />
-        </div>
-        <div
-          class="eight wide phone eight wide tablet eight wide computer column"
-        >
-          <span>Company</span>
-          <input
-            type="text"
-            name="Company"
-            placeholder="Better Startups, Inc."
-          />
-        </div>
-        <span class="benefits-label sixteen wide column">Benefits</span>
-        <div class="col-md-4 column field">
-          <div class="ui checkbox">
-            <input
-              type="checkbox"
-              value="API (Product) Demo"
-              ng-model="benefits"
-            />
-            <label>API (Product) Demo</label>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <label class="checkbox-inline">
-            <input type="checkbox" value="Custom Branded Prize" /> Custom
-            Branded Prize
-          </label>
-        </div>
-        <div class="col-md-4">
-          <label class="checkbox-inline">
-            <input type="checkbox" value="Pre-Hackathon Workshop" />
-            Pre-Hackathon Workshop
-          </label>
-        </div>
-        <div class="col-md-4">
-          <label class="checkbox-inline">
-            <input type="checkbox" value="Tech Talk During Event" /> Tech Talk
-            During Event
-          </label>
-        </div>
-        <div class="col-md-4">
-          <label class="checkbox-inline">
-            <input type="checkbox" value="Mini-Activity" /> Mini-Activity
-          </label>
-        </div>
-        <div class="col-md-4">
-          <label class="checkbox-inline">
-            <input type="checkbox" value="Future Workshop with Hack" /> Future
-            Workshop with Hack
-          </label>
-        </div>
-        <div class="col-md-4">
-          <label class="checkbox-inline">
-            <input type="checkbox" value="Opening Speech" /> Opening Speech
-          </label>
-        </div>
-        <div class="col-md-4">
-          <label class="checkbox-inline">
-            <input type="checkbox" value="Closing Speech" /> Closing Speech
-          </label>
-        </div>
-        <div class="col-md-4">
-          <label class="checkbox-inline">
-            <input type="checkbox" value="Access to Attendee Resumes" /> Access
-            to Attendee Resumes
-          </label>
-        </div>
-        <div class="col-md-4">
-          <label class="checkbox-inline">
-            <input type="checkbox" value="Company Lounge" /> Company Lounge
-          </label>
-        </div>
-        <div class="col-md-4">
-          <label class="checkbox-inline">
-            <input type="checkbox" value="Company Sponsored Raffle" /> Company
-            Sponsored Raffle
-          </label>
-        </div>
-        <div class="col-md-4">
-          <label class="checkbox-inline">
-            <input type="checkbox" value="Pre-Hackathon Social Media Post" />
-            Pre-Hackathon Social Media Post
-          </label>
-        </div>
-        <div class="col-md-12">
-          <span class="comments-label">Additional Comments</span>
-          <input
-            type="textarea"
-            name="Additional Comments"
-            placeholder="Say hi to us! :-)"
-          />
-        </div>
-        <input type="hidden" name="Benefits" value="" />
-        <input
-          type="hidden"
-          name="_next"
-          value="http://www.hackuci.com/sponsor"
-        />
-        <input
-          type="hidden"
-          name="_subject"
-          value="HackUCI Sponsorship Request"
-        />
-        <input type="submit" value="Send" />
-      </form>
-    </div>
-  </div>
+	<div class="ui modal" id="contactModal">
+		<div class="header">
+			<span class="modal-title">Sponsorship Information</span>
+			<div class="close-button">
+				<i class="fa fa-times close" aria-hidden="true"></i>
+			</div>
+		</div>
+		<div class="content">
+			<form class="ui grid" action="https://formspree.io/hackuci@gmail.com" method="POST">
+				<div class="eight wide phone eight wide tablet eight wide computer column">
+					<span>Name</span>
+					<input type="text" name="Name" placeholder="Jane Doe">
+				</div>
+				<div class="eight wide phone eight wide tablet eight wide computer column">
+					<span>Email</span>
+					<input type="email" name="_replyto" placeholder="hello@yourcompany.com">
+				</div>
+				<div class="eight wide phone eight wide tablet eight wide computer column">
+					<span>Phone</span>
+					<input type="number" name="Phone" placeholder="949-555-6789">
+				</div>
+				<div class="eight wide phone eight wide tablet eight wide computer column">
+					<span>Company</span>
+					<input type="text" name="Company" placeholder="Better Startups, Inc.">
+				</div>
+				<span class="benefits-label sixteen wide column">Benefits</span>
+				<div class="col-md-4 column field">
+					<div class="ui checkbox">
+						<input type="checkbox" value="API (Product) Demo" ng-model="benefits">
+						<label>API (Product) Demo</label>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<label class="checkbox-inline">
+						<input type="checkbox" value="Custom Branded Prize"> Custom Branded Prize
+					</label>
+				</div>
+				<div class="col-md-4">
+					<label class="checkbox-inline">
+						<input type="checkbox" value="Pre-Hackathon Workshop"> Pre-Hackathon Workshop
+					</label>
+				</div>
+				<div class="col-md-4">
+					<label class="checkbox-inline">
+						<input type="checkbox" value="Tech Talk During Event"> Tech Talk During Event
+					</label>
+				</div>
+				<div class="col-md-4">
+					<label class="checkbox-inline">
+						<input type="checkbox" value="Mini-Activity"> Mini-Activity
+					</label>
+				</div>
+				<div class="col-md-4">
+					<label class="checkbox-inline">
+						<input type="checkbox" value="Future Workshop with Hack"> Future Workshop with Hack
+					</label>
+				</div>
+				<div class="col-md-4">
+					<label class="checkbox-inline">
+						<input type="checkbox" value="Opening Speech"> Opening Speech
+					</label>
+				</div>
+				<div class="col-md-4">
+					<label class="checkbox-inline">
+						<input type="checkbox" value="Closing Speech"> Closing Speech
+					</label>
+				</div>
+				<div class="col-md-4">
+					<label class="checkbox-inline">
+						<input type="checkbox" value="Access to Attendee Resumes"> Access to Attendee Resumes
+					</label>
+				</div>
+				<div class="col-md-4">
+					<label class="checkbox-inline">
+						<input type="checkbox" value="Company Lounge"> Company Lounge
+					</label>
+				</div>
+				<div class="col-md-4">
+					<label class="checkbox-inline">
+						<input type="checkbox" value="Company Sponsored Raffle"> Company Sponsored Raffle
+					</label>
+				</div>
+				<div class="col-md-4">
+					<label class="checkbox-inline">
+						<input type="checkbox" value="Pre-Hackathon Social Media Post"> Pre-Hackathon Social Media Post
+					</label>
+				</div>
+				<div class="col-md-12">
+					<span class="comments-label">Additional Comments</span>
+					<input type="textarea" name="Additional Comments" placeholder="Say hi to us! :-)">
+				</div>
+				<input type="hidden" name="Benefits" value="" />
+				<input type="hidden" name="_next" value="http://www.hackuci.com/sponsor" />
+				<input type="hidden" name="_subject" value="HackUCI Sponsorship Request" />
+				<input type="submit" value="Send">
+			</form>
+		</div>
+	</div>
 </div>
