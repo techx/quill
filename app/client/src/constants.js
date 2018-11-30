@@ -1,6 +1,6 @@
 angular.module('reg')
     .constant('EVENT_INFO', {
-        NAME: 'VTHacks V',
+        NAME: 'VTHacks VI',
     })
     .constant('DASHBOARD', {
         UNVERIFIED: 'You should have received an email asking you verify your email. Click the link in the email and you can start your application!',
@@ -15,7 +15,7 @@ angular.module('reg')
         ADMITTED_AND_CANNOT_CONFIRM: 'The confirmation period ended [CONFIRM_DEADLINE]. If you have any questions or concerns about this, please contact [hackathon@vthacks.com](mailto:hackathon@vthacks.com).',
         ADMITTED_AND_CANNOT_CONFIRM: 'Although you were accepted, you did not complete your confirmation in time.\nUnfortunately, this means that you will not be able to attend the event.\nWe hope to see you again next year!',
         CONFIRMED_NOT_PAST_TITLE: 'You can still edit your confirmation information.',
-        DECLINED: 'We\'re sorry to hear that you won\'t be able to make it to VTHacks V! :(\nMaybe next year! We hope you see you again soon.',
+        DECLINED: 'We\'re sorry to hear that you won\'t be able to make it to VTHacks VI! :(\nMaybe next year! We hope you see you again soon.',
     })
     .constant('TEAM',{
         NO_TEAM_REG_CLOSED: 'Unfortunately, it\'s too late to enter with a team.\nHowever, you can still form teams on your own before or during the event!',
