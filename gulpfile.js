@@ -44,11 +44,6 @@ gulp.task('js', function () {
     .pipe(gulp.dest('app/client/build'));
 });
 
-gulp.task('semantic', function() {
-  gulp.src(['semantic/dist/**/*'])
-    .pipe(gulp.dest('app/client/semantic'));
-});
-
 gulp.task('sass', function() {
   gulp.src('app/client/stylesheets/site.scss')
     .pipe(sass())

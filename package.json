@@ -25,7 +25,6 @@
     "nodemailer": "^4.7.0",
     "nodemailer-smtp-transport": "^2.7.4",
     "request": "^2.88.0",
-    "semantic-ui": "^2.4.2",
     "showdown": "^1.9.0",
     "sweetalert": "^2.1.2",
     "underscore": "^1.9.1",
@@ -38,8 +37,7 @@
     "dev": "nodemon app.js",
     "watch": "gulp server",
     "prod": "gulp build && node app.js",
-    "config": "cp .env.config .env",
-    "postinstall": "(cd semantic; gulp build) && gulp semantic && gulp build"
+    "config": "cp .env.config .env"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
