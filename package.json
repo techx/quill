@@ -17,7 +17,7 @@
     "gulp-buffer": "0.0.2",
     "gulp-tap": "^1.0.1",
     "jquery": "^3.3.1",
-    "jsonwebtoken": "5.0.4",
+    "jsonwebtoken": "^5.0.4",
     "method-override": "^3.0.0",
     "moment": "^2.22.2",
     "mongoose": "^5.3.14",
