@@ -37,9 +37,9 @@
   #hero {
     background-image: url("../assets/images/triangles-background.png"),
       linear-gradient(to right, #2a2a2a, #191919);
-    background-size: 100%;
+    background-size: 110%;
     background-repeat: no-repeat;
-    background-position: center 40%;
+    background-position: 45% 40%;
     height: calc(100% + 49px);
     animation: fadein 0.5s both;
     animation-delay: 0.3s;
