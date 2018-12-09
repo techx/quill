@@ -1,5 +1,5 @@
 var mongoose   = require('mongoose'),
-    bcrypt     = require('bcrypt'),
+    bcrypt     = require('bcrypt-nodejs'),
     validator  = require('validator'),
     jwt        = require('jsonwebtoken');
     JWT_SECRET = process.env.JWT_SECRET;
@@ -272,7 +272,7 @@ schema.methods.generateTempAuthToken = function(){
 //=========================================
 
 schema.statics.generateHash = function(password) {
-  return bcrypt.hashSync(password, bcrypt.genSaltSync(8));
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };
 
 /**
