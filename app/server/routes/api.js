@@ -309,6 +309,18 @@ module.exports = function(router) {
     SettingsController.getPublicSettings(defaultResponse(req, res));
   });
 
+    /**
+   * Update the Host School.
+   */
+  router.put("/settings/hostSchool", isAdmin, function(req, res) {
+    var hostSchool = req.body.hostSchool;
+    SettingsController.updateField(
+      "hostSchool",
+      hostSchool,
+      defaultResponse(req, res)
+    );
+  });
+
   /**
    * Update the acceptance text.
    * body: {

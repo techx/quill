@@ -142,6 +142,16 @@ angular.module('reg')
           });
       };
 
+      $scope.updateHostSchool = function(){
+        var hostSchool = $scope.settings.hostSchool;
+        SettingsService
+          .updateHostSchool(hostSchool)
+          .then(response => {
+            swal("Looks good!", "Host School Updated", "success");
+            updateSettings(response.data);
+          });
+      };
+
       $scope.updateConfirmationText = function(){
         var text = $scope.settings.confirmationText;
         SettingsService
