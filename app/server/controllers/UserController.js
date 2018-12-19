@@ -736,4 +736,76 @@ UserController.getStats = function(callback){
   return callback(null, Stats.getUserStats());
 };
 
+UserController.addUserAcceptedQueue = function(id, callback){
+  User.findOneAndUpdate({
+    _id: id
+  },{
+    $set: {
+      'status.queued': Date.now()
+    }
+  },
+  function(err, user){
+    if(err || !user){
+      return callback(err);
+    }
+    if(user.status.queued){
+      return callback({
+        message: `User id:${id}, email:${user.email} already to acceptance queue`
+      });
+    } else {
+      return callback(null, {
+        message: `User id:${id}, email:${user.email} added to acceptance queue`
+      });
+    }
+  });
+};
+
+UserController.removeUserAcceptedQueue = function(id, callback){
+  User.findOneAndUpdate({
+    _id: id
+  },{
+    $set: {
+      'status.queued': null
+    }
+  },
+  function(err, user){
+    if(err || !user){
+      return callback(err);
+    }
+    if(!user.status.queued){
+      return callback({
+        message: `User id:${id}, email:${user.email} already not in acceptance queue`
+      });
+    } else {
+      return callback(null, {
+        message: `User id:${id}, email:${user.email} deleted from acceptance queue`
+      });
+    }
+  });
+};
+
+UserController.removeUserAcceptedQueue = function(id, callback){
+  User.findOneAndUpdate({
+    _id: id
+  },{
+    $set: {
+      'status.queued': null
+    }
+  },
+  function(err, user){
+    if(err || !user){
+      return callback(err);
+    }
+    if(!user.status.queued){
+      return callback({
+        message: `User id:${id}, email:${user.email} already not in acceptance queue`
+      });
+    } else {
+      return callback(null, {
+        message: `User id:${id}, email:${user.email} deleted from acceptance queue`
+      });
+    }
+  });
+};
+
 module.exports = UserController;

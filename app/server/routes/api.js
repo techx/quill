@@ -403,6 +403,21 @@ module.exports = function(router) {
     UserController.sendWaiverEmail(id, defaultResponse(req, res));
   });
 
+  /**
+   * Add user to acceptance queue.
+   */
+  router.post('/users/:id/queue', isAdmin, function(req,res){
+    var id = req.params.id;
+    UserController.addUserAcceptedQueue(id, defaultResponse(req, res));
+  });
+
+  /**
+   * Remove user from acceptance queue.
+   */
+  router.delete('/users/:id/queue', isAdmin, function(req,res){
+    var id = req.params.id;
+    UserController.removeUserAcceptedQueue(id, defaultResponse(req, res));
+  });
 
   // ---------------------------------------------
   // Settings [ADMIN ONLY!]
