@@ -738,10 +738,11 @@ UserController.getStats = function(callback){
 
 UserController.addUserAcceptedQueue = function(id, callback){
   User.findOneAndUpdate({
-    _id: id
+    _id: id,
+    'status.admitted': false
   },{
     $set: {
-      'status.queued': Date.now()
+      'status.queued': Date.now(),
     }
   },
   function(err, user){
@@ -784,27 +785,66 @@ UserController.removeUserAcceptedQueue = function(id, callback){
   });
 };
 
-UserController.removeUserAcceptedQueue = function(id, callback){
-  User.findOneAndUpdate({
-    _id: id
+UserController.acceptAllInAcceptedQueue = function(admitterEmail, callback){
+  User.update({
+    'status.queued' : {$ne: null},
+    'status.admitted' : false
   },{
     $set: {
+      'status.admitted': true,
+      'status.admittedBy': admitterEmail,
       'status.queued': null
     }
+  }, {
+    multi: true
   },
   function(err, user){
-    if(err || !user){
+    if (err || !user) {
       return callback(err);
     }
-    if(!user.status.queued){
-      return callback({
-        message: `User id:${id}, email:${user.email} already not in acceptance queue`
-      });
-    } else {
-      return callback(null, {
-        message: `User id:${id}, email:${user.email} deleted from acceptance queue`
-      });
+    Mailer.sendAcceptanceEmail(user.email);
+  });
+};
+
+UserController.viewAcceptedQueue = function(callback){
+  User
+  .find({
+    'status.queued' : {$ne: null},
+    'status.admitted' : false
+  })
+  .sort({
+    'status.queued': 'asc'
+  })
+  .exec(function (err, users){
+    if (err || !users){
+      return callback(err);
     }
+    queueStats = {
+      gender: {},
+      school: {},
+      year: {}
+    };
+    users.forEach(function(user){
+      if(user.profile.gender in queueStats.gender){
+        queueStats.gender[user.profile.gender] += 1;
+      } else {
+        queueStats.gender[user.profile.gender] = 1;
+      }
+      if(user.profile.school in queueStats.school){
+        queueStats.school[user.profile.school] += 1;
+      } else {
+        queueStats.school[user.profile.school] = 1;
+      }
+      if(user.profile.graduationYear in queueStats.year){
+        queueStats.year[user.profile.graduationYear] += 1;
+      } else {
+        queueStats.year[user.profile.graduationYear] = 1;
+      }
+    });
+    return callback(null, {
+      users,
+      stats: queueStats
+    });
   });
 };
 

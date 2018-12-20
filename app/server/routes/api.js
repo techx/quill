@@ -419,6 +419,26 @@ module.exports = function(router) {
     UserController.removeUserAcceptedQueue(id, defaultResponse(req, res));
   });
 
+  /**
+   * Accept all users in acceptance queue
+  */
+  router.post('/users/queue', isAdmin, function(req,res){
+    var token = getToken(req);
+    UserController.getByToken(token, function(err, user){
+      if (err) {
+        return res.status(500).send(err);
+      }
+      UserController.acceptAllInAcceptedQueue(user.email, defaultResponse(req, res));
+    });
+  });
+
+  /**
+   * View all users and stats in acceptance queue
+  */
+  router.get('/users/queue', isAdmin, function(req,res){
+    UserController.viewAcceptedQueue(defaultResponse(req, res));
+  });
+
   // ---------------------------------------------
   // Settings [ADMIN ONLY!]
   // ---------------------------------------------
