@@ -99,7 +99,7 @@
             <th>E-mail address</th>
             <th>School</th>
             <th>Grad</th>
-            <th>V/S/A/C</th>
+            <th>V/S/Q/A/C</th>
             <th>S</th>
             <th>B</th>
             <th></th>
@@ -145,6 +145,16 @@
               <i
                 ng-if="!user.status.completedProfile"
                 class="red remove circle icon">
+              </i>
+
+              <!-- Queued -->
+              <i
+                ng-if="user.status.queued"
+                class="green check circle icon">
+              </i>
+              <i
+                ng-if="!user.status.queued"
+                class="thin circle icon">
               </i>
 
               <!-- Admitted -->
@@ -212,6 +222,14 @@
             <td
               class="right aligned collapsing">
 
+              <!-- Add ng-if for the button so that it changes color and functionality if the user has been added to queue
+              Wait until after REST API is done first-->
+              <button
+                class="accept ui circular mini basic green icon button"
+                ng-click="addToQueue($event, user, $index)">
+                <i class="thumbs up icon"></i>
+              </button>
+
               <button
                 class="accept ui circular mini basic green icon button"
                 ng-click="acceptUser($event, user, $index)">
@@ -235,20 +253,20 @@
               <button
                 class="ui circular mini basic green icon button"
                 ng-click="sendWaiverEmail($event, user, $index)">
-                <i class="fa-envelope-o icon"></i>
+                <i class="envelope outline icon"></i>
               </button>
 
               <button
                 class="ui circular mini basic green icon button"
                 ng-click="markWaiverAsSigned($event, user, $index)"
                 ng-if="!user.confirmation.signatureLiability">
-                <i class="fa-pencil-square-o icon"></i>
+                <i class="edit outline icon"></i>
               </button>
 
               <button
                 class="ui circular mini basic green icon disabled button"
                 ng-if="user.confirmation.signatureLiability">
-                <i class="fa-pencil-square-o icon"></i>
+                <i class="edit outline icon"></i>
               </button>
 
             </td>

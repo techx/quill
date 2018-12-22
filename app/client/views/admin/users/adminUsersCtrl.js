@@ -112,6 +112,40 @@ angular.module('reg')
         }
       };
 
+      $scope.addToQueue = function($event, user, index) {
+        $event.stopPropagation();
+
+        swal({
+          title: "Whoa, wait a minute!",
+          text: "You are about to queue " + user.profile.name + "!",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#DD6B55",
+          confirmButtonText: "Yes, queue them.",
+          closeOnConfirm: false
+          }, function(){
+
+            swal({
+              title: "Are you sure?",
+              text: "Your account will be logged as having queued this user.",
+              type: "warning",
+              showCancelButton: true,
+              confirmButtonColor: "#DD6B55",
+              confirmButtonText: "Yes, add the user to the queue.",
+              closeOnConfirm: false
+              }, function(){
+                UserService
+                  .addQueue(user._id)
+                  .success(function(user){
+                    $scope.users[index] = user;
+                    swal("Accepted", user.profile.name + ' has been queued.', "success");
+                  });
+              });
+
+          });
+
+      }
+
       $scope.acceptUser = function($event, user, index) {
         $event.stopPropagation();
 
