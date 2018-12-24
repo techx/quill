@@ -17,7 +17,7 @@ angular.module('reg')
       $('.ui.dimmer').remove();
 
       UserService
-        .getAll()
+        .getQueue()
         .success(function(data){
           $scope.users = data;
         });
@@ -43,7 +43,7 @@ angular.module('reg')
           closeOnConfirm: false
           }, function(){
               UserService
-              .checkIn(user._id) //TODO CHANGE FUNCTION TO REMOVE FROM QUEUE
+              .removeQueue(user._id)
               .success(function(user){
                 $scope.users[index] = user;
                 swal("Removed", user.profile.name + ' has been removed from the queue.', "success");
