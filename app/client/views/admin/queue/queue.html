@@ -1,0 +1,106 @@
+<div id="queue">
+  <div class="ui segment">
+    <div class="ui header">
+      Gender
+    </div>
+    <div class="ui list">
+      <div class="item">
+        <i class="users icon"></i>
+        <div class="content">
+          <strong>Total users</strong>: {{users.length}}
+        </div>
+      </div>
+      <div class="item">
+        <i class="female icon"></i>
+        <div class="content">
+          <strong>Female</strong>: {{stats.demo.gender['F']}} ({{stats.demo.gender['F'] / stats.total * 100 | number:1}}%)
+        </div>
+      </div>
+      <div class="item">
+        <i class="male icon"></i>
+        <div class="content">
+          <strong>Male</strong>: {{stats.demo.gender['M']}} ({{stats.demo.gender['M'] / stats.total * 100 | number:1}}%)
+        </div>
+      </div>
+      <div class="item">
+        <i class="other gender icon"></i>
+        <div class="content">
+          <strong>Other</strong>: {{stats.demo.gender['O']}} ({{stats.demo.gender['O'] / stats.total * 100 | number:1}}%)
+        </div>
+      </div>
+      <div class="item">
+        <i class="question icon"></i>
+        <div class="content">
+          <strong>Did not respond</strong>: {{stats.demo.gender['N']}} ({{stats.demo.gender['N'] / stats.total * 100 | number:1 }}%)
+        </div>
+      </div>
+    </div>
+    <div class="ui divider"></div>
+    <div class="ui header">Graduation Year</div>
+    <div class="ui list">
+      <div class="item" ng-repeat="(key, value) in stats.demo.year">
+        <strong>{{key}}:</strong> {{value}} ({{value / stats.total * 100 | number: 1}}%)
+      </div>
+    </div>
+    <div class="ui divider"></div>
+    <div class="ui header">School</div>
+    <div class="ui list">
+      <div
+        class="item"
+        ng-repeat="school in stats.demo.schools | orderBy: '-count'">
+        <div class="content">
+          <strong>{{school.email}}</strong> : {{school.count}} ({{school.count / stats.total * 100 | number: 1}}%)
+          <div class="ui divider"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ui segment">
+    <div id="table-container" class="thirteen wide column">
+        <div class="ui header">
+          Users in Queue
+        </div>   
+        <table
+          class="ui celled selectable compact users table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Gender</th>
+              <th>School</th>
+              <th>Grad</th>
+              <th>Remove</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              ng-repeat="user in users"
+              ng-class="rowClass(user)">
+              <td>
+                <strong>
+                  {{user.profile.name}}
+                  {{user.status.queued}}
+                  &nbsp;
+  
+                </strong>
+              </td>
+              <td>{{user.profile.gender}}</td>
+              <td>{{user.profile.school}}</td>
+              <td
+                class="collapsing">
+                {{user.profile.graduationYear}}
+              </td>
+              <td
+                class="collapsing">
+                <button
+                  class="accept ui circular mini basic red icon button center"
+                  ng-click="removeFromQueue($event, user, $index)">
+                  <i class="trash alternate icon"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  </div>
+</div>
+
