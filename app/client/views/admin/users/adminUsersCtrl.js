@@ -146,6 +146,27 @@ angular.module('reg')
 
       }
 
+      $scope.removeFromQueue = function($event, user, index) {
+        $event.stopPropagation();
+
+        swal({
+          title: "Whoa, wait a minute!",
+          text: "You are about to remove " + user.profile.name + " from the queue!",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#DD6B55",
+          confirmButtonText: "Yes, remove them.",
+          closeOnConfirm: false
+          }, function(){
+              UserService
+              .removeQueue(user._id)
+              .success(function(user){
+                $scope.users[index] = user;
+                swal("Removed", user.profile.name + ' has been removed from the queue.', "success");
+              });
+          });
+      }
+
       $scope.acceptUser = function($event, user, index) {
         $event.stopPropagation();
 

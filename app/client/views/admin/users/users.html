@@ -225,9 +225,18 @@
               <!-- Add ng-if for the button so that it changes color and functionality if the user has been added to queue
               Wait until after REST API is done first-->
               <button
-                class="accept ui circular mini basic green icon button"
-                ng-click="addToQueue($event, user, $index)">
-                <i class="thumbs up icon"></i>
+                class="accept ui circular mini basic icon button">
+                
+                <i
+                  ng-if="user.status.queued" 
+                  class="red thumbs down icon"
+                  ng-click="removeFromQueue($event, user, $index)"></i>
+                
+                <i
+                  ng-if="!user.status.queued" 
+                  class="thumbs up icon"
+                  ng-click="addToQueue($event, user, $index)"></i>
+                
               </button>
 
               <button
