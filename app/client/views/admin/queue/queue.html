@@ -73,7 +73,8 @@
           </thead>
           <tbody>
             <tr
-              ng-repeat="user in users"
+              ng-repeat="user in users track by $index"
+              ng-if="user.status.queued"
               ng-class="rowClass(user)">
               <td>
                 <strong>

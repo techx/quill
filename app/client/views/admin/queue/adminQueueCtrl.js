@@ -17,7 +17,7 @@ angular.module('reg')
       $('.ui.dimmer').remove();
 
       UserService
-        .getQueue()
+        .getAll()
         .success(function(data){
           $scope.users = data;
         });
