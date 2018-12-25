@@ -112,59 +112,24 @@ angular.module('reg')
         }
       };
 
-      $scope.addToQueue = function($event, user, index) {
+      $scope.toggleQueue = function($event, user, index) {
         $event.stopPropagation();
 
-        swal({
-          title: "Whoa, wait a minute!",
-          text: "You are about to queue " + user.profile.name + "!",
-          type: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#DD6B55",
-          confirmButtonText: "Yes, queue them.",
-          closeOnConfirm: false
-          }, function(){
-
-            swal({
-              title: "Are you sure?",
-              text: "Your account will be logged as having queued this user.",
-              type: "warning",
-              showCancelButton: true,
-              confirmButtonColor: "#DD6B55",
-              confirmButtonText: "Yes, add the user to the queue.",
-              closeOnConfirm: false
-              }, function(){
-                UserService
-                  .addQueue(user._id)
-                  .success(function(user){
-                    $scope.users[index] = user;
-                    swal("Accepted", user.profile.name + ' has been queued.', "success");
-                  });
-              });
-
-          });
-
-      }
-
-      $scope.removeFromQueue = function($event, user, index) {
-        $event.stopPropagation();
-
-        swal({
-          title: "Whoa, wait a minute!",
-          text: "You are about to remove " + user.profile.name + " from the queue!",
-          type: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#DD6B55",
-          confirmButtonText: "Yes, remove them.",
-          closeOnConfirm: false
-          }, function(){
-              UserService
-              .removeQueue(user._id)
-              .success(function(user){
-                $scope.users[index] = user;
-                swal("Removed", user.profile.name + ' has been removed from the queue.', "success");
-              });
-          });
+        if (!user.status.queued) {
+          UserService
+            .addQueue(user._id)
+            .success(function(user){
+              $scope.users[index] = user;
+              swal("Accepted", user.profile.name + ' has been queued.', "success");
+            });
+        } else {
+          UserService
+            .removeQueue(user._id)
+            .success(function(user){
+              $scope.users[index] = user;
+              swal("Removed", user.profile.name + ' has been removed from the queue.', "success");
+            });
+        }
       }
 
       $scope.acceptUser = function($event, user, index) {
