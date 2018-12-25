@@ -35,7 +35,7 @@ angular.module('reg')
       },
 
       getQueue: function(){
-        return $http.get(base + "queue")
+        return $http.get("/api/queue")
       },
 
       updateProfile: function(id, profile){

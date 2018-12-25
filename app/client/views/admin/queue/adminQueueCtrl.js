@@ -7,7 +7,7 @@ angular.module('reg')
     '$http',
     '$window',
     function($scope, $state, $stateParams, UserService, $http, $window){
-      $scope.pages = [];
+      $scope.stats = [];
       $scope.users = [];
 
       // Semantic-UI moves modal content into a dimmer at the top level.
@@ -17,9 +17,10 @@ angular.module('reg')
       $('.ui.dimmer').remove();
 
       UserService
-        .getAll()
+        .getQueue()
         .success(function(data){
-          $scope.users = data;
+          $scope.stats = data.stats;
+          $scope.users = data.users;
         });
 
       $scope.$watch('queryText', function(queryText){
