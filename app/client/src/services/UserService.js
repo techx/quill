@@ -35,7 +35,7 @@ angular.module('reg')
       },
 
       getQueue: function(){
-        return $http.get("/api/queue")
+        return $http.get(base + "viewQueue");
       },
 
       updateProfile: function(id, profile){
@@ -68,12 +68,12 @@ angular.module('reg')
         return $http.post(base + id + '/queue')
       }, 
 
-       removeQueue: function(id){
-        return $http.delete(base + id + '/queue')
+      removeQueue: function(id){
+        return $http.delete(base + id + '/queue');
       },
 
-       admitQueue: function(id){
-        return $http.post(base + "queue")
+      admitQueue: function(id){
+        return $http.post(base + "acceptQueue");
       },
             
       admitUser: function(id){
