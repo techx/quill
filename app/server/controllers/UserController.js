@@ -748,6 +748,9 @@ UserController.addUserAcceptedQueue = function(id, callback){
       'status.queued': Date.now(),
     }
   },
+  {
+    new: true
+  },
   callback);
 };
 
@@ -759,6 +762,9 @@ UserController.removeUserAcceptedQueue = function(id, callback){
     $set: {
       'status.queued': null
     }
+  },
+  {
+    new: true
   },
   callback);
 };
