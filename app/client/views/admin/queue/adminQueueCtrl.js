@@ -23,13 +23,39 @@ angular.module('reg')
           $scope.users = data.users;
         });
 
-      $scope.$watch('queryText', function(queryText){
-        UserService
-          .getPage($stateParams.page, $stateParams.size, queryText)
-          .success(function(data){
+      $scope.acceptAllFromQueue = function($event, user, index) {
+        swal({
+          title: "Whoa, wait a minute!",
+          text: "You are about to accept all users from the queue!",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#DD6B55",
+          confirmButtonText: "Yes, accept them.",
+          closeOnConfirm: false
+          }, function(){
 
-          });
-      });
+            swal({
+              title: "Are you sure?",
+              text: "Your account will be logged as having accepted all users from the queue. " +
+                "Remember, this power is a privilege.",
+              type: "warning",
+              showCancelButton: true,
+              confirmButtonColor: "#DD6B55",
+              confirmButtonText: "Yes, accept the queued users.",
+              closeOnConfirm: false
+              }, function(){
+
+                UserService
+                  .admitUser(user._id)
+                  .success(function(user){
+                    $scope.users[index] = user;
+                    swal("Accepted", "All queued users have been accepted!", "success");
+                  });
+
+              });
+
+        });
+      }
 
       $scope.removeFromQueue = function($event, user, index) {
         $event.stopPropagation();

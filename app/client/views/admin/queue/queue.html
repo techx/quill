@@ -59,7 +59,13 @@
     <div id="table-container" class="thirteen wide column">
         <div class="ui header">
           Users in Queue
-        </div>   
+        </div>  
+        <button 
+          class="ui violet button"
+          ng-click="acceptAllFromQueue($event, user, index)"
+          ng-if="users.length > 0">
+          Accept Queue
+        </button> 
         <table
           class="ui celled selectable compact users table">
           <thead>
