@@ -4,7 +4,7 @@ var User = require('../models/User');
 
 // In memory stats.
 var stats = {};
-function calculateStats(filterField){
+function calculateStats(){
   console.log('Calculating stats...');
   var newStats = {
     lastUpdated: 0,
@@ -58,7 +58,7 @@ function calculateStats(filterField){
   };
 
   User
-    .find(filterField ? filterField : {})
+    .find({})
     .exec(function(err, users){
       if (err || !users){
         throw err;

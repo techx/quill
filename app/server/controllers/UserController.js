@@ -655,7 +655,7 @@ UserController.sendAcceptanceEmailById = function(id, callback) {
        if (err || !user) {
          return callback(err);
        }
-       Mailer.sendAcceptanceEmail(user.email, callback);
+       Mailer.sendAcceptanceEmail(user.email, user.status.confirmBy, callback);
        return callback(err, user);
    });
  };
@@ -739,70 +739,59 @@ UserController.getStats = function(callback){
 UserController.addUserAcceptedQueue = function(id, callback){
   User.findOneAndUpdate({
     _id: id,
-    'status.admitted': false
+    'status.admitted': false,
+    'status.declined': false,
+    'status.completedProfile': true,
+    'status.queued': null
   },{
     $set: {
       'status.queued': Date.now(),
     }
   },
-  function(err, user){
-    if(err || !user){
-      return callback(err);
-    }
-    if(user.status.queued){
-      return callback({
-        message: `User id:${id}, email:${user.email} already to acceptance queue`
-      });
-    } else {
-      return callback(null, {
-        message: `User id:${id}, email:${user.email} added to acceptance queue`
-      });
-    }
-  });
+  callback);
 };
 
 UserController.removeUserAcceptedQueue = function(id, callback){
   User.findOneAndUpdate({
-    _id: id
+    _id: id,
+    'status.queued' : {$ne: null}
   },{
     $set: {
       'status.queued': null
     }
   },
-  function(err, user){
-    if(err || !user){
-      return callback(err);
-    }
-    if(!user.status.queued){
-      return callback({
-        message: `User id:${id}, email:${user.email} already not in acceptance queue`
-      });
-    } else {
-      return callback(null, {
-        message: `User id:${id}, email:${user.email} deleted from acceptance queue`
-      });
-    }
-  });
+  callback);
 };
 
 UserController.acceptAllInAcceptedQueue = function(admitterEmail, callback){
-  User.update({
+  User
+  .find({
     'status.queued' : {$ne: null},
-    'status.admitted' : false
-  },{
-    $set: {
-      'status.admitted': true,
-      'status.admittedBy': admitterEmail,
-      'status.queued': null
-    }
-  }, {
-    multi: true
-  },
-  function(err, user){
-    if (err || !user) {
+    'status.admitted' : false,
+    'status.declined': false,
+    'status.completedProfile': true
+  })
+  .exec(function (err, users){
+    if (err || !users){
       return callback(err);
     }
-    Mailer.sendAcceptanceEmail(user.email);
+    users.forEach(function(user){
+      Mailer.sendAcceptanceEmail(user.email, user.status.confirmBy, function(err, data){
+        if(err){
+          return callback(err,{user});
+        }
+        user.status.admitted = true;
+        user.status.admittedBy = admitterEmail;
+        user.status.queued = null;
+        user.markModified('status');
+        user.save(function(err){
+          if(err){
+            return callback(err,{user});
+          }
+        });
+      });
+    });
+    return callback(null, {users});
   });
 };
 
