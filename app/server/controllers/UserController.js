@@ -7,7 +7,7 @@ var Stats = require('../services/stats');
 
 var validator = require('validator');
 var moment = require('moment');
-
+var fs = require('fs');
 var UserController = {};
 
 // Tests a string if it ends with target s
@@ -769,36 +769,61 @@ UserController.removeUserAcceptedQueue = function(id, callback){
   callback);
 };
 
+UserController.emailAllInAcceptedQueue = function(callback){
+  fs.open('emailedAcceptance.txt', 'a+', function(err, fd){
+    if(err){
+      return callback(err);
+    }
+
+    fs.readFile(fd, function(err, data){
+      if(err){
+        return callback(err);
+      }
+
+      var alreadyEmailed = new Set(data.toString().split('\n'));
+      User
+      .find({
+        'status.admitted' : true
+      })
+      .exec(function(err,users){
+        if(err){
+          return callback(err);
+        }
+        
+        fs.
+        appendFile(
+          fd,
+          users.filter(function(user){
+            return !alreadyEmailed.has(user.email);
+          })
+          .map(function(user){
+            UserController.sendAcceptanceEmailByEmail(user.email);
+            return user.email;
+          })
+          .join('\n'),
+          function(err){
+            fs.close(fd, callback);
+          });
+      });
+    });
+  });
+};
+
 UserController.acceptAllInAcceptedQueue = function(admitterEmail, callback){
   User
-  .find({
+  .updateMany({
     'status.queued' : {$ne: null},
     'status.admitted' : false,
     'status.declined': false,
     'status.completedProfile': true
-  })
-  .exec(function (err, users){
-    if (err || !users){
-      return callback(err);
+  },{
+    $set: {
+      'status.admitted': true,
+      'status.admittedBy': admitterEmail,
+      'status.queued': null
     }
-    users.forEach(function(user){
-      Mailer.sendAcceptanceEmail(user.email, user.status.confirmBy, function(err, data){
-        if(err){
-          return callback(err,{user});
-        }
-        user.status.admitted = true;
-        user.status.admittedBy = admitterEmail;
-        user.status.queued = null;
-        user.markModified('status');
-        user.save(function(err){
-          if(err){
-            return callback(err,{user});
-          }
-        });
-      });
-    });
-    return callback(null, {users});
-  });
+  },
+  callback); 
 };
 
 UserController.viewAcceptedQueue = function(callback){

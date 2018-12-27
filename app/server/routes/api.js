@@ -220,6 +220,12 @@ module.exports = function(router) {
     UserController.viewAcceptedQueue(defaultResponse(req, res));
   });
 
+  /*
+    Send acceptance email to each newly admitted user
+  */
+  router.post('/users/emailAdmitted', isAdmin, function(req,res){
+    UserController.emailAllInAcceptedQueue(defaultResponse(req, res));
+  });
   /**
    * [OWNER/ADMIN]
    *
