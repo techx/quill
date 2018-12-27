@@ -157,7 +157,7 @@ angular.module('reg')
               }, function(){
 
                 UserService
-                  .admitUser(user._id)
+                  .admitUser()
                   .success(function(user){
                     $scope.users[index] = user;
                     swal("Accepted", user.profile.name + ' has been admitted.', "success");
