@@ -46,7 +46,7 @@ angular.module('reg')
               }, function(){
 
                 UserService
-                  .admitUser(user._id)
+                  .admitQueue()
                   .success(function(user){
                     $scope.users[index] = user;
                     swal("Accepted", "All queued users have been accepted!", "success");
