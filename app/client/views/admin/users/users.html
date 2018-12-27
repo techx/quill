@@ -226,7 +226,8 @@
               Wait until after REST API is done first-->
               <button
                 class="accept ui circular mini basic icon button"
-                ng-click="toggleQueue($event, user, $index)">
+                ng-click="toggleQueue($event, user, $index)"
+                ng-if="!user.status.admitted">
                 
                 <i
                   ng-if="user.status.queued" 
