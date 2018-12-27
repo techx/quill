@@ -120,7 +120,12 @@ angular.module('reg')
             .addQueue(user._id)
             .success(function(user){
               $scope.users[index] = user;
-              swal("Queued", user.profile.name + ' has been queued.', "success");
+              swal({
+                title: "Queued",
+                text: user.profile.name + " has been queued!",
+                type: "success",
+                timer: 1000
+              });
             });
         } else {
           UserService
