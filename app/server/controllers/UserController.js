@@ -742,7 +742,7 @@ UserController.addUserAcceptedQueue = function(id, callback){
     'status.admitted': false,
     'status.declined': false,
     'status.completedProfile': true,
-    'status.queued': null
+    'status.queued': { $in : [0, null]}
   },{
     $set: {
       'status.queued': Date.now(),
@@ -757,10 +757,10 @@ UserController.addUserAcceptedQueue = function(id, callback){
 UserController.removeUserAcceptedQueue = function(id, callback){
   User.findOneAndUpdate({
     _id: id,
-    'status.queued' : {$ne: null}
+    'status.queued' : {$gt: 0}
   },{
     $set: {
-      'status.queued': null
+      'status.queued': 0
     }
   },
   {
@@ -812,7 +812,7 @@ UserController.emailAllInAcceptedQueue = function(callback){
 UserController.acceptAllInAcceptedQueue = function(admitterEmail, callback){
   User
   .updateMany({
-    'status.queued' : {$ne: null},
+    'status.queued' : {$gt: 0},
     'status.admitted' : false,
     'status.declined': false,
     'status.completedProfile': true
@@ -820,7 +820,7 @@ UserController.acceptAllInAcceptedQueue = function(admitterEmail, callback){
     $set: {
       'status.admitted': true,
       'status.admittedBy': admitterEmail,
-      'status.queued': null
+      'status.queued': 0
     }
   },
   callback); 
@@ -829,7 +829,7 @@ UserController.acceptAllInAcceptedQueue = function(admitterEmail, callback){
 UserController.viewAcceptedQueue = function(callback){
   User
   .find({
-    'status.queued' : {$ne: null},
+    'status.queued' : {$gt: 0},
     'status.admitted' : false
   })
   .sort({

@@ -142,8 +142,7 @@ var status = {
     default: false,
   },
   queued: {
-    type: Number,
-    required: false
+    type: Number
   },
   admitted: {
     type: Boolean,
