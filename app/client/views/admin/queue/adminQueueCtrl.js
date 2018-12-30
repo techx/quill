@@ -9,12 +9,35 @@ angular.module('reg')
     function($scope, $state, $stateParams, UserService, $http, $window){
       $scope.stats = [];
       $scope.users = [];
+      $scope.displayedUsers = [];
+      $scope.queryText = "";
 
       // Semantic-UI moves modal content into a dimmer at the top level.
       // While this is usually nice, it means that with our routing will generate
       // multiple modals if you change state. Kill the top level dimmer node on initial load
       // to prevent this.
       $('.ui.dimmer').remove();
+
+      $scope.$watch("queryText", function(queryText) {
+        $scope.filterUsers(queryText);
+      })
+
+      $scope.filterUsers = function(queryText) {
+        $scope.displayedUsers = []
+
+        if (queryText === "") {
+          $scope.displayedUsers = $scope.users;
+          return;
+        }
+
+        $scope.users.forEach(function(user) {
+          var queryLowerCase = queryText.toLowerCase();
+          var nameLowerCase = user.profile.name.toLowerCase();
+          if(nameLowerCase.indexOf(queryLowerCase) > -1) {
+            $scope.displayedUsers.push(user);
+          }
+        });
+      }
 
       UserService
         .getQueue()

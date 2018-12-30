@@ -65,7 +65,18 @@
           ng-click="acceptAllFromQueue($event, user, index)"
           ng-if="users.length > 0">
           Accept Queue
-        </button> 
+        </button>
+        <div class="ui form">
+          <div class="field">
+            <div class="ui icon fluid input">
+              <input type="text"
+                     placeholder="Search..."
+                     ng-model="queryText"
+                     ng-model-options="{debounce: 300}">
+                <i class="search icon"></i>
+            </div>
+          </div>
+        </div> 
         <table
           class="ui celled selectable compact users table">
           <thead>
@@ -79,7 +90,7 @@
           </thead>
           <tbody>
             <tr
-              ng-repeat="user in users track by $index"
+              ng-repeat="user in displayedUsers track by $index"
               ng-if="user.status.queued"
               ng-class="rowClass(user)">
               <td>
