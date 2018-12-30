@@ -92,7 +92,8 @@
             <tr
               ng-repeat="user in displayedUsers track by $index"
               ng-if="user.status.queued"
-              ng-class="rowClass(user)">
+              ng-class="rowClass(user)"
+              ng-click="goUser($event, user)">
               <td>
                 <strong>
                   {{user.profile.name}}

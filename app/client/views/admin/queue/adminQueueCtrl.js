@@ -100,4 +100,12 @@ angular.module('reg')
               });
           });
       }
+
+      $scope.goUser = function($event, user){
+        $event.stopPropagation();
+
+        $state.go('app.admin.user', {
+          id: user._id
+        });
+      };
     }]);
