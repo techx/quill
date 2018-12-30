@@ -33,6 +33,12 @@
       <div class="ui header">
         Users
       </div>
+      <button 
+        class="ui violet button"
+        ng-click="sendAdmittedEmail($event, user, index)"
+        ng-if="users.length > 0">
+        Email All Admitted Users
+      </button> 
       <div class="ui long user modal">
         <i class="close icon"></i>
         <div class="header">

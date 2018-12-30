@@ -92,6 +92,10 @@ angular.module('reg')
         return $http.post(base + id + '/sign');
       },
 
+      sendAdmittedEmail: function(){
+        return $http.post(base + "emailAdmitted");
+      },
+
       sendWaiverEmail: function(id){
         return $http.post(base + id + '/sendwaiver');
       },

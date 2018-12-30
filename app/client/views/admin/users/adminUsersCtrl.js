@@ -174,6 +174,28 @@ angular.module('reg')
 
       };
 
+      $scope.sendAdmittedEmail = function($event, user, index) {
+        $event.stopPropagation();
+
+        swal({
+          title: "Send Admitted Email",
+          text: "Are you sure you want to send the email to all admitted users?",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#DD6B55",
+          confirmButtonText: "Yes, send the admitted email!",
+          closeOnConfirm: false
+          },
+          function(){
+            UserService
+              .sendAdmittedEmail()
+              .success(function(){
+                swal("Admitted Email Sent!", "The email will be sent to all admitted users!", "success");
+              });
+          }
+        );
+      }
+
       $scope.sendWaiverEmail = function($event, user, index) {
         $event.stopPropagation();
 
