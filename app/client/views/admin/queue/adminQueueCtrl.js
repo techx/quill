@@ -41,7 +41,7 @@ angular.module('reg')
 
       UserService
         .getQueue()
-        .success(function(data){
+        .success(function(data) {
           $scope.stats = data.stats;
           $scope.users = data.users;
         });
@@ -55,7 +55,7 @@ angular.module('reg')
           confirmButtonColor: "#DD6B55",
           confirmButtonText: "Yes, accept them.",
           closeOnConfirm: false
-          }, function(){
+          }, function() {
 
             swal({
               title: "Are you sure?",
@@ -66,11 +66,11 @@ angular.module('reg')
               confirmButtonColor: "#DD6B55",
               confirmButtonText: "Yes, accept the queued users.",
               closeOnConfirm: false
-              }, function(){
+              }, function() {
 
                 UserService
                   .admitQueue()
-                  .success(function(user){
+                  .success(function(user) {
                     $scope.users[index] = user;
                     swal("Accepted", "All queued users have been accepted!", "success");
                   });
@@ -91,17 +91,17 @@ angular.module('reg')
           confirmButtonColor: "#DD6B55",
           confirmButtonText: "Yes, remove them.",
           closeOnConfirm: false
-          }, function(){
+          }, function() {
               UserService
               .removeQueue(user._id)
-              .success(function(user){
+              .success(function(user) {
                 $scope.users[index] = user;
                 swal("Removed", user.profile.name + ' has been removed from the queue.', "success");
               });
           });
       }
 
-      $scope.goUser = function($event, user){
+      $scope.goUser = function($event, user) {
         $event.stopPropagation();
 
         $state.go('app.admin.user', {

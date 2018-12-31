@@ -34,10 +34,6 @@ angular.module('reg')
         );
       },
 
-      getQueue: function(){
-        return $http.get(base + "viewQueue");
-      },
-
       updateProfile: function(id, profile){
         profile.name = profile.firstname + ' ' + profile.lastname;
         
@@ -62,6 +58,10 @@ angular.module('reg')
 
       getStats: function(){
         return $http.get(base + 'stats');
+      },
+
+      getQueue: function(){
+        return $http.get(base + "viewQueue");
       },
 
       addQueue: function(id){

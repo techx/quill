@@ -38,7 +38,9 @@
     <div class="ui divider"></div>
     <div class="ui header">Graduation Year</div>
     <div class="ui list">
-      <div class="item" ng-repeat="(key, value) in stats.year">
+      <div 
+        class="item" 
+        ng-repeat="(key, value) in stats.year">
         <strong>{{key}}:</strong> {{value}} ({{value / users.length * 100 | number: 1}}%)
       </div>
     </div>
@@ -56,7 +58,9 @@
     </div>
   </div>
   <div class="ui segment">
-    <div id="table-container" class="thirteen wide column">
+    <div 
+      id="table-container" 
+      class="thirteen wide column">
         <div class="ui header">
           Users in Queue
         </div>  
@@ -99,7 +103,6 @@
                   {{user.profile.name}}
                   {{user.status.queued}}
                   &nbsp;
-  
                 </strong>
               </td>
               <td>{{user.profile.gender}}</td>
@@ -108,8 +111,7 @@
                 class="collapsing">
                 {{user.profile.graduationYear}}
               </td>
-              <td
-                class="collapsing">
+              <td class="collapsing">
                 <button
                   class="accept ui circular mini basic red icon button center"
                   ng-click="removeFromQueue($event, user, $index)">

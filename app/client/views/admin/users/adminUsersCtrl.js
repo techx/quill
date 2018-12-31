@@ -124,7 +124,7 @@ angular.module('reg')
                 title: "Queued",
                 text: user.profile.name + " has been queued!",
                 type: "success",
-                timer: 1000
+                timer: 500
               });
             });
         } else {
@@ -190,7 +190,7 @@ angular.module('reg')
             UserService
               .sendAdmittedEmail()
               .success(function(){
-                swal("Admitted Email Sent!", "The email will be sent to all admitted users!", "success");
+                swal("Waiver Email Sent!", "The email will be sent to all admitted users!", "success");
               });
           }
         );
