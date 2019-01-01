@@ -44,6 +44,7 @@ angular.module('reg')
         .success(function(data) {
           $scope.stats = data.stats;
           $scope.users = data.users;
+          $scope.displayedUsers = $scope.users;
         });
 
       $scope.acceptAllFromQueue = function($event, user, index) {

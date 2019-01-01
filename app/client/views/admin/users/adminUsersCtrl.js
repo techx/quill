@@ -119,6 +119,15 @@ angular.module('reg')
           UserService
             .addQueue(user._id)
             .success(function(user){
+              if(user === null) {
+                swal({
+                  title: "User not Verified",
+                  text: "User cannot be queued!",
+                  type: "success",
+                  timer: 750
+                });
+                return;
+              }
               $scope.users[index] = user;
               swal({
                 title: "Queued",
