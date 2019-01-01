@@ -5,3 +5,4 @@ app/client/plugins/
 *.log
 .env
 .DS_Store
+.vscode/
