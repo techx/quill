@@ -144,6 +144,9 @@ var status = {
   queued: {
     type: Number
   },
+  notified: {
+    type: Boolean
+  },
   admitted: {
     type: Boolean,
     required: true,

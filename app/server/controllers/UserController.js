@@ -739,8 +739,8 @@ UserController.getStats = function(callback){
 UserController.addUserAcceptedQueue = function(id, callback){
   User.findOneAndUpdate({
     _id: id,
+    'verified': true,
     'status.admitted': false,
-    'status.declined': false,
     'status.completedProfile': true,
     'status.queued': { $in : [0, null]}
   },{
@@ -769,43 +769,33 @@ UserController.removeUserAcceptedQueue = function(id, callback){
   callback);
 };
 
-UserController.emailAllInAcceptedQueue = function(callback){
-  fs.open('emailedAcceptance.txt', 'a+', function(err, fd){
-    if(err){
+UserController.emailAcceptanceToAdmitted = function(callback){
+  User
+  .find({
+    'status.admitted': true,
+    'status.notified': false,
+    'status.declined': false,
+    'status.confirmed': false
+  })
+  .exec(function (err, users){
+    if (err || !users){
       return callback(err);
     }
-
-    fs.readFile(fd, function(err, data){
-      if(err){
-        return callback(err);
-      }
-
-      var alreadyEmailed = new Set(data.toString().split('\n'));
-      User
-      .find({
-        'status.admitted' : true
-      })
-      .exec(function(err,users){
+    users.forEach(function(user){
+      Mailer.sendAcceptanceEmail(user.email, user.status.confirmBy, function(err, data){
         if(err){
-          return callback(err);
+          return callback(err,{user});
         }
-        
-        fs.
-        appendFile(
-          fd,
-          users.filter(function(user){
-            return !alreadyEmailed.has(user.email);
-          })
-          .map(function(user){
-            UserController.sendAcceptanceEmailByEmail(user.email);
-            return user.email;
-          })
-          .join('\n'),
-          function(err){
-            fs.close(fd, callback);
-          });
+        user.status.notified = true;
+        user.markModified('status');
+        user.save(function(err){
+          if(err){
+            return callback(err,{user});
+          }
+        });
       });
     });
+    return callback(null, {users});
   });
 };
 
@@ -814,13 +804,13 @@ UserController.acceptAllInAcceptedQueue = function(admitterEmail, callback){
   .updateMany({
     'status.queued' : {$gt: 0},
     'status.admitted' : false,
-    'status.declined': false,
     'status.completedProfile': true
   },{
     $set: {
       'status.admitted': true,
       'status.admittedBy': admitterEmail,
-      'status.queued': 0
+      'status.queued': 0,
+      'status.notified': false
     }
   },
   callback); 

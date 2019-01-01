@@ -224,7 +224,7 @@ module.exports = function(router) {
     Send acceptance email to each newly admitted user
   */
   router.post('/users/emailAdmitted', isAdmin, function(req,res){
-    UserController.emailAllInAcceptedQueue(defaultResponse(req, res));
+    UserController.emailAcceptanceToAdmitted(defaultResponse(req, res));
   });
   /**
    * [OWNER/ADMIN]
