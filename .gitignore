@@ -6,4 +6,3 @@ app/client/plugins/
 .env
 .DS_Store
 .vscode/
-emailedAcceptance.txt
