@@ -199,7 +199,7 @@ angular.module('reg')
             UserService
               .sendAdmittedEmail()
               .success(function(){
-                swal("Waiver Email Sent!", "The email will be sent to all admitted users!", "success");
+                swal("Admitted Email Sent!", "The email will be sent to all admitted users!", "success");
               });
           }
         );
