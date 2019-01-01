@@ -7,7 +7,7 @@ var Stats = require('../services/stats');
 
 var validator = require('validator');
 var moment = require('moment');
-var fs = require('fs');
+
 var UserController = {};
 
 // Tests a string if it ends with target s
