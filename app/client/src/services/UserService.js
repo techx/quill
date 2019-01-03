@@ -61,7 +61,7 @@ angular.module('reg')
       },
 
       getQueue: function(){
-        return $http.get(base + "viewQueue");
+        return $http.get(base + 'viewQueue');
       },
 
       addQueue: function(id){
@@ -73,7 +73,7 @@ angular.module('reg')
       },
 
       admitQueue: function(id){
-        return $http.post(base + "acceptQueue");
+        return $http.post(base + 'acceptQueue');
       },
             
       admitUser: function(id){
@@ -93,7 +93,7 @@ angular.module('reg')
       },
 
       sendAdmittedEmail: function(){
-        return $http.post(base + "emailAdmitted");
+        return $http.post(base + 'emailAdmitted');
       },
 
       sendWaiverEmail: function(id){
