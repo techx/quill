@@ -24,17 +24,13 @@ function endsWith(s, test){
  * @return {[type]}            [description]
  */
 function canRegister(email, password, callback){
-
-  if (!password || password.length < 6){
-    return callback({ message: "Password must be 6 or more characters."}, false);
-  }
-
   // Check if its within the registration window.
   Settings.getRegistrationTimes(function(err, times){
     if (err) {
       callback(err);
     }
 
+    //Checks registration times.
     var now = Date.now();
 
     if (now < times.timeOpen){
@@ -49,21 +45,17 @@ function canRegister(email, password, callback){
       });
     }
 
-    // Check for emails.
-    Settings.getWhitelistedEmails(function(err, emails){
-      if (err || !emails){
-        return callback(err);
-      }
-      for (var i = 0; i < emails.length; i++) {
-        if (validator.isEmail(email) && endsWith(emails[i], email)){
+    // Check if email is valid.
+    if (validator.isEmail(email)){
           return callback(null, true);
-        }
-      }
-      return callback({
-        message: " This form requires a .edu email. If you don't have one, email us at registration@vthacks.com and we can set you up with an account."
-      }, false);
-    });
+    }else{
+      return callback({message: " This form requires an email."}, false);
+    }
 
+    //checks if password is valid.
+    if (!password || password.length < 6){
+      return callback({ message: "Password must be 6 or more characters."}, false);
+    }
   });
 }
 

@@ -23,11 +23,11 @@ var schema = new mongoose.Schema({
     type: Number,
     default: 604800000 // Date of confirmation
   },
-  whitelistedEmails: {
-    type: [String],
-    select: false,
-    default: ['.edu'],
-  },
+  // whitelistedEmails: {
+  //   type: [String],
+  //   select: false,
+  //   default: [''],
+  // },
   waitlistText: {
     type: String
   },
@@ -42,19 +42,19 @@ var schema = new mongoose.Schema({
   }
 });
 
-/**
- * Get the list of whitelisted emails.
- * Whitelist emails are by default not included in settings.
- * @param  {Function} callback args(err, emails)
- */
-schema.statics.getWhitelistedEmails = function(callback){
-  this
-    .findOne({})
-    .select('whitelistedEmails')
-    .exec(function(err, settings){
-      return callback(err, settings.whitelistedEmails);
-    });
-};
+// /**
+//  * Get the list of whitelisted emails.
+//  * Whitelist emails are by default not included in settings.
+//  * @param  {Function} callback args(err, emails)
+//  */
+// schema.statics.getWhitelistedEmails = function(callback){
+//   this
+//     .findOne({})
+//     .select('whitelistedEmails')
+//     .exec(function(err, settings){
+//       return callback(err, settings.whitelistedEmails);
+//     });
+// };
 
 /**
  * Get the open and close time for registration.

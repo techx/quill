@@ -36,22 +36,22 @@ angular.module('reg')
           });
       };
 
-      // Whitelist --------------------------------------
+      // // Whitelist --------------------------------------
 
-      SettingsService
-        .getWhitelistedEmails()
-        .success(function(emails){
-          $scope.whitelist = emails.join(", ");
-        });
+      // SettingsService
+      //   .getWhitelistedEmails()
+      //   .success(function(emails){
+      //     $scope.whitelist = emails.join(", ");
+      //   });
 
-      $scope.updateWhitelist = function(){
-        SettingsService
-          .updateWhitelistedEmails($scope.whitelist.replace(/ /g, '').split(','))
-          .success(function(settings){
-            swal('Whitelist updated.');
-            $scope.whitelist = settings.whitelistedEmails.join(", ");
-          });
-      };
+      // $scope.updateWhitelist = function(){
+      //   SettingsService
+      //     .updateWhitelistedEmails($scope.whitelist.replace(/ /g, '').split(','))
+      //     .success(function(settings){
+      //       swal('Whitelist updated.');
+      //       $scope.whitelist = settings.whitelistedEmails.join(", ");
+      //     });
+      // };
 
       // Registration Times -----------------------------
 
