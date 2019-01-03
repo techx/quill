@@ -28,10 +28,9 @@
           </div>
 
           <div class="field">
-            <label> Birthdate</label>
-            <input type="date"
-                   name="birthdate"
-                   ng-model="user.confirmation.birthdate"
+            <label> Birthdate (mm/dd/yyyy) </label>
+            <input name="birthdate"
+                   ng-model="user.profile.birthdate"
                    placeholder="mm/dd/yyyy"
                    required>
           </div>
@@ -76,7 +75,7 @@
             <label>Class Standing</label>
             <select
               name="classStanding"
-              ng-model="selectedUser.profile.classStanding">
+              ng-model="user.profile.classStanding">
               <option value="">Class Standing</option>
               <option value="freshman">Freshman</option>
               <option value="sophmore">Sophmore</option>

@@ -14,9 +14,7 @@ var profile = {
   },
 
   birthdate: {
-    type: String,
-    min: 8,
-    max: 20,
+    type: String
   },
 
   adult: {
@@ -34,7 +32,7 @@ var profile = {
   classStanding: {
     type: String,
     enum: {
-      values: 'freshman sophmore junior senior'.split(''),
+      values: 'freshman sophmore junior senior n/a'.split(''),
     }
   },
 
