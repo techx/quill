@@ -23,6 +23,14 @@
 
     <div
       ui-sref-active="active"
+      ui-sref="app.confirmation"
+      ng-show="currentUser.status.admitted"
+      class="item">
+      Confirmation
+    </div>
+
+    <div
+      ui-sref-active="active"
       ui-sref="app.admin.stats"
       class="item"
       ng-show="currentUser.admin">
