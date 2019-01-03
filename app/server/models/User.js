@@ -34,7 +34,7 @@ var profile = {
   classStanding: {
     type: String,
     enum: {
-      values: 'freshman sophmore junior senior'.split(''),
+      values: 'n/a freshman sophmore junior senior graduate'.split(''),
     }
   },
 

@@ -119,6 +119,15 @@ angular.module('reg')
                 }
               ]
             },
+            birthdate: {
+              identifier: 'birthdate',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'mm/dd/yyyy'
+                }
+              ]
+            },
             school: {
               identifier: 'school',
               rules: [
@@ -134,6 +143,15 @@ angular.module('reg')
                 {
                   type: 'empty',
                   prompt: 'Please select your graduation year.'
+                }
+              ]
+            },
+            classStanding: {
+              identifier: 'classStanding',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please select your currecnt class standing.'
                 }
               ]
             },
