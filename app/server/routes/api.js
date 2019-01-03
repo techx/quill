@@ -198,8 +198,34 @@ module.exports = function(router) {
         return res.status(500).send(err);
       });
     });
-  })
+  });
 
+  /**
+   * Accept all users in acceptance queue
+  */
+  router.post('/users/acceptQueue', isAdmin, function(req,res){
+    var token = getToken(req);
+    UserController.getByToken(token, function(err, user){
+      if (err) {
+        return res.status(500).send(err);
+      }
+      UserController.acceptAllInAcceptedQueue(user.email, defaultResponse(req, res));
+    });
+  });
+
+  /**
+   * View all users and stats in acceptance queue
+  */
+  router.get('/users/viewQueue', isAdmin, function(req,res){
+    UserController.viewAcceptedQueue(defaultResponse(req, res));
+  });
+
+  /*
+    Send acceptance email to each newly admitted user
+  */
+  router.post('/users/emailAdmitted', isAdmin, function(req,res){
+    UserController.emailAcceptanceToAdmitted(defaultResponse(req, res));
+  });
   /**
    * [OWNER/ADMIN]
    *
@@ -403,6 +429,21 @@ module.exports = function(router) {
     UserController.sendWaiverEmail(id, defaultResponse(req, res));
   });
 
+  /**
+   * Add user to acceptance queue.
+   */
+  router.post('/users/:id/queue', isAdmin, function(req,res){
+    var id = req.params.id;
+    UserController.addUserAcceptedQueue(id, defaultResponse(req, res));
+  });
+
+  /**
+   * Remove user from acceptance queue.
+   */
+  router.delete('/users/:id/queue', isAdmin, function(req,res){
+    var id = req.params.id;
+    UserController.removeUserAcceptedQueue(id, defaultResponse(req, res));
+  });
 
   // ---------------------------------------------
   // Settings [ADMIN ONLY!]
