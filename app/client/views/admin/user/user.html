@@ -100,7 +100,7 @@
 
       <div class="field">
         <label> Birthdate </label>
-        <input type="date"
+        <input type="text"
                name="birthdate"
                ng-model="user.confirmation.birthdate"
                placeholder="mm/dd/yyyy"
@@ -146,10 +146,12 @@
           name="classStanding"
           ng-model="selectedUser.profile.classStanding">
           <option value="">Class Standing</option>
+          <option value="n/a">N/A</option>
           <option value="freshman">Freshman</option>
           <option value="sophmore">Sophmore</option>
           <option value="junior">Junior</option>
           <option value="senior">Senior</option>
+          <option value="graduate">Graduate</option>
         </select>
       </div>
 
