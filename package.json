@@ -25,7 +25,6 @@
     "gulp-uglifyes": "^0.1.2",
     "gulp-util": "^3.0.8",
     "handlebars": "^3.0.3",
-    "heroku-ssl-redirect": "0.0.4",
     "jsonwebtoken": "5.0.4",
     "method-override": "^2.3.5",
     "minify": "^3.0.2",
