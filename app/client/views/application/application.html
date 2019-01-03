@@ -27,6 +27,15 @@
                    ng-model="user.profile.name">
           </div>
 
+          <div class="field">
+            <label> Birthdate</label>
+            <input type="date"
+                   name="birthdate"
+                   ng-model="user.confirmation.birthdate"
+                   placeholder="mm/dd/yyyy"
+                   required>
+          </div>
+
           <div class="field" ng-show="autoFilledSchool">
             <label> School </label>
             <input class="ui input"
@@ -60,6 +69,19 @@
               <option value="2023">2023</option>
               <option value="2024">2024</option>
               <option value="2025">2025</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Class Standing</label>
+            <select
+              name="classStanding"
+              ng-model="selectedUser.profile.classStanding">
+              <option value="">Class Standing</option>
+              <option value="freshman">Freshman</option>
+              <option value="sophmore">Sophmore</option>
+              <option value="junior">Junior</option>
+              <option value="senior">Senior</option>
             </select>
           </div>
 

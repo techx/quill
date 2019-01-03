@@ -98,6 +98,15 @@
                ng-model="selectedUser.profile.name">
       </div>
 
+      <div class="field">
+        <label> Birthdate </label>
+        <input type="date"
+               name="birthdate"
+               ng-model="user.confirmation.birthdate"
+               placeholder="mm/dd/yyyy"
+               required>
+      </div>
+
       <div class="field" ng-show="autoFilledSchool">
         <label> School </label>
         <input class="ui input"
@@ -128,6 +137,19 @@
           <option value="2023">2023</option>
           <option value="2024">2024</option>
           <option value="2025">2025</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Class Standing</label>
+        <select
+          name="classStanding"
+          ng-model="selectedUser.profile.classStanding">
+          <option value="">Class Standing</option>
+          <option value="freshman">Freshman</option>
+          <option value="sophmore">Sophmore</option>
+          <option value="junior">Junior</option>
+          <option value="senior">Senior</option>
         </select>
       </div>
 
@@ -201,6 +223,21 @@
       <div class="field">
         <label> Phone </label>
         <input type="tel" ng-model="selectedUser.confirmation.phoneNumber" />
+      </div>
+
+      <div class="field">
+        <label>Race/Ethnicity</label>
+        <select
+          name="ethnicity"
+          ng-model="user.confirmation.ethnicity">
+          <option value="">Select Ethnicity</option>
+          <option value="White">White</option>
+          <option value="Hispanic or Latino">Hispanic or Latino</option>
+          <option value="Black or African American">Black or African American</option>
+          <option value="Native American or American Indian">Native American or American Indian</option>
+          <option value="Asian or Pacific Islander">Asian or Pacific Islander</option>
+          <option value="Other">Other</option>
+        </select>
       </div>
 
       <div class="field">

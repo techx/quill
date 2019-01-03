@@ -13,6 +13,12 @@ var profile = {
     max: 100,
   },
 
+  birthdate: {
+    type: String,
+    min: 8,
+    max: 20,
+  },
+
   adult: {
     type: Boolean,
     required: true,
@@ -23,6 +29,13 @@ var profile = {
     type: String,
     min: 1,
     max: 150,
+  },
+
+  classStanding: {
+    type: String,
+    enum: {
+      values: 'freshman sophmore junior senior'.split(''),
+    }
   },
 
   graduationYear: {
@@ -80,6 +93,9 @@ var confirmation = {
   linkedin: String,
   website: String,
   resume: String,
+
+
+
 
   userNeedsTransportation: Boolean,
   travel: {
