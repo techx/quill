@@ -11,7 +11,7 @@
     "body-parser": "^1.18.3",
     "browserify": "^16.2.3",
     "browserify-ngannotate": "^2.0.0",
-    "dotenv": "^6.1.0",
+    "dotenv": "^6.2.0",
     "email-templates": "^5.0.2",
     "express": "^4.16.4",
     "gulp-buffer": "0.0.2",
@@ -19,8 +19,8 @@
     "jquery": "^3.3.1",
     "jsonwebtoken": "5.0.4",
     "method-override": "^3.0.0",
-    "moment": "^2.22.2",
-    "mongoose": "^5.3.14",
+    "moment": "^2.23.0",
+    "mongoose": "^5.4.2",
     "morgan": "^1.9.1",
     "nodemailer": "^4.7.0",
     "nodemailer-smtp-transport": "^2.7.4",
@@ -28,7 +28,7 @@
     "showdown": "^1.9.0",
     "sweetalert": "^2.1.2",
     "underscore": "^1.9.1",
-    "validator": "^10.9.0",
+    "validator": "^10.10.0",
     "vinyl-source-stream": "^2.0.0"
   },
   "scripts": {
@@ -48,7 +48,7 @@
     "gulp-sass": "^4.0.2",
     "gulp-sourcemaps": "^2.6.4",
     "gulp-uglify": "^3.0.1",
-    "nodemon": "^1.18.7"
+    "nodemon": "^1.18.9"
   },
   "engines": {
     "node": "10.14.1"
