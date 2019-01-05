@@ -60,6 +60,22 @@ angular.module('reg')
         return $http.get(base + 'stats');
       },
 
+      getQueue: function(){
+        return $http.get(base + 'viewQueue');
+      },
+
+      addQueue: function(id){
+        return $http.post(base + id + '/queue')
+      }, 
+
+      removeQueue: function(id){
+        return $http.delete(base + id + '/queue');
+      },
+
+      admitQueue: function(id){
+        return $http.post(base + 'acceptQueue');
+      },
+            
       admitUser: function(id){
         return $http.post(base + id + '/admit');
       },
@@ -74,6 +90,10 @@ angular.module('reg')
 
       markWaiverAsSigned: function(id){
         return $http.post(base + id + '/sign');
+      },
+
+      sendAdmittedEmail: function(){
+        return $http.post(base + 'emailAdmitted');
       },
 
       sendWaiverEmail: function(id){

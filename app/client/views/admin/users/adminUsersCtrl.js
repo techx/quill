@@ -112,6 +112,40 @@ angular.module('reg')
         }
       };
 
+      $scope.toggleQueue = function($event, user, index) {
+        $event.stopPropagation();
+
+        if (!user.status.queued) {
+          UserService
+            .addQueue(user._id)
+            .success(function(user){
+              if(user === null) {
+                swal({
+                  title: "User not Verified",
+                  text: "User cannot be queued!",
+                  type: "success",
+                  timer: 750
+                });
+                return;
+              }
+              $scope.users[index] = user;
+              swal({
+                title: "Queued",
+                text: user.profile.name + " has been queued!",
+                type: "success",
+                timer: 500
+              });
+            });
+        } else {
+          UserService
+            .removeQueue(user._id)
+            .success(function(user){
+              $scope.users[index] = user;
+              swal("Removed", user.profile.name + ' has been removed from the queue.', "success");
+            });
+        }
+      }
+
       $scope.acceptUser = function($event, user, index) {
         $event.stopPropagation();
 
@@ -148,6 +182,28 @@ angular.module('reg')
           });
 
       };
+
+      $scope.sendAdmittedEmail = function($event, user, index) {
+        $event.stopPropagation();
+
+        swal({
+          title: "Send Admitted Email",
+          text: "Are you sure you want to send the email to all admitted users?",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#DD6B55",
+          confirmButtonText: "Yes, send the admitted email!",
+          closeOnConfirm: false
+          },
+          function(){
+            UserService
+              .sendAdmittedEmail()
+              .success(function(){
+                swal("Admitted Email Sent!", "The email will be sent to all admitted users!", "success");
+              });
+          }
+        );
+      }
 
       $scope.sendWaiverEmail = function($event, user, index) {
         $event.stopPropagation();

@@ -151,6 +151,11 @@ angular.module('reg')
         templateUrl: "views/admin/settings/settings.html",
         controller: 'AdminSettingsCtrl',
       })
+      .state('app.admin.queue', {
+        url: "/admin/queue",
+        templateUrl: "views/admin/queue/queue.html",
+        controller: 'AdminQueueCtrl',
+      })
       .state('app.checkin', {
         url: "/checkin",
         templateUrl: "views/checkin/checkin.html",
