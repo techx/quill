@@ -99,11 +99,13 @@ emailService.sendPasswordChangedEmail = function (email, firstName, callback) {
  * @param  {[type]}   confirmBy [description]
  * @param  {Function} callback  [description]
  */
-emailService.sendAcceptanceEmail = function (email, confirmBy, callback) {
-  confirmDate = { 
+emailService.sendAcceptanceEmail = function (email, firstName, confirmBy, callback) {
+  acceptanceData = {
+    FirstName: firstName,
+    Link: `${ROOT_URL}/dashboard`, 
     date: moment(confirmBy).format('MMMM D, YYYY h:mm A') 
   };
-  sendOne(ACCEPTANCE_EMAIL_TEMPLATE, email, confirmDate, callback);
+  sendOne(ACCEPTANCE_EMAIL_TEMPLATE, email, acceptanceData, callback);
 };
 
 /**
@@ -111,11 +113,12 @@ emailService.sendAcceptanceEmail = function (email, confirmBy, callback) {
  * @param  {string|string[]}  email         [Email address(s) to send to]
  * @param  {Function} callback  [description]
  */
-emailService.sendWaiverEmail = function (email, callback) {
-  var userEmailData = {
-    email
+emailService.sendWaiverEmail = function (email, firstName, callback) {
+  var waiverData = {
+    email,
+    FirstName: firstName
   };
-  sendOne(WAIVER_EMAIL_TEMPLATE, email, userEmailData, callback);
+  sendOne(WAIVER_EMAIL_TEMPLATE, email, waiverData, callback);
 };
 
 module.exports = emailService;
