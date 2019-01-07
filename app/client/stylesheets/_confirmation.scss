@@ -1,4 +1,8 @@
 #confirmation {
+  color: white;
+  .ui.form .field>label {
+    color: white;
+  }
   .ui.checkbox {
     backface-visibility: unset;
   }
