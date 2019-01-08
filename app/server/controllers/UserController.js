@@ -344,7 +344,7 @@ UserController.updateConfirmationById = function (id, confirmation, callback){
         new: true
       }, function(err, user){
         if (!err && user && typeof user.confirmation.signatureLiability === 'undefined') {
-          Mailer.sendWaiverEmail(user.email, user.firstname, (err, info) => {
+          Mailer.sendWaiverEmail(user.email, user.profile.firstname, (err, info) => {
             if (!err) {
               User.findOneAndUpdate({
                 '_id': id
@@ -655,7 +655,7 @@ UserController.sendAcceptanceEmailById = function(id, callback) {
        if (err || !user) {
          return callback(err);
        }
-       Mailer.sendAcceptanceEmail(user.email, user.firstname, user.status.confirmBy, callback);
+       Mailer.sendAcceptanceEmail(user.email, user.profile.firstname, user.status.confirmBy, callback);
        return callback(err, user);
    });
  };
@@ -678,7 +678,7 @@ UserController.sendAcceptanceEmailByEmail = function(email, callback) {
        if (err || !user) {
          return callback(err || 'no user');
        }
-       Mailer.sendAcceptanceEmail(email, user.firstname, user.status.confirmBy, callback);
+       Mailer.sendAcceptanceEmail(email, user.profile.firstname, user.status.confirmBy, callback);
    });
  };
 
@@ -705,7 +705,7 @@ UserController.sendWaiverEmail = function(id, callback) {
     }
 
     if (typeof user.confirmation.signatureLiability === 'undefined') {
-      Mailer.sendWaiverEmail(user.email, user.firstname, (err, info) => {
+      Mailer.sendWaiverEmail(user.email, user.profile.firstname, (err, info) => {
         if (!err) {
           User.findOneAndUpdate({
             '_id': id
@@ -724,7 +724,7 @@ UserController.sendWaiverEmail = function(id, callback) {
         }
       });
     } else {
-      Mailer.sendWaiverEmail(user.email, user.firstname, (err, info) => {
+      Mailer.sendWaiverEmail(user.email, user.profile.firstname, (err, info) => {
         return callback(err, info);
       });
     }
@@ -782,7 +782,7 @@ UserController.emailAcceptanceToAdmitted = function(callback){
       return callback(err);
     }
     users.forEach(function(user){
-      Mailer.sendAcceptanceEmail(user.email, user.firstname, user.status.confirmBy, function(err, data){
+      Mailer.sendAcceptanceEmail(user.email, user.profile.firstname, user.status.confirmBy, function(err, data){
         if(err){
           return callback(err,{user});
         }
