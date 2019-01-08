@@ -1,62 +1,50 @@
 <div id="confirmation" class="page" ng-class="{ 'fade-out': fadeOut }">
-  <div class="divided title">
-    Confirmation
-  </div>
+  <div class="divided title">Confirmation</div>
 
   <div class="ui stackable page grid">
     <div class="column">
-
       <div class="ui form">
-
         <div class="divided title">Basic Details</div>
-
         <fieldset ng-disabled="pastConfirmation">
-
           <div class="field">
             <label> What's your phone number? (required) </label>
-            <p>
-              We need this in case we need to get ahold of you!
-            </p>
-            <input type="tel"
-                   name="phone"
-                   ng-model="user.confirmation.phoneNumber"
-                   placeholder="(123) - 555 - 1234"
-                   required>
+            <p>We need this in case we need to get ahold of you!</p>
+            <input
+              type="tel"
+              name="phone"
+              ng-model="user.confirmation.phoneNumber"
+              placeholder="(123) - 555 - 1234"
+              required
+            />
           </div>
 
           <div class="field">
             <label> Dietary Restrictions </label>
 
             <p>
-              If your restriction is not included here, please let us know in the additional notes at the bottom.
+              If your restriction is not included here, please let us know in
+              the additional notes at the bottom.
             </p>
-            <p>
-              We'll make sure you get fed :)
-            </p>
-
+            <p>We'll make sure you get fed :)</p>
           </div>
 
           <div class="inline fields">
-            <div class="field"
-              ng-repeat="(key, value) in dietaryRestrictions">
-
+            <div class="field" ng-repeat="(key, value) in dietaryRestrictions">
               <div class="ui checkbox">
                 <input type="checkbox" ng-model="dietaryRestrictions[key]" />
-                <label>{{key}}</label>
+                <label>{{ key }}</label>
               </div>
-
             </div>
           </div>
 
           <div class="field">
             <label> Shirt Size (required) </label>
-            <p>
-              Let's get you some swag!
-            </p>
+            <p>Let's get you some swag!</p>
             <select
               name="shirt"
               ng-model="user.confirmation.shirtSize"
-              required>
+              required
+            >
               <option value="">Shirt Size</option>
               <option value="XS">Unisex X-Small</option>
               <option value="S">Unisex Small</option>
@@ -67,8 +55,8 @@
             </select>
           </div>
 
-          <br>
-          <br>
+          <br />
+          <br />
 
           <div ng-if="showTransportation">
             <div class="divided title">Transportation</div>
@@ -76,22 +64,30 @@
             <div class="field">
               <label> Bus </label>
               <p>
-                Do you want to take the bus from {{user.profile.school}} to UC Irvine?
+                Do you want to take the bus from {{ user.profile.school }} to UC
+                Irvine?
               </p>
               <select
                 name="bus"
                 ng-model="user.confirmation.needsReimbursement"
-                required>
+                required
+              >
                 <option value="0">No</option>
                 <option value="1">Yes</option>
               </select>
-              <div class="ui yellow message" ng-show="showTransportationMessage">
-                Seats on the bus are allocated on a first come, first served basis. If all the seats are taken, you will be added to a waitlist. We will send you an email if you have a confirmed seat on the bus!
+              <div
+                class="ui yellow message"
+                ng-show="showTransportationMessage"
+              >
+                Seats on the bus are allocated on a first come, first served
+                basis. If all the seats are taken, you will be added to a
+                waitlist. We will send you an email if you have a confirmed seat
+                on the bus!
               </div>
             </div>
 
-            <br>
-            <br>
+            <br />
+            <br />
           </div>
 
           <div class="divided title">Legal</div>
@@ -99,38 +95,52 @@
           <div class="field">
             <label> Liability Waiver </label>
             <p>
-              For legal reasons, our university asks that you read and accept the terms of our liability waiver.
+              For legal reasons, our university asks that you read and accept
+              the terms of our liability waiver.
             </p>
             <p ng-if="!hasSignedLiability">
-              <strong>You will be sent a follow up email with a link to sign the waiver</strong> and you have until the day of the event, February 2, to sign it.
+              <strong
+                >You will be sent a follow up email with a link to sign the
+                waiver</strong
+              >
+              and you have until the day of the event, February 15, to sign it.
             </p>
             <p ng-if="hasSignedLiability">
-              Our records show that you have signed the waiver documents. We look forward to seeing you at HackUCI!
+              Our records show that you have signed the waiver documents. We
+              look forward to seeing you at HackUCI!
             </p>
           </div>
 
           <div class="field">
             <label> Code of Conduct </label>
             <p>
-              It is extremely important to us that attendees follow a set of guidelines to make the event fun for everyone involved. Please read through and make sure you understand what we will be expecting of you.
+              It is extremely important to us that attendees follow a set of
+              guidelines to make the event fun for everyone involved. Please
+              read through and make sure you understand what we will be
+              expecting of you.
             </p>
             <p>
-              By clicking submit below, I affirm that I have read and will abide by the <a href="../assets/code_of_conduct.pdf" target="_blank">Code of Conduct</a>.
+              By clicking submit below, I affirm that I have read and will abide
+              by the
+              <a href="../assets/code_of_conduct.pdf" target="_blank"
+                >Code of Conduct</a
+              >.
             </p>
           </div>
 
-          <br>
-          <br>
+          <br />
+          <br />
 
           <div class="field" ng-hide="regIsClosed">
-            <button type="submit"
-                    class="fluid ui purple button"
-                    ng-class="{ 'loading disabled': showButtonLoading }"
-                    ng-click="submitForm()">
+            <button
+              type="submit"
+              class="fluid ui purple button"
+              ng-class="{ 'loading disabled': showButtonLoading }"
+              ng-click="submitForm()"
+            >
               Submit
             </button>
           </div>
-
         </fieldset>
       </div>
     </div>
