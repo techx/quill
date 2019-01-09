@@ -800,20 +800,23 @@ UserController.emailAcceptanceToAdmitted = function(callback){
 };
 
 UserController.acceptAllInAcceptedQueue = function(admitterEmail, callback){
-  User
-  .updateMany({
-    'status.queued' : {$gt: 0},
-    'status.admitted' : false,
-    'status.completedProfile': true
-  },{
-    $set: {
-      'status.admitted': true,
-      'status.admittedBy': admitterEmail,
-      'status.queued': 0,
-      'status.notified': false
-    }
-  },
-  callback); 
+  Settings.getRegistrationTimes(function(err, times){
+    User
+    .updateMany({
+      'status.queued' : {$gt: 0},
+      'status.admitted' : false,
+      'status.completedProfile': true
+    },{
+      $set: {
+        'status.admitted': true,
+        'status.admittedBy': admitterEmail,
+        'status.confirmBy': times.timeConfirm,
+        'status.queued': 0,
+        'status.notified': false
+      }
+    },
+    callback);
+  });
 };
 
 UserController.viewAcceptedQueue = function(callback){
