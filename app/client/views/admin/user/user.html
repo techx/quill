@@ -99,10 +99,10 @@
       </div>
 
       <div class="field">
-        <label> Birthdate </label>
+        <label> Birthdate (mm/dd/yyyy) </label>
         <input type="text"
                name="birthdate"
-               ng-model="user.confirmation.birthdate"
+               ng-model="selectedUser.profile.birthdate"
                placeholder="mm/dd/yyyy"
                required>
       </div>
@@ -231,7 +231,7 @@
         <label>Race/Ethnicity</label>
         <select
           name="ethnicity"
-          ng-model="user.confirmation.ethnicity">
+          ng-model="selectedUser.confirmation.ethnicity">
           <option value="">Select Ethnicity</option>
           <option value="White">White</option>
           <option value="Hispanic or Latino">Hispanic or Latino</option>
@@ -281,7 +281,7 @@
       </div>
 
       <div class="field">
-        <label> Website </label>
+        <label> Website (LinkedIn or Portfolio) </label>
         <input type="url" ng-model="selectedUser.confirmation.website" />
       </div>
 
