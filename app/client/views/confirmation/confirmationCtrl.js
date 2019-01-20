@@ -31,6 +31,7 @@ angular.module('reg')
         }
       }
 
+      /*
       $scope.$watch("user.confirmation.needsReimbursement", function(value) {
         if (value === '1') {
           $scope.showTransportationMessage = true;
@@ -38,6 +39,7 @@ angular.module('reg')
           $scope.showTransportationMessage = false;
         }
       })
+      */
 
       if (user.confirmation.signatureLiability && user.confirmation.signatureLiability !== '') {
         $scope.hasSignedLiability = true;
