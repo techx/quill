@@ -255,15 +255,11 @@
   }
 
   #sponsors-list> div {
-    height: 60px;
-    padding-right: 10px;
-    padding-left: 10px;
+    padding: 0 20px;
     margin-top: 1%;
     opacity: 0.87;
-    width: 16.66666667% !important;
-    padding-top: 0;
-    padding-bottom: 0;
-    transition: opacity 0.2s ease;
+    width: 20% !important;
+    transition: all 0.2s ease;
   }
 
   #sponsors-list> div:hover {
@@ -318,11 +314,11 @@
     }
     #sponsors-list>div {
       height: 70px;
-      width: 50%!important;
+      width: 65% !important;
       text-align: center;
-      padding-top: 0!important;
-      padding-bottom: 0!important;
-      margin-bottom: 10%;
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+      margin-bottom: 7%;
     }
 
     #hero {
