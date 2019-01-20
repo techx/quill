@@ -91,7 +91,7 @@ angular.module('reg')
         if ($scope.hasSignedLiability) {
           $scope.confirmationText = $sce.trustAsHtml(converter.makeHtml('Your confirmation and waiver documents have been received.<br>We look forward to seeing you at HackUCI!'));
         } else {
-          $scope.confirmationText = $sce.trustAsHtml(converter.makeHtml('We have received your confirmation. Please take a moment to sign your <a href="https://app.hellosign.com/s/4bf9f65f" target="_blank">waiver documents</a>.'));
+          $scope.confirmationText = $sce.trustAsHtml(converter.makeHtml('We have received your confirmation. Please make sure to sign both waivers when they arrive in your inbox.'));
         }
       }
 

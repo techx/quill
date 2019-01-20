@@ -20,12 +20,6 @@
 
           <div class="field">
             <label> Dietary Restrictions </label>
-
-            <p>
-              If your restriction is not included here, please let us know in
-              the additional notes at the bottom.
-            </p>
-            <p>We'll make sure you get fed :)</p>
           </div>
 
           <div class="inline fields">
@@ -57,6 +51,7 @@
           <br />
           <br />
 
+          <!--
           <div ng-if="showTransportation">
             <div class="divided title">Transportation</div>
 
@@ -88,6 +83,7 @@
             <br />
             <br />
           </div>
+          -->
 
           <div class="divided title">Legal</div>
 
@@ -95,19 +91,21 @@
             <label> Liability Waiver </label>
             <p>
               For legal reasons, our university asks that you read and accept
-              the terms of our liability waiver.
+              the terms of their liability waiver. We also ask that you read and accept the terms of our event waiver.
             </p>
             <p ng-if="!hasSignedLiability">
               <strong
-                >You will be sent a follow up email with a link to sign the
-                waiver</strong
+                >You will be sent a follow up email with links to sign the
+                waivers,</strong
               >
-              and you have until the day of the event, February 15, to sign it.
+              and you have until the day of the event, February 15, to sign both waivers.
             </p>
+            <!--
             <p ng-if="hasSignedLiability">
               Our records show that you have signed the waiver documents. We
               look forward to seeing you at HackUCI!
             </p>
+            -->
           </div>
 
           <div class="field">

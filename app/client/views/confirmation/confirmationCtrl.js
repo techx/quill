@@ -31,6 +31,7 @@ angular.module('reg')
         }
       }
 
+      /*
       $scope.$watch("user.confirmation.needsReimbursement", function(value) {
         if (value === '1') {
           $scope.showTransportationMessage = true;
@@ -38,6 +39,7 @@ angular.module('reg')
           $scope.showTransportationMessage = false;
         }
       })
+      */
 
       if (user.confirmation.signatureLiability && user.confirmation.signatureLiability !== '') {
         $scope.hasSignedLiability = true;
@@ -57,7 +59,8 @@ angular.module('reg')
         'Vegan': false,
         'Halal': false,
         'Kosher': false,
-        'Nut Allergy': false
+        'Nut Allergy': false,
+        'Lactose Intolerance': false,
       };
 
       if (user.confirmation.dietaryRestrictions){
