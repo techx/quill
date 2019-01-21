@@ -103,7 +103,7 @@ emailService.sendAcceptanceEmail = function (email, firstName, confirmBy, callba
   acceptanceData = {
     FirstName: firstName,
     Link: `${ROOT_URL}/dashboard`, 
-    date: moment(confirmBy).format('MMMM D, YYYY h:mm A') 
+    date: moment(confirmBy).tz("America/Los_Angeles").format('MMMM D, YYYY h:mm A') 
   };
   sendOne(ACCEPTANCE_EMAIL_TEMPLATE, email, acceptanceData, callback);
 };
