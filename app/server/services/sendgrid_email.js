@@ -1,4 +1,4 @@
-var moment = require('moment');
+var moment = require('moment-timezone');
 var ROOT_URL = process.env.ROOT_URL;
 
 var SENDGRID_API_KEY = process.env.SENDGRID_API_KEY;
