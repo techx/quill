@@ -5,8 +5,8 @@
 
   <div class="ui stackable centered page grid">
     <div class="column">
-      <div class="ui status segment">
-        <div class="small title">
+        <div class="ui status segment top-status-bar" style="background-color: black;">
+        <div class="small title status-title">
           Your status:
         </div>
         <br>
@@ -16,7 +16,7 @@
           ng-class="user.status.name"
           ng-if="!showWaitlist && !dashState('admittedAndCannotConfirm')">
           {{user.status.name}}
-        </div>
+        </div>       
 
         <div
           class="declined state"
@@ -24,14 +24,71 @@
           Expired Admission
         </div>
 
-
         <div
           ng-if="showWaitlist"
           class="waitlist state">
           On waitlist
         </div>
 
-        <div class="ui divider"></div>
+        <div
+          class="status-progress"
+          ng-if="!showWaitlist && !dashState('admittedAndCannotConfirm')">
+          <div class="row">
+            <div class="col-xs-12 col-md-8 offset-md-2 block border">
+              <div class="progressBarWrapper">
+                <ul class="progressBar">
+
+                  <!-- Verify Email -->
+                  <li>
+                    <div ng-if="!dashState('unverified'); else notShow" class="active">
+                      <div class="active">Verify Email</div>
+                    </div>
+                    <ng-template #notShow>
+                      Verify Email
+                    </ng-template>
+                  </li>
+
+                  <!-- Submit Application -->
+                  <li>
+                    <div ng-if="dashState('openAndSubmitted') || dashState('closedAndSubmitted'); else notShow" class="active">
+                      <div class="active">Submit Application</div>
+                    </div>
+                    <ng-template #notShow>
+                      Submit Application
+                    </ng-template>
+                  </li>
+
+                  <!-- Get Admitted -->
+                  <li>
+                    <div ng-if="dashState('admittedAndCanConfirm') || dashState('admittedAndCannotConfirm'); else notShow" class="active">
+                      <div class="active">Get Admitted</div>
+                    </div>
+                    <ng-template #notShow>
+                      Get Admitted
+                    </ng-template>
+                  </li>
+
+                  <!-- Confirm -->
+                  <li>
+                    <div ng-if="dashState('confirmed'); else notShow" class="active">
+                      <div class="active">Confirm</div>
+                    </div>
+                    <ng-template #notShow>
+                      Confirm
+                    </ng-template>
+                  </li>
+
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+
+       <div class="ui status segment bottom-status-bar">
 
         <div ng-if="user.profile.name.length > 0">
           <p>

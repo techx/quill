@@ -1,4 +1,10 @@
+$vthacks-yellow: rgba(255,203,2,1);
+
 #dashboard {
+  .status-title {
+    color: $vthacks-yellow;
+  }
+
   .status {
     text-align: center;
     p {
@@ -11,9 +17,8 @@
       font-size: 1.2em;
     }
     .state {
-      text-align: center;
       padding: 12px 24px;
-      margin-bottom: 1em;
+      margin: 0 1em;
       color: white;
       font-size: 1.3em;
       text-transform: uppercase;
@@ -50,6 +55,58 @@
       &.declined {
         background: $status-declined-color;
       }
+    }
+
+    .progressBarWrapper {
+      width: 100%;
+
+	  .progressBar {
+
+	  	height: 100px;
+	  	padding: 20px 0;
+	  	color: white;
+
+	      li {
+	        list-style-type: none;
+	        float: left;
+	        width: 25%;
+	        position: relative;
+	        text-align: center;
+	      }
+
+	      li:before {
+	        content: " ";
+	        line-height: 30px;
+	        border-radius: 50%;
+	        width: 30px;
+	        height: 30px;
+	        display: block;
+	        text-align: center;
+	        margin: 0 auto 10px;
+	        border: 2px white solid;
+	      }
+
+	      li:after {
+	        content: "";
+	        position: absolute;
+	        width: 100%;
+	        height: 4px;
+	        background-color: #ddd;
+	        top: 15px;
+	        left: -50%;
+	        z-index: -1;
+	      }
+
+	      li:first-child:after {
+	        content: none;
+	      }
+
+	      li.active:before {
+	          background-size: contain;
+	          background-image: url("/assets/images/check.png");
+	          border: none;
+	      }
+	    }
     }
   }
 
