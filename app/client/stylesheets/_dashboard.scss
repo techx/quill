@@ -58,53 +58,53 @@
     .progressBarWrapper {
       width: 100%;
 
-	  .progressBar {
+    .progressBar {
 
-	  	height: 100px;
-	  	padding: 20px 0;
-	  	color: white;
+      height: 100px;
+      padding: 20px 0;
+      color: white;
 
-	      li {
-	        list-style-type: none;
-	        float: left;
-	        width: 25%;
-	        position: relative;
-	        text-align: center;
-	      }
+        li {
+          list-style-type: none;
+          float: left;
+          width: 25%;
+          position: relative;
+          text-align: center;
+        }
 
-	      li:before {
-	        content: " ";
-	        line-height: 30px;
-	        border-radius: 50%;
-	        width: 30px;
-	        height: 30px;
-	        display: block;
-	        text-align: center;
-	        margin: 0 auto 10px;
-	        border: 2px white solid;
-	      }
+        li:before {
+          content: " ";
+          line-height: 30px;
+          border-radius: 50%;
+          width: 30px;
+          height: 30px;
+          display: block;
+          text-align: center;
+          margin: 0 auto 10px;
+          border: 2px white solid;
+        }
 
-	      li:after {
-	        content: "";
-	        position: absolute;
-	        width: 100%;
-	        height: 4px;
-	        background-color: #ddd;
-	        top: 15px;
-	        left: -50%;
-	        z-index: -1;
-	      }
+        li:after {
+          content: "";
+          position: absolute;
+          width: 100%;
+          height: 4px;
+          background-color: #ddd;
+          top: 15px;
+          left: -50%;
+          z-index: -1;
+        }
 
-	      li:first-child:after {
-	        content: none;
-	      }
+        li:first-child:after {
+          content: none;
+        }
 
-	      li.active:before {
-	          background-size: contain;
-	          background-image: url("/assets/images/check.png");
-	          border: none;
-	      }
-	    }
+        li.active:before {
+            background-size: contain;
+            background-image: url("/assets/images/check.png");
+            border: none;
+        }
+      }
     }
   }
 

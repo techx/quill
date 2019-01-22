@@ -37,42 +37,21 @@
             <div class="col-xs-12 col-md-8 offset-md-2 block border">
               <div class="progressBarWrapper">
                 <ul class="progressBar">
+                    <li ng-class="{active: !dashState('unverified')}">
+                      Verify Email
+                    </li>
 
-                    <!-- Verify Email -->
-	                <div ng-if="!dashState('unverified'); else notVerified">
-	                  <li class="active">Verify Email</li>
-	                </div>
+                    <li ng-class="{active: dashState('openAndSubmitted') || dashState('closedAndSubmitted')}">
+                      Submit Application
+                    </li>
 
-	                <ng-template #notVerified>
-	                  <li>Verify Email</li>
-	                </ng-template>
+                    <li ng-class="{active: dashState('admittedAndCanConfirm') || dashState('admittedAndCannotConfirm')}">
+                      Get Admitted
+                    </li>
 
-                  	<!-- Submit Application -->
-                    <div ng-if="dashState('openAndSubmitted') || dashState('closedAndSubmitted'); else notSubmitted">
-                      <li class="active">Submit Application</li>
-                    </div>
-
-                    <ng-template #notSubmitted>
-                      <li>Submit Application</li>
-                    </ng-template>
-
-                    <!-- Get Admitted -->
-                    <div ng-if="dashState('admittedAndCanConfirm') || dashState('admittedAndCannotConfirm'); else notAdmitted">
-                      <li class="active">Get Admitted</li>
-                    </div>
-
-                    <ng-template #notAdmitted>
-                      <li>Get Admitted</li>
-                    </ng-template>
-
-                    <!-- Confirm -->
-                    <div ng-if="dashState('confirmed'); else notConfirmed">
-                      <li class="active">Confirm</li>
-                    </div>
-
-                    <ng-template #notConfirmed>
-                      <li>Confirm</li>
-                    </ng-template>
+                    <li ng-class="{active: dashState('confirmed')}">
+                      Confirm
+                    </li>
 
                 </ul>
               </div>
