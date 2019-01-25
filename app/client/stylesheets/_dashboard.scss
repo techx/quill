@@ -67,15 +67,18 @@
       justify-content: space-evenly;
 
         .progress {
-          background-image: url('/assets/images/cancel.png');
+          background-image: none;
           height: 30px;
           width: 30px;
           background-size: contain;
           background-repeat: none;
+          border: 2.5px solid white;
+          border-radius: 50%;
         }
 
         .active {
-          background-image: url('/assets/images/checked.png');
+          background-image: url('/assets/images/check.png');
+          border: none;
         }
 
         .progressNote {
