@@ -59,19 +59,19 @@
 
                   <!-- Verify Email -->
                   <div class="progressItem">
-                    <div class="progress" ng-class="{active: !dashState('unverified')}"></div>
+                    <div class="progress" ng-class="{active: dashState('verified')}"></div>
                     <p class="progressNote">Verify Email</p>
                   </div>
 
                   <!-- Submit Application -->
                   <div class="progressItem">
-                    <div class="progress" ng-class="{active: dashState('openAndSubmitted') || dashState('closedAndSubmitted')}"></div>
+                    <div class="progress" ng-class="{active: dashState('submitted')}"></div>
                     <p class="progressNote">Submit Application</p>
                   </div>
 
                   <!-- Get Admitted -->
                   <div class="progressItem">
-                    <div class="progress" ng-class="{active: dashState('admittedAndCanConfirm') || dashState('admittedAndCannotConfirm')}"></div>
+                    <div class="progress" ng-class="{active: dashState('admitted')}"></div>
                     <p class="progressNote">Get Admitted</p>
                   </div>
 
