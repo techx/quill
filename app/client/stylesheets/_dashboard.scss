@@ -1,4 +1,8 @@
 #dashboard {
+  .status-title {
+    color: white;
+  }
+
   .status {
     text-align: center;
     p {
@@ -11,9 +15,8 @@
       font-size: 1.2em;
     }
     .state {
-      text-align: center;
       padding: 12px 24px;
-      margin-bottom: 1em;
+      margin: 0 1em;
       color: white;
       font-size: 1.3em;
       text-transform: uppercase;
@@ -49,6 +52,69 @@
 
       &.declined {
         background: $status-declined-color;
+      }
+    }
+
+    .progressBarWrapper {
+      width: 100%;
+
+    .progressBar {
+
+      height: 135px;
+      padding: 30px 1em;
+      color: white;
+      display: flex;
+      justify-content: space-evenly;
+
+        .progress {
+          background-image: none;
+          height: 20px;
+          width: 20px;
+          background-size: contain;
+          background-repeat: none;
+          border: 2.5px solid white;
+          border-radius: 50%;
+        }
+
+        .active {
+          background-image: url('/assets/images/check.png');
+          border: none;
+        }
+
+        .progressNote {
+          padding: 0;
+          font-size: 14px;
+          text-align: center;
+          margin-top: 15px;
+        }
+
+        .progressItem {
+          display: flex;
+          flex-direction: column;
+          width: 25%;
+          height: 100%;
+          align-items: center;
+        }
+
+        @media only screen and (max-width: 768px) {
+          height: 200px;
+          flex-direction: column;
+
+          .progressNote {
+            padding: 0 15px;
+            line-height: 30px;
+            font-size: 16px;
+            text-align: left;
+            margin: 0;
+          }
+
+          .progressItem {
+            flex-direction: row;
+            height: 50px;
+            width: 100%;
+            padding-bottom: 20px;
+          }
+        }
       }
     }
   }

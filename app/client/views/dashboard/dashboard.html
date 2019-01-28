@@ -5,8 +5,8 @@
 
   <div class="ui stackable centered page grid">
     <div class="column">
-      <div class="ui status segment">
-        <div class="small title">
+        <div class="ui status segment top-status-bar" style="background-color: black;">
+        <div class="small title status-title">
           Your status:
         </div>
         <br>
@@ -16,7 +16,7 @@
           ng-class="user.status.name"
           ng-if="!showWaitlist && !dashState('admittedAndCannotConfirm')">
           {{user.status.name}}
-        </div>
+        </div>       
 
         <div
           class="declined state"
@@ -24,14 +24,74 @@
           Expired Admission
         </div>
 
-
         <div
           ng-if="showWaitlist"
           class="waitlist state">
           On waitlist
         </div>
 
-        <div class="ui divider"></div>
+        <div
+          class="status-progress"
+          ng-if="!showWaitlist && !dashState('admittedAndCannotConfirm')">
+          <div class="row">
+            <div class="col-xs-12 col-md-8 offset-md-2 block border">
+              <div class="progressBarWrapper">
+                <!-- <ul class="progressBar">
+                    <li ng-class="{active: !dashState('unverified')}">
+                      Verify Email
+                    </li>
+
+                    <li ng-class="{active: dashState('openAndSubmitted') || dashState('closedAndSubmitted')}">
+                      Submit Application
+                    </li>
+
+                    <li ng-class="{active: dashState('admittedAndCanConfirm') || dashState('admittedAndCannotConfirm')}">
+                      Get Admitted
+                    </li>
+
+                    <li ng-class="{active: dashState('confirmed')}">
+                      Confirm
+                    </li>
+
+                </ul> -->
+
+                <div class="progressBar">
+
+                  <!-- Verify Email -->
+                  <div class="progressItem">
+                    <div class="progress" ng-class="{active: dashState('verified')}"></div>
+                    <p class="progressNote">Verify Email</p>
+                  </div>
+
+                  <!-- Submit Application -->
+                  <div class="progressItem">
+                    <div class="progress" ng-class="{active: dashState('submitted')}"></div>
+                    <p class="progressNote">Submit Application</p>
+                  </div>
+
+                  <!-- Get Admitted -->
+                  <div class="progressItem">
+                    <div class="progress" ng-class="{active: dashState('admitted')}"></div>
+                    <p class="progressNote">Get Admitted</p>
+                  </div>
+
+                  <!-- Confirm -->
+                  <div class="progressItem">
+                    <div class="progress" ng-class="{active: dashState('confirmed')}"></div>
+                    <p class="progressNote">Confirm</p>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+
+       <div class="ui status segment bottom-status-bar">
 
         <div ng-if="user.profile.name.length > 0">
           <p>

@@ -123,6 +123,12 @@
           <br>
 
           <div class="divided title"> Skills & Accomplishments </div>
+          
+          <div class="field" style="padding-top: 20px">
+            <p>
+              Note: Your Github, LinkedIn, & Resume will be shared with our sponsors for potential employment opportunities.
+            </p>
+          </div>
 
           <div class="field">
             <label> What are you studying? </label>
@@ -141,20 +147,10 @@
           </div>
 
           <div class="field">
-            <label> LinkedIn </label>
-            <input type="text"
-                   name="linkedin"
-                   placeholder="https://linkedin.com/in/foobar"
-                   ng-model="user.confirmation.linkedin">
+            <label> Website (LinkedIn or Portfolio) </label>
+            <input type="url" ng-model="selectedUser.confirmation.website" />
           </div>
 
-          <div class="field">
-            <label> Twitter </label>
-            <input type="text"
-                   name="twitter"
-                   placeholder="https://twitter.com/foobar"
-                   ng-model="user.confirmation.twitter">
-          </div>
 
           <div class="field">
             <label> Resume/CV </label>
@@ -344,7 +340,7 @@
             <div class="ui checkbox">
               <input id="agreeCodeOfConduct"
               type="checkbox" ng-model="user.confirmation.agreeCodeOfConduct">
-              <label for="agreeCodeOfConduct"> I agree to the <a target="_blank" href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf">MLH Code of Conduct</a></label>
+              <label for="agreeCodeOfConduct"> I have read and agree to the <a target="_blank" href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf">MLH Code of Conduct.</a></label>
             </div>
           </div>
 
@@ -353,7 +349,7 @@
             <div class="ui checkbox">
               <input id="agreeTermsAndPrivacy"
               type="checkbox" ng-model="user.confirmation.agreeTermsAndPrivacy">
-              <label for="agreeTermsAndPrivacy">I agree to the terms of both the <a target="_blank" href="/register/mlh-terms-and-conditions">MLH Contest Terms and Conditions</a> and the <a target="_blank" href="https://mlh.io/privacy">MLH Privacy Policy</a>. Please note that you may receive pre and post-event informational e-mails and occasional messages about hackathons from MLH as per the MLH Privacy Policy.</label>
+              <label for="agreeTermsAndPrivacy">I authorize you to share my application/registration information for event administration, ranking, MLH administration, pre- and post-event informational e-mails, and occasional messages about hackathons in-line with the MLH Privacy Policy. I further I agree to the terms of both the <a target="_blank" href="/register/mlh-terms-and-conditions">MLH Contest Terms and Conditions</a> and the <a target="_blank" href="https://mlh.io/privacy">MLH Privacy Policy</a>.</label>
             </div>
           </div>
 
