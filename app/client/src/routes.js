@@ -212,37 +212,38 @@ angular.module('reg')
         var requireVerified = toState.data.requireVerified;
         var requireAdmitted = toState.data.requireAdmitted;
 
-        Session.getUser().then( (res) => {
-          var user = res.data;
+        if (requireLogin && !Session.getToken()) {
+          event.preventDefault();
+          $state.go('login', null, {
+            location: 'replace',
+          });
+        } else {
+          Session.getUser().then( (res) => {
+            var user = res.data; 
+    
+            if (requireAdmin && !user.admin) {
+              event.preventDefault();
+              $state.go('app.dashboard');
+            }
+    
+            if (requireVolunteerOrAdmin && !user.volunteer && !user.admin){
+              event.preventDefault();
+              $state.go('app.dashboard');
+            }
+    
+            if (requireVerified && !user.verified){
+              event.preventDefault();
+              $state.go('app.dashboard');
+            }
+            
+            if (requireAdmitted && !user.status.admitted) {
+              event.preventDefault();
+              $state.go('app.dashboard');
+            }
+  
+          });
+        }
 
-          if (requireLogin && !Session.getToken()) {
-            event.preventDefault();
-            $state.go('login', null, {
-              location: 'replace',
-            });
-          }
-  
-          if (requireAdmin && !user.admin) {
-            event.preventDefault();
-            $state.go('app.dashboard');
-          }
-  
-          if (requireVolunteerOrAdmin && !user.volunteer && !user.admin){
-            event.preventDefault();
-            $state.go('app.dashboard');
-          }
-  
-          if (requireVerified && !user.verified){
-            event.preventDefault();
-            $state.go('app.dashboard');
-          }
-          
-          if (requireAdmitted && !user.status.admitted) {
-            event.preventDefault();
-            $state.go('app.dashboard');
-          }
-
-        });
 
       });
 
