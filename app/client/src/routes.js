@@ -212,32 +212,37 @@ angular.module('reg')
         var requireVerified = toState.data.requireVerified;
         var requireAdmitted = toState.data.requireAdmitted;
 
-        if (requireLogin && !Session.getToken()) {
-          event.preventDefault();
-          $state.go('login', null, {
-            location: 'replace',
-          });
-        }
+        Session.getUser().then( (res) => {
+          var user = res.data;
 
-        if (requireAdmin && !Session.getUser().admin) {
-          event.preventDefault();
-          $state.go('app.dashboard');
-        }
+          if (requireLogin && !Session.getToken()) {
+            event.preventDefault();
+            $state.go('login', null, {
+              location: 'replace',
+            });
+          }
+  
+          if (requireAdmin && !user.admin) {
+            event.preventDefault();
+            $state.go('app.dashboard');
+          }
+  
+          if (requireVolunteerOrAdmin && !user.volunteer && !user.admin){
+            event.preventDefault();
+            $state.go('app.dashboard');
+          }
+  
+          if (requireVerified && !user.verified){
+            event.preventDefault();
+            $state.go('app.dashboard');
+          }
+          
+          if (requireAdmitted && !user.status.admitted) {
+            event.preventDefault();
+            $state.go('app.dashboard');
+          }
 
-        if (requireVolunteerOrAdmin && !Session.getUser().volunteer && !Session.getUser().admin){
-          event.preventDefault();
-          $state.go('app.dashboard');
-        }
-
-        if (requireVerified && !Session.getUser().verified){
-          event.preventDefault();
-          $state.go('app.dashboard');
-        }
-
-        if (requireAdmitted && !Session.getUser().status.admitted) {
-          event.preventDefault();
-          $state.go('app.dashboard');
-        }
+        });
 
       });
 
