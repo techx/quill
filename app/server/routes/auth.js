@@ -142,7 +142,7 @@ module.exports = function(router){
   /**
    * Verify a user with a given token.
    */
-  router.get('/verify/:token',
+   router.get('/verify/:token',
     function(req, res, next){
       var token = req.params.token;
       UserController.verifyByToken(token, function(err, user){
@@ -154,6 +154,6 @@ module.exports = function(router){
         return res.json(user);
 
       });
+    });
 
-  });
 };
