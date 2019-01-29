@@ -217,27 +217,33 @@ angular.module('reg')
           $state.go('login', null, {
             location: 'replace',
           });
+        } else {
+          Session.getUser().then( (res) => {
+            var user = res.data; 
+    
+            if (requireAdmin && !user.admin) {
+              event.preventDefault();
+              $state.go('app.dashboard');
+            }
+    
+            if (requireVolunteerOrAdmin && !user.volunteer && !user.admin){
+              event.preventDefault();
+              $state.go('app.dashboard');
+            }
+    
+            if (requireVerified && !user.verified){
+              event.preventDefault();
+              $state.go('app.dashboard');
+            }
+            
+            if (requireAdmitted && !user.status.admitted) {
+              event.preventDefault();
+              $state.go('app.dashboard');
+            }
+  
+          });
         }
 
-        if (requireAdmin && !Session.getUser().admin) {
-          event.preventDefault();
-          $state.go('app.dashboard');
-        }
-
-        if (requireVolunteerOrAdmin && !Session.getUser().volunteer && !Session.getUser().admin){
-          event.preventDefault();
-          $state.go('app.dashboard');
-        }
-
-        if (requireVerified && !Session.getUser().verified){
-          event.preventDefault();
-          $state.go('app.dashboard');
-        }
-
-        if (requireAdmitted && !Session.getUser().status.admitted) {
-          event.preventDefault();
-          $state.go('app.dashboard');
-        }
 
       });
 

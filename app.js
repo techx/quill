@@ -29,6 +29,7 @@ app.use(minify());
 app.use(morgan('dev'));
 app.use(cookieParser());
 
+
 app.use(bodyParser.urlencoded({
   extended: true
 }));
