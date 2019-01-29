@@ -67,8 +67,6 @@ angular.module('reg')
             return user.status.completedProfile;
           case 'admitted':
             return user.status.admitted;
-          case 'confirmed':
-            return user.status.confirmed;
         }
         return false;
       };
