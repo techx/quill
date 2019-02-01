@@ -7,7 +7,7 @@
     "angular": "^1.7.5",
     "angular-ui-router": "^1.0.20",
     "async": "^2.6.1",
-    "bcrypt": "^3.0.2",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "browserify": "^16.2.3",
     "browserify-ngannotate": "^2.0.0",

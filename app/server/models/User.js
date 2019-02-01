@@ -1,5 +1,5 @@
 var mongoose   = require('mongoose'),
-    bcrypt     = require('bcrypt'),
+    bcrypt     = require('bcryptjs'),
     validator  = require('validator'),
     jwt        = require('jsonwebtoken');
     JWT_SECRET = process.env.JWT_SECRET;
