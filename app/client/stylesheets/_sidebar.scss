@@ -36,6 +36,10 @@
     &.logo {
       opacity: 1;
       padding: 48px;
+
+      img {
+        max-width: 100%;
+      }
     }
 
   }
@@ -68,6 +72,10 @@
 
     cursor: pointer;
 
+    img {
+      max-width: 100%;
+    }
+    
     .close {
       color: white;
       font-size: 2em;
