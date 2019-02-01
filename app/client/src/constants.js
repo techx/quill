@@ -2,7 +2,7 @@ const angular = require('angular');
 
 angular.module('reg')
     .constant('EVENT_INFO', {
-        NAME: 'HackMIT 2015',
+        NAME: 'HackSC 2019',
     })
     .constant('DASHBOARD', {
         UNVERIFIED: 'You should have received an email asking you verify your email. Click the link in the email and you can start your application!',
@@ -16,7 +16,7 @@ angular.module('reg')
         ADMITTED_AND_CANNOT_CONFIRM_TITLE: 'Your confirmation deadline of [CONFIRM_DEADLINE] has passed.',
         ADMITTED_AND_CANNOT_CONFIRM: 'Although you were accepted, you did not complete your confirmation in time.\nUnfortunately, this means that you will not be able to attend the event, as we must begin to accept other applicants on the waitlist.\nWe hope to see you again next year!',
         CONFIRMED_NOT_PAST_TITLE: 'You can edit your confirmation information until [CONFIRM_DEADLINE]',
-        DECLINED: 'We\'re sorry to hear that you won\'t be able to make it to HackMIT 2015! :(\nMaybe next year! We hope you see you again soon.',
+        DECLINED: 'We\'re sorry to hear that you won\'t be able to make it to HackSC 2019! :(\nMaybe next year! We hope you see you again soon.',
     })
     .constant('TEAM',{
         NO_TEAM_REG_CLOSED: 'Unfortunately, it\'s too late to enter the lottery with a team.\nHowever, you can still form teams on your own before or during the event!',
