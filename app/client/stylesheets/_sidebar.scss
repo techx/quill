@@ -9,6 +9,13 @@
 
   @include transition-duration($sidebar-transition-time);
 
+  .title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin: 0.5rem 0 0;
+    font-family: $font-headings;
+  }
+
   .item {
     width: 100%;
     padding: 16px;
@@ -75,7 +82,7 @@
     img {
       max-width: 100%;
     }
-    
+
     .close {
       color: white;
       font-size: 2em;
