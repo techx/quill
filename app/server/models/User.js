@@ -385,12 +385,16 @@ schema.statics.getByToken = function(token, callback){
 
 schema.statics.validateProfile = function(profile, cb){
   return cb(!(
-    profile.name.length > 0 &&
-    profile.adult &&
-    profile.school.length > 0 &&
-    ['2016', '2017', '2018', '2019'].indexOf(profile.graduationYear) > -1 &&
-    ['M', 'F', 'O', 'N'].indexOf(profile.gender) > -1
-    ));
+      profile.firstName.length > 0 &&
+      profile.lastName.length > 0 &&
+      ['Male', 'Female', 'Other', 'No Response'].indexOf(profile.gender) > -1 &&
+      ['White', 'Black or African American', 'Native American or Alaska Native', 'Asian or Pacific Islander', 'Hispanic/Latinx', 'Multiracial', 'Other'].indexOf(profile.ethnicity) > -1 &&
+      profile.school.length > 0 &&
+      ['2019', '2020', '2021', '2022', 'High School', 'Graduate', 'Other'].indexOf(profile.year) > -1 &&
+      profile.major.length > 0 &&
+      profile.resume !== undefined &&
+      profile.adult
+  ));
 };
 
 //=========================================

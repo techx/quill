@@ -24,10 +24,10 @@ app.use(morgan('dev'));
 
 app.use(bodyParser.urlencoded({
   extended: true,
-  limit: '50mb'
+  limit: '1mb'
 }));
 app.use(bodyParser.json({
-  limit: '50mb'
+  limit: '1mb'
 }));
 
 

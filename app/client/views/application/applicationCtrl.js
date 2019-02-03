@@ -101,9 +101,13 @@ angular.module('reg')
 
             $scope.uploadFile = function (event) {
                 if (event.files.length < 1) {
-                    swal("Please upload a resume.", "error");
+                    return;
                 }
                 var file = event.files[0];
+                if (file.size > 1000000) {
+                    swal("Exceeded Maximum File Size", "Please select a file smaller or equal to 1mb.", "error");
+                    return;
+                }
                 var reader = new FileReader();
 
                 // Read the file and attempt to upload
@@ -112,25 +116,56 @@ angular.module('reg')
                         name: file.name,
                         type: file.type
                     };
-                    _uploadFile(metadata, reader.result);
+                    if ($scope.user.profile.resume !== undefined && $scope.user.profile.resume.id !== undefined) {
+                        _updateFile(metadata, reader.result);
+                    } else {
+                        _uploadFile(metadata, reader.result);
+                    }
                 };
+
+                reader.onerror = function(){
+                    swal("Error reading file", "Please select a different file.", "error")
+                };
+
                 reader.readAsDataURL(file);
             };
 
             function _uploadFile(metadata, file) {
+                $scope.fileLoading = true;
                 FileService
                     .uploadFile(Session.getUserId(), metadata, file)
                     .then((response) => {
                             var data = response.data;
-                            console.log(data);
                             $scope.user.profile.resume = {
                                 name: data.name,
                                 id: data.id,
                                 link: data.webViewLink
                             };
+                            $scope.fileLoading = false;
                             swal("Success!", "Your resume has been uploaded.", "success");
                         }, (response) => {
+                            $scope.fileLoading = false;
                             swal("Uh oh!", "Something went wrong.", "error");
+                        }
+                    );
+            }
+
+            function _updateFile(metadata, file) {
+                $scope.fileLoading = true;
+                FileService
+                    .updateFile(Session.getUserId(), $scope.user.profile.resume.id, metadata, file)
+                    .then((response) => {
+                            var data = response.data;
+                            $scope.user.profile.resume = {
+                                name: data.name,
+                                id: data.id,
+                                link: data.webViewLink
+                            };
+                            swal("Success!", "Your resume has been updated.", "success");
+                            $scope.fileLoading = false;
+                        }, (response) => {
+                            // Attempt to upload as new file
+                            _uploadFile(metadata, file);
                         }
                     );
             }

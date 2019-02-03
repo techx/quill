@@ -294,10 +294,19 @@ module.exports = function(router) {
    * Upload resume
    */
   router.put('/file/:id/upload', isOwnerOrAdmin, function(req, res){
-    var id = req.params.id;
     var metadata = req.body.metadata;
     var file = req.body.file;
-    FileController.upload(id, metadata, file, defaultResponse(req, res));
+    FileController.upload(metadata, file, defaultResponse(req, res));
+  });
+
+  /**
+   * Update resume
+   */
+  router.put('/file/:id/update', isOwnerOrAdmin, function(req, res){
+    var fileId = req.body.fileId;
+    var metadata = req.body.metadata;
+    var file = req.body.file;
+    FileController.update(fileId, metadata, file, defaultResponse(req, res));
   });
 
 

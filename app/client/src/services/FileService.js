@@ -12,6 +12,14 @@ angular.module('reg')
                         file: file
                     });
                 },
+
+                updateFile: function (id, fileId, metadata, file) {
+                    return $http.put(base + id + '/update', {
+                        fileId: fileId,
+                        metadata: metadata,
+                        file: file
+                    });
+                }
             };
         }
     ]);

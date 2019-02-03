@@ -113,9 +113,9 @@
                   name="experience"
                   ng-model="user.profile.experience">
             <option value=""></option>
-            <option value="Beginner">I have never been to a Hackathon Before</option>
-            <option value="Intermediate">I've been to a few Hackathons!</option>
-            <option value="Advanced">I've been to several Hackathons!</option>
+            <option value="Beginner">Beginner</option>
+            <option value="Intermediate">Intermediate</option>
+            <option value="Advanced">Advanced</option>
           </select>
         </div>
 
@@ -126,7 +126,7 @@
           <input type="file" style="display:none"
                  id="resume" name="resume" onchange="angular.element(this).scope().uploadFile(this)"/>
           <br>
-          <a ng-href="{{user.profile.resume.link}}" target="_blank">{{user.profile.resume.name}}</a>
+          <a ng-class="{'loading' : fileLoading}" ng-href="{{user.profile.resume.link}}" target="_blank">{{user.profile.resume.name}}</a>
         </div>
 
         <div class="divided title">Short Response</div>
