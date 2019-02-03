@@ -1,5 +1,6 @@
 var UserController = require('../controllers/UserController');
 var SettingsController = require('../controllers/SettingsController');
+var FileController = require('../controllers/FileController')
 
 var request = require('request');
 
@@ -287,6 +288,16 @@ module.exports = function(router) {
     var id = req.params.id;
     var user = req.user;
     UserController.removeAdminById(id, user, defaultResponse(req, res));
+  });
+
+  /**
+   * Upload resume
+   */
+  router.put('/file/:id/upload', isOwnerOrAdmin, function(req, res){
+    var id = req.params.id;
+    var metadata = req.body.metadata;
+    var file = req.body.file;
+    FileController.upload(id, metadata, file, defaultResponse(req, res));
   });
 
 

@@ -14,6 +14,7 @@
     "dotenv": "^6.2.0",
     "email-templates": "^5.0.2",
     "express": "^4.16.4",
+    "googleapis": "^37.1.0",
     "gulp-buffer": "0.0.2",
     "gulp-tap": "^1.0.1",
     "jquery": "^3.3.1",

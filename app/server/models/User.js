@@ -6,17 +6,43 @@ var mongoose   = require('mongoose'),
 
 var profile = {
 
-  // Basic info
-  name: {
+  firstName: {
     type: String,
     min: 1,
     max: 100,
   },
 
-  adult: {
-    type: Boolean,
-    required: true,
-    default: false,
+  lastName: {
+    type: String,
+    min: 1,
+    max: 100,
+  },
+
+  gender: {
+    type: String,
+    enum : {
+      values: [
+        'Male',
+        'Female',
+        'Other',
+        'No Response'
+      ]
+    }
+  },
+
+  ethnicity: {
+    type: String,
+    enum : {
+      values : [
+        'White',
+        'Black or African American',
+        'Native American or Alaska Native',
+        'Asian or Pacific Islander',
+        'Hispanic/Latinx',
+        'Multiracial',
+        'Other'
+      ]
+    }
   },
 
   school: {
@@ -25,11 +51,42 @@ var profile = {
     max: 150,
   },
 
-  graduationYear: {
+  year: {
     type: String,
     enum: {
-      values: '2016 2017 2018 2019'.split(' '),
+      values: [
+          '2019',
+          '2020',
+          '2021',
+          '2022',
+          'High School',
+          'Graduate',
+          'Other'
+      ],
     }
+  },
+
+  major: {
+    type: String,
+    min: 1,
+    max: 150,
+  },
+
+  experience: {
+    type: String,
+    enum: {
+      values: [
+          'Beginner',
+          'Intermediate',
+          'Advanced'
+      ]
+    }
+  },
+
+  resume: {
+    name: String,
+    id: String,
+    link: String
   },
 
   description: {
@@ -44,13 +101,11 @@ var profile = {
     max: 1500
   },
 
-  // Optional info for demographics
-  gender: {
-    type: String,
-    enum : {
-      values: 'M F O N'.split(' ')
-    }
-  },
+  adult: {
+    type: Boolean,
+    required: true,
+    default: false,
+  }
 
 };
 
