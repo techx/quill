@@ -17,15 +17,6 @@ angular.module('reg')
             // Set up the user
             $scope.user = currentUser.data;
 
-            // //Not in use because we don't allow minors (no exceptions)
-            // // Is the student from USC?
-            // $scope.isUSCStudent = $scope.user.email.split('@')[1] == 'usc.edu';
-            //
-            // // If so, default them to adult: true
-            // if ($scope.isUSCStudent){
-            //   $scope.user.profile.adult = true;
-            // }
-
             // Populate the school dropdown
             populateSchools();
             // Populate the major dropdown
@@ -280,12 +271,60 @@ angular.module('reg')
                                 }
                             ]
                         },
+                        essay1: {
+                            identifier: 'essay1',
+                            rules: [
+                                {
+                                    type: 'empty',
+                                    prompt: 'Your response should be between 1 and 1000 characters.'
+                                },
+                                {
+                                    type: 'maxLength[1000]',
+                                    prompt: 'Your response should be between 1 and 1000 characters.'
+                                }
+                            ]
+                        },
+                        essay2: {
+                            identifier: 'essay2',
+                            rules: [
+                                {
+                                    type: 'empty',
+                                    prompt: 'Your response should be between 1 and 1000 characters.'
+                                },
+                                {
+                                    type: 'maxLength[1000]',
+                                    prompt: 'Your response should be between 1 and 1000 characters.'
+                                }
+                            ]
+                        },
+                        essay3: {
+                            identifier: 'essay3',
+                            rules: [
+                                {
+                                    type: 'empty',
+                                    prompt: 'Your response should be between 1 and 100 characters.'
+                                },
+                                {
+                                    type: 'maxLength[100]',
+                                    prompt: 'Your response should be between 1 and 100 characters.'
+                                }
+                            ]
+                        },
                         adult: {
                             identifier: 'adult',
                             rules: [
                                 {
                                     type: 'allowMinors',
                                     prompt: 'You must be over 18 by the time HackSC begins.'
+                                }
+                            ]
+                        },
+                        mlh: {
+                            identifier: 'mlh',
+                            rules: [
+                                {
+                                    type: 'checked',
+                                    prompt: 'You must agree with the MLH code of conduct.'
                                 }
                             ]
                         }

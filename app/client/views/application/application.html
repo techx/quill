@@ -1,180 +1,225 @@
 <div id="application" class="page">
-  <div class="divided title">
-    Application
-  </div>
-
-  <div class="ui stackable page grid">
-    <div class="column">
-      <div class="ui form"
-            ng-class="{'loading': loading}">
-
-        <div class="divided title">About You</div>
-
-        <fieldset ng-disabled="regIsClosed">
-
-        <!--<div class="field">-->
-          <!--<label> Email </label>-->
-          <!--<input type="email"-->
-                 <!--name="email"-->
-                 <!--disabled="disabled"-->
-                 <!--ng-model="user.email">-->
-        <!--</div>-->
-
-        <div class="field">
-          <label> First Name </label>
-          <input type="text"
-                 name="firstName"
-                 ng-model="user.profile.firstName">
-        </div>
-
-        <div class="field">
-          <label> Last Name </label>
-          <input type="text"
-                 name="lastName"
-                 ng-model="user.profile.lastName">
-        </div>
-
-        <div class="field">
-          <label> Gender </label>
-          <select
-                  name="gender"
-                  ng-model="user.profile.gender">
-            <option value=""></option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Other">Other</option>
-            <option value="No Response">I prefer not to answer.</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label> Ethnicity </label>
-          <select
-            name="ethnicity"
-            ng-model="user.profile.ethnicity">
-            <option value=""></option>
-            <option value="White">White</option>
-            <option value="Black or African American">Black or African American</option>
-            <option value="Native American or Alaska Native">Native American or Alaska Native</option>
-            <option value="Asian or Pacific Islander">Asian or Pacific Islander</option>
-            <option value="Hispanic/Latinx">Hispanic/Latinx</option>
-            <option value="Multiracial">Multiracial</option>
-            <option value="Other">Other</option>
-          </select>
-        </div>
-
-        <div class="field" ng-show="autoFilledSchool">
-          <label> School </label>
-          <input class="ui input"
-                 disabled="disabled"
-                 ng-show="autoFilledSchool"
-                 ng-model="user.profile.school">
-        </div>
-
-        <div class="field" ng-show="!autoFilledSchool">
-          <label> School </label>
-          <div id="school" class="ui search">
-            <div class="ui input">
-              <input class="prompt" type="text" placeholder="" name="school" ng-model="user.profile.school">
-            </div>
-            <div class="results"></div>
-          </div>
-        </div>
-
-        <div class="field">
-          <label> Year </label>
-          <select
-                  name="year"
-                  ng-model="user.profile.year">
-            <option value=""></option>
-            <option value="2019">2019</option>
-            <option value="2020">2020</option>
-            <option value="2021">2021</option>
-            <option value="2022">2022</option>
-            <option value="High School">High School</option>
-            <option value="Graduate">Graduate</option>
-            <option value="Other">Other</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label> Major </label>
-          <div id="major" class="ui search">
-            <div class="ui input">
-              <input class="prompt" type="text" placeholder="" name="major" ng-model="user.profile.major">
-            </div>
-            <div class="results"></div>
-          </div>
-        </div>
-
-        <div class="field">
-          <label> Level of Experience </label>
-          <select
-                  name="experience"
-                  ng-model="user.profile.experience">
-            <option value=""></option>
-            <option value="Beginner">Beginner</option>
-            <option value="Intermediate">Intermediate</option>
-            <option value="Advanced">Advanced</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label> Resume </label>
-          <label for="resume" class="resumeInput"> Upload </label>
-          <!--Angular does not support binding for file inputs so we have to manually call upload-->
-          <input type="file" style="display:none"
-                 id="resume" name="resume" onchange="angular.element(this).scope().uploadFile(this)"/>
-          <br>
-          <a ng-class="{'loading' : fileLoading}" ng-href="{{user.profile.resume.link}}" target="_blank">{{user.profile.resume.name}}</a>
-        </div>
-
-        <div class="divided title">Short Response</div>
-
-        <div class="field">
-          <label>I would describe myself as a...</label>
-          <input type="text"
-                 placeholder="Designer, Data Scientist, iOS Wizard, Hacker Extraordinaire"
-                 ng-model="user.profile.description">
-        </div>
-
-        <div class="field">
-          <label>
-              What would you like to learn or get out of HackMIT? (optional)
-          </label>
-          <textarea ng-model="user.profile.essay">
-          </textarea>
-        </div>
-
-        <div class="field"
-             ng-hide="isUSCStudent">
-          <p>
-            Because of limitations imposed by USC, we are not legally allowed to host
-            minors (those under 18) for HackSC 2019. Checking the box below affirms that you are or will be 18 years or older by April 12-14, 2019.
-          </p>
-          <p>
-            <strong>
-            We will be checking ID. If you are a minor, you will be turned away at the door.
-            </strong>
-          </p>
-          <div class="ui checkbox">
-            <input type="checkbox" id="adult" ng-model="user.profile.adult">
-            <label for="adult">I will be 18 or older by April 12-14, 2019.</label>
-          </div>
-        </div>
-
-        <br>
-
-        <div class="field" ng-hide="regIsClosed">
-          <button type="submit"
-                  class="fluid ui purple button"
-                  ng-click="submitForm()">
-            Submit
-          </button>
-        </div>
-
-        </fieldset>
-      </div>
+    <div class="divided title">
+        Application
     </div>
-  </div>
+
+    <div class="ui stackable page grid">
+        <div class="column">
+            <div class="ui form"
+                 ng-class="{'loading': loading}">
+
+                <div class="divided title">About You</div>
+
+                <fieldset ng-disabled="regIsClosed">
+
+                    <div class="field">
+                        <label> First Name </label>
+                        <input type="text"
+                               id="firstName"
+                               ng-model="user.profile.firstName">
+                    </div>
+
+                    <div class="field">
+                        <label> Last Name </label>
+                        <input type="text"
+                               id="lastName"
+                               ng-model="user.profile.lastName">
+                    </div>
+
+                    <div class="field">
+                        <label> Gender </label>
+                        <select
+                                id="gender"
+                                ng-model="user.profile.gender">
+                            <option value=""></option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                            <option value="No Response">I prefer not to answer.</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label> Ethnicity </label>
+                        <select
+                                id="ethnicity"
+                                ng-model="user.profile.ethnicity">
+                            <option value=""></option>
+                            <option value="White">White</option>
+                            <option value="Black or African American">Black or African American</option>
+                            <option value="Native American or Alaska Native">Native American or Alaska Native</option>
+                            <option value="Asian or Pacific Islander">Asian or Pacific Islander</option>
+                            <option value="Hispanic/Latinx">Hispanic/Latinx</option>
+                            <option value="Multiracial">Multiracial</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="field" ng-show="autoFilledSchool">
+                        <label> School </label>
+                        <input class="ui input"
+                               disabled="disabled"
+                               ng-show="autoFilledSchool"
+                               ng-model="user.profile.school">
+                    </div>
+
+                    <div class="field" ng-show="!autoFilledSchool">
+                        <label> School </label>
+                        <div id="school" class="ui search">
+                            <div class="ui input">
+                                <input class="prompt" type="text" placeholder="" name="school"
+                                       ng-model="user.profile.school">
+                            </div>
+                            <div class="results"></div>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label> Year </label>
+                        <select
+                                id="year"
+                                ng-model="user.profile.year">
+                            <option value=""></option>
+                            <option value="2019">2019</option>
+                            <option value="2020">2020</option>
+                            <option value="2021">2021</option>
+                            <option value="2022">2022</option>
+                            <option value="High School">High School</option>
+                            <option value="Graduate">Graduate</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label> Major </label>
+                        <div id="major" class="ui search">
+                            <div class="ui input">
+                                <input class="prompt" type="text" placeholder="" name="major"
+                                       ng-model="user.profile.major">
+                            </div>
+                            <div class="results"></div>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label> Level of Experience </label>
+                        <select
+                                id="experience"
+                                ng-model="user.profile.experience">
+                            <option value=""></option>
+                            <option value="Beginner">Beginner</option>
+                            <option value="Intermediate">Intermediate</option>
+                            <option value="Advanced">Advanced</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label> Resume </label>
+                        <label for="resume" class="resumeInput"> Upload </label>
+                        <!--Angular does not support binding for file inputs so we have to manually call upload-->
+                        <input type="file" style="display:none"
+                               id="resume" name="resume" onchange="angular.element(this).scope().uploadFile(this)"/>
+                        <br>
+                        <div ng-class="{'loading' : fileLoading}">
+                            <a ng-href="{{user.profile.resume.link}}" target="_blank">{{user.profile.resume.name}}</a>
+                        </div>
+                    </div>
+
+                    <div class="divided title">Short Response</div>
+
+                    <div class="field">
+                        <label>Why do you want to attend HackSC?</label>
+                        <textarea
+                                id="essay1"
+                                ng-model="user.profile.essay1"
+                                placeholder="I love to hack!">
+                        </textarea>
+                    </div>
+
+                    <div class="field">
+                        <label>What are you passionate about?</label>
+                        <textarea
+                                id="essay2"
+                                ng-model="user.profile.essay2"
+                                placeholder="Cars and Trains and Planes">
+                        </textarea>
+                    </div>
+
+                    <div class="field">
+                        <label>What's your favorite drink?</label>
+                        <input
+                                type="text"
+                                id="essay3"
+                                placeholder="Soda, Boba, Water" ng-model="user.profile.essay3">
+                    </div>
+
+                    <div class="divided title">Transportation</div>
+
+                    <div class="field">
+                        <p>
+                            We will be sending busses to and from HackSC for schools in California.
+                            There no guarantee if we will send a bus to your school, but we will consider based on
+                            interest.
+                        </p>
+                        <div class="ui checkbox">
+                            <input type="checkbox" id="transportation" ng-model="user.profile.transportation">
+                            <label for="transportation">I will need transportation to and from HackSC.</label>
+                        </div>
+                    </div>
+
+                    <div class="divided title">Legal</div>
+
+                    <div class="field">
+                        <p>
+                            Because of limitations imposed by USC, we are not legally allowed to host
+                            minors (those under 18) for HackSC 2019. Checking the box below affirms that you are or will
+                            be 18 years or older by April 12-14, 2019.
+                        </p>
+                        <p>
+                            <strong>
+                                We will be checking ID. If you are a minor, you will be turned away at the door.
+                            </strong>
+                        </p>
+                        <div class="ui checkbox">
+                            <input type="checkbox" id="adult" ng-model="user.profile.adult">
+                            <label for="adult">I will be 18 or older by April 12, 2019.</label>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="ui checkbox">
+                            <input type="checkbox" id="mlh" ng-model="user.profile.mlh">
+                            <label for="mlh">
+                                I agree to and acknowledge the
+                                <a target="_blank" href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf">
+                                    MLH Code of Conduct
+                                </a>
+                                . I agree to the terms of both the
+                                <a target="_blank"
+                                   href="https://github.com/MLH/mlh-policies/tree/master/prize-terms-and-conditions">
+                                    MLH Contest Terms and Conditions
+                                </a>
+                                and the
+                                <a target="_blank" href="https://mlh.io/privacy">
+                                    MLH Privacy Policy
+                                </a>
+                                . Please note that you may receive e-mails and messages as per the MLH Privacy Policy. *
+                            </label>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="field" ng-hide="regIsClosed">
+                        <button type="submit"
+                                class="fluid ui purple button"
+                                ng-click="submitForm()">
+                            Submit
+                        </button>
+                    </div>
+
+                </fieldset>
+            </div>
+        </div>
+    </div>
 </div>

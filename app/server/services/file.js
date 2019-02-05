@@ -80,7 +80,6 @@ file.update = function(fileId, metadata, file, callback){
     var fileStream = new Readable();
     fileStream.push(buffer);
     fileStream.push(null);
-    console.log(file);
 
     drive.files.update({
         fileId: fileId,
@@ -95,7 +94,6 @@ file.update = function(fileId, metadata, file, callback){
         fields: 'id, name, webViewLink'
     }, (err, response) => {
         if(err){
-            console.log(err);
             callback(err);
         } else {
             callback(null, response.data);

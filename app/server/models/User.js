@@ -89,19 +89,31 @@ var profile = {
     link: String
   },
 
-  description: {
+  essay1: {
     type: String,
-    min: 0,
-    max: 300
+    min: 1,
+    max: 1000
   },
 
-  essay: {
+  essay2: {
     type: String,
-    min: 0,
-    max: 1500
+    min: 1,
+    max: 1000
+  },
+
+  essay3: {
+    type: String,
+    min: 1,
+    max: 100
   },
 
   adult: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
+
+  mlh: {
     type: Boolean,
     required: true,
     default: false,
@@ -393,7 +405,11 @@ schema.statics.validateProfile = function(profile, cb){
       ['2019', '2020', '2021', '2022', 'High School', 'Graduate', 'Other'].indexOf(profile.year) > -1 &&
       profile.major.length > 0 &&
       profile.resume !== undefined &&
-      profile.adult
+      profile.essay1.length > 0 && profile.essay1.length <= 1000 &&
+      profile.essay2.length > 0 && profile.essay2.length <= 1000 &&
+      profile.essay3.length > 0 && profile.essay3.length <= 100 &&
+      profile.adult &&
+      profile.mlh
   ));
 };
 
