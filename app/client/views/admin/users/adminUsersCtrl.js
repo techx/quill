@@ -138,21 +138,26 @@ angular.module('reg')
 
       };
 
+      /**
+      * Accepts all applicants with completed and verified profiles that haven't
+      * been admitted.
+      */
       $scope.acceptCompleted = function(){
         UserService.countCompleted().success((data) => {
           swal({
           title: "Whoa, wait a minute!",
           text: "You are about to accept " + data + " users!",
+                "Are you sure you're allowed to do that... idk bb",
           type: "warning",
           showCancelButton: true,
           confirmButtonColor: "#DD6B55",
-          confirmButtonText: "Yeah, do it.",
+          confirmButtonText: "I'm grown, I can handle it!",
           closeOnConfirm: false
         }, () => {
           UserService
             .acceptAll()
             .success(() => {
-              swal("Updated!", "Accepted everyone", "success");
+              swal("Updated!", "You accepted 42 applicants", "success");
             })
             .error(() => {
               return swal("Oops", "Something went wrong.\nIs there anyone to accept? ", "error");

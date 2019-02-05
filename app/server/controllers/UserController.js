@@ -202,7 +202,7 @@ UserController.getAll = function (callback) {
 };
 
 /**
- * Get all applicants with completed profiles.
+ * Get the count of all applicants with completed profiles.
  * @param  {Function} callback args(err, user)
  */
 UserController.countCompleted = function (callback) {
@@ -231,7 +231,7 @@ UserController.acceptAllCompleted = function (callback) {
       }
     }, 
     {
-      new: true
+      new: true /* mongoose 4.17 silliness */
     },
     callback);
 };
