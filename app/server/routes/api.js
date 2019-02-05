@@ -151,7 +151,7 @@ module.exports = function(router) {
 
     } else if (query.update /*feels like hacky bs*/) { 
 
-      UserController.accptAll(defaultResponse(req, res))
+      UserController.acceptAllCompleted(defaultResponse(req, res))
 
     } else {
 
