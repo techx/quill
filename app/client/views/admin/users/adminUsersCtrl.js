@@ -146,8 +146,8 @@ angular.module('reg')
         UserService.countCompleted().success((data) => {
           swal({
           title: "Whoa, wait a minute!",
-          text: "You are about to accept " + data + " users!",
-                "Are you sure you're allowed to do that... idk bb",
+          text: "You are about to accept " + data 
+            + " users!\nAre you sure you're allowed to do that... idk b",
           type: "warning",
           showCancelButton: true,
           confirmButtonColor: "#DD6B55",
