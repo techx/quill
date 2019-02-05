@@ -97,6 +97,10 @@
     height: 130%;
   }
 
+  .hint-logo {
+    transform: scale(0.8);
+  }
+
   .hero-title {
     font-size: 5em;
     line-height: 1.1em;
@@ -251,7 +255,7 @@
   #sponsors-list {
     margin-top: 1%;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
   }
 
   #sponsors-list > div {
