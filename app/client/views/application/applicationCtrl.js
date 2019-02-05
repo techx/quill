@@ -23,7 +23,7 @@ angular.module('reg')
             populateMajors();
             _setupForm();
 
-            $scope.regIsClosed = Date.now() > settings.data.timeClose;
+            $scope.regIsClosed = Date.now() > settings.data.timeClose || $scope.user.status.submitted;
 
             /**
              * TODO: JANK WARNING
@@ -166,11 +166,23 @@ angular.module('reg')
                     .updateProfile(Session.getUserId(), $scope.user.profile)
                     .then(response => {
                         swal("Awesome!", "Your application has been saved.", "success").then(value => {
-                            $state.go("app.dashboard");
+                            // do nothing - stay on same page
                         });
                     }, response => {
                         swal("Uh oh!", "Something went wrong.", "error");
                     });
+            }
+
+            function _submitApp(e) {
+                UserService
+                    .submitApp(Session.getUserId(), $scope.user.profile)
+                    .then(response => {
+                        swal("Awesome!", "Your application has been received.", "success").then(value => {
+                            $state.go("app.dashboard");
+                        });
+                    }, response => {
+                        swal("Uh oh!", "Something went wrong.", "error");
+                    })
             }
 
             function isMinor() {
@@ -332,9 +344,35 @@ angular.module('reg')
                 });
             }
 
-            $scope.submitForm = function () {
-                if ($('.ui.form').form('is valid')) {
-                    _updateUser();
+            $scope.updateProfile = function() {
+                _updateUser();
+            };
+
+            $scope.submitApp = function () {
+                if ($('.ui.form').form('is valid') && ($scope.user.profile.resume !== undefined)) {
+                    swal({
+                        title: "Confirm",
+                        text: "Are you sure you would like to submit your application? \n\n You can't edit it after submission.",
+                        icon: "warning",
+                        buttons: {
+                            cancel: {
+                                text: "Cancel",
+                                value: null,
+                                visible: true
+                            },
+                            confirm: {
+                                text: "Yes, I want to submit!",
+                                value: true,
+                                visible: true,
+                            }
+                        }
+                    }).then(value => {
+                        if (!value) {
+                            return;
+                        }
+
+                        _submitApp();
+                    });
                 } else {
                     swal("Uh oh!", "Please Fill The Required Fields", "error");
                 }

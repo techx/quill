@@ -24,11 +24,16 @@
           Expired Admission
         </div>
 
-
         <div
           ng-if="showWaitlist"
           class="waitlist state">
           On waitlist
+        </div>
+
+        <div
+          ng-if="showRejected"
+          class="rejected state">
+          Not Admitted
         </div>
 
         <div class="ui divider"></div>
@@ -109,7 +114,7 @@
           </p>
           <div class="ui purple button"
                ui-sref="app.application">
-            Edit your application
+            View your application
           </div>
 
           <div
@@ -143,11 +148,14 @@
         <div
           ng-if="dashState('closedAndSubmitted')"
           class="description" >
-
-          <div
-            class="markdown"
-            ng-bind-html="waitlistText">
-          </div>
+          <p>
+            <strong>
+              {{ DASHBOARD.SUBMITTED }}
+            </strong>
+          </p>
+          <p>
+            {{ DASHBOARD.SUBMITTED }}
+          </p>
 
           <div class="ui purple button"
                ui-sref="app.application">
@@ -206,6 +214,38 @@
 
             <p>
                 {{ DASHBOARD.ADMITTED_AND_CANNOT_CONFIRM }}
+            </p>
+          </div>
+
+        </div>
+
+        <div
+          class="description"
+          ng-if="dashState('rejected')">
+
+          <div class="markdown">
+            <h4>
+              {{ DASHBOARD.REJECTED_TITLE }}
+            </h4>
+
+            <p>
+              {{ DASHBOARD.REJECTED }}
+            </p>
+          </div>
+
+        </div>
+
+        <div
+          class="description"
+          ng-if="dashState('waitlisted')">
+
+          <div class="markdown">
+            <h4>
+              {{ DASHBOARD.WAITLISTED_TITLE }}
+            </h4>
+
+            <p>
+              {{ DASHBOARD.WAITLISTED }}
             </p>
           </div>
 

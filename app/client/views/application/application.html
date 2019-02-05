@@ -210,12 +210,22 @@
 
                     <br>
 
-                    <div class="field" ng-hide="regIsClosed">
-                        <button type="submit"
-                                class="fluid ui purple button"
-                                ng-click="submitForm()">
-                            Submit
-                        </button>
+                    <div class="field">
+                        <div class="field btn" ng-hide="regIsClosed">
+                            <button type="submit"
+                                    class="fluid ui purple button"
+                                    ng-click="updateProfile()">
+                                Update
+                            </button>
+                        </div>
+
+                        <div class="field btn" ng-hide="regIsClosed">
+                            <button type="submit"
+                                    class="fluid ui blue button"
+                                    ng-click="submitApp()">
+                                Submit
+                            </button>
+                        </div>
                     </div>
 
                 </fieldset>

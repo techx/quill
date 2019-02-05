@@ -267,6 +267,54 @@ UserController.getById = function (id, callback){
  */
 UserController.updateProfileById = function (id, profile, callback){
 
+  // Update without validation
+  // Check if its within the registration window.
+  Settings.getRegistrationTimes(function(err, times){
+    if (err) {
+      callback(err);
+    }
+
+    var now = Date.now();
+
+    if (now < times.timeOpen){
+      return callback({
+        message: "Registration opens in " + moment(times.timeOpen).fromNow() + "!"
+      });
+    }
+
+    if (now > times.timeClose){
+      return callback({
+        message: "Sorry, registration is closed."
+      });
+    }
+  });
+
+  User.findOneAndUpdate({
+        _id: id,
+        verified: true,
+        'status.submitted': false
+      },
+      {
+        $set: {
+          'lastUpdated': Date.now(),
+          'profile': profile
+        }
+      },
+      {
+        new: true
+      },
+      callback);
+};
+
+/**
+ * Submits a user's profile object, given an id and a profile.
+ *
+ * @param  {String}   id       Id of the user
+ * @param  {Object}   profile  Profile object
+ * @param  {Function} callback Callback with args (err, user)
+ */
+UserController.submitById = function (id, profile, callback){
+
   // Validate the user profile, and mark the user as profile completed
   // when successful.
   User.validateProfile(profile, function(err){
@@ -297,20 +345,21 @@ UserController.updateProfileById = function (id, profile, callback){
     });
 
     User.findOneAndUpdate({
-      _id: id,
-      verified: true
-    },
-      {
-        $set: {
-          'lastUpdated': Date.now(),
-          'profile': profile,
-          'status.completedProfile': true
-        }
-      },
-      {
-        new: true
-      },
-      callback);
+          _id: id,
+          verified: true,
+          'status.submitted': false
+        },
+        {
+          $set: {
+            'lastUpdated': Date.now(),
+            'profile': profile,
+            'status.submitted': true
+          }
+        },
+        {
+          new: true
+        },
+        callback);
 
   });
 };

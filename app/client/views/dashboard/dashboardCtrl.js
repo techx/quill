@@ -44,13 +44,13 @@ angular.module('reg')
           case 'unverified':
             return !user.verified;
           case 'openAndIncomplete':
-            return regIsOpen && user.verified && !user.status.completedProfile;
-          case 'openAndSubmitted':
-            return regIsOpen && user.status.completedProfile && !user.status.admitted;
+            return regIsOpen && user.verified && !user.status.submitted;
+          case 'openAndSubmitted': // reviewing, can make team
+            return regIsOpen && user.status.submitted && !user.status.admitted && !user.status.rejected && !user.status.waitlisted;
           case 'closedAndIncomplete':
-            return !regIsOpen && !user.status.completedProfile && !user.status.admitted;
-          case 'closedAndSubmitted': // Waitlisted State
-            return !regIsOpen && user.status.completedProfile && !user.status.admitted;
+            return !regIsOpen && !user.status.submitted && !user.status.admitted && !user.status.rejected && !user.status.waitlisted;
+          case 'closedAndSubmitted': // reviewing, cannot make team
+            return !regIsOpen && user.status.submitted && !user.status.admitted && !user.status.rejected && !user.status.waitlisted;
           case 'admittedAndCanConfirm':
             return !pastConfirmation &&
               user.status.admitted &&
@@ -61,6 +61,10 @@ angular.module('reg')
               user.status.admitted &&
               !user.status.confirmed &&
               !user.status.declined;
+          case 'rejected':
+            return user.status.rejected;
+          case 'waitlisted':
+            return user.status.waitlisted;
           case 'confirmed':
             return user.status.admitted && user.status.confirmed && !user.status.declined;
           case 'declined':
@@ -69,7 +73,9 @@ angular.module('reg')
         return false;
       };
 
-      $scope.showWaitlist = !regIsOpen && user.status.completedProfile && !user.status.admitted;
+      $scope.showWaitlist = user.status.waitlisted;
+
+      $scope.showRejected = user.status.rejected;
 
       $scope.resendEmail = function(){
         AuthService

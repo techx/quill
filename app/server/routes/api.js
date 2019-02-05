@@ -167,6 +167,19 @@ module.exports = function(router) {
   /**
    * [OWNER/ADMIN]
    *
+   * PUT - Submit's a user's application.
+   */
+  router.put('/users/:id/submit', isOwnerOrAdmin, function(req, res){
+    var profile = req.body.profile;
+    var id = req.params.id;
+
+    UserController.submitById(id, profile , defaultResponse(req, res));
+  });
+
+
+  /**
+   * [OWNER/ADMIN]
+   *
    * PUT - Update a specific user's confirmation information.
    */
   router.put('/users/:id/confirm', isOwnerOrAdmin, function(req, res){
