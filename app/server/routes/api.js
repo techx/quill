@@ -145,6 +145,14 @@ module.exports = function(router) {
 
       UserController.getPage(query, defaultResponse(req, res));
 
+    } else if (query.count /*feels like hacky bs*/) {
+
+      UserController.countCompleted(defaultResponse(req, res));
+
+    } else if (query.update /*feels like hacky bs*/) { 
+
+      UserController.acceptAllCompleted(defaultResponse(req, res))
+
     } else {
 
       UserController.getAll(defaultResponse(req, res));
@@ -261,7 +269,7 @@ module.exports = function(router) {
   /**
    * Admit a user. ADMIN ONLY, DUH
    *
-   * Also attaches the user who did the admitting, for liabaility.
+   * Also attaches the user who did the admitting, for liability.
    */
   router.post('/users/:id/admit', isAdmin, function(req, res){
     // Accept the hacker. Admin only

@@ -202,6 +202,41 @@ UserController.getAll = function (callback) {
 };
 
 /**
+ * Get the count of all applicants with completed profiles.
+ * @param  {Function} callback args(err, user)
+ */
+UserController.countCompleted = function (callback) {
+  User.count({
+      'status.completedProfile': true,
+      'verified': true,
+      'status.admitted': false
+    },
+    callback);
+};
+
+/**
+ * Accepts all applicants with completed profiles.
+ * @param  {Function} callback args(err, user)
+ */
+UserController.acceptAllCompleted = function (callback) {
+  User.updateMany({
+      'status.completedProfile': true,
+      'verified': true,
+      'status.admitted': false
+    },
+    {
+      $set: {
+        'lastUpdated': Date.now(),
+        'status.admitted': true
+      }
+    }, 
+    {
+      new: true /* mongoose 4.17 silliness */
+    },
+    callback);
+};
+
+/**
  * Builds search text queries.
  * 
  * @param   {String} searchText the text to search
