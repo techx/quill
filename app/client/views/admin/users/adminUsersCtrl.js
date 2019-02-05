@@ -138,36 +138,6 @@ angular.module('reg')
 
       };
 
-      /**
-      * Accepts all applicants with completed and verified profiles that haven't
-      * been admitted.
-      */
-      $scope.acceptCompleted = function(){
-        UserService.countCompleted().success((data) => {
-          swal({
-          title: "Whoa, wait a minute!",
-          text: "You are about to accept " + data 
-            + " users!\nAre you sure you're allowed to do that... idk b",
-          type: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#DD6B55",
-          confirmButtonText: "I'm grown, I can handle it!",
-          closeOnConfirm: false
-        }, () => {
-          UserService
-            .acceptAll()
-            .success(() => {
-              swal("Updated!", "You accepted 42 applicants", "success");
-            })
-            .error(() => {
-              return swal("Oops", "Something went wrong.\nIs there anyone to accept? ", "error");
-            });
-        });
-        }).error( () => {
-          return swal("Oops", "Something went wrong.\nIs there anyone to accept? ", "error");
-        });
-      };
-
       $scope.acceptChecked = function(){
         // Tracking info for mass admit
         var numToAccept = 0;
@@ -216,7 +186,7 @@ angular.module('reg')
           // Just say its accepted, Promises are hard rn...
           swal("Accepted", 'All marked users have been accepted', "success");
         });
-      };
+      }
 
       function formatTime(time){
         if (time) {

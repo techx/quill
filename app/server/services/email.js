@@ -291,7 +291,7 @@ controller.sendPasswordChangedEmail = function(email, callback){
   };
 
   /**
-   * Email-verify takes a few template values:
+   * Eamil-verify takes a few template values:
    * {
    *   verifyUrl: the url that the user must visit to verify their account
    * }

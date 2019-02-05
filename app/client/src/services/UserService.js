@@ -24,22 +24,6 @@ angular.module('reg')
         return $http.get(base);
       },
 
-      countCompleted: function(){
-        return $http.get(users + '?' + $.param(
-          {
-            count: true
-          })
-        );
-      },
-
-      acceptAll: function(){
-        return $http.get(users + '?' + $.param(
-          {
-            update: true
-          })
-        );
-      },
-
       getPage: function(page, size, text, statusFilters){
         return $http.get(users + '?' + $.param(
           {
