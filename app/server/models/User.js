@@ -381,7 +381,7 @@ schema.statics.verifyTempAuthToken = function (token, callback) {
     });
 };
 
-schema.statics.eByEmail = function (email) {
+schema.statics.findOneByEmail = function (email) {
     return this.findOne({
         email: email.toLowerCase()
     });
