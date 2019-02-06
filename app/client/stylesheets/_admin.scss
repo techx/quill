@@ -25,4 +25,25 @@
     }
 
   }
+
+  #school .title {
+    text-align: left;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  #major .title {
+    text-align: left;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  .resumeInput {
+    border: 1px solid rgba(34,36,38,.15);
+    border-radius: 5px;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-weight: normal !important;
+  }
 }

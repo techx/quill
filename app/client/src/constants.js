@@ -23,6 +23,14 @@ angular.module('reg')
         WAITLISTED: 'We will notify you if space opens up. Thank you for being patient.',
         DECLINED: 'We\'re sorry to hear that you won\'t be able to make it to HackSC 2019! We hope you see you again soon.',
     })
+    .constant('APPLICATION', {
+        ESSAY1_TITLE: 'Why do you want to attend HackSC?',
+        ESSAY1_PLACEHOLDER: 'I love to hack!',
+        ESSAY2_TITLE: 'What are you passionate about?',
+        ESSAY2_PLACEHOLDER: 'Cars and Trains and Planes',
+        ESSAY3_TITLE: 'What\'s your favorite drink?',
+        ESSAY3_PLACEHOLDER: 'Water ONLY'
+    })
     .constant('TEAM',{
         NO_TEAM_REG_CLOSED: 'Unfortunately, it\'s too late apply with a team.\nHowever, you can still form teams on your own before or during the event!',
     });

@@ -38,6 +38,11 @@ angular.module('reg')
           text: text
         });
       },
+      updateRejectionText: function(text){
+        return $http.put(base + 'rejection', {
+          text: text
+        });
+      },
       updateConfirmationText: function(text){
         return $http.put(base + 'confirmation', {
           text: text

@@ -107,6 +107,12 @@ var profile = {
         max: 100
     },
 
+    transportation: {
+        type: Boolean,
+        required: true,
+        default: false,
+    },
+
     adult: {
         type: Boolean,
         required: true,
@@ -187,7 +193,7 @@ var status = {
         required: true,
         default: false
     },
-    gradedBy: {
+    reviewedBy: {
         type: String,
         validate: [
             validator.isEmail,
@@ -422,6 +428,16 @@ schema.statics.validateProfile = function (profile, cb) {
 //=========================================
 // Virtuals
 //=========================================
+
+/**
+ * Provide the firstName + lastName.
+ */
+schema.virtual('profile.name').get(function (){
+    if(this.profile.firstName != undefined && this.profile.lastName != undefined){
+        return this.profile.firstName + " " + this.profile.lastName;
+    }
+    return undefined;
+});
 
 /**
  * Has the user completed their profile?

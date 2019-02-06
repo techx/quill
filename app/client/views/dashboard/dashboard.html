@@ -228,6 +228,11 @@
               {{ DASHBOARD.REJECTED_TITLE }}
             </h4>
 
+            <div
+              class="markdown"
+              ng-bind-html="rejectionText">
+            </div>
+
             <p>
               {{ DASHBOARD.REJECTED }}
             </p>
@@ -243,6 +248,11 @@
             <h4>
               {{ DASHBOARD.WAITLISTED_TITLE }}
             </h4>
+
+            <div
+              class="markdown"
+              ng-bind-html="waitlistedText">
+            </div>
 
             <p>
               {{ DASHBOARD.WAITLISTED }}

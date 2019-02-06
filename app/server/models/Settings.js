@@ -27,13 +27,10 @@ var schema = new mongoose.Schema({
     select: false,
     default: ['.edu'],
   },
-  reviewingText: {
-    type: String
-  },
   acceptanceText: {
     type: String
   },
-  rejectText: {
+  rejectionText: {
     type: String
   },
   waitlistText: {

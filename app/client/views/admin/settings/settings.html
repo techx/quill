@@ -4,7 +4,7 @@
     <!-- Reigstration Open/Close -->
     <div
       ng-class="{'loading': loading}"
-      class="ui red segment">
+      class="ui purple segment">
       <div class="ui form">
 
         <div class="ui header">
@@ -45,7 +45,7 @@
     <!-- Confirmation Date -->
     <div
       ng-class="{'loading': loading}"
-      class="ui orange segment">
+      class="ui purple segment">
       <div class="ui form">
 
         <div class="ui header">
@@ -79,7 +79,7 @@
 <!-- Additional Options -->
 <div
 ng-class="{'loading': loading}"
-class="ui green segment">
+class="ui purple segment">
 
   <div class="ui header">
     Additional Options
@@ -107,7 +107,7 @@ class="ui green segment">
 <!-- Whitelist -->
 <div
   ng-class="{'loading': loading}"
-  class="ui green segment">
+  class="ui purple segment">
 
   <div class="ui header">
     Whitelisted Emails
@@ -133,6 +133,78 @@ class="ui green segment">
       </div>
     </div>
   </div>
+</div>
+
+<!-- Acceptance Text Editor -->
+<div
+  ng-class="{'loading': loading}"
+  class="ui green segment">
+  <div class="ui header">
+    Acceptance Text
+  </div>
+  <div class="ui stackable two column grid">
+    <div class="column">
+      <div class="ui form">
+        <div class="field">
+          <textarea
+                  class="ui input"
+                  type="text"
+                  ng-model="settings.acceptanceText">
+          </textarea>
+        </div>
+        <div class="field">
+          <div
+                  class="ui green button"
+                  ng-click="updateAcceptanceText()">
+            Update
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div
+              class="preview ui segment"
+              ng-bind-html="markdownPreview(settings.acceptanceText)">
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Rejection Text Editor -->
+<div
+  ng-class="{'loading': loading}"
+  class="ui red segment">
+  <div class="ui header">
+    Rejection Text
+  </div>
+  <div class="ui stackable two column grid">
+    <div class="column">
+      <div class="ui form">
+        <div class="field">
+          <textarea
+                  class="ui input"
+                  type="text"
+                  ng-model="settings.rejectionText">
+          </textarea>
+        </div>
+        <div class="field">
+          <div
+                  class="ui green button"
+                  ng-click="updateRejectionText()">
+            Update
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div
+              class="preview ui segment"
+              ng-bind-html="markdownPreview(settings.acceptanceText)">
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <!-- Waitlist Text Editor -->
@@ -165,42 +237,6 @@ class="ui green segment">
       <div
         class="preview ui segment"
         ng-bind-html="markdownPreview(settings.waitlistText)">
-      </div>
-    </div>
-  </div>
-
-</div>
-
-<!-- Acceptance Text Editor -->
-<div
-  ng-class="{'loading': loading}"
-  class="ui pink segment">
-  <div class="ui header">
-    Acceptance Text
-  </div>
-  <div class="ui stackable two column grid">
-    <div class="column">
-      <div class="ui form">
-        <div class="field">
-          <textarea
-            class="ui input"
-            type="text"
-            ng-model="settings.acceptanceText">
-          </textarea>
-        </div>
-        <div class="field">
-          <div
-            class="ui green button"
-            ng-click="updateAcceptanceText()">
-            Update
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="column">
-      <div
-        class="preview ui segment"
-        ng-bind-html="markdownPreview(settings.acceptanceText)">
       </div>
     </div>
   </div>

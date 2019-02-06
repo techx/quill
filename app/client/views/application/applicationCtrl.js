@@ -12,10 +12,13 @@ angular.module('reg')
         'Session',
         'UserService',
         'FileService',
-        function ($scope, $rootScope, $state, $http, currentUser, settings, Session, UserService, FileService) {
+        'APPLICATION',
+        function ($scope, $rootScope, $state, $http, currentUser, settings, Session, UserService, FileService, APPLICATION) {
 
             // Set up the user
             $scope.user = currentUser.data;
+
+            $scope.APPLICATION = APPLICATION;
 
             // Populate the school dropdown
             populateSchools();

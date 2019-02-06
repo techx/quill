@@ -128,29 +128,30 @@
                     <div class="divided title">Short Response</div>
 
                     <div class="field">
-                        <label>Why do you want to attend HackSC?</label>
+                        <label>{{ APPLICATION.ESSAY1_TITLE }}</label>
                         <textarea
                                 id="essay1"
                                 ng-model="user.profile.essay1"
-                                placeholder="I love to hack!">
+                                placeholder="{{ APPLICATION.ESSAY1_PLACEHOLDER }}">
                         </textarea>
                     </div>
 
                     <div class="field">
-                        <label>What are you passionate about?</label>
+                        <label>{{ APPLICATION.ESSAY2_TITLE }}</label>
                         <textarea
                                 id="essay2"
                                 ng-model="user.profile.essay2"
-                                placeholder="Cars and Trains and Planes">
+                                placeholder="{{ APPLICATION.ESSAY2_PLACEHOLDER }}">
                         </textarea>
                     </div>
 
                     <div class="field">
-                        <label>What's your favorite drink?</label>
+                        <label>{{ APPLICATION.ESSAY3_TITLE }}</label>
                         <input
                                 type="text"
                                 id="essay3"
-                                placeholder="Soda, Boba, Water" ng-model="user.profile.essay3">
+                                ng-model="user.profile.essay3"
+                                placeholder="{{ APPLICATION.ESSAY3_PLACEHOLDER }}">
                     </div>
 
                     <div class="divided title">Transportation</div>

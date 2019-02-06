@@ -224,7 +224,7 @@ UserController.getPage = function(query, callback){
     .sort({
       'profile.name': 'asc'
     })
-    .select('+status.admittedBy')
+    .select('+status.reviewedBy')
     .skip(page * size)
     .limit(size)
     .exec(function (err, users){
@@ -688,13 +688,73 @@ UserController.admitUser = function(id, user, callback){
       },{
         $set: {
           'status.admitted': true,
-          'status.admittedBy': user.email,
+          'status.rejected': false,
+          'status.waitlisted': false,
+          'status.reviewedBy': user.email,
           'status.confirmBy': times.timeConfirm
         }
       }, {
         new: true
       },
       callback);
+  });
+};
+
+/**
+ * [ADMIN ONLY]
+ *
+ * Reject a user.
+ * @param  {String}   userId   User id of the reject
+ * @param  {String}   user     User doing the rejecting
+ * @param  {Function} callback args(err, user)
+ */
+UserController.rejectUser = function(id, user, callback){
+  Settings.getRegistrationTimes(function(err, times){
+    User
+        .findOneAndUpdate({
+              _id: id,
+              verified: true
+            },{
+              $set: {
+                'status.admitted': false,
+                'status.rejected': true,
+                'status.waitlisted': false,
+                'status.reviewedBy': user.email,
+                'status.confirmBy': times.timeConfirm
+              }
+            }, {
+              new: true
+            },
+            callback);
+  });
+};
+
+/**
+ * [ADMIN ONLY]
+ *
+ * Waitlist a user.
+ * @param  {String}   userId   User id of the waitlist
+ * @param  {String}   user     User doing the waitlisting
+ * @param  {Function} callback args(err, user)
+ */
+UserController.waitlistUser = function(id, user, callback){
+  Settings.getRegistrationTimes(function(err, times){
+    User
+        .findOneAndUpdate({
+              _id: id,
+              verified: true
+            },{
+              $set: {
+                'status.admitted': false,
+                'status.rejected': false,
+                'status.waitlisted': true,
+                'status.reviewedBy': user.email,
+                'status.confirmBy': times.timeConfirm
+              }
+            }, {
+              new: true
+            },
+            callback);
   });
 };
 

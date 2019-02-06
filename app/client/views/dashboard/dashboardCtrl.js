@@ -91,8 +91,9 @@ angular.module('reg')
       // -----------------------------------------------------
       var converter = new showdown.Converter();
       $scope.acceptanceText = $sce.trustAsHtml(converter.makeHtml(Settings.acceptanceText));
+      $scope.rejectionText = $sce.trustAsHtml(converter.makeHtml(Settings.rejectionText));
+      $scope.waitlistedText = $sce.trustAsHtml(converter.makeHtml(Settings.waitlistText));
       $scope.confirmationText = $sce.trustAsHtml(converter.makeHtml(Settings.confirmationText));
-      $scope.waitlistText = $sce.trustAsHtml(converter.makeHtml(Settings.waitlistText));
 
       $scope.declineAdmission = function(){
 
