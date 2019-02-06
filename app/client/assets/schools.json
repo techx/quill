@@ -775,5 +775,9 @@
     "fiu.edu": {
         "school": "Florida International University",
         "state": "Florida"
+    },
+    "usc.edu": {
+        "school": "University of Southern California",
+        "state": "California"
     }
 }

@@ -1,5 +1,6 @@
 var UserController = require('../controllers/UserController');
 var SettingsController = require('../controllers/SettingsController');
+var FileController = require('../controllers/FileController')
 
 var request = require('request');
 
@@ -166,6 +167,19 @@ module.exports = function(router) {
   /**
    * [OWNER/ADMIN]
    *
+   * PUT - Submit's a user's application.
+   */
+  router.put('/users/:id/submit', isOwnerOrAdmin, function(req, res){
+    var profile = req.body.profile;
+    var id = req.params.id;
+
+    UserController.submitById(id, profile , defaultResponse(req, res));
+  });
+
+
+  /**
+   * [OWNER/ADMIN]
+   *
    * PUT - Update a specific user's confirmation information.
    */
   router.put('/users/:id/confirm', isOwnerOrAdmin, function(req, res){
@@ -242,15 +256,39 @@ module.exports = function(router) {
   });
 
   /**
-   * Admit a user. ADMIN ONLY, DUH
+   * Admit a user. ADMIN ONLY
    *
-   * Also attaches the user who did the admitting, for liabaility.
+   * Also attaches the user who admitted, for liability.
    */
   router.post('/users/:id/admit', isAdmin, function(req, res){
     // Accept the hacker. Admin only
     var id = req.params.id;
     var user = req.user;
     UserController.admitUser(id, user, defaultResponse(req, res));
+  });
+
+  /**
+   * Reject a user. ADMIN ONLY
+   *
+   * Also attaches the user who rejected, for liability.
+   */
+  router.post('/users/:id/reject', isAdmin, function(req, res){
+    // Accept the hacker. Admin only
+    var id = req.params.id;
+    var user = req.user;
+    UserController.rejectUser(id, user, defaultResponse(req, res));
+  });
+
+  /**
+   * Waitlist a user. ADMIN ONLY
+   *
+   * Also attaches the user who waitlisted, for liability.
+   */
+  router.post('/users/:id/waitlist', isAdmin, function(req, res){
+    // Accept the hacker. Admin only
+    var id = req.params.id;
+    var user = req.user;
+    UserController.waitlistUser(id, user, defaultResponse(req, res));
   });
 
   /**
@@ -289,6 +327,25 @@ module.exports = function(router) {
     UserController.removeAdminById(id, user, defaultResponse(req, res));
   });
 
+  /**
+   * Upload resume
+   */
+  router.put('/file/:id/upload', isOwnerOrAdmin, function(req, res){
+    var metadata = req.body.metadata;
+    var file = req.body.file;
+    FileController.upload(metadata, file, defaultResponse(req, res));
+  });
+
+  /**
+   * Update resume
+   */
+  router.put('/file/:id/update', isOwnerOrAdmin, function(req, res){
+    var fileId = req.body.fileId;
+    var metadata = req.body.metadata;
+    var file = req.body.file;
+    FileController.update(fileId, metadata, file, defaultResponse(req, res));
+  });
+
 
   // ---------------------------------------------
   // Settings [ADMIN ONLY!]
@@ -310,7 +367,7 @@ module.exports = function(router) {
   });
 
   /**
-   * Update the acceptance text.
+   * Update the waitlist text.
    * body: {
    *   text: String
    * }
@@ -329,6 +386,17 @@ module.exports = function(router) {
   router.put('/settings/acceptance', isAdmin, function(req, res){
     var text = req.body.text;
     SettingsController.updateField('acceptanceText', text, defaultResponse(req, res));
+  });
+
+  /**
+   * Update the rejection text.
+   * body: {
+   *   text: String
+   * }
+   */
+  router.put('/settings/rejection', isAdmin, function(req, res){
+    var text = req.body.text;
+    SettingsController.updateField('rejectionText', text, defaultResponse(req, res));
   });
 
   /**

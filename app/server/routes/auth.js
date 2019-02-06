@@ -13,7 +13,7 @@ module.exports = function(router){
    * Login a user with a username (email) and password.
    * Find em', check em'.
    * Pass them an authentication token on success.
-   * Otherwise, 401. You fucked up.
+   * Otherwise, 401.
    *
    * body {
    *  email: email,

@@ -40,6 +40,12 @@ angular.module('reg')
         });
       },
 
+      submitApp: function(id, profile){
+        return $http.put(base + id + '/submit', {
+          profile: profile
+        });
+      },
+
       updateConfirmation: function(id, confirmation){
         return $http.put(base + id + '/confirm', {
           confirmation: confirmation
@@ -77,6 +83,14 @@ angular.module('reg')
 
       admitUser: function(id){
         return $http.post(base + id + '/admit');
+      },
+
+      rejectUser: function(id){
+        return $http.post(base + id + '/reject');
+      },
+
+      waitlistUser: function(id){
+        return $http.post(base + id+ '/waitlist');
       },
 
       checkIn: function(id){

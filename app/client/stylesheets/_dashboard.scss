@@ -50,6 +50,10 @@
       &.declined {
         background: $status-declined-color;
       }
+
+      &.rejected {
+        background: $status-rejected-color;
+      }
     }
   }
 

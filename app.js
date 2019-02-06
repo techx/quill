@@ -18,14 +18,18 @@ var adminConfig     = require('./config/admin');
 var app             = express();
 
 // Connect to mongodb
-mongoose.connect(database);
+mongoose.connect(database, {useNewUrlParser: true});
 
 app.use(morgan('dev'));
 
 app.use(bodyParser.urlencoded({
-  extended: true
+  extended: true,
+  limit: '1mb'
 }));
-app.use(bodyParser.json());
+app.use(bodyParser.json({
+  limit: '1mb'
+}));
+
 
 app.use(methodOverride());
 

@@ -142,6 +142,16 @@ angular.module('reg')
           });
       };
 
+      $scope.updateRejectionText = function() {
+          var text = $scope.settings.rejectionText;
+          SettingsService
+              .updateRejectionText(text)
+              .then(response => {
+                  swal("Looks good!", "Rejection Text Updated", "success");
+                  updateSettings(response.data);
+              });
+      };
+
       $scope.updateConfirmationText = function(){
         var text = $scope.settings.confirmationText;
         SettingsService
