@@ -360,7 +360,7 @@ angular.module('reg')
         } else if (user.admin) {
           return 'Admin';
         } else {
-          return 'Under Review';
+          return 'Waitlisted';
         }
       }
 
