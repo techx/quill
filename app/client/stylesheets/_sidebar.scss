@@ -9,6 +9,13 @@
 
   @include transition-duration($sidebar-transition-time);
 
+  .title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin: 0.5rem 0 0;
+    font-family: $font-headings;
+  }
+
   .item {
     width: 100%;
     padding: 16px;
@@ -36,6 +43,10 @@
     &.logo {
       opacity: 1;
       padding: 48px;
+
+      img {
+        max-width: 100%;
+      }
     }
 
   }
@@ -67,6 +78,10 @@
     @include transition-duration($sidebar-transition-time);
 
     cursor: pointer;
+
+    img {
+      max-width: 100%;
+    }
 
     .close {
       color: white;

@@ -2,12 +2,8 @@
   <div class="container">
     <div class="content">
       <div class="ui segment">
-
-        <div class="logo">
-          <img src="assets/images/logo-color.svg">
-        </div>
-
-        <div class="ui divider"></div>
+        <h1 class="title">HackSC</h1>
+        <p class="subtitle">USC's Premier Hackathon</p>
 
         <div class="ui small error message"
              ng-show="error">
@@ -18,17 +14,15 @@
           <div class="ui login-password form">
             <form ng-submit="login()">
               <div class="field">
-                <label> Email</label>
                 <input type="email"
                        id='email'
-                       placeholder="foo@bar.edu"
+                       placeholder="E-mail"
                        ng-model="email">
               </div>
               <div class="field">
-                <label> Password</label>
                 <input type="password"
                        id='password'
-                       placeholder="Password (at least 6 characters)"
+                       placeholder="Password"
                        ng-model="password" required>
               </div>
               <div class="field">
@@ -42,7 +36,6 @@
           </div>
 
           <div class="ui form" ng-show="regIsOpen">
-            <div class="ui divider"></div>
             <div class="field">
               <button id="register"
                       type="submit"
@@ -58,10 +51,9 @@
           <div class="ui forgot-password form">
             <form ng-submit="sendResetEmail()">
               <div class="field">
-                <label> Email</label>
                 <input type="email"
                        id='email'
-                       placeholder="foo@bar.edu"
+                       placeholder="E-mail"
                        ng-model="email">
               </div>
               <div class="field">
@@ -74,8 +66,6 @@
             </form>
           </div>
         </div>
-
-        <div class="ui divider"></div>
 
         <div ng-show="loginState === 'login'" class="forgot">
           <a href="#" ng-click="setLoginState('forgot')">
