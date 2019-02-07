@@ -1,5 +1,5 @@
 # Quill
-Registration, for hackers!
+USC's version of hackathon registration!
 
 Quill is a registration system designed especially for hackathons. For hackers, it’s a clean and streamlined interface to submit registration and confirmation information. For hackathon organizers, it’s an easy way to manage applications, view registration stats, and more!
 
@@ -20,7 +20,8 @@ Statuses:
 - Submitted, registration closed
 - Admitted / unconfirmed: the user has been admitted to the event, but has not confirmed their attendance and submitted their confirmation form
 - Admitted / confirmation deadline passed: the user has been admitted, but did not confirm their attendance before the deadline
-- Waitlisted: the user was not admitted to the event
+- Rejected: the user was not admitted to the event
+- Waitlisted: the user put on the waitlist for the event
 - Confirmed: the user has been admitted and has confirmed their attendance
 - User declined admission: the user has been admitted, but will not be attending the event
 
@@ -46,7 +47,7 @@ The Stats tab summarizes useful registration statistics on the number of users i
 The Users tab displays a table of users where admins can:
 1. Search for a user by name
 2. Quick-view user applications in a pop-up modal
-3. See a user’s application status (verified, submitted, admitted, and confirmed) at-a-glance
+3. See a user’s application status (submitted, admitted, and confirmed) at-a-glance
 4. See responses to other miscellaneous fields on the application
 5. Open and edit an individual application
 6. Admit users manually
