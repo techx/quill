@@ -95,7 +95,7 @@ angular.module('reg')
       });
 
       $http
-        .get('/assets/expo.json')
+        .get('https://www.jasonbase.com/things/5byP')
         .then(function(res) {
           $scope.schedule = res.data;
         });
