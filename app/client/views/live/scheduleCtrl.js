@@ -95,7 +95,7 @@ angular.module('reg')
       });
 
       $http
-        .get('https://www.jasonbase.com/things/zn84.json')
+        .get('/assets/schedule.json')
         .then(function(res) {
           $scope.schedule = res.data;
         });
