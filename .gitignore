@@ -12,3 +12,6 @@ app/client/build/
 
 # Other
 .idea/
+
+# Ignore env file to prevent accidental commits
+.env 
