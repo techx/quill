@@ -59,7 +59,7 @@
           <p>
             {{ DASHBOARD.UNVERIFIED }}
           </p>
-          <div class="ui purple button" ng-click="resendEmail()">
+          <div class="ui buttonPrimary button" ng-click="resendEmail()">
             Resend verification email
           </div>
         </div>
@@ -94,7 +94,7 @@
             {{ DASHBOARD.INCOMPLETE }}
           </p>
 
-          <div class="ui purple button"
+          <div class="ui buttonPrimary button"
                ui-sref="app.application">
             Complete your application
           </div>
@@ -112,20 +112,20 @@
           <p>
             {{ DASHBOARD.SUBMITTED }}
           </p>
-          <div class="ui purple button"
+          <div class="ui buttonPrimary button"
                ui-sref="app.application">
             View your application
           </div>
 
           <div
-            class="ui pink button"
+            class="ui buttonSecondary button"
             ng-show="!user.teamCode"
             ui-sref="app.team">
             Create or join a team
           </div>
 
           <div
-            class="ui pink button"
+            class="ui buttonSecondary button"
             ng-show="user.teamCode"
             ui-sref="app.team">
             View your Team
