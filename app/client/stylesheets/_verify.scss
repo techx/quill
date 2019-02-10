@@ -11,4 +11,12 @@
       margin-bottom: 36px;
     }
   }
+
+  .continue-btn {
+    background-color: $primary;
+
+    &:hover {
+      background-color: darken($primary, 5%);
+    }
+  }
 }
