@@ -18,6 +18,8 @@ angular.module('reg')
             // Set up the user
             $scope.user = currentUser.data;
 
+            $scope.uscApplicant = $scope.user.email.split('@')[1] === 'usc.edu';
+
             $scope.APPLICATION = APPLICATION;
 
             // Populate the school dropdown
@@ -26,7 +28,7 @@ angular.module('reg')
             populateMajors();
             _setupForm();
 
-            $scope.regIsClosed = Date.now() > settings.data.timeClose || $scope.user.status.submitted;
+            $scope.regIsClosed = ($scope.uscApplicant ? (Date.now() > settings.data.timeCloseUSC) : (Date.now() > settings.data.timeClose)) || $scope.user.status.submitted;
 
             function populateSchools() {
                 $http
@@ -217,6 +219,11 @@ angular.module('reg')
                     return minorsValidation();
                 };
 
+                // Custom resume validation rule
+                $.fn.form.settings.rules.resumeUploaded = function (value) {
+                    return $scope.user.profile.resume !== undefined;
+                };
+
                 // Semantic-UI form validation
                 $('.ui.form').form({
                     inline: true,
@@ -293,6 +300,15 @@ angular.module('reg')
                                 }
                             ]
                         },
+                        resume: {
+                            identifier: 'resume',
+                            rules: [
+                                {
+                                    type: 'resumeUploaded',
+                                    prompt: 'Please upload your resume.'
+                                }
+                            ]
+                        },
                         essay1: {
                             identifier: 'essay1',
                             rules: [
@@ -359,7 +375,7 @@ angular.module('reg')
             };
 
             $scope.submitApp = function () {
-                if ($('.ui.form').form('is valid') && ($scope.user.profile.resume !== undefined)) {
+                if ($('.ui.form').form('is valid')) {
                     swal({
                         title: "Confirm",
                         text: "Are you sure you would like to submit your application? \n\n You can't edit it after submission.",

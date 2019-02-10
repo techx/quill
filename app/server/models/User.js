@@ -25,7 +25,7 @@ var profile = {
                 'Male',
                 'Female',
                 'Other',
-                'No Response'
+                'Prefer not to answer'
             ]
         }
     },
@@ -415,10 +415,31 @@ schema.statics.validateProfile = function (profile, cb) {
     return cb(!(
         profile.firstName.length > 0 &&
         profile.lastName.length > 0 &&
-        ['Male', 'Female', 'Other', 'No Response'].indexOf(profile.gender) > -1 &&
-        ['White / Caucasian', 'Black or African American', 'Native American or Alaska Native', 'Asian / Pacific Islander', 'Hispanic / Latinx', 'Multiracial', 'Other'].indexOf(profile.ethnicity) > -1 &&
+        [
+            'Male',
+            'Female',
+            'Other',
+            'Prefer not to answer'
+        ].indexOf(profile.gender) > -1 &&
+        [
+            'White / Caucasian',
+            'Black or African American',
+            'Native American or Alaska Native',
+            'Asian / Pacific Islander',
+            'Hispanic / Latinx',
+            'Multiracial / Other',
+            'Prefer not to answer'
+        ].indexOf(profile.ethnicity) > -1 &&
         profile.school.length > 0 &&
-        ['2019', '2020', '2021', '2022', 'High School', 'Graduate', 'Other'].indexOf(profile.year) > -1 &&
+        [
+            '2019',
+            '2020',
+            '2021',
+            '2022',
+            'High School',
+            'Graduate',
+            'Other'
+        ].indexOf(profile.year) > -1 &&
         profile.major.length > 0 &&
         profile.resume !== undefined &&
         profile.essay1.length > 0 && profile.essay1.length <= 1500 &&

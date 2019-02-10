@@ -49,10 +49,10 @@ SettingsController.getWhitelistedEmails = function(callback){
  * @param  {Number}   close    Close time in ms
  * @param  {Function} callback args(err, settings)
  */
-SettingsController.updateRegistrationTimes = function(open, close, callback){
+SettingsController.updateRegistrationTimes = function(open, close, closeUSC, callback){
   var updatedTimes = {};
 
-  if (close <= open){
+  if (close <= open || closeUSC <= open){
     return callback({
       message: "Registration cannot close before or at exactly the same time it opens."
     });
@@ -64,6 +64,10 @@ SettingsController.updateRegistrationTimes = function(open, close, callback){
 
   if (close){
     updatedTimes.timeClose = close;
+  }
+
+  if (closeUSC){
+    updatedTimes.timeCloseUSC = closeUSC;
   }
 
   Settings

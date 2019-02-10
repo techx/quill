@@ -24,9 +24,16 @@
 
         <div class="field">
           <label>
-            Closes: {{ formatDate(settings.timeClose) }}
+            Closes (General): {{ formatDate(settings.timeClose) }}
           </label>
           <input type="datetime-local" ng-model="settings.timeClose">
+        </div>
+
+        <div class="field">
+          <label>
+            Closes (USC): {{ formatDate(settings.timeCloseUSC) }}
+          </label>
+          <input type="datetime-local" ng-model="settings.timeCloseUSC">
         </div>
 
         <div class="ui field">
@@ -77,32 +84,34 @@
 </div>
 
 <!-- Additional Options -->
-<div
-ng-class="{'loading': loading}"
-class="ui purple segment">
+<!--Do not allow minors-->
+<!--<div-->
+<!--ng-class="{'loading': loading}"-->
+<!--class="ui purple segment">-->
 
-  <div class="ui header">
-    Additional Options
-  </div>
+  <!--<div class="ui header">-->
+    <!--Additional Options-->
+  <!--</div>-->
 
-  <div class="column">
-    <div class="ui form">
-      <div class="grouped fields">
-        <div class="field">
-          <div class="ui toggle checkbox">
-              <input 
-              type="checkbox"
-              name="allowMinors"
-              ng-class="{true: 'checked', false: ''}[settings.allowMinors]"
-              ng-model="settings.allowMinors"
-              ng-change="updateAllowMinors()">
-              <label>Allow minors</label>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+  <!---->
+  <!--<div class="column">-->
+    <!--<div class="ui form">-->
+      <!--<div class="grouped fields">-->
+        <!--<div class="field">-->
+          <!--<div class="ui toggle checkbox">-->
+              <!--<input -->
+              <!--type="checkbox"-->
+              <!--name="allowMinors"-->
+              <!--ng-class="{true: 'checked', false: ''}[settings.allowMinors]"-->
+              <!--ng-model="settings.allowMinors"-->
+              <!--ng-change="updateAllowMinors()">-->
+              <!--<label>Allow minors</label>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
 
 <!-- Whitelist -->
 <div

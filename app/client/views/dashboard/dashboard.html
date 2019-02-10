@@ -14,7 +14,7 @@
         <div
           class="state"
           ng-class="user.status.name"
-          ng-if="!showWaitlist && !dashState('admittedAndCannotConfirm')">
+          ng-if="!showRejected && !showWaitlist && !dashState('admittedAndCannotConfirm')">
           {{user.status.name}}
         </div>
 
@@ -66,11 +66,20 @@
 
         <div
           ng-class="settings.timeClose"
-          ng-if="!dashState('admittedAndCanConfirm') || !dashState('admittedAndCannotConfirm') || !dashState('confirmed') || !dashState('declined')">
+          ng-if="!uscApplicant && !(dashState('admittedAndCanConfirm') || dashState('admittedAndCannotConfirm') || dashState('rejected') || dashState('waitlisted') || dashState('confirmed') || dashState('declined'))">
           <strong>
             Registration Deadline:
           </strong>
           {{ timeClose }}
+        </div>
+
+        <div
+          ng-class="settings.timeCloseUSC"
+          ng-if="uscApplicant && !(dashState('admittedAndCanConfirm') || dashState('admittedAndCannotConfirm') || dashState('rejected') || dashState('waitlisted') || dashState('confirmed') || dashState('declined'))">
+          <strong>
+            Registration Deadline:
+          </strong>
+          {{ timeCloseUSC }}
         </div>
 
         <div
@@ -191,12 +200,12 @@
             </h4>
           </div>
 
-          <div class="ui purple button"
+          <div class="ui buttonPrimary button"
                ui-sref="app.confirmation">
             Confirm your spot
           </div>
 
-          <div class="ui red button"
+          <div class="ui buttonTertiary button"
                ng-click="declineAdmission()">
             Sorry, I can't make it
           </div>
@@ -278,12 +287,12 @@
             ng-bind-html="confirmationText">
           </div>
 
-          <div class="ui purple button"
+          <div class="ui buttonPrimary button"
                ui-sref="app.confirmation">
             {{pastConfirmation ? 'View' : 'Edit'}} your confirmation information
           </div>
 
-          <div class="ui red button"
+          <div class="ui buttonTertiary button"
                ng-click="declineAdmission()">
             Sorry, I can't make it
           </div>
