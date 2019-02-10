@@ -110,7 +110,7 @@
             </strong>
           </p>
           <p>
-            {{ DASHBOARD.SUBMITTED }}
+            {{ DASHBOARD.SUBMITTED_BEFORE_DEADLINE }}
           </p>
           <div class="ui buttonPrimary button"
                ui-sref="app.application">
@@ -150,20 +150,20 @@
           class="description" >
           <p>
             <strong>
-              {{ DASHBOARD.SUBMITTED }}
+              {{ DASHBOARD.SUBMITTED_TITLE }}
             </strong>
           </p>
           <p>
-            {{ DASHBOARD.SUBMITTED }}
+            {{ DASHBOARD.SUBMITTED_AFTER_DEADLINE }}
           </p>
 
-          <div class="ui purple button"
+          <div class="ui buttonPrimary button"
                ui-sref="app.application">
             View your application
           </div>
 
           <div
-            class="ui pink button"
+            class="ui buttonSecondary button"
             ng-show="user.teamCode"
             ui-sref="app.team">
             View your Team
