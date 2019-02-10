@@ -37,7 +37,7 @@
 
           <div class="field">
             <button
-              class="ui fluid pink button"
+              class="ui fluid buttonPrimary button"
               ng-click="joinTeam()">
               Join or Create Team
             </button>
@@ -70,7 +70,7 @@
           <p
             ng-repeat="user in teammates"
             class="item">
-            {{user.profile.name || 'Somebody (has not filled out their profile!)'}}
+            {{(user.profile.firstName + " " + user.profile.lastName) || 'Somebody (has not filled out their profile!)'}}
           </p>
 
           <div
@@ -78,7 +78,7 @@
             <div class="ui divider"></div>
 
             <button
-              class="ui fluid red button"
+              class="ui fluid buttonPrimary button"
               ng-click="leaveTeam()">Leave Team</button>
           </div>
 

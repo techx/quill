@@ -10,4 +10,19 @@
   .subheader {
     word-wrap: break-word;
   }
+
+  .buttonPrimary{
+    background-color: $brand-primary;
+    color: white;
+  }
+
+  .buttonSecondary{
+    background-color: $brand-secondary;
+    color: white
+  }
+
+  .buttonTertiary{
+    background-color: $brand-tertiary;
+    color: white;
+  }
 }

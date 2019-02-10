@@ -4,7 +4,7 @@ var {Readable} = require('stream');
 var file = {};
 
 var CLIENT_EMAIL = process.env.CLIENT_EMAIL;
-var PRIVATE_KEY = JSON.parse(process.env.PRIVATE_KEY);
+var PRIVATE_KEY = (process.env.NODE_ENV === 'production') ? JSON.parse(process.env.PRIVATE_KEY) : process.env.PRIVATE_KEY;
 var scopes = [
     'https://www.googleapis.com/auth/drive.file'
 ];

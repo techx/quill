@@ -35,7 +35,7 @@
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
                             <option value="Other">Other</option>
-                            <option value="No Response">I prefer not to answer.</option>
+                            <option value="No Response">Prefer not to answer</option>
                         </select>
                     </div>
 
@@ -45,13 +45,13 @@
                                 id="ethnicity"
                                 ng-model="user.profile.ethnicity">
                             <option value=""></option>
-                            <option value="White">White</option>
+                            <option value="White / Caucasian">White / Caucasian</option>
                             <option value="Black or African American">Black or African American</option>
                             <option value="Native American or Alaska Native">Native American or Alaska Native</option>
-                            <option value="Asian or Pacific Islander">Asian or Pacific Islander</option>
-                            <option value="Hispanic/Latinx">Hispanic/Latinx</option>
-                            <option value="Multiracial">Multiracial</option>
-                            <option value="Other">Other</option>
+                            <option value="Asian / Pacific Islander">Asian / Pacific Islander</option>
+                            <option value="Hispanic / Latinx">Hispanic / Latinx</option>
+                            <option value="Multiracial / Other">Multiracial / Other</option>
+                            <option value="Prefer not to answer">Prefer not to answer</option>
                         </select>
                     </div>
 
@@ -114,14 +114,20 @@
                     </div>
 
                     <div class="field">
-                        <label> Resume </label>
-                        <label for="resume" class="resumeInput"> Upload </label>
-                        <!--Angular does not support binding for file inputs so we have to manually call upload-->
-                        <input type="file" style="display:none"
-                               id="resume" name="resume" onchange="angular.element(this).scope().uploadFile(this)"/>
-                        <br>
-                        <div ng-class="{'loading' : fileLoading}">
+                        <label> Resume</label>
+                        <div class=""
+                             ng-class="{'loading' : fileLoading}">
+                            <label for="resume" class="resumeInput"> Upload </label>
+                            <!--Angular does not support binding for file inputs so we have to manually call upload-->
+                            <input type="file"
+                                   style="display:none"
+                                   accept="application/pdf"
+                                   id="resume"
+                                   name="resume"
+                                   onchange="angular.element(this).scope().uploadFile(this)"/>
                             <a ng-href="{{user.profile.resume.link}}" target="_blank">{{user.profile.resume.name}}</a>
+                            <br>
+                            <span class="asterisk">*pdf only</span>
                         </div>
                     </div>
 
@@ -134,6 +140,7 @@
                                 ng-model="user.profile.essay1"
                                 placeholder="{{ APPLICATION.ESSAY1_PLACEHOLDER }}">
                         </textarea>
+                        <span class="characterCount">{{user.profile.essay1.length ? user.profile.essay1.length : 0}}/1500</span>
                     </div>
 
                     <div class="field">
@@ -143,6 +150,7 @@
                                 ng-model="user.profile.essay2"
                                 placeholder="{{ APPLICATION.ESSAY2_PLACEHOLDER }}">
                         </textarea>
+                        <span class="characterCount">{{user.profile.essay2.length ? user.profile.essay2.length : 0}}/1500</span>
                     </div>
 
                     <div class="field">
@@ -153,6 +161,29 @@
                                 ng-model="user.profile.essay3"
                                 placeholder="{{ APPLICATION.ESSAY3_PLACEHOLDER }}">
                     </div>
+
+                    <div class="field">
+                        <label>LinkedIn (Optional)</label>
+                        <input
+                                type="text"
+                                ng-model="user.profile.linkedin">
+                    </div>
+
+                    <div class="field">
+                        <label>Github (Optional)</label>
+                        <input
+                                type="text"
+                                ng-model="user.profile.github">
+                    </div>
+
+                    <div class="field">
+                        <label>Other (Optional)</label>
+                        <input
+                                type="text"
+                                ng-model="user.profile.other">
+                    </div>
+
+                    <br>
 
                     <div class="divided title">Transportation</div>
 
@@ -173,13 +204,8 @@
                     <div class="field">
                         <p>
                             Because of limitations imposed by USC, we are not legally allowed to host
-                            minors (those under 18) for HackSC 2019. Checking the box below affirms that you are or will
-                            be 18 years or older by April 12-14, 2019.
-                        </p>
-                        <p>
-                            <strong>
-                                We will be checking ID. If you are a minor, you will be turned away at the door.
-                            </strong>
+                            minors (those under 18) for HackSC. Checking the box below affirms that you are or will
+                            be 18 years or older by April 12, 2019. <strong>We will be checking ID.</strong>
                         </p>
                         <div class="ui checkbox">
                             <input type="checkbox" id="adult" ng-model="user.profile.adult">
@@ -191,7 +217,7 @@
                         <div class="ui checkbox">
                             <input type="checkbox" id="mlh" ng-model="user.profile.mlh">
                             <label for="mlh">
-                                I agree to and acknowledge the
+                                I have read and agree to the
                                 <a target="_blank" href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf">
                                     MLH Code of Conduct
                                 </a>
@@ -203,8 +229,7 @@
                                 and the
                                 <a target="_blank" href="https://mlh.io/privacy">
                                     MLH Privacy Policy
-                                </a>
-                                . Please note that you may receive e-mails and messages as per the MLH Privacy Policy. *
+                                </a>.
                             </label>
                         </div>
                     </div>
@@ -214,7 +239,8 @@
                     <div class="field">
                         <div class="field btn" ng-hide="regIsClosed">
                             <button type="submit"
-                                    class="fluid ui purple button"
+                                    id="update"
+                                    class="fluid ui button"
                                     ng-click="updateProfile()">
                                 Update
                             </button>
@@ -222,7 +248,8 @@
 
                         <div class="field btn" ng-hide="regIsClosed">
                             <button type="submit"
-                                    class="fluid ui blue button"
+                                    id="submit"
+                                    class="fluid ui button"
                                     ng-click="submitApp()">
                                 Submit
                             </button>

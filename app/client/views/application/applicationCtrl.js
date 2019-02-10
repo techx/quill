@@ -28,9 +28,6 @@ angular.module('reg')
 
             $scope.regIsClosed = Date.now() > settings.data.timeClose || $scope.user.status.submitted;
 
-            /**
-             * TODO: JANK WARNING
-             */
             function populateSchools() {
                 $http
                     .get('/assets/schools.json')
@@ -94,14 +91,24 @@ angular.module('reg')
             }
 
             $scope.uploadFile = function (event) {
+                // Check null
                 if (event.files.length < 1) {
                     return;
                 }
                 var file = event.files[0];
+
+                // Check type
+                if (file.name.split('.').pop() !== 'pdf'){
+                    swal("Incorrect File Type", "Please select a pdf file!", "error");
+                    return;
+                }
+
+                // Check size
                 if (file.size > 1000000) {
                     swal("Exceeded Maximum File Size", "Please select a file smaller or equal to 1mb.", "error");
                     return;
                 }
+
                 var reader = new FileReader();
 
                 // Read the file and attempt to upload
@@ -291,11 +298,11 @@ angular.module('reg')
                             rules: [
                                 {
                                     type: 'empty',
-                                    prompt: 'Your response should be between 1 and 1000 characters.'
+                                    prompt: 'Your response should be between 1 and 1500 characters.'
                                 },
                                 {
-                                    type: 'maxLength[1000]',
-                                    prompt: 'Your response should be between 1 and 1000 characters.'
+                                    type: 'maxLength[1500]',
+                                    prompt: 'Your response should be between 1 and 1500 characters.'
                                 }
                             ]
                         },
@@ -304,11 +311,11 @@ angular.module('reg')
                             rules: [
                                 {
                                     type: 'empty',
-                                    prompt: 'Your response should be between 1 and 1000 characters.'
+                                    prompt: 'Your response should be between 1 and 1500 characters.'
                                 },
                                 {
-                                    type: 'maxLength[1000]',
-                                    prompt: 'Your response should be between 1 and 1000 characters.'
+                                    type: 'maxLength[1500]',
+                                    prompt: 'Your response should be between 1 and 1500 characters.'
                                 }
                             ]
                         },
@@ -317,11 +324,11 @@ angular.module('reg')
                             rules: [
                                 {
                                     type: 'empty',
-                                    prompt: 'Your response should be between 1 and 100 characters.'
+                                    prompt: 'Your response should be between 1 and 500 characters.'
                                 },
                                 {
-                                    type: 'maxLength[100]',
-                                    prompt: 'Your response should be between 1 and 100 characters.'
+                                    type: 'maxLength[500]',
+                                    prompt: 'Your response should be between 1 and 500 characters.'
                                 }
                             ]
                         },

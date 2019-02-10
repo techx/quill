@@ -34,13 +34,13 @@ var profile = {
         type: String,
         enum: {
             values: [
-                'White',
+                'White / Caucasian',
                 'Black or African American',
                 'Native American or Alaska Native',
-                'Asian or Pacific Islander',
-                'Hispanic/Latinx',
-                'Multiracial',
-                'Other'
+                'Asian / Pacific Islander',
+                'Hispanic / Latinx',
+                'Multiracial / Other',
+                'Prefer not to answer'
             ]
         }
     },
@@ -92,20 +92,24 @@ var profile = {
     essay1: {
         type: String,
         min: 1,
-        max: 1000
+        max: 1500
     },
 
     essay2: {
         type: String,
         min: 1,
-        max: 1000
+        max: 1500
     },
 
     essay3: {
         type: String,
         min: 1,
-        max: 100
+        max: 500
     },
+
+    linkedin: String,
+    github: String,
+    other: String,
 
     transportation: {
         type: Boolean,
@@ -412,14 +416,14 @@ schema.statics.validateProfile = function (profile, cb) {
         profile.firstName.length > 0 &&
         profile.lastName.length > 0 &&
         ['Male', 'Female', 'Other', 'No Response'].indexOf(profile.gender) > -1 &&
-        ['White', 'Black or African American', 'Native American or Alaska Native', 'Asian or Pacific Islander', 'Hispanic/Latinx', 'Multiracial', 'Other'].indexOf(profile.ethnicity) > -1 &&
+        ['White / Caucasian', 'Black or African American', 'Native American or Alaska Native', 'Asian / Pacific Islander', 'Hispanic / Latinx', 'Multiracial', 'Other'].indexOf(profile.ethnicity) > -1 &&
         profile.school.length > 0 &&
         ['2019', '2020', '2021', '2022', 'High School', 'Graduate', 'Other'].indexOf(profile.year) > -1 &&
         profile.major.length > 0 &&
         profile.resume !== undefined &&
-        profile.essay1.length > 0 && profile.essay1.length <= 1000 &&
-        profile.essay2.length > 0 && profile.essay2.length <= 1000 &&
-        profile.essay3.length > 0 && profile.essay3.length <= 100 &&
+        profile.essay1.length > 0 && profile.essay1.length <= 1500 &&
+        profile.essay2.length > 0 && profile.essay2.length <= 1500 &&
+        profile.essay3.length > 0 && profile.essay3.length <= 500 &&
         profile.adult &&
         profile.mlh
     ));
