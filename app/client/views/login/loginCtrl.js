@@ -45,6 +45,12 @@ angular.module('reg')
 
       $scope.sendResetEmail = function() {
         var email = $scope.email;
+        
+        if (email === undefined || email === ''){
+          $scope.error = "Please enter in a valid e-mail!";
+          return;
+        }
+
         AuthService.sendResetEmail(email);
         swal("Don't sweat!", "An email should be sent to you shortly.", "success");
       };

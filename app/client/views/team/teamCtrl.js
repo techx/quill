@@ -30,6 +30,13 @@ angular.module('reg')
       }
 
       $scope.joinTeam = function(){
+        var code = $scope.code;
+
+        if (code === undefined || code === '') {
+          $scope.error = 'Please enter a team name.';
+          return;
+        }
+
         UserService
           .joinOrCreateTeam($scope.code)
           .then(response => {
