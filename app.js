@@ -17,6 +17,12 @@ var adminConfig     = require('./config/admin');
 
 var app             = express();
 
+// Enforce HTTPS on production
+if (process.env.NODE_ENV === 'production') {
+  var enforce         = require('express-sslify');
+  app.use(enforce.HTTPS({ trustProtoHeader: true }));
+}
+
 // Connect to mongodb
 mongoose.connect(database, {useNewUrlParser: true});
 
