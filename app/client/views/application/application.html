@@ -35,7 +35,7 @@
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
                             <option value="Other">Other</option>
-                            <option value="No Response">Prefer not to answer</option>
+                            <option value="Prefer not to answer">Prefer not to answer</option>
                         </select>
                     </div>
 
@@ -102,33 +102,32 @@
                     </div>
 
                     <div class="field">
-                        <label> Level of Experience </label>
+                        <label> Hackathon Experience </label>
                         <select
                                 id="experience"
                                 ng-model="user.profile.experience">
                             <option value=""></option>
-                            <option value="Beginner">Beginner</option>
-                            <option value="Intermediate">Intermediate</option>
-                            <option value="Advanced">Advanced</option>
+                            <option value="Beginner">I've never been to a hackathon</option>
+                            <option value="Intermediate">I've been to a few hackathons</option>
+                            <option value="Advanced">I've been to many and/or have won competitions</option>
                         </select>
+                        <span class="asterisk">HackSC is an all-inclusive place that welcomes all experience levels. Don't be worried if you've never been to a hackathon before!</span>
                     </div>
 
                     <div class="field">
                         <label> Resume</label>
-                        <div class=""
-                             ng-class="{'loading' : fileLoading}">
-                            <label for="resume" class="resumeInput"> Upload </label>
-                            <!--Angular does not support binding for file inputs so we have to manually call upload-->
-                            <input type="file"
-                                   style="display:none"
-                                   accept="application/pdf"
-                                   id="resume"
-                                   name="resume"
-                                   onchange="angular.element(this).scope().uploadFile(this)"/>
-                            <a ng-href="{{user.profile.resume.link}}" target="_blank">{{user.profile.resume.name}}</a>
-                            <br>
-                            <span class="asterisk">*pdf only</span>
-                        </div>
+                        <label for="resume" class="resumeInput"> Upload </label>
+                        <!--Angular does not support binding for file inputs so we have to manually call upload-->
+                        <input type="file"
+                               style="display:none"
+                               accept="application/pdf"
+                               id="resume"
+                               name="resume"
+                               onchange="angular.element(this).scope().uploadFile(this)"/>
+                        <span ng-show="fileLoading">Uploading...</span>
+                        <a ng-href="{{user.profile.resume.link}}" target="_blank">{{user.profile.resume.name}}</a>
+                        <br>
+                        <span class="asterisk">*pdf only</span>
                     </div>
 
                     <div class="divided title">Short Response</div>
@@ -160,6 +159,8 @@
                                 id="essay3"
                                 ng-model="user.profile.essay3"
                                 placeholder="{{ APPLICATION.ESSAY3_PLACEHOLDER }}">
+                        <span class="characterCount">{{user.profile.essay3.length ? user.profile.essay3.length : 0}}/500</span>
+
                     </div>
 
                     <div class="field">
@@ -190,7 +191,7 @@
                     <div class="field">
                         <p>
                             We will be sending busses to and from HackSC for schools in California.
-                            There is no guarantee we will send a bus to your school, but we will consider it based on
+                            There is no guarantee we will send a bus to your school, but we will consider based on
                             interest.
                         </p>
                         <div class="ui checkbox">
@@ -204,15 +205,15 @@
                     <div class="field">
                         <p>
                             Because of limitations imposed by USC, we are not legally allowed to host
-                            minors (those under 18) for HackSC. Checking the box below affirms that you are or will
-                            be 18 years or older by April 12, 2019. <strong>We will be checking ID.</strong>
+                            minors (those under 18) for HackSC. Checking the box below confirms that you are or will
+                            be 18 years or older by April 12th, 2019.
+                            <br><strong>We will be checking IDs.</strong>
                         </p>
                         <div class="ui checkbox">
                             <input type="checkbox" id="adult" ng-model="user.profile.adult">
-                            <label for="adult">I will be 18 or older by April 12, 2019.</label>
+                            <label for="adult">I will be 18 or older by April 12th, 2019.</label>
                         </div>
                     </div>
-
                     <div class="field">
                         <div class="ui checkbox">
                             <input type="checkbox" id="mlh" ng-model="user.profile.mlh">
@@ -238,7 +239,7 @@
 
                     <div class="field">
                         <div class="field btn" ng-hide="regIsClosed">
-                            <button type="submit"
+                            <button
                                     id="update"
                                     class="fluid ui button"
                                     ng-click="updateProfile()">
@@ -247,9 +248,9 @@
                         </div>
 
                         <div class="field btn" ng-hide="regIsClosed">
-                            <button type="submit"
+                            <button
                                     id="submit"
-                                    class="fluid ui button"
+                                    class="fluid ui primary submit button"
                                     ng-click="submitApp()">
                                 Submit
                             </button>

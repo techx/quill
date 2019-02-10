@@ -13,7 +13,6 @@ angular.module('reg')
 
             // Set up the user
             $scope.selectedUser = User.data;
-            console.log($scope.selectedUser.status);
 
             $scope.APPLICATION = APPLICATION;
 
@@ -91,14 +90,24 @@ angular.module('reg')
             }
 
             $scope.uploadFile = function (event) {
+                // Check null
                 if (event.files.length < 1) {
                     return;
                 }
                 var file = event.files[0];
+
+                // Check type
+                if (file.name.split('.').pop() !== 'pdf'){
+                    swal("Incorrect File Type", "Please select a pdf file!", "error");
+                    return;
+                }
+
+                // Check size
                 if (file.size > 1000000) {
                     swal("Exceeded Maximum File Size", "Please select a file smaller or equal to 1mb.", "error");
                     return;
                 }
+
                 var reader = new FileReader();
 
                 // Read the file and attempt to upload

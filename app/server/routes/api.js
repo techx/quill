@@ -431,7 +431,8 @@ module.exports = function(router) {
   router.put('/settings/times', isAdmin, function(req, res){
     var open = req.body.timeOpen;
     var close = req.body.timeClose;
-    SettingsController.updateRegistrationTimes(open, close, defaultResponse(req, res));
+    var closeUSC = req.body.timeCloseUSC;
+    SettingsController.updateRegistrationTimes(open, close, closeUSC, defaultResponse(req, res));
   });
 
   /**

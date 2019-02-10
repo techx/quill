@@ -87,17 +87,17 @@
         <div class="actions">
           <div class="three column centered row">
             <div class="ui positive labeled icon button column"
-                 ng-click="admitUser($event, user, $index)">
+                 ng-click="admitUser($event, selectedUser, $index)">
               Admit
               <i class="checkmark icon"></i>
             </div>
             <div class="ui negative labeled icon button column"
-                 ng-click="rejectUser($event, user, $index)">
+                 ng-click="rejectUser($event, selectedUser, $index)">
               Reject
               <i class="remove icon"></i>
             </div>
             <div class="ui neutral labeled icon button column"
-                 ng-click="waitlistUser($event, user, $index)">
+                 ng-click="waitlistUser($event, selectedUser, $index)">
               Waitlist
               <i class="wait icon"></i>
             </div>

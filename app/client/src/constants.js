@@ -7,13 +7,14 @@ angular.module('reg')
     .constant('DASHBOARD', {
         UNVERIFIED: 'You should have received an email asking you verify your email. Click the link in the email and you can start your application!',
         INCOMPLETE_TITLE: 'You still need to complete your application!',
-        INCOMPLETE: 'If you do not complete your application before the [APP_DEADLINE], you will not be considered for admissions.',
+        INCOMPLETE: 'If you do not complete your application before [APP_DEADLINE], you will not be considered for admissions.',
         SUBMITTED_TITLE: 'Your application has been submitted!',
         SUBMITTED_BEFORE_DEADLINE: 'Feel free to view it at any time. You can also form a team any time before [APP_DEADLINE]',
         SUBMITTED_AFTER_DEADLINE: 'Feel free to view it at any time. Reviews are now underway, and decisions should come out soon!',
         CLOSED_AND_INCOMPLETE_TITLE: 'Unfortunately, the application window has closed.',
         CLOSED_AND_INCOMPLETE: 'Because you have not submitted your application in time, you will not be eligible to attend the HackSC 2019.',
         ADMITTED_AND_CAN_CONFIRM_TITLE: 'You must confirm by [CONFIRM_DEADLINE].',
+        ADMITTED_AND_CAN_CONFIRM: '',
         ADMITTED_AND_CANNOT_CONFIRM_TITLE: 'Your confirmation deadline of [CONFIRM_DEADLINE] has passed.',
         ADMITTED_AND_CANNOT_CONFIRM: 'Although you were accepted, you did not complete your confirmation in time.\nUnfortunately, this means that you will not be able to attend the event, as we must begin to accept other applicants on the waitlist.\nWe hope to see you again next year!',
         CONFIRMED_NOT_PAST_TITLE: 'You can edit your confirmation information until [CONFIRM_DEADLINE]',
@@ -28,7 +29,7 @@ angular.module('reg')
         ESSAY1_PLACEHOLDER: '',
         ESSAY2_TITLE: 'Tell us about one of your projects (technical or non-technical) that you\'re most proud of.',
         ESSAY2_PLACEHOLDER: '',
-        ESSAY3_TITLE: 'Tell us a fun fact about yourself!',
+        ESSAY3_TITLE: 'What is something you\'d like to see in the next 10 years?',
         ESSAY3_PLACEHOLDER: ''
     })
     .constant('TEAM',{

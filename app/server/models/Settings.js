@@ -12,15 +12,19 @@ var schema = new mongoose.Schema({
   status: String,
   timeOpen: {
     type: Number,
-    default: 0
+    default: Date.now()
   },
   timeClose: {
     type: Number,
     default: Date.now() + 31104000000 // Add a year from now.
   },
+  timeCloseUSC: {
+    type: Number,
+    default: Date.now() + 31104000000 // Add a year from now.
+  },
   timeConfirm: {
     type: Number,
-    default: 604800000 // Date of confirmation
+    default: Date.now() + (2*31104000000) // Date of confirmation
   },
   whitelistedEmails: {
     type: [String],
@@ -70,6 +74,7 @@ schema.statics.getRegistrationTimes = function(callback){
       callback(err, {
         timeOpen: settings.timeOpen,
         timeClose: settings.timeClose,
+        timeCloseUSC: settings.timeCloseUSC,
         timeConfirm: settings.timeConfirm
       });
     });
