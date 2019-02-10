@@ -270,7 +270,7 @@ h4{
 }
 
 .pink.button {
-  background: #e76482;
+  background: #EF5144;
   padding: 12px 24px;
   color: white;
   text-decoration: none;
@@ -316,6 +316,7 @@ h4{
   /*@editable*/ color:#606060;
   /*@editable*/ font-weight:normal;
   /*@editable*/ text-decoration:underline;
+  padding-right: 5px;
 }
 
 /* /\/\/\/\/\/\/\/\/ MOBILE STYLES /\/\/\/\/\/\/\/\/ */
