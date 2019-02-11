@@ -107,6 +107,8 @@ var profile = {
         max: 500
     },
 
+    skills: String,
+    
     linkedin: String,
     github: String,
     other: String,
