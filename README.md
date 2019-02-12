@@ -1,4 +1,4 @@
-# Quill
+# USC Quill
 USC's version of hackathon registration!
 
 Quill is a registration system designed especially for hackathons. For hackers, it’s a clean and streamlined interface to submit registration and confirmation information. For hackathon organizers, it’s an easy way to manage applications, view registration stats, and more!
@@ -128,7 +128,7 @@ To customize the verification and confirmation emails for your event, put your n
 Contributions to Quill are welcome and appreciated! Please take a look at [`CONTRIBUTING.md`][contribute] first.
 
 # Feedback / Questions
-If you have any questions about this software, please contact [quill@hackmit.org][email].
+If you have any questions about this software, please contact [team@hacksc.com][email] and the wonderful creators [quill@hackmit.org][email].
 
 # License
 Copyright (c) 2015-2016 Edwin Zhang (https://github.com/ehzhang). Released under AGPLv3. See [`LICENSE.txt`][license] for details.
