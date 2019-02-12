@@ -12,7 +12,7 @@ angular.module('reg')
         SUBMITTED_BEFORE_DEADLINE: 'Feel free to view it at any time. You can also form a team any time before [APP_DEADLINE]',
         SUBMITTED_AFTER_DEADLINE: 'Feel free to view it at any time. Reviews are now underway, and decisions should come out soon!',
         CLOSED_AND_INCOMPLETE_TITLE: 'Unfortunately, the application window has closed.',
-        CLOSED_AND_INCOMPLETE: 'Because you have not submitted your application in time, you will not be eligible to attend the HackSC 2019.',
+        CLOSED_AND_INCOMPLETE: 'Because you have not submitted your application in time, you will not be eligible to attend HackSC 2019.',
         ADMITTED_AND_CAN_CONFIRM_TITLE: 'You must confirm by [CONFIRM_DEADLINE].',
         ADMITTED_AND_CAN_CONFIRM: '',
         ADMITTED_AND_CANNOT_CONFIRM_TITLE: 'Your confirmation deadline of [CONFIRM_DEADLINE] has passed.',
