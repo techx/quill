@@ -4,16 +4,19 @@
   <section id="hero" class="center">
     <div class="logo-header-container ui grid mobile only tablet only">
       <div class="logo-header logo-cog">
-        <img src="../assets/images/logo-cog.svg">
+        <img src="../assets/images/logo-cog.svg" />
       </div>
       <div class="logo-header">
-        <img src="../assets/images/logo-anteater.svg">
+        <img src="../assets/images/logo-anteater.svg" />
       </div>
     </div>
-    
+
     <div class="countdown-container">
       <span class="countdown-segment">
-        <span class="countdown countdown--bold" ng-style="{ 'opacity' : countdownOpacity }">
+        <span
+          class="countdown countdown--bold"
+          ng-style="{ 'opacity' : countdownOpacity }"
+        >
           {{ hours }}
         </span>
         <span class="countdown" ng-style="{ 'opacity' : countdownOpacity }">
@@ -21,7 +24,10 @@
         </span>
       </span>
       <span class="countdown-segment">
-        <span class="countdown countdown--bold countdown--fixed" ng-style="{ 'opacity' : countdownOpacity }">
+        <span
+          class="countdown countdown--bold countdown--fixed"
+          ng-style="{ 'opacity' : countdownOpacity }"
+        >
           {{ minutes }}
         </span>
         <span class="countdown" ng-style="{ 'opacity' : countdownOpacity }">
@@ -29,7 +35,10 @@
         </span>
       </span>
       <span class="countdown-segment">
-        <span class="countdown countdown--bold countdown--fixed" ng-style="{ 'opacity' : countdownOpacity }">
+        <span
+          class="countdown countdown--bold countdown--fixed"
+          ng-style="{ 'opacity' : countdownOpacity }"
+        >
           {{ seconds }}
         </span>
         <span class="countdown" ng-style="{ 'opacity' : countdownOpacity }">
@@ -39,8 +48,28 @@
     </div>
 
     <div class="hero-border">
-      <svg version="1.1" id="circle" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1920 380" xml:space="preserve" preserveAspectRatio="none">
-        <path fill="#f2f1f7" d="M0,309c0,0,340,70.8,960,70.8c620,0.2,960-70.8,960-70.8v71H0" transform="translate(0 1)"></path>
+      <svg
+        version="1.1"
+        id="circle"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        x="0px"
+        y="0px"
+        viewBox="0 0 1920 380"
+        xml:space="preserve"
+        preserveAspectRatio="none"
+      >
+        <defs>
+          <linearGradient id="backgroundGradient">
+            <stop offset="5%" stop-color="#2a2a2a" />
+            <stop offset="95%" stop-color="#191919" />
+          </linearGradient>
+        </defs>
+        <path
+          fill="url(#backgroundGradient)"
+          d="M0,309c0,0,340,70.8,960,70.8c620,0.2,960-70.8,960-70.8v71H0"
+          transform="translate(0 1)"
+        ></path>
       </svg>
     </div>
   </section>

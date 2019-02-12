@@ -95,7 +95,7 @@ angular.module('reg')
       });
 
       $http
-        .get('https://www.jasonbase.com/things/zn84.json')
+        .get('https://www.jasonbase.com/things/3w2a')
         .then(function(res) {
           $scope.schedule = res.data;
         });
