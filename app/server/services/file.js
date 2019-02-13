@@ -61,14 +61,12 @@ file.upload = function (metadata, file, callback) {
             }
         }, (err, data) => {
             if(err){
-                console.log(err);
                 callback(err);
             }else{
                 callback(null, fileData);
             }
         })
     }, (err) => {
-        console.log(err);
         callback(err);
     });
 };

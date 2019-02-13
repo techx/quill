@@ -21,7 +21,7 @@
       </span>
     </p>
     <p>
-      <strong> Reviewed by: </strong> {{selectedUser.status.reviewedBy ? selectedUser.status.reviewedBy : 'Not Reviewed'}}
+      <strong> Reviewed by: </strong> {{(selectedUser.status.reviewedBy ? selectedUser.status.reviewedBy : 'Not Reviewed')}}
     </p>
   </div>
 
@@ -221,6 +221,16 @@
                 placeholder="{{ APPLICATION.ESSAY3_PLACEHOLDER }}">
         <span class="characterCount">{{selectedUser.profile.essay3.length ? selectedUser.profile.essay3.length : 0}}/500</span>
 
+      </div>
+
+      <div class="field">
+        <label>Skills and Technologies (Optional)</label>
+        <textarea
+                type="text"
+                ng-model="selectedUser.profile.skills"
+                class="skills">
+        </textarea>
+        <span class="asterisk">Enter skills and technologies you know using a comma separated list</span>
       </div>
 
       <div class="field">

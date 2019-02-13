@@ -103,8 +103,8 @@ angular.module('reg')
                 }
 
                 // Check size
-                if (file.size > 1000000) {
-                    swal("Exceeded Maximum File Size", "Please select a file smaller or equal to 1mb.", "error");
+                if (file.size > 2000000) {
+                    swal("Exceeded Maximum File Size", "Please select a file smaller or equal to 2mb.", "error");
                     return;
                 }
 
@@ -112,6 +112,11 @@ angular.module('reg')
 
                 // Read the file and attempt to upload
                 reader.onloadend = function () {
+                    // check metadata
+                    if(file.type !== 'application/pdf'){
+                        swal("Incorrect File Type", "Please select a pdf file!", "error");
+                        return;
+                    }
                     var metadata = {
                         name: file.name,
                         type: file.type
@@ -133,7 +138,7 @@ angular.module('reg')
             function _uploadFile(metadata, file) {
                 $scope.fileLoading = true;
                 FileService
-                    .uploadFile(Session.getUserId(), metadata, file)
+                    .uploadFile($scope.selectedUser._id, metadata, file)
                     .then((response) => {
                             var data = response.data;
                             $scope.selectedUser.profile.resume = {
@@ -153,7 +158,7 @@ angular.module('reg')
             function _updateFile(metadata, file) {
                 $scope.fileLoading = true;
                 FileService
-                    .updateFile(Session.getUserId(), $scope.selectedUser.profile.resume.id, metadata, file)
+                    .updateFile($scope.selectedUser._id, $scope.selectedUser.profile.resume.id, metadata, file)
                     .then((response) => {
                             var data = response.data;
                             $scope.selectedUser.profile.resume = {
@@ -172,7 +177,7 @@ angular.module('reg')
 
             function _updateUser(e) {
                 UserService
-                    .updateProfile(Session.getUserId(), $scope.selectedUser.profile)
+                    .updateProfile($scope.selectedUser._id, $scope.selectedUser.profile)
                     .then(response => {
                         swal("Awesome!", "Your application has been saved.", "success").then(value => {
                             // do nothing - stay on same page
