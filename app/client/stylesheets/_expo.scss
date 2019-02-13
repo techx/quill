@@ -20,12 +20,7 @@
 
   #hero::before {
     content: "";
-    background-image: linear-gradient(
-      to bottom right,
-      #02ccba 0%,
-      #3d99be 31%,
-      #9848d5 100%
-    );
+    background-image: linear-gradient(to right, #7ce0ff 0%, #f497f6 100%);
     opacity: 0.8;
     width: 100%;
     left: 0;
@@ -149,7 +144,7 @@
       right: 0;
       border-radius: 15px;
       box-shadow: 0 2px 16px rgba(24, 51, 59, 0.35);
-      background: rgba(52, 73, 94, 0.99);
+      background: linear-gradient(to right, #46618a 0%, #5272a1 100%);
       position: absolute;
       z-index: 1000;
     }

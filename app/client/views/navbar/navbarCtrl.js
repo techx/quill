@@ -12,9 +12,12 @@ angular.module('reg')
       var transparentNavbarViews = ['app.home', 'app.login', 'app.sponsor', 'app.mentor', 'app.recruit', 'app.logistics', 'app.corporate', 'app.marketing', 'app.technology']
       var liveViews = ['app.live', 'app.schedule', 'app.expo']
       var hackViews = ['app.recruit', 'app.logistics', 'app.corporate', 'app.marketing', 'app.technology']
+      var startDate = moment(EVENT_INFO.START_DATE);
+      var now = Date.now()
 
       var Settings = settings.data;
 
+      $scope.showLiveSite = now >= startDate
       $scope.regIsOpen = Utils.isRegOpen(Settings);
 
       $scope.$watch(function(){

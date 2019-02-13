@@ -12,7 +12,7 @@ angular.module('reg')
     function($rootScope, $scope, $timeout, $window, $document, $timeout, $http, Utils, EVENT_INFO){
       var startDate = moment(EVENT_INFO.START_DATE + ' ' + EVENT_INFO.START_TIME);
       var endDate = moment(EVENT_INFO.END_DATE + ' ' + EVENT_INFO.END_TIME);
-
+      
       $scope.calcCountdown = function() {
         var now = Date.now();
         if (now <= startDate) {

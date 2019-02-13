@@ -111,12 +111,13 @@
       >
         LOGOUT
       </a>
-      <!-- <a
+      <a
         ui-sref-active="menu-item-active"
         ui-sref="app.schedule"
+        ng-if="showLiveSite"
         class="menu-item menu-item--sponsor">
         LIVE
-      </a> -->
+      </a>
     </div>
 
     <div class="navbar-menu" ng-if="showLiveNavbar">
