@@ -114,8 +114,9 @@
       <a
         ui-sref-active="menu-item-active"
         ui-sref="app.schedule"
-        ng-if="showLiveSite"
-        class="menu-item menu-item--sponsor">
+        ng-if="isHackDay"
+        class="menu-item menu-item--sponsor"
+      >
         LIVE
       </a>
     </div>
@@ -130,6 +131,9 @@
         class="menu-item"
       >
         SCHEDULE
+      </a>
+      <a href="#" ui-sref-active="menu-item-active" class="menu-item">
+        STARTER PACKS
       </a>
       <a href="https://hackuci2019.slack.com" target="_blank" class="menu-item">
         SLACK <i class="fa fa-external-link"></i>
@@ -333,7 +337,7 @@
         SCHEDULE
       </a>
       <a
-        href="https://hackuci2018.slack.com"
+        href="https://hackuci2019.slack.com"
         target="_blank"
         class="menu-item"
         ng-click="onMenuClick()"
@@ -341,7 +345,7 @@
         SLACK <i class="fa fa-external-link"></i>
       </a>
       <a
-        href="https://hackuci2018.devpost.com/"
+        href="https://hackuci2019.devpost.com/"
         target="_blank"
         class="menu-item"
         ng-click="onMenuClick()"
