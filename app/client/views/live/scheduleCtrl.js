@@ -6,6 +6,7 @@ angular.module("reg").controller("ScheduleCtrl", [
   "$document",
   "$timeout",
   "$http",
+  '$location',
   "Utils",
   "EVENT_INFO",
   function(
@@ -16,12 +17,13 @@ angular.module("reg").controller("ScheduleCtrl", [
     $document,
     $timeout,
     $http,
+    $location,
     Utils,
     EVENT_INFO
   ) {
     var startDate = moment(EVENT_INFO.START_DATE + " " + EVENT_INFO.START_TIME);
     var endDate = moment(EVENT_INFO.END_DATE + " " + EVENT_INFO.END_TIME);
-
+    $scope.currentPath = $location.absUrl() + "#darkGradient"
     $scope.calcCountdown = function() {
       var now = Date.now();
       if (now <= startDate) {
