@@ -7,12 +7,14 @@ angular.module('reg')
     '$document',
     '$timeout',
     '$http',
+    '$location',
     'Utils',
     'EVENT_INFO',
-    function($rootScope, $scope, $timeout, $window, $document, $timeout, $http, Utils, EVENT_INFO){
+    function($rootScope, $scope, $timeout, $window, $document, $timeout, $http, $location, Utils, EVENT_INFO){
       var startDate = moment(EVENT_INFO.EXPO_START_DATE + ' ' + EVENT_INFO.EXPO_START_TIME);
       var endDate = moment(EVENT_INFO.EXPO_END_DATE + ' ' + EVENT_INFO.EXPO_END_TIME);
 
+      $scope.currentPath = $location.absUrl() + "#darkGradient"
       $scope.calcCountdown = function() {
         var now = Date.now();
         if (now <= startDate) {
