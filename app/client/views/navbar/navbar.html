@@ -275,6 +275,13 @@
       </a>
       <a
         ui-sref-active="menu-item-active"
+        ui-sref="app.schedule"
+        class="menu-item menu-item--sponsor"
+      >
+        LIVE
+      </a>
+      <a
+        ui-sref-active="menu-item-active"
         ui-sref="app.application"
         ng-if="isLoggedIn && !currentUser.status.declined"
         class="menu-item"
