@@ -111,12 +111,13 @@
       >
         LOGOUT
       </a>
-      <!-- <a
+      <a
         ui-sref-active="menu-item-active"
         ui-sref="app.schedule"
-        class="menu-item menu-item--sponsor">
+        class="menu-item menu-item--sponsor"
+      >
         LIVE
-      </a> -->
+      </a>
     </div>
 
     <div class="navbar-menu" ng-if="showLiveNavbar">
@@ -129,6 +130,9 @@
         class="menu-item"
       >
         SCHEDULE
+      </a>
+      <a href="https://github.com/raopg/hackuci-resources" target="_blank" ui-sref-active="menu-item-active" class="menu-item">
+        STARTER PACKS
       </a>
       <a href="https://hackuci2019.slack.com" target="_blank" class="menu-item">
         SLACK <i class="fa fa-external-link"></i>
@@ -271,6 +275,13 @@
       </a>
       <a
         ui-sref-active="menu-item-active"
+        ui-sref="app.schedule"
+        class="menu-item menu-item--sponsor"
+      >
+        LIVE
+      </a>
+      <a
+        ui-sref-active="menu-item-active"
         ui-sref="app.application"
         ng-if="isLoggedIn && !currentUser.status.declined"
         class="menu-item"
@@ -332,7 +343,7 @@
         SCHEDULE
       </a>
       <a
-        href="https://hackuci2018.slack.com"
+        href="https://hackuci2019.slack.com"
         target="_blank"
         class="menu-item"
         ng-click="onMenuClick()"
@@ -340,7 +351,7 @@
         SLACK <i class="fa fa-external-link"></i>
       </a>
       <a
-        href="https://hackuci2018.devpost.com/"
+        href="https://hackuci2019.devpost.com/"
         target="_blank"
         class="menu-item"
         ng-click="onMenuClick()"
