@@ -123,7 +123,7 @@ angular.module("reg").controller("ScheduleCtrl", [
       }
     });
 
-    $http.get("https://www.jasonbase.com/things/3w2a").then(function(res) {
+    $http.get("https://jsonblob.com/api/bec8c3d3-30db-11e9-8bfe-51ae0e2054c1").then(function(res) {
       $scope.schedule = res.data;
     });
   }
