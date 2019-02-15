@@ -36,12 +36,7 @@ angular.module("reg").controller("NavbarCtrl", [
       "app.marketing",
       "app.technology"
     ];
-    var startDate = moment(EVENT_INFO.START_DATE);
-    var endDate = moment(EVENT_INFO.END_DATE + " " + "23:59");
     var Settings = settings.data;
-    var now = Date.now();
-    console.log(now >= startDate && now <= endDate)
-    $scope.isHackDay = now >= startDate && now <= endDate;
     $scope.regIsOpen = Utils.isRegOpen(Settings);
 
     $scope.$watch(
