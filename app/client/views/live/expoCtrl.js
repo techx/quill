@@ -97,7 +97,7 @@ angular.module('reg')
       });
 
       $http
-        .get('https://jsonblob.com/api/7188cdbc-30dc-11e9-8bfe-29bb0f2e821e')
+        .get('assets/expo.json')
         .then(function(res) {
           $scope.schedule = res.data;
         });
