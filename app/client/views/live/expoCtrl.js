@@ -97,7 +97,7 @@ angular.module('reg')
       });
 
       $http
-        .get('assets/expo.json')
+        .get('/assets/expo.json')
         .then(function(res) {
           $scope.schedule = res.data;
         });
