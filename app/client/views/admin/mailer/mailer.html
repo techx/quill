@@ -1,0 +1,92 @@
+<div id="mailer">
+
+    <div
+        class="ui form blue segment">
+        <div class="ui header">
+            Mass Mailer
+        </div>
+        <div class="field">
+            <label>Sender</label>
+            <select
+                    id="sender"
+                    ng-model="sender">
+                <option value="team@hacksc.com">team@hacksc.com</option>
+                <option value="noreply@hacksc.com">noreply@hacksc.com</option>
+            </select>
+        </div>
+        <div class="field">
+            <label>Recipients</label>
+            <div class="ui six column grid">
+                <div class="column">
+                    <div class="ui radio checkbox">
+                        <input type="radio" ng-model="recipient" ng-value="'verified'" name="sendto">
+                        <label>Verified</label>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="ui radio checkbox">
+                        <input type="radio" ng-model="recipient" ng-value="'submitted'" name="sendto">
+                        <label>Submitted</label>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="ui radio checkbox">
+                        <input type="radio" ng-model="recipient" ng-value="'admitted'" name="sendto">
+                        <label>Admitted</label>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="ui radio checkbox">
+                        <input type="radio" ng-model="recipient" ng-value="'rejected'" name="sendto">
+                        <label>Rejected</label>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="ui radio checkbox">
+                        <input type="radio" ng-model="recipient" ng-value="'waitlisted'" name="sendto">
+                        <label>Waitlisted</label>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="ui radio checkbox">
+                        <input type="radio" ng-model="recipient" ng-value="'confirmed'" name="sendto">
+                        <label>Confirmed</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <label>Title</label>
+            <input
+                class="ui input"
+                ng-model="mailTitle"
+                type="text"
+                />
+        </div>
+        <div class="field">
+            <label>Body</label>
+            <p style="font-size: 12px">Use the left side as reference, because will send out unescaped HTML</p>
+            <div class="ui stackable two column grid">
+                <div class="column">
+                <textarea
+                        class="ui input"
+                        type="text"
+                        ng-model="mailText">
+                </textarea>
+                </div>
+                <div class="column">
+                    <div
+                            class="preview ui segment"
+                            ng-bind-html="markdownPreview(mailText)">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div
+                class="ui green button"
+                ng-click="sendMail(mailTitle, mailText)">
+            Send
+        </div>
+    </div>
+
+</div>

@@ -78,6 +78,44 @@ function sendOne(templateName, options, data, callback) {
   });
 }
 
+function sendOneCustom(sender, templateName, options, data, callback) {
+  if (NODE_ENV === "dev") {
+    console.log(templateName);
+    console.log(JSON.stringify(data, "", 2));
+  }
+
+  const email = new Email({
+    message: {
+      from: sender
+    },
+    send: true,
+    transport: transporter
+  });
+
+  data.emailHeaderImage = EMAIL_HEADER_IMAGE;
+  data.emailAddress = EMAIL_ADDRESS;
+  data.hackathonName = HACKATHON_NAME;
+  data.twitterHandle = TWITTER_HANDLE;
+  data.facebookHandle = FACEBOOK_HANDLE;
+
+  email.send({
+    locals: data,
+    message: {
+      subject: options.subject,
+      to: options.to
+    },
+    template: path.join(__dirname, "..", "emails", templateName),
+  }).then(res => {
+    if (callback) {
+      callback(undefined, res)
+    }
+  }).catch(err => {
+    if (callback) {
+      callback(err, undefined);
+    }
+  });
+}
+
 /**
  * Send a verification email to a user, with a verification token to enter.
  * @param  {[type]}   email    [description]
@@ -192,6 +230,50 @@ controller.sendPasswordChangedEmail = function(email, callback){
       callback(err, info);
     }
   });
+
+};
+
+/**
+ * Send mass emails
+ * @param title
+ * @param text
+ * @param recipients
+ * @param callback
+ */
+
+controller.sendMassMail = function(sender, title, text, recipients, callback){
+  if(recipients.length <= 0){
+    callback('No applicants of this type');
+  }
+
+  var error = null;
+  var res = null;
+
+  recipients.forEach(function(value){
+
+    var options = {
+      to: value,
+      subject: "["+HACKATHON_NAME+"] - " + title,
+    };
+
+    var locals = {
+      title: title,
+      body: text,
+    };
+
+    sendOneCustom(sender,'email-html', options, locals, function(err, info){
+      if (err){
+        console.log(err);
+        error = err;
+      }
+      if (info){
+        console.log(info.message);
+        res = info;
+      }
+    });
+  });
+
+  callback(error, res);
 
 };
 
