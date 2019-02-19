@@ -108,10 +108,32 @@ var profile = {
     },
 
     skills: String,
-    
+
     linkedin: String,
     github: String,
     other: String,
+
+    role: {
+        developer: {
+            type: Boolean,
+            required: false,
+            default: false 
+        },
+        designer: {
+            type: Boolean,
+            required: false,
+            default: false
+        },
+        productManager: {
+            type: Boolean,
+            required: false,
+            default: false
+        },
+        other: {
+            type: String,
+            required: false
+        }
+    },
 
     transportation: {
         type: Boolean,
