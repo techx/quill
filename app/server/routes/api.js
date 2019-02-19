@@ -479,10 +479,11 @@ module.exports = function(router) {
   // ---------------------------------------------
 
   router.put('/mail/send', isAdmin, function(req, res){
+    var sender = req.body.sender;
     var title = req.body.title;
     var text = req.body.text;
     var recipient = req.body.recipient;
-    MailController.send(title, text, recipient, defaultResponse(req, res));
+    MailController.send(sender, title, text, recipient, defaultResponse(req, res));
   })
 
 

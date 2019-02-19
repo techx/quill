@@ -6,6 +6,15 @@
             Mass Mailer
         </div>
         <div class="field">
+            <label>Sender</label>
+            <select
+                    id="sender"
+                    ng-model="sender">
+                <option value="team@hacksc.com">team@hacksc.com</option>
+                <option value="noreply@hacksc.com">noreply@hacksc.com</option>
+            </select>
+        </div>
+        <div class="field">
             <label>Recipients</label>
             <div class="ui six column grid">
                 <div class="column">

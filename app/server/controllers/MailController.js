@@ -3,7 +3,7 @@ var Mailer = require('../services/email');
 
 var MailController = {};
 
-MailController.send = function (title, text, recipient, callback) {
+MailController.send = function (sender, title, text, recipient, callback) {
     var recipients = [];
     // filer recipient
     switch (recipient) {
@@ -18,7 +18,7 @@ MailController.send = function (title, text, recipient, callback) {
                         return;
                     }
                     recipients = res.map(doc => doc.email);
-                    Mailer.sendMassMail(title, text, recipients, callback);
+                    Mailer.sendMassMail(sender, title, text, recipients, callback);
                 });
             break;
         case 'submitted':
@@ -32,7 +32,7 @@ MailController.send = function (title, text, recipient, callback) {
                         return;
                     }
                     recipients = res.map(doc => doc.email);
-                    Mailer.sendMassMail(title, text, recipients, callback);
+                    Mailer.sendMassMail(sender, title, text, recipients, callback);
                 });
             break;
         case 'admitted':
@@ -46,7 +46,7 @@ MailController.send = function (title, text, recipient, callback) {
                         return;
                     }
                     recipients = res.map(doc => doc.email);
-                    Mailer.sendMassMail(title, text, recipients, callback);
+                    Mailer.sendMassMail(sender, title, text, recipients, callback);
                 });
             break;
         case 'rejected':
@@ -60,7 +60,7 @@ MailController.send = function (title, text, recipient, callback) {
                         return;
                     }
                     recipients = res.map(doc => doc.email);
-                    Mailer.sendMassMail(title, text, recipients, callback);
+                    Mailer.sendMassMail(sender, title, text, recipients, callback);
                 });
             break;
         case 'waitlisted':
@@ -74,7 +74,7 @@ MailController.send = function (title, text, recipient, callback) {
                         return;
                     }
                     recipients = res.map(doc => doc.email);
-                    Mailer.sendMassMail(title, text, recipients, callback);
+                    Mailer.sendMassMail(sender, title, text, recipients, callback);
                 });
             break;
         case 'confirmed':
@@ -88,14 +88,14 @@ MailController.send = function (title, text, recipient, callback) {
                         return;
                     }
                     recipients = res.map(doc => doc.email);
-                    Mailer.sendMassMail(title, text, recipients, callback)
+                    Mailer.sendMassMail(sender, title, text, recipients, callback)
                 });
             break;
         default:
             // custom, separate by email
             recipients = recipient.split(',');
             if(recipients)
-            Mailer.sendMassMail(title, text, recipients, callback);
+            Mailer.sendMassMail(sender, title, text, recipients, callback);
             break;
     }
 };
