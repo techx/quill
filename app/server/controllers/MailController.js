@@ -94,7 +94,6 @@ MailController.send = function (sender, title, text, recipient, callback) {
         default:
             // custom, separate by email
             recipients = recipient.split(',');
-            if(recipients)
             Mailer.sendMassMail(sender, title, text, recipients, callback);
             break;
     }
