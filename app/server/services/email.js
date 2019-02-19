@@ -195,4 +195,48 @@ controller.sendPasswordChangedEmail = function(email, callback){
 
 };
 
+/**
+ * Send mass emails
+ * @param title
+ * @param text
+ * @param recipients
+ * @param callback
+ */
+
+controller.sendMassMail = function(title, text, recipients, callback){
+  if(recipients.length <= 0){
+    callback('No applicants of this type');
+  }
+
+  var error = null;
+  var res = null;
+
+  recipients.forEach(function(value){
+
+    var options = {
+      to: value,
+      subject: "["+HACKATHON_NAME+"] - " + title,
+    };
+
+    var locals = {
+      title: title,
+      body: text,
+    };
+
+    sendOne('email-html', options, locals, function(err, info){
+      if (err){
+        console.log(err);
+        error = err;
+      }
+      if (info){
+        console.log(info.message);
+        res = info;
+      }
+    });
+  });
+
+  callback(error, res);
+
+};
+
 module.exports = controller;

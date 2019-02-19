@@ -2,6 +2,7 @@ const angular = require('angular');
 const SettingsService = require('./services/SettingsService.js');
 const UserService = require('./services/UserService.js');
 const FileService = require('./services/FileService.js');
+const MailService = require('./services/MailService.js');
 const AdminCtrl = require('../views/admin/adminCtrl.js');
 const AdminSettingsCtrl = require('../views/admin/settings/adminSettingsCtrl.js');
 const AdminStatsCtrl = require('../views/admin/stats/adminStatsCtrl.js');
@@ -156,15 +157,15 @@ angular.module('reg')
           }
         }
       })
+      .state('app.admin.mailer', {
+      url: "/admin/mailer",
+      templateUrl: "views/admin/mailer/mailer.html",
+      controller: 'AdminMailerCtrl',
+      })
       .state('app.admin.settings', {
         url: "/admin/settings",
         templateUrl: "views/admin/settings/settings.html",
         controller: 'AdminSettingsCtrl',
-      })
-      .state('app.admin.mailer', {
-        url: "/admin/mailer",
-        templateUrl: "views/admin/mailer/mailer.html",
-        controller: 'AdminMailerCtrl',
       })
       .state('reset', {
         url: "/reset/:token",

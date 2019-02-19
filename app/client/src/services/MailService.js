@@ -10,10 +10,11 @@ angular.module('reg')
                 // Admin Actions
                 // ----------------------
 
-                sendMail: function(id, text, options){
-                    return $http.put(base + id + '/send', {
+                sendMail: function(title, text, recipient){
+                    return $http.put(base + 'send', {
+                        title: title,
                         text: text,
-                        options: options
+                        recipient: recipient
                     });
                 },
             };

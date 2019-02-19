@@ -1,6 +1,7 @@
 var UserController = require('../controllers/UserController');
 var SettingsController = require('../controllers/SettingsController');
-var FileController = require('../controllers/FileController')
+var FileController = require('../controllers/FileController');
+var MailController = require('../controllers/MailController');
 
 var request = require('request');
 
@@ -471,5 +472,18 @@ module.exports = function(router) {
     var allowMinors = req.body.allowMinors;
     SettingsController.updateField('allowMinors', allowMinors, defaultResponse(req, res));
   });
+
+
+  // ---------------------------------------------
+  // Mail [ADMIN ONLY!]
+  // ---------------------------------------------
+
+  router.put('/mail/send', isAdmin, function(req, res){
+    var title = req.body.title;
+    var text = req.body.text;
+    var recipient = req.body.recipient;
+    MailController.send(title, text, recipient, defaultResponse(req, res));
+  })
+
 
 };
