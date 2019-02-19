@@ -28,12 +28,37 @@ angular.module('reg')
                     return;
                 }
 
-                MailService.sendMail($scope.sender, title, text, $scope.recipient)
-                    .then(response => {
-                        swal('Success', 'Mail has been queued and are being sent out', 'success');
-                    }, err => {
-                        swal('Error', err, 'error');
-                    });
+                swal({
+                    buttons: {
+                        cancel: {
+                            text: "Cancel",
+                            value: null,
+                            visible: true
+                        },
+                        accept: {
+                            className: "danger-button",
+                            closeModal: false,
+                            text: "Send",
+                            value: true,
+                            visible: true
+                        }
+                    },
+                    dangerMode: true,
+                    icon: "warning",
+                    text: "You are about to send a mass email, to hundreds of applicants",
+                    title: "Send?"
+                }).then(value => {
+                    if (!value) {
+                        return;
+                    }
+
+                    MailService.sendMail($scope.sender, title, text, $scope.recipient)
+                        .then(response => {
+                            swal('Success', 'Mail has been queued and are being sent out', 'success');
+                        }, err => {
+                            swal('Error', err, 'error');
+                        });
+                });
             }
 
         }]);
