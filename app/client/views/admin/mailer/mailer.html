@@ -1,0 +1,76 @@
+<div id="mailer">
+
+    <div
+        ng-class="{'loading': loading}"
+        class="ui blue segment">
+        <div class="ui header">
+            Mass Mailer
+        </div>
+        <div class="fields">
+            <label>Send to</label>
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <input type="radio" name="sendto" checked="checked">
+                    <label>Verified</label>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <input type="radio" name="sendto">
+                    <label>Submitted</label>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <input type="radio" name="sendto">
+                    <label>Admitted</label>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <input type="radio" name="sendto">
+                    <label>Rejected</label>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <input type="radio" name="sendto">
+                    <label>Waitlisted</label>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <input type="radio" name="sendto">
+                    <label>Confirmed</label>
+                </div>
+            </div>
+        </div>
+        <div class="ui stackable two column grid">
+            <div class="column">
+                <div class="ui form">
+                    <div class="field">
+                      <textarea
+                              class="ui input"
+                              type="text"
+                              ng-model="mailMarkup">
+                      </textarea>
+                    </div>
+                    <div class="field">
+                        <div
+                            class="ui green button"
+                            ng-click="sendMail(mailMarkup)">
+                            Send
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div
+                        class="preview ui segment"
+                        ng-bind-html="markdownPreview(mailMarkup)">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
