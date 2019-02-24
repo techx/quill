@@ -100,6 +100,7 @@
             <th>$</th>
             <th>App.</th>
             <th>Accept/Check In/Admin</th>
+            <th>Delete User</th>
           </tr>
         </thead>
         <tbody>
@@ -218,7 +219,7 @@
             </td>
 
             <td
-              class="right aligned collapsing">
+              class="collapsing">
 
               <button
                 class="accept ui circular mini basic green icon button"
@@ -241,19 +242,39 @@
               </button>
 
               <button
+                ng-if="!user.admin"
+                ng-click="toggleAdmin($event, user, $index)"
+                class="ui circular mini basic red icon button">
+
+                <i
+                  class="red spy icon"></i>
+  
+              </button>
+
+              <button
+                ng-if="user.admin"
                 ng-click="toggleAdmin($event, user, $index)"
                 class="ui circular mini basic green icon button">
 
                 <i
-                  ng-if="!user.admin"
-                  class="spy outline icon"></i>
-
-                <i
-                  ng-if="user.admin"
                   class="green spy icon"></i>
 
               </button>
 
+            </td>
+
+            <td 
+              class="right aligned collapsing">
+
+              <button
+              ng-click="deleteUser($event, user, $index)"
+              class="ui circular mini basic green icon button">
+  
+              <i
+                class="green trash icon"></i>
+  
+              </button>
+              
             </td>
           </tr>
         </tbody>

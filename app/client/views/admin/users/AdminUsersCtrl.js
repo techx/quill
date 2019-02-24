@@ -41,6 +41,11 @@ angular.module('reg')
           updatePage(response.data);
         });
 
+      var myId;
+      UserService.getCurrentUser().then(value => {
+        myId = value.data.id;
+      });
+
       $scope.$watch('queryText', function(queryText){
         UserService
           .getPage($stateParams.page, $stateParams.size, queryText)
@@ -112,8 +117,6 @@ angular.module('reg')
       $scope.acceptUser = function($event, user, index) {
         $event.stopPropagation();
 
-        console.log(user);
-
         swal({
           buttons: {
             cancel: {
@@ -175,17 +178,18 @@ angular.module('reg')
 
       $scope.toggleAdmin = function($event, user, index) {
         $event.stopPropagation();
-        if ($scope.users[index].email === user.email){
+        
+        if (myId === user._id){
           swal({
             title: "You can't do that!",
             text: "You cannot remove yourself as an admin.",
-            type: "error"
+            icon: "error"
           })
         }
         else if (!user.admin){
           swal({
             title: "Whoa, wait a minute!",
-            text: "You are about make " + user.profile.name + " an admin!",
+            text: "You are about to make " + user.email + " an admin!",
             icon: "warning",
             buttons: {
               cancel: {
@@ -207,23 +211,115 @@ angular.module('reg')
             }
 
             UserService
-              .makeAdmin(user._id)
+              .makeAdmin(user.id)
               .then(response => {
-                $scope.users[index] = response.data;
-                swal("Made", response.data.profile.name + ' an admin.', "success");
+                if (response.status === 200){
+                  swal({
+                    title: "Power Granted!",
+                    text: "Gave admin privelages to " + user.email + ". Refresh to see changes.",
+                    icon: "success",
+                    button: {
+                      text: "Refresh",
+                      visible: true
+                    }
+                  }).then(value => {
+                    location.reload(true);
+                  });
+                }
               });
             }
           );
         } else {
-          UserService
-            .removeAdmin(user._id)
-            .then(response => {
-              $scope.users[index] = response.data;
-              swal("Removed", response.data.profile.name + ' as admin', "success");
-            });
-        }
-      };
+          swal({
+            title: "Whoa, wait a minute!",
+            text: "You are about to take away " + user.email + "'s admin rights",
+            icon: "warning",
+            buttons: {
+              cancel: {
+                text: "Cancel",
+                value: null,
+                visible: true
+              },
+              confirm: {
+                text: "Yes, take away their powers",
+                className: "danger-button",
+                closeModal: false,
+                value: true,
+                visible: true
+              }
+            }
+          }).then(value => {
+            if (!value) {
+              return;
+            }
 
+            UserService
+            .removeAdmin(user.id)
+            .then(response => {
+              if (response.status === 200){
+                swal("Power Revoked.", "Successfully took away " + user.email + "'s admin rights", "success");
+              }
+            });
+          });
+        };
+      }
+      
+      $scope.deleteUser = function($event, user, index){
+        $event.stopPropagation();
+          
+        if (myId === user._id){
+          swal({
+            title: "You can't do that!",
+            text: "You cannot remove yourself from the system.",
+            icon: "error"
+          })
+        }
+        else {
+
+          swal({
+            title: "Whoa, wait a minute!",
+            text: "You are about to delete " + user.email + " from the system!",
+            icon: "warning",
+            buttons: {
+              cancel: {
+                text: "Cancel",
+                value: null,
+                visible: true
+              },
+              confirm: {
+                text: "Good riddance!",
+                className: "danger-button",
+                closeModal: false,
+                value: true,
+                visible: true
+              }
+            }
+          }).then(value => {
+            if (!value) {
+              return;
+            }
+
+            UserService
+              .deleteUser(user.id)
+              .then(response => {
+                if (response.status === 200){
+                  swal({
+                    title: "Good riddance, indeed.",
+                    text: "Deleted all traces of " + user.email + ". Please refresh to see changes.",
+                    icon: "success",
+                    button: {
+                      text: "Refresh",
+                      visible: true
+                    }
+                  }).then(value => {
+                    location.reload(true);
+                  });
+                }
+              });
+          });
+        }
+      }
+      
       function formatTime(time){
         if (time) {
           return moment(time).format('MMMM Do YYYY, h:mm:ss a');
@@ -240,7 +336,7 @@ angular.module('reg')
         if (user.status.admitted && !user.status.confirmed) {
           return 'warning';
         }
-      };
+      }
 
       function selectUser(user){
         $scope.selectedUser = user;

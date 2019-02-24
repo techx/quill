@@ -94,6 +94,10 @@ angular.module('reg')
       removeAdmin: function(id){
         return $http.post(base + id + '/removeadmin');
       },
+
+      deleteUser: function(id){
+        return $http.post(base + id + '/deleteuser');
+      }
     };
   }
   ]);
