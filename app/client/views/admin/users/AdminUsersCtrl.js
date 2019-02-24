@@ -35,6 +35,13 @@ angular.module('reg')
         $scope.pages = p;
       }
 
+      function removeUser(id) {
+        var index = $scope.users.findIndex(function(data) {
+          return data.id === id;
+        });
+        $scope.users.splice(index, 1);
+      }
+
       UserService
         .getPage($stateParams.page, $stateParams.size, $stateParams.query)
         .then(response => {
@@ -213,19 +220,8 @@ angular.module('reg')
             UserService
               .makeAdmin(user.id)
               .then(response => {
-                if (response.status === 200){
-                  swal({
-                    title: "Power Granted!",
-                    text: "Gave admin privelages to " + user.email + ". Refresh to see changes.",
-                    icon: "success",
-                    button: {
-                      text: "Refresh",
-                      visible: true
-                    }
-                  }).then(value => {
-                    location.reload(true);
-                  });
-                }
+                $scope.users[index] = response.data;
+                swal("Power Granted!", "Gave admin privelages to " + user.email + ".", "success");
               });
             }
           );
@@ -256,9 +252,8 @@ angular.module('reg')
             UserService
             .removeAdmin(user.id)
             .then(response => {
-              if (response.status === 200){
-                swal("Power Revoked.", "Successfully took away " + user.email + "'s admin rights", "success");
-              }
+              $scope.users[index] = response.data;
+              swal("Power Revoked.", "Successfully took away " + user.email + "'s admin rights", "success");
             });
           });
         };
@@ -303,17 +298,8 @@ angular.module('reg')
               .deleteUser(user.id)
               .then(response => {
                 if (response.status === 200){
-                  swal({
-                    title: "Good riddance, indeed.",
-                    text: "Deleted all traces of " + user.email + ". Please refresh to see changes.",
-                    icon: "success",
-                    button: {
-                      text: "Refresh",
-                      visible: true
-                    }
-                  }).then(value => {
-                    location.reload(true);
-                  });
+                  removeUser(user.id);
+                  swal("Good riddance, indeed.", "Deleted all traces of " + user.email, "success");
                 }
               });
           });

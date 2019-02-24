@@ -707,6 +707,8 @@ UserController.makeAdminById = function(id, user, callback){
     $set: {
       'admin': true
     }
+  }, {
+    new: true
   },
   callback);
 };
@@ -726,6 +728,8 @@ UserController.removeAdminById = function(id, user, callback){
     $set: {
       'admin': false
     }
+  }, {
+    new: true
   },
   callback);
 };
