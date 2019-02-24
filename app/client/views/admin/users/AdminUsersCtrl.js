@@ -175,8 +175,14 @@ angular.module('reg')
 
       $scope.toggleAdmin = function($event, user, index) {
         $event.stopPropagation();
-
-        if (!user.admin){
+        if ($scope.users[index].email === user.email){
+          swal({
+            title: "You can't do that!",
+            text: "You cannot remove yourself as an admin.",
+            type: "error"
+          })
+        }
+        else if (!user.admin){
           swal({
             title: "Whoa, wait a minute!",
             text: "You are about make " + user.profile.name + " an admin!",
