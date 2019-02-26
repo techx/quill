@@ -128,21 +128,6 @@
                     </div>
                 </div>
 
-                <div class="item">
-                    <i class="child icon"></i>
-                    <div class="content">
-                        <strong>
-                            Women's shirt sizes:
-                        </strong> :
-                        XS ({{stats.shirtSizes['WXS']}})
-                        S ({{stats.shirtSizes['WS']}})
-                        M ({{stats.shirtSizes['WM']}})
-                        L ({{stats.shirtSizes['WL']}})
-                        XL ({{stats.shirtSizes['WXL']}})
-                        XXL ({{stats.shirtSizes['WXXL']}})
-                    </div>
-                </div>
-
                 <div class="ui divider"></div>
 
                 <div class="item">
@@ -181,36 +166,75 @@
         </div>
         <div class="ui list">
             <div class="item">
-                <i class="users icon"></i>
+                <i class="male icon"></i>
                 <div class="content">
-                    <strong>Total users</strong>: {{stats.total}}
+                    <strong>Male:</strong> {{stats.demo.gender['Male']}} ({{stats.demo.gender['Male'] / stats.total * 100 |
+                    number:1}}%)
                 </div>
             </div>
             <div class="item">
                 <i class="female icon"></i>
                 <div class="content">
-                    <strong>Female</strong>: {{stats.demo.gender['Female']}} ({{stats.demo.gender['Female'] / stats.total * 100 |
-                    number:1}}%)
-                </div>
-            </div>
-            <div class="item">
-                <i class="male icon"></i>
-                <div class="content">
-                    <strong>Male</strong>: {{stats.demo.gender['Male']}} ({{stats.demo.gender['Male'] / stats.total * 100 |
+                    <strong>Female:</strong> {{stats.demo.gender['Female']}} ({{stats.demo.gender['Female'] / stats.total * 100 |
                     number:1}}%)
                 </div>
             </div>
             <div class="item">
                 <i class="other gender icon"></i>
                 <div class="content">
-                    <strong>Other</strong>: {{stats.demo.gender['Other']}} ({{stats.demo.gender['Other'] / stats.total * 100 |
+                    <strong>Other:</strong> {{stats.demo.gender['Other']}} ({{stats.demo.gender['Other'] / stats.total * 100 |
                     number:1}}%)
                 </div>
             </div>
             <div class="item">
                 <i class="question icon"></i>
                 <div class="content">
-                    <strong>Did not respond</strong>: {{stats.demo.gender['No Response']}} ({{stats.demo.gender['No Response'] / stats.total
+                    <strong>Did not respond:</strong> {{stats.demo.gender['Prefer not to answer']}} ({{stats.demo.gender['Prefer not to answer'] / stats.total
+                    * 100 | number:1 }}%)
+                </div>
+            </div>
+        </div>
+        <div class="ui divider"></div>
+        <div class="ui list">
+            <div class="item">
+                <div class="content">
+                    <strong>White / Caucasian:</strong> {{stats.demo.ethnicity['White / Caucasian']}} ({{stats.demo.ethnicity['White / Caucasian'] / stats.total * 100 |
+                    number:1}}%)
+                </div>
+            </div>
+            <div class="item">
+                <div class="content">
+                    <strong>Black or African American:</strong> {{stats.demo.ethnicity['Black or African American']}} ({{stats.demo.ethnicity['Black or African American'] / stats.total * 100 |
+                    number:1}}%)
+                </div>
+            </div>
+            <div class="item">
+                <div class="content">
+                    <strong>Native American or Alaska Native:</strong> {{stats.demo.ethnicity['Native American or Alaska Native']}} ({{stats.demo.ethnicity['Native American or Alaska Native'] / stats.total * 100 |
+                    number:1}}%)
+                </div>
+            </div>
+            <div class="item">
+                <div class="content">
+                    <strong>Asian / Pacific Islander:</strong> {{stats.demo.ethnicity['Asian / Pacific Islander']}} ({{stats.demo.ethnicity['Asian / Pacific Islander'] / stats.total
+                    * 100 | number:1 }}%)
+                </div>
+            </div>
+            <div class="item">
+                <div class="content">
+                    <strong>Hispanic / Latinx:</strong> {{stats.demo.ethnicity['Hispanic / Latinx']}} ({{stats.demo.ethnicity['Hispanic / Latinx'] / stats.total
+                    * 100 | number:1 }}%)
+                </div>
+            </div>
+            <div class="item">
+                <div class="content">
+                    <strong>Multiracial / Other:</strong> {{stats.demo.ethnicity['Multiracial / Other']}} ({{stats.demo.ethnicity['Multiracial / Other'] / stats.total
+                    * 100 | number:1 }}%)
+                </div>
+            </div>
+            <div class="item">
+                <div class="content">
+                    <strong>Prefer not to answer:</strong> {{stats.demo.ethnicity['Prefer not to answer']}} ({{stats.demo.ethnicity['Prefer not to answer'] / stats.total
                     * 100 | number:1 }}%)
                 </div>
             </div>
@@ -252,7 +276,7 @@
                     class="item"
                     ng-repeat="school in stats.demo.schools | orderBy: '-count'">
                 <div class="content">
-                    <strong>{{school.email}}</strong> : {{school.count}} ({{school.count / stats.total * 100 | number:
+                    <strong>{{school.email}}:</strong> {{school.count}} ({{school.count / stats.total * 100 | number:
                     1}}%)
                     <p>
                     <div class="ui purple mini label">
@@ -274,7 +298,7 @@
         </div>
     </div>
 
-    <!--   <div
+    <div
         class="ui purple segment"
         ng-class="{'loading': loading}">
         <div class="ui header">
@@ -290,6 +314,6 @@
             {{team.users.join(', ')}}
           </div>
         </div>
-      </div> -->
+      </div>
 
 </div>
