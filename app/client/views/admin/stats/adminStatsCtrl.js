@@ -9,8 +9,6 @@ angular.module('reg')
       UserService
         .getStats()
         .then(stats => {
-          console.log(stats);
-          
           $scope.stats = stats.data;
           $scope.loading = false;
         });
