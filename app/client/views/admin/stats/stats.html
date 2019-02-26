@@ -141,8 +141,8 @@
                 </div>
 
                 <div class="item">
-                    <span ng-repeat="transportation in stats.transportation | orderBy: 'school'">
-                        <strong>{{transportation.school}}:</strong> {{transportation.count}} <br>
+                    <span ng-repeat="transportation in stats.transportation | orderBy: '-count'">
+                        {{transportation.school}}: {{transportation.count}} <br>
                     </span>
                 </div>
 
