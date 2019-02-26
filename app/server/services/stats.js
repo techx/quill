@@ -15,16 +15,16 @@ function calculateStats(){
         'Male': 0,
         'Female': 0,
         'Other': 0,
-        'No Response': 0
+        'Prefer not to answer': 0
       },
       ethnicity: {
-        'White': 0,
+        'White / Caucasian': 0,
         'Black or African American': 0,
         'Native American or Alaska Native': 0,
-        'Asian or Pacific Islander': 0,
-        'Hispanic/Latinx': 0,
-        'Multiracial': 0,
-        'Other': 0
+        'Asian / Pacific Islander': 0,
+        'Hispanic / Latinx': 0,
+        'Multiracial / Other': 0,
+        'Prefer not to answer': 0
       },
       schools: {},
       year: {
@@ -42,9 +42,6 @@ function calculateStats(){
         'Intermediate': 0,
         'Advanced': 0
       },
-      transportation: {
-        'Transportation': 0
-      }
     },
 
     teams: {},
@@ -58,6 +55,7 @@ function calculateStats(){
     declined: 0,
 
     transportationTotal: 0,
+    transportation: {},
 
     confirmedFemale: 0,
     confirmedMale: 0,
@@ -134,16 +132,22 @@ function calculateStats(){
         // Count confirmed that are USC
         newStats.confirmedUSC += user.status.confirmed && email === "usc.edu" ? 1 : 0;
 
-        newStats.confirmedFemale += user.status.confirmed && user.profile.gender == "Female" ? 1 : 0;
-        newStats.confirmedMale += user.status.confirmed && user.profile.gender == "Male" ? 1 : 0;
-        newStats.confirmedOther += user.status.confirmed && user.profile.gender == "Other" ? 1 : 0;
-        newStats.confirmedNone += user.status.confirmed && user.profile.gender == "No Response" ? 1 : 0;
+        newStats.confirmedFemale += user.status.confirmed && user.profile.gender === "Female" ? 1 : 0;
+        newStats.confirmedMale += user.status.confirmed && user.profile.gender === "Male" ? 1 : 0;
+        newStats.confirmedOther += user.status.confirmed && user.profile.gender === "Other" ? 1 : 0;
+        newStats.confirmedNone += user.status.confirmed && user.profile.gender === "Prefer not to answer" ? 1 : 0;
 
         // Count declined
         newStats.declined += user.status.declined ? 1 : 0;
 
         // Count the number of people who need transportation
         newStats.transportationTotal += user.profile.transportation ? 1 : 0;
+        if(user.profile.transportation){
+          if(!newStats.transportation[user.profile.school]){
+            newStats.transportation[user.profile.school] = 0;
+          }
+          newStats.transportation[user.profile.school]++;
+        }
 
         // Count schools, label by email
         if (!newStats.demo.schools[email]){
@@ -201,6 +205,17 @@ function calculateStats(){
             });
           });
         newStats.dietaryRestrictions = restrictions;
+
+        // Transform transportation into an array of objects
+        var transportation = [];
+        _.keys(newStats.transportation)
+            .forEach(function(key){
+              transportation.push({
+                school: key,
+                count: newStats.transportation[key]
+              });
+            });
+        newStats.transportation = transportation;
 
         // Transform schools into an array of objects
         var schools = [];

@@ -136,7 +136,14 @@
                         <strong>
                             Total Need Transportation:
                         </strong>{{stats.transportationTotal}}
+                        <br>
                     </div>
+                </div>
+
+                <div class="item">
+                    <span ng-repeat="transportation in stats.transportation | orderBy: 'school'">
+                        <strong>{{transportation.school}}:</strong> {{transportation.count}} <br>
+                    </span>
                 </div>
 
                 <div class="ui divider"></div>
