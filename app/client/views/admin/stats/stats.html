@@ -283,9 +283,17 @@
                     class="item"
                     ng-repeat="school in stats.demo.schools | orderBy: '-count'">
                 <div class="content">
-                    <strong>{{school.name}} ({{school.email}}):</strong> {{school.count}} ({{school.count / stats.total * 100 | number:
-                    1}}%)
+                    <strong>{{school.name}} ({{school.email}}):</strong> <br/>
+                    {{school.countWithVerified}} verified ({{school.countWithVerified / stats.total * 100 | number:
+                    1}}% of all accounts) <br/>
+                    {{school.count}} submitted ({{school.count / stats.total * 100 | number:
+                    1}}% of all accounts)
                     <p>
+
+                    <div class="ui gray mini label">
+                        Verified: {{school.stats.verified}}
+                    </div>
+
                     <div class="ui purple mini label">
                         Submitted: {{school.stats.submitted}}
                     </div>

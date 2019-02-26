@@ -153,6 +153,7 @@ function calculateStats(){
         if (!newStats.demo.schools[email]){
           newStats.demo.schools[email] = {
             name: '',
+            verified: 0,
             submitted: 0,
             admitted: 0,
             rejected: 0,
@@ -168,6 +169,9 @@ function calculateStats(){
         newStats.demo.schools[email].waitlisted += user.status.waitlisted ? 1: 0;
         newStats.demo.schools[email].confirmed += user.status.confirmed ? 1 : 0;
         newStats.demo.schools[email].declined += user.status.declined ? 1 : 0;
+
+        // Account created and verified but not submitted
+        newStats.demo.schools[email].verified += (!user.status.submitted && user.verified) ? 1 : 0;
 
         // Grab the team name if there is one
         if (user.teamCode && user.teamCode.length > 0){
@@ -227,6 +231,7 @@ function calculateStats(){
               email: key,
               name: newStats.demo.schools[key].name,
               count: newStats.demo.schools[key].submitted,
+              countWithVerified: newStats.demo.schools[key].submitted + newStats.demo.schools[key].verified,
               stats: newStats.demo.schools[key]
             });
           });
