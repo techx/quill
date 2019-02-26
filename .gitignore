@@ -14,4 +14,5 @@ app/client/build/
 .idea/
 
 # Ignore env file to prevent accidental commits
-.env 
+.env
+willie.env
