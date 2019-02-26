@@ -223,6 +223,8 @@
 
       </div>
 
+      <div class="divided title">Optional Response</div>
+
       <div class="field">
         <label>Skills and Technologies (Optional)</label>
         <textarea
@@ -252,6 +254,40 @@
         <input
                 type="text"
                 ng-model="selectedUser.profile.other">
+      </div>
+
+      <div class="field">
+        <label>Role (Optional)</label>
+        <p>
+          HackSC hopes to bring in people of all different roles including designers and
+          product managers. Feel free to select the roles you identify with. You can select more than one.
+        </p>
+
+        <div class="ui checkbox">
+          <input type="checkbox" id="developer" ng-model="selectedUser.profile.role.developer">
+          <label for="developer">Developer</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="ui checkbox">
+          <input type="checkbox" id="designer" ng-model="selectedUser.profile.role.designer">
+          <label for="designer">Designer</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="ui checkbox">
+          <input type="checkbox" id="productManager" ng-model="selectedUser.profile.role.productManager">
+          <label for="productManager">Product Manager</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <p>Other</p>
+        <input
+                type="text"
+                ng-model="selectedUser.profile.role.other">
       </div>
 
       <br>

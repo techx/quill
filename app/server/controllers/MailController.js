@@ -99,4 +99,8 @@ MailController.send = function (sender, title, text, recipient, callback) {
     }
 };
 
+MailController.sendPostVerificationEmail = function(recipient, callback){
+    Mailer.sendPostVerificationEmail(recipient, callback);
+};
+
 module.exports = MailController;

@@ -330,7 +330,13 @@ angular.module('reg')
             fields: [
               {
                 name: 'Name',
-                value: user.profile.name
+                value: user.profile.Name
+              },{
+                name: 'FirstName',
+                value: user.profile.firstName
+              },{
+                name: 'LastName',
+                value: user.profile.lastName
               },{
                 name: 'Gender',
                 value: user.profile.gender
@@ -363,6 +369,25 @@ angular.module('reg')
               },{
                 name: APPLICATION.ESSAY3_TITLE,
                 value: user.profile.essay3
+              },{
+                name: 'Skills',
+                value: user.profile.skills
+              },{
+                name: 'LinkedIn',
+                value: user.profile.linkedin
+              },{
+                name: 'Github',
+                value: user.profile.github
+              },{
+                name: 'Other',
+                value: user.profile.other
+              },{
+                name: 'Role',
+                value: (user.profile.role ?
+                          ((user.profile.role.developer ? 'Developer, ' : '')
+                          + (user.profile.role.designer ? 'Designer, ' : '')
+                          + (user.profile.role.productManager ? 'Product Manager, ' : '')
+                          + (user.profile.role.other ? user.profile.other : '')) : '')
               }
             ]
           },{

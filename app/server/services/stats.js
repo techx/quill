@@ -110,6 +110,9 @@ function calculateStats(){
         // Add to year
         newStats.demo.year[user.profile.year] += 1;
 
+        // Add to experience
+        newStats.demo.experience[user.profile.experience] += 1;
+
         // Count verified
         newStats.verified += user.verified ? 1 : 0;
 
@@ -161,12 +164,12 @@ function calculateStats(){
         newStats.demo.schools[email].declined += user.status.declined ? 1 : 0;
 
         // Grab the team name if there is one
-        // if (user.teamCode && user.teamCode.length > 0){
-        //   if (!newStats.teams[user.teamCode]){
-        //     newStats.teams[user.teamCode] = [];
-        //   }
-        //   newStats.teams[user.teamCode].push(user.profile.name);
-        // }
+        if (user.teamCode && user.teamCode.length > 0){
+          if (!newStats.teams[user.teamCode]){
+            newStats.teams[user.teamCode] = [];
+          }
+          newStats.teams[user.teamCode].push(user.profile.name);
+        }
 
         // Count shirt sizes
         if (user.confirmation.shirtSize in newStats.shirtSizes){
@@ -212,15 +215,15 @@ function calculateStats(){
         newStats.demo.schools = schools;
 
         // Likewise, transform the teams into an array of objects
-        // var teams = [];
-        // _.keys(newStats.teams)
-        //   .forEach(function(key){
-        //     teams.push({
-        //       name: key,
-        //       users: newStats.teams[key]
-        //     });
-        //   });
-        // newStats.teams = teams;
+        var teams = [];
+        _.keys(newStats.teams)
+          .forEach(function(key){
+            teams.push({
+              name: key,
+              users: newStats.teams[key]
+            });
+          });
+        newStats.teams = teams;
 
         console.log('Stats updated!');
         newStats.lastUpdated = new Date();

@@ -13,7 +13,7 @@ angular.module('reg')
                 AuthService.verify(token,
                     function (user) {
                         // send mail once verified
-                        sendVerifiedMail(user.email);
+                        sendPostVerificationEmail(user.email);
                         $scope.success = true;
                         $scope.loading = false;
                     },
@@ -22,13 +22,12 @@ angular.module('reg')
                     });
             }
 
-            function sendVerifiedMail(recipient){
-                var sender = "team@hacksc.com";
-                MailService.sendVerifiedMail(sender, recipient)
+            function sendPostVerificationEmail(recipient){
+                MailService.sendPostVerificationEmail(recipient)
                     .then(response => {
                         // success
                     }, err => {
-                        console.log('error sending verified email');
+                        console.log('error sending additional email');
                     });
             }
         }]);

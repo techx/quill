@@ -484,7 +484,12 @@ module.exports = function(router) {
     var text = req.body.text;
     var recipient = req.body.recipient;
     MailController.send(sender, title, text, recipient, defaultResponse(req, res));
-  })
+  });
+
+  router.put('/mail/sendPostVerificationEmail', isAdmin, function(req, res){
+    var recipient = req.body.recipient;
+    MailController.sendPostVerificationEmail(recipient, defaultResponse(req, res));
+  });
 
 
 };
