@@ -19,6 +19,16 @@ angular.module('reg')
                     });
                 },
 
+                sendSchoolMail: function(sender, title, text, recipient, schoolRecipient){
+                    return $http.put(base + 'sendSchool', {
+                        sender: sender,
+                        title: title,
+                        text: text,
+                        recipient: recipient,
+                        schoolRecipient: schoolRecipient
+                    });
+                },
+
                 sendPostVerificationEmail: function(recipient){
                     return $http.put(base + 'sendPostVerificationEmail', {
                         recipient: recipient

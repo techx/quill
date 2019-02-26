@@ -283,7 +283,7 @@
                     class="item"
                     ng-repeat="school in stats.demo.schools | orderBy: '-count'">
                 <div class="content">
-                    <strong>{{school.email}}:</strong> <br/>
+                    <strong>{{school.name}} ({{school.email}}):</strong> <br/>
                     {{school.countWithVerified}} verified ({{school.countWithVerified / stats.total * 100 | number:
                     1}}% of all accounts) <br/>
                     {{school.count}} submitted ({{school.count / stats.total * 100 | number:
@@ -299,6 +299,12 @@
                     </div>
                     <div class="ui pink mini label">
                         Admitted: {{school.stats.admitted}}
+                    </div>
+                    <div class="ui red mini label">
+                        Rejected: {{school.stats.rejected}}
+                    </div>
+                    <div class="ui blue mini label">
+                        Waitlisted: {{school.stats.waitlisted}}
                     </div>
                     <div class="ui green mini label">
                         Confirmed: {{school.stats.confirmed}}

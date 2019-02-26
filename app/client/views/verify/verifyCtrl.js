@@ -12,10 +12,10 @@ angular.module('reg')
             if (token) {
                 AuthService.verify(token,
                     function (user) {
-                        // send mail once verified
-                        sendPostVerificationEmail(user.email);
                         $scope.success = true;
                         $scope.loading = false;
+                        // send mail once verified
+                        sendPostVerificationEmail(user.email);
                     },
                     function (err) {
                         $scope.loading = false;

@@ -152,6 +152,7 @@ function calculateStats(){
         // Count schools, label by email
         if (!newStats.demo.schools[email]){
           newStats.demo.schools[email] = {
+            name: '',
             verified: 0,
             submitted: 0,
             admitted: 0,
@@ -161,7 +162,7 @@ function calculateStats(){
             declined: 0,
           };
         }
-
+        newStats.demo.schools[email].name = user.profile.school;
         newStats.demo.schools[email].submitted += user.status.submitted ? 1 : 0;
         newStats.demo.schools[email].admitted += user.status.admitted ? 1 : 0;
         newStats.demo.schools[email].rejected += user.status.rejected ? 1: 0;
@@ -228,6 +229,7 @@ function calculateStats(){
           .forEach(function(key){
             schools.push({
               email: key,
+              name: newStats.demo.schools[key].name,
               count: newStats.demo.schools[key].submitted,
               countWithVerified: newStats.demo.schools[key].submitted + newStats.demo.schools[key].verified,
               stats: newStats.demo.schools[key]
