@@ -5,56 +5,39 @@
         <div class="ui header">
             Mass Mailer
         </div>
-        <div class="field">
-            <label>Sender</label>
-            <select
-                    id="sender"
-                    ng-model="sender">
-                <option value="team@hacksc.com">team@hacksc.com</option>
-                <option value="noreply@hacksc.com">noreply@hacksc.com</option>
-            </select>
-        </div>
-        <div class="field">
-            <label>Recipients</label>
-            <div class="ui six column grid">
-                <div class="column">
-                    <div class="ui radio checkbox">
-                        <input type="radio" ng-model="recipient" ng-value="'verified'" name="sendto">
-                        <label>Verified</label>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="ui radio checkbox">
-                        <input type="radio" ng-model="recipient" ng-value="'submitted'" name="sendto">
-                        <label>Submitted</label>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="ui radio checkbox">
-                        <input type="radio" ng-model="recipient" ng-value="'admitted'" name="sendto">
-                        <label>Admitted</label>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="ui radio checkbox">
-                        <input type="radio" ng-model="recipient" ng-value="'rejected'" name="sendto">
-                        <label>Rejected</label>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="ui radio checkbox">
-                        <input type="radio" ng-model="recipient" ng-value="'waitlisted'" name="sendto">
-                        <label>Waitlisted</label>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="ui radio checkbox">
-                        <input type="radio" ng-model="recipient" ng-value="'confirmed'" name="sendto">
-                        <label>Confirmed</label>
-                    </div>
-                </div>
+        <div class="ui three column grid">
+            <div class="field column">
+                <label>Sender</label>
+                <select
+                        id="sender"
+                        ng-model="sender">
+                    <option value="team@hacksc.com">team@hacksc.com</option>
+                    <option value="noreply@hacksc.com">noreply@hacksc.com</option>
+                </select>
+            </div>
+            <div class="field column">
+                <label>Recipient</label>
+                <select
+                        id="recipient"
+                        ng-model="recipient">
+                    <option ng-repeat="recipient in recipientOptions" value="{{recipient}}">
+                        {{recipient}}
+                    </option>
+                </select>
+            </div>
+            <div class="field column">
+                <label>Schools</label>
+                <select
+                        id="schoolsRecipient"
+                        ng-model="schoolRecipient">
+                    <option value="all">all</option>
+                    <option ng-repeat="school in schools | orderBy: 'school.name'" value="{{school.email}}">
+                        {{school.email}} {{school.name}}
+                    </option>
+                </select>
             </div>
         </div>
+        <div class="ui divider"></div>
         <div class="field">
             <label>Title</label>
             <input
