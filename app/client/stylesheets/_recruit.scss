@@ -31,20 +31,12 @@
 
 	/* Hero */
 	#hero {
-		background-image: url('../assets/images/bg_recruitment.jpg');
-		background-size: cover;
-		background-position: center center;
+		background-image: url('../assets/images/desktop-background.png');
+		background-size: 110%;
+		background-repeat: no-repeat;
+    background-position: center center;
 		height: calc(100% + 49px);
     animation: fadein .5s both;
-	}
-
-	#hero::before {
-		content: '';
-		background-image: linear-gradient(to bottom right, #02ccba 0%, #3d99be 31%, #9848d5 100%);
-		opacity: 0.8;
-		width: 100%;
-		height: calc(100% + 50px);
-		position: absolute;
 	}
 
 	.hero-content {
