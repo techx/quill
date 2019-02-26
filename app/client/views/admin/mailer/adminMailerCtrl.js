@@ -15,6 +15,12 @@ angular.module('reg')
             $scope.mailTitle = '';
             $scope.mailText = '';
 
+            $scope.senderOptions = [
+                'team@hacksc.com',
+                'noreply@hacksc.com',
+                'outreach@hacksc.com'
+            ];
+
             $scope.recipientOptions = [
                 'verified',
                 'verified and not submitted',

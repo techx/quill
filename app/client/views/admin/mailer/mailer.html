@@ -11,8 +11,9 @@
                 <select
                         id="sender"
                         ng-model="sender">
-                    <option value="team@hacksc.com">team@hacksc.com</option>
-                    <option value="noreply@hacksc.com">noreply@hacksc.com</option>
+                    <option ng-repeat="sender in senderOptions" value="{{sender}}">
+                        {{sender}}
+                    </option>
                 </select>
             </div>
             <div class="field column">
@@ -32,7 +33,7 @@
                         ng-model="schoolRecipient">
                     <option value="all">all</option>
                     <option ng-repeat="school in schools | orderBy: 'school.name'" value="{{school.email}}">
-                        {{school.email}} {{school.name}}
+                        {{school.name}} ({{school.email}})
                     </option>
                 </select>
             </div>
