@@ -50,10 +50,15 @@ angular.module('reg')
         });
       },
       updateAllowMinors: function(allowMinors){
-        return $http.put(base + 'minors', { 
-          allowMinors: allowMinors 
+        return $http.put(base + 'minors', {
+          allowMinors: allowMinors
         });
       },
+      updateReviewers: function(reviewers){
+        return $http.put(base + 'reviewers', {
+          reviewers: reviewers
+        });
+      }
     };
 
   }

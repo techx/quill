@@ -45,6 +45,10 @@ var schema = new mongoose.Schema({
   },
   allowMinors: {
     type: Boolean
+  },
+  reviewers: {
+    type: Number,
+    default: 3
   }
 });
 
@@ -79,6 +83,14 @@ schema.statics.getRegistrationTimes = function(callback){
       });
     });
 };
+
+schema.statics.getReviewers = function(callback){
+  this.findOne({})
+      .select('reviewers')
+      .exec(function(err, settings){
+        return callback(err, settings.reviewers);
+      })
+}
 
 schema.statics.getPublicSettings = function(callback){
   this

@@ -117,7 +117,7 @@ var profile = {
         developer: {
             type: Boolean,
             required: false,
-            default: false 
+            default: false
         },
         designer: {
             type: Boolean,
@@ -221,14 +221,6 @@ var status = {
         required: true,
         default: false
     },
-    reviewedBy: {
-        type: String,
-        validate: [
-            validator.isEmail,
-            'Invalid Email',
-        ],
-        select: false
-    },
     confirmed: {
         type: Boolean,
         required: true,
@@ -249,10 +241,37 @@ var status = {
     },
     confirmBy: {
         type: Number
-    },
-    reimbursementGiven: {
-        type: Boolean,
-        default: false
+    }
+};
+
+var review = {
+    reviewers: [{
+        type: String,
+        validate: [
+            validator.isEmail,
+            'Invalid Email',
+        ],
+        select: false
+    }],
+    rating: [{
+        name: 'Skill',
+        score: Number,
+        min: 0,
+        max: 5
+    }, {
+        name: 'Fit',
+        score: Number,
+        min: 0,
+        max: 5
+    }, {
+        name: 'Passion',
+        score: Number,
+        min: 0,
+        max: 5
+    }],
+    overallRating: {
+        type: Number,
+        default: -1,
     }
 };
 
@@ -328,6 +347,8 @@ var schema = new mongoose.Schema({
     confirmation: confirmation,
 
     status: status,
+
+    review: review,
 
 });
 

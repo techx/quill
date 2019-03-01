@@ -41,6 +41,15 @@ angular.module('reg')
           });
       };
 
+      $scope.updateReviewers = function() {
+          SettingsService
+              .updateReviewers($scope.settings.reviewers)
+              .then(response => {
+                  $scope.settings.reviewers = response.data.reviewers;
+                  swal("Looks good!", "There are now " + $scope.settings.reviewers + " reviewers per application.", "success");
+              })
+      }
+
       // Whitelist --------------------------------------
 
       SettingsService

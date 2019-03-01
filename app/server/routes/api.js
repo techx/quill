@@ -473,6 +473,19 @@ module.exports = function(router) {
     SettingsController.updateField('allowMinors', allowMinors, defaultResponse(req, res));
   });
 
+  /**
+   * [ADMIN ONLY]
+   * {
+   *   reviewers: Number
+   * }
+   * res: Settings
+   *
+   */
+  router.put('/settings/reviewers', isAdmin, function(req, res){
+    var reviewers = req.body.reviewers;
+    SettingsController.updateField('reviewers', reviewers, defaultResponse(req, res));
+  });
+
 
   // ---------------------------------------------
   // Mail [ADMIN ONLY!]

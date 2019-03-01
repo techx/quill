@@ -85,21 +85,21 @@
 
 <!-- Additional Options -->
 <!--Do not allow minors-->
-<!--<div-->
-<!--ng-class="{'loading': loading}"-->
-<!--class="ui purple segment">-->
+<div
+ng-class="{'loading': loading}"
+class="ui purple segment">
 
-  <!--<div class="ui header">-->
-    <!--Additional Options-->
-  <!--</div>-->
+  <div class="ui header">
+    Additional Options
+  </div>
 
-  <!---->
-  <!--<div class="column">-->
-    <!--<div class="ui form">-->
-      <!--<div class="grouped fields">-->
+
+  <div class="column">
+    <div class="ui form">
+      <div class="grouped fields">
         <!--<div class="field">-->
           <!--<div class="ui toggle checkbox">-->
-              <!--<input -->
+              <!--<input-->
               <!--type="checkbox"-->
               <!--name="allowMinors"-->
               <!--ng-class="{true: 'checked', false: ''}[settings.allowMinors]"-->
@@ -108,10 +108,20 @@
               <!--<label>Allow minors</label>-->
           <!--</div>-->
         <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
-<!--</div>-->
+        <div class="field">
+          <div class="ui input">
+            <input
+              type="number"
+              name="reviewers"
+              ng-model="settings.reviewers"
+              ng-change="updateReviewers()">
+            <label>Number of Reviewers per Application</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Whitelist -->
 <div
@@ -252,6 +262,7 @@
 
 </div>
 
+<!--Confirmation Text Editor-->
 <div
   ng-class="{'loading': loading}"
   class="ui orange segment">
