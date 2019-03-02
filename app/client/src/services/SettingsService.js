@@ -54,9 +54,22 @@ angular.module('reg')
           allowMinors: allowMinors
         });
       },
-      updateReviewers: function(reviewers){
-        return $http.put(base + 'reviewers', {
-          reviewers: reviewers
+      getReview: function(){
+        return $http.get(base + 'review')
+      },
+      updateReview: function(reviewers, reviewCriteria){
+        return $http.put(base + 'review', {
+          reviewers: reviewers,
+          reviewCriteria: reviewCriteria
+        });
+      },
+      getJudge: function(){
+        return $http.get(base + 'judge')
+      },
+      updateJudge: function(judges, judgeCriteria){
+        return $http.put(base + 'judge', {
+          judges: judges,
+          judgeCriteria: judgeCriteria
         });
       }
     };

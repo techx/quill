@@ -475,15 +475,56 @@ module.exports = function(router) {
 
   /**
    * [ADMIN ONLY]
+   * Get the review criteria.
+   *
+   * res: {
+   *   emails: [String]
+   * }
+   */
+  router.get('/settings/review', isAdmin, function(req, res){
+    SettingsController.getReview(defaultResponse(req, res));
+  });
+
+  /**
+   * [ADMIN ONLY]
    * {
    *   reviewers: Number
+   *   reviewCriteria: [String]
    * }
    * res: Settings
    *
    */
-  router.put('/settings/reviewers', isAdmin, function(req, res){
+  router.put('/settings/review', isAdmin, function(req, res){
     var reviewers = req.body.reviewers;
-    SettingsController.updateField('reviewers', reviewers, defaultResponse(req, res));
+    var reviewCriteria = req.body.reviewCriteria;
+    SettingsController.updateReview(reviewers, reviewCriteria, defaultResponse(req, res));
+  });
+
+  /**
+   * [ADMIN ONLY]
+   * Get the judge criteria.
+   *
+   * res: {
+   *   emails: [String]
+   * }
+   */
+  router.get('/settings/judge', isAdmin, function(req, res){
+    SettingsController.getJudge(defaultResponse(req, res));
+  });
+
+  /**
+   * [ADMIN ONLY]
+   * {
+   *   judges: Number
+   *   judgeCriteria: [String]
+   * }
+   * res: Settings
+   *
+   */
+  router.put('/settings/judge', isAdmin, function(req, res){
+    var judges = req.body.judges;
+    var judgeCriteria = req.body.judgeCriteria;
+    SettingsController.updateJudge(judges, judgeCriteria, defaultResponse(req, res));
   });
 
 

@@ -48,9 +48,54 @@ var schema = new mongoose.Schema({
   },
   reviewers: {
     type: Number,
+    select: false,
     default: 3
+  },
+  reviewCriteria: {
+    type: [String],
+    select: false,
+    default: ['Skill', 'Culture', 'Passion']
+  },
+  judges: {
+    type: Number,
+    select: false,
+    default: 3
+  },
+  judgeCriteria: {
+    type: [String],
+    select: false,
+    default: ['Entrepreneurship', 'Entertainment', 'Transportation', 'Technicality', 'Creativity', 'Impact']
   }
 });
+
+/**
+ * Get the list of review criteria
+ * Review criteria are by default not included in settings.
+ * @param  {Function} callback args(err, reviewCriteria)
+ */
+schema.statics.getReview = function(callback){
+  this
+      .findOne({})
+      .select('reviewers reviewCriteria')
+      .exec(function(err, settings){
+        return callback(err, settings);
+      });
+};
+
+/**
+ * Get the list of review criteria
+ * Review criteria are by default not included in settings.
+ * @param  {Function} callback args(err, reviewCriteria)
+ */
+schema.statics.getJudge = function(callback){
+  this
+      .findOne({})
+      .select('judges judgeCriteria')
+      .exec(function(err, settings){
+        return callback(err, settings);
+      });
+};
+
 
 /**
  * Get the list of whitelisted emails.
@@ -83,14 +128,6 @@ schema.statics.getRegistrationTimes = function(callback){
       });
     });
 };
-
-schema.statics.getReviewers = function(callback){
-  this.findOne({})
-      .select('reviewers')
-      .exec(function(err, settings){
-        return callback(err, settings.reviewers);
-      })
-}
 
 schema.statics.getPublicSettings = function(callback){
   this

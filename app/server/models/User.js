@@ -246,28 +246,15 @@ var status = {
 
 var review = {
     reviewers: [{
-        type: String,
-        validate: [
-            validator.isEmail,
-            'Invalid Email',
-        ],
-        select: false
-    }],
-    rating: [{
-        name: 'Skill',
-        score: Number,
-        min: 0,
-        max: 5
-    }, {
-        name: 'Fit',
-        score: Number,
-        min: 0,
-        max: 5
-    }, {
-        name: 'Passion',
-        score: Number,
-        min: 0,
-        max: 5
+        email: {
+            type: String,
+            validate: [
+                validator.isEmail,
+                'Invalid Email',
+            ],
+            select: false
+        },
+        rating: [Number]
     }],
     overallRating: {
         type: Number,
