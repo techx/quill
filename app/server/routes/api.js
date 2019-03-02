@@ -2,6 +2,7 @@ var UserController = require('../controllers/UserController');
 var SettingsController = require('../controllers/SettingsController');
 var FileController = require('../controllers/FileController');
 var MailController = require('../controllers/MailController');
+var ReviewController = require('../controllers/ReviewController');
 
 var request = require('request');
 
@@ -567,5 +568,58 @@ module.exports = function(router) {
     MailController.sendSchool(sender, title, text, recipient, schoolRecipient, defaultResponse(req, res));
   });
 
+  // ---------------------------------------------
+  // Review [ADMIN ONLY!]
+  // ---------------------------------------------
+
+  /**
+   * [ADMIN ONLY]
+   * Accepts the top number amount of applicants based on score.
+   * The rest are half waitlisted half rejected.
+   *
+   */
+  router.get('/review/release', isAdmin, function(req, res){
+    ReviewController.release(defaultResponse(req, res));
+  });
+
+  /**
+   * [ADMIN ONLY]
+   * Assigns the given user for review
+   *
+   */
+  router.get('/review/assign/:id', isAdmin, function(req, res){
+    ReviewController.assignReview(req.params.id, defaultResponse(req, res));
+  });
+
+  /**
+   * [ADMIN ONLY]
+   * Assigns all submitted users for review
+   *
+   */
+  router.get('/review/assign', isAdmin, function(req, res){
+    ReviewController.assignReviews(defaultResponse(req, res));
+  });
+  /**
+   * [ADMIN ONLY]
+   * Returns the queue of users the admin has to review
+   *
+   */
+  router.get('/review/queue', isAdmin, function(req, res){
+    var user = req.user; // grab admin id
+    ReviewController.getQueue(user, defaultResponse(req, res));
+  });
+
+  /**
+   * [ADMIN ONLY]
+   * Updates the user with the review
+   *
+   */
+  router.put('/review/update', isAdmin, function(req, res){
+    var user = req.user;
+    var userId = req.body.userId;
+    var rating = req.body.rating;
+    var comment = req.body.comment;
+    ReviewController.updateReview(userId, user, rating, comment, defaultResponse(req, res));
+  });
 
 };

@@ -3,11 +3,13 @@ const SettingsService = require('./services/SettingsService.js');
 const UserService = require('./services/UserService.js');
 const FileService = require('./services/FileService.js');
 const MailService = require('./services/MailService.js');
+const ReviewService = require('./services/ReviewService');
 const AdminCtrl = require('../views/admin/adminCtrl.js');
 const AdminSettingsCtrl = require('../views/admin/settings/adminSettingsCtrl.js');
 const AdminStatsCtrl = require('../views/admin/stats/adminStatsCtrl.js');
 const AdminUserCtrl = require('../views/admin/user/adminUserCtrl.js');
 const AdminUsersCtrl = require('../views/admin/users/adminUsersCtrl.js');
+const AdminReviewCtrl = require('../views/admin/review/adminReviewCtrl.js');
 const AdminMailerCtrl = require('../views/admin/mailer/adminMailerCtrl.js');
 const ApplicationCtrl = require('../views/application/applicationCtrl.js');
 const ConfirmationCtrl = require('../views/confirmation/confirmationCtrl.js');
@@ -157,10 +159,15 @@ angular.module('reg')
           }
         }
       })
+      .state('app.admin.review', {
+        url: "/admin/review",
+        templateUrl: "views/admin/review/review.html",
+        controller: 'AdminReviewCtrl',
+      })
       .state('app.admin.mailer', {
-      url: "/admin/mailer",
-      templateUrl: "views/admin/mailer/mailer.html",
-      controller: 'AdminMailerCtrl',
+        url: "/admin/mailer",
+        templateUrl: "views/admin/mailer/mailer.html",
+        controller: 'AdminMailerCtrl',
       })
       .state('app.admin.settings', {
         url: "/admin/settings",

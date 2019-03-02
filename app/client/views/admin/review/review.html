@@ -1,0 +1,68 @@
+<div class="ui segment">
+
+    <div class="actions">
+        <div class="four column centered row">
+            <div class="ui labeled button column"
+                 ng-click="releaseDecisions()">
+                Release Decisions
+            </div>
+            <div class="ui labeled button column"
+                 ng-click="assignReviews()">
+                Assign Reviews
+            </div>
+            <div class="ui labeled button column"
+                 ng-click="refresh()">
+                Refresh
+            </div>
+            <div class="ui labeled button column"
+                 ng-click="updateReview()">
+                Submit
+            </div>
+        </div>
+    </div>
+
+    <div class="ui divider"></div>
+
+    <div ng-show="empty">
+        <p>
+            You don't have anyone to review right now! Press the refresh button or check back another time.
+        </p>
+    </div>
+
+    <div ng-show="!empty">
+        <div class="header">
+            {{user.profile.name ? user.profile.name : user.email}}
+            <span
+                    ng-show="user.admin">
+            (Admin)
+          </span>
+        </div>
+        <div class="content">
+            <div ng-repeat="section in user.sections">
+                <div class="ui divider"></div>
+
+                <h3> {{section.title}} </h3>
+
+                <p ng-repeat="field in section.fields">
+                    <strong> {{field.name}}: </strong>
+
+                    <span ng-show="field.type === 'boolean'">
+                <i class="red circle remove icon" ng-show="!field.value"></i>
+                <i class="green circle check icon" ng-show="field.value"></i>
+              </span>
+
+                    <span ng-if="field.type === 'link'">
+                <a target="_blank" href="{{field.value}}">{{field.title}}</a>
+              </span>
+
+                    <span ng-if="field.type == null">
+                {{field.value}}
+              </span>
+
+                </p>
+
+            </div>
+
+        </div>
+    </div>
+</div>
