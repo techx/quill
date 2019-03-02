@@ -53,19 +53,23 @@
 	.logo-header-container {
 		height: 50px;
 		margin-top: 0;
-		margin-bottom: 2%;
+		margin-bottom: 10%;
 		animation: fadein .5s both;
 		animation-delay: .15s;
 	}
 
 	.logo-header {
 		height: 50px;
-		position: absolute;
-		left: 0;
-		right: 0;
+		margin-bottom: 1%;
 		width: 100%;
 		text-align: center;
 		transition: all .2s ease;
+	}
+
+	.hack-header {
+		font-family: Arial, Helvetica, sans-serif;
+		font-size: 3.5em;
+    font-weight: 700;
 	}
 
 	.logo-header>img {
@@ -181,19 +185,19 @@
 	}
 
 	/* Who We Are */
-	#whoweare {
-		background-image: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%);
+	#about-us {
+		background: #7673c9;
 		color: white;
 		padding: 6% 0;
 
-    #whoweare-content {
+    #about-us-content {
       width: 85%;
       
       .title {
         text-align: center;
       }
 
-      .whoweare-description {
+      .about-us-description {
         font-weight: 300;
         letter-spacing: .06em;
         padding-top: 2.5%;
@@ -213,9 +217,9 @@
 
 	/* Mobile */
 	@media (max-width: 767px) {
-		#whoweare {
-			#whoweare-content {
-				.whoweare-description {
+		#about-us {
+			#about-us-content {
+				.about-us-description {
 					letter-spacing: 0.025em;
 					line-height: 1.55em;
 				}
@@ -250,7 +254,7 @@
         z-index: 100;
 
         &:before {
-          background: linear-gradient(to bottom right, #02ccba 0%, #3d99be 31%, #9848d5 100%);
+          background-image: linear-gradient(to right, #2a2a2a, #191919);
           content: '';    
           display: block;
           height: 100%;
@@ -313,10 +317,10 @@
       }
     }
   }
-  
+	
 	/* Footer */
 	#footer {
-		background-image: linear-gradient(-225deg, #2CD8D5 0%, #6B8DD6 48%, #8E37D7 100%);
+		background-image: url(../assets/images/footer.png);
 		color: white;
 		text-align: center;
 		padding: 6% 0;
@@ -366,11 +370,11 @@
 			}
 		}
 
-		#info, #whoweare {
+		#info, #about-us {
 			padding: 12.5% 0;
 		}
 
-		#info-content, #whoweare-content {
+		#info-content, #about-us-content {
 			width: 90%;
 		}
 
@@ -398,7 +402,7 @@
 
 	/* Tablet */
 	@media (min-width: 768px) and (max-width: 991px) {
-		#info-content, #whoweare-content {
+		#info-content, #about-us-content {
 			width: 90%;
 		}
 
@@ -409,7 +413,7 @@
 
 	/* Large Screens */
 	@media (min-width: 1650px) {
-		#info-content, #whoweare-content, #committee-content{
+		#info-content, #about-us-content, #committee-content{
 			width: 70%;
 		}
 	}
@@ -429,29 +433,28 @@
 
 	#hero::before {
 		content: '';
-		background-image: linear-gradient(to bottom right, #02ccba 0%, #3d99be 31%, #9848d5 100%);
+		background: #2a2a2a;
 		opacity: 0.8;
 		width: 100%;
     height: calc(45vh + 50px);
     left: 0;
 		position: absolute;
   }
-  
+	
+	#content {
+		background: white;
+	}
+	
   .logo-header-container {
 		height: 50px;
-    margin: 0 0 5% 0;
 		animation: fadein .5s both;
 		animation-delay: .15s;
+		margin-bottom:10px;
 	}
 
 	.logo-header {
 		height: 50px;
-    position: absolute;
-    top: 115px;
-		left: 0;
-		right: 0;
 		width: 100%;
-		text-align: center;
 		transition: all .2s ease;
 	}
 
@@ -561,7 +564,7 @@
 		}
 
 		#break {
-			background-image: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%);
+			background: #7673c9;
 			color: white;
 			padding: 3.5% 0;
 			animation: fadein .5s both;
@@ -680,7 +683,7 @@
 	
 	/* Footer */
 	#footer {
-		background-image: linear-gradient(-225deg, #2CD8D5 0%, #6B8DD6 48%, #8E37D7 100%);
+		background-image: url(../assets/images/footer.png);
 		color: white;
 		text-align: center;
 		padding: 6% 0;
