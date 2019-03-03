@@ -221,6 +221,12 @@ body {
 
 	/* Mobile */
 	@media (max-width: 767px) {
+		#hero {
+			background-image: linear-gradient(to right, #2a2a2a, #191919);
+		}
+		.hack-header {
+			font-size: 3.0em;
+		}
 		#about-us {
 			#about-us-content {
 				.about-us-description {
@@ -601,9 +607,6 @@ body {
 
 		/* Tablet */
 		@media (min-width: 768px) and (max-width: 991px) {
-			#hero {
-				background-image: background-image: linear-gradient(to right, #2a2a2a, #191919);
-			}
 			#break {
 				#break-content {
 					width: 90%;
@@ -672,10 +675,6 @@ body {
 
 		/* Mobile */
     @media (max-width: 767px) {
-			#hero {
-				background-image: linear-gradient(to right, #2a2a2a, #191919);
-			}
-			
       .job-container {
 				padding: 8%;
 				
