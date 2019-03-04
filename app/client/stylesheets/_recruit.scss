@@ -225,10 +225,17 @@
 
   /* Mobile */
   @media (max-width: 767px) {
-    #hero::before {
-      background-image: url("../assets/images/desktop-background.png");
-      background-size: 70%;
+    #hero {
+      background-image: linear-gradient(to right, #2a2a2a, #191919);
     }
+    
+    .logo-header {
+      height: 100px;
+    }
+    .hero-content > div {
+      margin-top: 50px;
+    }
+
     .hack-header {
       font-size: 3em;
     }
@@ -529,7 +536,6 @@
       width: 200px;
       display: block;
       margin: 0.8em auto 0;
-
     }
   }
 
