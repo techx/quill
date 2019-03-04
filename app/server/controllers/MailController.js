@@ -24,6 +24,9 @@ var sendMassMail = function (query, sender, title, text, callback) {
 MailController.send = function (sender, title, text, recipient, callback) {
     // filter recipient
     switch (recipient) {
+        case 'unverified':
+            sendMassMail({'verified': false}, sender, title, text, callback);
+            break;
         case 'verified':
             sendMassMail({'verified': true}, sender, title, text, callback);
             break;
@@ -64,6 +67,9 @@ MailController.sendSchool = function (sender, title, text, recipient, schoolReci
     console.log(schoolRegex);
     // filter recipient
     switch (recipient) {
+        case 'unverified':
+            sendMassMail({'verified': false, email: schoolRegex}, sender, title, text, callback);
+            break;
         case 'verified':
             sendMassMail({'verified': true, email: schoolRegex}, sender, title, text, callback);
             break;

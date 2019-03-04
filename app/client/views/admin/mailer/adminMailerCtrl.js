@@ -22,6 +22,7 @@ angular.module('reg')
             ];
 
             $scope.recipientOptions = [
+                'unverified',
                 'verified',
                 'verified and not submitted',
                 'submitted',
