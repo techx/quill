@@ -5,7 +5,7 @@ angular.module('reg')
         NAME: 'HackSC 2019',
     })
     .constant('DASHBOARD', {
-        UNVERIFIED: 'You should have received an email asking you verify your email. Click the link in the email and you can start your application! If you haven\'t received an email, contact us at team@hacksc.com.',
+        UNVERIFIED: 'You should have received an email asking you verify your email. Click the link in the email and you can start your application!\nIf you haven\'t received an email, your school may be blocking our emails. Sign up with a gmail account and we will verify your student status another way. For further issues, contact us at team@hacksc.com.',
         INCOMPLETE_TITLE: 'You still need to complete your application!',
         INCOMPLETE: 'If you do not complete your application before [APP_DEADLINE], you will not be considered for admissions.',
         SUBMITTED_TITLE: 'Your application has been submitted!',
