@@ -225,8 +225,9 @@
 
   /* Mobile */
   @media (max-width: 767px) {
-    #hero {
-      background-image: linear-gradient(to right, #2a2a2a, #191919);
+    #hero::before {
+      background-image: url("../assets/images/desktop-background.png");
+      background-size: 70%;
     }
     .hack-header {
       font-size: 3em;
@@ -307,7 +308,7 @@
         }
 
         &.committee-card--logistics {
-          background: url("../assets/images/logistics.png");
+          background: url("../assets/images/logistics.jpg");
           background-position: center center;
           background-size: cover;
           background-repeat: no-repeat;
@@ -321,14 +322,14 @@
         }
 
         &.committee-card--marketing {
-          background: url("../assets/images/marketing.png");
+          background: url("../assets/images/marketing.jpg");
           background-position: center center;
           background-size: cover;
           background-repeat: no-repeat;
         }
 
         &.committee-card--technology {
-          background: url("../assets/images/technology.png");
+          background: url("../assets/images/technology.jpg");
           background-position: center center;
           background-size: cover;
           background-repeat: no-repeat;
