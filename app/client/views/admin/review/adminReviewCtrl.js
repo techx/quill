@@ -17,8 +17,10 @@ angular.module('reg')
             $scope.user.sections = generateSections({
                 status: '',
                 profile: ''});
-            $scope.ratings = [0,0,0];
+            $scope.ratings = [];
             $scope.comments = '';
+            $scope.reviewCriteria = [];
+            $scope.admissions;
 
             $scope.$on('$viewContentLoaded', function() {
                 // Need to settimeout 0 to properly load element properties
@@ -49,18 +51,45 @@ angular.module('reg')
                     dangerMode: true,
                     icon: "warning",
                     text: "You are about to release all application decisions!",
-                    title: "Release?"
+                    title: "Whoa!"
                 }).then(value => {
                     if (!value) {
                         return;
                     }
 
-                    ReviewService.release()
-                        .then(response => {
-                            swal('Success!', 'All decisions have been released', 'success');
-                        }, err => {
-                            swal('Oops!', 'Something went wrong', 'error');
-                        })
+                    swal({
+                        buttons: {
+                            cancel: {
+                                text: "Cancel",
+                                value: null,
+                                visible: true
+                            },
+                            accept: {
+                                className: "danger-button",
+                                closeModal: false,
+                                text: "Actually Release",
+                                value: true,
+                                visible: true
+                            }
+                        },
+                        dangerMode: true,
+                        icon: "warning",
+                        text: "Are you ABSOLUTELY SURE? This cannot be undone!!! " +
+                            "There will be " + $scope.admissions + " admissions, and the rest will be half waitlisted and half rejected. " +
+                            "Decisions will be immediately available, but you'll have to send an email to notify applicants",
+                        title: "Are you really sure?"
+                    }).then(value => {
+                        if (!value) {
+                            return;
+                        }
+
+                        ReviewService.release()
+                            .then(response => {
+                                swal('Success!', 'All decisions have been released', 'success');
+                            }, err => {
+                                swal('Oops!', 'Something went wrong', 'error');
+                            })
+                    });
                 });
             };
 
@@ -68,6 +97,7 @@ angular.module('reg')
                 ReviewService.assignReviews()
                     .then(response => {
                         swal('Success!', 'All submissions have been assigned for review', 'success');
+                        getReviewQueue();
                     }, err => {
                         swal('Oops!', 'Something went wrong', 'error');
                     })
@@ -78,7 +108,7 @@ angular.module('reg')
             $scope.updateReview = function() {
                 // check in range
                 for(var i = 0; i < $scope.ratings.length; i++){
-                    if($scope.ratings[i] < 0 || $scope.ratings[i] > 5){
+                    if($scope.ratings[i] === undefined || $scope.ratings[i] < 0 || $scope.ratings[i] > 5){
                         swal('Oops', 'Scores must be between 0 and 5.', 'error');
                         return;
                     }
@@ -87,9 +117,7 @@ angular.module('reg')
                     .then(response => {
                         //swal('Great!', 'Review Updated', 'success');
                         // clear for next user
-                        $scope.user = {};
-                        $scope.ratings = [0, 0, 0];
-                        $scope.comments = '';
+                        clearCurrentReview();
                         // get next user
                         nextUser();
                     }, err => {
@@ -102,6 +130,8 @@ angular.module('reg')
                 .getReview()
                 .then(response => {
                     $scope.reviewCriteria = response.data.reviewCriteria;
+                    $scope.admissions = response.data.admissions;
+                    clearCurrentReview();
                 });
 
             // Populate queue
@@ -137,6 +167,12 @@ angular.module('reg')
                 if (time) {
                     return moment(time).format('MMMM Do YYYY, h:mm:ss a');
                 }
+            }
+
+            function clearCurrentReview(){
+                $scope.ratings = new Array($scope.reviewCriteria.length);
+                $scope.ratings.fill(0);
+                $scope.comments = '';
             }
 
             function generateSections(user){

@@ -5,98 +5,27 @@ var ReviewController = {};
 
 /**
  * Returns sorted descending list of applicants by their rating
- * @type {Promise<any>}
  */
 var rankRating = function (callback) {
     User.find({
         verified: true,
         admin: false
     }).sort({
-        'review.overallRating': 'desc'
+        'review.overallRating': -1
     }).exec(callback);
 };
 
 /**
- * Returns sorted descending list of admins by their review number
- * @type {Promise<any>}
+ * Returns sorted ascending list of admins by their review number
  */
 var rankCount = function (callback) {
     User.find({
         verified: true,
         admin: true
     }).sort({
-        'review.reviewCount': 'asc'
+        'review.reviewCount': 1
     }).exec(callback);
 };
-
-/**
- * Assigns user for review. Will not reassign, or assign more than allowed
- * @param userId
- * @param callback
- */
-var assignReview = function (userId, callback) {
-    rankCount(function (err, adminUsers) {
-        if (err || !adminUsers) {
-            return callback(err);
-        }
-
-        User.findById(userId).exec(function(err, user){
-            if(err){
-                return callback(err);
-            }
-
-            // Get number of reviewers
-            Settings.getReview(function (err, settings) {
-                var reviewers = (settings.reviewers - user.review.reviewers.length); // remaining reviewers need to assign
-
-                // assign to remaining reviewers. Will not assign if already fulfilled
-                for(var i = 0; i < reviewers && i < adminUsers.length; i++){
-
-                    // assign user to reviewer
-                    User.findOneAndUpdate({
-                        _id: adminUsers[i].id,
-                        verified: true
-                    }, {
-                        $push: {
-                            'review.reviewQueue': userId,
-                        },
-                        $set: {
-                            'review.reviewCount': ++adminUsers[i].review.reviewCount,
-                        }
-                    }, {
-                        new: true
-                    }, function (err) {
-                        if (err) {
-                            return callback(err);
-                        }
-                    });
-
-                    // assign reviewer to user
-                    User.findOneAndUpdate({
-                        _id: userId,
-                        verified: true
-                    }, {
-                        $push: {
-                            'review.reviewers': {
-                                email: adminUsers[i].email,
-                                ratings: [],
-                                comments: ''
-                            }
-                        }
-                    }, {
-                        new: true
-                    }, function(err){
-                        if(err){
-                            return callback(err);
-                        }
-                    });
-                }
-                callback();
-            });
-        });
-    });
-};
-
 
 /**
  * Release all decisions for applicants
@@ -159,13 +88,71 @@ ReviewController.release = function (callback) {
 
 /**
  * Assigns user for review. Will not reassign, or assign more than allowed
- * @param id
+ * @param userId
  * @param callback
  */
-ReviewController.assignReview = function (id, callback) {
-    assignReview(id, callback);
-};
+ReviewController.assignReview = function (userId, callback) {
+    rankCount(function (err, adminUsers) {
+        if (err || !adminUsers) {
+            return callback(err);
+        }
 
+        User.findById(userId).exec(function(err, user){
+            if(err){
+                return callback(err);
+            }
+
+            // Get number of reviewers
+            Settings.getReview(function (err, settings) {
+                var reviewers = (settings.reviewers - user.review.reviewers.length); // remaining reviewers need to assign
+
+                // assign to remaining reviewers. Will not assign if already fulfilled
+                for(var i = 0; i < reviewers && i < adminUsers.length; i++){
+
+                    // assign user to reviewer
+                    User.findOneAndUpdate({
+                        _id: adminUsers[i].id,
+                        verified: true
+                    }, {
+                        $push: {
+                            'review.reviewQueue': userId,
+                        },
+                        $inc: {
+                            'review.reviewCount': 1,
+                        }
+                    }, {
+                        new: true
+                    }, function (err) {
+                        if (err) {
+                            return callback(err);
+                        }
+                    });
+
+                    // assign reviewer to user
+                    User.findOneAndUpdate({
+                        _id: userId,
+                        verified: true
+                    }, {
+                        $push: {
+                            'review.reviewers': {
+                                email: adminUsers[i].email,
+                                ratings: [],
+                                comments: ''
+                            }
+                        }
+                    }, {
+                        new: true
+                    }, function(err){
+                        if(err){
+                            return callback(err);
+                        }
+                    });
+                }
+                callback();
+            });
+        });
+    });
+};
 
 /**
  * Assigns all submitted users for review
@@ -173,25 +160,86 @@ ReviewController.assignReview = function (id, callback) {
  * @param callback
  */
 ReviewController.assignReviews = function (callback) {
-    User.find({
-        verified: true,
-        admin: false,
-        'status.submitted': true
-    }, function(err, users){
+    Settings.getReview(function (err, settings) {
         if(err){
             return callback(err);
         }
 
-        // lazy and inefficient but works
-        users.forEach(function(user){
-           assignReview(user.id, function(err){
-               if(err){
-                   return callback(err);
-               }
-           });
+        // get the ascending list of admins
+        rankCount(function(err, admins){
+            if(err){
+                return callback(err);
+            }
+
+            // find all users that need to be assigned
+            User.find({
+                verified: true,
+                admin: false,
+                'status.submitted': true,
+            }, function(err, users){
+                if(err){
+                    return callback(err)
+                }
+
+                // assign all users to admins for review
+                var adminIndex = 0;
+                for(let i = 0; i < users.length; i++){
+                    // assign only up to settings.reviewers
+                    var reviewers = settings.reviewers - users[i].review.reviewers.length;
+                    for(let j = 0; j < reviewers; j++){
+                        // adminIndex loop and distribution
+                        if(adminIndex >= admins.length){
+                            adminIndex = 0;
+                        }else if(adminIndex < admins.length-1 && admins[adminIndex].review.reviewCount < admins[adminIndex+1].review.reviewCount){
+                            // assign to admins with lower reviewCounts
+                            // when this happens, you've reached the next level of review counts, so go back to the start and iterate again
+                            adminIndex = 0;
+                        }
+                        // assign user to reviewer
+                        User.findOneAndUpdate({
+                            _id: admins[adminIndex].id,
+                            verified: true
+                        }, {
+                            $push: {
+                                'review.reviewQueue': users[i].id,
+                            },
+                            $inc: {
+                                'review.reviewCount': 1,
+                            }
+                        }, {
+                            new: true
+                        }, function (err) {
+                            if (err) {
+                                return callback(err);
+                            }
+                        });
+
+                        // assign reviewer to user
+                        User.findOneAndUpdate({
+                            _id: users[i].id,
+                            verified: true
+                        }, {
+                            $push: {
+                                'review.reviewers': {
+                                    email: admins[adminIndex].email,
+                                    ratings: [],
+                                    comments: ''
+                                }
+                            }
+                        }, {
+                            new: true
+                        }, function(err){
+                            if(err){
+                                return callback(err);
+                            }
+                        });
+                        adminIndex++;
+                    }
+                }
+            });
         });
-        callback();
     });
+    callback();
 };
 
 

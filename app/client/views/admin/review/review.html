@@ -1,19 +1,19 @@
-<div class="ui segment"
+<div class="ui yellow segment"
      ng-class="{'loading': loading}">
 
     <div>
         <div class="four column centered row">
             <div class="ui basic button column"
-                 ng-click="assignReviews()">
-                Assign Reviews
-            </div>
-            <div class="ui basic button column"
                  ng-click="refresh()">
                 Refresh
             </div>
-            <div class="ui red button right floated column"
+            <div class="ui red inverted button right floated column"
                  ng-click="releaseDecisions()">
                 Release Decisions
+            </div>
+            <div class="ui blue inverted button right floated column"
+                 ng-click="assignReviews()">
+                Assign Reviews
             </div>
         </div>
     </div>
@@ -22,7 +22,7 @@
 
     <div ng-show="users.length == 0">
         <p>
-            You don't have anyone to review right now! Press the refresh button or check back another time.
+            You don't have anyone to review right now! Press the refresh button or check back another time, or press Assigned Reviews to perform a comprehensive scan.
         </p>
     </div>
 
