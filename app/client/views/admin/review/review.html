@@ -7,6 +7,10 @@
                  ng-click="refresh()">
                 Refresh
             </div>
+            <div class="ui checkbox column">
+                <input type="checkbox" id="blindReview" ng-model="blindReview">
+                <label for="blindReview">Blind Review</label>
+            </div>
             <div class="ui red inverted button right floated column"
                  ng-click="releaseDecisions()">
                 Release Decisions
@@ -51,7 +55,7 @@
             </div>
         </div>
 
-        <div class="header">
+        <div class="header" ng-show="!blindReview">
             <h2>{{user.profile.name ? user.profile.name : user.email}}</h2>
         </div>
 
@@ -61,7 +65,7 @@
             <div ng-repeat="section in user.sections">
                 <div class="divided title"> {{section.name}} </div>
 
-                <p ng-repeat="field in section.fields">
+                <p ng-repeat="field in section.fields" ng-show="!(blindReview && field.sensitive)">
                     <strong> {{field.name}} </strong>
 
                     <br>

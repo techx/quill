@@ -12,6 +12,7 @@ angular.module('reg')
         function($scope, UserService, SettingsService, ReviewService, APPLICATION){
             $scope.APPLICATION = APPLICATION;
             $scope.loading = false;
+            $scope.blindReview = false;
             $scope.users = []; // array of userIDs
             $scope.user = {};
             $scope.user.sections = generateSections({
@@ -20,7 +21,7 @@ angular.module('reg')
             $scope.ratings = [];
             $scope.comments = '';
             $scope.reviewCriteria = [];
-            $scope.admissions;
+            $scope.admissions = 0;
 
             $scope.$on('$viewContentLoaded', function() {
                 // Need to settimeout 0 to properly load element properties
@@ -182,88 +183,104 @@ angular.module('reg')
                         fields: [
                             {
                                 name: 'Created On',
-                                value: formatTime(user.timestamp)
+                                value: formatTime(user.timestamp),
+                                sensitive: false
                             },{
                                 name: 'Last Updated',
-                                value: formatTime(user.lastUpdated)
-                            },{
-                                name: 'Checked In',
-                                value: formatTime(user.status.checkInTime) || 'N/A'
+                                value: formatTime(user.lastUpdated),
+                                sensitive: false
                             },{
                                 name: 'Email',
-                                value: user.email
+                                value: user.email,
+                                sensitive: true
                             },{
                                 name: 'Team',
-                                value: user.teamCode || 'None'
+                                value: user.teamCode || 'None',
+                                sensitive: false
                             },{
                                 name: 'Transportation',
                                 value: user.profile.transportation,
-                                type: 'boolean'
+                                type: 'boolean',
+                                sensitive: false
                             }
                         ]
                     },{
                         name: 'Profile',
                         fields: [
                             {
-                                name: 'Name',
-                                value: user.profile.Name
-                            },{
                                 name: 'FirstName',
-                                value: user.profile.firstName
+                                value: user.profile.firstName,
+                                sensitive: true,
                             },{
                                 name: 'LastName',
-                                value: user.profile.lastName
+                                value: user.profile.lastName,
+                                sensitive: true,
                             },{
                                 name: 'Gender',
-                                value: user.profile.gender
+                                value: user.profile.gender,
+                                sensitive: true,
                             },{
                                 name: 'Ethnicity',
-                                value: user.profile.ethnicity
+                                value: user.profile.ethnicity,
+                                sensitive: true,
                             },{
                                 name: 'School',
-                                value: user.profile.school
+                                value: user.profile.school,
+                                sensitive: true,
                             },{
                                 name: 'Year',
-                                value: user.profile.year
+                                value: user.profile.year,
+                                sensitive: true,
                             },{
                                 name: 'Major',
-                                value: user.profile.major
+                                value: user.profile.major,
+                                sensitive: true,
                             },{
                                 name: 'Experience',
-                                value: user.profile.experience
+                                value: user.profile.experience,
+                                sensitive: true,
                             },{
                                 name: 'Resume',
                                 title: (user.profile.resume ? user.profile.resume.name : ''),
                                 value: (user.profile.resume ? user.profile.resume.link : ''),
-                                type: 'link'
+                                type: 'link',
+                                sensitive: false
                             },{
                                 name: APPLICATION.ESSAY1_TITLE,
-                                value: user.profile.essay1
+                                value: user.profile.essay1,
+                                sensitive: false
                             },{
                                 name: APPLICATION.ESSAY2_TITLE,
-                                value: user.profile.essay2
+                                value: user.profile.essay2,
+                                sensitive: false
                             },{
                                 name: APPLICATION.ESSAY3_TITLE,
-                                value: user.profile.essay3
+                                value: user.profile.essay3,
+                                sensitive: false
                             },{
                                 name: 'Skills',
-                                value: user.profile.skills
+                                value: user.profile.skills,
+                                sensitive: false
                             },{
                                 name: 'LinkedIn',
-                                value: user.profile.linkedin
+                                value: user.profile.linkedin,
+                                sensitive: false
                             },{
                                 name: 'Github',
-                                value: user.profile.github
+                                value: user.profile.github,
+                                sensitive: false
                             },{
                                 name: 'Other',
-                                value: user.profile.other
+                                value: user.profile.other,
+                                sensitive: false
                             },{
                                 name: 'Role',
                                 value: (user.profile.role ?
                                     ((user.profile.role.developer ? 'Developer, ' : '')
                                         + (user.profile.role.designer ? 'Designer, ' : '')
                                         + (user.profile.role.productManager ? 'Product Manager, ' : '')
-                                        + (user.profile.role.other ? user.profile.other : '')) : '')
+                                        + (user.profile.role.other ? user.profile.other : '')) : ''),
+                                sensitive: false
                             }
                         ]
                     },

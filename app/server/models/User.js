@@ -496,7 +496,7 @@ schema.statics.validateProfile = function (profile, cb) {
  * Provide the firstName + lastName.
  */
 schema.virtual('profile.name').get(function (){
-    if(this.profile.firstName != undefined && this.profile.lastName != undefined){
+    if(this.profile.firstName !== undefined && this.profile.lastName !== undefined){
         return this.profile.firstName + " " + this.profile.lastName;
     }
     return undefined;
