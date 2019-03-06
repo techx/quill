@@ -41,6 +41,15 @@ angular.module('reg')
           });
       };
 
+        $scope.updateAdmissions = function () {
+            SettingsService
+                .updateAdmissions($scope.settings.admissions)
+                .then(response => {
+                    $scope.settings.admissions = response.data.admissions;
+                    swal("Looks good!", "Admissions Updated. Now accepting" + $scope.settings.admissions + "people.", "success");
+                });
+        };
+
       // Review --------------------------------------
 
       SettingsService
@@ -80,6 +89,7 @@ angular.module('reg')
                     swal('Looks Good!', 'Judge Settings Updated', 'success');
                 })
         };
+
 
       // Whitelist --------------------------------------
 

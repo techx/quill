@@ -26,12 +26,11 @@ angular.module('reg')
                     return $http.get(base + 'queue');
                 },
 
-                updateReview: function(userId, email, rating, comment){
+                updateReview: function(userId, ratings, comments){
                     return $http.put(base + 'update', {
                         userId: userId,
-                        email: email,
-                        rating: rating,
-                        comment: comment
+                        ratings: ratings,
+                        comments: comments
                     });
                 },
             };

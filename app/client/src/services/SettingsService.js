@@ -71,6 +71,11 @@ angular.module('reg')
           judges: judges,
           judgeCriteria: judgeCriteria
         });
+      },
+      updateAdmissions: function(admissions){
+        return $http.put(base + 'admissions', {
+          admissions: admissions
+        });
       }
     };
 

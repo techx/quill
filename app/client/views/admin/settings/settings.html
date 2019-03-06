@@ -182,35 +182,48 @@
   </div>
 </div>
 
-<!-- Additional Options -->
-<!--Do not allow minors-->
-<!--<div-->
-<!--ng-class="{'loading': loading}"-->
-<!--class="ui purple segment">-->
+<!--Additional Options-->
+<div
+        ng-class="{'loading': loading}"
+class="ui purple segment">
 
-  <!--<div class="ui header">-->
-    <!--Additional Options-->
-  <!--</div>-->
+  <div class="ui header">
+    Additional Options
+  </div>
 
 
-  <!--<div class="column">-->
-    <!--<div class="ui form">-->
-      <!--<div class="grouped fields">-->
-        <!--&lt;!&ndash;<div class="field">&ndash;&gt;-->
-          <!--&lt;!&ndash;<div class="ui toggle checkbox">&ndash;&gt;-->
-              <!--&lt;!&ndash;<input&ndash;&gt;-->
-              <!--&lt;!&ndash;type="checkbox"&ndash;&gt;-->
-              <!--&lt;!&ndash;name="allowMinors"&ndash;&gt;-->
-              <!--&lt;!&ndash;ng-class="{true: 'checked', false: ''}[settings.allowMinors]"&ndash;&gt;-->
-              <!--&lt;!&ndash;ng-model="settings.allowMinors"&ndash;&gt;-->
-              <!--&lt;!&ndash;ng-change="updateAllowMinors()">&ndash;&gt;-->
-              <!--&lt;!&ndash;<label>Allow minors</label>&ndash;&gt;-->
-          <!--&lt;!&ndash;</div>&ndash;&gt;-->
-        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
-<!--</div>-->
+  <div class="column">
+    <div class="ui form">
+      <div class="grouped fields">
+        <!--<div class="field">-->
+          <!--<div class="ui toggle checkbox">-->
+              <!--<input-->
+              <!--type="checkbox"-->
+              <!--name="allowMinors"-->
+              <!--ng-class="{true: 'checked', false: ''}[settings.allowMinors]"-->
+              <!--ng-model="settings.allowMinors"-->
+              <!--ng-change="updateAllowMinors()">-->
+              <!--<label>Allow minors</label>-->
+          <!--</div>-->
+          <div class="field">
+              <label>Number of Admissions</label>
+              <div class="ui input">
+                  <input
+                          type="number"
+                          ng-model="settings.admissions">
+              </div>
+          </div>
+          <div class="ui field">
+            <div
+                    class="ui green button"
+                    ng-click="updateAdmissions()">
+              Update
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 

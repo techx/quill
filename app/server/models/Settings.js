@@ -56,9 +56,8 @@ var schema = new mongoose.Schema({
     select: false,
     default: ['Skill', 'Culture', 'Passion']
   },
-  acceptances: {
+  admissions: {
     type: Number,
-    select: false,
     default: 800
   },
   judges: {
@@ -81,7 +80,7 @@ var schema = new mongoose.Schema({
 schema.statics.getReview = function(callback){
   this
       .findOne({})
-      .select('reviewers reviewCriteria acceptances')
+      .select('reviewers reviewCriteria admissions')
       .exec(function(err, settings){
         return callback(err, settings);
       });

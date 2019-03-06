@@ -254,12 +254,12 @@ var review = {
             ],
             select: false
         },
-        rating: [Number],
-        comment: String
+        ratings: [Number],
+        comments: String
     }],
     overallRating: {
         type: Number,
-        default: -1,
+        default: 0,
     },
     reviewQueue: [String],
     reviewCount: {

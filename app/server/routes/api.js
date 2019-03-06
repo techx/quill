@@ -528,6 +528,19 @@ module.exports = function(router) {
     SettingsController.updateJudge(judges, judgeCriteria, defaultResponse(req, res));
   });
 
+  /**
+   * [ADMIN ONLY]
+   * {
+   *   admissions: Number
+   * }
+   * res: Settings
+   *
+   */
+  router.put('/settings/admissions', isAdmin, function(req, res){
+    var admissions = req.body.admissions;
+    SettingsController.updateField("admissions", admissions, defaultResponse(req, res));
+  });
+
 
   // ---------------------------------------------
   // Mail [ADMIN ONLY!]
@@ -615,11 +628,11 @@ module.exports = function(router) {
    *
    */
   router.put('/review/update', isAdmin, function(req, res){
-    var user = req.user;
+    var adminUser = req.user;
     var userId = req.body.userId;
-    var rating = req.body.rating;
-    var comment = req.body.comment;
-    ReviewController.updateReview(userId, user, rating, comment, defaultResponse(req, res));
+    var ratings = req.body.ratings;
+    var comments = req.body.comments;
+    ReviewController.updateReview(userId, adminUser, ratings, comments, defaultResponse(req, res));
   });
 
 };

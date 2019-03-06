@@ -1,3 +1,4 @@
+const angular = require('angular');
 const moment = require('moment');
 const swal = require('sweetalert');
 
@@ -5,20 +6,29 @@ angular.module('reg')
     .controller('AdminReviewCtrl',[
         '$scope',
         'UserService',
+        'SettingsService',
         'ReviewService',
         'APPLICATION',
-        function($scope, UserService, ReviewService, APPLICATION){
-            $scope.empty = true;
-
-            $scope.user = {};
-            $scope.users = []; // array of userIDs
-
+        function($scope, UserService, SettingsService, ReviewService, APPLICATION){
             $scope.APPLICATION = APPLICATION;
-
+            $scope.loading = false;
+            $scope.users = []; // array of userIDs
             $scope.user = {};
             $scope.user.sections = generateSections({
                 status: '',
                 profile: ''});
+            $scope.ratings = [0,0,0];
+            $scope.comments = '';
+
+            $scope.$on('$viewContentLoaded', function() {
+                // Need to settimeout 0 to properly load element properties
+                setTimeout(function() {
+                    angular.element('.ui.sticky')
+                        .sticky({
+                            context: '#review'
+                        });
+                },1000);
+            });
 
             $scope.releaseDecisions = function(){
                 swal({
@@ -66,23 +76,44 @@ angular.module('reg')
             $scope.refresh = getReviewQueue;
 
             $scope.updateReview = function() {
-                ReviewService.updateReview($scope.user.id, $scope.rating, $scope.comment)
+                // check in range
+                for(var i = 0; i < $scope.ratings.length; i++){
+                    if($scope.ratings[i] < 0 || $scope.ratings[i] > 5){
+                        swal('Oops', 'Scores must be between 0 and 5.', 'error');
+                        return;
+                    }
+                }
+                ReviewService.updateReview($scope.user._id, $scope.ratings, $scope.comments)
                     .then(response => {
-                        swal('Great!', 'Review Updated', 'success');
+                        //swal('Great!', 'Review Updated', 'success');
+                        // clear for next user
+                        $scope.user = {};
+                        $scope.ratings = [0, 0, 0];
+                        $scope.comments = '';
+                        // get next user
                         nextUser();
                     }, err => {
                         swal('Oops!', 'Something went wrong', 'error');
                     });
             };
 
+            // Get criteria
+            SettingsService
+                .getReview()
+                .then(response => {
+                    $scope.reviewCriteria = response.data.reviewCriteria;
+                });
+
+            // Populate queue
             getReviewQueue();
 
             function getReviewQueue(){
+                $scope.loading = true;
                 ReviewService.getReviewQueue()
                     .then(response => {
                         $scope.users = response.data;
-                        $scope.empty = response.data === undefined || response.data.length === 0;
                         nextUser();
+                        $scope.loading = false;
                     }, err => {
                         swal('Uh oh!', 'something went wrong, refresh to try again!', 'error');
                     });
@@ -99,7 +130,6 @@ angular.module('reg')
                         }, err => {
                             swal('Uh oh!', 'Something went wrong.', 'error');
                         });
-                    $scope.empty = $scope.users.length > 0;
                 }
             }
 

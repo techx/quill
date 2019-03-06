@@ -1,6 +1,5 @@
 var User = require('../models/User');
 var Settings = require('../models/Settings');
-var async = require('async');
 
 var ReviewController = {};
 
@@ -35,39 +34,59 @@ var rankCount = function (callback) {
  * @param id
  * @param callback
  */
-var assignReview = function (id, callback) {
-    rankCount(function (err, users) {
-        if (err || !users) {
+var assignReview = function (userId, callback) {
+    rankCount(function (err, adminUsers) {
+        if (err || !adminUsers) {
             return callback(err);
         }
 
-        User.findById(id).exec(function(err, user){
+        User.findById(userId).exec(function(err, user){
             if(err){
                 return callback(err);
             }
 
             // Get number of reviewers
             Settings.getReview(function (err, settings) {
-                var reviewers = settings.reviewers - user.review.reviewers.length;
+                var reviewers = (settings.reviewers - user.review.reviewers.length); // remaining reviewers need to assign
 
                 // assign to remaining reviewers. Will not assign if already fulfilled
-                for(var i = 0; i < reviewers && i < users.length; i++){
+                for(var i = 0; i < reviewers && i < adminUsers.length; i++){
 
                     // assign user to reviewer
                     User.findOneAndUpdate({
-                        _id: users[i].id,
+                        _id: adminUsers[i]._id,
                         verified: true
                     }, {
                         $push: {
-                            'review.reviewQueue': id,
+                            'review.reviewQueue': userId,
                         },
                         $set: {
-                            'review.reviewCount': ++users[i].review.reviewCount,
+                            'review.reviewCount': ++adminUsers[i].review.reviewCount,
                         }
                     }, {
                         new: true
                     }, function (err) {
                         if (err) {
+                            return callback(err);
+                        }
+                    });
+
+                    // assign reviewer to user
+                    User.findOneAndUpdate({
+                        _id: userId,
+                        verified: true
+                    }, {
+                        $push: {
+                            'review.reviewers': {
+                                email: adminUsers[i].email,
+                                ratings: [],
+                                comments: ''
+                            }
+                        }
+                    }, {
+                        new: true
+                    }, function(err){
+                        if(err){
                             return callback(err);
                         }
                     });
@@ -91,11 +110,11 @@ ReviewController.release = function (callback) {
             return callback(err);
         }
 
-        // Set the number of acceptances
-        Settings.getReview(function (err, settings) {
+        // Get the number of acceptances
+        Settings.getPublicSettings(function (err, settings) {
             var total = users.length;
-            var acceptances = settings.acceptances;
-            var waitlists = (total - acceptances) / 2;
+            var admissions = settings.admissions;
+            var waitlists = (total - admissions) / 2;
 
             // Decide each student
             users.forEach(function (user) {
@@ -104,8 +123,8 @@ ReviewController.release = function (callback) {
                     'status.rejected': false,
                     'status.waitlisted': false,
                 };
-                if (acceptances > 0) {
-                    acceptances--;
+                if (admissions > 0) {
+                    admissions--;
                     setOptions['status.admitted'] = true;
                 } else if (waitlists > 0) {
                     waitlists--;
@@ -119,7 +138,7 @@ ReviewController.release = function (callback) {
                     setOptions['status.confirmBy'] = times.timeConfirm;
                     User
                         .findOneAndUpdate({
-                                _id: user.id,
+                                _id: user._id,
                                 verified: true
                             }, {
                                 $set: setOptions
@@ -157,6 +176,7 @@ ReviewController.assignReviews = function (callback) {
     User.find({
         verified: true,
         admin: false,
+        'status.submitted': true
     }, function(err, users){
         if(err){
             return callback(err);
@@ -164,7 +184,7 @@ ReviewController.assignReviews = function (callback) {
 
         // lazy and inefficient but works
         users.forEach(function(user){
-           assignReview(user.id, function(err){
+           assignReview(user._id, function(err){
                if(err){
                    return callback(err);
                }
@@ -181,7 +201,7 @@ ReviewController.assignReviews = function (callback) {
  * @param callback
  */
 ReviewController.getQueue = function (user, callback) {
-    User.findById(user.id).exec(function (err, user) {
+    User.findById(user._id).exec(function (err, user) {
         if(err){
             return callback(err);
         }
@@ -191,44 +211,54 @@ ReviewController.getQueue = function (user, callback) {
 
 /**
  * Updates a user's review
- * @param id
- * @param user
- * @param rating
- * @param comment
+ * @param userId
+ * @param adminUser
+ * @param ratings
+ * @param comments
  * @param callback
  */
-ReviewController.updateReview = function (id, user, rating, comment, callback) {
-    // assign reviewer to user
-    User.findOneAndUpdate({
-        _id: id,
-        verified: true
-    }, {
-        $push: {
-            'review.reviewers': {
-                email: user.email,
-                rating: rating,
-                comment: comment
-            },
-        }
-    }, {
-        new: true
-    }, function (err, user) {
-        if (err) {
-            return callback(err);
-        }
+ReviewController.updateReview = function (userId, adminUser, ratings, comments, callback) {
+    // Grab user
+    User.findById(userId).exec(function(err, user){
+        // add rating and assign overall rating
+        var overallRating = user.review.overallRating + ratings.reduce(function(sum, val){return sum+val});
 
-        // calculate new rating
-        var overallRating = user.review.overallRating + rating;
+        // update review
         User.findOneAndUpdate({
-            _id: user.id,
-            verified: true
+            _id: userId,
+            verified: true,
+            'review.reviewers.email': adminUser.email
         }, {
+            $push: {
+                'review.reviewers': {
+                    email: adminUser.email,
+                    ratings: ratings,
+                    comments: comments
+                },
             $set: {
-                'review.overallRating': overallRating
+                    'review.reviewers.$.ratings': ratings,
+                    'review.reviewers.$.comments': comments,
+                    'review.overallRating': overallRating
+                }
             }
         }, {
             new: true
-        }, callback)
+        }, function(err, user){
+            // pop the user from the admin's queue
+            User.findOneAndUpdate({
+                _id: adminUser._id,
+                verified: true,
+                admin: true
+            }, {
+                $pull: {
+                    'review.reviewQueue': userId,
+                }
+            }, callback);
+        });
+    }, function(err){
+        if(err){
+            callback(err);
+        }
     });
 };
 

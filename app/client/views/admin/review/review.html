@@ -1,68 +1,85 @@
-<div class="ui segment">
+<div class="ui segment"
+     ng-class="{'loading': loading}">
 
-    <div class="actions">
+    <div>
         <div class="four column centered row">
-            <div class="ui labeled button column"
-                 ng-click="releaseDecisions()">
-                Release Decisions
-            </div>
-            <div class="ui labeled button column"
+            <div class="ui basic button column"
                  ng-click="assignReviews()">
                 Assign Reviews
             </div>
-            <div class="ui labeled button column"
+            <div class="ui basic button column"
                  ng-click="refresh()">
                 Refresh
             </div>
-            <div class="ui labeled button column"
-                 ng-click="updateReview()">
-                Submit
+            <div class="ui red button right floated column"
+                 ng-click="releaseDecisions()">
+                Release Decisions
             </div>
         </div>
     </div>
 
     <div class="ui divider"></div>
 
-    <div ng-show="empty">
+    <div ng-show="users.length == 0">
         <p>
             You don't have anyone to review right now! Press the refresh button or check back another time.
         </p>
     </div>
 
-    <div ng-show="!empty">
-        <div class="header">
-            {{user.profile.name ? user.profile.name : user.email}}
-            <span
-                    ng-show="user.admin">
-            (Admin)
-          </span>
+    <div class="ui form"
+         id="review"
+         ng-show="users.length != 0">
+
+        <!--Sticky Review Panel-->
+        <div class="ui dividing right internal rail">
+            <div class="ui sticky" id="reviewPanel">
+                <div class="divided title">Reviewing Criteria</div>
+                <div ng-repeat="criteria in reviewCriteria">
+                    <div class="field">
+                        <label>{{criteria}}</label>
+                        <input type="number" min="0" max="5" ng-model="ratings[$index]">
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="comments">Comments</label>
+                    <textarea
+                        id="comments"
+                        ng-model="comments">
+                    </textarea>
+                </div>
+                <button class="ui button" ng-click="updateReview()">Submit</button>
+            </div>
         </div>
+
+        <div class="header">
+            <h2>{{user.profile.name ? user.profile.name : user.email}}</h2>
+        </div>
+
+        <br>
+
         <div class="content">
             <div ng-repeat="section in user.sections">
-                <div class="ui divider"></div>
-
-                <h3> {{section.title}} </h3>
+                <div class="divided title"> {{section.name}} </div>
 
                 <p ng-repeat="field in section.fields">
-                    <strong> {{field.name}}: </strong>
+                    <strong> {{field.name}} </strong>
+
+                    <br>
 
                     <span ng-show="field.type === 'boolean'">
-                <i class="red circle remove icon" ng-show="!field.value"></i>
-                <i class="green circle check icon" ng-show="field.value"></i>
-              </span>
+                        <i class="red circle remove icon" ng-show="!field.value"></i>
+                        <i class="green circle check icon" ng-show="field.value"></i>
+                    </span>
 
                     <span ng-if="field.type === 'link'">
-                <a target="_blank" href="{{field.value}}">{{field.title}}</a>
-              </span>
+                         <a target="_blank" href="{{field.value}}">{{field.title}}</a>
+                    </span>
 
                     <span ng-if="field.type == null">
-                {{field.value}}
-              </span>
-
+                        {{field.value}}
+                    </span>
                 </p>
-
             </div>
-
         </div>
     </div>
 </div>
