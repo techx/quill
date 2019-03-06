@@ -12,7 +12,7 @@ angular.module('reg')
         'Session',
         'UserService',
         'FileService',
-        'ReviewService'
+        'ReviewService',
         'APPLICATION',
         function ($scope, $rootScope, $state, $http, currentUser, settings, Session, UserService, FileService, ReviewService, APPLICATION) {
 
