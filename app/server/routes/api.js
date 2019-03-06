@@ -163,7 +163,7 @@ module.exports = function(router) {
     var profile = req.body.profile;
     var id = req.params.id;
 
-    UserController.updateProfileById(id, profile , defaultResponse(req, res));
+    UserController.updateProfileById(id, profile, defaultResponse(req, res));
   });
 
   /**
@@ -175,7 +175,7 @@ module.exports = function(router) {
     var profile = req.body.profile;
     var id = req.params.id;
 
-    UserController.submitById(id, profile , defaultResponse(req, res));
+    UserController.submitById(id, profile, defaultResponse(req, res));
   });
 
 

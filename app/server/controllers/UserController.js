@@ -308,6 +308,7 @@ UserController.updateProfileById = function (id, profile, callback){
 
 /**
  * Submits a user's profile object, given an id and a profile.
+ * Also automatically adds them to be reviewed
  *
  * @param  {String}   id       Id of the user
  * @param  {Object}   profile  Profile object
@@ -358,8 +359,7 @@ UserController.submitById = function (id, profile, callback){
         },
         {
           new: true
-        },
-        callback);
+        }, callback);
 
   });
 };

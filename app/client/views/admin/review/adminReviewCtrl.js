@@ -83,7 +83,7 @@ angular.module('reg')
                         return;
                     }
                 }
-                ReviewService.updateReview($scope.user._id, $scope.ratings, $scope.comments)
+                ReviewService.updateReview($scope.user.id, $scope.ratings, $scope.comments)
                     .then(response => {
                         //swal('Great!', 'Review Updated', 'success');
                         // clear for next user

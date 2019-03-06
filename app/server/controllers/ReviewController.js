@@ -31,7 +31,7 @@ var rankCount = function (callback) {
 
 /**
  * Assigns user for review. Will not reassign, or assign more than allowed
- * @param id
+ * @param userId
  * @param callback
  */
 var assignReview = function (userId, callback) {
@@ -54,7 +54,7 @@ var assignReview = function (userId, callback) {
 
                     // assign user to reviewer
                     User.findOneAndUpdate({
-                        _id: adminUsers[i]._id,
+                        _id: adminUsers[i].id,
                         verified: true
                     }, {
                         $push: {
@@ -138,7 +138,7 @@ ReviewController.release = function (callback) {
                     setOptions['status.confirmBy'] = times.timeConfirm;
                     User
                         .findOneAndUpdate({
-                                _id: user._id,
+                                _id: user.id,
                                 verified: true
                             }, {
                                 $set: setOptions
@@ -184,7 +184,7 @@ ReviewController.assignReviews = function (callback) {
 
         // lazy and inefficient but works
         users.forEach(function(user){
-           assignReview(user._id, function(err){
+           assignReview(user.id, function(err){
                if(err){
                    return callback(err);
                }
@@ -201,7 +201,7 @@ ReviewController.assignReviews = function (callback) {
  * @param callback
  */
 ReviewController.getQueue = function (user, callback) {
-    User.findById(user._id).exec(function (err, user) {
+    User.findById(user.id).exec(function (err, user) {
         if(err){
             return callback(err);
         }
@@ -246,7 +246,7 @@ ReviewController.updateReview = function (userId, adminUser, ratings, comments, 
         }, function(err, user){
             // pop the user from the admin's queue
             User.findOneAndUpdate({
-                _id: adminUser._id,
+                _id: adminUser.id,
                 verified: true,
                 admin: true
             }, {

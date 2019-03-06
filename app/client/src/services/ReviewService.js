@@ -14,8 +14,8 @@ angular.module('reg')
                     return $http.get(base + 'release');
                 },
 
-                assignReview: function(userId){
-                    return $http.get(base + 'assign/' + userId);
+                assignReview: function(id){
+                    return $http.get(base + 'assign/' + id);
                 },
 
                 assignReviews: function(){
