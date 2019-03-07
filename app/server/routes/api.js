@@ -614,11 +614,11 @@ module.exports = function(router) {
   });
 
   /**
-   * [ADMIN ONLY]
    * Assigns the given user for review
+   * Can assign self
    *
    */
-  router.get('/review/assign/:id', isAdmin, function(req, res){
+  router.get('/review/assign/:id', isOwnerOrAdmin, function(req, res){
     ReviewController.assignReview(req.params.id, defaultResponse(req, res));
   });
 

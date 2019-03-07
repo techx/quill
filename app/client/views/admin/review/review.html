@@ -12,6 +12,9 @@
             </div>
             <div class="ui flowing popup transition hidden">
                 <div class="ui list">
+                    <div class="item">
+                        <strong>Need to Review</strong>
+                    </div>
                     <div class="item" ng-repeat="reviewers in reviewersList">
                         {{reviewers.profile.name ? reviewers.profile.name : reviewers.email}} : {{reviewers.review.reviewQueue.length}}
                     </div>
@@ -21,8 +24,8 @@
                 <!--<input type="checkbox" id="blindReview" ng-model="blindReview" disabled>-->
                 <!--<label for="blindReview">Blind Review</label>-->
             <!--</div>-->
-            <!--<button class="ui red inverted basic button right floated column"-->
-                 <!--ng-click="releaseDecisions()" disabled>-->
+            <!--<button class="ui red inverted button right floated column"-->
+                 <!--ng-click="releaseDecisions()">-->
                 <!--Release Decisions-->
             <!--</button>-->
             <button class="ui inverted blue button right floated column"

@@ -52,30 +52,27 @@
                 {{selectedUser.status.name.toUpperCase()}}
               </div>
             </div>
-            <p>
-              <strong> Reviewed by: </strong> {{selectedUser.status.reviewedBy ? selectedUser.status.reviewedBy : 'Not Reviewed'}}
-            </p>
           </div>
 
           <div ng-repeat="section in selectedUser.sections">
-            <div class="ui divider"></div>
 
-            <h3> {{section.title}} </h3>
+            <h3 class="small divided title"> {{section.name}} </h3>
 
             <p ng-repeat="field in section.fields">
-              <strong> {{field.name}}: </strong>
+              <strong> {{field.name}} </strong>
 
-              <span ng-show="field.type === 'boolean'">
+              <br>
+
+              <span ng-if="field.type === 'boolean'">
                 <i class="red circle remove icon" ng-show="!field.value"></i>
                 <i class="green circle check icon" ng-show="field.value"></i>
               </span>
 
-              <span ng-show="field.type === 'reviewers'">
-                <div ng-repeat="review in field.value">
-                  <p>{{review.email}}</p>
-                  <p>{{review.ratings}}</p>
-                  <p>{{review.comments}}</p>
-                </div>
+              <span ng-if="field.type === 'reviewers'">
+                <span ng-repeat="review in field.value">
+                  Reviewed By: {{review.email}} <br>
+                  Comments: {{review.comments}} <br>
+                </span>
               </span>
 
               <span ng-if="field.type === 'link'">
@@ -118,7 +115,7 @@
         <thead>
           <tr>
             <th>Name</th>
-            <th>E-mail address</th>
+            <th>E-mail</th>
             <th>School</th>
             <th>Year</th>
             <th>S / A / C</th>

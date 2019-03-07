@@ -18,6 +18,7 @@ angular.module('reg')
 
       $scope.EVENT_INFO = EVENT_INFO;
 
+      /*causing errors*/
       $scope.pastConfirmation = Utils.isAfter(user.status.confirmBy);
 
       $scope.logout = function(){

@@ -252,7 +252,6 @@ var review = {
                 validator.isEmail,
                 'Invalid Email',
             ],
-            select: false
         },
         ratings: [Number],
         comments: String
