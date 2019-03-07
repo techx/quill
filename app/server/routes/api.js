@@ -587,6 +587,24 @@ module.exports = function(router) {
 
   /**
    * [ADMIN ONLY]
+   * Returns submissions list sorted by their rank
+   *
+   */
+  router.get('/review/list/submissions', isAdmin, function(req, res){
+    ReviewController.getSubmissionsList(defaultResponse(req, res));
+  });
+
+  /**
+   * [ADMIN ONLY]
+   * Returns reviewers list sorted by their total review count
+   *
+   */
+  router.get('/review/list/reviewers', isAdmin, function(req, res){
+    ReviewController.getReviewersList(defaultResponse(req, res));
+  });
+
+  /**
+   * [ADMIN ONLY]
    * Accepts the top number amount of applicants based on score.
    * The rest are half waitlisted half rejected.
    *

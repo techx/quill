@@ -28,6 +28,22 @@ var rankCount = function (callback) {
 };
 
 /**
+ * Returns submissions list sorted by their rank
+ * @param callback
+ */
+ReviewController.getSubmissionsList = function (callback) {
+    rankRating(callback);
+};
+
+/**
+ * Returns reviewers list sorted by their total review count
+ * @param callback
+ */
+ReviewController.getReviewersList = function (callback) {
+    rankCount(callback);
+};
+
+/**
  * Release all decisions for applicants
  * Top X amount is accepted (set in settings)
  * Rest is split evenly into Waitlist/Reject
@@ -97,8 +113,8 @@ ReviewController.assignReview = function (userId, callback) {
             return callback(err);
         }
 
-        User.findById(userId).exec(function(err, user){
-            if(err){
+        User.findById(userId).exec(function (err, user) {
+            if (err) {
                 return callback(err);
             }
 
@@ -107,7 +123,7 @@ ReviewController.assignReview = function (userId, callback) {
                 var reviewers = (settings.reviewers - user.review.reviewers.length); // remaining reviewers need to assign
 
                 // assign to remaining reviewers. Will not assign if already fulfilled
-                for(var i = 0; i < reviewers && i < adminUsers.length; i++){
+                for (var i = 0; i < reviewers && i < adminUsers.length; i++) {
 
                     // assign user to reviewer
                     User.findOneAndUpdate({
@@ -142,8 +158,8 @@ ReviewController.assignReview = function (userId, callback) {
                         }
                     }, {
                         new: true
-                    }, function(err){
-                        if(err){
+                    }, function (err) {
+                        if (err) {
                             return callback(err);
                         }
                     });
@@ -161,13 +177,13 @@ ReviewController.assignReview = function (userId, callback) {
  */
 ReviewController.assignReviews = function (callback) {
     Settings.getReview(function (err, settings) {
-        if(err){
+        if (err) {
             return callback(err);
         }
 
         // get the ascending list of admins
-        rankCount(function(err, admins){
-            if(err){
+        rankCount(function (err, admins) {
+            if (err) {
                 return callback(err);
             }
 
@@ -176,21 +192,21 @@ ReviewController.assignReviews = function (callback) {
                 verified: true,
                 admin: false,
                 'status.submitted': true,
-            }, function(err, users){
-                if(err){
+            }, function (err, users) {
+                if (err) {
                     return callback(err)
                 }
 
                 // assign all users to admins for review
                 var adminIndex = 0;
-                for(let i = 0; i < users.length; i++){
+                for (let i = 0; i < users.length; i++) {
                     // assign only up to settings.reviewers
                     var reviewers = settings.reviewers - users[i].review.reviewers.length;
-                    for(let j = 0; j < reviewers; j++){
+                    for (let j = 0; j < reviewers; j++) {
                         // adminIndex loop and distribution
-                        if(adminIndex >= admins.length){
+                        if (adminIndex >= admins.length) {
                             adminIndex = 0;
-                        }else if(adminIndex < admins.length-1 && admins[adminIndex].review.reviewCount < admins[adminIndex+1].review.reviewCount){
+                        } else if (adminIndex < admins.length - 1 && admins[adminIndex].review.reviewCount < admins[adminIndex + 1].review.reviewCount) {
                             // assign to admins with lower reviewCounts
                             // when this happens, you've reached the next level of review counts, so go back to the start and iterate again
                             adminIndex = 0;
@@ -228,8 +244,8 @@ ReviewController.assignReviews = function (callback) {
                             }
                         }, {
                             new: true
-                        }, function(err){
-                            if(err){
+                        }, function (err) {
+                            if (err) {
                                 return callback(err);
                             }
                         });
@@ -250,7 +266,7 @@ ReviewController.assignReviews = function (callback) {
  */
 ReviewController.getQueue = function (user, callback) {
     User.findById(user.id).exec(function (err, user) {
-        if(err){
+        if (err) {
             return callback(err);
         }
         callback(err, user.review.reviewQueue);
@@ -267,9 +283,11 @@ ReviewController.getQueue = function (user, callback) {
  */
 ReviewController.updateReview = function (userId, adminUser, ratings, comments, callback) {
     // Grab user
-    User.findById(userId).exec(function(err, user){
+    User.findById(userId).exec(function (err, user) {
         // add rating and assign overall rating
-        var overallRating = user.review.overallRating + ratings.reduce(function(sum, val){return sum+val});
+        var overallRating = user.review.overallRating + ratings.reduce(function (sum, val) {
+            return sum + val
+        });
 
         // update review
         User.findOneAndUpdate({
@@ -277,21 +295,14 @@ ReviewController.updateReview = function (userId, adminUser, ratings, comments, 
             verified: true,
             'review.reviewers.email': adminUser.email
         }, {
-            $push: {
-                'review.reviewers': {
-                    email: adminUser.email,
-                    ratings: ratings,
-                    comments: comments
-                },
             $set: {
-                    'review.reviewers.$.ratings': ratings,
-                    'review.reviewers.$.comments': comments,
-                    'review.overallRating': overallRating
-                }
-            }
+                'review.reviewers.$.ratings': ratings,
+                'review.reviewers.$.comments': comments,
+                'review.overallRating': overallRating
+            },
         }, {
             new: true
-        }, function(err, user){
+        }, function (err, user) {
             // pop the user from the admin's queue
             User.findOneAndUpdate({
                 _id: adminUser.id,
@@ -303,8 +314,8 @@ ReviewController.updateReview = function (userId, adminUser, ratings, comments, 
                 }
             }, callback);
         });
-    }, function(err){
-        if(err){
+    }, function (err) {
+        if (err) {
             callback(err);
         }
     });

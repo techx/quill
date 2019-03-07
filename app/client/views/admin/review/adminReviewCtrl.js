@@ -5,33 +5,64 @@ const swal = require('sweetalert');
 angular.module('reg')
     .controller('AdminReviewCtrl',[
         '$scope',
+        '$timeout',
         'UserService',
         'SettingsService',
         'ReviewService',
         'APPLICATION',
-        function($scope, UserService, SettingsService, ReviewService, APPLICATION){
+        function($scope, $timeout, UserService, SettingsService, ReviewService, APPLICATION){
             $scope.APPLICATION = APPLICATION;
+
+            // Settings and data
+            $scope.toast = false;
             $scope.loading = false;
-            $scope.blindReview = false;
+            $scope.blindReview = true;
+            $scope.admissions = 0;
+            $scope.ratingsRange = [0, 5];
+            $scope.reviewersList = [];
+
+            // Display user
             $scope.users = []; // array of userIDs
             $scope.user = {};
             $scope.user.sections = generateSections({
                 status: '',
                 profile: ''});
+
+            // Rating data
             $scope.ratings = [];
             $scope.comments = '';
             $scope.reviewCriteria = [];
-            $scope.admissions = 0;
+
+            // Get criteria
+            SettingsService
+                .getReview()
+                .then(response => {
+                    $scope.reviewCriteria = response.data.reviewCriteria;
+                    $scope.admissions = response.data.admissions;
+                    clearCurrentReview();
+                });
+
+            // Populate fields
+            getReviewQueue();
+            getReviewersList();
 
             $scope.$on('$viewContentLoaded', function() {
-                // Need to settimeout 0 to properly load element properties
-                setTimeout(function() {
+                angular.element('#popup')
+                    .popup();
+
+                // Need to timeout to properly load element properties
+                $timeout(function() {
                     angular.element('.ui.sticky')
                         .sticky({
                             context: '#review'
                         });
                 },1000);
             });
+
+            $scope.refresh = function () {
+                getReviewQueue();
+                getReviewersList();
+            };
 
             $scope.releaseDecisions = function(){
                 swal({
@@ -104,13 +135,11 @@ angular.module('reg')
                     })
             };
 
-            $scope.refresh = getReviewQueue;
-
             $scope.updateReview = function() {
                 // check in range
                 for(var i = 0; i < $scope.ratings.length; i++){
-                    if($scope.ratings[i] === undefined || $scope.ratings[i] < 0 || $scope.ratings[i] > 5){
-                        swal('Oops', 'Scores must be between 0 and 5.', 'error');
+                    if($scope.ratings[i] === undefined || $scope.ratings[i] < $scope.ratingsRange[0] || $scope.ratings[i] > $scope.ratingsRange[1]){
+                        swal('Oops', 'Scores must be between 0 and ' + $scope.ratingsRange, 'error');
                         return;
                     }
                 }
@@ -121,22 +150,23 @@ angular.module('reg')
                         clearCurrentReview();
                         // get next user
                         nextUser();
+                        $scope.toast = true;
+                        $timeout(function(){
+                            $scope.toast = false;
+                        }, 3000);
                     }, err => {
                         swal('Oops!', 'Something went wrong', 'error');
                     });
             };
 
-            // Get criteria
-            SettingsService
-                .getReview()
-                .then(response => {
-                    $scope.reviewCriteria = response.data.reviewCriteria;
-                    $scope.admissions = response.data.admissions;
-                    clearCurrentReview();
-                });
-
-            // Populate queue
-            getReviewQueue();
+            $scope.range = function(min, max, step) {
+                step = step || 1;
+                var input = [];
+                for (var i = min; i <= max; i += step) {
+                    input.push(i);
+                }
+                return input;
+            };
 
             function getReviewQueue(){
                 $scope.loading = true;
@@ -152,16 +182,29 @@ angular.module('reg')
 
             function nextUser(){
                 if($scope.users.length > 0){
+                    $scope.loading = true;
                     // Get user data
                     UserService.get($scope.users.shift())
                         .then(response => {
                             var user = response.data;
                             $scope.user = user;
                             $scope.user.sections = generateSections(user);
+                            $scope.loading = false;
                         }, err => {
+                            $scope.loading = false;
                             swal('Uh oh!', 'Something went wrong.', 'error');
                         });
                 }
+            }
+
+            function getReviewersList(){
+                ReviewService.getReviewersList()
+                    .then(response => {
+                        // sort by reviews
+                        $scope.reviewersList = response.data.sort(function(a, b){
+                            return b.review.reviewQueue.length - a.review.reviewQueue.length;
+                        });
+                    });
             }
 
             function formatTime(time){

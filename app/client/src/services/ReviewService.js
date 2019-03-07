@@ -10,6 +10,14 @@ angular.module('reg')
                 // Admin Actions
                 // ----------------------
 
+                getSubmissionsList: function(){
+                    return $http.get(base + 'list/submissions');
+                },
+
+                getReviewersList: function(){
+                    return $http.get(base + 'list/reviewers');
+                },
+
                 release: function(){
                     return $http.get(base + 'release');
                 },

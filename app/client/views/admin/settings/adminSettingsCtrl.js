@@ -36,7 +36,7 @@ angular.module('reg')
             $scope.settings.allowMinors = response.data.allowMinors;
             const successText = $scope.settings.allowMinors ?
               "Minors are now allowed to register." :
-              "Minors are no longer allowed to register."
+              "Minors are no longer allowed to register.";
             swal("Looks good!", successText, "success");
           });
       };
@@ -46,7 +46,7 @@ angular.module('reg')
                 .updateAdmissions($scope.settings.admissions)
                 .then(response => {
                     $scope.settings.admissions = response.data.admissions;
-                    swal("Looks good!", "Admissions Updated. Now accepting" + $scope.settings.admissions + "people.", "success");
+                    swal("Looks good!", "Admissions Updated. Now accepting " + $scope.settings.admissions + " people.", "success");
                 });
         };
 

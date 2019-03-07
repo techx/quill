@@ -326,16 +326,23 @@ angular.module('reg')
               }
             ]
           },{
-            name: 'Profile',
-            fields: [
-              {
-                name: 'Name',
-                value: user.profile.Name
+            name: 'Review',
+            fields: [{
+                name: 'Reviewers',
+                value: user.review.reviewers,
+                type: 'reviewers'
               },{
-                name: 'FirstName',
+                name: 'Overall Rating',
+                value: user.review.overallRating
+              }
+            ]
+          },{
+            name: 'Profile',
+            fields: [{
+                name: 'First Name',
                 value: user.profile.firstName
               },{
-                name: 'LastName',
+                name: 'Last Name',
                 value: user.profile.lastName
               },{
                 name: 'Gender',

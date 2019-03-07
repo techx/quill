@@ -2,23 +2,33 @@
      ng-class="{'loading': loading}">
 
     <div>
-        <div class="four column centered row">
-            <div class="ui basic button column"
+        <div class="five column centered row">
+            <button class="ui basic button column"
                  ng-click="refresh()">
                 Refresh
+            </button>
+            <div class="ui icon basic button column" id="popup" data-position="bottom left">
+                <i class="user icon"></i>
             </div>
-            <div class="ui checkbox column">
-                <input type="checkbox" id="blindReview" ng-model="blindReview">
-                <label for="blindReview">Blind Review</label>
+            <div class="ui flowing popup transition hidden">
+                <div class="ui list">
+                    <div class="item" ng-repeat="reviewers in reviewersList">
+                        {{reviewers.profile.name ? reviewers.profile.name : reviewers.email}} : {{reviewers.review.reviewQueue.length}}
+                    </div>
+                </div>
             </div>
-            <div class="ui red inverted button right floated column"
-                 ng-click="releaseDecisions()">
-                Release Decisions
-            </div>
-            <div class="ui blue inverted button right floated column"
+            <!--<div class="ui checkbox column">-->
+                <!--<input type="checkbox" id="blindReview" ng-model="blindReview" disabled>-->
+                <!--<label for="blindReview">Blind Review</label>-->
+            <!--</div>-->
+            <!--<button class="ui red inverted basic button right floated column"-->
+                 <!--ng-click="releaseDecisions()" disabled>-->
+                <!--Release Decisions-->
+            <!--</button>-->
+            <button class="ui inverted blue button right floated column"
                  ng-click="assignReviews()">
                 Assign Reviews
-            </div>
+            </button>
         </div>
     </div>
 
@@ -41,7 +51,7 @@
                 <div ng-repeat="criteria in reviewCriteria">
                     <div class="field">
                         <label>{{criteria}}</label>
-                        <input type="number" min="0" max="5" ng-model="ratings[$index]">
+                        <input type="number" min="{{ratingsRange[0]}}" max="{{ratingsRange[1]}}" ng-model="ratings[$index]">
                     </div>
                 </div>
                 <div class="field">
@@ -51,7 +61,15 @@
                         ng-model="comments">
                     </textarea>
                 </div>
-                <button class="ui button" ng-click="updateReview()">Submit</button>
+                <div class="ui two column row">
+                    <div class="ui button column" ng-click="updateReview()">Submit</div>
+                    <!--Notification-->
+                    <div class="ui column" ng-show="toast">
+                        <br>
+                        <i class="green check icon"></i>
+                    </div>
+                </div>
+
             </div>
         </div>
 

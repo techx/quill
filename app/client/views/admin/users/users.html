@@ -70,6 +70,14 @@
                 <i class="green circle check icon" ng-show="field.value"></i>
               </span>
 
+              <span ng-show="field.type === 'reviewers'">
+                <div ng-repeat="review in field.value">
+                  <p>{{review.email}}</p>
+                  <p>{{review.ratings}}</p>
+                  <p>{{review.comments}}</p>
+                </div>
+              </span>
+
               <span ng-if="field.type === 'link'">
                 <a target="_blank" href="{{field.value}}">{{field.title}}</a>
               </span>
