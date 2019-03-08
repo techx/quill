@@ -207,6 +207,7 @@ UserController.getPage = function(query, callback){
   var page = query.page;
   var size = parseInt(query.size);
   var searchText = query.text;
+  var findQuery = {};
   var sortQuery = {};
   if(query.sort === undefined || query.sort === ''){
     sortQuery['timestamp'] = 'asc';
@@ -219,12 +220,13 @@ UserController.getPage = function(query, callback){
         'profile.firstName': order,
         'profile.lastName': order,
       }
+    }else if(squery === 'admin'){
+      findQuery.admin = order;
     }else{
       sortQuery[squery] = order;
     }
   }
 
-  var findQuery = {};
   if (searchText.length > 0){
     var queries = [];
     var re = new RegExp(searchText, 'i');

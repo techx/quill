@@ -229,10 +229,6 @@ angular.module('reg')
                                 value: formatTime(user.timestamp),
                                 sensitive: false
                             },{
-                                name: 'Last Updated',
-                                value: formatTime(user.lastUpdated),
-                                sensitive: false
-                            },{
                                 name: 'Email',
                                 value: user.email,
                                 sensitive: true
@@ -277,17 +273,17 @@ angular.module('reg')
                             },{
                                 name: 'Major',
                                 value: user.profile.major,
-                                sensitive: true,
+                                sensitive: false,
                             },{
                                 name: 'Experience',
                                 value: user.profile.experience,
-                                sensitive: true,
+                                sensitive: false,
                             },{
                                 name: 'Resume',
                                 title: (user.profile.resume ? user.profile.resume.name : ''),
                                 value: (user.profile.resume ? user.profile.resume.link : ''),
                                 type: 'link',
-                                sensitive: false
+                                sensitive: true
                             },{
                                 name: APPLICATION.ESSAY1_TITLE,
                                 value: user.profile.essay1,
@@ -307,15 +303,15 @@ angular.module('reg')
                             },{
                                 name: 'LinkedIn',
                                 value: user.profile.linkedin,
-                                sensitive: false
+                                sensitive: true
                             },{
                                 name: 'Github',
                                 value: user.profile.github,
-                                sensitive: false
+                                sensitive: true
                             },{
                                 name: 'Other',
                                 value: user.profile.other,
-                                sensitive: false
+                                sensitive: true
                             },{
                                 name: 'Role',
                                 value: (user.profile.role ?

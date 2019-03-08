@@ -21,11 +21,15 @@ angular.module('reg')
         value: 'profile.name',
         order: 'asc'
       },{
-        name: 'Rank',
+        name: 'Review Rating',
         value: 'review.overallRating',
         order: 'desc'
+      },{
+        name: 'Admin',
+        value: 'admin',
+        order: 'true'
       }];
-      $scope.sortOption = $stateParams.sort || 'profile.name:asc';
+      $scope.sortOption = $stateParams.sort || 'timestamp:asc';
 
       $scope.APPLICATION = APPLICATION;
 

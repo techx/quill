@@ -1,15 +1,17 @@
 var User = require('../models/User');
 var Settings = require('../models/Settings');
+var ADMIN_EMAIL = process.env.ADMIN_EMAIL;
 
 var ReviewController = {};
 
 /**
- * Returns sorted descending list of applicants by their rating
+ * Returns sorted descending list of submitted applicants by their rating
  */
 var rankRating = function (callback) {
     User.find({
         verified: true,
-        admin: false
+        admin: false,
+        'status.submitted': true
     }).sort({
         'review.overallRating': -1
     }).exec(callback);
@@ -17,12 +19,20 @@ var rankRating = function (callback) {
 
 /**
  * Returns sorted ascending list of admins by their review number
+ * Does or does not include admin email
  */
-var rankCount = function (callback) {
-    User.find({
+var rankCount = function (includeAdminEmail, callback) {
+    var query = {
         verified: true,
-        admin: true
-    }).sort({
+        admin: true,
+    };
+    if(!includeAdminEmail){
+        query.email = {
+            $ne: ADMIN_EMAIL
+        }
+    }
+
+    User.find(query).sort({
         'review.reviewCount': 1
     }).exec(callback);
 };
@@ -40,7 +50,7 @@ ReviewController.getSubmissionsList = function (callback) {
  * @param callback
  */
 ReviewController.getReviewersList = function (callback) {
-    rankCount(callback);
+    rankCount(true, callback);
 };
 
 /**
@@ -108,7 +118,7 @@ ReviewController.release = function (callback) {
  * @param callback
  */
 ReviewController.assignReview = function (userId, callback) {
-    rankCount(function (err, adminUsers) {
+    rankCount(false, function (err, adminUsers) {
         if (err || !adminUsers) {
             return callback(err);
         }
@@ -124,7 +134,6 @@ ReviewController.assignReview = function (userId, callback) {
 
                 // assign to remaining reviewers. Will not assign if already fulfilled
                 for (var i = 0; i < reviewers && i < adminUsers.length; i++) {
-
                     // assign user to reviewer
                     User.findOneAndUpdate({
                         _id: adminUsers[i].id,
@@ -182,7 +191,7 @@ ReviewController.assignReviews = function (callback) {
         }
 
         // get the ascending list of admins
-        rankCount(function (err, admins) {
+        rankCount(false, function (err, admins) {
             if (err) {
                 return callback(err);
             }
@@ -261,7 +270,7 @@ ReviewController.assignReviews = function (callback) {
 
 /**
  * Gets the user queue for the specific admin id
- * @param id
+ * @param user
  * @param callback
  */
 ReviewController.getQueue = function (user, callback) {
