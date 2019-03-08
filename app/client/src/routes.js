@@ -145,6 +145,7 @@ angular.module('reg')
         url: "/admin/users?" +
           '&page' +
           '&size' +
+          '&sort' +
           '&query',
         templateUrl: "views/admin/users/users.html",
         controller: 'AdminUsersCtrl'

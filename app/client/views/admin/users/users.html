@@ -3,10 +3,19 @@
   <div class="ui stackable grid">
     <div class="three wide column">
       <div class="ui header">
-        Search
+        Options
       </div>
       <div class="ui form">
         <div class="field">
+          <label> Sort </label>
+          <select
+                  ng-model="sortOption" ng-change="sortBy(sortOption)">
+            <option ng-repeat="option in sortOptions" ng-value="option.value + ':'+ option.order">{{option.name}}</option>
+          </select>
+        </div>
+        <br>
+        <div class="field">
+          <label> Search </label>
           <div class="ui icon fluid input">
             <input type="text"
                    placeholder="Search..."
@@ -15,7 +24,6 @@
               <i class="search icon"></i>
           </div>
         </div>
-
       </div>
 
       <div class="ui divider"></div>
@@ -33,6 +41,7 @@
       <div class="ui header">
         Users
       </div>
+
       <div class="ui long user modal">
         <i class="close icon"></i>
         <div class="header">
@@ -91,6 +100,16 @@
 
         <div class="actions">
           <div class="three column centered row">
+            <div class="ui green inverted labeled icon button column"
+                 ng-click="setOverallRating($event, selectedUser, $index, 100)">
+              Mark for Admit
+              <i class="checkmark icon"></i>
+            </div>
+            <div class="ui red inverted labeled icon button column"
+                 ng-click="setOverallRating($event, selectedUser, $index, -100)">
+              Mark for Reject
+              <i class="remove icon"></i>
+            </div>
             <div class="ui positive labeled icon button column"
                  ng-click="admitUser($event, selectedUser, $index)">
               Admit

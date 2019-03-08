@@ -264,7 +264,8 @@ var review = {
     reviewCount: {
         type: Number,
         default: 0
-    }
+    },
+    select: false,
 };
 
 // define the schema for our admin model

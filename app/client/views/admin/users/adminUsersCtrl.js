@@ -12,6 +12,20 @@ angular.module('reg')
 
       $scope.pages = [];
       $scope.users = [];
+      $scope.sortOptions = [{
+        name: 'Default',
+        value: 'timestamp',
+        order: 'asc'
+      },{
+        name: 'Name',
+        value: 'profile.name',
+        order: 'asc'
+      },{
+        name: 'Rank',
+        value: 'review.overallRating',
+        order: 'desc'
+      }];
+      $scope.sortOption = $stateParams.sort || 'profile.name:asc';
 
       $scope.APPLICATION = APPLICATION;
 
@@ -43,14 +57,22 @@ angular.module('reg')
       }
 
       UserService
-        .getPage($stateParams.page, $stateParams.size, $stateParams.query)
+        .getPage($stateParams.page, $stateParams.size, $stateParams.sort, $stateParams.query)
         .then(response => {
           updatePage(response.data);
         });
 
+      $scope.sortBy = function(sortOption){
+        UserService
+            .getPage($stateParams.page, $stateParams.size, sortOption, $stateParams.query)
+            .then(response => {
+              updatePage(response.data);
+            });
+      };
+
       $scope.$watch('queryText', function(queryText){
         UserService
-          .getPage($stateParams.page, $stateParams.size, queryText)
+          .getPage($stateParams.page, $stateParams.size, $stateParams.sort, queryText)
           .then(response => {
             updatePage(response.data);
           });
@@ -59,7 +81,9 @@ angular.module('reg')
       $scope.goToPage = function(page){
         $state.go('app.admin.users', {
           page: page,
-          size: $stateParams.size || 50
+          size: $stateParams.size || 50,
+          sort: $scope.sortOption || $stateParams.sort,
+          query: $scope.queryText || $stateParams.query
         });
       };
 
@@ -69,6 +93,16 @@ angular.module('reg')
         $state.go('app.admin.user', {
           id: user._id
         });
+      };
+
+      $scope.setOverallRating = function($event, user, index, rating){
+        var text = rating >= 100 ? 'admit' : 'reject';
+        UserService
+            .setOverallRating(user._id, rating)
+            .then(response => {
+              $scope.users[index] = response.data;
+              swal('Marked for ' + text, response.data.profile.name + ' has been marked for ' + text, "success");
+            });
       };
 
       $scope.admitUser = function($event, user, index) {

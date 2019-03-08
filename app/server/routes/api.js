@@ -258,6 +258,17 @@ module.exports = function(router) {
   });
 
   /**
+   * Changes the overall rating for the user. ADMIN ONLY
+   */
+  router.post('/users/:id/setOverallRating', isAdmin, function(req, res){
+    // Mark the user for admit. Admin only
+    var id = req.params.id;
+    var user = req.user;
+    var rating = req.body.rating;
+    UserController.setOverallRating(id, user, rating, defaultResponse(req, res));
+  });
+
+  /**
    * Admit a user. ADMIN ONLY
    *
    * Also attaches the user who admitted, for liability.

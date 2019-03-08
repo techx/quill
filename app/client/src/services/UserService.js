@@ -24,9 +24,10 @@ angular.module('reg')
         return $http.get(base);
       },
 
-      getPage: function(page, size, text){
+      getPage: function(page, size, sort, text){
         return $http.get(users + '?' + $.param(
           {
+            sort: sort,
             text: text,
             page: page ? page : 0,
             size: size ? size : 50
@@ -79,6 +80,12 @@ angular.module('reg')
 
       getStats: function(){
         return $http.get(base + 'stats');
+      },
+
+      setOverallRating: function(id, rating){
+        return $http.post(base + id + '/setOverallRating', {
+          rating: rating,
+        });
       },
 
       admitUser: function(id){
