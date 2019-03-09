@@ -17,6 +17,38 @@ SettingsController.updateField = function(field, value, callback){
     }, {new: true}, callback);
 };
 
+SettingsController.getReview = function(callback){
+  Settings.getReview(callback);
+};
+
+SettingsController.updateReview = function(reviewers, reviewCriteria, callback){
+  Settings
+      .findOneAndUpdate({},{
+        $set: {
+          reviewers: reviewers,
+          reviewCriteria: reviewCriteria
+        }
+      }, {new: true})
+      .select('reviewers reviewCriteria')
+      .exec(callback);
+};
+
+SettingsController.getJudge = function(callback){
+  Settings.getJudge(callback);
+};
+
+SettingsController.updateJudge = function(judges, judgeCriteria, callback){
+  Settings
+      .findOneAndUpdate({},{
+        $set: {
+          judges: judges,
+          judgeCriteria: judgeCriteria
+        }
+      }, {new: true})
+      .select('judges judgeCriteria')
+      .exec(callback);
+};
+
 /**
  * Update the list of whitelisted emails and email extensions.
  * @param  {[type]}   emails   [description]

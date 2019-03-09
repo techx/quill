@@ -5,13 +5,14 @@ mongoose.connect(database.url);
 
 var UserController = require('../app/server/controllers/UserController');
 
-var users = 1000;
+var users = 10;
 var username = 'hacker';
 
 for (var i = 0; i < users; i++){
   console.log(username, i);
+  // Creates, Verifies, Submits
   UserController
-    .createUser(username + i + '@school.edu', 'foobar', function(){
-    console.log(i);
+    .createUser(username + i + '@school.edu', 'foobar', function(err, user) {
+      console.log(user);
     });
 }

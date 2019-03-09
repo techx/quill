@@ -207,24 +207,42 @@ UserController.getPage = function(query, callback){
   var page = query.page;
   var size = parseInt(query.size);
   var searchText = query.text;
-
   var findQuery = {};
+  var sortQuery = {};
+  if(query.sort === undefined || query.sort === ''){
+    sortQuery['timestamp'] = 'asc';
+  }else{
+    // for some reason name virtual doesn't work
+    var squery = query.sort.split(':')[0];
+    var order = query.sort.split(':')[1];
+    if(squery === 'profile.name'){
+      sortQuery = {
+        'profile.firstName': order,
+        'profile.lastName': order,
+      }
+    }else if(squery === 'admin'){
+      findQuery.admin = order;
+    }else{
+      sortQuery[squery] = order;
+    }
+  }
+
   if (searchText.length > 0){
     var queries = [];
     var re = new RegExp(searchText, 'i');
     queries.push({ email: re });
-    queries.push({ 'profile.name': re });
+    queries.push({ 'profile.firstName': re });
     queries.push({ 'teamCode': re });
+    queries.push({ 'profile.school': re });
+    queries.push({ 'profile.year': re });
 
     findQuery.$or = queries;
   }
 
   User
     .find(findQuery)
-    .sort({
-      'profile.name': 'asc'
-    })
-    .select('+status.reviewedBy')
+    .sort(sortQuery)
+    .select('+review')
     .skip(page * size)
     .limit(size)
     .exec(function (err, users){
@@ -308,6 +326,7 @@ UserController.updateProfileById = function (id, profile, callback){
 
 /**
  * Submits a user's profile object, given an id and a profile.
+ * Also automatically adds them to be reviewed
  *
  * @param  {String}   id       Id of the user
  * @param  {Object}   profile  Profile object
@@ -358,8 +377,7 @@ UserController.submitById = function (id, profile, callback){
         },
         {
           new: true
-        },
-        callback);
+        }, callback);
 
   });
 };
@@ -669,6 +687,26 @@ UserController.resetPassword = function(token, password, callback){
         });
       });
   });
+};
+
+/**
+ * [ADMIN ONLY]
+ *
+ * Changes the user's overall rating. This can mean automatic accept or reject
+ * @param id
+ * @param user
+ * @param rating
+ * @param callback
+ */
+UserController.setOverallRating = function(id, user, rating, callback){
+  User.findOneAndUpdate({
+    _id: id,
+    verified: true
+  }, {
+    $set: {
+      'review.overallRating': rating,
+    }
+  }, callback);
 };
 
 /**

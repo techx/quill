@@ -117,7 +117,7 @@ var profile = {
         developer: {
             type: Boolean,
             required: false,
-            default: false 
+            default: false
         },
         designer: {
             type: Boolean,
@@ -221,14 +221,6 @@ var status = {
         required: true,
         default: false
     },
-    reviewedBy: {
-        type: String,
-        validate: [
-            validator.isEmail,
-            'Invalid Email',
-        ],
-        select: false
-    },
     confirmed: {
         type: Boolean,
         required: true,
@@ -249,11 +241,31 @@ var status = {
     },
     confirmBy: {
         type: Number
-    },
-    reimbursementGiven: {
-        type: Boolean,
-        default: false
     }
+};
+
+var review = {
+    reviewers: [{
+        email: {
+            type: String,
+            validate: [
+                validator.isEmail,
+                'Invalid Email',
+            ],
+        },
+        ratings: [Number],
+        comments: String
+    }],
+    overallRating: {
+        type: Number,
+        default: 0,
+    },
+    reviewQueue: [String],
+    reviewCount: {
+        type: Number,
+        default: 0
+    },
+    select: false,
 };
 
 // define the schema for our admin model
@@ -328,6 +340,8 @@ var schema = new mongoose.Schema({
     confirmation: confirmation,
 
     status: status,
+
+    review: review,
 
 });
 
@@ -482,7 +496,7 @@ schema.statics.validateProfile = function (profile, cb) {
  * Provide the firstName + lastName.
  */
 schema.virtual('profile.name').get(function (){
-    if(this.profile.firstName != undefined && this.profile.lastName != undefined){
+    if(this.profile.firstName !== undefined && this.profile.lastName !== undefined){
         return this.profile.firstName + " " + this.profile.lastName;
     }
     return undefined;

@@ -1,7 +1,7 @@
 <div class="ui stackable two column grid">
   <div class="column">
 
-    <!-- Reigstration Open/Close -->
+    <!-- Registration Open/Close -->
     <div
       ng-class="{'loading': loading}"
       class="ui purple segment">
@@ -83,23 +83,121 @@
   </div>
 </div>
 
-<!-- Additional Options -->
-<!--Do not allow minors-->
-<!--<div-->
-<!--ng-class="{'loading': loading}"-->
-<!--class="ui purple segment">-->
+<div class="ui stackable two column grid">
+  <div class="column">
 
-  <!--<div class="ui header">-->
-    <!--Additional Options-->
-  <!--</div>-->
+    <!--Review-->
+    <div
+            ng-class="{'loading': loading}"
+            class="ui purple segment">
 
-  <!---->
-  <!--<div class="column">-->
-    <!--<div class="ui form">-->
-      <!--<div class="grouped fields">-->
+      <div class="ui header">
+        Review Options
+      </div>
+
+      <div class="column">
+        <div class="ui form">
+          <div class="field">
+            <label>Number of Reviewers per Application</label>
+            <div class="ui input">
+              <input
+                      type="number"
+                      ng-model="reviewers">
+            </div>
+          </div>
+          <div class="field">
+            <label>Reviewing Criteria (Comma Separated)</label>
+            <div
+                    class="ui label"
+                    ng-repeat="criteria in reviewCriteria.replace(' ','').split(',')">
+              {{criteria}}
+            </div>
+            <div class="ui input">
+              <textarea
+                      class="ui input"
+                      type="text"
+                      ng-model="reviewCriteria">
+              </textarea>
+            </div>
+          </div>
+
+          <div class="ui field">
+            <div
+                    class="ui green button"
+                    ng-click="updateReview()">
+              Update
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="column">
+
+    <!--Judge-->
+    <div
+            ng-class="{'loading': loading}"
+            class="ui purple segment">
+
+      <div class="ui header">
+        Judge Options
+      </div>
+
+      <div class="column">
+        <div class="ui form">
+          <div class="field">
+            <label>Number of Judges per Application</label>
+            <div class="ui input">
+              <input
+                      type="number"
+                      ng-model="judges">
+            </div>
+          </div>
+          <div class="field">
+            <label>Judging Criteria (Comma Separated)</label>
+            <div
+                    class="ui label"
+                    ng-repeat="criteria in judgeCriteria.replace(' ','').split(',')">
+              {{criteria}}
+            </div>
+            <textarea
+                    class="ui input"
+                    type="text"
+                    ng-model="judgeCriteria">
+            </textarea>
+          </div>
+
+          <div class="ui field">
+            <div
+                    class="ui green button"
+                    ng-click="updateJudge()">
+              Update
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!--Additional Options-->
+<div
+        ng-class="{'loading': loading}"
+class="ui purple segment">
+
+  <div class="ui header">
+    Additional Options
+  </div>
+
+
+  <div class="column">
+    <div class="ui form">
+      <div class="grouped fields">
         <!--<div class="field">-->
           <!--<div class="ui toggle checkbox">-->
-              <!--<input -->
+              <!--<input-->
               <!--type="checkbox"-->
               <!--name="allowMinors"-->
               <!--ng-class="{true: 'checked', false: ''}[settings.allowMinors]"-->
@@ -107,11 +205,27 @@
               <!--ng-change="updateAllowMinors()">-->
               <!--<label>Allow minors</label>-->
           <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
-<!--</div>-->
+          <div class="field">
+              <label>Number of Admissions</label>
+              <div class="ui input">
+                  <input
+                          type="number"
+                          ng-model="settings.admissions">
+              </div>
+          </div>
+          <div class="ui field">
+            <div
+                    class="ui green button"
+                    ng-click="updateAdmissions()">
+              Update
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 <!-- Whitelist -->
 <div
@@ -252,6 +366,7 @@
 
 </div>
 
+<!--Confirmation Text Editor-->
 <div
   ng-class="{'loading': loading}"
   class="ui orange segment">

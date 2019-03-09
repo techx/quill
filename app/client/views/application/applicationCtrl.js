@@ -12,8 +12,9 @@ angular.module('reg')
         'Session',
         'UserService',
         'FileService',
+        'ReviewService',
         'APPLICATION',
-        function ($scope, $rootScope, $state, $http, currentUser, settings, Session, UserService, FileService, APPLICATION) {
+        function ($scope, $rootScope, $state, $http, currentUser, settings, Session, UserService, FileService, ReviewService, APPLICATION) {
 
             // Set up the user
             $scope.user = currentUser.data;
@@ -194,6 +195,8 @@ angular.module('reg')
                 UserService
                     .submitApp(Session.getUserId(), $scope.user.profile)
                     .then(response => {
+                        // add person into review queue
+                        ReviewService.assignReview(response.data.id);
                         swal("Awesome!", "Your application has been received.", "success").then(value => {
                             $state.go("app.dashboard");
                         });

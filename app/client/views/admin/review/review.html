@@ -1,0 +1,111 @@
+<div class="ui yellow segment"
+     ng-class="{'loading': loading}">
+
+    <div>
+        <div class="six column centered row">
+            <button class="ui basic button column"
+                 ng-click="refresh()">
+                Refresh
+            </button>
+            <div class="ui icon basic button column" id="popup" data-position="bottom left">
+                <i class="user icon"></i>
+            </div>
+            <div class="ui flowing popup transition hidden">
+                <div class="ui list">
+                    <div class="item">
+                        <strong>Need to Review</strong>
+                    </div>
+                    <div class="item" ng-repeat="reviewers in reviewersList">
+                        {{reviewers.profile.name ? reviewers.profile.name : reviewers.email}} : {{reviewers.review.reviewQueue.length}}
+                    </div>
+                </div>
+            </div>
+            <div class="ui label column">
+                Left to review: {{users.length}}
+            </div>
+            <!--<div class="ui checkbox column">-->
+                <!--<input type="checkbox" id="blindReview" ng-model="blindReview">-->
+                <!--<label for="blindReview">Blind Review</label>-->
+            <!--</div>-->
+            <!--<button class="ui red inverted button right floated column"-->
+                 <!--ng-click="releaseDecisions()">-->
+                <!--Release Decisions-->
+            <!--</button>-->
+            <button class="ui inverted blue button right floated column"
+                 ng-click="assignReviews()">
+                Assign Reviews
+            </button>
+        </div>
+    </div>
+
+    <div class="ui divider"></div>
+
+    <div ng-show="users.length == 0">
+        <p>
+            You don't have anyone to review right now! Press the refresh button or check back another time, or press Assigned Reviews to perform a comprehensive scan.
+        </p>
+    </div>
+
+    <div class="ui form"
+         id="review"
+         ng-show="users.length != 0">
+
+        <!--Sticky Review Panel-->
+        <div class="ui dividing right internal rail">
+            <div class="ui sticky" id="reviewPanel">
+                <div class="divided title">Reviewing Criteria</div>
+                <div ng-repeat="criteria in reviewCriteria">
+                    <div class="field">
+                        <label>{{criteria}}</label>
+                        <input type="number" min="{{ratingsRange[0]}}" max="{{ratingsRange[1]}}" ng-model="ratings[$index]">
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="comments">Comments</label>
+                    <textarea
+                        id="comments"
+                        ng-model="comments">
+                    </textarea>
+                </div>
+                <span class="centered subtext">*Score from 1 - 5</span>
+                <div class="ui two column centered row">
+                    <div class="ui green inverted button column" ng-click="updateReview()">Submit</div>
+                    <!--Notification-->
+                    <i class="ui column green check icon" ng-show="toast"></i>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="header" ng-show="!blindReview">
+            <h2>{{user.profile.name ? user.profile.name : user.email}}</h2>
+        </div>
+
+        <br>
+
+        <div class="content">
+            <div ng-repeat="section in user.sections">
+                <div class="divided title"> {{section.name}} </div>
+
+                <p ng-repeat="field in section.fields" ng-show="!(blindReview && field.sensitive)">
+                    <strong> {{field.name}} </strong>
+
+                    <br>
+
+                    <span ng-show="field.type === 'boolean'">
+                        <i class="red circle remove icon" ng-show="!field.value"></i>
+                        <i class="green circle check icon" ng-show="field.value"></i>
+                    </span>
+
+                    <span ng-if="field.type === 'link'">
+                         <a target="_blank" href="{{field.value}}">{{field.title}}</a>
+                    </span>
+
+                    <span ng-if="field.type == null">
+                        {{field.value}}
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

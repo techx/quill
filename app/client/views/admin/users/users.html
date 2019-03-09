@@ -1,12 +1,21 @@
-<div class="ui segment">
+<div class="ui orange segment">
 
   <div class="ui stackable grid">
     <div class="three wide column">
       <div class="ui header">
-        Search
+        Options
       </div>
       <div class="ui form">
         <div class="field">
+          <label> Sort </label>
+          <select
+                  ng-model="sortOption" ng-change="sortBy(sortOption)">
+            <option ng-repeat="option in sortOptions" ng-value="option.value + ':'+ option.order">{{option.name}}</option>
+          </select>
+        </div>
+        <br>
+        <div class="field">
+          <label> Search </label>
           <div class="ui icon fluid input">
             <input type="text"
                    placeholder="Search..."
@@ -15,7 +24,6 @@
               <i class="search icon"></i>
           </div>
         </div>
-
       </div>
 
       <div class="ui divider"></div>
@@ -33,6 +41,7 @@
       <div class="ui header">
         Users
       </div>
+
       <div class="ui long user modal">
         <i class="close icon"></i>
         <div class="header">
@@ -52,22 +61,27 @@
                 {{selectedUser.status.name.toUpperCase()}}
               </div>
             </div>
-            <p>
-              <strong> Reviewed by: </strong> {{selectedUser.status.reviewedBy ? selectedUser.status.reviewedBy : 'Not Reviewed'}}
-            </p>
           </div>
 
           <div ng-repeat="section in selectedUser.sections">
-            <div class="ui divider"></div>
 
-            <h3> {{section.title}} </h3>
+            <h3 class="small divided title"> {{section.name}} </h3>
 
             <p ng-repeat="field in section.fields">
-              <strong> {{field.name}}: </strong>
+              <strong> {{field.name}} </strong>
 
-              <span ng-show="field.type === 'boolean'">
+              <br>
+
+              <span ng-if="field.type === 'boolean'">
                 <i class="red circle remove icon" ng-show="!field.value"></i>
                 <i class="green circle check icon" ng-show="field.value"></i>
+              </span>
+
+              <span ng-if="field.type === 'reviewers'">
+                <span ng-repeat="review in field.value">
+                  Reviewed By: {{review.email}} <br>
+                  Comments: {{review.comments}} <br>
+                </span>
               </span>
 
               <span ng-if="field.type === 'link'">
@@ -86,6 +100,16 @@
 
         <div class="actions">
           <div class="three column centered row">
+            <div class="ui green inverted labeled icon button column"
+                 ng-click="setOverallRating($event, selectedUser, $index, 100)">
+              Mark for Admit
+              <i class="checkmark icon"></i>
+            </div>
+            <div class="ui red inverted labeled icon button column"
+                 ng-click="setOverallRating($event, selectedUser, $index, -100)">
+              Mark for Reject
+              <i class="remove icon"></i>
+            </div>
             <div class="ui positive labeled icon button column"
                  ng-click="admitUser($event, selectedUser, $index)">
               Admit
@@ -110,7 +134,7 @@
         <thead>
           <tr>
             <th>Name</th>
-            <th>E-mail address</th>
+            <th>E-mail</th>
             <th>School</th>
             <th>Year</th>
             <th>S / A / C</th>

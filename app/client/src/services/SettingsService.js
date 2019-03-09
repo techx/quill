@@ -50,10 +50,33 @@ angular.module('reg')
         });
       },
       updateAllowMinors: function(allowMinors){
-        return $http.put(base + 'minors', { 
-          allowMinors: allowMinors 
+        return $http.put(base + 'minors', {
+          allowMinors: allowMinors
         });
       },
+      getReview: function(){
+        return $http.get(base + 'review')
+      },
+      updateReview: function(reviewers, reviewCriteria){
+        return $http.put(base + 'review', {
+          reviewers: reviewers,
+          reviewCriteria: reviewCriteria
+        });
+      },
+      getJudge: function(){
+        return $http.get(base + 'judge')
+      },
+      updateJudge: function(judges, judgeCriteria){
+        return $http.put(base + 'judge', {
+          judges: judges,
+          judgeCriteria: judgeCriteria
+        });
+      },
+      updateAdmissions: function(admissions){
+        return $http.put(base + 'admissions', {
+          admissions: admissions
+        });
+      }
     };
 
   }

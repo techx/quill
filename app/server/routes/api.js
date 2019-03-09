@@ -2,6 +2,7 @@ var UserController = require('../controllers/UserController');
 var SettingsController = require('../controllers/SettingsController');
 var FileController = require('../controllers/FileController');
 var MailController = require('../controllers/MailController');
+var ReviewController = require('../controllers/ReviewController');
 
 var request = require('request');
 
@@ -162,7 +163,7 @@ module.exports = function(router) {
     var profile = req.body.profile;
     var id = req.params.id;
 
-    UserController.updateProfileById(id, profile , defaultResponse(req, res));
+    UserController.updateProfileById(id, profile, defaultResponse(req, res));
   });
 
   /**
@@ -174,7 +175,7 @@ module.exports = function(router) {
     var profile = req.body.profile;
     var id = req.params.id;
 
-    UserController.submitById(id, profile , defaultResponse(req, res));
+    UserController.submitById(id, profile, defaultResponse(req, res));
   });
 
 
@@ -254,6 +255,17 @@ module.exports = function(router) {
     //   }
     //   return res.json(user);
     // });
+  });
+
+  /**
+   * Changes the overall rating for the user. ADMIN ONLY
+   */
+  router.post('/users/:id/setOverallRating', isAdmin, function(req, res){
+    // Mark the user for admit. Admin only
+    var id = req.params.id;
+    var user = req.user;
+    var rating = req.body.rating;
+    UserController.setOverallRating(id, user, rating, defaultResponse(req, res));
   });
 
   /**
@@ -473,6 +485,73 @@ module.exports = function(router) {
     SettingsController.updateField('allowMinors', allowMinors, defaultResponse(req, res));
   });
 
+  /**
+   * [ADMIN ONLY]
+   * Get the review criteria.
+   *
+   * res: {
+   *   emails: [String]
+   * }
+   */
+  router.get('/settings/review', isAdmin, function(req, res){
+    SettingsController.getReview(defaultResponse(req, res));
+  });
+
+  /**
+   * [ADMIN ONLY]
+   * {
+   *   reviewers: Number
+   *   reviewCriteria: [String]
+   * }
+   * res: Settings
+   *
+   */
+  router.put('/settings/review', isAdmin, function(req, res){
+    var reviewers = req.body.reviewers;
+    var reviewCriteria = req.body.reviewCriteria;
+    SettingsController.updateReview(reviewers, reviewCriteria, defaultResponse(req, res));
+  });
+
+  /**
+   * [ADMIN ONLY]
+   * Get the judge criteria.
+   *
+   * res: {
+   *   emails: [String]
+   * }
+   */
+  router.get('/settings/judge', isAdmin, function(req, res){
+    SettingsController.getJudge(defaultResponse(req, res));
+  });
+
+  /**
+   * [ADMIN ONLY]
+   * {
+   *   judges: Number
+   *   judgeCriteria: [String]
+   * }
+   * res: Settings
+   *
+   */
+  router.put('/settings/judge', isAdmin, function(req, res){
+    var judges = req.body.judges;
+    var judgeCriteria = req.body.judgeCriteria;
+    SettingsController.updateJudge(judges, judgeCriteria, defaultResponse(req, res));
+  });
+
+  /**
+   * [ADMIN ONLY]
+   * {
+   *   admissions: Number
+   * }
+   * res: Settings
+   *
+   */
+  router.put('/settings/admissions', isAdmin, function(req, res){
+    var admissions = req.body.admissions;
+    SettingsController.updateField("admissions", admissions, defaultResponse(req, res));
+  });
+
 
   // ---------------------------------------------
   // Mail [ADMIN ONLY!]
@@ -513,5 +592,76 @@ module.exports = function(router) {
     MailController.sendSchool(sender, title, text, recipient, schoolRecipient, defaultResponse(req, res));
   });
 
+  // ---------------------------------------------
+  // Review [ADMIN ONLY!]
+  // ---------------------------------------------
+
+  /**
+   * [ADMIN ONLY]
+   * Returns submissions list sorted by their rank
+   *
+   */
+  router.get('/review/list/submissions', isAdmin, function(req, res){
+    ReviewController.getSubmissionsList(defaultResponse(req, res));
+  });
+
+  /**
+   * [ADMIN ONLY]
+   * Returns reviewers list sorted by their total review count
+   *
+   */
+  router.get('/review/list/reviewers', isAdmin, function(req, res){
+    ReviewController.getReviewersList(defaultResponse(req, res));
+  });
+
+  /**
+   * [ADMIN ONLY]
+   * Accepts the top number amount of applicants based on score.
+   * The rest are half waitlisted half rejected.
+   *
+   */
+  router.get('/review/release', isAdmin, function(req, res){
+    ReviewController.release(defaultResponse(req, res));
+  });
+
+  /**
+   * Assigns the given user for review
+   * Can assign self
+   *
+   */
+  router.get('/review/assign/:id', isOwnerOrAdmin, function(req, res){
+    ReviewController.assignReview(req.params.id, defaultResponse(req, res));
+  });
+
+  /**
+   * [ADMIN ONLY]
+   * Assigns all submitted users for review
+   *
+   */
+  router.get('/review/assign', isAdmin, function(req, res){
+    ReviewController.assignReviews(defaultResponse(req, res));
+  });
+  /**
+   * [ADMIN ONLY]
+   * Returns the queue of users the admin has to review
+   *
+   */
+  router.get('/review/queue', isAdmin, function(req, res){
+    var user = req.user; // grab admin id
+    ReviewController.getQueue(user, defaultResponse(req, res));
+  });
+
+  /**
+   * [ADMIN ONLY]
+   * Updates the user with the review
+   *
+   */
+  router.put('/review/update', isAdmin, function(req, res){
+    var adminUser = req.user;
+    var userId = req.body.userId;
+    var ratings = req.body.ratings;
+    var comments = req.body.comments;
+    ReviewController.updateReview(userId, adminUser, ratings, comments, defaultResponse(req, res));
+  });
 
 };

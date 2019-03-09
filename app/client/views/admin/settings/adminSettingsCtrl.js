@@ -36,10 +36,60 @@ angular.module('reg')
             $scope.settings.allowMinors = response.data.allowMinors;
             const successText = $scope.settings.allowMinors ?
               "Minors are now allowed to register." :
-              "Minors are no longer allowed to register."
+              "Minors are no longer allowed to register.";
             swal("Looks good!", successText, "success");
           });
       };
+
+        $scope.updateAdmissions = function () {
+            SettingsService
+                .updateAdmissions($scope.settings.admissions)
+                .then(response => {
+                    $scope.settings.admissions = response.data.admissions;
+                    swal("Looks good!", "Admissions Updated. Now accepting " + $scope.settings.admissions + " people.", "success");
+                });
+        };
+
+      // Review --------------------------------------
+
+      SettingsService
+          .getReview()
+          .then(response => {
+              $scope.reviewers = response.data.reviewers;
+              $scope.reviewCriteria = response.data.reviewCriteria.join(", ");
+          });
+
+      $scope.updateReview = function() {
+          SettingsService
+              .updateReview($scope.reviewers, $scope.reviewCriteria.split(',').map(s => s.trim()))
+              .then(response => {
+                  $scope.settings.reviewers = response.data.reviewers;
+                  $scope.settings.reviewCriteria = response.data.reviewCriteria;
+                  $scope.reviewCriteria = response.data.reviewCriteria.join(', ');
+                  swal('Looks Good!', 'Review Settings Updated', 'success');
+              })
+      };
+
+        // Judge --------------------------------------
+
+        SettingsService
+            .getJudge()
+            .then(response => {
+                $scope.judges = response.data.judges;
+                $scope.judgeCriteria = response.data.judgeCriteria.join(", ");
+            });
+
+        $scope.updateJudge = function() {
+            SettingsService
+                .updateJudge($scope.reviewers, $scope.judgeCriteria.split(',').map(s => s.trim()))
+                .then(response => {
+                    $scope.settings.judges = response.data.judges;
+                    $scope.settings.judgeCriteria = response.data.judgeCriteria;
+                    $scope.judgeCriteria = response.data.judgeCriteria.join(', ');
+                    swal('Looks Good!', 'Judge Settings Updated', 'success');
+                })
+        };
+
 
       // Whitelist --------------------------------------
 
@@ -53,7 +103,7 @@ angular.module('reg')
         SettingsService
           .updateWhitelistedEmails($scope.whitelist.replace(/ /g, '').split(','))
           .then(response => {
-            swal('Whitelist updated.');
+            swal('Looks Good!', 'Whitelist Updated', 'success');
             $scope.whitelist = response.data.whitelistedEmails.join(", ");
           });
       };

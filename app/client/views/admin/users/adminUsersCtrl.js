@@ -12,6 +12,24 @@ angular.module('reg')
 
       $scope.pages = [];
       $scope.users = [];
+      $scope.sortOptions = [{
+        name: 'Default',
+        value: 'timestamp',
+        order: 'asc'
+      },{
+        name: 'Name',
+        value: 'profile.name',
+        order: 'asc'
+      },{
+        name: 'Review Rating',
+        value: 'review.overallRating',
+        order: 'desc'
+      },{
+        name: 'Admin',
+        value: 'admin',
+        order: 'true'
+      }];
+      $scope.sortOption = $stateParams.sort || 'timestamp:asc';
 
       $scope.APPLICATION = APPLICATION;
 
@@ -22,9 +40,13 @@ angular.module('reg')
       $('.ui.dimmer').remove();
       // Populate the size of the modal for when it appears, with an arbitrary user.
       $scope.selectedUser = {};
-      $scope.selectedUser.sections = generateSections({status: '', confirmation: {
-        dietaryRestrictions: []
-      }, profile: ''});
+      $scope.selectedUser.sections = generateSections({
+        status: '',
+        review: '',
+        confirmation: {
+            dietaryRestrictions: []
+        },
+        profile: ''});
 
       function updatePage(data){
         $scope.users = data.users;
@@ -39,14 +61,22 @@ angular.module('reg')
       }
 
       UserService
-        .getPage($stateParams.page, $stateParams.size, $stateParams.query)
+        .getPage($stateParams.page, $stateParams.size, $stateParams.sort, $stateParams.query)
         .then(response => {
           updatePage(response.data);
         });
 
+      $scope.sortBy = function(sortOption){
+        UserService
+            .getPage($stateParams.page, $stateParams.size, sortOption, $stateParams.query)
+            .then(response => {
+              updatePage(response.data);
+            });
+      };
+
       $scope.$watch('queryText', function(queryText){
         UserService
-          .getPage($stateParams.page, $stateParams.size, queryText)
+          .getPage($stateParams.page, $stateParams.size, $stateParams.sort, queryText)
           .then(response => {
             updatePage(response.data);
           });
@@ -55,7 +85,9 @@ angular.module('reg')
       $scope.goToPage = function(page){
         $state.go('app.admin.users', {
           page: page,
-          size: $stateParams.size || 50
+          size: $stateParams.size || 50,
+          sort: $scope.sortOption || $stateParams.sort,
+          query: $scope.queryText || $stateParams.query
         });
       };
 
@@ -65,6 +97,16 @@ angular.module('reg')
         $state.go('app.admin.user', {
           id: user._id
         });
+      };
+
+      $scope.setOverallRating = function($event, user, index, rating){
+        var text = rating >= 100 ? 'admit' : 'reject';
+        UserService
+            .setOverallRating(user._id, rating)
+            .then(response => {
+              $scope.users[index] = response.data;
+              swal('Marked for ' + text, response.data.profile.name + ' has been marked for ' + text, "success");
+            });
       };
 
       $scope.admitUser = function($event, user, index) {
@@ -326,16 +368,23 @@ angular.module('reg')
               }
             ]
           },{
-            name: 'Profile',
-            fields: [
-              {
-                name: 'Name',
-                value: user.profile.Name
+            name: 'Review',
+            fields: [{
+                name: 'Overall Rating',
+                value: user.review.overallRating
               },{
-                name: 'FirstName',
+                name: 'Reviewers',
+                value: user.review.reviewers,
+                type: 'reviewers'
+              }
+            ]
+          },{
+            name: 'Profile',
+            fields: [{
+                name: 'First Name',
                 value: user.profile.firstName
               },{
-                name: 'LastName',
+                name: 'Last Name',
                 value: user.profile.lastName
               },{
                 name: 'Gender',
