@@ -2,7 +2,7 @@
      ng-class="{'loading': loading}">
 
     <div>
-        <div class="five column centered row">
+        <div class="six column centered row">
             <button class="ui basic button column"
                  ng-click="refresh()">
                 Refresh
@@ -19,6 +19,9 @@
                         {{reviewers.profile.name ? reviewers.profile.name : reviewers.email}} : {{reviewers.review.reviewQueue.length}}
                     </div>
                 </div>
+            </div>
+            <div class="ui label column">
+                Left to review: {{users.length}}
             </div>
             <!--<div class="ui checkbox column">-->
                 <!--<input type="checkbox" id="blindReview" ng-model="blindReview">-->
@@ -64,13 +67,11 @@
                         ng-model="comments">
                     </textarea>
                 </div>
-                <div class="ui two column row">
-                    <div class="ui button column" ng-click="updateReview()">Submit</div>
+                <span class="centered subtext">*Score from 1 - 5</span>
+                <div class="ui two column centered row">
+                    <div class="ui green inverted button column" ng-click="updateReview()">Submit</div>
                     <!--Notification-->
-                    <div class="ui column" ng-show="toast">
-                        <br>
-                        <i class="green check icon"></i>
-                    </div>
+                    <i class="ui column green check icon" ng-show="toast"></i>
                 </div>
 
             </div>
