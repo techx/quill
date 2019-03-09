@@ -1,25 +1,30 @@
 <div class="ui yellow segment"
      ng-class="{'loading': loading}">
 
+    <!--List Modal-->
+    <div class="ui modal">
+        <div class="header">Reviewing List</div>
+        <div class="content">
+            <div class="ui list">
+                <div class="item">
+                    <strong>Need to Review</strong>
+                </div>
+                <div class="item" ng-repeat="reviewers in reviewersList">
+                    {{reviewers.profile.name ? reviewers.profile.name : reviewers.email}} : {{reviewers.review.reviewQueue.length}}
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div>
         <div class="six column centered row">
             <button class="ui basic button column"
                  ng-click="refresh()">
                 Refresh
             </button>
-            <div class="ui icon basic button column" id="popup" data-position="bottom left">
+            <button class="ui icon basic button column" ng-click="showModal()">
                 <i class="user icon"></i>
-            </div>
-            <div class="ui flowing popup transition hidden">
-                <div class="ui list">
-                    <div class="item">
-                        <strong>Need to Review</strong>
-                    </div>
-                    <div class="item" ng-repeat="reviewers in reviewersList">
-                        {{reviewers.profile.name ? reviewers.profile.name : reviewers.email}} : {{reviewers.review.reviewQueue.length}}
-                    </div>
-                </div>
-            </div>
+            </button>
             <div class="ui label column">
                 Left to review: {{users.length}}
             </div>

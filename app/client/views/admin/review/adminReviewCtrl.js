@@ -59,6 +59,11 @@ angular.module('reg')
                 },1000);
             });
 
+            $scope.showModal = function() {
+                angular.element('.ui.modal')
+                    .modal('show');
+            };
+
             $scope.refresh = function () {
                 getReviewQueue();
                 getReviewersList();
