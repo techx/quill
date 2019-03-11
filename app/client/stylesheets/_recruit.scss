@@ -467,6 +467,10 @@
     height: calc(45vh + 49px);
     animation: fadein 0.5s both;
   }
+  
+  .body {
+    margin-bottom: 2%;
+  }
 
   #hero::before {
     content: "";
