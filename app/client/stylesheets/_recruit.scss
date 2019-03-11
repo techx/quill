@@ -228,9 +228,11 @@
     #hero {
       background-image: linear-gradient(to right, #2a2a2a, #191919);
     }
-
+    .logo-header-container {
+      margin-bottom: 20%;
+    }
     .logo-header {
-      height: 100px;
+      height: 150px;
     }
     .hero-content > div {
       margin-top: 50px;
