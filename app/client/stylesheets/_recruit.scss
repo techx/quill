@@ -467,7 +467,7 @@
     height: calc(45vh + 49px);
     animation: fadein 0.5s both;
   }
-  
+
   .body {
     margin-bottom: 2%;
   }
@@ -665,6 +665,12 @@
           line-height: 1em;
         }
 
+        .prompt {
+          font-size: 1.25em;
+          font-weight: 250;
+          line-height: 1em;
+        }
+
         .body {
           padding: 1em 1.75em 0 2.5em;
 
@@ -705,6 +711,10 @@
 
         .job {
           .job-title {
+            line-height: 1.1em;
+          }
+
+          .prompt {
             line-height: 1.1em;
           }
 
