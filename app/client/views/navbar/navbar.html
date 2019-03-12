@@ -21,7 +21,7 @@
       ui-sref="app.recruit"
       ng-if="showHackNavbar"
     >
-      <img src="../assets/images/logo-hack.png" />
+      <img src="../assets/images/hack-logo-transparent.png" style="height: 100%; width: 65px; height: 65px;"/>
     </div>
 
     <div class="logo-header_live center" ng-if="showLiveNavbar">LIVE</div>
@@ -131,7 +131,12 @@
       >
         SCHEDULE
       </a>
-      <a href="https://github.com/raopg/hackuci-resources" target="_blank" ui-sref-active="menu-item-active" class="menu-item">
+      <a
+        href="https://github.com/raopg/hackuci-resources"
+        target="_blank"
+        ui-sref-active="menu-item-active"
+        class="menu-item"
+      >
         STARTER PACKS
       </a>
       <a href="https://hackuci2019.slack.com" target="_blank" class="menu-item">
@@ -166,6 +171,7 @@
         ui-sref="app.recruit"
         ui-sref-active="menu-item-active"
         class="menu-item"
+        id="menu-item-welcome"
       >
         WELCOME
       </a>
@@ -173,6 +179,7 @@
         ui-sref="app.logistics"
         ui-sref-active="menu-item-active"
         class="menu-item"
+        id="menu-item-logistic"
       >
         LOGISTICS
       </a>
@@ -180,6 +187,7 @@
         ui-sref="app.corporate"
         ui-sref-active="menu-item-active"
         class="menu-item"
+        id="menu-item-corporate"
       >
         CORPORATE
       </a>
@@ -187,6 +195,7 @@
         ui-sref="app.marketing"
         ui-sref-active="menu-item-active"
         class="menu-item"
+        id="menu-item-market"
       >
         MARKETING
       </a>
@@ -194,6 +203,7 @@
         ui-sref="app.technology"
         ui-sref-active="menu-item-active"
         class="menu-item"
+        id="menu-item-technology"
       >
         TECHNOLOGY
       </a>
