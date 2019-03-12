@@ -66,6 +66,7 @@ On the Settings tab, admins can easily control their event application timeline 
 | ------------------------------------------- | ------- |
 | [Node.js](http://nodejs.org)                | `10.13+`  |
 | [MongoDB](www.mongodb.com/) | `4.0+`  |
+| gulp| `3.9.1`|
 
 Run the following commands to check the current installed versions:
 
@@ -98,6 +99,8 @@ git update-index --assume-unchanged .env
 
 Edit the configuration file in `.env` for your setup, and then run the application:
 ```bash
+npm install --global gulp-cli
+npm install --save-dev gulp@3.9.1
 gulp server
 ```
 
