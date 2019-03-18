@@ -46,7 +46,7 @@ angular.module('reg')
       $scope.sendResetEmail = function() {
         var email = $scope.email;
         AuthService.sendResetEmail(email);
-        swal("Don't sweat!", "An email should be sent to you shortly.", "success");
+        swal("不用担心!", "密码重置邮件已发送到你的注册邮箱", "success");
       };
 
     }

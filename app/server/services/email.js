@@ -89,7 +89,7 @@ controller.sendVerificationEmail = function(email, token, callback) {
 
   var options = {
     to: email,
-    subject: "["+HACKATHON_NAME+"] - Verify your email"
+    subject: "["+HACKATHON_NAME+"] - 请验证你的账户"
   };
 
   var locals = {
@@ -126,16 +126,15 @@ controller.sendPasswordResetEmail = function(email, token, callback) {
 
   var options = {
     to: email,
-    subject: "["+HACKATHON_NAME+"] - Password reset requested!"
+    subject: "["+HACKATHON_NAME+"] - 密码重置"
   };
 
   var locals = {
-    title: 'Password Reset Request',
+    title: '我们收到了你的密码重置请求',
     subtitle: '',
-    description: 'Somebody (hopefully you!) has requested that your password be reset. If ' +
-      'this was not you, feel free to disregard this email. This link will expire in one hour.',
+    description: '有人在 http://ambassador.hackinit.org/ 请求重置本账号的密码。如果非本人操作，请忽视此邮件。请点击如下按钮重置密码，有效期为一小时',
     actionUrl: ROOT_URL + '/reset/' + token,
-    actionName: "Reset Password"
+    actionName: "重置密码"
   };
 
   /**
@@ -167,12 +166,12 @@ controller.sendPasswordChangedEmail = function(email, callback){
 
   var options = {
     to: email,
-    subject: "["+HACKATHON_NAME+"] - Your password has been changed!"
+    subject: "["+HACKATHON_NAME+"] - 你的密码已修改"
   };
 
   var locals = {
-    title: 'Password Updated',
-    body: 'Somebody (hopefully you!) has successfully changed your password.',
+    title: '你的密码已修改',
+    body: '有人（希望是你自己）已经成功修改了你的账户密码。',
   };
 
   /**

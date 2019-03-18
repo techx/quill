@@ -26,7 +26,7 @@ function endsWith(s, test){
 function canRegister(email, password, callback){
 
   if (!password || password.length < 6){
-    return callback({ message: "Password must be 6 or more characters."}, false);
+    return callback({ message: "密码长度必须大于等于6个字符！\nPassword must be 6 or more characters."}, false);
   }
 
   // Check if its within the registration window.
@@ -45,7 +45,7 @@ function canRegister(email, password, callback){
 
     if (now > times.timeClose){
       return callback({
-        message: "Sorry, registration is closed."
+        message: "抱歉，注册系统已关闭。"
       });
     }
 
@@ -88,13 +88,13 @@ UserController.loginWithPassword = function(email, password, callback){
 
   if (!password || password.length === 0){
     return callback({
-      message: 'Please enter a password'
+      message: 'Please enter a password.\n请输入密码'
     });
   }
 
   if (!validator.isEmail(email)){
     return callback({
-      message: 'Invalid email'
+      message: 'Invalid email\n邮件格式有误'
     });
   }
 
@@ -107,12 +107,12 @@ UserController.loginWithPassword = function(email, password, callback){
       }
       if (!user) {
         return callback({
-          message: "We couldn't find you!"
+          message: "We couldn't find you!\n我们无法找到你，请检查你的邮件地址。"
         });
       }
       if (!user.checkPassword(password)) {
         return callback({
-          message: "That's not the right password."
+          message: "That's not the right password.\n输入密码有误。"
         });
       }
 
@@ -137,7 +137,7 @@ UserController.createUser = function(email, password, callback) {
 
   if (typeof email !== "string"){
     return callback({
-      message: "Email must be a string."
+      message: "Email must be a string.\n邮件地址必须是一个字符串"
     });
   }
 
@@ -158,7 +158,7 @@ UserController.createUser = function(email, password, callback) {
         // Duplicate key error codes
         if (err.name === 'MongoError' && (err.code === 11000 || err.code === 11001)) {
           return callback({
-            message: 'An account for this email already exists.'
+            message: 'An account for this email already exists.\n该邮件地址已被注册。'
           });
         }
 
@@ -291,7 +291,7 @@ UserController.updateProfileById = function (id, profile, callback){
 
       if (now > times.timeClose){
         return callback({
-          message: "Sorry, registration is closed."
+          message: "Sorry, registration is closed.\n很抱歉，申请已经截止。"
         });
       }
     });
@@ -334,7 +334,7 @@ UserController.updateConfirmationById = function (id, confirmation, callback){
     // that's okay.
     if (Date.now() >= user.status.confirmBy && !user.status.confirmed){
       return callback({
-        message: "You've missed the confirmation deadline."
+        message: "You've missed the confirmation deadline.你已错过确认期限。"
       });
     }
 

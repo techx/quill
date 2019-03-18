@@ -74,11 +74,11 @@ angular.module('reg')
         UserService
           .updateProfile(Session.getUserId(), $scope.user.profile)
           .then(response => {
-            swal("Awesome!", "Your application has been saved.", "success").then(value => {
+            swal("谢谢!", "你的申请已经被成功保存.", "success").then(value => {
               $state.go("app.dashboard");
             });
           }, response => {
-            swal("Uh oh!", "Something went wrong.", "error");
+            swal("Oops!", "可能哪里出错了.", "error");
           });
       }
 
@@ -113,7 +113,7 @@ angular.module('reg')
               rules: [
                 {
                   type: 'empty',
-                  prompt: 'Please enter your name.'
+                  prompt: '请输入你的姓名'
                 }
               ]
             },
@@ -122,7 +122,7 @@ angular.module('reg')
               rules: [
                 {
                   type: 'empty',
-                  prompt: 'Please enter your school name.'
+                  prompt: '请输入你的学校全称'
                 }
               ]
             },
@@ -131,7 +131,7 @@ angular.module('reg')
               rules: [
                 {
                   type: 'empty',
-                  prompt: 'Please select your graduation year.'
+                  prompt: '请选择你的毕业年份'
                 }
               ]
             },
@@ -140,19 +140,19 @@ angular.module('reg')
               rules: [
                 {
                   type: 'empty',
-                  prompt: 'Please select a gender.'
+                  prompt: '请选择你的性别'
                 }
               ]
             },
-            adult: {
-              identifier: 'adult',
-              rules: [
-                {
-                  type: 'allowMinors',
-                  prompt: 'You must be an adult, or an MIT student.'
-                }
-              ]
-            }
+            // adult: {
+            //   identifier: 'adult',
+            //   rules: [
+            //     {
+            //       type: 'allowMinors',
+            //       prompt: 'You must be an adult, or an MIT student.'
+            //     }
+            //   ]
+            // }
           }
         });
       }
@@ -161,7 +161,7 @@ angular.module('reg')
         if ($('.ui.form').form('is valid')){
           _updateUser();
         } else {
-          swal("Uh oh!", "Please Fill The Required Fields", "error");
+          swal("Oops!", "请填充必要的信息", "error");
         }
       };
     }]);

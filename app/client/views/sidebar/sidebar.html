@@ -8,7 +8,7 @@
   <div ui-sref-active="active"
        ui-sref="app.dashboard"
        class="item">
-    Dashboard
+    Dashboard 控制面板
   </div>
 
   <div ng-show="currentUser.verified">
@@ -18,10 +18,10 @@
       ui-sref="app.application"
       ng-show="!currentUser.status.declined"
       class="item">
-      Application
+      Application 申请
     </div>
 
-    <div
+    <!-- <div
       ui-sref-active="active"
       ui-sref="app.confirmation"
       ng-show="!pastConfirmation && currentUser.status.admitted && !currentUser.status.declined"
@@ -35,21 +35,21 @@
       ng-show="!currentUser.status.declined"
       class="item">
       Team
-    </div>
+    </div> -->
 
     <div
       ui-sref-active="active"
       ui-sref="app.admin.stats"
       class="item"
       ng-show="currentUser.admin">
-      Admin
+      Admin 管理员
     </div>
 
   </div>
 
   <div class="item"
        ng-click="logout()">
-    Logout
+    Logout 登出
   </div>
 
   <div class="note">

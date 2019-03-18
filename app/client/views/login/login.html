@@ -18,24 +18,24 @@
           <div class="ui login-password form">
             <form ng-submit="login()">
               <div class="field">
-                <label> Email</label>
+                <label>邮件地址</label>
                 <input type="email"
                        id='email'
-                       placeholder="foo@bar.edu"
+                       placeholder="邮件地址"
                        ng-model="email">
               </div>
               <div class="field">
-                <label> Password</label>
+                <label> 密码</label>
                 <input type="password"
                        id='password'
-                       placeholder="Password (at least 6 characters)"
+                       placeholder="密码（至少6位）"
                        ng-model="password" required>
               </div>
               <div class="field">
                 <button id="login-password"
                         type="submit"
                         class="fluid ui login button">
-                        Login
+                        登陆
                 </button>
               </div>
             </form>
@@ -48,7 +48,7 @@
                       type="submit"
                       class="fluid ui register button"
                       ng-click="register()">
-                      Register
+                      点此注册
               </button>
             </div>
           </div>
@@ -58,17 +58,17 @@
           <div class="ui forgot-password form">
             <form ng-submit="sendResetEmail()">
               <div class="field">
-                <label> Email</label>
+                <label> 邮件地址</label>
                 <input type="email"
                        id='email'
-                       placeholder="foo@bar.edu"
+                       placeholder="邮件地址"
                        ng-model="email">
               </div>
               <div class="field">
                 <button id="forgot-password"
                         type="submit"
                         class="fluid ui login button">
-                        Send Reset Email
+                        发送重置邮件
                 </button>
               </div>
             </form>
@@ -79,13 +79,13 @@
 
         <div ng-show="loginState === 'login'" class="forgot">
           <a href="#" ng-click="setLoginState('forgot')">
-            Forgot Password?
+            忘记密码
           </a>
         </div>
 
         <div ng-show="loginState === 'forgot'" class="forgot">
           <a href="#" ng-click="setLoginState('login')">
-            {{regIsOpen ? 'Login or Register' : 'Login'}}
+            {{regIsOpen ? '登陆或注册' : '登陆'}}
           </a>
         </div>
 

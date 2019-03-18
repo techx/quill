@@ -1,6 +1,6 @@
 <div id="application" class="page">
   <div class="divided title">
-    Application
+    校园大使申请
   </div>
 
   <div class="ui stackable page grid">
@@ -8,12 +8,38 @@
       <div class="ui form"
             ng-class="{'loading': loading}">
 
-        <div class="divided title">Basic Information</div>
+        <div class="divided title">准备好成为一名校园大使了吗？</div>
 
+        <div class="field">
+            <p>
+              作为学校里最有影响力的少数派，你将会担负起一份对我们来说万分重要的责任——帮助我们在同学和朋友中推广<b> THE Hack </b>。<br />
+              当然，这是一份轻松有趣，充满弹性的工作。如果你对即将到来的挑战充满信心，或是渴望历练一下自己的市场推广技能，那么我们诚挚欢迎你的加入。<br />
+              如果你有任何相关的问题，欢迎发送邮件到<a href="mailto:contact@thehack.io">contact@thehack.io</a>。<br />
+            </p>
+            <p>
+          </div>
+  
+           <div class="col-xs-12 col-md-4">
+              <h4><b>四个成为校园大使的理由</b></h4>
+              <ul class="list-group">
+                  <li class="list-group-item">
+                    你将获得无与伦比的工作经验，和<b> THE Hack </b>组委会以及全国的校园学生领袖共同协作，收获广泛社交网络，为你所在的校园与社区推动了STEM教育并锻炼自己的市场营销与宣传能力
+                  </li>
+                  <li class="list-group-item">
+                      获得<b> THE Hack </b>官方校园大使<b>工作证书</b>和校园大使<b>专属礼品</b>
+                  </li>
+                  <li class="list-group-item">
+                      如果你所在的学校申请人数有显著提升，校园大使所在的队伍在申请参赛时会优先考虑，录取率大大提高
+                  </li>
+                  <li class="list-group-item">
+                      每位校园大使可指定1组队伍进入优先考虑行列，录取率显著提高
+                  </li>
+              </ul>
+        </div>
         <fieldset ng-disabled="regIsClosed">
 
         <div class="field">
-          <label> Email </label>
+          <label> 电子邮件 </label>
           <input type="email"
                  name="email"
                  disabled="disabled"
@@ -21,21 +47,28 @@
         </div>
 
         <div class="field">
-          <label> Full Name </label>
+          <label> 全名 </label>
           <input type="text"
                  name="name"
                  ng-model="user.profile.name">
         </div>
 
-        <div class="field" ng-show="autoFilledSchool">
-          <label> School </label>
-          <input class="ui input"
-                 disabled="disabled"
-                 ng-show="autoFilledSchool"
-                 ng-model="user.profile.school">
-        </div>
+        <div class="field">
+            <label> 手机号码 </label>
+            <input type="text"
+                   name="phoneNum"
+                   ng-model="user.profile.phoneNum">
+          </div>
+  
+           <div class="field">
+            <label> 学校 </label>
+            <input type="text"
+                   name="school"
+                   ng-model="user.profile.school">
+          </div>
+  
 
-        <div class="field" ng-show="!autoFilledSchool">
+        <!-- <div class="field" ng-show="!autoFilledSchool">
           <label> School </label>
           <div id="school" class="ui search">
             <div class="ui input">
@@ -43,50 +76,76 @@
             </div>
             <div class="results"></div>
           </div>
-        </div>
+        </div> -->
 
         <div class="field">
-          <label>Graduation Year</label>
+          <label>毕业年份</label>
           <select
             name="year"
             ng-model="user.profile.graduationYear">
-            <option value="">Graduation Year</option>
-            <option value="2016">2016</option>
-            <option value="2017">2017</option>
-            <option value="2018">2018</option>
+            <option value="">请选择...</option>
             <option value="2019">2019</option>
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+            <option value="2022+">2022及以后</option>
           </select>
         </div>
 
         <div class="field">
-          <label>Gender</label>
+          <label>性别</label>
           <select
             name="gender"
             ng-model="user.profile.gender">
-            <option value="">Gender</option>
-            <option value="M">Male</option>
-            <option value="F">Female</option>
-            <option value="O">Other</option>
-            <option value="N">I prefer not to answer.</option>
+            <option value="">请选择...</option>
+            <option value="M">男性</option>
+            <option value="F">女性</option>
+            <option value="O">其他</option>
+            <option value="N">我倾向于不回答</option>
           </select>
         </div>
 
         <div class="field">
-          <label>I would describe myself as a...</label>
+          <label>校内/社团/校外组织担任的职务（如果有)</label>
           <input type="text"
-                 placeholder="Designer, Data Scientist, iOS Wizard, Hacker Extraordinaire"
-                 ng-model="user.profile.description">
+                 name="role"
+                 ng-model="user.profile.schoolRole">
         </div>
 
         <div class="field">
-          <label>
-              What would you like to learn or get out of HackMIT? (optional)
-          </label>
-          <textarea ng-model="user.profile.essay">
-          </textarea>
+            <div class="field">
+                <label>
+                    你是从哪里听说<b>THE Hack</b>创客马拉松的？
+                </label>
+                <textarea ng-model="user.profile.whereHeard">
+                </textarea>
         </div>
+        <div class="field">
+            
+         <label>你过去是否有推广活动的经历？如有，请详述。
+         </label>
+         <textarea ng-model="user.profile.promoExperience"></textarea>	       
+       </div>
 
-        <div class="field"
+        <div class="field">
+         <label>
+             你是否参加过hackathon？请列出你参加过的hackathon。
+         </label>
+         <textarea ng-model="user.profile.isHacker">
+         </textarea>
+       </div>
+
+        <div class="field">
+         <label>
+             请简要描述你计划如何在你的学校推广<b>THE Hack</b>。
+         </label>
+         <textarea ng-model="user.profile.promoPlan">
+         </textarea>
+       </div>
+       <div class="field">
+          <p><b>THE Hack</b> 团队可能会在近期与你联系，请你提供一份个人简历。简历不需正式，但是需要能够让我们更好地了解你。我们非常希望邀请你加入我们的团队，请给我们一些时间审核你的申请。
+          </p>
+        </div>
+        <!-- <div class="field"
              ng-hide="isMitStudent">
           <p>
             Because of limitations imposed by MIT, we are not legally allowed to host
@@ -101,7 +160,7 @@
             <input type="checkbox" id="adult" ng-model="user.profile.adult">
             <label for="adult">I am 18 or older.</label>
           </div>
-        </div>
+        </div> -->
 
         <br>
 
@@ -109,7 +168,7 @@
           <button type="submit"
                   class="fluid ui purple button"
                   ng-click="submitForm()">
-            Submit
+            提交申请
           </button>
         </div>
 

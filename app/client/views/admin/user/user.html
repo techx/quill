@@ -109,11 +109,11 @@
         <select
           name="year"
           ng-model="selectedUser.profile.graduationYear">
-          <option value="">Graduation Year</option>
-          <option value="2016">2016</option>
-          <option value="2017">2017</option>
-          <option value="2018">2018</option>
+          <option value="">请选择...</option>
           <option value="2019">2019</option>
+          <option value="2020">2020</option>
+          <option value="2021">2021</option>
+          <option value="2022+">2022及以后</option>
         </select>
       </div>
 
@@ -122,30 +122,65 @@
         <select
           name="gender"
           ng-model="selectedUser.profile.gender">
-          <option value="">Gender</option>
-          <option value="M">Male</option>
-          <option value="F">Female</option>
-          <option value="O">Other</option>
-          <option value="N">I prefer not to answer.</option>
+          <option value="">请选择...</option>
+          <option value="M">男性</option>
+          <option value="F">女性</option>
+          <option value="O">其他</option>
+          <option value="N">我倾向于不回答</option>
         </select>
       </div>
 
       <div class="field">
-        <label>I would describe myself as a...</label>
+          <label> 校内担任的职务（如果有） </label>
+          <input type="text"
+                 name="role"
+                 ng-model="selectedUser.profile.schoolRole"> 
+        <!-- <label>I would describe myself as a...</label>
         <input type="text"
                placeholder="Designer, Data Scientist, iOS Wizard, Hacker Extraordinaire"
-               ng-model="selectedUser.profile.description">
+               ng-model="selectedUser.profile.description"> -->
       </div>
-
       <div class="field">
+          <label>
+              你是从哪里听说<b>THE Hack</b>创客马拉松的？
+          </label>
+          <textarea ng-model="selectedUser.profile.whereHeard">
+          </textarea>
+      </div>
+      <div class="field">
+          <label>
+              你过去是否有推广活动的经历？如有，请详述。
+          </label>
+          <textarea ng-model="selectedUser.profile.promoExperience">
+          </textarea>
+      </div>
+      <div class="field">
+          <label>
+              你是否参加过hackathon？请列出你参加过的hackathon。
+          </label>
+          <textarea ng-model="selectedUser.profile.isHacker">
+          </textarea>
+      </div>
+      <div class="field">
+          <label>
+              请简要描述你计划如何在你的学校推广<b>THE Hack</b>。
+          </label>
+          <textarea ng-model="selectedUser.profile.promoPlan">
+          </textarea>
+      </div>
+      <!-- <div class="field">
         <label>
             What would you like to learn or get out of HackMIT? (optional)
         </label>
         <textarea ng-model="selectedUser.profile.essay">
         </textarea>
+      </div> -->
+      <div class="field">
+        <p>
+            <b>THE Hack</b> 团队可能会在近期与你联系，请你提供一份个人简历。简历不需正式，但是需要能够让我们更好地了解你。我们非常希望邀请你加入我们的团队，请给我们一些时间审核你的申请。
+        </p>
       </div>
-
-      <div class="field"
+      <!-- <div class="field"
            ng-hide="isMitStudent">
         <p>
           Because of limitations imposed by MIT, we are not legally allowed to host
@@ -160,7 +195,7 @@
           <input type="checkbox" id="adult" ng-model="selectedUser.profile.adult">
           <label for="adult">I am 18 or older.</label>
         </div>
-      </div>
+      </div> -->
 
       <div class="field">
         <div

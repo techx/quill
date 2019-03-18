@@ -16,7 +16,7 @@ angular.module('reg')
         var confirm = $scope.confirm;
 
         if (password !== confirm){
-          $scope.error = "Passwords don't match!";
+          $scope.error = "两次新密码输入不一致";
           $scope.confirm = "";
           return;
         }
@@ -25,7 +25,7 @@ angular.module('reg')
           token,
           $scope.password,
           message => {
-            swal("Neato!", "Your password has been changed!", "success").then(value => {
+            swal("重置成功!", "你的密码已经被修改", "success").then(value => {
               $state.go("login");
             });
           },
