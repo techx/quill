@@ -199,11 +199,11 @@ UserController.getAll = function (callback) {
 
 /**
  * Get a page of users.
- * @param  {[type]}   page     page number
- * @param  {[type]}   size     size of the page
+ * @param query
+ * @param admin
  * @param  {Function} callback args(err, {users, page, totalPages})
  */
-UserController.getPage = function(query, callback){
+UserController.getPage = function(query, admin, callback){
   var page = query.page;
   var size = parseInt(query.size);
   var searchText = query.text;
@@ -222,6 +222,14 @@ UserController.getPage = function(query, callback){
       }
     }else if(squery === 'admin'){
       findQuery.admin = order;
+    }else if(squery === 'review'){
+      findQuery['review.reviewers'] = {
+        $elemMatch : {
+          email: admin.email,
+        }
+      };
+      // sort in decreasing order
+      sortQuery['review.overallRating'] = 'desc';
     }else{
       sortQuery[squery] = order;
     }

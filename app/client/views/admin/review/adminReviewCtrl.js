@@ -142,18 +142,66 @@ angular.module('reg')
 
             $scope.updateReview = function() {
                 // check in range
+                var allzeros = true;
                 for(var i = 0; i < $scope.ratings.length; i++){
                     if($scope.ratings[i] === undefined || $scope.ratings[i] < $scope.ratingsRange[0] || $scope.ratings[i] > $scope.ratingsRange[1]){
                         swal('Oops', 'Scores must be between 0 and ' + $scope.ratingsRange, 'error');
                         return;
                     }
+                    if($scope.ratings[i] !== 0){
+                        allzeros = false;
+                    }
                 }
+                if(allzeros){
+                    swal({
+                        buttons: {
+                            cancel: {
+                                text: "Cancel",
+                                value: null,
+                                visible: true
+                            },
+                            accept: {
+                                className: "danger-button",
+                                closeModal: false,
+                                text: "Submit",
+                                value: true,
+                                visible: true
+                            }
+                        },
+                        dangerMode: true,
+                        icon: "warning",
+                        text: "You are submitting all 0's. Did you accidentally press submit, or are you actually giving all 0's?",
+                        title: "Whoa!"
+                    }).then(value => {
+                        if (!value) {
+                            return;
+                        }
+                        ReviewService.updateReview($scope.user.id, $scope.ratings, $scope.comments)
+                            .then(response => {
+                                //swal('Great!', 'Review Updated', 'success');
+                                // clear for next user
+                                clearCurrentReview();
+                                // get next user
+                                $scope.users.shift();
+                                nextUser();
+                                $scope.toast = true;
+                                $timeout(function(){
+                                    $scope.toast = false;
+                                }, 3000);
+                                swal.close();
+                            }, err => {
+                                swal('Oops!', 'Something went wrong', 'error');
+                            });
+                    });
+                }
+                // update otherwise
                 ReviewService.updateReview($scope.user.id, $scope.ratings, $scope.comments)
                     .then(response => {
                         //swal('Great!', 'Review Updated', 'success');
                         // clear for next user
                         clearCurrentReview();
                         // get next user
+                        $scope.users.shift();
                         nextUser();
                         $scope.toast = true;
                         $timeout(function(){
@@ -189,7 +237,7 @@ angular.module('reg')
                 if($scope.users.length > 0){
                     $scope.loading = true;
                     // Get user data
-                    UserService.get($scope.users.shift())
+                    UserService.get($scope.users[0])
                         .then(response => {
                             var user = response.data;
                             $scope.user = user;

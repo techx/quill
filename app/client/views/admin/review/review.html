@@ -47,7 +47,8 @@
 
     <div ng-show="users.length == 0">
         <p>
-            You don't have anyone to review right now! Press the refresh button or check back another time, or press Assigned Reviews to perform a comprehensive scan.
+            You don't have anyone to review right now. Press the refresh button or check back another time, or press Assigned Reviews to perform a comprehensive scan.
+            If it is past the deadline, then you are finished! Congrats!
         </p>
     </div>
 
@@ -72,7 +73,7 @@
                         ng-model="comments">
                     </textarea>
                 </div>
-                <span class="centered subtext">*Score from 1 - 5</span>
+                <span class="centered subtext">*Score from 0 - 5</span>
                 <div class="ui two column centered row">
                     <div class="ui green inverted button column" ng-click="updateReview()">Submit</div>
                     <!--Notification-->
@@ -98,17 +99,17 @@
                     <br>
 
                     <span ng-show="field.type === 'boolean'">
-                        <i class="red circle remove icon" ng-show="!field.value"></i>
-                        <i class="green circle check icon" ng-show="field.value"></i>
-                    </span>
+                    <i class="red circle remove icon" ng-show="!field.value"></i>
+                    <i class="green circle check icon" ng-show="field.value"></i>
+                </span>
 
                     <span ng-if="field.type === 'link'">
-                         <a target="_blank" href="{{field.value}}">{{field.title}}</a>
-                    </span>
+                     <a target="_blank" href="{{field.value}}">{{field.title}}</a>
+                </span>
 
                     <span ng-if="field.type == null">
-                        {{field.value}}
-                    </span>
+                    {{field.value}}
+                </span>
                 </p>
             </div>
         </div>

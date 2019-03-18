@@ -126,10 +126,11 @@ module.exports = function(router) {
    */
   router.get('/users', isAdmin, function(req, res){
     var query = req.query;
+    var admin = req.user;
 
     if (query.page && query.size){
 
-      UserController.getPage(query, defaultResponse(req, res));
+      UserController.getPage(query, admin, defaultResponse(req, res));
 
     } else {
 

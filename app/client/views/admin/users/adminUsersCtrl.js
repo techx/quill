@@ -28,6 +28,10 @@ angular.module('reg')
         name: 'Admin',
         value: 'admin',
         order: 'true'
+      },{
+        name: 'My Reviews',
+        value: 'review',
+        order: 'true',
       }];
       $scope.sortOption = $stateParams.sort || 'timestamp:asc';
 
