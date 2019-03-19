@@ -193,23 +193,24 @@ angular.module('reg')
                                 swal('Oops!', 'Something went wrong', 'error');
                             });
                     });
+                }else{
+                    // update otherwise
+                    ReviewService.updateReview($scope.user.id, $scope.ratings, $scope.comments)
+                        .then(response => {
+                            //swal('Great!', 'Review Updated', 'success');
+                            // clear for next user
+                            clearCurrentReview();
+                            // get next user
+                            $scope.users.shift();
+                            nextUser();
+                            $scope.toast = true;
+                            $timeout(function(){
+                                $scope.toast = false;
+                            }, 3000);
+                        }, err => {
+                            swal('Oops!', 'Something went wrong', 'error');
+                        });
                 }
-                // update otherwise
-                ReviewService.updateReview($scope.user.id, $scope.ratings, $scope.comments)
-                    .then(response => {
-                        //swal('Great!', 'Review Updated', 'success');
-                        // clear for next user
-                        clearCurrentReview();
-                        // get next user
-                        $scope.users.shift();
-                        nextUser();
-                        $scope.toast = true;
-                        $timeout(function(){
-                            $scope.toast = false;
-                        }, 3000);
-                    }, err => {
-                        swal('Oops!', 'Something went wrong', 'error');
-                    });
             };
 
             $scope.range = function(min, max, step) {

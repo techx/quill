@@ -291,42 +291,36 @@ ReviewController.getQueue = function (user, callback) {
  * @param callback
  */
 ReviewController.updateReview = function (userId, adminUser, ratings, comments, callback) {
-    // Grab user
-    User.findById(userId).exec(function (err, user) {
-        // add rating and assign overall rating
-        var overallRating = user.review.overallRating + ratings.reduce(function (sum, val) {
-            return sum + val
-        });
+    var ratingSum = ratings.reduce(function (sum, val) {
+        return sum + val
+    });
 
-        // update review
-        User.findOneAndUpdate({
-            _id: userId,
-            verified: true,
-            'review.reviewers.email': adminUser.email
-        }, {
-            $set: {
-                'review.reviewers.$.ratings': ratings,
-                'review.reviewers.$.comments': comments,
-                'review.overallRating': overallRating
-            },
-        }, {
-            new: true
-        }, function (err, user) {
-            // pop the user from the admin's queue
-            User.findOneAndUpdate({
-                _id: adminUser.id,
-                verified: true,
-                admin: true
-            }, {
-                $pull: {
-                    'review.reviewQueue': userId,
-                }
-            }, callback);
-        });
-    }, function (err) {
-        if (err) {
-            callback(err);
+    // update review
+    User.findOneAndUpdate({
+        _id: userId,
+        verified: true,
+        'review.reviewers.email': adminUser.email
+    }, {
+        $set: {
+            'review.reviewers.$.ratings': ratings,
+            'review.reviewers.$.comments': comments
+        },
+        $inc: {
+            'review.overallRating' : ratingSum
         }
+    }, {
+        new: true
+    }, function (err, user) {
+        // pop the user from the admin's queue
+        User.findOneAndUpdate({
+            _id: adminUser.id,
+            verified: true,
+            admin: true
+        }, {
+            $pull: {
+                'review.reviewQueue': userId,
+            }
+        }, callback);
     });
 };
 
