@@ -9,7 +9,7 @@ var Settings = require('../app/server/models/Settings');
 var ADMIN_EMAIL = process.env.ADMIN_EMAIL;
 
 // CHANGE THIS ONLY
-var reassignEmail = 'lharper@usc.edu';
+var reassignEmail = '';
 
 
 /*terrible code below shield your eyes*/
