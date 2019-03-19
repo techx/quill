@@ -1,8 +1,7 @@
 require('dotenv').config();
 // Connect to mongodb
 var mongoose        = require('mongoose');
-//var database        = process.env.DATABASE || "mongodb://localhost:27017";
-var database = 'mongodb+srv://dho-dev:HACK5CAdmin@prod-s19-2vjv1.mongodb.net/test?retryWrites=true';
+var database        = process.env.DATABASE || "mongodb://localhost:27017";
 mongoose.connect(database, {useNewUrlParser: true});
 
 var User = require('../app/server/models/User');

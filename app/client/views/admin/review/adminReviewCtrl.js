@@ -176,6 +176,7 @@ angular.module('reg')
                         if (!value) {
                             return;
                         }
+                        $scope.updating = true;
                         ReviewService.updateReview($scope.user.id, $scope.ratings, $scope.comments)
                             .then(response => {
                                 //swal('Great!', 'Review Updated', 'success');
@@ -189,12 +190,15 @@ angular.module('reg')
                                     $scope.toast = false;
                                 }, 3000);
                                 swal.close();
+                                $scope.updating = false;
                             }, err => {
                                 swal('Oops!', 'Something went wrong', 'error');
+                                $scope.updating = false;
                             });
                     });
                 }else{
                     // update otherwise
+                    $scope.updating = true;
                     ReviewService.updateReview($scope.user.id, $scope.ratings, $scope.comments)
                         .then(response => {
                             //swal('Great!', 'Review Updated', 'success');
@@ -207,8 +211,10 @@ angular.module('reg')
                             $timeout(function(){
                                 $scope.toast = false;
                             }, 3000);
+                            $scope.updating = false;
                         }, err => {
                             swal('Oops!', 'Something went wrong', 'error');
+                            $scope.updating = false;
                         });
                 }
             };

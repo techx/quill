@@ -75,7 +75,7 @@
                 </div>
                 <span class="centered subtext">*Score from 0 - 5</span>
                 <div class="ui two column centered row">
-                    <div class="ui green inverted button column" ng-click="updateReview()">Submit</div>
+                    <button class="ui green inverted button column" ng-class="{'disabled': updating}" ng-click="updateReview()">Submit</button>
                     <!--Notification-->
                     <i class="ui column green check icon" ng-show="toast"></i>
                 </div>
