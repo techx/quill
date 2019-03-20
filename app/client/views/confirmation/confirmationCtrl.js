@@ -21,8 +21,6 @@ angular.module('reg')
       fillInBusStop();
       _setupForm();
 
-      $scope.fileName = user._id + "_" + user.profile.name.split(" ").join("_");
-
       // -------------------------------
       // All this just for dietary restriction checkboxes fml
 
@@ -56,6 +54,7 @@ angular.module('reg')
         var email = user.email.split('@')[1];
 
         // Kill Willie for this later
+        // I'll kill you 0 consistency - Daniel
         var USC = "USC";
         var STANFORD = "Stanford";
         var BERKELEY = "Berkeley";
@@ -94,7 +93,7 @@ angular.module('reg')
           "ucsb.edu": UCSB,
           "cpp.edu": UCSB,
           "umail.ucsb.edu": UCSB
-        }
+        };
 
         if (stops[email]) {
           $scope.user.confirmation.busStop = stops[email];
@@ -137,10 +136,11 @@ angular.module('reg')
               return false;
             }
           }
-        }
+        };
 
         // Semantic-UI form validation
         $('.ui.form').form({
+          inline: true,
           fields: {
             shirt: {
               identifier: 'shirt',

@@ -18,7 +18,7 @@
               We need this in case we need to get ahold of you!
             </p>
             <input type="tel"
-                   name="phone"
+                   id="phone"
                    ng-model="user.confirmation.phoneNumber"
                    placeholder="(123) - 555 - 1234"
                    required>
@@ -38,8 +38,8 @@
               ng-repeat="(key, value) in dietaryRestrictions">
 
               <div class="ui checkbox">
-                <input type="checkbox" ng-model="dietaryRestrictions[key]" />
-                <label>{{key}}</label>
+                <input type="checkbox" id="dietaryRestrictions{{key}}"ng-model="dietaryRestrictions[key]" />
+                <label for="dietaryRestrictions{{key}}">{{key}}</label>
               </div>
 
             </div>
@@ -51,7 +51,7 @@
               Let's get you some swag!
             </p>
             <select
-              name="shirt"
+              id="shirt"
               ng-model="user.confirmation.shirtSize"
               required>
               <option value="">Shirt Size</option>
@@ -69,8 +69,8 @@
               Will you be needing hardware?
             </label>
             <div class="ui checkbox">
-              <input type="checkbox" ng-model="user.confirmation.wantsHardware">
-              <label> Yes, I would like to use hardware in my hack. </label>
+              <input type="checkbox" id="wantsHardware" ng-model="user.confirmation.wantsHardware">
+              <label for="wantsHardware"> Yes, I would like to use hardware in my hack. </label>
             </div>
           </div>
 
@@ -95,7 +95,7 @@
             <label>Transportation Details</label>
             <p>
               HackSC will be providing busses to several schools in California. For logistical purposes, please let us know if you will be needing
-              bus transportation to HackSC. If you plan on driving, please note that our venue is the California Market Center in Downtown Los Angeles (110 E 9th St, Los Angeles, CA 90079).
+              bus transportation to and from HackSC. If you plan on driving, please note that our venue is the California Market Center in Downtown Los Angeles (110 E 9th St, Los Angeles, CA 90079).
             </p>
 
             <p>
@@ -109,7 +109,7 @@
             </label>
             <div class="ui checkbox">
               <input type="checkbox" id="needsTransportation" ng-model="user.confirmation.needsTransportation">
-              <label> Yes, I need bus transportation. </label>
+              <label for="needsTransportation"> Yes, I need bus transportation. </label>
             </div>
           </div>
 
@@ -138,7 +138,7 @@
                 <option value="Berkeley">UC Berkeley</option>
                 <option value="UCSD">UC San Diego</option>
                 <option value="UC Irvine">UC Irvine</option>
-                <option value="UCLA">UCLA</option>
+                <option value="UCLA">UC Los Angeles</option>
                 <option value="UCSB">UC Santa Barbara</option>
             </select>
           </div>
@@ -191,9 +191,9 @@
               ng-model="user.confirmation.notes"></textarea>
           </div>
 
-          <div class="field" ng-hide="regIsClosed">
+          <div class="field" ng-hide="pastConfirmation">
             <button type="submit"
-                    class="fluid ui purple button"
+                    class="fluid ui primary button"
                     ng-click="submitForm()">
               Submit
             </button>
