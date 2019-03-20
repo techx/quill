@@ -128,8 +128,6 @@ angular.module('reg')
         $.fn.form.settings.rules.selectBusStop = function (value, fields) {
           var needsTransportation = $('#needsTransportation')[0].checked;
 
-          console.log(needsTransportation);
-
           if (!needsTransportation) {
             return true;
           } else {
