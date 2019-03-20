@@ -749,6 +749,35 @@ UserController.admitUser = function(id, user, callback){
 /**
  * [ADMIN ONLY]
  *
+ * Admit a user by email.
+ * @param  {String}   email   User email of the admit
+ * @param  {String}   user     User doing the admitting
+ * @param  {Function} callback args(err, user)
+ */
+UserController.admitUserByEmail = function(email, user, callback){
+  Settings.getRegistrationTimes(function(err, times){
+    User
+        .findOneAndUpdate({
+              email: email,
+              verified: true
+            },{
+              $set: {
+                'status.admitted': true,
+                'status.rejected': false,
+                'status.waitlisted': false,
+                'status.reviewedBy': user.email,
+                'status.confirmBy': times.timeConfirm
+              }
+            }, {
+              new: true
+            },
+            callback);
+  });
+};
+
+/**
+ * [ADMIN ONLY]
+ *
  * Reject a user.
  * @param  {String}   userId   User id of the reject
  * @param  {String}   user     User doing the rejecting
@@ -778,6 +807,35 @@ UserController.rejectUser = function(id, user, callback){
 /**
  * [ADMIN ONLY]
  *
+ * Reject a user by email.
+ * @param  {String}   email   User email of the admit
+ * @param  {String}   user     User doing the admitting
+ * @param  {Function} callback args(err, user)
+ */
+UserController.rejectUserByEmail = function(email, user, callback){
+  Settings.getRegistrationTimes(function(err, times){
+    User
+        .findOneAndUpdate({
+              email: email,
+              verified: true
+            },{
+              $set: {
+                'status.admitted': false,
+                'status.rejected': true,
+                'status.waitlisted': false,
+                'status.reviewedBy': user.email,
+                'status.confirmBy': times.timeConfirm
+              }
+            }, {
+              new: true
+            },
+            callback);
+  });
+};
+
+/**
+ * [ADMIN ONLY]
+ *
  * Waitlist a user.
  * @param  {String}   userId   User id of the waitlist
  * @param  {String}   user     User doing the waitlisting
@@ -788,6 +846,35 @@ UserController.waitlistUser = function(id, user, callback){
     User
         .findOneAndUpdate({
               _id: id,
+              verified: true
+            },{
+              $set: {
+                'status.admitted': false,
+                'status.rejected': false,
+                'status.waitlisted': true,
+                'status.reviewedBy': user.email,
+                'status.confirmBy': times.timeConfirm
+              }
+            }, {
+              new: true
+            },
+            callback);
+  });
+};
+
+/**
+ * [ADMIN ONLY]
+ *
+ * Admit a user by email.
+ * @param  {String}   email   User email of the admit
+ * @param  {String}   user     User doing the admitting
+ * @param  {Function} callback args(err, user)
+ */
+UserController.waitlistUserByEmail = function(email, user, callback){
+  Settings.getRegistrationTimes(function(err, times){
+    User
+        .findOneAndUpdate({
+              email: email,
               verified: true
             },{
               $set: {
