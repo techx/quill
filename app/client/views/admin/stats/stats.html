@@ -134,7 +134,7 @@
                     <i class="green bus icon"></i>
                     <div class="content">
                         <strong>
-                            Total Need Transportation:
+                            Total Need Transportation (From Applications):
                         </strong>{{stats.transportationTotal}}
                         <br>
                     </div>
@@ -143,6 +143,24 @@
                 <div class="item">
                     <span ng-repeat="transportation in stats.transportation | orderBy: '-count'">
                         {{transportation.school}}: {{transportation.count}} <br>
+                    </span>
+                </div>
+
+                <div class="ui divider"></div>
+
+                <div class="item">
+                    <i class="green bus icon"></i>
+                    <div class="content">
+                        <strong>
+                            Total Confirmed Transportation (From Admitted + Confirmed):
+                        </strong>{{stats.confirmedTransportationTotal}}
+                        <br>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <span ng-repeat="stop in stats.confirmedTransportation | orderBy: '-count'">
+                        {{stop.school}}: {{stop.count}} <br>
                     </span>
                 </div>
 
