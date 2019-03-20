@@ -57,6 +57,9 @@ function calculateStats(){
     transportationTotal: 0,
     transportation: {},
 
+    confirmedTransportationTotal: 0,
+    confirmedTransportation: {},
+
     confirmedFemale: 0,
     confirmedMale: 0,
     confirmedOther: 0,
@@ -170,6 +173,16 @@ function calculateStats(){
         newStats.demo.schools[email].confirmed += user.status.confirmed ? 1 : 0;
         newStats.demo.schools[email].declined += user.status.declined ? 1 : 0;
 
+        // Count the number of people who have confirmed transportation
+        newStats.confirmedTransportationTotal += user.confirmation.needsTransportation ? 1 : 0;
+        if (user.confirmation.needsTransportation) {
+          if(!newStats.confirmedTransportation[user.confirmation.busStop]){
+            newStats.confirmedTransportation[user.confirmation.busStop] = 0;
+          }
+
+          newStats.confirmedTransportation[user.confirmation.busStop]++;
+        }
+
         // Account created and verified but not submitted
         newStats.demo.schools[email].verified += (!user.status.submitted && user.verified) ? 1 : 0;
 
@@ -222,6 +235,17 @@ function calculateStats(){
               });
             });
         newStats.transportation = transportation;
+
+        // Transform confirmed transportation into an array of objects
+        var confirmedTransportation = [];
+        _.keys(newStats.confirmedTransportation)
+            .forEach(function(key){
+              confirmedTransportation.push({
+                school: key,
+                count: newStats.confirmedTransportation[key]
+              });
+            });
+        newStats.confirmedTransportation = confirmedTransportation;
 
         // Transform schools into an array of objects
         var schools = [];

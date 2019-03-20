@@ -11,6 +11,8 @@ angular.module('reg')
         .then(stats => {
           $scope.stats = stats.data;
           $scope.loading = false;
+
+          console.log($scope.stats);
         });
 
       $scope.fromNow = function(date){
