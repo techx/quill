@@ -9,7 +9,7 @@ var User = require('../app/server/models/User');
 var users = 100;
 var username = 'hacker';
 
-for (var i = 0; i < users; i++){
+for (let i = 0; i < users; i++){
   console.log('creating: ' + username + i);
   var email = username + i + '@school.edu';
   var password = 'foobar';
