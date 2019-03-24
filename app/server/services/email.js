@@ -360,4 +360,32 @@ controller.sendPostVerificationEmail = function(recipient, callback){
   });
 };
 
+controller.sendStatusChangeEmail = function(recipient){
+  var title = 'Application Update';
+  var text = "An update has been made to your application. Please check your status at <a href='https://apply.hacksc.com'>apply.hacksc.com</a><br>" +
+      "We wish you the best. If you have any questions, please reach out to us at hackers@hacksc.com";
+
+  var options = {
+    to: recipient,
+    subject: "["+HACKATHON_NAME+"] - " + title,
+  };
+
+  var locals = {
+    title: title,
+    body: text,
+  };
+
+  sendOne('email-html', options, locals, function(err, info){
+    if (err){
+      console.log(err);
+    }
+    if (info){
+      console.log(info.message);
+    }
+    if(callback){
+      callback(err, info);
+    }
+  });
+};
+
 module.exports = controller;

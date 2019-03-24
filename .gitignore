@@ -12,7 +12,9 @@ app/client/build/
 
 # Other
 .idea/
+scripts/data/
 
 # Ignore env file to prevent accidental commits
 .env
 willie.env
+

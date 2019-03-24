@@ -1,6 +1,6 @@
 require('dotenv').load();
 var mongoose        = require('mongoose');
-var database        = process.env.DATABASE || "mongodb://localhost:27017";
+var database        = process.env.PROD_DATABASE || "mongodb://localhost:27017";
 var jwt             = require('jsonwebtoken');
 mongoose.connect(database);
 
@@ -11,7 +11,7 @@ var UserController = require('../app/server/controllers/UserController');
 var user = { email: process.env.ADMIN_EMAIL };
 
 var os = require('os');
-var userArray = require('fs').readFileSync('scripts/data/acceptances.csv').toString().split(os.EOL);
+var userArray = require('fs').readFileSync('scripts/data/acceptances.csv').toString().split('\n');
 var count = 0;
 console.log(userArray);
 userArray.forEach(function (email) {
