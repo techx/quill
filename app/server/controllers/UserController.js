@@ -413,12 +413,16 @@ UserController.updateConfirmationById = function (id, confirmation, callback){
       });
     }
 
-    // You can only confirm acceptance if you're admitted and haven't declined.
+    // You can only confirm if you're admitted or waitlisted and haven't declined.
     User.findOneAndUpdate({
       '_id': id,
       'verified': true,
-      'status.admitted': true,
-      'status.declined': {$ne: true}
+      'status.declined': {$ne: true},
+      $or: [{
+        'status.admitted': true,
+      },{
+        'status.waitlisted': true,
+      }]
     },
       {
         $set: {
@@ -442,12 +446,16 @@ UserController.updateConfirmationById = function (id, confirmation, callback){
  */
 UserController.declineById = function (id, callback){
 
-  // You can only decline if you've been accepted.
+  // You can only decline if you've been accepted or waitlisted
   User.findOneAndUpdate({
     '_id': id,
     'verified': true,
-    'status.admitted': true,
-    'status.declined': false
+    'status.declined': false,
+    $or: [{
+      'status.admitted': true,
+    },{
+      'status.waitlisted': true,
+    }]
   },
     {
       $set: {
@@ -811,7 +819,6 @@ UserController.rejectUser = function(id, user, callback){
                 'status.rejected': true,
                 'status.waitlisted': false,
                 'status.reviewedBy': user.email,
-                'status.confirmBy': times.timeConfirm
               }
             }, {
               new: true
@@ -848,7 +855,6 @@ UserController.rejectUserByEmail = function(email, user, callback){
                 'status.rejected': true,
                 'status.waitlisted': false,
                 'status.reviewedBy': user.email,
-                'status.confirmBy': times.timeConfirm
               }
             }, {
               new: true
