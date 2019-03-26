@@ -21,50 +21,12 @@ var sendMassMail = function (query, sender, title, text, callback) {
         });
 };
 
-MailController.send = function (sender, title, text, recipient, callback) {
-    // filter recipient
-    switch (recipient) {
-        case 'unverified':
-            sendMassMail({'verified': false}, sender, title, text, callback);
-            break;
-        case 'verified':
-            sendMassMail({'verified': true}, sender, title, text, callback);
-            break;
-        case 'verified and not submitted':
-            sendMassMail({'verified': true, 'status.submitted': false}, sender, title, text, callback);
-            break;
-        case 'submitted':
-            sendMassMail({'status.submitted': true}, sender, title, text, callback);
-            break;
-        case 'admitted':
-            sendMassMail({'status.admitted': true}, sender, title, text, callback);
-            break;
-        case 'rejected':
-            sendMassMail({'status.rejected': true}, sender, title, text, callback);
-            break;
-        case 'waitlisted':
-            sendMassMail({'status.waitlisted': true}, sender, title, text, callback);
-            break;
-        case 'admitted and not confirmed':
-            sendMassMail({'status.admitted': true, 'status.confirmed': false}, sender, title, text, callback);
-            break;
-        case 'confirmed':
-            sendMassMail({'status.confirmed': true}, sender, title, text, callback);
-            break;
-        case 'confirmed and need transportation':
-            sendMassMail({'status.confirmed': true, 'profile.transportation': true, email: schoolRegex}, sender, title, text, callback);
-            break;
-        default:
-            // custom, separate by email
-            var recipients = recipient.split(',');
-            Mailer.sendMassMail(sender, title, text, recipients, callback);
-            break;
-    }
-};
-
-MailController.sendSchool = function (sender, title, text, recipient, schoolRecipient, callback) {
+MailController.send = function (sender, title, text, recipient, schoolRecipient, callback) {
     var schoolRegex = new RegExp('@' + schoolRecipient);
-    console.log(schoolRegex);
+    if(schoolRecipient === 'all'){
+        // match anything
+        schoolRegex = new RegExp('');
+    }
     // filter recipient
     switch (recipient) {
         case 'unverified':
@@ -95,8 +57,11 @@ MailController.sendSchool = function (sender, title, text, recipient, schoolReci
             sendMassMail({'status.confirmed': true, email: schoolRegex}, sender, title, text, callback);
             break;
         case 'confirmed and need transportation':
-            sendMassMail({'status.confirmed': true, 'profile.transportation': true, email: schoolRegex}, sender, title, text, callback);
+            sendMassMail({'status.confirmed': true, 'confirmation.needsTransportation': true, email: schoolRegex}, sender, title, text, callback);
             break;
+        default:
+            // custom
+            Mailer.sendMassMail(sender, title, text, recipient, callback);
     }
 };
 

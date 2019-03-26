@@ -10,17 +10,8 @@ angular.module('reg')
                 // Admin Actions
                 // ----------------------
 
-                sendMail: function(sender, title, text, recipient){
+                sendMail: function(sender, title, text, recipient, schoolRecipient){
                     return $http.put(base + 'send', {
-                        sender: sender,
-                        title: title,
-                        text: text,
-                        recipient: recipient
-                    });
-                },
-
-                sendSchoolMail: function(sender, title, text, recipient, schoolRecipient){
-                    return $http.put(base + 'sendSchool', {
                         sender: sender,
                         title: title,
                         text: text,
@@ -33,7 +24,7 @@ angular.module('reg')
                     return $http.put(base + 'sendPostVerificationEmail', {
                         recipient: recipient
                     });
-                }
+                },
             };
         }
     ]);

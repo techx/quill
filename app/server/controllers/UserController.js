@@ -742,7 +742,15 @@ UserController.admitUser = function(id, user, callback){
       }, {
         new: true
       },
-      callback);
+      function(err, user){
+          if(err){
+              return callback(err);
+          }
+          // send mail
+          Mailer.sendStatusChangeEmail(user.email);
+
+          callback(err, user);
+      });
   });
 };
 
@@ -771,7 +779,15 @@ UserController.admitUserByEmail = function(email, user, callback){
             }, {
               new: true
             },
-            callback);
+            function(err, user){
+                if(err){
+                    return callback(err);
+                }
+                // send mail
+                Mailer.sendStatusChangeEmail(user.email);
+
+                callback(err, user);
+            });
   });
 };
 
@@ -800,7 +816,15 @@ UserController.rejectUser = function(id, user, callback){
             }, {
               new: true
             },
-            callback);
+            function(err, user){
+              if(err){
+                return callback(err);
+              }
+              // send mail
+              Mailer.sendStatusChangeEmail(user.email);
+
+              callback(err, user);
+            });
   });
 };
 
@@ -829,7 +853,15 @@ UserController.rejectUserByEmail = function(email, user, callback){
             }, {
               new: true
             },
-            callback);
+            function(err, user){
+              if(err){
+                return callback(err);
+              }
+              // send mail
+              Mailer.sendStatusChangeEmail(user.email);
+
+              callback(err, user);
+            });
   });
 };
 
@@ -858,7 +890,15 @@ UserController.waitlistUser = function(id, user, callback){
             }, {
               new: true
             },
-            callback);
+            function(err, user){
+              if(err){
+                return callback(err);
+              }
+              // send mail
+              Mailer.sendStatusChangeEmail(user.email);
+
+              callback(err, user);
+            });
   });
 };
 
@@ -887,7 +927,15 @@ UserController.waitlistUserByEmail = function(email, user, callback){
             }, {
               new: true
             },
-            callback);
+            function(err, user){
+              if(err){
+                return callback(err);
+              }
+              // send mail
+              Mailer.sendStatusChangeEmail(user.email);
+
+              callback(err, user);
+            });
   });
 };
 
