@@ -568,7 +568,8 @@ module.exports = function(router) {
     var title = req.body.title;
     var text = req.body.text;
     var recipient = req.body.recipient;
-    MailController.send(sender, title, text, recipient, defaultResponse(req, res));
+    var schoolRecipient = req.body.schoolRecipient;
+    MailController.send(sender, title, text, recipient, schoolRecipient, defaultResponse(req, res));
   });
 
   /**
@@ -577,20 +578,6 @@ module.exports = function(router) {
   router.put('/mail/sendPostVerificationEmail', isOwnerOrAdmin, function(req, res){
     var recipient = req.body.recipient;
     MailController.sendPostVerificationEmail(recipient, defaultResponse(req, res));
-  });
-
-  /**
-   * [ADMIN ONLY]
-   * Sends a mass mail to the intended recipients with school
-   *
-   */
-  router.put('/mail/sendSchool', isAdmin, function(req, res){
-    var sender = req.body.sender;
-    var title = req.body.title;
-    var text = req.body.text;
-    var recipient = req.body.recipient;
-    var schoolRecipient = req.body.schoolRecipient;
-    MailController.sendSchool(sender, title, text, recipient, schoolRecipient, defaultResponse(req, res));
   });
 
   // ---------------------------------------------

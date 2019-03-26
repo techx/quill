@@ -11,6 +11,7 @@ angular.module('reg')
 
             $scope.sender = 'team@hacksc.com';
             $scope.recipient = 'verified';
+            $scope.customRecipients = [];
             $scope.schoolRecipient = 'all';
             $scope.mailTitle = '';
             $scope.mailText = '';
@@ -31,7 +32,8 @@ angular.module('reg')
                 'waitlisted',
                 'admitted and not confirmed',
                 'confirmed',
-                'confirmed and need transporation'
+                'confirmed and need transporation',
+                'custom'
             ];
 
             // Load Schools Dropdown
@@ -80,21 +82,14 @@ angular.module('reg')
                         return;
                     }
 
-                    if($scope.schoolRecipient === 'all'){
-                        MailService.sendMail($scope.sender, title, text, $scope.recipient)
-                            .then(response => {
-                                swal('Success', 'Mail has been queued and are being sent out', 'success');
-                            }, err => {
-                                swal('Error', err, 'error');
-                            });
-                    }else{
-                        MailService.sendSchoolMail($scope.sender, title, text, $scope.recipient, $scope.schoolRecipient)
-                            .then(response => {
-                                swal('Sucess', 'Mail has been queued and are being sent out.', 'success');
-                            }, err => {
-                                swal('Error', err, 'error');
-                            })
-                    }
+                    var recipients = ($scope.recipient === 'custom') ? $scope.customRecipients.replace(/ /g, '').split(',') : $scope.recipient;
+                    console.log(recipients);
+                    MailService.sendMail($scope.sender, title, text, recipients, $scope.schoolRecipient)
+                        .then(response => {
+                            swal('Success', 'Mail has been queued and are being sent out', 'success');
+                        }, err => {
+                            swal('Error', err, 'error');
+                        });
                 });
             }
 
