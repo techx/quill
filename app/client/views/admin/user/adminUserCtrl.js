@@ -20,12 +20,92 @@ angular.module('reg')
             populateSchools();
             // Populate the major dropdown
             populateMajors();
+            // Populate dietary restrictions
+            populateDietaryRestrictions();
+            // Populate Bus Stops
+            populateBusStops();
 
             $scope.formatTime = function(time){
                 if (time) {
                     return moment(time).format('MMMM Do YYYY, h:mm:ss a');
                 }
             };
+
+            function populateDietaryRestrictions(){
+                var dietaryRestrictions = {
+                    'Vegetarian': false,
+                    'Vegan': false,
+                    'Halal': false,
+                    'Kosher': false,
+                    'Nut Allergy': false,
+                    'Lactose Intolerant': false,
+                    'Gluten Free': false
+                };
+
+                if ($scope.selectedUser.confirmation.dietaryRestrictions){
+                    $scope.selectedUser.confirmation.dietaryRestrictions.forEach(function(restriction){
+                        if (restriction in dietaryRestrictions){
+                            dietaryRestrictions[restriction] = true;
+                        }
+                    });
+                }
+
+                $scope.dietaryRestrictions = dietaryRestrictions;
+            }
+
+            function populateBusStops() {
+                if ($scope.selectedUser.confirmation.busStop !== undefined && user.confirmation !== "") {
+                    return;
+                }
+
+                var email = $scope.selectedUser.email.split('@')[1];
+
+                // Kill Willie for this later
+                // I'll kill you 0 consistency - Daniel
+                var USC = "USC";
+                var STANFORD = "Stanford";
+                var BERKELEY = "Berkeley";
+                var UCSD = "UCSD";
+                var UCI = "UC Irvine";
+                var UCLA = "UCLA";
+                var UCSB = "UCSB";
+
+                var stops = {
+                    "school.edu": USC,
+                    "usc.edu": USC,
+                    "stanford.edu": STANFORD,
+                    "ucsc.edu": STANFORD,
+                    "mywvm.wvm.edu": STANFORD,
+                    "sjsu.edu": STANFORD,
+                    "student.ohlone.edu": STANFORD,
+                    "berkeley.edu": BERKELEY,
+                    "mail.ccsf.edu": BERKELEY,
+                    "sfsu.edu": BERKELEY,
+                    "usfca.edu": BERKELEY,
+                    "horizon.csueastbay.edu": BERKELEY,
+                    "acsmail.ucsd.edu": UCSD,
+                    "ucsd.edu": UCSD,
+                    "sdsu.edu": UCSD,
+                    "my.canyons.edu": UCSD,
+                    "sandiego.edu": UCSD,
+                    "eng.ucsd.edu": UCSD,
+                    "uci.edu": UCI,
+                    "csu.fullerton.edu": UCI,
+                    "sac.edu": UCI,
+                    "ivc.edu": UCI,
+                    "orangecoastcollege.edu": UCI,
+                    "student.csulb.edu": UCI,
+                    "ucla.edu": UCLA,
+                    "g.ucla.edu": UCLA,
+                    "ucsb.edu": UCSB,
+                    "cpp.edu": UCSB,
+                    "umail.ucsb.edu": UCSB
+                };
+
+                if (stops[email]) {
+                    $scope.selectedUser.confirmation.busStop = stops[email];
+                }
+            }
 
             function populateSchools() {
                 $http
@@ -175,7 +255,7 @@ angular.module('reg')
                     );
             }
 
-            function _updateUser(e) {
+            function _updateUserProfile() {
                 UserService
                     .updateProfile($scope.selectedUser._id, $scope.selectedUser.profile)
                     .then(response => {
@@ -188,6 +268,32 @@ angular.module('reg')
             }
 
             $scope.updateProfile = function() {
-                _updateUser();
+                _updateUserProfile();
             };
+
+            function _updateUserConfirmation(){
+                var confirmation = $scope.selectedUser.confirmation;
+                // Get the dietary restrictions as an array
+                var drs = [];
+                Object.keys($scope.dietaryRestrictions).forEach(function(key){
+                    if ($scope.dietaryRestrictions[key]){
+                        drs.push(key);
+                    }
+                });
+                confirmation.dietaryRestrictions = drs;
+
+                UserService
+                    .updateConfirmation($scope.selectedUser._id, confirmation)
+                    .then(response => {
+                        swal("Woo!", "You're confirmed!", "success").then(value => {
+                            // do nothing - stay on same page
+                        });
+                    }, response => {
+                        swal("Uh oh!", "Something went wrong.", "error");
+                    });
+            }
+
+            $scope.updateConfirmation = function() {
+                _updateUserConfirmation();
+            }
         }]);

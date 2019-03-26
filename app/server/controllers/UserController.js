@@ -240,6 +240,7 @@ UserController.getPage = function(query, admin, callback){
     var re = new RegExp(searchText, 'i');
     queries.push({ email: re });
     queries.push({ 'profile.firstName': re });
+    queries.push({ 'profile.lastName': re });
     queries.push({ 'teamCode': re });
     queries.push({ 'profile.school': re });
     queries.push({ 'profile.year': re });

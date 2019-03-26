@@ -323,15 +323,9 @@ var schema = new mongoose.Schema({
     status: status,
 
     review: review,
-
-});
-
-schema.set('toJSON', {
-    virtuals: true
-});
-
-schema.set('toObject', {
-    virtuals: true
+},{
+    toObject: { virtuals: true },
+    toJSON: { virtuals: true }
 });
 
 //=========================================

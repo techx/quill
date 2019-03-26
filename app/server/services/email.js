@@ -375,7 +375,8 @@ controller.sendStatusChangeEmail = function(recipient){
     body: text,
   };
 
-  sendOne('email-html', options, locals, function(err, info){
+  var sender = EMAIL_MASS_CONTACT;
+  sendOneMass(sender, 'email-html', options, locals, function(err, info){
     if (err){
       console.log(err);
     }

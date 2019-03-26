@@ -456,21 +456,28 @@ angular.module('reg')
                 name: 'Shirt Size',
                 value: user.confirmation.shirtSize
               },{
-                name: 'Major',
-                value: user.confirmation.major
-              },{
-                name: 'Github',
-                value: user.confirmation.github
-              },{
-                name: 'Website',
-                value: user.confirmation.website
-              },{
                 name: 'Needs Hardware',
                 value: user.confirmation.wantsHardware,
                 type: 'boolean'
               },{
                 name: 'Hardware Requested',
                 value: user.confirmation.hardware
+              },{
+                name: 'Needs Transportation',
+                value: user.confirmation.needsTransportation,
+                type: 'boolean'
+              },{
+                name: 'Bus Stop',
+                value: user.confirmation.busStop
+              },{
+                name: 'Fun Fact',
+                value: user.confirmation.funFact
+              },{
+                name: 'Project Plans',
+                value: user.confirmation.projectPlans
+              },{
+                name: 'Notes',
+                value: user.confirmation.notes
               }
             ]
           }
