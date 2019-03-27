@@ -367,211 +367,190 @@
       </div>
 
       <div class="field">
-        <label> Phone </label>
-        <input type="tel" ng-model="selectedUser.confirmation.phoneNumber" />
+        <label> What's your phone number? (required) </label>
+        <p>
+          We need this in case we need to get ahold of you!
+        </p>
+        <input type="tel"
+               id="phone"
+               ng-model="selectedUser.confirmation.phoneNumber"
+               placeholder="(123) - 555 - 1234"
+               required>
       </div>
 
       <div class="field">
         <label> Dietary Restrictions </label>
-        <input
-          type="text" ng-model="selectedUser.confirmation.dietaryRestrictions" />
+
+        <p>
+          If your restriction is not included here, please let us know in the additional notes at the bottom. We'll make sure you're fed and nourished during your time at HackSC!
+        </p>
+
       </div>
 
-      <div class="field">
-        <label> Shirt Size </label>
-        <input type="text" ng-model="selectedUser.profile.shirtSize" />
-      </div>
+      <div class="inline fields">
+        <div class="field"
+             ng-repeat="(key, value) in dietaryRestrictions">
 
-      <div class="field">
-        <label> Major </label>
-        <input type="text" ng-model="selectedUser.profile.major" />
-      </div>
+          <div class="ui checkbox">
+            <input type="checkbox" id="dietaryRestrictions{{key}}"ng-model="dietaryRestrictions[key]" />
+            <label for="dietaryRestrictions{{key}}">{{key}}</label>
+          </div>
 
-      <div class="field">
-        <label> Github </label>
-        <input type="url" ng-model="selectedUser.profile.github" />
-      </div>
-
-      <div class="field">
-        <label> Website </label>
-        <input type="url" ng-model="selectedUser.profile.website" />
-      </div>
-
-      <div class="field">
-        <label> Resume </label>
-        <input type="url" ng-model="selectedUser.profile.resume" />
-      </div>
-
-      <div class="ui divider"></div>
-
-      <div class="field">
-        <label>
-          Needs Hardware
-        </label>
-        <div class="ui checkbox">
-          <input type="checkbox" ng-model="selectedUser.confirmation.wantsHardware">
-          <label> Yup, I need hardware </label>
         </div>
       </div>
 
       <div class="field">
+        <label> Shirt Size (required) </label>
+        <p>
+          Let's get you some swag!
+        </p>
+        <select
+                id="shirt"
+                ng-model="selectedUser.confirmation.shirtSize"
+                required>
+          <option value="">Shirt Size</option>
+          <option value="XS">Unisex X-Small</option>
+          <option value="S">Unisex Small</option>
+          <option value="M">Unisex Medium</option>
+          <option value="L">Unisex Large</option>
+          <option value="XL">Unisex X-Large</option>
+          <option value="XXL">Unisex XX-Large</option>
+        </select>
+      </div>
+
+      <div class="field">
         <label>
-        Hardware
+          Will you be needing hardware?
         </label>
+        <div class="ui checkbox">
+          <input type="checkbox" id="wantsHardware" ng-model="selectedUser.confirmation.wantsHardware">
+          <label for="wantsHardware"> Yes, I would like to use hardware in my hack. </label>
+        </div>
+      </div>
+
+      <div
+              class="field"
+              ng-show="selectedUser.confirmation.wantsHardware">
+        <label>
+          What kind of hardware would be useful for you?
+        </label>
+        <p>
+          We will have a hardware checkout, and we'll try our best to provide things that would be useful to you - however, we can't guarantee everything. We will publish a list of available hardware closer to the day of the event.
+        </p>
         <input type="text" ng-model="selectedUser.confirmation.hardware">
       </div>
 
-      <div class="ui divider"></div>
+      <br>
+      <br>
 
-      <div class="ui header">
-        Hosting
+      <div class="divided title">Transportation</div>
+
+      <div class="field">
+        <label>Transportation Details</label>
+        <p>
+          HackSC will be providing busses to several schools in California. For logistical purposes, please let us know if you will be needing
+          bus transportation to and from HackSC. If you plan on driving, please note that our venue is the California Market Center in Downtown Los Angeles (110 E 9th St, Los Angeles, CA 90079).
+        </p>
+
+        <p>
+          Please note that unfortunately, we cannot provide any travel reimbursement for flights or other modes of transportation.
+        </p>
       </div>
 
       <div class="field">
-        <strong> Needs Hosting Friday </strong>
-        <i
-          ng-if="selectedUser.confirmation.hostNeededFri"
-          class="green check circle icon">
-        </i>
-        <i
-          ng-if="!selectedUser.confirmation.hostNeededFri"
-          class="red remove circle icon">
-        </i>
-      </div>
-
-      <div class="field">
-        <strong> Needs Hosting Saturday </strong>
-        <i
-          ng-if="selectedUser.confirmation.hostNeededSat"
-          class="green check circle icon">
-        </i>
-        <i
-          ng-if="!selectedUser.confirmation.hostNeededSat"
-          class="red remove circle icon">
-        </i>
-      </div>
-
-      <div class="field">
-        <strong> Gender Neutral </strong>
-        <i
-          ng-if="selectedUser.confirmation.genderNeutral"
-          class="green check circle icon">
-        </i>
-        <i
-          ng-if="!selectedUser.confirmation.genderNeutral"
-          class="red remove circle icon">
-        </i>
-      </div>
-
-      <div class="field">
-        <strong> Cat Friendly </strong>
-        <i
-          ng-if="selectedUser.confirmation.catFriendly"
-          class="green check circle icon">
-        </i>
-        <i
-          ng-if="!selectedUser.confirmation.catFriendly"
-          class="red remove circle icon">
-        </i>
-      </div>
-
-      <div class="field">
-        <strong> Smoking Friendly </strong>
-        <i
-          ng-if="selectedUser.confirmation.smokingFriendly"
-          class="green check circle icon">
-        </i>
-        <i
-          ng-if="!selectedUser.confirmation.smokingFriendly"
-          class="red remove circle icon">
-        </i>
-      </div>
-
-      <div class="field">
-        <label> Hosting Notes </label>
-        <textarea ng-model="selectedUser.confirmation.hostNotes"></textarea>
-      </div>
-
-      <div class="ui divider"></div>
-
-      <div class="ui header">
-        Travel
-      </div>
-
-      <div class="field">
-        <strong> Needs Reimbursement</strong>
-        <i
-          ng-if="selectedUser.confirmation.needsReimbursement"
-          class="green check circle icon">
-        </i>
-        <i
-          ng-if="!selectedUser.confirmation.needsReimbursement"
-          class="red remove circle icon">
-        </i>
-      </div>
-
-      <div class="field">
-        <label>Full Name</label>
-        <input type="text"
-               name="name"
-               ng-model="selectedUser.confirmation.address.name">
-      </div>
-
-      <div class="field">
-        <label> Address Line 1 - Street address, P.O. box, company name, c/o </label>
-        <input
-          type="text"
-          name="addressLine1"
-          ng-model="selectedUser.confirmation.address.line1">
-      </div>
-
-      <div class="field">
-        <label> Address Line 2 - Apartment, suite, unit, building, floor, etc. </label>
-        <input
-          type="text"
-          name="addressLine2"
-          ng-model="selectedUser.confirmation.address.line2">
-      </div>
-
-      <div class="four fields">
-        <div class="field">
-          <label> City </label>
-          <input
-            type="text"
-            name="city"
-            ng-model="selectedUser.confirmation.address.city">
+        <label>
+          Will you be needing bus transportation?
+        </label>
+        <div class="ui checkbox">
+          <input type="checkbox" id="needsTransportation" ng-model="selectedUser.confirmation.needsTransportation">
+          <label for="needsTransportation"> Yes, I need bus transportation. </label>
         </div>
+      </div>
+
+      <div
+              class="field"
+              ng-show="selectedUser.confirmation.needsTransportation">
+        <label>
+          Bus Stop (required)
+        </label>
+        <p>
+          We are sending busses to the following schools. Please select the bus stop most convenient for you. Based off your school's location, you might already have a stop set by default.
+        </p>
+
+        <p>
+          It's important to note that confirming your need for busses doesn't guarantee you a spot on the bus. Bus coordinators will be selected and spots will be
+          given on a first come, first serve basis. More details will be provided soon.
+        </p>
+
+        <select
+                name="busStop"
+                id="busStop"
+                ng-model="selectedUser.confirmation.busStop">
+          <option value="">Please select a bus stop</option>
+          <option value="USC">USC</option>
+          <option value="Stanford">Stanford</option>
+          <option value="Berkeley">UC Berkeley</option>
+          <option value="UCSD">UC San Diego</option>
+          <option value="UC Irvine">UC Irvine</option>
+          <option value="UCLA">UC Los Angeles</option>
+          <option value="UCSB">UC Santa Barbara</option>
+        </select>
+      </div>
+
+      <br>
+      <br>
+
+      <div class="divided title">For Fun</div>
+
+      <div class="field">
         <div class="field">
-          <label> State/Province/Region </label>
-          <input
-            type="text"
-            name="state"
-            ng-model="selectedUser.confirmation.address.state">
-        </div>
-        <div class="field">
-          <label> ZIP </label>
-          <input
-            type="text"
-            name="zip"
-            ng-model="selectedUser.confirmation.address.zip">
-        </div>
-        <div class="field">
-          <label> Country </label>
-          <input
-            type="text"
-            name="country"
-            ng-model="selectedUser.confirmation.address.country">
+          <label>Fun Fact (Optional)</label>
+
+          <p>
+            Just for fun, tell us a fun fact about yourself so we can get to know you better
+          </p>
+
+          <input type="text"
+                 name="name"
+                 ng-model="selectedUser.confirmation.funFact">
         </div>
       </div>
 
       <div class="field">
-        <label> Receipt </label>
-        <input type="url" ng-model="selectedUser.confirmation.receipt" />
+        <div class="field">
+          <label>Project Plans (Optional)</label>
+
+          <p>
+            We're excited to see what you'll be building at HackSC! If you're excited about any vertical in particular, we'd love to hear about any project plans
+            you or your team may have.
+          </p>
+
+          <textarea ng-model="selectedUser.confirmation.projectPlans"></textarea>
+        </div>
+      </div>
+
+      <br>
+      <br>
+
+      <div class="divided title">everything else</div>
+
+      <div class="field">
+        <label>
+          Additional Notes
+        </label>
+        <p>
+          If there's anything else you need to let us know, tell us here!
+        </p>
+        <textarea
+                ng-model="selectedUser.confirmation.notes"></textarea>
       </div>
 
       <div class="field">
-        <label> Additional Notes </label>
-        <textarea ng-model="selectedUser.confirmation.notes"></textarea>
+        <button type="submit"
+                class="fluid ui primary button"
+                ng-click="updateConfirmation()">
+          Update Confirmation
+        </button>
       </div>
 
     </fieldset>

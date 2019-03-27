@@ -101,7 +101,7 @@ angular.module('reg')
         templateUrl: "views/confirmation/confirmation.html",
         controller: 'ConfirmationCtrl',
         data: {
-          requireAdmitted: true
+          requireAdmittedOrWaitlisted: true
         },
         resolve: {
           currentUser: function(UserService){
@@ -212,6 +212,7 @@ angular.module('reg')
       var requireAdmin = transition.to().data.requireAdmin;
       var requireVerified = transition.to().data.requireVerified;
       var requireAdmitted = transition.to().data.requireAdmitted;
+      var requireAdmittedOrWaitlisted = transition.to().data.requireAdmittedOrWaitlisted;
 
       if (requireLogin && !Session.getToken()) {
         return transition.router.stateService.target("login");
@@ -226,6 +227,10 @@ angular.module('reg')
       }
 
       if (requireAdmitted && !Session.getUser().status.admitted) {
+        return transition.router.stateService.target("app.dashboard");
+      }
+
+      if(requireAdmittedOrWaitlisted && !(Session.getUser().status.admitted || Session.getUser().status.waitlisted)){
         return transition.router.stateService.target("app.dashboard");
       }
     });

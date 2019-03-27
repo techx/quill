@@ -13,6 +13,7 @@ app/client/build/
 # Other
 .idea/
 scripts/data/
+scripts/custom.js
 
 # Ignore env file to prevent accidental commits
 .env
