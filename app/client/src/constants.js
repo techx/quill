@@ -19,9 +19,9 @@ angular.module('reg')
         ADMITTED_AND_CANNOT_CONFIRM: 'Although you were accepted, you did not complete your confirmation in time.\nUnfortunately, this means that you will not be able to attend the event, as we must begin to accept other applicants on the waitlist.\nWe hope to see you again next year!',
         CONFIRMED_NOT_PAST_TITLE: 'You can edit your confirmation information until [CONFIRM_DEADLINE]',
         REJECTED_TITLE: 'We are unable to admit you at this time.' ,
-        REJECTED: 'We had many applicants this year, and it was difficult choosing hackers given the limited space we had. We encourage you to apply again next year!',
+        REJECTED: '',
         WAITLISTED_TITLE: 'Space is limited, but we want you to come!',
-        WAITLISTED: 'We will notify you if space opens up. Thank you for being patient.',
+        WAITLISTED: '',
         DECLINED: 'We\'re sorry to hear that you won\'t be able to make it to HackSC 2019! We hope you see you again soon.',
     })
     .constant('APPLICATION', {
