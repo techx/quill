@@ -230,7 +230,8 @@ angular.module('reg')
                     coordinators: [{
                         email: "jennifernlai@ucsb.edu",
                         name: "Jennifer Lai"
-                    }]
+                    }],
+                    note: "Unfortunately, we had to cancel the UCSB bus due to unforseen circumstances. We're sorry about this inconvenience."
                 },
             };
 
