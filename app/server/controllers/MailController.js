@@ -4,29 +4,38 @@ var Mailer = require('../services/email');
 var MailController = {};
 
 var sendMassMail = function (query, sender, title, text, callback) {
+    console.log('test');
     User.find(query,
         (err, res) => {
             if (err) {
                 callback(err);
                 return;
             }
-            console.log(res);
             if(res.length === 0){
                 // no recipients
                 callback();
                 return;
             }
             recipients = res.map(doc => doc.email);
-            Mailer.sendMassMail(sender, title, text, recipients, callback);
+            console.log(recipients);
+            callback(err, res);
+            //Mailer.sendMassMail(sender, title, text, recipients, callback);
         });
 };
 
 MailController.send = function (sender, title, text, recipient, schoolRecipient, callback) {
-    var schoolRegex = new RegExp('@' + schoolRecipient);
+    var schoolRegex;
     if(schoolRecipient === 'all'){
         // match anything
         schoolRegex = new RegExp('');
+    }else if(schoolRecipient === 'non-usc'){
+        schoolRegex = {
+            $not: new RegExp('@usc.edu')
+        };
+    }else{
+        schoolRegex = new RegExp('@' + schoolRecipient);
     }
+
     // filter recipient
     switch (recipient) {
         case 'unverified':

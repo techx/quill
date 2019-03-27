@@ -383,9 +383,6 @@ controller.sendStatusChangeEmail = function(recipient){
     if (info){
       console.log(info.message);
     }
-    if(callback){
-      callback(err, info);
-    }
   });
 };
 

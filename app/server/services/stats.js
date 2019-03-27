@@ -51,6 +51,8 @@ function calculateStats(){
     rejected: 0,
     waitlisted: 0,
     confirmed: 0,
+    confirmedAdmitted: 0,
+    confirmedWaitlisted: 0,
     confirmedUSC: 0,
     declined: 0,
 
@@ -127,10 +129,16 @@ function calculateStats(){
         newStats.rejected += user.status.rejected ? 1 : 0;
 
         // Count waitlisted
-        newStats.waitlisted += user.status.rejected ? 1 : 0;
+        newStats.waitlisted += user.status.waitlisted ? 1 : 0;
 
         // Count confirmed
         newStats.confirmed += user.status.confirmed ? 1 : 0;
+
+        // Count confirmed admits
+        newStats.confirmedAdmitted += (user.status.admitted && user.status.confirmed) ? 1 : 0;
+
+        // Count confirmed waitlisted
+        newStats.confirmedWaitlisted += (user.status.waitlisted && user.status.confirmed) ? 1 : 0;
 
         // Count confirmed that are USC
         newStats.confirmedUSC += user.status.confirmed && email === "usc.edu" ? 1 : 0;

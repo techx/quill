@@ -32,6 +32,7 @@
                         id="schoolsRecipient"
                         ng-model="schoolRecipient">
                     <option value="all">all</option>
+                    <option value="non-usc">non-usc</option>
                     <option ng-repeat="school in schools | orderBy: 'school.name'" value="{{school.email}}">
                         {{school.name}} ({{school.email}})
                     </option>
