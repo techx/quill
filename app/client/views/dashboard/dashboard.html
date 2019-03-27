@@ -267,6 +267,24 @@
               {{ DASHBOARD.WAITLISTED }}
             </p>
 
+            <div
+                    ng-show="showTransportation && user.confirmation.needsTransportation"
+                    class="transportation">
+              <div class="ui dividing header">Transportation</div>
+              You have requested transportation from <strong>{{transportation.school}}</strong>.
+              <br>
+              Your pickup location will be <strong>{{transportation.location}}</strong> at <strong>{{transportation.time}}</strong>.
+              <br>
+              Your bus coordinators are:
+              <br>
+              <span ng-repeat="coordinator in transportation.coordinators">
+                <strong>{{coordinator.name}}</strong> - <em>{{coordinator.email}}</em>
+                <br>
+              </span>
+              Capacity is limited and are filled on a first come first serve basis, so we recommend you come to your location early!
+              If you have any questions, your bus coordinators are your main point of contact.
+            </div>
+
           </div>
 
           <div class="ui buttonPrimary button"
@@ -296,6 +314,24 @@
           <div
             class="markdown"
             ng-bind-html="confirmationText">
+          </div>
+
+          <div
+                  ng-show="showTransportation && user.confirmation.needsTransportation"
+                  class="transportation">
+            <div class="ui dividing header">Transportation</div>
+            You have requested transportation from <strong>{{transportation.school}}</strong>.
+            <br>
+            Your pickup location will be <strong>{{transportation.location}}</strong> at <strong>{{transportation.time}}</strong>.
+            <br>
+            Your bus coordinators are:
+            <br>
+            <span ng-repeat="coordinator in transportation.coordinators">
+                <strong>{{coordinator.name}}</strong> - <em>{{coordinator.email}}</em>
+                <br>
+            </span>
+            Capacity is limited and are filled on a first come first serve basis, so we recommend you come to your location early!
+            If you have any questions, your bus coordinators are your main point of contact.
           </div>
 
           <div class="ui buttonPrimary button"

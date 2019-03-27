@@ -98,35 +98,142 @@ angular.module('reg')
       $scope.confirmationText = $sce.trustAsHtml(converter.makeHtml(Settings.confirmationText));
 
       $scope.declineAdmission = function(){
+          swal({
+            title: "Whoa!",
+            text: "Are you sure you would like to decline your admission? \n\n You can't go back!",
+            icon: "warning",
+            buttons: {
+              cancel: {
+                text: "Cancel",
+                value: null,
+                visible: true
+              },
+              confirm: {
+                text: "Yes, I can't make it",
+                value: true,
+                visible: true,
+                className: "danger-button"
+              }
+            }
+          }).then(value => {
+            if (!value) {
+              return;
+            }
 
-      swal({
-        title: "Whoa!",
-        text: "Are you sure you would like to decline your admission? \n\n You can't go back!",
-        icon: "warning",
-        buttons: {
-          cancel: {
-            text: "Cancel",
-            value: null,
-            visible: true
-          },
-          confirm: {
-            text: "Yes, I can't make it",
-            value: true,
-            visible: true,
-            className: "danger-button"
-          }
-        }
-      }).then(value => {
-        if (!value) {
-          return;
-        }
-
-        UserService
-          .declineAdmission(user._id)
-          .then(response => {
-            $rootScope.currentUser = response.data;
-            $scope.user = response.data;
+            UserService
+              .declineAdmission(user._id)
+              .then(response => {
+                $rootScope.currentUser = response.data;
+                $scope.user = response.data;
+              });
           });
-      });
-    };
+      };
+
+        // -----------------------------------------------------
+        // Transportation
+        // -----------------------------------------------------
+        $scope.showTransportation = true;
+        $scope.transportation = {
+            school: "",
+            location: "",
+            coordinators: [],
+        };
+
+        if(user.confirmation !== undefined && user.confirmation.needsTransportation){
+            populateTransportation();
+        }
+
+        function populateTransportation() {
+            var transportationInformation = {
+                "USC": {
+                    school: "University of Southern California",
+                    location: "W. Jefferson and Trousdale",
+                    time: "4:30 PM - 5:15 PM",
+                    coordinators: [{
+                        email: "hsiaotuh@usc.edu",
+                        name: "Daniel Ho"
+                    },{
+                        email: "lianwang@usc.edu",
+                        name: "Jane Wang"
+                    }]
+                },
+                "Stanford": {
+                    school: "Stanford University",
+                    location: "473 Via Ortega Dr, Stanford, CA 94305",
+                    time: "8:00 AM",
+                    coordinators: [{
+                        email: "jsutaria@stanford.edu",
+                        name: "Jainil Sutaria"
+                    }]
+                },
+                "Berkeley": {
+                    school: "UC Berkeley",
+                    location: "Springer Gateway, Berkeley, CA 94720",
+                    time: "9:00 AM",
+                    coordinators: [{
+                        email: "jenzou@berkeley.edu",
+                        name: "Jennifer Zou"
+                    },{
+                        email: "sejalmohata@berkeley.edu",
+                        name: "Sejal Mohata"
+                    }]
+                },
+                "UCSD": {
+                    school: "UC San Diego",
+                    location: "Lot P602, San Diego, CA 92161",
+                    time: "1:30 PM",
+                    coordinators: [{
+                        email: "jha@ucsd.edu",
+                        name: "Jeffrey Ha"
+                    },{
+                        email: "stl005@ucsd.edu",
+                        name: "Stanley Lee"
+                    }]
+                },
+                "UC Irvine": {
+                    school: "UC Irvine",
+                    location: "Office of Admissions and Relations with Schools, University of California Irvine, 260 Aldrich Hall, Irvine, CA 9269",
+                    time: "3:00 PM",
+                    coordinators: [{
+                        email: "crystc6@uci.edu",
+                        name: "Crystal Cheung"
+                    },{
+                        email: "rjmirand@uci.edu",
+                        name: "Ryan Miranda"
+                    },{
+                        email: "lilyp3@uci.edu",
+                        name: "Lily Pham"
+                    },{
+                        email: "sjng1@uci.edu",
+                        name: "Steve Ng"
+                    },{
+                        email: "marcusw2@uci.edu",
+                        name: "Marcus Wong"
+                    }]
+                },
+                "UCLA": {
+                    school: "UC Los Angeles",
+                    location: "Le Conte Parking Lot, 10928 Le Conte Ave, Los Angeles, CA 90024",
+                    time: "3:00 PM",
+                    coordinators: [{
+                        email: "tiffanychandra@g.ucla.edu",
+                        name: "Tiffany Chandra"
+                    }, {
+                        email: "kylewong@g.ucla.edu",
+                        name: "Kyle Wong"
+                    }]
+                },
+                "UCSB": {
+                    school: "UC Santa Barbara",
+                    location: "Lot 29, Isla Vista, CA 93117",
+                    time: "2:30 PM",
+                    coordinators: [{
+                        email: "jennifernlai@ucsb.edu",
+                        name: "Jennifer Lai"
+                    }]
+                },
+            };
+
+            $scope.transportation = transportationInformation[user.confirmation.busStop];
+        }
   }]);
