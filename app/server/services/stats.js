@@ -84,6 +84,7 @@ function calculateStats(){
     },
 
     dietaryRestrictions: {},
+    dietaryRestrictionCombinations: {},
 
     wantsHardware: 0,
 
@@ -209,12 +210,22 @@ function calculateStats(){
 
         // Dietary restrictions
         if (user.confirmation.dietaryRestrictions){
+          var combination = ''
           user.confirmation.dietaryRestrictions.forEach(function(restriction){
             if (!newStats.dietaryRestrictions[restriction]){
               newStats.dietaryRestrictions[restriction] = 0;
             }
             newStats.dietaryRestrictions[restriction] += 1;
+            combination += restriction + ' ';
           });
+
+          if (combination !== '') {
+            if (!newStats.dietaryRestrictionCombinations[combination]) {
+              newStats.dietaryRestrictionCombinations[combination] = 0
+            }
+
+            newStats.dietaryRestrictionCombinations[combination]++
+          }
         }
 
         // Count checked in
@@ -232,6 +243,17 @@ function calculateStats(){
             });
           });
         newStats.dietaryRestrictions = restrictions;
+
+        // Transform dietary restriction combinations into a series of objects
+        var restrictionCombinations = [];
+        _.keys(newStats.dietaryRestrictionCombinations)
+          .forEach(function(key){
+            restrictionCombinations.push({
+              name: key,
+              count: newStats.dietaryRestrictionCombinations[key],
+            });
+          });
+        newStats.dietaryRestrictionCombinations = restrictionCombinations;
 
         // Transform transportation into an array of objects
         var transportation = [];

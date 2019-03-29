@@ -186,7 +186,7 @@
 
                 <div class="ui divider"></div>
 
-                <div class="item">
+                <div class="item"> 
                     <i class="food icon"></i>
                     <div class="content">
                         <strong>
@@ -195,6 +195,16 @@
                         <span
                                 ng-repeat="restriction in stats.dietaryRestrictions | orderBy: '-count'">
                         {{restriction.name}} ({{restriction.count}})
+                        </span>
+
+                        <hr/>
+
+                        <strong>
+                            Dietary Restriction Combinations:
+                        </strong>
+                        <span
+                                ng-repeat="combination in stats.dietaryRestrictionCombinations | orderBy: '-count'">
+                        {{combination.name}} ({{combination.count}})
                         </span>
                     </div>
                 </div>
