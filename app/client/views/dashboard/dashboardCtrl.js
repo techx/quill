@@ -135,7 +135,7 @@ angular.module('reg')
         $scope.showTransportation = false;
         $scope.transportation = null;
 
-        populateTransportation();
+        //populateTransportation();
 
         function populateTransportation() {
             var transportationInformation = {
