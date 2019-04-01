@@ -4,7 +4,6 @@ var Mailer = require('../services/email');
 var MailController = {};
 
 var sendMassMail = function (query, sender, title, text, callback) {
-    console.log('test');
     User.find(query,
         (err, res) => {
             if (err) {
@@ -17,9 +16,7 @@ var sendMassMail = function (query, sender, title, text, callback) {
                 return;
             }
             recipients = res.map(doc => doc.email);
-            console.log(recipients);
-            callback(err, res);
-            //Mailer.sendMassMail(sender, title, text, recipients, callback);
+            Mailer.sendMassMail(sender, title, text, recipients, callback);
         });
 };
 
