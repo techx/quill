@@ -69,7 +69,17 @@ var schema = new mongoose.Schema({
     type: [String],
     select: false,
     default: ['Entrepreneurship', 'Entertainment', 'Transportation', 'Technicality', 'Creativity', 'Impact']
-  }
+  },
+  transportation: [{ // TODO: implement this
+    school: String,
+    coordinators: [{
+      name: String,
+      email: String,
+    }],
+    location: String,
+    time: Number,
+    select: false,
+  }],
 });
 
 /**
