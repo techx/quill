@@ -133,15 +133,9 @@ angular.module('reg')
         // Transportation
         // -----------------------------------------------------
         $scope.showTransportation = false;
-        $scope.transportation = {
-            school: "",
-            location: "",
-            coordinators: [],
-        };
+        $scope.transportation = null;
 
-        if(user.confirmation !== undefined && user.confirmation.needsTransportation){
-            populateTransportation();
-        }
+        populateTransportation();
 
         function populateTransportation() {
             var transportationInformation = {
@@ -213,7 +207,7 @@ angular.module('reg')
                 },
                 "UCLA": {
                     school: "UCLA",
-                    location: "Le Conte Parking Lot, 10928 Le Conte Ave, Los Angeles, CA 90024",
+                    location: "1 Charles E Young Dr N, Los Angeles, CA 90024",
                     time: "4:00 PM",
                     coordinators: [{
                         email: "tiffanychandra@g.ucla.edu",
@@ -235,6 +229,11 @@ angular.module('reg')
                 },
             };
 
-            $scope.transportation = transportationInformation[user.confirmation.busStop];
+            if(user.confirmation !== undefined && user.confirmation.needsTransportation && user.confirmation.busStop !== ""){
+                $scope.transportation = transportationInformation[user.confirmation.busStop];
+            }else if(user.confirmation !== undefined && user.profile.school === "University of Southern California"){
+                // show transportation for all USC students
+                $scope.transportation = transportationInformation['USC'];
+            }
         }
   }]);

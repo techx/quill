@@ -272,7 +272,7 @@
                     class="transportation">
               <div class="ui dividing header">Transportation</div>
                 <div
-                  ng-show="user.confirmation.needsTransportation">
+                  ng-show="transportation != null">
                   <div
                           ng-show="transportation.note != undefined">
                     {{transportation.note}}
@@ -280,16 +280,22 @@
                   <div
                           ng-show="transportation.note == undefined || transportation.note == ''">
 
-                    You have requested transportation from <strong>{{transportation.school}}</strong>.
-                    <br>
-                    Your pickup location will be <strong>{{transportation.location}}</strong>, and bus will arrive at <strong>{{transportation.time}}</strong>.
-                    <br>
+                    We are providing bus transportation from <strong>{{transportation.school}}</strong>.
+                    <br><br>
+                    Your pickup location will be <strong>{{transportation.location}}</strong>, and the bus(es) will arrive at <strong>{{transportation.time}}</strong>.
+                    <!--USC only-->
+                    <span
+                      ng-show="transportation.school == 'University of Southern California'">
+                      This means there will be multiple buses running between campus and the venue at 30 minute intervals, with the last one leaving at 6:00 PM.
+                    </span>
+                    <br><br>
                     Your bus coordinators are:
                     <br>
                     <span ng-repeat="coordinator in transportation.coordinators">
                         <strong>{{coordinator.name}}</strong> - <a href="{{coordinator.email}}">{{coordinator.email}}</a>
                         <br>
                     </span>
+                    <br>
                     Capacity is limited and seats are filled on a first come first serve basis, so we highly recommend you come to your location early!
                     Buses will leave once capacity is filled or 30 minutes after arrival time, whichever happens first.
                     If you have any questions, your bus coordinators are your main point of contact.
@@ -299,7 +305,7 @@
 
                 <div>
                   If you plan on arriving on your own, please set your destination to <strong>California Market Center, 110 E 9th St, Los Angeles, CA 90079</strong>.
-                  Check-in runs from <strong>Friday, April 12th, 5pm - 10pm</strong> but we recommend arriving early so you don't miss dinner and our opening ceremony.
+                  Check-in runs from <strong>Friday, April 12th, 5:00 PM - 10:00 PM</strong> but we recommend arriving early so you don't miss dinner and our opening ceremony.
                   We will be outside with signs and instructions, but in case you experience any issue please email us at <a href="mailto:hackers@hacksc.com">hackers@hacksc.com</a>.
                   <br>
                   For drivers, there is parking on-premise for $16. This price covers the entire duration of HackSC, but you may not move your car on Saturday.
@@ -339,31 +345,53 @@
             ng-bind-html="confirmationText">
           </div>
 
+          <div
+                  ng-show="showTransportation"
+                  class="transportation">
+            <div class="ui dividing header">Transportation</div>
             <div
-                    ng-show="showTransportation && user.confirmation.needsTransportation"
-                    class="transportation">
-                <div class="ui dividing header">Transportation</div>
-                <div
-                        ng-show="transportation.note != undefined">
-                    {{transportation.note}}
-                </div>
-                <div
-                        ng-show="transportation.note == undefined || transportation.note == ''">
+                    ng-show="transportation != null">
+              <div
+                      ng-show="transportation.note != undefined">
+                {{transportation.note}}
+              </div>
+              <div
+                      ng-show="transportation.note == undefined || transportation.note == ''">
 
-                    You have requested transportation from <strong>{{transportation.school}}</strong>.
-                    <br>
-                    Your pickup location will be <strong>{{transportation.location}}</strong> at <strong>{{transportation.time}}</strong>.
-                    <br>
-                    Your bus coordinators are:
-                    <br>
-                    <span ng-repeat="coordinator in transportation.coordinators">
-                        <strong>{{coordinator.name}}</strong> - <em>{{coordinator.email}}</em>
+                We are providing bus transportation from <strong>{{transportation.school}}</strong>.
+                <br><br>
+                Your pickup location will be <strong>{{transportation.location}}</strong>, and the bus(es) will arrive at <strong>{{transportation.time}}</strong>.
+                <!--USC only-->
+                <span
+                        ng-show="transportation.school == 'University of Southern California'">
+                      This means there will be multiple buses running between campus and the venue at 30 minute intervals, with the last one leaving at 6:00 PM.
+                    </span>
+                <br><br>
+                Your bus coordinators are:
+                <br>
+                <span ng-repeat="coordinator in transportation.coordinators">
+                        <strong>{{coordinator.name}}</strong> - <a href="{{coordinator.email}}">{{coordinator.email}}</a>
                         <br>
                     </span>
-                    Capacity is limited and are filled on a first come first serve basis, so we recommend you come to your location early!
-                    If you have any questions, your bus coordinators are your main point of contact.
-                </div>
+                <br>
+                Capacity is limited and seats are filled on a first come first serve basis, so we highly recommend you come to your location early!
+                Buses will leave once capacity is filled or 30 minutes after arrival time, whichever happens first.
+                If you have any questions, your bus coordinators are your main point of contact.
+              </div>
+              <br>
             </div>
+
+            <div>
+              If you plan on arriving on your own, please set your destination to <strong>California Market Center, 110 E 9th St, Los Angeles, CA 90079</strong>.
+              Check-in runs from <strong>Friday, April 12th, 5:00 PM - 10:00 PM</strong> but we recommend arriving early so you don't miss dinner and our opening ceremony.
+              We will be outside with signs and instructions, but in case you experience any issue please email us at <a href="mailto:hackers@hacksc.com">hackers@hacksc.com</a>.
+              <br>
+              For drivers, there is parking on-premise for $16. This price covers the entire duration of HackSC, but you may not move your car on Saturday.
+              Please note that we unfortunately cannot provide any form of reimbursement due to USC policy.
+              <br>
+              We can't wait to see you there!
+            </div>
+          </div>
 
           <div class="ui buttonPrimary button"
                ui-sref="app.confirmation">
