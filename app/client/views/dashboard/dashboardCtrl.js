@@ -132,7 +132,7 @@ angular.module('reg')
         // -----------------------------------------------------
         // Transportation
         // -----------------------------------------------------
-        $scope.showTransportation = true;
+        $scope.showTransportation = false;
         $scope.transportation = {
             school: "",
             location: "",
@@ -147,8 +147,8 @@ angular.module('reg')
             var transportationInformation = {
                 "USC": {
                     school: "University of Southern California",
-                    location: "W. Jefferson and Trousdale",
-                    time: "4:30 PM - 5:15 PM",
+                    location: "W Jefferson Blvd & Trousdale Pkwy, Los Angeles, CA 90007",
+                    time: "4:30 PM - 6:00 PM",
                     coordinators: [{
                         email: "hsiaotuh@usc.edu",
                         name: "Daniel Ho"
@@ -160,7 +160,7 @@ angular.module('reg')
                 "Stanford": {
                     school: "Stanford University",
                     location: "473 Via Ortega Dr, Stanford, CA 94305",
-                    time: "8:00 AM",
+                    time: "9:30 AM",
                     coordinators: [{
                         email: "jsutaria@stanford.edu",
                         name: "Jainil Sutaria"
@@ -169,7 +169,7 @@ angular.module('reg')
                 "Berkeley": {
                     school: "UC Berkeley",
                     location: "Springer Gateway, Berkeley, CA 94720",
-                    time: "9:00 AM",
+                    time: "7:30 AM",
                     coordinators: [{
                         email: "jenzou@berkeley.edu",
                         name: "Jennifer Zou"
@@ -181,19 +181,19 @@ angular.module('reg')
                 "UCSD": {
                     school: "UC San Diego",
                     location: "Lot P602, San Diego, CA 92161",
-                    time: "1:30 PM",
+                    time: "1:00 PM",
                     coordinators: [{
-                        email: "jha@ucsd.edu",
-                        name: "Jeffrey Ha"
-                    },{
                         email: "stl005@ucsd.edu",
                         name: "Stanley Lee"
+                    },{
+                        email: "j7yang@ucsd.edu",
+                        name: "Jane Yang"
                     }]
                 },
                 "UC Irvine": {
                     school: "UC Irvine",
                     location: "Office of Admissions and Relations with Schools, University of California Irvine, 260 Aldrich Hall, Irvine, CA 9269",
-                    time: "3:00 PM",
+                    time: "2:00 PM",
                     coordinators: [{
                         email: "crystc6@uci.edu",
                         name: "Crystal Cheung"
@@ -212,9 +212,9 @@ angular.module('reg')
                     }]
                 },
                 "UCLA": {
-                    school: "UC Los Angeles",
+                    school: "UCLA",
                     location: "Le Conte Parking Lot, 10928 Le Conte Ave, Los Angeles, CA 90024",
-                    time: "3:00 PM",
+                    time: "4:00 PM",
                     coordinators: [{
                         email: "tiffanychandra@g.ucla.edu",
                         name: "Tiffany Chandra"
@@ -231,7 +231,7 @@ angular.module('reg')
                         email: "jennifernlai@ucsb.edu",
                         name: "Jennifer Lai"
                     }],
-                    note: "Unfortunately, we had to cancel the UCSB bus due to unforseen circumstances. We're sorry about this inconvenience."
+                    note: "Unfortunately, we are unable to provide bus transportation for UCSB. We're sorry about any inconveniences this may have caused, but still hope that you can join us at HackSC!"
                 },
             };
 

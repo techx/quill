@@ -42,22 +42,22 @@ MailController.send = function (sender, title, text, recipient, schoolRecipient,
             sendMassMail({'status.submitted': true, email: schoolRegex}, sender, title, text, callback);
             break;
         case 'admitted':
-            sendMassMail({'status.admitted': true, email: schoolRegex}, sender, title, text, callback);
+            sendMassMail({'status.admitted': true, 'status.declined': false, email: schoolRegex}, sender, title, text, callback);
             break;
         case 'rejected':
             sendMassMail({'status.rejected': true, email: schoolRegex}, sender, title, text, callback);
             break;
         case 'waitlisted':
-            sendMassMail({'status.waitlisted': true, email: schoolRegex}, sender, title, text, callback);
+            sendMassMail({'status.waitlisted': true, 'status.declined': false, email: schoolRegex}, sender, title, text, callback);
             break;
         case 'admitted and not confirmed':
-            sendMassMail({'status.admitted': true, 'status.confirmed': false, email: schoolRegex}, sender, title, text, callback);
+            sendMassMail({'status.admitted': true, 'status.confirmed': false, 'status.declined': false, email: schoolRegex}, sender, title, text, callback);
             break;
         case 'confirmed':
-            sendMassMail({'status.confirmed': true, email: schoolRegex}, sender, title, text, callback);
+            sendMassMail({'status.confirmed': true, 'status.declined': false, email: schoolRegex}, sender, title, text, callback);
             break;
         case 'confirmed and need transportation':
-            sendMassMail({'status.confirmed': true, 'confirmation.needsTransportation': true, email: schoolRegex}, sender, title, text, callback);
+            sendMassMail({'status.confirmed': true, 'status.declined': false, 'confirmation.needsTransportation': true, email: schoolRegex}, sender, title, text, callback);
             break;
         default:
             // custom
