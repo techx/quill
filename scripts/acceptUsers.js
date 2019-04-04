@@ -11,18 +11,19 @@ var UserController = require('../app/server/controllers/UserController');
 var user = { email: process.env.ADMIN_EMAIL };
 
 var os = require('os');
-var userArray = require('fs').readFileSync('scripts/data/acceptances.csv').toString().split('\n');
+var userArray = require('fs').readFileSync('scripts/data/test.csv').toString().split('\n').map(value => value.trim());
 var count = 0;
-console.log(userArray);
 userArray.forEach(function (email) {
-    UserController.admitUserByEmail(email, user, function(err) {
-      if(err){
-        console.log(err);
-      }
-      console.log('admitted:' + email);
-      count += 1;
-      if (count === userArray.length) {
-        console.log("Done");
-      }
-    });
+    if(email !== ''){
+        UserController.admitUserByEmail(email, user, function(err) {
+            if(err){
+                console.log(err);
+            }
+            console.log('admitted:' + email);
+            count += 1;
+            if (count === userArray.length) {
+                console.log("Done");
+            }
+        });
+    }
 });

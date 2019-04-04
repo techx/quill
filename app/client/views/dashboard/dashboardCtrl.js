@@ -132,17 +132,17 @@ angular.module('reg')
         // -----------------------------------------------------
         // Transportation
         // -----------------------------------------------------
-        $scope.showTransportation = false;
+        $scope.showTransportation = true;
         $scope.transportation = null;
 
-        //populateTransportation();
+        populateTransportation();
 
         function populateTransportation() {
             var transportationInformation = {
                 "USC": {
                     school: "University of Southern California",
                     location: "W Jefferson Blvd & Trousdale Pkwy, Los Angeles, CA 90007",
-                    time: "4:30 PM - 6:00 PM",
+                    time: "5:00 PM - 7:30 PM",
                     coordinators: [{
                         email: "hsiaotuh@usc.edu",
                         name: "Daniel Ho"
@@ -175,7 +175,7 @@ angular.module('reg')
                 "UCSD": {
                     school: "UC San Diego",
                     location: "Lot P602, San Diego, CA 92161",
-                    time: "1:00 PM",
+                    time: "1:30 PM",
                     coordinators: [{
                         email: "stl005@ucsd.edu",
                         name: "Stanley Lee"
@@ -187,7 +187,7 @@ angular.module('reg')
                 "UC Irvine": {
                     school: "UC Irvine",
                     location: "Office of Admissions and Relations with Schools, University of California Irvine, 260 Aldrich Hall, Irvine, CA 9269",
-                    time: "2:00 PM",
+                    time: "2:30 PM",
                     coordinators: [{
                         email: "crystc6@uci.edu",
                         name: "Crystal Cheung"
@@ -200,19 +200,13 @@ angular.module('reg')
                     },{
                         email: "sjng1@uci.edu",
                         name: "Steve Ng"
-                    },{
-                        email: "marcusw2@uci.edu",
-                        name: "Marcus Wong"
                     }]
                 },
                 "UCLA": {
                     school: "UCLA",
                     location: "1 Charles E Young Dr N, Los Angeles, CA 90024",
-                    time: "4:00 PM",
+                    time: "3:00 PM",
                     coordinators: [{
-                        email: "tiffanychandra@g.ucla.edu",
-                        name: "Tiffany Chandra"
-                    }, {
                         email: "kylewong@g.ucla.edu",
                         name: "Kyle Wong"
                     }]

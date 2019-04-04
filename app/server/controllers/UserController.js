@@ -788,14 +788,13 @@ UserController.admitUserByEmail = function(email, user, callback){
             }, {
               new: true
             },
-            function(err, user){
-                if(err){
-                    return callback(err);
+            function(err, newUser){
+              if(err){
+                  return callback(err);
                 }
-                // send mail
-                Mailer.sendStatusChangeEmail(user.email);
+                Mailer.sendStatusChangeEmail(newUser.email);
 
-                callback(err, user);
+                callback(err, newUser);
             });
   });
 };
@@ -824,14 +823,14 @@ UserController.rejectUser = function(id, user, callback){
             }, {
               new: true
             },
-            function(err, user){
+            function(err, newUser){
               if(err){
                 return callback(err);
               }
               // send mail
-              Mailer.sendStatusChangeEmail(user.email);
+              Mailer.sendStatusChangeEmail(newUser.email);
 
-              callback(err, user);
+              callback(err, newUser);
             });
   });
 };
