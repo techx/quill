@@ -2,19 +2,19 @@ const angular = require('angular');
 const SettingsService = require('./services/SettingsService.js');
 const UserService = require('./services/UserService.js');
 
-const AdminCtrl = require('../views/admin/AdminCtrl.js');
-const AdminSettingsCtrl = require('../views/admin/settings/AdminSettingsCtrl.js');
-const AdminStatsCtrl = require('../views/admin/stats/AdminStatsCtrl.js');
-const AdminUserCtrl = require('../views/admin/user/AdminUserCtrl.js');
-const AdminUsersCtrl = require('../views/admin/users/AdminUsersCtrl.js');
-const ApplicationCtrl = require('../views/application/ApplicationCtrl.js');
-const ConfirmationCtrl = require('../views/confirmation/ConfirmationCtrl.js');
-const DashboardCtrl = require('../views/dashboard/DashboardCtrl.js');
-const LoginCtrl = require('../views/login/LoginCtrl.js');
-const ResetCtrl = require('../views/reset/ResetCtrl.js');
-const SidebarCtrl = require('../views/sidebar/SidebarCtrl.js');
-const TeamCtrl = require('../views/team/TeamCtrl.js');
-const VerifyCtrl = require('../views/verify/VerifyCtrl.js');
+const AdminCtrl = require('../views/admin/adminCtrl.js');
+const AdminSettingsCtrl = require('../views/admin/settings/adminSettingsCtrl.js');
+const AdminStatsCtrl = require('../views/admin/stats/adminStatsCtrl.js');
+const AdminUserCtrl = require('../views/admin/user/adminUserCtrl.js');
+const AdminUsersCtrl = require('../views/admin/users/adminUsersCtrl.js');
+const ApplicationCtrl = require('../views/application/applicationCtrl.js');
+const ConfirmationCtrl = require('../views/confirmation/confirmationCtrl.js');
+const DashboardCtrl = require('../views/dashboard/dashboardCtrl.js');
+const LoginCtrl = require('../views/login/loginCtrl.js');
+const ResetCtrl = require('../views/reset/resetCtrl.js');
+const SidebarCtrl = require('../views/sidebar/sidebarCtrl.js');
+const TeamCtrl = require('../views/team/teamCtrl.js');
+const VerifyCtrl = require('../views/verify/verifyCtrl.js');
 
 angular.module('reg')
   .config([
