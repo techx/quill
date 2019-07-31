@@ -3,6 +3,7 @@ node_modules/
 app/client/build/
 app/client/plugins/
 www/
+.sass-cache/*
 *.log
 .env
 update*.sh
