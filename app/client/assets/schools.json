@@ -775,5 +775,58 @@
     "fiu.edu": {
         "school": "Florida International University",
         "state": "Florida"
+    },
+    "mail.mcgill.ca": {
+        "school": "McGill University",
+        "state": "Quebec"
+    },
+    "mail.concordia.ca": {
+        "school": "Concordia University",
+        "state": "Quebec"
+    },
+    "live.concordia.ca": {
+        "school": "Concordia University",
+        "state": "Quebec"
+    },
+    "ens.etsmtl.ca": {
+        "school": "École de technologie supérieure",
+        "state": "Quebec"
+    },
+    "polymtl.ca": {
+        "school": "École Polytechnique de Montréal",
+        "state": "Quebec"
+    },
+    "courrier.uquam.ca": {
+        "school": "Université du Québec à Montréal",
+        "state": "Quebec"
+    },
+    "ulaval.ca": {
+        "school": "Laval University",
+        "state": "Quebec"
+    },
+    "uwaterloo.ca": {
+        "school": "The University of Waterloo",
+        "state": "Ontario"
+    },
+    "edu.uwaterloo.ca": {
+        "school": "The University of Waterloo",
+        "state": "Ontario"
+    },
+    "mail.utoronto.ca": {
+        "school": "The University of Toronto",
+        "state": "Ontario"
+    },
+    "my.yorku.ca": {
+        "school": "York University",
+        "state": "Ontario"
+    },
+    "uottawa.ca": {
+        "school": "The University of Ottawa",
+        "state": "Ontario"
+    },
+    "ryerson.ca": {
+        "school": "Ryerson University",
+        "state": "Ontario"
     }
+
 }
