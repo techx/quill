@@ -1,7 +1,7 @@
 angular
   .module("reg")
   .constant("EVENT_INFO", {
-    NAME: "BostonHacks 2018"
+    NAME: "BostonHacks 2019"
   })
   .constant("DASHBOARD", {
     UNVERIFIED:
@@ -23,7 +23,7 @@ angular
     CONFIRMED_NOT_PAST_TITLE:
       "You can edit your confirmation information until [CONFIRM_DEADLINE])",
     DECLINED:
-      "We're sorry to hear that you won't be able to make it to BostonHacks 2018! :(\nMaybe next year! We hope you see you again soon."
+      "We're sorry to hear that you won't be able to make it to BostonHacks 2019! :(\nMaybe next year! We hope you see you again soon."
   })
   .constant("TEAM", {
     NO_TEAM_REG_CLOSED:
