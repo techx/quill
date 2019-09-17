@@ -109,15 +109,6 @@ angular.module('reg')
                 }
               ]
             },
-            phone: {
-              identifier: 'phone',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please enter a phone number.'
-                }
-              ]
-            },
             contactName: {
               identifier: 'contactName',
               rules: [
@@ -169,15 +160,6 @@ angular.module('reg')
                 {
                   type: 'empty',
                   prompt: 'Please type your digital signature.'
-                }
-              ]
-            },
-            firstTimeHacker: {
-              identifier: 'firstHackathon',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please indicate if you\'ve ever gone to a hackathon before.'
                 }
               ]
             },
