@@ -38,12 +38,6 @@ angular.module("reg").controller("ApplicationCtrl", [
     _setupForm();
 
     $scope.regIsClosed = Date.now() > Settings.data.timeClose;
-
-    var resumeSubmitted = $scope.user.profile.resumeSubmitted;
-    $("#resumeButton").click(function() {
-      resumeSubmitted = true;
-    });
-
     /**
      * TODO: JANK WARNING
      */
@@ -80,7 +74,6 @@ angular.module("reg").controller("ApplicationCtrl", [
     }
 
     function _updateUser(e) {
-      $scope.user.profile.resumeSubmitted = true;
       UserService.updateProfile(Session.getUserId(), $scope.user.profile)
         .success(function(data) {
           sweetAlert(
@@ -186,6 +179,33 @@ angular.module("reg").controller("ApplicationCtrl", [
               {
                 type: "checked",
                 prompt: "You must be an adult, or a BU student."
+              }
+            ]
+          },
+          resume: {
+            identifier: "resume",
+            rules: [
+              {
+                type: "empty",
+                prompt: "Please enter your resume."
+              }
+            ]
+          },
+          firstHackathon: {
+            identifier: "firstHackathon",
+            rules: [
+              {
+                type: "empty",
+                prompt: "Please enter 'Yes' or 'No'"
+              }
+            ]
+          },
+          firstBostonHacks: {
+            identifier: "firstBostonHacks",
+            rules: [
+              {
+                type: "empty",
+                prompt: "Please enter 'Yes' or 'No'"
               }
             ]
           },

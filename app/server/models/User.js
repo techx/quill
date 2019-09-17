@@ -32,9 +32,6 @@ var profile = {
   birthdate: {
     type: Date
   },
-  resumeSubmitted: {
-    type: Boolean
-  },
 
   school: {
     type: String,
@@ -81,6 +78,23 @@ var profile = {
       values: "AIAN API BAA H WC MCO N".split(" ")
     }
   },
+  resume: {
+    type: String,
+    min: 1,
+    max: 100
+  },
+  firstHackathon: {
+    type: String,
+    enum: {
+      values: "Yes No".split(" ")
+    }
+  },
+  firstBostonHacks: {
+    type: String,
+    enum: {
+      values: "Yes No".split(" ")
+    }
+  },
 
   busLocation: {
     type: String,
@@ -106,7 +120,6 @@ var confirmation = {
   github: String,
   twitter: String,
   website: String,
-  resume: String,
 
   needsReimbursement: Boolean,
   address: {

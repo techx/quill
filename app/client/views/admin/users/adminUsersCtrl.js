@@ -225,6 +225,18 @@ angular.module("reg").controller("AdminUsersCtrl", [
               value: user.profile.ethnicity
             },
             {
+              name: "First BostonHacks?",
+              value: user.profile.firstBostonHacks
+            },
+            {
+              name: "resume",
+              value: user.profile.resume
+            },
+            {
+              name: "First Hackathon?",
+              value: user.profile.firstHackathon
+            },
+            {
               name: "Bus Location",
               value: user.profile.busLocation
             },

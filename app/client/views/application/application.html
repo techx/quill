@@ -107,18 +107,10 @@
         </div>
 
         <div class="field">
-          <label> Skill Sheet (required) </label>
-          <p>
-            Upload a document outlining any skills or experience you'd like to share (ex. resume). PDF preferred!
-          </p>
-          <a
-            target="_blank"
-            id="resumeButton"
-            href="https://www.dropbox.com/request/kpTradSm41YxFmNwxpeC"
-            class="ui pink button">
-            Upload
-          </a>
-          <input style="display: none;" name = "isSubmitted" ng-model="user.profile.resumeSubmitted">
+          <label> Can you provide us a link to your resume? </label>
+          <input type="text"
+                 name="resume"
+                 ng-model="user.profile.resume">
         </div>
 
         <div class="field">
@@ -130,6 +122,27 @@
             <option value="NYC">New York City</option>
             <option value="Montreal">Montreal</option>
             <option value="Toronto">Toronto</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Is this your first Hackathon?</label>
+          <select
+            name="firstHackathon"
+            ng-model="user.profile.firstHackathon">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+
+          </select>
+        </div>
+        <div class="field">
+          <label>Is this your first BostonHacks?</label>
+          <select
+            name="firstBostonHacks"
+            ng-model="user.profile.firstBostonHacks">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+
           </select>
         </div>
 

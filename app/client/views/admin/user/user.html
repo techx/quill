@@ -142,9 +142,9 @@
 
        <div class="field">
         <label>Birth Date</label>
-        <input type = "date" name = "birth date" 
+        <input type = "date" name = "birth date"
         ng-model="user.profile.birthdate">
-        
+
       </div>
 
       <div class="field">
@@ -173,6 +173,34 @@
           <option value="Philadelphia">Philadelphia</option>
           <option value="Montreal">Montreal</option>
           <option value="Toronto">Toronto</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label> Can you provide us a link to your resume? </label>
+        <input type="text"
+               name="resume"
+               ng-model="selectedUser.profile.resume">
+      </div>
+
+      <div class="field">
+        <label>Is this your first Hackathon?</label>
+        <select
+          name="firstHackathon"
+          ng-model="selectedUser.profile.firstHackathon">
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+      </div>
+
+
+      <div class="field">
+        <label>Is this your first BostonHacks?</label>
+        <select
+          name="firstBostonHacks"
+          ng-model="selectedUser.profile.firstBostonHacks">
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
         </select>
       </div>
 
@@ -276,11 +304,6 @@
       <div class="field">
         <label> Website </label>
         <input type="url" ng-model="selectedUser.profile.website" />
-      </div>
-
-      <div class="field">
-        <label> Resume </label>
-        <input type="url" ng-model="selectedUser.profile.resume" />
       </div>
 
       <div class="ui divider"></div>
