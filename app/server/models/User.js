@@ -11,48 +11,23 @@ var profile = {
     min: 1,
     max: 100,
   },
-
+  firstName: {
+    type: String,
+    min: 1,
+    max: 100,
+  },
+  lastName: {
+    type: String,
+    min: 1,
+    max: 100,
+  },
+  phoneNumber: String,
+  birthday: String,
   adult: {
     type: Boolean,
     required: true,
     default: false,
   },
-
-  school: {
-    type: String,
-    min: 1,
-    max: 150,
-  },
-
-  eid: {
-    type: String,
-    min: 1,
-    max: 150,
-  },
-
-  graduationYear: {
-    type: String,
-    enum: {
-      values: '2018 2019 2020 2021'.split(' ')
-    }
-  },
-
-  description: {
-    type: String,
-    min: 0,
-    max: 300,
-  },
-
-  essay: {
-    type: String,
-    min: 0,
-    max: 1500
-  },
-
-  phoneNumber: String,
-
-  socialMedia: [String],
-
   // Optional info for demographics
   gender: {
     type: String,
@@ -60,10 +35,62 @@ var profile = {
       values: 'M F O N'.split(' ')
     }
   },
-
+  otherGender: String,
+  race: {
+    type: String,
+    enum : {
+      values: 'I A B H W O N'.split(' ')
+    }
+  },
+  otherRace: String,
+  school: {
+    type: String,
+    min: 1,
+    max: 150,
+  },
+  major: String,
+  standing: {
+    type: String,
+    enum : {
+      values: 'F P J S M D'.split(' ')
+    }
+  },
+  graduationTime: {
+    type: String,
+    enum: {
+      values: [
+        'Fall 2019', 
+        'Spring 2020',
+        'Fall 2020',
+        'Spring 2021',
+        'Fall 2021',
+        'Spring 2022',
+        'Fall 2022',
+        'Spring 2023',
+        'Other'
+      ]
+    }
+  },
+  resume: Boolean,
   firstHackathon: String,
-
-  resume: Boolean
+  numHackathons: Number,
+  socialMedia: [String],
+  reimbursement: {
+    type: String,
+    enum : {
+        values: 'O I N'.split(' ')
+    }
+  },
+  essay: {
+    type: String,
+    min: 0,
+    max: 1500
+  },
+  description: {
+    type: String,
+    min: 0,
+    max: 300,
+  }
 };
 
 // Only after confirmed
@@ -349,9 +376,22 @@ schema.statics.getByToken = function(token, callback){
 schema.statics.validateProfile = function(profile, cb){
   return cb(!(
     profile.name.length > 0 &&
+    profile.firstName.length > 0 &&
+    profile.lastName.length > 0 &&
+    profile.resume &&
     profile.adult &&
     profile.school.length > 0 &&
-    ['2018', '2019', '2020', '2021'].indexOf(profile.graduationYear) > -1 &&
+    [
+        'Fall 2019', 
+        'Spring 2020',
+        'Fall 2020',
+        'Spring 2021',
+        'Fall 2021',
+        'Spring 2022',
+        'Fall 2022',
+        'Spring 2023',
+        'Other'
+    ].indexOf(profile.graduationTime) > -1 &&
     ['M', 'F', 'O', 'N'].indexOf(profile.gender) > -1
     ));
 };
