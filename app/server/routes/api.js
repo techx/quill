@@ -2,6 +2,8 @@ var UserController = require('../controllers/UserController');
 var SettingsController = require('../controllers/SettingsController');
 
 var request = require('request');
+var multer = require('multer');
+var upload = multer();
 
 module.exports = function(router) {
 
@@ -161,6 +163,19 @@ module.exports = function(router) {
     var id = req.params.id;
 
     UserController.updateProfileById(id, profile , defaultResponse(req, res));
+  });
+
+  /**
+   * [OWNER/ADMIN]
+   *
+   * PUT - Update a specific user's resume.
+   */
+  router.put('/users/:id/resume', isOwnerOrAdmin, upload.any(), function(req, res){
+    var resume = req.files[0];
+    var id = req.params.id;
+
+    console.log(resume);
+    UserController.updateResumeById(id, resume, defaultResponse(req, res));
   });
 
   /**

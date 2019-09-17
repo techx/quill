@@ -5,21 +5,21 @@
 
   <div class="ui stackable page grid">
     <div class="column">
-      <div class="ui form"
+      <div class="ui form error"
             ng-class="{'loading': loading}">
 
         <div class="divided title">Disclaimer</div>
 
         <div class="field">
             <p>
-                Filling out this form will register you for WholesomeHacks, a Freetail Hackers hackathon presented at the Student Activity Center Ballroom on March 31st.
+                Filling out this form will register you for HackTX 2019, a Freetail Hackers hackathon presented at the AT&T Conference Center in Austin, TX on November 1st 2019.
                 <strong>You must be at least 18 years old to register.</strong> 
                 <br><br>
                 To learn more about the event, visit 
-                <a href="https://freetailhackers.com/wholesome-hacks">the event page</a>.
+                <a href="https://hacktx.com">the HackTX event page</a>.
                 <br><br>
-                Since space is limited, we will have randomized acceptances. 
-                <strong>Registering does not guarantee a spot at WholesomeHacks.</strong> 
+                Since space is limited, we will limited acceptances. We have two rounds of acceptances -- an early bird deadline on September 20th and a general application deadline of October 11th. 
+                <strong>Registering does not guarantee a spot at HackTX 2019.</strong> 
                 After filling out this form, you will be notified of whether you are accepted. You need to accept your invitation within the time limit, otherwise we will pass your invitation onto the next person on the waiting list. 
                 <br><br>
                 Thank you so much for your interest and we hope to see you there! 
@@ -42,11 +42,23 @@
         </div>
 
         <div class="field">
-          <label> Full Name </label>
+          <label> Full Legal Name</label>
           <input type="text"
                  name="name"
                  placeholder="Name"
                  ng-model="user.profile.name">
+        </div>
+
+        <div class="field">
+          <label> What's your phone number? (required) </label>
+          <p>
+            We need this in case we need to get ahold of you!
+          </p>
+          <input type="tel"
+               name="phone"
+               ng-model="user.profile.phoneNumber"
+               placeholder="(123) - 555 - 1234"
+               required>
         </div>
 
         <div class="field" ng-show="autoFilledSchool">
@@ -99,7 +111,21 @@
         </div>
 
         <div class="field">
-            <label> How did you hear about WholesomeHacks? </label>
+          <label> Skill Sheet (required) </label>
+          <p>
+            Upload a document outlining any skills or experience you'd like to share (ex. resume). PDF only!
+          </p>
+          <input 
+            type="file"
+            name="resume"
+            accept="application/pdf"
+            ng-model="user.profile.resume"
+            onchange="angular.element(this).scope().uploadResume(this.files)"
+            >
+        </div>
+
+        <div class="field">
+            <label> How did you hear about HackTX? </label>
         </div>
 
         <div class="inline fields">
@@ -110,10 +136,21 @@
                 </div>
             </div>
         </div>
+          
+        <div class="field">
+          <label> If accepted, will HackTX be your first hackathon? </label>
+          <select
+            name="firstHackathon"
+            ng-model="user.profile.firstHackathon">
+            <option value="">Select an option</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
 
         <div class="field">
           <p>
-            Checking the box below affirms that you are or will be 18 years or older by March 31st, 2018.
+            Checking the box below affirms that you are or will be 18 years or older by November 1st, 2019.
           </p>
           <p>
             <strong>
@@ -139,13 +176,10 @@
         </div>
 
         <div class="field" ng-hide="regIsClosed">
-          <button type="submit"
-                  class="fluid ui purple button"
-                  ng-click="submitForm()">
+          <div class="fluid ui purple submit button" ng-click="submitForm()">
             Submit
-          </button>
+          </div>
         </div>
-
         </fieldset>
       </div>
     </div>

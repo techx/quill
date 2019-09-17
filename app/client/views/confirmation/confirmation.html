@@ -13,18 +13,6 @@
         <fieldset ng-disabled="pastConfirmation">
 
           <div class="field">
-            <label> What's your phone number? (required) </label>
-            <p>
-              We need this in case we need to get ahold of you!
-            </p>
-            <input type="tel"
-                   name="phone"
-                   ng-model="user.confirmation.phoneNumber"
-                   placeholder="(123) - 555 - 1234"
-                   required>
-          </div>
-
-          <div class="field">
             <label> Dietary Restrictions </label>
 
             <p>
@@ -122,18 +110,6 @@
                    ng-model="user.confirmation.twitter">
           </div>
 
-          <div class="field">
-            <label> Skill Sheet (required) </label>
-            <p>
-              Upload a document outlining any skills or experience you'd like to share (ex. resume). PDF preferred!
-            </p>
-            <a
-              target="_blank"
-              href="https://www.dropbox.com/request/kqieLgNd08ShwmG7X2eD"
-              class="ui pink button">
-              Upload
-            </a>
-          </div>
 
           <br>
           <br>
@@ -248,17 +224,6 @@
             <p>
               Give us some ideas of what kind of workshops you'd like to see. Do you want to learn how to build workout Android app? How to survive a 12-hour hackathon? How to use APIs? We want to create the best event experience and that depends on you telling us what you want : )
             </p>
-          </div>
-
-          <div class="field">
-            <label> If accepted, will WholesomeHacks be your first hackathon? </label>
-            <select
-              name="firstHackathon"
-              ng-model="user.confirmation.firstHackathon">
-              <option value="">Select an option</option>
-              <option value="yes">Yes</option>
-              <option value="no">No</option>
-            </select>
           </div>
 
           <div class="field">

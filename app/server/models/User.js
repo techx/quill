@@ -37,8 +37,6 @@ var profile = {
     }
   },
 
-  
-
   description: {
     type: String,
     min: 0,
@@ -51,6 +49,8 @@ var profile = {
     max: 1500
   },
 
+  phoneNumber: String,
+
   socialMedia: [String],
 
   // Optional info for demographics
@@ -61,11 +61,13 @@ var profile = {
     }
   },
 
+  firstHackathon: String,
+
+  resume: Boolean
 };
 
 // Only after confirmed
 var confirmation = {
-  phoneNumber: String,
   dietaryRestrictions: [String],
   shirtSize: {
     type: String,
@@ -80,7 +82,6 @@ var confirmation = {
   github: String,
   twitter: String,
   website: String,
-  resume: String,
 
   needsReimbursement: Boolean,
   address: {

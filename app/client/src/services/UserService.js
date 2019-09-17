@@ -40,6 +40,16 @@ angular.module('reg')
         });
       },
 
+      uploadResume: function(id, resume){
+        var formData = new FormData();
+        formData.append('resume', resume);
+        return $http.put(base + id + '/resume', formData, {
+          withCredentials: true,
+          headers: {'Content-Type': undefined},
+          transformRequest: angular.identity
+        });
+      },
+
       updateConfirmation: function(id, confirmation){
         return $http.put(base + id + '/confirm', {
           confirmation: confirmation

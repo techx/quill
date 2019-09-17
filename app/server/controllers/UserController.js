@@ -3,7 +3,9 @@ var User = require('../models/User');
 var Settings = require('../models/Settings');
 var Mailer = require('../services/email');
 var Stats = require('../services/stats');
+var s3 = require('../services/s3');
 
+var util = require('util');
 var validator = require('validator');
 var moment = require('moment');
 
@@ -312,6 +314,17 @@ UserController.updateProfileById = function (id, profile, callback) {
       callback);
 
   });
+};
+
+/**
+ * Update a user's profile object, given an id and a profile.
+ *
+ * @param  {String}   id       Id of the user
+ * @param  {Object}   profile  Profile object
+ * @param  {Function} callback Callback with args (err, user)
+ */
+UserController.updateResumeById = function (id, resume, callback) {
+  s3.uploadResume(resume, util.format('%s.pdf', id), callback);
 };
 
 /**

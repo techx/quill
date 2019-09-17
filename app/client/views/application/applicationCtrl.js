@@ -19,6 +19,8 @@ angular.module('reg')
       // Is the student from UT?
       $scope.isUtStudent = $scope.user.email.split('@')[1] == 'utexas.edu';
 
+      $scope.resume = null;
+
       // If so, default them to adult: true
       if ($scope.isUtStudent){
         $scope.user.profile.adult = true;
@@ -88,6 +90,8 @@ angular.module('reg')
           });
       }
 
+
+
       function _updateUser(e){
         var profile = $scope.user.profile;
         // Get the dietary restrictions as an array
@@ -99,10 +103,13 @@ angular.module('reg')
         });
         profile.socialMedia = drs;
 
+        console.log($scope.user.profile);
+
         UserService
           .updateProfile(Session.getUserId(), $scope.user.profile)
           .then(response => {
-            swal("Awesome!", "Your application has been saved.", "success").then(value => {
+            swal("Awesome!", "Your application has been saved.", "success")
+            .then(value => {
               $state.go("app.dashboard");
             });
           }, response => {
@@ -126,10 +133,18 @@ angular.module('reg')
         return true;
       }
 
+      function resumeValidation() {
+        return $scope.user.profile.resume;
+      }
+
       function _setupForm(){
         // Custom minors validation rule
         $.fn.form.settings.rules.allowMinors = function (value) {
           return minorsValidation();
+        };
+
+        $.fn.form.settings.rules.emptyResume = function (value) {
+          return resumeValidation();
         };
 
         // Semantic-UI form validation
@@ -142,6 +157,15 @@ angular.module('reg')
                 {
                   type: 'empty',
                   prompt: 'Please enter your name.'
+                }
+              ]
+            },
+            phone: {
+              identifier: 'phone',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please enter a phone number.'
                 }
               ]
             },
@@ -181,12 +205,21 @@ angular.module('reg')
                 }
               ]
             },
-            firstHackathon: {
+            resume: {
+              identifier: 'resume',
+              rules: [
+                {
+                  type: 'emptyResume',
+                  prompt: 'Please upload your resume.'
+                }
+              ]
+            },
+            firstTimeHacker: {
               identifier: 'firstHackathon',
               rules: [
                 {
                   type: 'empty',
-                  prompt: 'Please select yes or no.'
+                  prompt: 'Please indicate if you\'ve ever gone to a hackathon before.'
                 }
               ]
             },
@@ -199,7 +232,8 @@ angular.module('reg')
                 }
               ]
             }
-          }
+          },
+          on: 'blur'
         });
       }
 
@@ -210,4 +244,14 @@ angular.module('reg')
           swal("Uh oh!", "Please Fill The Required Fields", "error");
         }
       };
+
+      $scope.uploadResume = function(files) {
+        UserService
+          .uploadResume(Session.getUserId(), files[0])
+          .then(response => {
+            $scope.user.profile.resume = true
+          }, response => {
+            $scope.user.profile.resume = false
+          });
+       }
     }]);
