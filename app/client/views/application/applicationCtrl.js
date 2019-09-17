@@ -1,5 +1,6 @@
 const angular = require("angular");
 const swal = require("sweetalert");
+const util = require("util");
 
 angular.module('reg')
   .controller('ApplicationCtrl', [
@@ -31,7 +32,8 @@ angular.module('reg')
         'Twitter': false,
         'School Club': false,
         'Website': false,
-        'Friend': false
+        'Friend': false,
+        'MLH': false,
       };
 
       if ($scope.user.profile.socialMedia){
@@ -43,12 +45,13 @@ angular.module('reg')
       }
 
       $scope.socialMedia = socialMedia;
+
+      $scope.regIsClosed = Date.now() > settings.data.timeClose || Date.now() < settings.data.timeOpen;
      
       // Populate the school dropdown
       populateSchools();
+      populateMajors();
       _setupForm();
-
-      $scope.regIsClosed = Date.now() > settings.data.timeClose;
 
       /**
        * TODO: JANK WARNING
@@ -90,10 +93,36 @@ angular.module('reg')
           });
       }
 
+      function populateMajors(){
+        $http
+          .get('/assets/majors.csv')
+          .then(function(res){
+            $scope.majors = res.data.split('\n');
+            $scope.majors.push('Other');
+
+            var content = [];
+
+            for (i = 0; i < $scope.majors.length; i++) {
+              $scope.majors[i] = $scope.majors[i].trim();
+              content.push({title: $scope.majors[i]})
+            }
+
+            $('#major.ui.search')
+              .search({
+                source: content,
+                cache: true,
+                onSelect: function(result, response) {
+                  $scope.user.profile.major = result.title.trim();
+                }
+              })
+          });
+      }
+
 
 
       function _updateUser(e){
         var profile = $scope.user.profile;
+
         // Get the dietary restrictions as an array
         var drs = [];
         Object.keys($scope.socialMedia).forEach(function(key){
@@ -103,8 +132,8 @@ angular.module('reg')
         });
         profile.socialMedia = drs;
 
-        console.log($scope.user.profile);
-
+        profile.name = util.format("%s %s", profile.firstName.trim(), profile.lastName.trim());
+          
         UserService
           .updateProfile(Session.getUserId(), $scope.user.profile)
           .then(response => {
@@ -133,8 +162,16 @@ angular.module('reg')
         return true;
       }
 
-      function resumeValidation() {
-        return $scope.user.profile.resume;
+      function resumeValidation(value) {
+        return $scope.user.profile.resume || value;
+      }
+
+      function graduationValidation(value) {
+        const standing = $scope.user.profile.standing;
+        if (standing === 'M' || standing === 'D') {
+            $scope.user.profile.graduationTime = "Other";
+        }
+        return $scope.user.profile.graduationTime.length > 0 || value;
       }
 
       function _setupForm(){
@@ -144,19 +181,50 @@ angular.module('reg')
         };
 
         $.fn.form.settings.rules.emptyResume = function (value) {
-          return resumeValidation();
+          return resumeValidation(value);
+        };
+
+        $.fn.form.settings.rules.emptyGraduation = function(value) {
+          return graduationValidation(value);
         };
 
         // Semantic-UI form validation
         $('.ui.form').form({
           inline: true,
           fields: {
-            name: {
-              identifier: 'name',
+            firstName: {
+              identifier: 'firstName',
               rules: [
                 {
                   type: 'empty',
-                  prompt: 'Please enter your name.'
+                  prompt: 'Please enter your first name.'
+                }
+              ]
+            },
+            lastName: {
+              identifier: 'lastName',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please enter your last name.'
+                }
+              ]
+            },
+            birthday: {
+              identifier: 'birthday',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please enter your birthday.'
+                }
+              ]
+            },
+            adult: {
+              identifier: 'adult',
+              rules: [
+                {
+                  type: 'allowMinors',
+                  prompt: 'You must be an adult to attend this event.'
                 }
               ]
             },
@@ -169,24 +237,6 @@ angular.module('reg')
                 }
               ]
             },
-            school: {
-              identifier: 'school',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please enter your school name.'
-                }
-              ]
-            },
-            eid: {
-              identifier: 'uteid',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please type your UT EID or put N/A if not a UT student.'
-                }
-              ]
-            },
             gender: {
               identifier: 'gender',
               rules: [
@@ -196,12 +246,48 @@ angular.module('reg')
                 }
               ]
             },
-            year: {
-              identifier: 'year',
+            race: {
+              identifier: 'race',
               rules: [
                 {
                   type: 'empty',
-                  prompt: 'Please select your graduation year.'
+                  prompt: 'Please select an ethnicity/race.'
+                }
+              ]
+            },
+            school: {
+              identifier: 'school',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please enter your school name.'
+                }
+              ]
+            },
+            major: {
+              identifier: 'major',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please select your major.'
+                }
+              ]
+            },
+            standing: {
+              identifier: 'standing',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please select your class standing.'
+                }
+              ]
+            },
+            graduation: {
+              identifier: 'graduation',
+              rules: [
+                {
+                  type: 'emptyGraduation',
+                  prompt: 'Please select your graduation time.'
                 }
               ]
             },
@@ -211,7 +297,7 @@ angular.module('reg')
                 {
                   type: 'emptyResume',
                   prompt: 'Please upload your resume.'
-                }
+                },
               ]
             },
             firstTimeHacker: {
@@ -223,12 +309,21 @@ angular.module('reg')
                 }
               ]
             },
-            adult: {
-              identifier: 'adult',
+            reimbursement: {
+              identifier: 'reimbursement',
               rules: [
                 {
-                  type: 'allowMinors',
-                  prompt: 'You must be an adult to attend this event.'
+                  type: 'empty',
+                  prompt: 'Please indicate if you need assistance getting to the event.'
+                }
+              ]
+            },
+            essay: {
+              identifier: 'essay',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please tell us why you want to attend HackTX.'
                 }
               ]
             }
@@ -246,6 +341,7 @@ angular.module('reg')
       };
 
       $scope.uploadResume = function(files) {
+        $scope.notEmpty = files.length > 1;
         UserService
           .uploadResume(Session.getUserId(), files[0])
           .then(response => {
