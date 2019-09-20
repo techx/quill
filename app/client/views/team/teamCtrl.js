@@ -27,9 +27,29 @@ angular.module('reg')
 
       if ($scope.user.teamCode){
         _populateTeammates();
+      } else {
+        _setupForm();
       }
 
-      $scope.joinTeam = function(){
+      function _setupForm() {
+        $('.ui.form').form({
+          inline: true,
+          fields: {
+            team: {
+              identifier: 'team',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please enter your team name.'
+                }
+              ]
+            }
+          },
+          on: 'blur'
+        });
+      }
+
+      function _joinTeam() {
         UserService
           .joinOrCreateTeam($scope.code)
           .then(response => {
@@ -39,6 +59,14 @@ angular.module('reg')
           }, response => {
             $scope.error = response.data.message;
           });
+      }
+
+      $scope.joinTeam = function(){
+        if ($('.ui.form').form('is valid')){
+          _updateUser();
+        } else {
+          swal("Uh oh!", "Please Type a Team Name", "error");
+        }
       };
 
       $scope.leaveTeam = function(){
