@@ -29,16 +29,6 @@ app.use(bodyParser.json());
 
 app.use(methodOverride());
 
-// enable ssl redirect
-function ensureSecure(req, res, next){
-  if(req.headers["x-forwarded-proto"] === "https"){
-    // OK, continue
-    return next();
-  }
-  res.redirect('https://'+req.hostname+req.url); // handle port numbers if you need non defaults
-};
-app.all('*', ensureSecure);
-
 app.use(express.static(__dirname + '/app/client'));
 
 // Routers =====================================================================
