@@ -63,7 +63,7 @@ angular.module('reg')
 
       $scope.joinTeam = function(){
         if ($('.ui.form').form('is valid')){
-          _updateUser();
+          _joinTeam();
         } else {
           swal("Uh oh!", "Please Type a Team Name", "error");
         }
