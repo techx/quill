@@ -52,6 +52,13 @@ var profile = {
     }
   },
 
+  gradActualYear: {
+    type: String,
+    enum: {
+      values: "2019 2020 2021 2022 2023 2024".split(" ")
+    }
+  },
+
   description: {
     type: String,
     min: 0,

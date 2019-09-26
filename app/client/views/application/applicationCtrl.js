@@ -200,6 +200,15 @@ angular.module("reg").controller("ApplicationCtrl", [
               }
             ]
           },
+          gradActualYear: {
+            identifier: "gradActualYear",
+            rules: [
+              {
+                type: "empty",
+                prompt: "Please pick a year from the dropdown"
+              }
+            ]
+          },
           firstBostonHacks: {
             identifier: "firstBostonHacks",
             rules: [

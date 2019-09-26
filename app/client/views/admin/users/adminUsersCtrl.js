@@ -253,6 +253,10 @@ angular.module("reg").controller("AdminUsersCtrl", [
               value: user.profile.graduationYear
             },
             {
+              name: "Class Year",
+              value: user.profile.gradActualYear
+            },
+            {
               name: "Anything Else",
               value: user.profile.essay
             },
