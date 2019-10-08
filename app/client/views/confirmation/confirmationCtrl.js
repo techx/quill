@@ -49,7 +49,9 @@ angular.module('reg')
         'Vegan': false,
         'Halal': false,
         'Kosher': false,
-        'Nut Allergy': false
+        'Nut Allergy': false,
+        'Gluten Free': false,
+        'Other (please email us!)': false
       };
 
       if (user.confirmation.dietaryRestrictions){
