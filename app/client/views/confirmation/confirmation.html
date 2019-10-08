@@ -6,7 +6,7 @@
   <div class="ui stackable page grid">
     <div class="column">
 
-      <div class="ui form">
+      <div class="ui form error">
 
         <div class="divided title">Basic Details</div>
 
@@ -217,6 +217,23 @@
           <br>
           <br>
 
+          <div class="field">
+            <label>Affliation with MLH</label>
+            <p>
+                Signing this form means we can share your information with MLH to help them make new and better hackathons.
+            </p>
+            <p>
+            By writing my name below, I authorize you to share my application/registration information for event administration, ranking, MLH administration, pre- and post-event informational e-mails, and occasional messages about hackathons in-line with the <a href="https://mlh.io/privacy" targer="_blank">MLH Privacy Policy</a>. I further agree to the terms of both the <a href="https://github.com/MLH/mlh-policies/tree/master/prize-terms-and-conditions" target="_blank">MLH Contest Terms and Conditions</a> and the <a href="https://mlh.io/privacy" target="_blank">MLH Privacy Policy</a>.
+            </p>
+            <input type="text"
+                   name="signatureAffliationMlh"
+                   placeholder="Your Full Legal Name"
+                   ng-model="user.confirmation.signatureAffliationMlh">
+          </div>
+
+          <br>
+          <br>
+          
           <div class="divided title">everything else</div>
 
           <div class="field">
@@ -267,11 +284,9 @@
           </div>
 
           <div class="field" ng-hide="regIsClosed">
-            <button type="submit"
-                    class="fluid ui purple button"
-                    ng-click="submitForm()">
+            <div class="fluid ui purple submit button" ng-click="submitForm()">
               Submit
-            </button>
+            </div>
           </div>
 
         </fieldset>

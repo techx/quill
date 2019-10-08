@@ -163,7 +163,17 @@ angular.module('reg')
                 }
               ]
             },
-          }
+            signatureAffliationMlh: {
+              identifier: 'signatureAffliationMlh',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please type your digital signature.'
+                }
+              ]
+            },
+          },
+          on: 'blur'
         });
       }
 
