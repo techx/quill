@@ -369,9 +369,7 @@ UserController.updateConfirmationById = function (id, confirmation, callback) {
         if (err || !user) {
           return callback(err, user);
         }
-        Mailer.sendConfirmationEmail(user);
         return callback(err, user);
-
     });
   });
 };
