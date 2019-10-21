@@ -90,6 +90,17 @@ var profile = {
     type: String,
     min: 0,
     max: 300,
+  },
+  isSponsor: {
+    type: Boolean,
+    required: true,
+    default: false
+  },
+  sponsorshipTier: {
+    type: String,
+    enum: {
+      values: ['Kilo', 'Mega', 'Giga'] // Double check these!
+    }
   }
 };
 
