@@ -93,6 +93,9 @@ angular.module('reg')
           }
         }
       })
+      .state('app.sponsorRequest', {
+        // Do some stuff here... email corporate team account info?
+      })
       .state('app.confirmation', {
         url: "/confirmation",
         templateUrl: "views/confirmation/confirmation.html",
