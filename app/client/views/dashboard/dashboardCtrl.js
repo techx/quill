@@ -67,8 +67,10 @@ angular.module("reg").controller("DashboardCtrl", [
           return (
             !regIsOpen && !user.status.completedProfile && !user.status.admitted
           );
-        case "closedAndSubmitted":
-          return !regIsOpen && user.status.completedProfile;
+        case "closedAndSubmitted": // Waitlisted State
+          return (
+            !regIsOpen && user.status.completedProfile && !user.status.admitted
+          );
         case "admittedAndCanConfirm":
           return (
             !pastConfirmation &&
@@ -95,7 +97,11 @@ angular.module("reg").controller("DashboardCtrl", [
       return false;
     };
 
-    $scope.showWaitlist = !regIsOpen && !user.status.completedProfile;
+    $scope.showWaitlist =
+      !regIsOpen &&
+      user.status.completedProfile &&
+      !user.status.admitted &&
+      false;
 
     $scope.resendEmail = function() {
       AuthService.resendVerificationEmail().then(function() {
