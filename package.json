@@ -39,6 +39,7 @@
     "prod": "gulp build && node app.js",
     "config": "cp .env.config .env",
     "test": "jest --forceExit",
+	"test:accessibility": "pa11y-ci",
     "eslint": "./node_modules/.bin/eslint './**/*.js'"
   },
   "devDependencies": {
@@ -53,6 +54,7 @@
     "gulp-uglify": "^3.0.2",
     "jest": "^24.9.0",
     "nodemon": "^1.19.4",
+	"pa11y-ci": "^2.3.0",
     "supertest": "^4.0.2"
   },
   "engines": {
