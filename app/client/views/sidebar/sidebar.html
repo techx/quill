@@ -29,6 +29,15 @@
       Confirmation
     </div>
 
+    <!-- should show if current user isSponsor == true -->
+    <div
+      ui-sref-active="active"
+      ui-sref="app.resumes"
+      ng-show="!currentUser.status.admitted && !currentUser.status.declined"
+      class="item">
+      Resumes
+    </div>
+
     <div
       ui-sref-active="active"
       ui-sref="app.team"

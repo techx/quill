@@ -12,6 +12,7 @@ const ConfirmationCtrl = require('../views/confirmation/confirmationCtrl.js');
 const DashboardCtrl = require('../views/dashboard/dashboardCtrl.js');
 const LoginCtrl = require('../views/login/loginCtrl.js');
 const ResetCtrl = require('../views/reset/resetCtrl.js');
+const ResumesCtrl = require('../views/resumes/resumesCtrl.js');
 const SidebarCtrl = require('../views/sidebar/sidebarCtrl.js');
 const TeamCtrl = require('../views/team/teamCtrl.js');
 const VerifyCtrl = require('../views/verify/verifyCtrl.js');
@@ -138,6 +139,12 @@ angular.module('reg')
             return SettingsService.getPublicSettings();
           }
         }
+      })
+      .state('app.resumes', {
+        // Render resume view
+        url: "/resumes",
+        templateUrl:"views/resumes/resumes.html",
+        controller: 'ResumesCtrl'
       })
       .state('app.admin', {
         views: {
