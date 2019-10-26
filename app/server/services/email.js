@@ -214,12 +214,12 @@ controller.sendAcceptanceEmail = function(email, confirmBy, callback) {
   date = new Date(confirmBy);
   // Hack for timezone
   var confirmDeadline = moment(date).format('dddd, MMMM Do YYYY, h:mm a') +
-    " " + date.toTimeString().split(' ')[2];
+    " " + date.toTimeString().split(' ')[2] + ")";
 
   var locals = {
     title: 'Congratulations!',
     subtitle: '',
-    description: 'Woohoo! You have been accepted to ' + HACKATHON_NAME +  '. We can\'t wait to see you get hacking!',
+    description: 'Woohoo! You have been accepted to ' + HACKATHON_NAME +  '. We can\'t wait to see you get hacking! You have until ' + confirmDeadline + ' to accept your spot!',
     confirmDeadline: confirmDeadline,
     actionUrl: ROOT_URL,
     actionName: "Go to Your Dashboard"
