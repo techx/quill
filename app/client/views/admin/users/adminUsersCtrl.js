@@ -8,6 +8,7 @@ angular.module('reg')
     '$stateParams',
     'UserService',
     function($scope, $state, $stateParams, UserService){
+      $scope.queryText = $stateParams.query;
 
       $scope.pages = [];
       $scope.users = [];
@@ -34,6 +35,7 @@ angular.module('reg')
         }
         $scope.pages = p;
       }
+
 
       UserService
         .getPage($stateParams.page, $stateParams.size, $stateParams.query)
