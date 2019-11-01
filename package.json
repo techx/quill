@@ -5,6 +5,7 @@
   "private": "true",
   "dependencies": {
     "angular": "^1.7.5",
+    "angular-qrcode": "^7.2.0",
     "angular-ui-router": "^1.0.20",
     "async": "^2.6.1",
     "aws-sdk": "^2.528.0",

@@ -2,9 +2,15 @@ const $ = require('jquery');
 
 var angular = require('angular');
 var uiRouter = require('angular-ui-router');
+var qrcode = require('qrcode-generator');
+var ngQrcode = require('angular-qrcode');
+
+window.qrcode = qrcode;
+require('../../../node_modules/qrcode-generator/qrcode_UTF8');
 
 var app = angular.module('reg', [
   'ui.router',
+  'monospaced.qrcode',
 ]);
 
 const constants = require('./constants.js');
