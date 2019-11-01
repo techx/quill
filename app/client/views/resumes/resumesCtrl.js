@@ -223,6 +223,17 @@ angular.module('reg')
         }
       }
 
+      function getResume(user) {
+        if (user._id) {
+          UserService
+          .getResume(user._id)
+          .then(response => {
+            console.log('response::: ' + JSON.stringify(response));
+            return response;
+          });
+        }
+      }
+
       $scope.rowClass = function(user) {
         if (user.admin){
           return 'admin';
@@ -244,6 +255,15 @@ angular.module('reg')
 
       function generateSections(user){
         return [
+          {
+            name: 'Resume',
+            fields: [
+              {
+                name: 'Resume',
+                value: getResume(user)
+              }
+            ]
+          },
           {
             name: 'Basic Info',
             fields: [

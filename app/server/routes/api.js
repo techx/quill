@@ -165,6 +165,12 @@ module.exports = function(router) {
     UserController.updateProfileById(id, profile , defaultResponse(req, res));
   });
 
+  router.get('/users/:id/resume', function(req, res) {
+    var id = req.params.id;
+
+    UserController.getResumeById(id, defaultResponse(req, res));
+  });
+
   /**
    * [OWNER/ADMIN]
    *

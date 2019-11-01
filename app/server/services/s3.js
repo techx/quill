@@ -27,11 +27,44 @@ function uploadResume(file, fileName, callback) {
   });
 }
 
+function getResume(fileName, callback) {
+  var params = {
+    Bucket: process.env.BUCKET_NAME,
+    Key: util.format('resumes/%s.pdf', fileName)
+  };
+  
+  s3.getObject(params, function(err, res) {
+    if (err) {
+      callback(err, undefined);
+    }
+    if (res) {
+      callback(undefined, res);
+    }
+  });
+}
+
 controller.uploadResume = function(file, fileName, callback) {
   var fileBuffer = file['buffer']
   uploadResume(fileBuffer, fileName, function(err, info) {
     if (err){
       console.log(err);
+    }
+    if (info){
+      console.log(info);
+    }
+    if (callback){
+      callback(err, info);
+    }
+  });
+
+};
+
+controller.getResume = function(fileName, callback) {
+  // var fileBuffer = file['buffer']
+  getResume(fileName, function(err, info) {
+    if (err){
+      console.log("Resume not found :(");
+      return;
     }
     if (info){
       console.log(info);

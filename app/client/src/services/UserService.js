@@ -40,6 +40,10 @@ angular.module('reg')
         });
       },
 
+      getResume: function(id) {
+        return $http.get(base + id + '/resume');
+      },
+
       uploadResume: function(id, resume){
         var formData = new FormData();
         formData.append('resume', resume);

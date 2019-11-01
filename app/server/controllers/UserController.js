@@ -259,6 +259,10 @@ UserController.getById = function (id, callback){
   User.findById(id).exec(callback);
 };
 
+UserController.getResumeById = function(id, callback) {
+  s3.getResume(id, callback);
+};
+
 /**
  * Update a user's profile object, given an id and a profile.
  *
