@@ -30,7 +30,8 @@ function uploadResume(file, fileName, callback) {
 function getResume(fileName, callback) {
   var params = {
     Bucket: process.env.BUCKET_NAME,
-    Key: util.format('resumes/%s.pdf', fileName)
+    Key: util.format('resumes/%s.pdf', fileName),
+    ResponseContentType: 'application/pdf',
   };
   
   s3.getObject(params, function(err, res) {
@@ -63,6 +64,7 @@ controller.getResume = function(fileName, callback) {
   // var fileBuffer = file['buffer']
   getResume(fileName, function(err, info) {
     if (err){
+      console.log(err);
       console.log("Resume not found :(");
       return;
     }
