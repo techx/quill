@@ -104,6 +104,12 @@ angular.module('reg')
       removeAdmin: function(id){
         return $http.post(base + id + '/removeadmin');
       },
+
+      createWalkin: function(email){
+        return $http.post(base + 'createwalkin', {
+          email: email
+        });
+      },
     };
   }
   ]);

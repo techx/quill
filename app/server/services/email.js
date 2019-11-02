@@ -121,6 +121,47 @@ controller.sendVerificationEmail = function(email, token, callback) {
 };
 
 /**
+ * Send a email to a walk in user, with a verification token to enter.
+ * @param  {[type]}   email    [description]
+ * @param  {[type]}   token    [description]
+ * @param  {Function} callback [description]
+ * @return {[type]}            [description]
+ */
+controller.sendWalkinEmail = function(email, token, callback) {
+  console.log("TEST");
+  var options = {
+    to: email,
+    subject: "["+HACKATHON_NAME+"] - Register now!"
+  };
+
+  var locals = {
+    verifyUrl: ROOT_URL + '/walkin/' + token
+  };
+
+  /**
+   * Eamil-verify takes a few template values:
+   * {
+   *   verifyUrl: the url that the user must visit to verify their account
+   * }
+   */
+  sendOne('email-verify', options, locals, function(err, info){
+    if (err){
+      console.log("TEST1");
+      console.log(err);
+    }
+    if (info){
+      console.log("TEST2");
+      console.log(info.message);
+    }
+    if (callback){
+      console.log("TEST3");
+      callback(err, info);
+    }
+  });
+
+};
+
+/**
  * Send a password recovery email.
  * @param  {[type]}   email    [description]
  * @param  {[type]}   token    [description]

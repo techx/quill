@@ -110,6 +110,14 @@ angular.module('reg')
           .then(onSuccess, onFailure);
       };
 
+      authService.createWalkinUser = function(token, pass, onSuccess, onFailure){
+        return $http
+          .post('/auth/walkin/' + token, {
+              password: pass
+          })
+          .then(onSuccess, onFailure);
+      };
+
       return authService;
     }
   ]);

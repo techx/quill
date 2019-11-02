@@ -16,6 +16,7 @@ const ResetCtrl = require('../views/reset/resetCtrl.js');
 const SidebarCtrl = require('../views/sidebar/sidebarCtrl.js');
 const TeamCtrl = require('../views/team/teamCtrl.js');
 const VerifyCtrl = require('../views/verify/verifyCtrl.js');
+const WalkinCtrl = require('../views/walkin/walkinCtrl.js');
 
 angular.module('reg')
   .config([
@@ -207,6 +208,14 @@ angular.module('reg')
         url: "/verify/:token",
         templateUrl: "views/verify/verify.html",
         controller: 'VerifyCtrl',
+        data: {
+          requireLogin: false
+        }
+      })
+      .state('walkin', {
+        url: "/walkin/:token",
+        templateUrl: "views/walkin/walkin.html",
+        controller: 'WalkinCtrl',
         data: {
           requireLogin: false
         }
