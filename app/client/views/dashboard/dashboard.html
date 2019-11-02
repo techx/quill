@@ -74,7 +74,7 @@
           <strong>
             Confirmation Deadline:
           </strong>
-          {{ timeConfirm }}
+          {{ userTimeConfirm }}
         </div>
 
         <div
@@ -257,6 +257,11 @@
           <div class="ui purple button"
                ui-sref="app.confirmation">
             {{pastConfirmation ? 'View' : 'Edit'}} your confirmation information
+          </div>
+
+          <div class="ui blue button"
+               ui-sref="app.checkin">
+            Check into HackTX
           </div>
 
           <div class="ui red button"

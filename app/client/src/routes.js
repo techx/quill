@@ -9,6 +9,7 @@ const AdminUserCtrl = require('../views/admin/user/adminUserCtrl.js');
 const AdminUsersCtrl = require('../views/admin/users/adminUsersCtrl.js');
 const ApplicationCtrl = require('../views/application/applicationCtrl.js');
 const ConfirmationCtrl = require('../views/confirmation/confirmationCtrl.js');
+const CheckInCtrl = require('../views/checkin/checkinCtrl.js');
 const DashboardCtrl = require('../views/dashboard/dashboardCtrl.js');
 const LoginCtrl = require('../views/login/loginCtrl.js');
 const ResetCtrl = require('../views/reset/resetCtrl.js');
@@ -124,6 +125,19 @@ angular.module('reg')
           requireAdmitted: true
         }
       })
+      .state('app.checkin', {
+        url: "/checkin",
+        templateUrl: "views/checkin/checkin.html",
+        controller: 'CheckInCtrl',
+        data: {
+          requireConfirmed: true
+        },
+        resolve: {
+          currentUser: function(UserService){
+            return UserService.getCurrentUser();
+          }
+        }
+      })
       .state('app.team', {
         url: "/team",
         templateUrl: "views/team/team.html",
@@ -167,6 +181,12 @@ angular.module('reg')
           '&page' +
           '&size' +
           '&query',
+        params: {
+          query: {
+            value: '',
+            dynamic: true
+          }
+        },
         templateUrl: "views/admin/users/users.html",
         controller: 'AdminUsersCtrl'
       })
@@ -223,6 +243,7 @@ angular.module('reg')
       var requireVerified = transition.to().data.requireVerified;
       var requireAdmitted = transition.to().data.requireAdmitted;
       var requireNotAdmitted = transition.to().data.requireNotAdmitted;
+      var requireConfirmed = transition.to().data.requireConfirmed;
 
       if (requireLogin && !Session.getToken()) {
         return transition.router.stateService.target("login");
@@ -241,6 +262,10 @@ angular.module('reg')
       }
 
       if (requireNotAdmitted && Session.getUser().status.admitted) {
+        return transition.router.stateService.target("app.dashboard");
+      }
+
+      if (requireConfirmed && !Session.getUser().status.confirmed) {
         return transition.router.stateService.target("app.dashboard");
       }
     });

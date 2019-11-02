@@ -217,6 +217,11 @@ UserController.getPage = function (query, callback) {
     queries.push({'profile.name': re});
     queries.push({'teamCode': re});
 
+    // check if valid ObjectId passed, else will crash program
+    if (searchText.match(/^[0-9a-fA-F]{24}$/)) {
+      queries.push({_id: searchText});
+    }
+
     findQuery.$or = queries;
   }
 
