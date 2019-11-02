@@ -7,7 +7,8 @@ angular.module('reg')
     '$scope',
     '$sce',
     'SettingsService',
-    function($scope, $sce, SettingsService){
+    'UserService',
+    function($scope, $sce, SettingsService, UserService){
 
       $scope.settings = {};
       SettingsService
@@ -39,6 +40,23 @@ angular.module('reg')
             swal("Looks good!", successText, "success");
           });
       };
+
+      // Walkin Users --------------------------------------
+
+      $scope.createWalkinUsers = function() {
+        var emails = $scope.walkinEmails.replace(/ /g, '').split(',');
+        var counter = 0;
+        emails.forEach(function(email) {
+          UserService 
+            .createWalkin(email)
+            .then(response => {
+              counter++;
+              if (counter === emails.length) {
+                swal('Walk in users created.');
+              }
+            });
+        });
+      }
 
       // Whitelist --------------------------------------
 

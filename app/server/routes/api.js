@@ -304,6 +304,11 @@ module.exports = function(router) {
     UserController.removeAdminById(id, user, defaultResponse(req, res));
   });
 
+  router.post('/users/createwalkin', isAdmin, function(req, res){
+    var email = req.body.email;
+    UserController.sendWalkInEmail(email, defaultResponse(req, res));
+  });
+
 
   // ---------------------------------------------
   // Settings [ADMIN ONLY!]
