@@ -95,9 +95,6 @@ angular.module('reg')
           }
         }
       })
-      .state('app.sponsorRequest', {
-        // Do some stuff here... email corporate team account info?
-      })
       .state('app.confirmation', {
         url: "/confirmation",
         templateUrl: "views/confirmation/confirmation.html",
@@ -158,6 +155,20 @@ angular.module('reg')
         // Render resume view
         url: "/resumes",
         templateUrl:"views/resumes/resumes.html",
+        controller: 'ResumesCtrl'
+      })
+      .state('app.resumes.users', {
+        url: "/resumes/users?" +
+          '&page' +
+          '&size' +
+          '&query',
+        params: {
+          query: {
+            value: '',
+            dynamic: true
+          }
+        },
+        templateUrl: "views/resumes/resumes.html",
         controller: 'ResumesCtrl'
       })
       .state('app.admin', {

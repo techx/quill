@@ -91,11 +91,6 @@ var profile = {
     min: 0,
     max: 300,
   },
-  isSponsor: {
-    type: Boolean,
-    required: true,
-    default: false
-  },
   sponsorshipTier: {
     type: String,
     enum: {
@@ -183,7 +178,12 @@ var status = {
   reimbursementGiven: {
     type: Boolean,
     default: false
-  }
+  },
+  isSponsor: {
+    type: Boolean,
+    required: true,
+    default: false
+  },
 };
 
 // define the schema for our admin model

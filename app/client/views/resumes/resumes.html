@@ -87,11 +87,6 @@
               <th>E-mail address</th>
               <th>School</th>
               <th>Grad</th>
-              <th>V/S/A/C</th>
-              <th>Host</th>
-              <th>$</th>
-              <th></th>
-              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -108,94 +103,7 @@
               <td class="collapsing">
                 {{user.profile.graduationYear}}
               </td>
-              <td class="collapsing">
 
-                <!-- Verified -->
-                <i ng-if="user.verified" class="green check circle icon">
-                </i>
-                <i ng-if="!user.verified" class="red remove circle icon">
-                </i>
-
-                <!-- Submitted -->
-                <i ng-if="user.status.completedProfile" class="green check circle icon">
-                </i>
-                <i ng-if="!user.status.completedProfile" class="red remove circle icon">
-                </i>
-
-                <!-- Admitted -->
-                <i ng-if="user.status.admitted" class="green check circle icon">
-                </i>
-                <i ng-if="!user.status.admitted" class="thin circle icon">
-                </i>
-
-                <!-- Confirmed -->
-                <i ng-if="!user.status.admitted" class="circle thin icon">
-                </i>
-                <i ng-if="user.status.admitted && user.status.confirmed" class="green check circle icon">
-                </i>
-                <i ng-if="user.status.admitted && !user.status.confirmed && !user.status.declined"
-                  class="question icon">
-                </i>
-                <i ng-if="user.status.admitted && user.status.declined" class="red remove circle icon">
-                </i>
-
-              </td>
-
-              <!-- Host -->
-              <td class="collapsing">
-
-                <span ng-if="user.status.confirmed">
-                  <i ng-if="user.confirmation.hostNeededFri" class="home icon">
-                  </i>
-                  <i ng-if="!user.confirmation.hostNeededFri && user.confirmation.hostNeededSat" class="no icon">
-                  </i>
-                  <i ng-if="user.confirmation.hostNeededSat" class="home icon">
-                  </i>
-                </span>
-
-              </td>
-
-              <td class="collapsing">
-                <span ng-if="user.status.confirmed">
-                  <i ng-if="user.confirmation.needsReimbursement && !user.status.reimbursementGiven"
-                    class="red money icon">
-                  </i>
-                  <i ng-if="user.confirmation.needsReimbursement && user.status.reimbursementGiven"
-                    class="green money icon">
-                  </i>
-                </span>
-              </td>
-
-              <td class="collapsing">
-                <button ng-click="goUser($event, user)" class="ui circular mini basic icon button">
-                  <i class="linkify icon"></i>
-                </button>
-              </td>
-
-              <td class="right aligned collapsing">
-
-                <button class="accept ui circular mini basic green icon button"
-                  ng-click="acceptUser($event, user, $index)">
-                  <i class="add user icon"></i>
-                </button>
-
-                <button ng-click="toggleCheckIn($event, user, $index)" class="ui circular mini basic green icon button">
-
-                  <i ng-if="!user.status.checkedIn" class="flag outline icon"></i>
-
-                  <i ng-if="user.status.checkedIn" class="green flag icon"></i>
-
-                </button>
-
-                <button ng-click="toggleAdmin($event, user, $index)" class="ui circular mini basic green icon button">
-
-                  <i ng-if="!user.admin" class="spy outline icon"></i>
-
-                  <i ng-if="user.admin" class="green spy icon"></i>
-
-                </button>
-
-              </td>
             </tr>
           </tbody>
         </table>
