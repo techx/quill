@@ -5,6 +5,15 @@ Quill is a registration system designed especially for hackathons. For hackers, 
 
 ![Login Splash](./docs/images/screenshots/login.png)
 
+# Navigation
+
+- [Features](#features)
+- [Setup](#setup)
+- [Customizing For Your Event](#customizing-for-your-event)
+- [Contributing](#contributing)
+- [Feedback / Questions](#feedback--questions)
+- [License](#license)
+
 # Features
 ## Quill for Users
 ### Dashboard
