@@ -86,6 +86,9 @@ How to upgrade to latest releases:
 - Node.js: https://nodejs.org/en/download/
 - MongoDB: https://docs.mongodb.com/manual/administration/install-community/
 
+Additonally, there is an `.nvmrc` file in the root of the project. You can use [Node Version Manager (nvm)](https://github.com/nvm-sh/nvm) to make sure you are using the right version of node for this and other projects! This also ensures that any cloud deployments of the project use the same version of Node.
+
+
 ### Deploying locally
 Getting a local instance of Quill up and running takes less than 5 minutes! Start by setting up the database. Ideally, you should run MongoDB as a daemon with a secure configuration (with most linux distributions, you should be able to install it with your package manager, and it'll be set up as a daemon). Although not recommended for production, when running locally for development, you could do it like this
 
