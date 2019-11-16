@@ -1,0 +1,25 @@
+name: Node Build
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10.x]
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Start MongoDB As Docker
+      uses: wbari/start-mongoDB@v0.2
+      with:
+        mongoDBVersion: 4.2
+    - name: npm start
+      run: |
+        npm run start
