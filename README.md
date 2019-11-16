@@ -176,9 +176,9 @@ If you have any questions about this software, please contact [quill@hackmit.org
 
 ## License
 
-Copyright (c) 2015-2016 [Edwin Zhang](https://github.com/ehzhang). Released under AGPLv3. See [`LICENSE.txt`][license] for details.
+Copyright (c) 2015-2016 [Edwin Zhang](https://github.com/ehzhang). Released under AGPLv3. See [`LICENSE`][license] for details.
 
 [contribute]: https://github.com/techx/quill/blob/master/CONTRIBUTING.md
-[license]: https://github.com/techx/quill/blob/master/LICENSE.txt
+[license]: https://github.com/techx/quill/blob/master/LICENSE
 [email]: mailto:quill@hackmit.org
 [users]: https://github.com/techx/quill/wiki/Quill-Users
