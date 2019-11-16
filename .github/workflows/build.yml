@@ -6,7 +6,7 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: actions/checkout@v1
     - name: Start MongoDB As Docker
@@ -17,4 +17,4 @@ jobs:
       with:
         node-version: '10.x'
     - run: npm install
-    - run: npm test
+    - run: npm run start
