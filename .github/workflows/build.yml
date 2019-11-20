@@ -8,14 +8,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Read .nvmrc
-      run: echo "##[set-output name=NVMRC;]$(cat .nvmrc)"
-      id: nvm
+    
     - uses: actions/checkout@v1
+
     - name: Start MongoDB As Docker
       uses: wbari/start-mongoDB@v0.2
       with:
         mongoDBVersion: 4.2
+    
+    - name: Read .nvmrc
+      run: echo "##[set-output name=NVMRC;]$(cat .nvmrc)"
+      id: nvm
+
     - uses: actions/setup-node@v1
       with:
         node-version: "${{ steps.nvm.outputs.NVMRC }}"
