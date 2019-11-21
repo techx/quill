@@ -12,7 +12,7 @@ Quill is a registration system designed especially for hackathons. For hackers, 
 ## Navigation
 
 - [Features](#features)
-- [Deployment](#deployment)
+- [Setup](#setup)
 - [Customizing For Your Event](#customizing-for-your-event)
 - [Contributing](#contributing)
 - [Feedback / Questions](#feedback--questions)
@@ -136,10 +136,6 @@ Edit the configuration file in `.env` for your setup, and then run the applicati
 ```bash
 gulp server
 ```
-### Deploying for your hackathon
-The database can either be hosted with [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) or on your own server. Atlas will generally be easier to set up and should be the preferred choice unless you are familiar with administering your own server. A guide to setting up Atlas can be found [here](https://docs.atlas.mongodb.com/getting-started/). Note that the URI for the database (which must be specified in `.env`) will be different depending on where your database is hosted. 
-
-There are also several options for hosting Quill itself. You can use Heroku by clicking the __Deploy to Heroku__ button above where, after making a Heroku account, you will be able to set the configuration variables and deploy Quill. A Dockerfile has also been provided to make it easy to run Quill in a Docker container either on your own server or with your preferred cloud service provider. Don't forget to publish the container's port `3000` to the host machine. If using the command line, this is done by using the `-p` flag and specifying which port on the host machine should redirect to port 3000 on the container.
 
 ## Customizing for your event
 
