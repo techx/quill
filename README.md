@@ -1,7 +1,7 @@
 # Quill
 
 ## *Registration, for hackers!*
-
+![](https://github.com/krubenok/hello-world/workflows/Greet%20Everyone/badge.svg)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](code-of-conduct.md)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
 
@@ -165,6 +165,12 @@ If you want stats for your new fields:
 ### Email Templates
 
 To customize the verification and confirmation emails for your event, put your new email templates in `server/templates/` and edit `server/services/email.js`
+
+## CI/CD
+
+### Build and Run
+
+`.github/workflows/build.yml` contains a github action for building and running the project. The only test currently run is to check that a GET request of `/login` returns a status code `200`. This should be expanded in future with thorough unit testing. The Github action spawns a Docker instance of MongoDB for the application to connect to and utilizes the NodeJS version as specified in the `.nvmrc` file.
 
 ## Contributing
 

@@ -1,4 +1,4 @@
-name: Node Build
+name: Build and Run
 
 on: [push]
 
