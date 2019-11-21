@@ -6,7 +6,6 @@ describe("Get Login", () => {
     it("Should Get the login Page   ", async () => {
         const res = await request(app)
             .get("/login")
-            .end()
         expect(res.statusCode).toEqual(200);
     });
 });
