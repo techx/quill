@@ -9,14 +9,32 @@ Quill is a registration system designed especially for hackathons. For hackers, 
 
 ![Login Splash](./docs/images/screenshots/login.png)
 
-## Navigation
-
-- [Features](#features)
-- [Setup](#setup)
-- [Customizing For Your Event](#customizing-for-your-event)
-- [Contributing](#contributing)
-- [Feedback / Questions](#feedback--questions)
-- [License](#license)
+## Table of Contents
+- [Quill](#quill)
+  - [*Registration, for hackers!*](#registration-for-hackers)
+  - [Table of Contents](#table-of-contents)
+  - [Features](#features)
+    - [Quill for Hackers](#quill-for-hackers)
+      - [Dashboard](#dashboard)
+      - [Application](#application)
+      - [Team Registration](#team-registration)
+    - [Quill for Admins](#quill-for-admins)
+      - [Stats](#stats)
+  - [Setup](#setup)
+    - [Cloud Deployment](#cloud-deployment)
+      - [Heroku](#heroku)
+    - [Deploying locally](#deploying-locally)
+      - [Requirements](#requirements)
+  - [Customizing for your event](#customizing-for-your-event)
+    - [Copy](#copy)
+    - [Branding / Assets](#branding--assets)
+    - [Application questions](#application-questions)
+    - [Email Templates](#email-templates)
+  - [CI/CD and Automation](#cicd-and-automation)
+    - [Build and Run](#build-and-run)
+  - [Contributing](#contributing)
+  - [Feedback / Questions](#feedback--questions)
+  - [License](#license)
 
 ## Features
 
@@ -166,7 +184,7 @@ If you want stats for your new fields:
 
 To customize the verification and confirmation emails for your event, put your new email templates in `server/templates/` and edit `server/services/email.js`
 
-## CI/CD
+## CI/CD and Automation
 
 ### Build and Run
 
