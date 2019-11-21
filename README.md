@@ -1,7 +1,7 @@
 # Quill
 
 ## *Registration, for hackers!*
-![](https://github.com/krubenok/hello-world/workflows/Greet%20Everyone/badge.svg)
+
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](code-of-conduct.md)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
 
@@ -20,6 +20,8 @@ Quill is a registration system designed especially for hackathons. For hackers, 
       - [Team Registration](#team-registration)
     - [Quill for Admins](#quill-for-admins)
       - [Stats](#stats)
+      - [Users Table](#users-table)
+      - [Settings](#settings)
   - [Setup](#setup)
     - [Cloud Deployment](#cloud-deployment)
       - [Heroku](#heroku)
