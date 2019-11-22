@@ -1,19 +1,19 @@
-name: Build and Run
+name: Lint, Build and Run
 
 on: [push]
 
 jobs:
-    # lint:
-    #     runs-on: ubuntu-latest
+    lint:
+        runs-on: ubuntu-latest
 
-    #     steps:
-    #         - name: Checkout Code
-    #           uses: actions/checkout@v1
+        steps:
+            - name: Checkout Code
+              uses: actions/checkout@v1
 
-    #         - name: ESLint
-    #           uses: xt0rted/eslint-action@master
-    #           env:
-    #             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            - name: ESLint
+              uses: gimenete/eslint-action@master
+              env:
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
     build:
         runs-on: ubuntu-latest
