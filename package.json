@@ -38,7 +38,8 @@
     "watch": "gulp server",
     "prod": "gulp build && node app.js",
     "config": "cp .env.config .env",
-    "test": "jest --forceExit"
+    "test": "jest --forceExit",
+    "eslint": "./node_modules/.bin/eslint './**/*.js'"
   },
   "devDependencies": {
     "eslint": "^6.6.0",
