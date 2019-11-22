@@ -7,8 +7,10 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - name: ESLint
+            - name: Checkout Code
               uses: actions/checkout@v1
+
+            - name: ESLint
               uses: gimenete/eslint-action@1.0
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
