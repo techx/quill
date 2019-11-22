@@ -7,13 +7,13 @@ on:
             - "actions/docker-publish"
 
 jobs:
-    docker:
-        - name: Publish Docker
-          uses: elgohr/Publish-Docker-Github-Action@2.8
-          with:
-              # The name of the image you would like to push
-              name: quill
-              # The login username for the registry
-              username: secrets.DOCKER_USER
-              # The login password for the registry
-              password: secrets.DOCKER_PASS
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@master
+            - name: Publish to Registry
+              uses: elgohr/Publish-Docker-Github-Action@master
+              with:
+                  name: krubenok/quill
+                  username: ${{ secrets.DOCKER_USER }}
+                  password: ${{ secrets.DOCKER_PASS }}
