@@ -9,14 +9,34 @@ Quill is a registration system designed especially for hackathons. For hackers, 
 
 ![Login Splash](./docs/images/screenshots/login.png)
 
-## Navigation
-
-- [Features](#features)
-- [Setup](#setup)
-- [Customizing For Your Event](#customizing-for-your-event)
-- [Contributing](#contributing)
-- [Feedback / Questions](#feedback--questions)
-- [License](#license)
+## Table of Contents
+- [Quill](#quill)
+  - [*Registration, for hackers!*](#registration-for-hackers)
+  - [Table of Contents](#table-of-contents)
+  - [Features](#features)
+    - [Quill for Hackers](#quill-for-hackers)
+      - [Dashboard](#dashboard)
+      - [Application](#application)
+      - [Team Registration](#team-registration)
+    - [Quill for Admins](#quill-for-admins)
+      - [Stats](#stats)
+      - [Users Table](#users-table)
+      - [Settings](#settings)
+  - [Setup](#setup)
+    - [Cloud Deployment](#cloud-deployment)
+      - [Heroku](#heroku)
+    - [Deploying locally](#deploying-locally)
+      - [Requirements](#requirements)
+  - [Customizing for your event](#customizing-for-your-event)
+    - [Copy](#copy)
+    - [Branding / Assets](#branding--assets)
+    - [Application questions](#application-questions)
+    - [Email Templates](#email-templates)
+  - [CI/CD and Automation](#cicd-and-automation)
+    - [Lint, Build and Run](#lint-build-and-run)
+  - [Contributing](#contributing)
+  - [Feedback / Questions](#feedback--questions)
+  - [License](#license)
 
 ## Features
 
@@ -165,6 +185,14 @@ If you want stats for your new fields:
 ### Email Templates
 
 To customize the verification and confirmation emails for your event, put your new email templates in `server/templates/` and edit `server/services/email.js`
+
+## CI/CD and Automation
+
+### Lint, Build and Run
+
+`.github/workflows/build.yml` contains a github action for building and running the project. The only test currently run is to check that a GET request of `/login` returns a status code `200`. This should be expanded in future with thorough unit testing. The Github action spawns a Docker instance of MongoDB for the application to connect to and utilizes the NodeJS version as specified in the `.nvmrc` file.
+
+It also contains an action that will run ESLint on the project and report the errors individually.
 
 ## Contributing
 

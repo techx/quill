@@ -1,7 +1,7 @@
 {
-  "name": "hackmit-reg",
+  "name": "quill",
   "description": "mean stack registration system",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": "true",
   "dependencies": {
     "angular": "^1.7.8",
@@ -37,9 +37,11 @@
     "dev": "nodemon app.js",
     "watch": "gulp server",
     "prod": "gulp build && node app.js",
-    "config": "cp .env.config .env"
+    "config": "cp .env.config .env",
+    "test": "jest --forceExit"
   },
   "devDependencies": {
+    "eslint": "^6.6.0",
     "gulp": "^3.9.1",
     "gulp-clean-css": "^4.2.0",
     "gulp-concat": "^2.6.1",
@@ -48,9 +50,11 @@
     "gulp-sass": "^4.0.2",
     "gulp-sourcemaps": "^2.6.5",
     "gulp-uglify": "^3.0.2",
-    "nodemon": "^1.19.4"
+    "jest": "^24.9.0",
+    "nodemon": "^1.19.4",
+    "supertest": "^4.0.2"
   },
   "engines": {
-    "node": "10.14.1"
+    "node": "10.17.0"
   }
 }
