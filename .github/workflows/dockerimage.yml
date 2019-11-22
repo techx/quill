@@ -17,3 +17,6 @@ jobs:
                   name: krubenok/quill
                   username: ${{ secrets.DOCKER_USER }}
                   password: ${{ secrets.DOCKER_PASS }}
+                  dockerfile: Dockerfile
+                  workdir: .
+
