@@ -14,9 +14,8 @@ jobs:
             - name: Publish to Registry
               uses: elgohr/Publish-Docker-Github-Action@master
               with:
-                  name: krubenok/quill
+                  name: krubenok/quill:latest
                   username: ${{ secrets.DOCKER_USER }}
                   password: ${{ secrets.DOCKER_PASS }}
                   dockerfile: Dockerfile
                   workdir: .
-
