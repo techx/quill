@@ -9,7 +9,8 @@ jobs:
 
     steps:
 
-    - uses: actions/checkout@v1
+    - name: Checkout Code
+      uses: actions/checkout@v1
 
     - name: Start MongoDB As Docker
       uses: wbari/start-mongoDB@v0.2
@@ -20,8 +21,22 @@ jobs:
       run: echo "##[set-output name=NVMRC;]$(cat .nvmrc)"
       id: nvm
 
-    - uses: actions/setup-node@v1
+    - name: Cache
+      uses: actions/cache@v1
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+
+    - name: Setup Node
+      uses: actions/setup-node@v1
       with:
         node-version: "${{ steps.nvm.outputs.NVMRC }}"
-    - run: npm install
-    - run: npm run test
+    
+    - name: Install Dependencies
+      if: steps.cache.outputs.cache-hit != 'true'
+      run: npm install
+
+    - name: Run Test Cases
+      run: npm run test
