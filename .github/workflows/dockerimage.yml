@@ -1,0 +1,16 @@
+name: Publish to Docker Hub
+
+on: push
+  branches:
+    - master
+    - actions/docker-publish
+
+- name: Publish Docker
+  uses: elgohr/Publish-Docker-Github-Action@2.8
+  with:
+    # The name of the image you would like to push
+    name: quill
+    # The login username for the registry
+    username: secrets.DOCKER_USER
+    # The login password for the registry
+    password: secrets.DOCKER_PASS
