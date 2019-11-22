@@ -4,7 +4,6 @@ on:
     push:
         branches:
             - master
-            - "actions/docker-publish"
 
 jobs:
     build:
