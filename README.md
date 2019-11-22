@@ -208,7 +208,9 @@ It also contains an action that will run ESLint on the project and report the er
 **[The following secrets need to be added to the repository](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets)**
 
 - DOCKER_USER => your docker hub username
-- DOCKER_PASS => your docker hub password
+- DOCKER_PASS => your docker hub password*
+
+**[Using a Token rather than a password for this is probably a good idea.](https://www.docker.com/blog/docker-hub-new-personal-access-tokens/)*
 
 This will output an image in Docker Hub located at $DOCKER_USER/quill:latest
 
