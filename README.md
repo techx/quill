@@ -33,7 +33,7 @@ Quill is a registration system designed especially for hackathons. For hackers, 
     - [Application questions](#application-questions)
     - [Email Templates](#email-templates)
   - [CI/CD and Automation](#cicd-and-automation)
-    - [Build and Run](#build-and-run)
+    - [Lint, Build and Run](#lint-build-and-run)
   - [Contributing](#contributing)
   - [Feedback / Questions](#feedback--questions)
   - [License](#license)
@@ -188,9 +188,11 @@ To customize the verification and confirmation emails for your event, put your n
 
 ## CI/CD and Automation
 
-### Build and Run
+### Lint, Build and Run
 
 `.github/workflows/build.yml` contains a github action for building and running the project. The only test currently run is to check that a GET request of `/login` returns a status code `200`. This should be expanded in future with thorough unit testing. The Github action spawns a Docker instance of MongoDB for the application to connect to and utilizes the NodeJS version as specified in the `.nvmrc` file.
+
+It also contains an action that will run ESLint on the project and report the errors individually.
 
 ## Contributing
 
