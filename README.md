@@ -35,6 +35,7 @@ Quill is a registration system designed especially for hackathons. For hackers, 
     - [Email Templates](#email-templates)
   - [CI/CD and Automation](#cicd-and-automation)
     - [Lint, Build and Run](#lint-build-and-run)
+	- [Automated Dependency Updates](#automated-dependency-updates)
   - [Contributing](#contributing)
   - [Feedback / Questions](#feedback--questions)
   - [License](#license)
@@ -198,6 +199,10 @@ To customize the verification and confirmation emails for your event, put your n
 `.github/workflows/build.yml` contains a Github Action for building and running the project. The only test currently run is to check that a GET request of `/login` returns a status code `200`. This should be expanded in future with thorough unit testing. The Github action spawns a Docker instance of MongoDB for the application to connect to and utilizes the NodeJS version as specified in the `.nvmrc` file.
 
 It also contains an action that will run ESLint on the project and report the errors individually.
+
+### Automated Dependency Updates
+
+The repository has been signed up to Dependabot, an automated dependency management tool. Dependabot automatically checks for updates for any outdated or insecure requirements and it will open a pull request for each one of them. To parametrize the tool further please look here: <https://dependabot.com/docs/config-file/>
 
 ## Contributing
 
