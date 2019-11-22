@@ -41,6 +41,7 @@
     "test": "jest --forceExit"
   },
   "devDependencies": {
+    "eslint": "^6.6.0",
     "gulp": "^3.9.1",
     "gulp-clean-css": "^4.2.0",
     "gulp-concat": "^2.6.1",
