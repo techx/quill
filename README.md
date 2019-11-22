@@ -28,6 +28,7 @@ Quill is a registration system designed especially for hackathons. For hackers, 
       - [Heroku](#heroku)
     - [Deploying locally](#deploying-locally)
       - [Requirements](#requirements)
+    - [Deploying for your hackathon](#deploying-for-your-hackathon)
   - [Customizing for your event](#customizing-for-your-event)
     - [Copy](#copy)
     - [Branding / Assets](#branding--assets)
@@ -35,6 +36,7 @@ Quill is a registration system designed especially for hackathons. For hackers, 
     - [Email Templates](#email-templates)
   - [CI/CD and Automation](#cicd-and-automation)
     - [Lint, Build and Run](#lint-build-and-run)
+    - [Publish to Docker Hub](#publish-to-docker-hub)
   - [Contributing](#contributing)
   - [Feedback / Questions](#feedback--questions)
   - [License](#license)
@@ -198,6 +200,17 @@ To customize the verification and confirmation emails for your event, put your n
 `.github/workflows/build.yml` contains a Github Action for building and running the project. The only test currently run is to check that a GET request of `/login` returns a status code `200`. This should be expanded in future with thorough unit testing. The Github action spawns a Docker instance of MongoDB for the application to connect to and utilizes the NodeJS version as specified in the `.nvmrc` file.
 
 It also contains an action that will run ESLint on the project and report the errors individually.
+
+### Publish to Docker Hub
+
+`.github/workflows/dockerimage.yml` conatins a Github Action for building and publishing a Docker Image to the Docker Hub. The action takes the docker file at `.Dockerfile` and publishes it to the account specified in the Github Secrets.
+
+**[The following secrets need to be added to the repository](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets)**
+
+- DOCKER_USER => your docker hub username
+- DOCKER_PASS => your docker hub password
+
+This will output an image in Docker Hub located at $DOCKER_USER/quill:latest
 
 ## Contributing
 

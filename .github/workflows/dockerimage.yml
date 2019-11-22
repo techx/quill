@@ -4,6 +4,7 @@ on:
     push:
         branches:
             - master
+            - "actions/docker-publish"
 
 jobs:
     build:
@@ -13,7 +14,7 @@ jobs:
             - name: Publish to Registry
               uses: elgohr/Publish-Docker-Github-Action@master
               with:
-                  name: krubenok/quill:latest
+                  name: ${{ secrets.DOCKER_USER }}/quill:latest
                   username: ${{ secrets.DOCKER_USER }}
                   password: ${{ secrets.DOCKER_PASS }}
                   dockerfile: Dockerfile
