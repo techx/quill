@@ -203,7 +203,7 @@ It also contains an action that will run ESLint on the project and report the er
 
 ### Automated Dependency Updates
 
-The repository has been signed up to Dependabot, an automated dependency management tool. Dependabot automatically checks for updates for any outdated or insecure requirements and it will open a pull request for each one of them. To parametrize the tool further please look here: <https://dependabot.com/docs/config-file/>
+The repository has been signed up to Dependabot, an automated dependency management tool. Dependabot automatically checks for updates for any outdated or insecure requirements and it will open a pull request for each one of them. To parametrize the tool further please [look here.](https://dependabot.com/docs/config-file/)
 
 ## Contributing
 
