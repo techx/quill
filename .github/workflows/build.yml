@@ -50,3 +50,6 @@ jobs:
 
             - name: Run Test Cases
               run: npm run test
+
+            - name: Run Accessibility Tests
+              run: npm run test:accessibility
