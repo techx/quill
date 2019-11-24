@@ -37,6 +37,7 @@ Quill is a registration system designed especially for hackathons. For hackers, 
   - [CI/CD and Automation](#cicd-and-automation)
     - [Lint, Build and Run](#lint-build-and-run)
     - [Publish to Docker Hub](#publish-to-docker-hub)
+    - [Automated Dependency Updates](#automated-dependency-updates)
   - [Contributing](#contributing)
   - [Feedback / Questions](#feedback--questions)
   - [License](#license)
@@ -213,6 +214,10 @@ It also contains an action that will run ESLint on the project and report the er
 **[Using a Token rather than a password for this is probably a good idea.](https://www.docker.com/blog/docker-hub-new-personal-access-tokens/)*
 
 This will output an image in Docker Hub located at $DOCKER_USER/quill:latest
+
+### Automated Dependency Updates
+
+The repository has been signed up to Dependabot, an automated dependency management tool. Dependabot automatically checks for updates for any outdated or insecure requirements and it will open a pull request for each one of them. To parametrize the tool further please [look here.](https://dependabot.com/docs/config-file/)
 
 ## Contributing
 
