@@ -238,13 +238,27 @@ To customize the verification and confirmation emails for your event, put your n
 - DOCKER_USER => your docker hub username
 - DOCKER_PASS => your docker hub password*
 
-**[Using a Token rather than a password for this is probably a good idea.](https://www.docker.com/blog/docker-hub-new-personal-access-tokens/)*
+**[Using a Token rather than a password for this is probably a good idea.](https://www.docker.com/blog/docker-hub-new-personal-access-tokens/)**
 
 This will output an image in Docker Hub located at $DOCKER_USER/quill:latest
 
 ### Automated Dependency Updates
 
 The repository has been signed up to Dependabot, an automated dependency management tool. Dependabot automatically checks for updates for any outdated or insecure requirements and it will open a pull request for each one of them. To parametrize the tool further please [look here.](https://dependabot.com/docs/config-file/)
+
+### Notifications [on Push]
+
+This project has been set up to run workflows that send notifications to a Discord server and a Slack workspace when changes are pushed. The secrets required to run these must be set by the admin according to the documentation of each implementation (configuration links). 
+
+* `.yml` file information has already been added to the repository under `.github/workflows/notify.yml` and individual platforms may be removed by editing this file.
+
+##### Discord Notification
+[Configuring the action to send notifications to your organization's Discord server can be found here.](https://github.com/Ilshidur/action-discord)
+
+* Note that leaving `/github` at the end of the `DISCORD_WEBHOOK` token (contrary to what the action recommends)  will use the default GitHub webhook settings in addition to sending this action's notification. We suggest leaving it if there is no webhook already configured.
+
+##### Slack Notification
+[Configuring the action to send notifications to your organization's Slack workspace can be found here.](https://github.com/marketplace/actions/slack-notify)
 
 ## Testing
 
@@ -261,6 +275,7 @@ An accessibility testing tool, pa11y-ci, has been provided and configured for th
 If your contribution adds any new pages to Quill, please add them to `.pa11yci` to make sure that these pages are covered by the accessibility tests. If your new pages are accessed as a non-logged-in user, add them at the beginning of the URL list. If they are accessed when logged in, add them after the URL with actions to log in.
 
 For more information on pa11y-ci, please visit [pa11y-ci] and [pa11y], in particular the [section on actions][pa11y-actions].
+
 
 ## Contributing
 
