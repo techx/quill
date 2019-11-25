@@ -1,0 +1,41 @@
+{
+	"standard": "WCAG2AAA",
+	"level": "error",
+	"defaults": {
+		"timeout": 30000,
+		"wait": 2000,
+		"ignore": []
+	},
+    "urls": [
+		{
+			"url": "http://localhost:3000/login"
+		},
+		{
+			"url": "http://localhost:3000",
+			"actions": [
+				"wait for element #email to be added",
+				"wait for element #password to be added",
+				"wait for element .pa11y-click-login to be added",
+				"set field #email to admin@example.com",
+				"set field #password to party",
+				"click element .pa11y-click-login",
+				"wait for url to not be http://localhost:3000/login"
+			]
+		},
+		{
+			"url": "http://localhost:3000/application"
+		},
+		{
+			"url": "http://localhost:3000/team"
+		},
+		{
+			"url": "http://localhost:3000/admin"
+		},
+		{
+			"url": "http://localhost:3000/admin/users"
+		},
+		{
+			"url": "http://localhost:3000/admin/settings"
+		}
+    ]
+}

@@ -1,4 +1,4 @@
-name: Lint, Build and Run
+name: Lint
 
 on: [push]
 
@@ -13,4 +13,4 @@ jobs:
             - name: ESLint
               uses: gimenete/eslint-action@master
               env:
-                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
