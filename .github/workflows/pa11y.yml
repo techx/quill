@@ -48,4 +48,5 @@ jobs:
               run: npm install
 
             - name: Run Accessibility Tests
-              run: echo $DATABASE && ( node app.js > /dev/null 2>&1 & ) && sleep 5 && npm run test:accessibility
+              run: echo $DATABASE 
+              # && ( node app.js > /dev/null 2>&1 & ) && sleep 5 && npm run test:accessibility
