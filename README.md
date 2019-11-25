@@ -41,6 +41,7 @@ Quill is a registration system designed especially for hackathons. For hackers, 
     - [Publish to Docker Hub](#publish-to-docker-hub)
     - [Automated Dependency Updates](#automated-dependency-updates)
   - [Testing](#testing)
+    - [Jest](#jest)
     - [Accessibility](#accessibility)
   - [Contributing](#contributing)
   - [Feedback / Questions](#feedback--questions)
@@ -226,6 +227,10 @@ This will output an image in Docker Hub located at $DOCKER_USER/quill:latest
 The repository has been signed up to Dependabot, an automated dependency management tool. Dependabot automatically checks for updates for any outdated or insecure requirements and it will open a pull request for each one of them. To parametrize the tool further please [look here.](https://dependabot.com/docs/config-file/)
 
 ## Testing
+
+### Jest
+
+Basic Jest testing has been implemented in the `test.js` file. Currently the only test is to check that the `/login` page returns a HTTP 200 status code. These tests can be run using the `npm run test` command. More Jest tests including snapshots and unit tests should be added as features are created or updated. 
 
 ### Accessibility
 
