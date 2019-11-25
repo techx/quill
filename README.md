@@ -5,6 +5,7 @@
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](code-of-conduct.md)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
 [![Dependencies](https://david-dm.org/techx/quill.svg)](https://app.dependabot.com/accounts/krubenok/repos/204301089)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ecd84351d8444ca29d05756ac7f40fc0)](https://www.codacy.com/manual/krubenok/quill?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=krubenok/quill&amp;utm_campaign=Badge_Grade)
 
 Quill is a registration system designed especially for hackathons. For hackers, it’s a clean and streamlined interface to submit registration and confirmation information. For hackathon organizers, it’s an easy way to manage applications, view registration stats, and more!
 
@@ -35,7 +36,8 @@ Quill is a registration system designed especially for hackathons. For hackers, 
     - [Application questions](#application-questions)
     - [Email Templates](#email-templates)
   - [CI/CD and Automation](#cicd-and-automation)
-    - [Lint, Build and Run](#lint-build-and-run)
+    - [Build and Test](#build-and-test)
+    - [Lint](#lint)
     - [Publish to Docker Hub](#publish-to-docker-hub)
     - [Automated Dependency Updates](#automated-dependency-updates)
   - [Contributing](#contributing)
@@ -196,15 +198,17 @@ To customize the verification and confirmation emails for your event, put your n
 
 ## CI/CD and Automation
 
-### Lint, Build and Run
+### Build and Test
 
-`.github/workflows/build.yml` contains a Github Action for building and running the project. The only test currently run is to check that a GET request of `/login` returns a status code `200`. This should be expanded in future with thorough unit testing. The Github action spawns a Docker instance of MongoDB for the application to connect to and utilizes the NodeJS version as specified in the `.nvmrc` file.
+`.github/workflows/build.yml` contains a Github Action for building and running the project. The only test currently run is to check that a GET request of `/login` returns a status code `200`. This should be expanded in future with thorough unit testing. The Github action spawns a Docker instance of MongoDB for the application to connect to and utilizes the NodeJS version as specified in the `.nvmrc` file. *This action is run automatically on each push to any branch*.
 
-It also contains an action that will run ESLint on the project and report the errors individually.
+### Lint
+
+`.github/workflows/link.yml` contains a Github Action for linting the project. The action is currently using ESLint to achieve this with a *very* minimal ruleset (currently only checking for semi-colon rules). This should be modified to include an opinionated style checker such as [AirBnb's](https://github.com/airbnb/javascript). *This action is run automatically on each push to any branch*.
 
 ### Publish to Docker Hub
 
-`.github/workflows/dockerimage.yml` conatins a Github Action for building and publishing a Docker Image to the Docker Hub. The action takes the docker file at `.Dockerfile` and publishes it to the account specified in the Github Secrets.
+`.github/workflows/dockerimage.yml` conatins a Github Action for building and publishing a Docker Image to the Docker Hub. The action takes the docker file at `.Dockerfile` and publishes it to the account specified in the Github Secrets. *This action is run automatically on each merge to the `master` branch*
 
 **[The following secrets need to be added to the repository](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets)**
 

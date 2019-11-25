@@ -1,0 +1,16 @@
+name: Lint
+
+on: [push]
+
+jobs:
+    lint:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout Code
+              uses: actions/checkout@v1
+
+            - name: ESLint
+              uses: gimenete/eslint-action@master
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
