@@ -52,4 +52,6 @@ jobs:
               run: npm run test
 
             - name: Run Accessibility Tests
-              run: mkdir db && ( mongod --dbpath db > /dev/null 2>&1 & ) && sleep 5 && ( node app.js > /dev/null 2>&1 & ) && sleep 5 && npm run test:accessibility
+              env:
+                DATABASE: mongodb://mongo:27017
+              run: ( node app.js > /dev/null 2>&1 & ) && sleep 5 && npm run test:accessibility
