@@ -238,7 +238,7 @@ To customize the verification and confirmation emails for your event, put your n
 - DOCKER_USER => your docker hub username
 - DOCKER_PASS => your docker hub password*
 
-**[Using a Token rather than a password for this is probably a good idea.](https://www.docker.com/blog/docker-hub-new-personal-access-tokens/)*
+**[Using a Token rather than a password for this is probably a good idea.](https://www.docker.com/blog/docker-hub-new-personal-access-tokens/)**
 
 This will output an image in Docker Hub located at $DOCKER_USER/quill:latest
 
