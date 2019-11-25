@@ -1,4 +1,4 @@
-name: Lint, Build and Run
+name: Lint
 
 on: [push]
 
