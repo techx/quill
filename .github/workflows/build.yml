@@ -53,5 +53,5 @@ jobs:
 
             - name: Run Accessibility Tests
               env:
-                DATABASE: mongodb://mongo:27017
+                DATABASE: mongodb://localhost:27017
               run: ( node app.js > /dev/null 2>&1 & ) && sleep 5 && npm run test:accessibility
