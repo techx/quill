@@ -25,11 +25,15 @@ Quill is a registration system designed especially for hackathons. For hackers, 
       - [Users Table](#users-table)
       - [Settings](#settings)
   - [Setup](#setup)
-    - [Cloud Deployment](#cloud-deployment)
-      - [Heroku](#heroku)
-    - [Deploying locally](#deploying-locally)
-      - [Requirements](#requirements)
+    - [Requirements](#requirements)
+    - [Local Deployment](#local-deployment)
+      - [MongoDB](#mongodb)
+      - [SMTP](#smtp)
+      - [Quill](#quill-1)
     - [Deploying for your hackathon](#deploying-for-your-hackathon)
+      - [MongoDB](#mongodb-1)
+      - [SMTP](#smtp-1)
+      - [Quill](#quill-2)
   - [Customizing for your event](#customizing-for-your-event)
     - [Copy](#copy)
     - [Branding / Assets](#branding--assets)
@@ -109,15 +113,9 @@ On the Settings tab, admins can easily control their event application timeline 
 
 ## Setup
 
-### Cloud Deployment
-
-#### Heroku
-
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
-### Deploying locally
-
-#### Requirements
+### Requirements
 
 | Requirement                  | Version  |
 | ---------------------------- | -------- |
@@ -138,12 +136,30 @@ mongo --version
 
 Additonally, there is an `.nvmrc` file in the root of the project. You can use [Node Version Manager (nvm)](https://github.com/nvm-sh/nvm) to make sure you are using the right version of node for this and other projects! This also ensures that any cloud deployments of the project use the same version of Node.
 
-Getting a local instance of Quill up and running takes less than 5 minutes! Start by setting up the database. Ideally, you should run MongoDB as a daemon with a secure configuration (with most linux distributions, you should be able to install it with your package manager, and it'll be set up as a daemon). Although not recommended for production, when running locally for development, you could do it like this
+We use `dotenv` to keep track of environment variables, so be sure to stop tracking the `.env` file in Git:
+
+```bash
+git update-index --assume-unchanged .env
+```
+
+After doing this, fill in the environment variables in the `.env` before running Quill.
+
+### Local Deployment
+
+#### MongoDB
+
+Ideally, you should run MongoDB as a daemon with a secure configuration (with most linux distributions, you should be able to install it with your package manager, and it'll be set up as a daemon). Although not recommended for production, when running locally for development, you could do it like this
 
 ```bash
 mkdir db
 mongod --dbpath db --bind_ip 127.0.0.1
 ```
+
+#### SMTP
+
+This step is only required if you want to test the email-related functionality of Quill. The easiest option is to use the SMTP server provided by your personal email (Gmail, Outlook, etc.). Look for the documentation about SMTP for your respective email and fill in the values in the `.env` accordingly. Be warned that sending many emails this way is not recommended and this method should only be used for testing. In particular, note that Gmail will require you to enable less secure apps in your security settings before Quill will be able to send email.
+
+#### Quill
 
 Install the necessary dependencies:
 
@@ -151,19 +167,23 @@ Install the necessary dependencies:
 npm install
 ```
 
-We use `dotenv` to keep track of environment variables, so be sure to stop tracking the `.env` file in Git:
-
-```bash
-git update-index --assume-unchanged .env
-```
-
-Edit the configuration file in `.env` for your setup, and then run the application:
+Ensure you have filled in the `.env` according to your setup, and then run the application:
 
 ```bash
 gulp server
 ```
+
 ### Deploying for your hackathon
-The database can either be hosted with [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) or on your own server. Atlas will generally be easier to set up and should be the preferred choice unless you are familiar with administering your own server. A guide to setting up Atlas can be found [here](https://docs.atlas.mongodb.com/getting-started/). Note that the URI for the database (which must be specified in `.env`) will be different depending on where your database is hosted. 
+
+#### MongoDB
+
+The database can either be hosted with a cloud-hosted MongoDB provider, such as [MongoDB Atlas](https://www.mongodb.com/cloud/atlas), or on your own server. Cloud-hosted MongoDB will generally be easier to set up and should be the preferred choice unless you are familiar with administering your own server. A guide to setting up Atlas can be found [here](https://docs.atlas.mongodb.com/getting-started/). Note that the URI for the database (which must be specified in `.env`) will be different depending on where your database is hosted. 
+
+#### SMTP
+
+A dedicated SMTP provider is absolutely required if you want Quill to work for your hackathon. There are several providers available such as [Mailgun](https://www.mailgun.com) or [Sendgrid](https://sendgrid.com), both part of the GitHub Student Developer Pack. After setting this up, fill in the `.env` with the values that your provider gives you.
+
+#### Quill
 
 There are also several options for hosting Quill itself. You can use Heroku by clicking the __Deploy to Heroku__ button above where, after making a Heroku account, you will be able to set the configuration variables and deploy Quill. A Dockerfile has also been provided to make it easy to run Quill in a Docker container either on your own server or with your preferred cloud service provider. Don't forget to publish the container's port `3000` to the host machine. If using the command line, this is done by using the `-p` flag and specifying which port on the host machine should redirect to port 3000 on the container.
 
