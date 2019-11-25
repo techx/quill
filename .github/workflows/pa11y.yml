@@ -1,6 +1,6 @@
 name: Pa11y Accessibility Testing
 
-on: [pull_request]
+on: [push]
 
 jobs:    
     pa11y:
