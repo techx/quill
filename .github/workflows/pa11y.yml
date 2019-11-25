@@ -1,6 +1,6 @@
-name: Pa11y Testings
+name: Pa11y Accessibility Testing
 
-on: [push]
+on: [pull_request]
 
 jobs:    
     pa11y:
@@ -39,4 +39,4 @@ jobs:
             - name: Run Accessibility Tests
               env:
                   DATABASE: mongodb://mongo:27017
-              run: ( node app.js > /dev/null 2>&1 & ) && sleep 5 && npm run test:accessibility
+              run: ping mongo && ( node app.js > /dev/null 2>&1 & ) && sleep 5 && npm run test:accessibility
