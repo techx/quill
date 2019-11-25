@@ -1,9 +1,9 @@
-name: Build and Test
+name: Pa11y Testings
 
 on: [push]
 
 jobs:    
-    build:
+    pa11y:
         runs-on: ubuntu-latest
 
         steps:
@@ -36,5 +36,7 @@ jobs:
               if: steps.cache.outputs.cache-hit != 'true'
               run: npm install
 
-            - name: Run Test Cases
-              run: npm run test
+            - name: Run Accessibility Tests
+              env:
+                  DATABASE: mongodb://127.0.0.1:27017
+              run: ( node app.js > /dev/null 2>&1 & ) && sleep 5 && npm run test:accessibility
