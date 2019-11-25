@@ -51,7 +51,13 @@ jobs:
             - name: Run Test Cases
               run: npm run test
 
+            - name: Install MongoDb
+              run: |
+                wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add -
+                echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list
+                sudo apt-get update
+                sudo apt-get install -y mongodb-org
+                mkdir db
+
             - name: Run Accessibility Tests
-              env:
-                DATABASE: mongodb://localhost:27017
-              run: ( node app.js > /dev/null 2>&1 & ) && sleep 5 && npm run test:accessibility
+              run: ( mongod --dbpath db > /dev/null 2>&1 & ) && sleep 5 && ( node app.js > /dev/null 2>&1 & ) && sleep 5 && npm run test:accessibility
