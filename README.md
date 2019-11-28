@@ -129,6 +129,36 @@ Contributions to Quill are welcome and appreciated! Please take a look at [`CONT
 # Feedback / Questions
 If you have any questions about this software, please contact [quill@hackmit.org][email].
 
+## Contributors
+
+### Code Contributors
+
+This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
+<a href="https://github.com/techx/quill/graphs/contributors"><img src="https://opencollective.com/techx/contributors.svg?width=890&button=false" /></a>
+
+### Financial Contributors
+
+Become a financial contributor and help us sustain our community. [[Contribute](https://opencollective.com/techx/contribute)]
+
+#### Individuals
+
+<a href="https://opencollective.com/techx"><img src="https://opencollective.com/techx/individuals.svg?width=890"></a>
+
+#### Organizations
+
+Support this project with your organization. Your logo will show up here with a link to your website. [[Contribute](https://opencollective.com/techx/contribute)]
+
+<a href="https://opencollective.com/techx/organization/0/website"><img src="https://opencollective.com/techx/organization/0/avatar.svg"></a>
+<a href="https://opencollective.com/techx/organization/1/website"><img src="https://opencollective.com/techx/organization/1/avatar.svg"></a>
+<a href="https://opencollective.com/techx/organization/2/website"><img src="https://opencollective.com/techx/organization/2/avatar.svg"></a>
+<a href="https://opencollective.com/techx/organization/3/website"><img src="https://opencollective.com/techx/organization/3/avatar.svg"></a>
+<a href="https://opencollective.com/techx/organization/4/website"><img src="https://opencollective.com/techx/organization/4/avatar.svg"></a>
+<a href="https://opencollective.com/techx/organization/5/website"><img src="https://opencollective.com/techx/organization/5/avatar.svg"></a>
+<a href="https://opencollective.com/techx/organization/6/website"><img src="https://opencollective.com/techx/organization/6/avatar.svg"></a>
+<a href="https://opencollective.com/techx/organization/7/website"><img src="https://opencollective.com/techx/organization/7/avatar.svg"></a>
+<a href="https://opencollective.com/techx/organization/8/website"><img src="https://opencollective.com/techx/organization/8/avatar.svg"></a>
+<a href="https://opencollective.com/techx/organization/9/website"><img src="https://opencollective.com/techx/organization/9/avatar.svg"></a>
+
 # License
 Copyright (c) 2015-2016 Edwin Zhang (https://github.com/ehzhang). Released under AGPLv3. See [`LICENSE.txt`][license] for details.
 
