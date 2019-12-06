@@ -688,8 +688,6 @@ UserController.checkOutById = function(id, user, callback){
     $set: {
       'status.checkedIn': false
     }
-  }, {
-    new: true
   },
   callback);
 };
@@ -698,14 +696,13 @@ UserController.checkOutById = function(id, user, callback){
  * [ADMIN ONLY]
  *
  * Make user an admin
- * @param  {String}   userId   User id of the user being made admin
+ * @param  {String}   id   User id of the user being made admin
  * @param  {String}   user     User making this person admin
  * @param  {Function} callback args(err, user)
  */
 UserController.makeAdminById = function(id, user, callback){
   User.findOneAndUpdate({
-    _id: id,
-    verified: true
+    _id: id
   },{
     $set: {
       'admin': true
@@ -726,14 +723,27 @@ UserController.makeAdminById = function(id, user, callback){
  */
 UserController.removeAdminById = function(id, user, callback){
   User.findOneAndUpdate({
-    _id: id,
-    verified: true
+    _id: id
   },{
     $set: {
       'admin': false
     }
   }, {
     new: true
+  },
+  callback);
+};
+
+/**
+ * [ADMIN ONLY]
+ *
+ * Delete a user from the database
+ * @param  {String}   id   User id of the user being deleted
+ * @param  {Function} callback args(err, user)
+ */
+UserController.deleteUserById = function(id, user, callback){
+  User.deleteOne({
+    _id: id
   },
   callback);
 };

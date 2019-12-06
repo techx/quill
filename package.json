@@ -48,6 +48,7 @@
     "gulp-sass": "^4.0.2",
     "gulp-sourcemaps": "^2.6.4",
     "gulp-uglify": "^3.0.1",
+    "gulp-util": "^3.0.8",
     "nodemon": "^1.18.9"
   },
   "engines": {

@@ -289,6 +289,15 @@ module.exports = function(router) {
     UserController.removeAdminById(id, user, defaultResponse(req, res));
   });
 
+  /**
+   * Delete user
+   */
+  router.post('/users/:id/deleteuser', isAdmin, function(req, res){
+    var id = req.params.id;
+    var user = req.user;
+    UserController.deleteUserById(id, user, defaultResponse(req, res));
+  });
+
 
   // ---------------------------------------------
   // Settings [ADMIN ONLY!]

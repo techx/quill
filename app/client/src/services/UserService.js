@@ -77,7 +77,7 @@ angular.module('reg')
 
       admitUser: function(id){
         return $http.post(base + id + '/admit');
-      },
+      }, 
 
       checkIn: function(id){
         return $http.post(base + id + '/checkin');
@@ -94,6 +94,10 @@ angular.module('reg')
       removeAdmin: function(id){
         return $http.post(base + id + '/removeadmin');
       },
+
+      deleteUser: function(id){
+        return $http.post(base + id + '/deleteuser');
+      }
     };
   }
   ]);
