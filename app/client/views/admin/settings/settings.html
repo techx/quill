@@ -101,6 +101,30 @@ class="ui green segment">
         </div>
       </div>
     </div>
+      <!-- Host School -->
+  <div class="ui divider"></div>
+   <div class="ui header">
+    Host School (used in stats)
+  </div>
+   <div class="ui form">
+   <div
+      class="ui label"
+      ng-model="">
+      {{settings.hostSchool}}
+    </div>
+     <div class="field">
+      <input class="ui input" type="text" ng-model="settings.hostSchool">
+      </input>
+    </div>
+    <div class="field">
+      <div
+        class="ui green button"
+        ng-click="updateHostSchool()">
+        Update
+      </div>
+    </div>
+  </div>
+
   </div>
 </div>
 

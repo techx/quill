@@ -38,6 +38,9 @@ var schema = new mongoose.Schema({
   },
   allowMinors: {
     type: Boolean
+  },
+  hostSchool: {
+    type: String,
   }
 });
 
@@ -70,6 +73,14 @@ schema.statics.getRegistrationTimes = function(callback){
         timeConfirm: settings.timeConfirm
       });
     });
+};
+
+schema.statics.getHostSchool = function(callback) {
+this.findOne({})
+.select("hostSchool")
+.exec(function(err, settings) {
+  callback(err, settings.hostSchool);
+});
 };
 
 schema.statics.getPublicSettings = function(callback){

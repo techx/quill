@@ -1,6 +1,8 @@
 var _ = require('underscore');
 var async = require('async');
 var User = require('../models/User');
+var Settings = require("../models/Settings");
+
 
 // In memory stats.
 var stats = {};
@@ -33,6 +35,9 @@ function calculateStats(){
     confirmed: 0,
     confirmedMit: 0,
     declined: 0,
+
+    confirmedHostSchool: 0,
+    hostSchool:'',
 
     confirmedFemale: 0,
     confirmedMale: 0,
@@ -74,6 +79,14 @@ function calculateStats(){
     checkedIn: 0
   };
 
+  Settings.getHostSchool(function(err, School) {
+    if (err) {
+      callback(err);
+    } else {
+      newStats.hostSchool=School;
+    }
+  });
+
   User
     .find({})
     .exec(function(err, users){
@@ -103,8 +116,8 @@ function calculateStats(){
         // Count confirmed
         newStats.confirmed += user.status.confirmed ? 1 : 0;
 
-        // Count confirmed that are mit
-        newStats.confirmedMit += user.status.confirmed && email === "mit.edu" ? 1 : 0;
+        // Count confirmed that are hostSchool
+        newStats.confirmedHostSchool += user.status.confirmed && email === newStats.hostSchool ? 1 : 0;
 
         newStats.confirmedFemale += user.status.confirmed && user.profile.gender == "F" ? 1 : 0;
         newStats.confirmedMale += user.status.confirmed && user.profile.gender == "M" ? 1 : 0;

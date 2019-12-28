@@ -15,12 +15,13 @@ angular.module('reg')
 
       // Set up the user
       $scope.user = currentUser.data;
+      console.log(currentUser.data);
 
-      // Is the student from MIT?
-      $scope.isMitStudent = $scope.user.email.split('@')[1] == 'mit.edu';
+      // Is the student from HostSchool?
+      $scope.isHostSchool = $scope.user.email.split('@')[1] == settings.data.hostSchool;
 
       // If so, default them to adult: true
-      if ($scope.isMitStudent){
+      if ($scope.isHostSchool){
         $scope.user.profile.adult = true;
       }
 
@@ -140,7 +141,16 @@ angular.module('reg')
               rules: [
                 {
                   type: 'empty',
-                  prompt: 'Please select a gender.'
+                  prompt: 'Please select a gender. '
+                }
+              ]
+            },
+            howManyHackathons: {
+              identifier: 'howManyHackathons',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please select how many hackathons you have attended.'
                 }
               ]
             },
@@ -149,7 +159,7 @@ angular.module('reg')
               rules: [
                 {
                   type: 'allowMinors',
-                  prompt: 'You must be an adult, or an MIT student.'
+                  prompt: 'You must be an adult, or an ESI student.'
                 }
               ]
             }
