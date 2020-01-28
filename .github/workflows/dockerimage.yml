@@ -1,0 +1,20 @@
+name: Publish to Docker Hub
+
+on:
+    push:
+        branches:
+            - master
+
+jobs:
+    docker:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@master
+            - name: Publish to Registry
+              uses: elgohr/Publish-Docker-Github-Action@master
+              with:
+                  name: ${{ secrets.DOCKER_USER }}/quill:latest
+                  username: ${{ secrets.DOCKER_USER }}
+                  password: ${{ secrets.DOCKER_PASS }}
+                  dockerfile: Dockerfile
+                  workdir: .
