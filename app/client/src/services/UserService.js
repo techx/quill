@@ -71,6 +71,27 @@ angular.module('reg')
       // Admin Only
       // -------------------------
 
+      getCSV: function(){
+        $http.get(base + 'exportcsv').then(function (data, status, headers) {
+        var linkElement = document.createElement('a');
+        try {
+            linkElement.setAttribute('href', data.data.path);
+            linkElement.setAttribute("download", data.data.filename);
+            var clickEvent = new MouseEvent("click", {
+                "view": window,
+                "bubbles": true,
+                "cancelable": false
+            });
+            linkElement.dispatchEvent(clickEvent);
+        } catch (ex) {
+            console.log(ex);
+        }
+
+        }, function (data) {
+          console.log(data);
+        });
+      },
+
       getStats: function(){
         return $http.get(base + 'stats');
       },

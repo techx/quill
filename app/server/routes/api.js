@@ -1,5 +1,8 @@
 var UserController = require('../controllers/UserController');
 var SettingsController = require('../controllers/SettingsController');
+var User = require('../models/User');
+var json2csv = require('json2csv').parse;
+var path = require('path');
 
 var request = require('request');
 
@@ -140,6 +143,79 @@ module.exports = function(router) {
    */
   router.get('/users/stats', isAdmin, function(req, res){
     UserController.getStats(defaultResponse(req, res));
+  });
+
+  router.get('/users/exportcsv', isAdmin, function(req, res, next){
+    function timeStamp() {
+      // Create a date object with the current time
+      var now = new Date();
+       // Create an array with the current month, day and time
+      var date = [ now.getMonth() + 1, now.getDate(), now.getFullYear() ];
+
+        // Create an array with the current hour, minute and second
+      var time = [ now.getHours(), now.getMinutes(), now.getSeconds() ];
+
+       // Determine AM or PM suffix based on the hour
+      var suffix = ( time[0] < 12 ) ? "AM" : "PM";
+
+       // Convert hour from military time
+      time[0] = ( time[0] < 12 ) ? time[0] : time[0] - 12;
+
+       // If hour is 0, set it to 12
+      time[0] = time[0] || 12;
+
+       // If seconds and minutes are less than 10, add a zero
+      for ( var i = 1; i < 3; i++ ) {
+        if ( time[i] < 10 ) {
+          time[i] = "0" + time[i];
+        }
+      }
+
+       // Return the formatted string
+      return '_'+date.join("-") + "_" + time.join("-") + "_" + suffix;
+    }
+
+    var filename = "export_quill_users" + timeStamp() + ".csv";
+
+    var fields = ['_id','email','verified','timestamp','lastUpdated',
+                  'profile.adult','profile.name','profile.school',
+                  'profile.gender','profile.graduationYear',
+                  'profile.description','profile.essay','status.name',
+                  'status.completedProfile','status.admitted',
+                  'status.confirmed','status.declined','status.checkedIn',
+                  'status.reimbursementGiven',
+                ];
+    var fs = require('fs');
+
+    User.find({}, function (err, users_data) {
+      if (err) {
+        return res.status(501).json({err});
+      }
+      else {
+        let csv;
+        try {
+          csv = json2csv(users_data, {fields});
+        } catch (err) {
+          console.log(err);
+          return res.status(502).json({err});
+        }
+        const filePath = path.join(__dirname, "../..","client","assets",filename)
+        fs.writeFile(filePath, csv, function (err) {
+          if (err) {
+            return res.json(err).status(503);
+          }
+          else {
+            setTimeout(function () {
+              fs.unlinkSync(filePath);
+            }, 30000)
+            return res.json({
+              path: "/assets/" + filename,
+              filename: filename
+            });
+          }
+        })
+      }
+    })
   });
 
   /**

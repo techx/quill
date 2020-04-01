@@ -64,6 +64,10 @@ angular.module('reg')
         });
       };
 
+      $scope.getCSV = function(){
+        UserService.getCSV();
+      };
+
       $scope.toggleCheckIn = function($event, user, index) {
         $event.stopPropagation();
 
