@@ -8,9 +8,12 @@ var ngQrcode = require('angular-qrcode');
 window.qrcode = qrcode;
 require('../../../node_modules/qrcode-generator/qrcode_UTF8');
 
+require('../../../node_modules/angular-multi-select-master/isteven-multi-select');
+
 var app = angular.module('reg', [
   'ui.router',
   'monospaced.qrcode',
+  'isteven-multi-select'
 ]);
 
 const constants = require('./constants.js');

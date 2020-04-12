@@ -2,8 +2,7 @@ const angular = require("angular");
 const swal = require("sweetalert");
 const util = require("util");
 
-// THIS IS BREAKING
-angular.module('reg', [ "isteven-multi-select" ])
+angular.module('reg')
   .controller('ApplicationCtrl', [
     '$scope',
     '$rootScope',
@@ -23,13 +22,13 @@ angular.module('reg', [ "isteven-multi-select" ])
 
       $scope.resume = null;
 
-      // $scope.modernBrowsers = [
-      //   { icon: "<img src=[..]/opera.png.. />", name: "Opera", maker: "(Opera Software)", ticked: true },
-      //   { icon: "<img src=[..]/internet_explorer.png.. />", name: "Internet Explorer", maker: "(Microsoft)", ticked: false },
-      //   { icon: "<img src=[..]/firefox-icon.png.. />", name: "Firefox", maker: "(Mozilla Foundation)", ticked: true },
-      //   { icon: "<img src=[..]/safari_browser.png.. />", name: "Safari", maker: "(Apple)", ticked: false },
-      //   { icon: "<img src=[..]/chrome.png.. />", name: "Chrome", maker: "(Google)", ticked: true }
-      // ];
+      $scope.modernBrowsers = [
+        { name: "Opera", selected: false },
+        { name: "Internet Explorer", selected: false },
+        { name: "Firefox", selected: false },
+        { name: "Safari", selected: false },
+        { name: "Chrome", selected: false }
+      ];
 
       // If so, default them to adult: true
       if ($scope.isUtStudent) {
