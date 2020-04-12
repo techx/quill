@@ -6,28 +6,37 @@
   <div class="ui stackable page grid">
     <div class="column">
       <div class="ui form error"
-            ng-class="{'loading': loading}">
+        ng-class="{'loading': loading}">
 
         <div class="divided title">Disclaimer</div>
 
         <div class="field">
-            <p>
-                Filling out this form will register you for HackTX 2019, a Freetail Hackers hackathon presented at the AT&T Conference Center in Austin, TX from November 2nd, 2019 to November 3rd, 2019.
-                <strong>You must be at least 18 years old to register.</strong> 
-                <br><br>
-                To learn more about the event, visit 
-                <a href="https://hacktx.com">the HackTX event page</a>.
-                <br><br>
-                Since space is limited, we will limited acceptances. We have two rounds of acceptances -- an early bird deadline on September 27th and a general application deadline of October 11th. 
-                <br><br>
-                <strong>Registering does not guarantee a spot at HackTX 2019.</strong> 
-                <br><br>
-                After filling out this form, you will be notified of whether you are accepted. You need to accept your invitation within the time limit, otherwise we will pass your invitation onto the next person on the waiting list. 
-                <br><br>
-                By registering for this event, you agree to follow the <a href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf">MLH code of conduct</a>.
-                <br><br>
-                Thank you so much for your interest and we hope to see you there! 
-            </p>
+          <p>
+            Filling out this form will register you for HackTX 2019, a Freetail
+            Hackers hackathon presented at the AT&T Conference Center in Austin,
+            TX from November 2nd, 2019 to November 3rd, 2019.
+            <strong>You must be at least 18 years old to register.</strong>
+            <br><br>
+            To learn more about the event, visit
+            <a href="https://hacktx.com">the HackTX event page</a>.
+            <br><br>
+            Since space is limited, we will limited acceptances. We have two
+            rounds of acceptances -- an early bird deadline on September 27th
+            and a general application deadline of October 11th.
+            <br><br>
+            <strong>Registering does not guarantee a spot at HackTX 2019.</strong>
+            <br><br>
+            After filling out this form, you will be notified of whether you are
+            accepted. You need to accept your invitation within the time limit,
+            otherwise we will pass your invitation onto the next person on the
+            waiting list.
+            <br><br>
+            By registering for this event, you agree to follow the <a
+              href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf">MLH code
+              of conduct</a>.
+            <br><br>
+            Thank you so much for your interest and we hope to see you there!
+          </p>
         </div>
 
         <br>
@@ -37,82 +46,70 @@
 
         <fieldset ng-disabled="regIsClosed">
 
-        <div class="field">
-          <label> Email* </label>
-          <input type="email"
-                 name="email"
-                 disabled="disabled"
-                 ng-model="user.email">
-        </div>
-
-        <div class="two fields">
           <div class="field">
-            <label> First Name* </label>
-            <input type="text"
-                   name="firstName"
-                   placeholder="John"
-                   ng-model="user.profile.firstName">
+            <label> Email* </label>
+            <input type="email"
+              name="email"
+              disabled="disabled"
+              ng-model="user.email">
           </div>
+
+          <div class="two fields">
+            <div class="field">
+              <label> First Name* </label>
+              <input type="text"
+                name="firstName"
+                placeholder="John"
+                ng-model="user.profile.firstName">
+            </div>
+            <div class="field">
+              <label> Last Name* </label>
+              <input type="text"
+                name="lastName"
+                placeholder="Smith"
+                ng-model="user.profile.lastName">
+            </div>
+          </div>
+
           <div class="field">
-            <label> Last Name* </label>
+            <label> Phone Number* </label>
+            <input type="tel"
+              name="phone"
+              ng-model="user.profile.phoneNumber"
+              placeholder="123-456-7890"
+              required>
+          </div>
+
+          <div class="field">
+            <label> Birthday* </label>
             <input type="text"
-                   name="lastName"
-                   placeholder="Smith"
-                   ng-model="user.profile.lastName">
+              name="birthday"
+              placeholder="11/01/2019"
+              ng-model="user.profile.birthday">
           </div>
-        </div>
 
-        <div class="field">
-          <label> Phone Number* </label>
-          <input type="tel"
-                 name="phone"
-                 ng-model="user.profile.phoneNumber"
-                 placeholder="123-456-7890"
-                 required>
-        </div>
-
-        <div class="field">
-          <label> Birthday* </label>
-          <input type="text"
-                 name="birthday"
-                 placeholder="11/01/2019"
-                 ng-model="user.profile.birthday">
-        </div>
-
-        <div class="field">
-          <p>
-            Checking the box below affirms that you are or will be 18 years or older by November 1st, 2019.
-          </p>
-          <p>
-            <strong>
-              We will be checking ID. If you are a minor, you will be turned away at the door.
-            </strong>
-          </p>
-          <div class="ui checkbox">
-            <input type="checkbox" id="adult" ng-model="user.profile.adult">
-            <label for="adult">I am 18 or older.</label>
+          <div class="field">
+            <p>
+              Checking the box below affirms that you are or will be 18 years or
+              older by November 1st, 2019.
+            </p>
+            <p>
+              <strong>
+                We will be checking ID. If you are a minor, you will be turned
+                away at the door.
+              </strong>
+            </p>
+            <div class="ui checkbox">
+              <input type="checkbox" id="adult" ng-model="user.profile.adult">
+              <label for="adult">I am 18 or older.</label>
+            </div>
           </div>
-        </div>
 
-        <br><br>
+          <br><br>
 
-        <div class="divided title"> Diversity </div>
+          <div class="divided title"> Diversity </div>
 
-        <div class="field" ng-show="user.profile.gender !== 'O'">
-          <label> Gender* </label>
-          <select
-            name="gender"
-            ng-model="user.profile.gender">
-            <option value="">Gender</option>
-            <option value="M">Male</option>
-            <option value="F">Female</option>
-            <option value="O">Other</option>
-            <option value="N">I prefer not to answer.</option>
-          </select>
-        </div>
-
-        <div class="two fields" ng-show="user.profile.gender === 'O'">
-          <div class="field"> 
+          <div class="field" ng-show="user.profile.gender !== 'O'">
             <label> Gender* </label>
             <select
               name="gender"
@@ -124,32 +121,29 @@
               <option value="N">I prefer not to answer.</option>
             </select>
           </div>
-          <div class="field">
-            <label> Please specify </label>
-            <input type="text"
-                   name="otherGender"
-                   ng-model="user.profile.otherGender">
+
+          <div class="two fields" ng-show="user.profile.gender === 'O'">
+            <div class="field">
+              <label> Gender* </label>
+              <select
+                name="gender"
+                ng-model="user.profile.gender">
+                <option value="">Gender</option>
+                <option value="M">Male</option>
+                <option value="F">Female</option>
+                <option value="O">Other</option>
+                <option value="N">I prefer not to answer.</option>
+              </select>
+            </div>
+            <div class="field">
+              <label> Please specify </label>
+              <input type="text"
+                name="otherGender"
+                ng-model="user.profile.otherGender">
+            </div>
           </div>
-        </div>
 
-        <div class="field" ng-show="user.profile.race !== 'O'">
-          <label> Race/Ethnicity* </label>
-          <select
-            name="race"
-            ng-model="user.profile.race">
-            <option value="">Race</option>
-            <option value="I">American Indian or Alaskan Native</option>
-            <option value="A">Asian / Pacific Islander</option>
-            <option value="B">Black or African American</option>
-            <option value="H">Hispanic</option>
-            <option value="W">White / Caucasian</option>
-            <option value="O">Multiple ethnicity / Other</option>
-            <option value="N">I prefer not to answer.</option>
-          </select>
-        </div>
-
-        <div class="two fields" ng-show="user.profile.race === 'O'">
-          <div class="field"> 
+          <div class="field" ng-show="user.profile.race !== 'O'">
             <label> Race/Ethnicity* </label>
             <select
               name="race"
@@ -164,112 +158,154 @@
               <option value="N">I prefer not to answer.</option>
             </select>
           </div>
-          <div class="field">
-            <label> Please specify </label>
-            <input type="text"
-                   name="otherRace"
-                   ng-model="user.profile.otherRace">
-          </div>
-        </div>
 
-        <br><br>
-
-        <div class="divided title"> Experience </div>
-
-        <div class="field" ng-show="autoFilledSchool">
-          <label> School* </label>
-          <input class="ui input"
-                 disabled="disabled"
-                 ng-show="autoFilledSchool"
-                 ng-model="user.profile.school">
-        </div>
-
-        <div class="field" ng-show="!autoFilledSchool">
-          <label> School* </label>
-          <div id="school" class="ui search">
-            <div class="ui input">
-              <input class="prompt" 
-                     type="text" 
-                     placeholder="School" 
-                     name="school" 
-                     ng-model="user.profile.school">                
+          <div class="two fields" ng-show="user.profile.race === 'O'">
+            <div class="field">
+              <label> Race/Ethnicity* </label>
+              <select
+                name="race"
+                ng-model="user.profile.race">
+                <option value="">Race</option>
+                <option value="I">American Indian or Alaskan Native</option>
+                <option value="A">Asian / Pacific Islander</option>
+                <option value="B">Black or African American</option>
+                <option value="H">Hispanic</option>
+                <option value="W">White / Caucasian</option>
+                <option value="O">Multiple ethnicity / Other</option>
+                <option value="N">I prefer not to answer.</option>
+              </select>
             </div>
-            <div class="results"></div>
-          </div>
-        </div>
-
-        <div class="field">
-          <label> Major* </label>
-          <div id="major" class="ui search">
-            <div class="ui input">
-              <input class="prompt"
-                     type="text"
-                     placeholder="Major"
-                     name="major"
-                     ng-model="user.profile.major">
+            <div class="field">
+              <label> Please specify </label>
+              <input type="text"
+                name="otherRace"
+                ng-model="user.profile.otherRace">
             </div>
-            <div class="results"></div>
           </div>
-        </div>
 
-        <div class="field">
-          <label>Class Standing*</label>
-          <select name="standing"
-                  ng-model="user.profile.standing">
-            <option value="F">Undergraduate Freshman</option>
-            <option value="P">Undergraduate Sophomore</option>
-            <option value="J">Undergraduate Junior</option>
-            <option value="S">Undergraduate Senior</option>
-            <option value="M">Pursuing Masters Degree</option>
-            <option value="D">Pursuing Doctorate Degree</option>
-          </select>
-        </div>
+          <br><br>
 
-        <div class="field" ng-show="user.profile.standing && user.profile.standing !== 'M' && user.profile.standing !== 'D'">
-          <label>Graduation*</label>
-          <select
-            name="graduation"
-            ng-model="user.profile.graduationTime">
-            <option value="">Graduation Time</option>
-            <option ng-show="user.profile.standing === 'S'" value="Fall 2019">Fall 2019</option>
-            <option ng-show="user.profile.standing === 'S'" value="Spring 2020">Spring 2020</option>
-            <option ng-show="user.profile.standing === 'J'" value="Fall 2020">Fall 2020</option>
-            <option ng-show="user.profile.standing === 'J'" value="Spring 2021">Spring 2021</option>
-            <option ng-show="user.profile.standing === 'P'" value="Fall 2021">Fall 2021</option>
-            <option ng-show="user.profile.standing === 'P'" value="Spring 2022">Spring 2022</option>
-            <option ng-show="user.profile.standing === 'F'" value="Fall 2022">Fall 2022</option>
-            <option ng-show="user.profile.standing === 'F'" value="Spring 2023">Spring 2023</option>
-            <option value="Other">Other</option>
-          </select>
-        </div>
+          <div class="divided title"> Experience </div>
 
-        <div class="field">
-          <label> Skill Sheet* </label>
-          <p>
-            Upload a document outlining any skills or experience you'd like to share (ex. resume). PDF only!
-          </p>
-          <input 
-            type="file"
-            name="resume"
-            accept="application/pdf"
-            ng-model="user.profile.resume"
-            onchange="angular.element(this).scope().uploadResume(this.files)"
-            >
-        </div>
+          <div class="field" ng-show="autoFilledSchool">
+            <label> School* </label>
+            <input class="ui input"
+              disabled="disabled"
+              ng-show="autoFilledSchool"
+              ng-model="user.profile.school">
+          </div>
 
-        <div class="field" ng-hide="user.profile.firstHackathon === 'no'">
-          <label> Would HackTX be your 1st hackathon?* </label>
-          <select
-            name="firstHackathon"
-            ng-model="user.profile.firstHackathon">
-            <option value="">Select an option</option>
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
-          </select>
-        </div>
+          <div class="field" ng-show="!autoFilledSchool">
+            <label> School* </label>
+            <div id="school" class="ui search">
+              <div class="ui input">
+                <input class="prompt"
+                  type="text"
+                  placeholder="School"
+                  name="school"
+                  ng-model="user.profile.school">
+              </div>
+              <div class="results"></div>
+            </div>
+          </div>
 
-        <div class="two fields" ng-show="user.profile.firstHackathon === 'no'">
           <div class="field">
+            <label> Major* </label>
+            <div id="major" class="ui search">
+              <div class="ui input">
+                <input class="prompt"
+                  type="text"
+                  placeholder="Major"
+                  name="major"
+                  ng-model="user.profile.major">
+              </div>
+              <div class="results"></div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Class Standing*</label>
+            <select name="standing"
+              ng-model="user.profile.standing">
+              <option value="F">Undergraduate Freshman</option>
+              <option value="P">Undergraduate Sophomore</option>
+              <option value="J">Undergraduate Junior</option>
+              <option value="S">Undergraduate Senior</option>
+              <option value="M">Pursuing Masters Degree</option>
+              <option value="D">Pursuing Doctorate Degree</option>
+            </select>
+          </div>
+
+          <div class="field" ng-show="user.profile.standing &&
+            user.profile.standing !== 'M' && user.profile.standing !== 'D'">
+            <label>Graduation*</label>
+            <select
+              name="graduation"
+              ng-model="user.profile.graduationTime">
+              <option value="">Graduation Time</option>
+              <option ng-show="user.profile.standing === 'S'" value="Fall 2019">Fall
+                2019</option>
+              <option ng-show="user.profile.standing === 'S'" value="Spring
+                2020">Spring 2020</option>
+              <option ng-show="user.profile.standing === 'J'" value="Fall 2020">Fall
+                2020</option>
+              <option ng-show="user.profile.standing === 'J'" value="Spring
+                2021">Spring 2021</option>
+              <option ng-show="user.profile.standing === 'P'" value="Fall 2021">Fall
+                2021</option>
+              <option ng-show="user.profile.standing === 'P'" value="Spring
+                2022">Spring 2022</option>
+              <option ng-show="user.profile.standing === 'F'" value="Fall 2022">Fall
+                2022</option>
+              <option ng-show="user.profile.standing === 'F'" value="Spring
+                2023">Spring 2023</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label> Skill Sheet* </label>
+            <p>
+              Upload a document outlining any skills or experience you'd like to
+              share (ex. resume). PDF only!
+            </p>
+            <input
+              type="file"
+              name="resume"
+              accept="application/pdf"
+              ng-model="user.profile.resume"
+              onchange="angular.element(this).scope().uploadResume(this.files)">
+          </div>
+
+          <!-- This works for selecting a single skill, but not multiple... need to use multiselect -->
+          <div class="field">
+            <label> Skills* </label>
+            <p>
+              Feel free to list all your expertise. (psst... HackTX sponsors
+              will use this to search for your resume!)
+            </p>
+            <div id="skills" class="ui search">
+              <div class="ui input">
+                <input class="prompt"
+                  type="text"
+                  placeholder="Skill"
+                  name="skills"
+                  ng-model="user.profile.skills">
+              </div>
+              <div class="results"></div>
+            </div>
+          </div>
+
+          <!-- Multiselect -->
+          <div isteven-multi-select
+            input-model="modernBrowsers"
+            output-model="outputBrowsers"
+            button-label="icon name"
+            item-label="icon name maker"
+            tick-property="ticked">
+          </div>
+
+          <div class="field" ng-hide="user.profile.firstHackathon === 'no'">
             <label> Would HackTX be your 1st hackathon?* </label>
             <select
               name="firstHackathon"
@@ -279,72 +315,89 @@
               <option value="no">No</option>
             </select>
           </div>
-          <div class="field">
-            <label> Number of Hackathons Attended </label>
-            <input type="number"
-                   name="numHackathons"
-                   ng-model="user.profile.numHackathons">
-          </div>
-        </div>
-        
-        <br><br>
 
-        <div class="divided title"> Additional Information </div>
-
-        <div class="field">
-            <label> How did you hear about HackTX? </label>
-        </div>
-
-        <div class="inline fields">
-            <div class="field" ng-repeat="(key, value) in socialMedia">
-                <div class="ui checkbox">
-                    <input type="checkbox" ng-model="socialMedia[key]">
-                    <label>{{key}}</label>
-                </div>
+          <div class="two fields" ng-show="user.profile.firstHackathon ===
+            'no'">
+            <div class="field">
+              <label> Would HackTX be your 1st hackathon?* </label>
+              <select
+                name="firstHackathon"
+                ng-model="user.profile.firstHackathon">
+                <option value="">Select an option</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+              </select>
             </div>
-        </div>
+            <div class="field">
+              <label> Number of Hackathons Attended </label>
+              <input type="number"
+                name="numHackathons"
+                ng-model="user.profile.numHackathons">
+            </div>
+          </div>
 
-        <div class="field">
+          <br><br>
+
+          <div class="divided title"> Additional Information </div>
+
+          <div class="field">
+            <label> How did you hear about HackTX? </label>
+          </div>
+
+          <div class="inline fields">
+            <div class="field" ng-repeat="(key, value) in socialMedia">
+              <div class="ui checkbox">
+                <input type="checkbox" ng-model="socialMedia[key]">
+                <label>{{key}}</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
             <label> Do you need reimbursement?* </label>
             <select name="reimbursement"
-                    ng-model="user.profile.reimbursement">
-                <option value="O">Yes, out of state</option>
-                <option value="I">Yes, in state</option>
-                <option value="N">No</option>
+              ng-model="user.profile.reimbursement">
+              <option value="O">Yes, out of state</option>
+              <option value="I">Yes, in state</option>
+              <option value="N">No</option>
             </select>
-        </div>
+          </div>
 
-        <div class="field">
+          <div class="field">
             <label> Why do you want to attend HackTX?* </label>
             <textarea name="essay"
-                      ng-model="user.profile.essay" />
-        </div>
+              ng-model="user.profile.essay" />
+            </div>
 
-        <div class="field">
-            <label> Anything else you'd like to tell us? </label>
-            <textarea name="description"
-                      ng-model="user.profile.description" />
-        </div>
-          
-        <br>
-        <br> 
+            <div class="field">
+              <label> Anything else you'd like to tell us? </label>
+              <textarea name="description"
+                ng-model="user.profile.description" />
+              </div>
 
-        <div class="divided title">That's a wrap!</div>
-        <div class="field">
-            <p>
-                Thanks so much for filling this form out. We'll be in touch via the email that you listed in this form. You should be notified of your acceptance within a week or so. Please 
-                <a href="mailto:hello@freetailhackers.com">email us</a>
-                if you have any questions! Good luck and we hope to see you there : )
-            </p>
-        </div>
+              <br>
+              <br>
 
-        <div class="field" ng-hide="regIsClosed">
-          <div class="fluid ui purple submit button" ng-click="submitForm()">
-            Submit
+              <div class="divided title">That's a wrap!</div>
+              <div class="field">
+                <p>
+                  Thanks so much for filling this form out. We'll be in touch
+                  via the email that you listed in this form. You should be
+                  notified of your acceptance within a week or so. Please
+                  <a href="mailto:hello@freetailhackers.com">email us</a>
+                  if you have any questions! Good luck and we hope to see you
+                  there : )
+                </p>
+              </div>
+
+              <div class="field" ng-hide="regIsClosed">
+                <div class="fluid ui purple submit button"
+                  ng-click="submitForm()">
+                  Submit
+                </div>
+              </div>
+            </fieldset>
           </div>
         </div>
-        </fieldset>
       </div>
     </div>
-  </div>
-</div>
