@@ -58,9 +58,10 @@ angular.module('reg')
       });
 
       $scope.goToPage = function (page) {
-        $state.go('app.resumes.users', {
-          page: page,
-          size: $stateParams.size || 50
+        UserService
+        .getPage(page, $stateParams.size || 50, $stateParams.query)
+        .then(response => {
+          updatePage(response.data);
         });
       };
 
