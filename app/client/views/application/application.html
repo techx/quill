@@ -274,6 +274,7 @@
               name="resume"
               accept="application/pdf"
               ng-model="user.profile.resume"
+              id="resumeInput"
               onchange="angular.element(this).scope().uploadResume(this.files)">
           </div>
 
@@ -284,25 +285,14 @@
               Feel free to list all your expertise. (psst... HackTX sponsors
               will use this to search for your resume!)
             </p>
-            <div id="skills" class="ui search">
-              <div class="ui input">
-                <input class="prompt"
-                  type="text"
-                  placeholder="Skill"
-                  name="skills"
-                  ng-model="user.profile.skills">
-              </div>
-              <div class="results"></div>
+            <!-- Multiselect -->
+            <div isteven-multi-select
+              input-model="skills"
+              output-model="outputSkills"
+              button-label="name"
+              item-label="name"
+              tick-property="selected">
             </div>
-          </div>
-
-          <!-- Multiselect -->
-          <div isteven-multi-select
-            input-model="modernBrowsers"
-            output-model="outputSkills"
-            button-label="name"
-            item-label="name"
-            tick-property="selected">
           </div>
 
           <div class="field" ng-hide="user.profile.firstHackathon === 'no'">

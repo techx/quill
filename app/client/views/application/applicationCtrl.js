@@ -21,15 +21,6 @@ angular.module('reg')
       $scope.isUtStudent = $scope.user.email.split('@')[1] == 'utexas.edu';
 
       $scope.resume = null;
-
-      $scope.modernBrowsers = [
-        { name: "Opera", selected: false },
-        { name: "Internet Explorer", selected: false },
-        { name: "Firefox", selected: false },
-        { name: "Safari", selected: false },
-        { name: "Chrome", selected: false }
-      ];
-
       // If so, default them to adult: true
       if ($scope.isUtStudent) {
         $scope.user.profile.adult = true;
@@ -53,7 +44,7 @@ angular.module('reg')
       }
 
       $scope.socialMedia = socialMedia;
-
+      $scope.skills = [];
       $scope.regIsClosed = Date.now() > settings.data.timeClose || Date.now() < settings.data.timeOpen;
 
       // Populate the school dropdown
@@ -131,24 +122,10 @@ angular.module('reg')
         $http
           .get('/assets/skills.csv')
           .then(function (res) {
-            $scope.skills = res.data.split('\n');
-            $scope.skills.push('Other');
-
-            var content = [];
-
-            for (i = 0; i < $scope.skills.length; i++) {
-              $scope.skills[i] = $scope.skills[i].trim();
-              content.push({ title: $scope.skills[i] })
-            }
-
-            $('#skills.ui.search')
-              .search({
-                source: content,
-                cache: true,
-                onSelect: function (result, response) {
-                  $scope.user.profile.skills = result.title.trim();
-                }
-              })
+            res.data.split('\n').forEach(element => {
+              $scope.skills.push({ 'name': element, 'selected': false });
+            });
+            $scope.skills.push({ 'name': 'Other', 'selected': false });
           });
       }
 
@@ -165,6 +142,12 @@ angular.module('reg')
         profile.socialMedia = drs;
 
         profile.name = util.format("%s %s", profile.firstName.trim(), profile.lastName.trim());
+
+        $scope.outputSkills.forEach(skill => {
+          profile.skills.push(skill.name);
+        });
+
+        console.log(profile.skills);
 
         UserService
           .updateProfile(Session.getUserId(), $scope.user.profile)
