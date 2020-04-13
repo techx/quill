@@ -147,8 +147,6 @@ angular.module('reg')
           profile.skills.push(skill.name);
         });
 
-        console.log(profile.skills);
-
         UserService
           .updateProfile(Session.getUserId(), $scope.user.profile)
           .then(response => {
