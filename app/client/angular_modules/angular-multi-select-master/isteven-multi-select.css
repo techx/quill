@@ -109,7 +109,7 @@
 /* filter */
 .multiSelect .inputFilter {
 
-    border: 0px;
+    border: none !important;
     height: 26px;
     font-size: 14px;
     width: 100%;
@@ -293,7 +293,7 @@
 .multiSelect .multiSelectItem .acol label {
     display: inline-block;
     padding-right: 30px;
-    font-size: 1.1rem;
+    font-size: 1.0rem;
     color: #4285F4;
     margin: 0px;
     font-weight: normal;
