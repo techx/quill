@@ -17,12 +17,22 @@
               <i class="search icon"></i>
             </div>
           </div>
-
         </div>
 
         <div class="ui divider"></div>
 
-        <button ng-repeat="page in pages" ng-class="page == currentPage ? 'active pink' : ''" ng-click="goToPage(page)"
+        <div isteven-multi-select
+          input-model="skills"
+          output-model="outputSkills"
+          button-label="name"
+          item-label="name"
+          tick-property="selected">
+        </div>
+
+        <div class="ui divider"></div>
+
+        <button ng-repeat="page in pages" ng-class="page == currentPage ?
+          'active pink' : ''" ng-click="goToPage(page)"
           class="ui icon basic page button">
           {{page}}
         </button>

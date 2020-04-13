@@ -15,6 +15,7 @@ angular.module('reg')
 
       $scope.pages = [];
       $scope.users = [];
+      $scope.skills = [];
 
       // Semantic-UI moves modal content into a dimmer at the top level.
       // While this is usually nice, it means that with our routing will generate
@@ -30,6 +31,19 @@ angular.module('reg')
         },
         profile: ''
       });
+      
+      // populateSkills();
+
+      function populateSkills() {
+        $http
+          .get('/assets/skills.csv')
+          .then(function (res) {
+            res.data.split('\n').forEach(element => {
+              $scope.skills.push({ 'name': element, 'selected': false });
+            });
+            $scope.skills.push({ 'name': 'Other', 'selected': false });
+          });
+      }
 
       function updatePage(data) {
         $scope.users = data.users;
