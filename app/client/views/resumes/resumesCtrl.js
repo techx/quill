@@ -10,12 +10,23 @@ angular.module('reg')
     '$scope',
     '$state',
     '$stateParams',
+    '$http',
     'UserService',
-    function ($scope, $state, $stateParams, UserService) {
+    function ($scope, $state, $stateParams, $http, UserService) {
 
       $scope.pages = [];
       $scope.users = [];
       $scope.skills = [];
+
+      $scope.gradChoices = [
+        { semester: 'Fall 2020', selected: false },
+        { semester: 'Spring 2021', selected: false },
+        { semester: 'Fall 2021', selected: false },
+        { semester: 'Spring 2022', selected: false },
+        { semester: 'Fall 2022', selected: false },
+        { semester: 'Spring 2023', selected: false },
+        { semester: 'Fall 2023', selected: false },
+      ]
 
       // Semantic-UI moves modal content into a dimmer at the top level.
       // While this is usually nice, it means that with our routing will generate
@@ -31,8 +42,8 @@ angular.module('reg')
         },
         profile: ''
       });
-      
-      // populateSkills();
+
+      populateSkills();
 
       function populateSkills() {
         $http
@@ -73,10 +84,10 @@ angular.module('reg')
 
       $scope.goToPage = function (page) {
         UserService
-        .getPage(page, $stateParams.size || 50, $stateParams.query)
-        .then(response => {
-          updatePage(response.data);
-        });
+          .getPage(page, $stateParams.size || 50, $stateParams.query)
+          .then(response => {
+            updatePage(response.data);
+          });
       };
 
       function formatTime(time) {

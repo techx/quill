@@ -20,12 +20,25 @@
         </div>
 
         <div class="ui divider"></div>
-
+        <div class="ui header">
+          Filter by Skills
+        </div>
         <div isteven-multi-select
           input-model="skills"
           output-model="outputSkills"
           button-label="name"
           item-label="name"
+          tick-property="selected">
+        </div>
+
+        <div class="ui header">
+          Filter by Graduation
+        </div>
+        <div isteven-multi-select
+          input-model="gradChoices"
+          output-model="outputGrad"
+          button-label="semester"
+          item-label="semester"
           tick-property="selected">
         </div>
 
