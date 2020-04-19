@@ -208,10 +208,13 @@ UserController.getPage = function (query, callback) {
   var page = query.page;
   var size = parseInt(query.size);
   var searchText = query.text;
+  var gradYears = query.grad;
+  var skills = query.skills;
 
+  var queries = [];
+  var year_query = {};
   var findQuery = {};
   if (searchText.length > 0) {
-    var queries = [];
     var re = new RegExp(searchText, 'i');
     queries.push({email: re});
     queries.push({'profile.name': re});
@@ -222,8 +225,32 @@ UserController.getPage = function (query, callback) {
       queries.push({_id: searchText});
     }
 
-    findQuery.$or = queries;
+    findQuery.$and = [];
+    findQuery.$and.push({'$or': queries});
   }
+
+  // check if grad year passed in
+  if (gradYears.length > 0) {
+    years = gradYears.split(",");
+    year_query = {'$in': years};
+    
+    if (!findQuery.$and) {
+      findQuery.$and = [];
+    }
+    findQuery.$and.push({'profile.graduationTime': year_query});
+  }
+
+  // check if skills passed in
+  if (skills.length > 0) {
+    skills_arr = skills.split(",");
+    skills_query = {'$in': skills_arr};
+    match_query = {'$elemMatch': skills_query}
+    if (!findQuery.$and) {
+      findQuery.$and = [];
+    }
+    findQuery.$and.push({'profile.skills': match_query});
+  }
+
 
   User
     .find(findQuery)
@@ -280,7 +307,6 @@ UserController.updateProfileById = function (id, profile, callback) {
   // Validate the user profile, and mark the user as profile completed
   // when successful.
   User.validateProfile(profile, function (err) {
-
     if (err) {
       return callback({message: 'invalid profile'});
     }
@@ -321,7 +347,6 @@ UserController.updateProfileById = function (id, profile, callback) {
         new: true
       },
       callback);
-
   });
 };
 

@@ -180,7 +180,6 @@ module.exports = function(router) {
     var resume = req.files[0];
     var id = req.params.id;
 
-    console.log(resume);
     UserController.updateResumeById(id, resume, defaultResponse(req, res));
   });
 

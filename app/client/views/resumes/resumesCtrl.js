@@ -1,6 +1,11 @@
 const moment = require('moment');
 const swal = require('sweetalert');
 const pdfjsLib = require('pdfjs-dist');
+const JSZip = require('jszip');
+const FileSaver = require('file-saver');
+var zip = new JSZip();
+var selected_resumes;
+
 
 // The workerSrc property shall be specified.
 pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.js`;
@@ -16,8 +21,10 @@ angular.module('reg')
 
       $scope.pages = [];
       $scope.users = [];
-      $scope.skills = [];
+      $scope.skillChoices = [];
 
+      $scope.selectedSkills = [];
+      $scope.selectedGrad = [];
       $scope.gradChoices = [
         { semester: 'Fall 2020', selected: false },
         { semester: 'Spring 2021', selected: false },
@@ -50,9 +57,9 @@ angular.module('reg')
           .get('/assets/skills.csv')
           .then(function (res) {
             res.data.split('\n').forEach(element => {
-              $scope.skills.push({ 'name': element, 'selected': false });
+              $scope.skillChoices.push({ 'name': element, 'selected': false });
             });
-            $scope.skills.push({ 'name': 'Other', 'selected': false });
+            $scope.skillChoices.push({ 'name': 'Other', 'selected': false });
           });
       }
 
@@ -68,33 +75,102 @@ angular.module('reg')
         $scope.pages = p;
       }
 
+      $scope.onSelectYear = function(data) {
+        if (data.selected) {
+            $scope.selectedGrad.push(data.semester);
+        } else {
+            $scope.selectedGrad = $scope.selectedGrad.filter(semester => semester !== data.semester)
+        }
+        updateFilters();
+      }
+
+      $scope.onClearYears = function() {
+        $scope.selectedGrad = [];
+        updateFilters();
+      }
+
+      $scope.onSelectSkill = function(data) {
+        if (data.selected) {
+            $scope.selectedSkills.push(data.name);
+        } else {
+            $scope.selectedSkills = $scope.selectedSkills.filter(name => name !== data.name)
+        }
+        updateFilters();
+      }
+
+      $scope.onClearSkills = function() {
+        $scope.selectedSkills = [];
+        updateFilters();
+      }
+
       UserService
-        .getPage($stateParams.page, $stateParams.size, $stateParams.query)
+        .getPage($stateParams.page, $stateParams.size, $stateParams.query, $stateParams.gradYears, $stateParams.skills)
         .then(response => {
           updatePage(response.data);
         });
 
       $scope.$watch('queryText', function (queryText) {
         UserService
-          .getPage($stateParams.page, $stateParams.size, queryText)
+          .getPage(0, $scope.pageSize, queryText, $scope.selectedGrad.toString(), $scope.selectedSkills.toString())
           .then(response => {
             updatePage(response.data);
           });
       });
 
+
       $scope.goToPage = function (page) {
         UserService
-          .getPage(page, $stateParams.size || 50, $stateParams.query)
+          .getPage(page, $scope.size || 50, $scope.queryText, $scope.selectedGrad.toString(), $scope.selectedSkills.toString())
           .then(response => {
             updatePage(response.data);
           });
       };
+
+      function updateFilters() {
+        UserService
+        .getPage(0, $scope.pageSize, $scope.queryText, $scope.selectedGrad.toString(), $scope.selectedSkills.toString())
+        .then(response => {
+          updatePage(response.data);
+        });
+      }
 
       function formatTime(time) {
         if (time) {
           return moment(time).format('MMMM Do YYYY, h:mm:ss a');
         }
       }
+
+      $scope.updateCheckedCount = function(user){
+        if(user.checked) {
+          if (user._id) {
+            UserService
+              .getResume(user._id)
+              .then(pdfPath => {
+                // Asynchronous download of PDF
+                var loadingTask = pdfjsLib.getDocument(pdfPath.data.Body);
+                loadingTask.promise.then(function (pdf) {
+                  zip.file("resume" + user._id + ".pdf", pdfPath.data.Body.data);
+                });
+              });
+            }
+        } else { 
+          zip.remove("resume" + user._id + ".pdf");
+        }
+      }
+
+      $scope.getCheckedCount = function() {
+        return $scope.users.filter(function(resume){
+          return resume.checked;
+        }).length;
+      };
+
+      $scope.downloadCheckedResumes = function() {
+        zip.generateAsync({type:"blob"})
+       .then(function(content) {
+           FileSaver.saveAs(content, "resumes.zip");
+       }); 
+      };
+
 
       function getResume(user) {
         if (user._id) {
@@ -104,12 +180,10 @@ angular.module('reg')
               // Asynchronous download of PDF
               var loadingTask = pdfjsLib.getDocument(pdfPath.data.Body);
               loadingTask.promise.then(function (pdf) {
-                console.log('PDF loaded');
 
                 // Fetch the first page
                 var pageNumber = 1;
                 pdf.getPage(pageNumber).then(function (page) {
-                  console.log('Page loaded');
 
                   var scale = 1.0;
                   var viewport = page.getViewport({
