@@ -50,6 +50,9 @@ gulp.task('sass', async function() {
       .on('error', sass.logError)
     .pipe(cleanCss())
     .pipe(gulp.dest('app/client/build'));
+  // build for multi-select dropdown
+  gulp.src('node_modules/isteven-angular-multiselect/isteven-multi-select.css')
+    .pipe(gulp.dest('app/client/build'));
 });
 
 gulp.task('build', gulp.series(gulp.parallel('js', 'sass'), () => {
