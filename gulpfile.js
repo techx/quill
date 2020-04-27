@@ -26,7 +26,7 @@ gulp.task('default', function(){
   console.log('yo. use gulp watch or something');
 });
 
-gulp.task('js', async function () {
+gulp.task('js', function () {
   var b = browserify({
     entries: 'app/client/src/app.js',
     debug: environment === "dev",
@@ -44,7 +44,7 @@ gulp.task('js', async function () {
     .pipe(gulp.dest('app/client/build'));
 });
 
-gulp.task('sass', async function() {
+gulp.task('sass', function() {
   gulp.src('app/client/stylesheets/site.scss')
     .pipe(sass())
       .on('error', sass.logError)
@@ -55,17 +55,17 @@ gulp.task('sass', async function() {
     .pipe(gulp.dest('app/client/build'));
 });
 
-gulp.task('build', gulp.series(gulp.parallel('js', 'sass'), () => {
+gulp.task('build', ['js', 'sass'], function() {
   // Yup, build the js and sass.
-}));
+});
 
-gulp.task('watch', gulp.series(gulp.parallel('js', 'sass'), async function() {
-  gulp.watch('app/client/src/**/*.js', gulp.series('js'));
-  gulp.watch('app/client/views/**/*.js', gulp.series('js'));
-  gulp.watch('app/client/stylesheets/**/*.scss', gulp.series('sass'));
-}));
+gulp.task('watch', ['js', 'sass'], function() {
+  gulp.watch('app/client/src/**/*.js', ['js']);
+  gulp.watch('app/client/views/**/*.js', ['js']);
+  gulp.watch('app/client/stylesheets/**/*.scss', ['sass']);
+});
 
-gulp.task('server', gulp.series('watch', async function() {
+gulp.task('server', ['watch'], function() {
   nodemon({
     script: 'app.js',
     env: { 'NODE_ENV': process.env.NODE_ENV || 'DEV' },
@@ -73,4 +73,4 @@ gulp.task('server', gulp.series('watch', async function() {
       'app/server'
     ]
   });
-}));
+});

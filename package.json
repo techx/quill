@@ -17,7 +17,7 @@
     "email-templates": "^5.0.2",
     "express": "^4.16.4",
     "file-saver": "^2.0.2",
-    "gulp": "^4.0.0",
+    "gulp": "^3.9.1",
     "gulp-buffer": "0.0.2",
     "gulp-tap": "^1.0.1",
     "jquery": "^3.4.1",
