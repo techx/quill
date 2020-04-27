@@ -72,6 +72,7 @@ var profile = {
     }
   },
   resume: Boolean,
+  skills: [String],
   firstHackathon: String,
   numHackathons: Number,
   socialMedia: [String],

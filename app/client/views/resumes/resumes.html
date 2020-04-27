@@ -17,12 +17,45 @@
               <i class="search icon"></i>
             </div>
           </div>
+        </div>
 
+        <div class="ui divider"></div>
+        <div class="ui header">
+          Filter by Skills
+        </div>
+        <div isteven-multi-select
+          input-model="skillChoices"
+          output-model="outputSkills"
+          button-label="name"
+          item-label="name"
+          tick-property="selected"
+          helper-elements="all filter none"
+          on-item-click="onSelectSkill(data)"
+          on-select-all="onClearSkills()"
+          on-select-none="onClearSkills()"
+          on-reset="onClearSkills()">
+        </div>
+
+        <div class="ui header">
+          Filter by Graduation
+        </div>
+        <div isteven-multi-select
+          input-model="gradChoices"
+          output-model="outputGrad"
+          button-label="semester"
+          item-label="semester"
+          tick-property="selected"
+          helper-elements="all filter none"
+          on-item-click="onSelectYear(data)"
+          on-select-all="onClearYears()"
+          on-select-none="onClearYears()"
+          on-reset="onClearYears()">
         </div>
 
         <div class="ui divider"></div>
 
-        <button ng-repeat="page in pages" ng-class="page == currentPage ? 'active pink' : ''" ng-click="goToPage(page)"
+        <button ng-repeat="page in pages" ng-class="page == currentPage ?
+          'active pink' : ''" ng-click="goToPage(page)"
           class="ui icon basic page button">
           {{page}}
         </button>
@@ -83,6 +116,7 @@
         <table class="ui celled selectable compact users table">
           <thead>
             <tr>
+              <th>Select</th>
               <th>Name</th>
               <th>E-mail address</th>
               <th>School</th>
@@ -90,26 +124,33 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-click="selectUser(user)" ng-repeat="user in users" ng-class="rowClass(user)">
+            <tr ng-repeat="user in users" ng-class="rowClass(user)">
               <td>
+                <input type="checkbox"
+                ng-model="user.checked"
+                ng-if="user.profile.resume"
+                ng-change="updateCheckedCount(user)">
+              </td>
+              <td ng-click="selectUser(user)">
                 <strong>
                   {{user.profile.name}}
                   &nbsp;
-
                 </strong>
               </td>
-              <td>{{user.email}}</td>
-              <td>{{user.profile.school}}</td>
+              <td ng-click="selectUser(user)">{{user.email}}</td>
+              <td ng-click="selectUser(user)">{{user.profile.school}}</td>
               <td class="collapsing">
                 {{user.profile.graduationYear}}
               </td>
-
             </tr>
           </tbody>
         </table>
-
+        <button
+        ng-class="'active pink'"
+        ng-click="downloadCheckedResumes(user)"
+        class="ui icon basic page button"> Download {{getCheckedCount()}} Resume(s)
+      </button>
       </div>
     </div>
-
   </div>
 </div>

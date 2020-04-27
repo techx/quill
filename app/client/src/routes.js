@@ -161,7 +161,9 @@ angular.module('reg')
         url: "/resumes/users?" +
           '&page' +
           '&size' +
-          '&query',
+          '&query' +
+          '&gradYears' +
+          '&skills',
         params: {
           query: {
             value: '',
