@@ -18,7 +18,7 @@
     "express": "^4.17.1",
     "gulp-buffer": "0.0.2",
     "gulp-tap": "^1.0.1",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "json2csv": "^4.5.4",
     "jsonwebtoken": "5.0.4",
     "method-override": "^3.0.0",
