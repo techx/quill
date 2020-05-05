@@ -56,7 +56,7 @@ angular.module('reg')
 
             for(i = 0; i < $scope.schools.length; i++) {
               $scope.schools[i] = $scope.schools[i].trim();
-              content.push({title: $scope.schools[i]})
+              content.push({title: $scope.schools[i]});
             }
 
             $('#school.ui.search')
@@ -66,7 +66,7 @@ angular.module('reg')
                 onSelect: function(result, response) {
                   $scope.user.profile.school = result.title.trim();
                 }
-              })
+              });
           });
       }
 

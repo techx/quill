@@ -199,7 +199,7 @@ module.exports = function(router) {
           console.log(err);
           return res.status(502).json({err});
         }
-        const filePath = path.join(__dirname, "../..","client","assets",filename)
+        const filePath = path.join(__dirname, "../..","client","assets",filename);
         fs.writeFile(filePath, csv, function (err) {
           if (err) {
             return res.json(err).status(503);
@@ -207,15 +207,15 @@ module.exports = function(router) {
           else {
             setTimeout(function () {
               fs.unlinkSync(filePath);
-            }, 30000)
+            }, 30000);
             return res.json({
               path: "/assets/" + filename,
               filename: filename
             });
           }
-        })
+        });
       }
-    })
+    });
   });
 
   /**

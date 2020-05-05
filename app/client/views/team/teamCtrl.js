@@ -22,7 +22,7 @@ angular.module('reg')
           .then(response => {
             $scope.error = null;
             $scope.teammates = response.data;
-          })
+          });
       }
 
       if ($scope.user.teamCode){

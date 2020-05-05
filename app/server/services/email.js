@@ -69,7 +69,7 @@ function sendOne(templateName, options, data, callback) {
     template: path.join(__dirname, "..", "emails", templateName),
   }).then(res => {
     if (callback) {
-      callback(undefined, res)
+      callback(undefined, res);
     }
   }).catch(err => {
     if (callback) {
