@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\app",
+    "\\app\\client",
+    "\\app\\client\\src",
+    "\\app\\client\\src\\services",
+    "\\app\\client\\views",
+    "\\app\\client\\views\\admin",
+    "\\app\\client\\views\\reset",
+    "\\app\\server",
+    "\\app\\server\\controllers"
+  ],
+  "SelectedNode": "\\app\\client\\views\\admin\\sponsors\\sponsors.html",
+  "PreviewInSolutionExplorer": false
+}

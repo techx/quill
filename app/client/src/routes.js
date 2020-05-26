@@ -231,7 +231,7 @@ angular.module('reg')
           }
         },
         templateUrl: "views/admin/sponsors/sponsors.html",
-        controller: 'AdminUsersCtrl'
+        controller: 'AdminSponsorsCtrl'
       })
       .state('reset', {
         url: "/reset/:token",
