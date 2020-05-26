@@ -14,7 +14,7 @@
                     <div class="ui divider"></div>
                     <div class="ui field">
                         <div class="ui pink button"
-                             ng-click="createSponsor(email)">
+                             ng-click="createSponsor(email, console.log(email))">
                             Add Sponsor
                         </div>
                     </div>
@@ -22,7 +22,8 @@
             </div>
         </div>
     </div>
-    <div class="ui stackable one column grid">
+    <div class="ui divider"></div>
+    <div class="three wide column">
         <div class="column">
             <div class="ui pink segment">
                 <div class="ui stackable grid">
@@ -53,108 +54,59 @@
                         </button>
 
                     </div>
-                    <div id="table-container" class="thirteen wide column">
-                        <div class="ui header" style="padding:20px">
-                            Sponsors
-                        </div>
-                        <div class="ui long user modal">
-                            <i class="close icon"></i>
-                            <div class="header">
-                                {{selectedUser.profile.name ? selectedUser.profile.name : selectedUser.email}}
-                                <span ng-show="selectedUser.admin">
-                                    (Admin)
-                                </span>
-                            </div>
-                            <div class="content">
+                    <div class="thirteen wide column">
+                    <div class="ui header">
+                        Sponsors
+                    </div>
+                    <table class="ui celled selectable compact sponsors table">
+                        <thead>
+                            <tr>
+                                <th>Company Name</th>
+                                <th>E-mail address</th>
+                                <th>Completed Profile</th>
+                                <th>Resume Access</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-click="selectUser(user)"
+                                ng-repeat="user in users"
+                                ng-class="rowClass(user)">
+                                <td>
+                                    <strong>
+                                        {{user.profile.name}}
+                                        &nbsp;
 
-                                <div>
-                                    <div class="ui header">
-                                        Status:
-                                        <div class="ui label">
-                                            {{selectedUser.status.name.toUpperCase()}}
-                                        </div>
-                                    </div>
-                                    <p>
-                                        <strong> Admitted by: </strong> {{selectedUser.status.admittedBy ? selectedUser.status.admittedBy : 'N/A'}}
-                                    </p>
-                                </div>
+                                    </strong>
+                                </td>
+                                <td>{{user.email}}</td>
+                                <td class="collapsing">
+                                    <!-- Verified -->
+                                    <i ng-if="user.verified"
+                                       class="green check circle icon">
+                                    </i>
+                                    <i ng-if="!user.verified"
+                                       class="red remove circle icon">
+                                    </i>
+                                    <button ng-click="goUser($event, user)"
+                                            class="ui circular mini basic icon button">
+                                        <i class="linkify icon"></i>
+                                    </button>
+                                </td>
 
-                                <div ng-repeat="section in selectedUser.sections">
-                                    <div class="ui divider"></div>
+                                <td class="collapsing">
 
-                                    <h3> {{section.title}} </h3>
+                                    <button class="accept ui circular mini basic green icon button"
+                                            ng-click="acceptUser($event, user, $index)">
+                                        <i class="add user icon"></i>
+                                    </button>
 
-                                    <p ng-repeat="field in section.fields">
-                                        <strong> {{field.name}}: </strong>
-
-                                        <span ng-show="field.type === 'boolean'">
-                                            <i class="red circle remove icon" ng-show="!field.value"></i>
-                                            <i class="green circle check icon" ng-show="field.value"></i>
-                                        </span>
-
-                                        <span ng-if="field.type == null">
-                                            {{field.value}}
-                                        </span>
-                                    </p>
-
-                                </div>
-
-                            </div>
-
-                            <div class="actions">
-                                <div class="ui positive right labeled icon button">
-                                    Nothing
-                                    <i class="checkmark icon"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <table class="ui celled selectable compact sponsors table">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>E-mail address</th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-click="selectUser(sponsor)"
-                                    ng-repeat="sponsor in sponsors"
-                                    ng-class="rowClass(sponsor)">
-                                    <td>
-                                        <strong>
-                                            {{sponsor.profile.name}}
-                                            &nbsp;
-
-                                        </strong>
-                                    </td>
-                                    <td>{{sponsor.email}}</td>
-                                    <td class="collapsing">
-                                        <!-- Verified -->
-                                        <i ng-if="user.verified"
-                                           class="green check circle icon">
-                                        </i>
-                                        <i ng-if="!user.verified"
-                                           class="red remove circle icon">
-                                        </i>
-                                    </td>
-
-                                    <!-- Host -->
-
-                                    <td class="right aligned collapsing">
-
-                                        <button class="accept ui circular mini basic green icon button"
-                                                ng-click="acceptUser($event, user, $index)">
-                                            <i class="add user icon"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                     </div>
                 </div>
             </div>
         </div>
-        </div>
     </div>
+</div>

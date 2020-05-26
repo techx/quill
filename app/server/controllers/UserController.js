@@ -185,6 +185,68 @@ UserController.createUser = function (email, password, callback) {
   });
 };
 
+/**
+ * Create a new sponsor given an email.
+ * @param  {String}   email    User's email.
+ * @param  {Function} callback args(err, user)
+ */
+UserController.createSponsor = function (email, callback) {
+
+  if (typeof email !== 'string') {
+    return callback({
+      message: 'Email must be a string.'
+    });
+  }
+
+  email = email.toLowerCase();
+
+  // Check that there isn't a user with this email already.
+  canRegister(email, function (err, valid) {
+
+    if (err || !valid) {
+      return callback(err);
+    }
+
+    var u = new User();
+    u.email = email;
+    var pass = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < 15; i++ ) {
+        pass += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    u.password = User.generateHash(pass);
+    u.save(function (err) {
+      if (err) {
+        // Duplicate key error codes
+        if (err.name === 'MongoError' && (err.code === 11000 || err.code === 11001)) {
+          return callback({
+            message: 'An account for this email already exists.'
+          });
+        }
+
+        return callback(err);
+      } else {
+        // yay! success.
+        var token = u.generateAuthToken();
+        u.status.isSponsor = true;
+        // Send over a verification email
+        var tempPass = pass;
+        Mailer.sendVerificationEmail(email, pass);
+        return callback(
+          null,
+          {
+            token: token,
+            user: u
+          }
+        );
+      }
+
+    });
+  });
+};
+
+
 UserController.getByToken = function (token, callback) {
   User.getByToken(token, callback);
 };
