@@ -91,14 +91,25 @@ var profile = {
     type: String,
     min: 0,
     max: 300,
-  },
-  sponsorshipTier: {
-    type: String,
-    enum: {
-      values: ['Kilo', 'Mega', 'Giga'] // Double check these!
-    }
   }
 };
+
+var sponsorFields = {
+    sponsorStatus: {
+        type:String, 
+        enum : {
+            values: ['incomplete', 'completedProfile', 'grantedResumeAccess']
+	    }
+    },
+    companyName: String,
+    sponsorshipTier: {
+        type: String,
+        enum: {
+            values: ['Kilo', 'Mega', 'Giga'] // Double check these!
+        }
+    },
+    pledgeAmount: Number
+}
 
 // Only after confirmed
 var confirmation = {
@@ -179,12 +190,7 @@ var status = {
   reimbursementGiven: {
     type: Boolean,
     default: false
-  },
-  isSponsor: {
-    type: Boolean,
-    required: true,
-    default: false
-  },
+  }
 };
 
 // define the schema for our admin model
@@ -210,6 +216,12 @@ var schema = new mongoose.Schema({
     type: Boolean,
     required: true,
     default: false,
+  },
+
+  sponsor: {
+    type: Boolean,
+    required: true,
+    default: false
   },
 
   timestamp: {

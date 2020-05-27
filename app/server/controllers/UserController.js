@@ -209,6 +209,7 @@ UserController.createSponsor = function (email, callback) {
 
     var u = new User();
     u.email = email;
+    // generate temporary password
     var pass = '';
     var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     var charactersLength = characters.length;
@@ -229,9 +230,10 @@ UserController.createSponsor = function (email, callback) {
       } else {
         // yay! success.
         var token = u.generateAuthToken();
+        // sponsor fields default declarations
         u.status.isSponsor = true;
+        u.sponsorFields.sponsorStatus = 'incomplete';
         // Send over a verification email
-        var tempPass = pass;
         Mailer.sendVerificationEmail(email, pass);
         return callback(
           null,
@@ -768,6 +770,46 @@ UserController.admitUser = function (id, user, callback) {
   });
 
 };
+
+/**
+ * [ADMIN ONLY]
+ *
+ * Give a sponsor access to Resumes
+ * @param  {String}   userId      User id of the sponsor granted access
+ * @param  {Function} callback    args(err, user)
+ */
+ UserController.grantResumeAccess = function (id, callback) {
+     User.findOneAndUpdate({
+        _id: id,
+	 }, {
+     $set: {
+        'sponsorFields.sponsorStatus': 'grantedResumeAccess'
+     }, {
+        new: true
+     },
+     callback);
+ }
+
+ /**
+ * [ADMIN ONLY]
+ *
+ * Remove sponsor's access to Resumes
+ * @param  {String}   userId      User id of the sponsor removed access
+ * @param  {Function} callback    args(err, user)
+ */
+ UserController.grantResumeAccess = function (id, callback) {
+     User.findOneAndUpdate({
+        _id: id,
+	 }, {
+     $set: {
+        'sponsorFields.sponsorStatus': 'completedProfile'
+     }, {
+        new: true
+     },
+     callback);
+ }
+
+
 
 /**
  * [ADMIN ONLY]

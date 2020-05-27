@@ -174,6 +174,132 @@ angular.module('reg')
         });
       };
 
+      $scope.grantResumeAccess = function($event, user, index) {
+        $event.stopPropagation();
+
+        console.log(user);
+
+        swal({
+          buttons: {
+            cancel: {
+              text: "Cancel",
+              value: null,
+              visible: true
+            },
+            accept: {
+              className: "danger-button",
+              closeModal: false,
+              text: "Yes, grant resume access",
+              value: true,
+              visible: true
+            }
+          },
+          dangerMode: true,
+          icon: "warning",
+          text: "You are about to grant resume access to " + user.profile.name + "!",
+          title: "Whoa, wait a minute!"
+        }).then(value => {
+          if (!value) {
+            return;
+          }
+
+          swal({
+            buttons: {
+              cancel: {
+                text: "Cancel",
+                value: null,
+                visible: true
+              },
+              yes: {
+                className: "danger-button",
+                closeModal: false,
+                text: "Yes, grant this user resume access",
+                value: true,
+                visible: true
+              }
+            },
+            dangerMode: true,
+            title: "Are you sure?",
+            text: "Your account will be logged as having granted this user resume access. " +
+              "Remember, this power is a privilege.",
+            icon: "warning"
+          }).then(value => {
+            if (!value) {
+              return;
+            }
+            UserService
+              .grantResumeAccess(user._id)
+              .then(response => {
+                $scope.users[index] = response.data;
+                swal("Accepted", response.data.profile.name + ' has been granted resume access.', "success");
+              });
+          });
+        });
+      };
+
+      $scope.removeResumeAccess = function($event, user, index) {
+        $event.stopPropagation();
+
+        console.log(user);
+
+        swal({
+          buttons: {
+            cancel: {
+              text: "Cancel",
+              value: null,
+              visible: true
+            },
+            accept: {
+              className: "danger-button",
+              closeModal: false,
+              text: "Yes, remove resume access",
+              value: true,
+              visible: true
+            }
+          },
+          dangerMode: true,
+          icon: "warning",
+          text: "You are about to remove resume access from " + user.profile.name + "!",
+          title: "Whoa, wait a minute!"
+        }).then(value => {
+          if (!value) {
+            return;
+          }
+
+          swal({
+            buttons: {
+              cancel: {
+                text: "Cancel",
+                value: null,
+                visible: true
+              },
+              yes: {
+                className: "danger-button",
+                closeModal: false,
+                text: "Yes, remove this user's resume access",
+                value: true,
+                visible: true
+              }
+            },
+            dangerMode: true,
+            title: "Are you sure?",
+            text: "Your account will be logged as having removed this user's resume access. " +
+              "Remember, this power is a privilege.",
+            icon: "warning"
+          }).then(value => {
+            if (!value) {
+              return;
+            }
+            UserService
+              .removeResumeAccess(user._id)
+              .then(response => {
+                $scope.users[index] = response.data;
+                swal("Accepted", response.data.profile.name + ' has been rejected resume access.', "success");
+              });
+          });
+        });
+      };
+
       $scope.toggleAdmin = function($event, user, index) {
         $event.stopPropagation();
 

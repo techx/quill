@@ -61,45 +61,59 @@
                     <table class="ui celled selectable compact sponsors table">
                         <thead>
                             <tr>
-                                <th>Company Name</th>
+                                <th>Name</th>
                                 <th>E-mail address</th>
-                                <th>Completed Profile</th>
-                                <th>Resume Access</th>
+                                <th>Company Name</th>
+                                <th class="center aligned">Completed Profile</th>
+                                <th class="center aligned">Resume Access</th>
+                                <th class="center aligned">Change Access</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-click="selectUser(user)"
+                            <tr ng-if="user.sponsor"
+                                ng-click="selectUser(user)"
                                 ng-repeat="user in users"
                                 ng-class="rowClass(user)">
                                 <td>
                                     <strong>
                                         {{user.profile.name}}
                                         &nbsp;
-
                                     </strong>
                                 </td>
                                 <td>{{user.email}}</td>
-                                <td class="collapsing">
-                                    <!-- Verified -->
-                                    <i ng-if="user.verified"
-                                       class="green check circle icon">
-                                    </i>
-                                    <i ng-if="!user.verified"
-                                       class="red remove circle icon">
-                                    </i>
+                                <td>{{user.sponsorFields.companyName}}</td>
+                                <td class="center aligned collapsing">
+                                    <!-- Completed Profile -->
                                     <button ng-click="goUser($event, user)"
                                             class="ui circular mini basic icon button">
                                         <i class="linkify icon"></i>
                                     </button>
+                                    <i ng-if="user.sponsorFields.sponsorStatus == 'completedProfile'"
+                                       class="green check circle icon">
+                                    </i>
+                                    <i ng-if="!user.status.completedProfile == 'incomplete'"
+                                       class="red remove circle icon">
+                                    </i>
                                 </td>
+                                <td class="center aligned collapsing">
+                                    <!-- Resume Access Status -->
+                                        <i ng-if="user.sponsorFields.sponsorStatus == 'grantedResumeAccess'"
+                                           class="green check circle icon">
+                                        </i>
+                                        <i ng-if="user.sponsorFields.sponsorStatus != 'grantedResumeAccess'"
+                                           class="red remove circle icon">
+                                        </i>
+                                </td>
+                                <td class="center aligned collapsing">
 
-                                <td class="collapsing">
-
-                                    <button class="accept ui circular mini basic green icon button"
-                                            ng-click="acceptUser($event, user, $index)">
+                                    <i ng-if="user.sponsorFields.sponsorStatus == 'completedProfile'" class="accept ui circular mini basic green icon button"
+                                       ng-click="grantResumeAccess($event, user, $index)">
                                         <i class="add user icon"></i>
-                                    </button>
-
+                                    </i>
+                                    <i ng-if="user.sponsorFields.sponsorStatus == 'grantedResumeAccess'" class="reject ui circular mini basic red icon button"
+                                       ng-click="removeResumeAccess($event, user, $index)">
+                                        <i class="remove user icon"></i>
+                                    </i>
                                 </td>
                             </tr>
                         </tbody>

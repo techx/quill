@@ -95,6 +95,14 @@ angular.module('reg')
         return $http.post(base + id + '/admit');
       },
 
+      grantResumeAccess: function(id){
+        return $http.post(base + id + '/grantresumeaccess');
+      },
+
+      removeResumeAccess: function(id){
+        return $http.post(base + id + '/removeresumeaccess');
+      },
+
       checkIn: function(id){
         return $http.post(base + id + '/checkin');
       },
