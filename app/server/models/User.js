@@ -272,6 +272,8 @@ var schema = new mongoose.Schema({
 
   status: status,
 
+  sponsorFields: sponsorFields
+
 });
 
 schema.set('toJSON', {

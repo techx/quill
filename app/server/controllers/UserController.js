@@ -784,6 +784,7 @@ UserController.admitUser = function (id, user, callback) {
 	 }, {
      $set: {
         'sponsorFields.sponsorStatus': 'grantedResumeAccess'
+     }
      }, {
         new: true
      },
@@ -803,6 +804,7 @@ UserController.admitUser = function (id, user, callback) {
 	 }, {
      $set: {
         'sponsorFields.sponsorStatus': 'completedProfile'
+     }
      }, {
         new: true
      },
