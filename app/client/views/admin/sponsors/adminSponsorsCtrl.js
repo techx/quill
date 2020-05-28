@@ -6,8 +6,8 @@ angular.module('reg')
     '$scope',
     '$state',
     '$stateParams',
-    'UserService',
-    function($scope, $state, $stateParams, UserService){
+    'SponsorService',
+    function($scope, $state, $stateParams, SponsorService){
       $scope.createText = $stateParams.email;
 
       $scope.pages = [];
@@ -22,12 +22,16 @@ angular.module('reg')
       $scope.selectedUser = {};
     
 
-      $scope.createSponsor = function(email) {
-        SponsorController
+      $scope.createSponsor = function() {
+        var email = $scope.email;
+        console.log(email);
+        SponsorService
         .createSponsor(email, function(){
-        console.log("success!");
+          console.log("success!");
+        })
+        .then(response => {
+          swal("Looks good!", "Sponsor Created!", "success");
         });
-        return;
 	  } 
 
     }]);

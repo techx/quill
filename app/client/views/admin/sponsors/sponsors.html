@@ -12,9 +12,9 @@
                                ng-model="email">
                     </div>
                     <div class="ui divider"></div>
-                    <div class="ui field">
+                    <div class="ui field" ng-controller="AdminSponsorsCtrl">
                         <div class="ui pink button"
-                             ng-click="createSponsor(email, console.log(email))">
+                             ng-click="createSponsor()">
                             Add Sponsor
                         </div>
                     </div>

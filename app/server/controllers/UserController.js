@@ -192,6 +192,7 @@ UserController.createUser = function (email, password, callback) {
  */
 UserController.createSponsor = function (email, callback) {
 
+  
   if (typeof email !== 'string') {
     return callback({
       message: 'Email must be a string.'

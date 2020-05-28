@@ -373,6 +373,22 @@ module.exports = function(router) {
     SettingsController.updateField('timeConfirm', time, defaultResponse(req, res));
   });
 
+
+  /**
+   * Add a sponsor to the database.
+   * 
+   * body: {
+   *  email: String
+   *  callback: Function
+   * }
+   * 
+   */
+  router.put('/settings/newSponsor', isAdmin, function(req, res){
+    var time = req.body.email;
+    var callback = req.body.callback;
+    UserController.createSponsor(time, callback);
+  });
+
   /**
    * Set the registration open and close times.
    * body : {
@@ -423,6 +439,7 @@ module.exports = function(router) {
     SettingsController.updateField('allowMinors', allowMinors, defaultResponse(req, res));
   });
 
+  
 
 
 };
