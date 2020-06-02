@@ -133,7 +133,7 @@ angular.module('reg')
 
       newSponsor: function(email, onSuccess, onFailure) {
         return $http
-          .post('/newsponsor', {
+          .post(base + 'newsponsor', {
             email: email,
           })
           .then(response => {

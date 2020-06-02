@@ -309,10 +309,11 @@ module.exports = function(router) {
     UserController.removeAdminById(id, user, defaultResponse(req, res));
   });
 
-  router.post('/newsponsor',
+  router.post('/users/newsponsor',
     function(req, res, next){
       // Register with an email and password
       var email = req.body.email;
+      console.log("Reached");
       UserController.createSponsor(email, function(err, user){
           if (err){
             return res.status(400).send(err);
