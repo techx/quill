@@ -309,7 +309,7 @@ module.exports = function(router) {
     UserController.removeAdminById(id, user, defaultResponse(req, res));
   });
 
-  router.post('/users/newsponsor',
+  router.post('/users/newsponsor', isAdmin,
     function(req, res, next){
       // Register with an email and password
       var email = req.body.email;

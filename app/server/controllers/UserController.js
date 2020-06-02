@@ -192,7 +192,7 @@ UserController.createUser = function (email, password, callback) {
  * @param  {Function} callback args(err, user)
  */
 UserController.createSponsor = function (email, callback) {
-
+console.log(email);
   if (typeof email !== 'string') {
     return callback({
       message: 'Email must be a string.'
@@ -200,24 +200,17 @@ UserController.createSponsor = function (email, callback) {
   }
 
   email = email.toLowerCase();
-
-  // Check that there isn't a user with this email already.
-  canRegister(email, password, function (err, valid) {
-
-    if (err || !valid) {
-      return callback(err);
-    }
-
-    var password = '';
-    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    var charactersLength = characters.length;
-    for ( var i = 0; i < 15; i++ ) {
+  var password = '';
+  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var charactersLength = characters.length;
+  for ( var i = 0; i < 15; i++ ) {
         password += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
-
+    console.log(password);
     var u = new User();
     u.email = email;
     u.password = User.generateHash(password);
+    console.log("generated user");
     u.save(function (err) {
       if (err) {
         // Duplicate key error codes
@@ -244,9 +237,7 @@ UserController.createSponsor = function (email, callback) {
           }
         );
       }
-
     });
-  });
 };
 
 
