@@ -4,13 +4,10 @@
     "\\app",
     "\\app\\client",
     "\\app\\client\\src",
-    "\\app\\client\\views",
-    "\\app\\client\\views\\admin",
-    "\\app\\server\\emails",
-    "\\app\\server\\emails\\email-sponsors",
-    "\\app\\server\\emails\\email-verify",
-    "\\app\\server\\services"
+    "\\app\\client\\src\\services",
+    "\\app\\server",
+    "\\app\\server\\controllers",
+    "\\app\\server\\routes"
   ],
-  "SelectedNode": "\\app\\client\\views\\admin\\stats",
   "PreviewInSolutionExplorer": false
 }
