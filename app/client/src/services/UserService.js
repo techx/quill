@@ -7,6 +7,18 @@ angular.module('reg')
     var users = '/api/users';
     var base = users + '/';
 
+    function loginSuccess(data, cb){
+        console.log("success!");
+        if (cb){
+          cb(data.user);
+        }
+      }
+
+
+      function loginFailure(data, cb){
+        console.log("failed!");
+      }
+
     return {
 
       // ----------------------
@@ -117,6 +129,21 @@ angular.module('reg')
 
       removeAdmin: function(id){
         return $http.post(base + id + '/removeadmin');
+      },
+
+      newSponsor: function(email, onSuccess, onFailure) {
+        return $http
+          .post('/newsponsor', {
+            email: email,
+          })
+          .then(response => {
+            loginSuccess(response.data, onSuccess);
+          }, response => {
+            loginFailure(response.data, onFailure);
+          })
+          .catch(function onError(error) {
+            console.log(error);         
+          });
       },
     };
   }

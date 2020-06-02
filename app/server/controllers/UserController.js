@@ -186,13 +186,13 @@ UserController.createUser = function (email, password, callback) {
 };
 
 /**
- * Create a new sponsor given an email.
+ * Create a new user given an email and a password.
  * @param  {String}   email    User's email.
+ * @param  {String}   password [description]
  * @param  {Function} callback args(err, user)
  */
 UserController.createSponsor = function (email, callback) {
 
-  
   if (typeof email !== 'string') {
     return callback({
       message: 'Email must be a string.'
@@ -202,22 +202,22 @@ UserController.createSponsor = function (email, callback) {
   email = email.toLowerCase();
 
   // Check that there isn't a user with this email already.
-  canRegister(email, function (err, valid) {
+  canRegister(email, password, function (err, valid) {
 
     if (err || !valid) {
       return callback(err);
     }
 
-    var u = new User();
-    u.email = email;
-    // generate temporary password
-    var pass = '';
+    var password = '';
     var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     var charactersLength = characters.length;
     for ( var i = 0; i < 15; i++ ) {
-        pass += characters.charAt(Math.floor(Math.random() * charactersLength));
+        password += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
-    u.password = User.generateHash(pass);
+
+    var u = new User();
+    u.email = email;
+    u.password = User.generateHash(password);
     u.save(function (err) {
       if (err) {
         // Duplicate key error codes
@@ -231,11 +231,11 @@ UserController.createSponsor = function (email, callback) {
       } else {
         // yay! success.
         var token = u.generateAuthToken();
-        // sponsor fields default declarations
-        u.status.isSponsor = true;
-        u.sponsorFields.sponsorStatus = 'incomplete';
+        u.sponsor = true;
+        console.log("Success! New sponsor: ", email, password);
         // Send over a verification email
-        Mailer.sendVerificationEmail(email, pass);
+        var verificationToken = u.password
+        Mailer.sendVerificationEmail(email, verificationToken);
         return callback(
           null,
           {
@@ -902,6 +902,37 @@ UserController.removeAdminById = function(id, user, callback){
   },
   callback);
 };
+
+UserController.newSponsor = function(email, callback){
+  
+  
+  User.findOneAndUpdate({
+    _id: id,
+    verified: true
+  },{
+    $set: {
+      'sponsor': true
+    }
+  }, {
+    new: true
+  },
+  callback);
+};
+
+UserController.makeSponsor = function(sponsor, user, callback){
+  User.findOneAndUpdate({
+    _id: sponsor.id,
+    verified: true
+  },{
+    $set: {
+      'sponsor': true
+    }
+  }, {
+    new: true
+  },
+  callback);
+};
+
 
 /**
  * [ADMIN ONLY]

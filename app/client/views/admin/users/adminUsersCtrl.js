@@ -7,7 +7,8 @@ angular.module('reg')
     '$state',
     '$stateParams',
     'UserService',
-    function($scope, $state, $stateParams, UserService){
+    'AuthService',
+    function($scope, $state, $stateParams, UserService, AuthService){
       $scope.queryText = $stateParams.query;
 
       $scope.pages = [];
@@ -298,6 +299,18 @@ angular.module('reg')
               });
           });
         });
+      };
+
+      function createSponsorSuccess() {
+        console.log("Success");
+	  }
+      function createSponsorError() {
+       console.log("Error");
+	  }
+
+      $scope.createSponsor = function(){
+        UserService.newSponsor(
+          $scope.email, createSponsorSuccess, createSponsorError);
       };
 
       $scope.toggleAdmin = function($event, user, index) {

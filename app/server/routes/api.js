@@ -309,6 +309,18 @@ module.exports = function(router) {
     UserController.removeAdminById(id, user, defaultResponse(req, res));
   });
 
+  router.post('/newsponsor',
+    function(req, res, next){
+      // Register with an email and password
+      var email = req.body.email;
+      UserController.createSponsor(email, function(err, user){
+          if (err){
+            return res.status(400).send(err);
+          }
+          return res.json(user);
+      });
+  });
+
 
   // ---------------------------------------------
   // Settings [ADMIN ONLY!]
@@ -374,20 +386,6 @@ module.exports = function(router) {
   });
 
 
-  /**
-   * Add a sponsor to the database.
-   * 
-   * body: {
-   *  email: String
-   *  callback: Function
-   * }
-   * 
-   */
-  router.put('/settings/newSponsor', isAdmin, function(req, res){
-    var time = req.body.email;
-    var callback = req.body.callback;
-    UserController.createSponsor(time, callback);
-  });
 
   /**
    * Set the registration open and close times.

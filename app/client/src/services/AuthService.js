@@ -19,6 +19,7 @@ angular.module('reg')
         }
       }
 
+
       function loginFailure(data, cb){
         $state.go('login');
         if (cb) {
