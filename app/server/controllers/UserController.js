@@ -288,7 +288,7 @@ UserController.getPage = function (query, callback) {
   if (gradYears.length > 0) {
     years = gradYears.split(",");
     year_query = {'$in': years};
-    
+
     if (!findQuery.$and) {
       findQuery.$and = [];
     }
@@ -905,6 +905,25 @@ UserController.makeSponsorById = function(id, user, callback){
     new: true
   },
   callback);
+};
+
+UserController.updateSponsorById = function(id, user, callback){
+  console.log(id)
+  User.findOneAndUpdate({
+    _id: id,
+  },{
+    $set: {
+
+      'pledgeAmount': user.data.pledgeAmount,
+      'API' : user.data.API,
+      'companyName' : user.data.companyName,
+      'links': user.data.links
+    }
+  },{
+    new: true
+  },
+  callback);
+
 };
 
 

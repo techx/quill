@@ -8,7 +8,7 @@ angular.module('reg')
     var base = users + '/';
 
     function sponsorSuccess(data, cb){
-       if(cb) 
+       if(cb)
         cb(data);
     }
     function sponsorFailure(data, cb){
@@ -138,8 +138,14 @@ angular.module('reg')
             sponsorFailure(response.data, onFailure);
           })
           .catch(function onError(error) {
-            console.log(error);         
+            console.log(error);
           });
+      },
+
+      updateSponsor : function(id, data){
+        return $http.post(base + id + '/updateSponsor', {
+          data : data
+        });
       },
 
       makeSponsor: function(id){

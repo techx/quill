@@ -53,102 +53,11 @@ angular.module('reg')
       // populateSkills();
       _setupForm();
 
-      /**
-       * TODO: JANK WARNING
-       */
-      function populateSchools() {
-        $http
-          .get('/assets/schools.json')
-          .then(function (res) {
-            var schools = res.data;
-            var email = $scope.user.email.split('@')[1];
-
-            if (schools[email]) {
-              $scope.user.profile.school = schools[email].school;
-              $scope.autoFilledSchool = true;
-            }
-          });
-
-        $http
-          .get('/assets/schools.csv')
-          .then(function (res) {
-            $scope.schools = res.data.split('\n');
-            $scope.schools.push('Other');
-
-            var content = [];
-
-            for (i = 0; i < $scope.schools.length; i++) {
-              $scope.schools[i] = $scope.schools[i].trim();
-              content.push({ title: $scope.schools[i] })
-            }
-
-            $('#school.ui.search')
-              .search({
-                source: content,
-                cache: true,
-                onSelect: function (result, response) {
-                  $scope.user.profile.school = result.title.trim();
-                }
-              })
-          });
-      }
-
-      function populateMajors() {
-        $http
-          .get('/assets/majors.csv')
-          .then(function (res) {
-            $scope.majors = res.data.split('\n');
-            $scope.majors.push('Other');
-
-            var content = [];
-
-            for (i = 0; i < $scope.majors.length; i++) {
-              $scope.majors[i] = $scope.majors[i].trim();
-              content.push({ title: $scope.majors[i] })
-            }
-
-            $('#major.ui.search')
-              .search({
-                source: content,
-                cache: true,
-                onSelect: function (result, response) {
-                  $scope.user.profile.major = result.title.trim();
-                }
-              })
-          });
-      }
-
-      function populateSkills() {
-        $http
-          .get('/assets/skills.csv')
-          .then(function (res) {
-            res.data.split('\n').forEach(element => {
-              $scope.skills.push({ 'name': element, 'selected': false });
-            });
-            $scope.skills.push({ 'name': 'Other', 'selected': false });
-          });
-      }
-
       function _updateUser(e) {
         var profile = $scope.user.profile;
 
-        // Get the dietary restrictions as an array
-        var drs = [];
-        Object.keys($scope.socialMedia).forEach(function (key) {
-          if ($scope.socialMedia[key]) {
-            drs.push(key);
-          }
-        });
-        profile.socialMedia = drs;
-
-        profile.name = util.format("%s %s", profile.firstName.trim(), profile.lastName.trim());
-
-        $scope.outputSkills.forEach(skill => {
-          profile.skills.push(skill.name);
-        });
-
         UserService
-          .updateProfile(Session.getUserId(), $scope.user.profile)
+          .updateSponsor(Session.getUserId(), $scope.user)
           .then(response => {
             swal("Awesome!", "Your application has been saved.", "success")
               .then(value => {
@@ -210,25 +119,25 @@ angular.module('reg')
               rules: [
                 {
                   type: 'empty',
+                  prompt: 'Please enter a company name.'
+                }
+              ]
+            },
+            PlegeAmount: {
+              identifier: 'PlegeAmount',
+              rules: [
+                {
+                  type: 'empty',
                   prompt: 'Please enter an amount.'
                 }
               ]
             },
-            lastName: {
-              identifier: 'lastName',
+            RelevantLinks: {
+              identifier: 'RelevantLinks',
               rules: [
                 {
                   type: 'empty',
-                  prompt: 'Please enter an amount'
-                }
-              ]
-            },
-            essay: {
-              identifier: 'essay',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please tell us why you want to attend HackTX.'
+                  prompt: 'Please list some relevant links for your hackathon idea.'
                 }
               ]
             }
@@ -245,14 +154,5 @@ angular.module('reg')
         }
       };
 
-      $scope.uploadResume = function (files) {
-        $scope.notEmpty = files.length > 1;
-        UserService
-          .uploadResume(Session.getUserId(), files[0])
-          .then(response => {
-            $scope.user.profile.resume = true
-          }, response => {
-            $scope.user.profile.resume = false
-          });
-      }
+
     }]);

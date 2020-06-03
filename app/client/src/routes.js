@@ -100,9 +100,8 @@ angular.module('reg')
       .state('app.sponsorapplication', {
         url: "/sponsorapplication",
         templateUrl: "views/sponsor-application/sponsor_application.html",
-        controller: 'ApplicationCtrl',
+        controller: 'SponsorApplicationCtrl',
         data: {
-          // isSponsor : false,
           requireVerified: false,
           requireNotAdmitted: true
         },
