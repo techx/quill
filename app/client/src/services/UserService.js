@@ -7,17 +7,13 @@ angular.module('reg')
     var users = '/api/users';
     var base = users + '/';
 
-    function loginSuccess(data, cb){
-        console.log("success!");
-        if (cb){
-          cb(data.user);
-        }
-      }
-
-
-      function loginFailure(data, cb){
+    function sponsorSuccess(data, cb){
+       if(cb) 
+        cb(data);
+    }
+    function sponsorFailure(data, cb){
         console.log("failed!");
-      }
+    }
 
     return {
 
@@ -137,13 +133,17 @@ angular.module('reg')
             email: email,
           })
           .then(response => {
-            loginSuccess(response.data, onSuccess);
+            sponsorSuccess(response.data, onSuccess);
           }, response => {
-            loginFailure(response.data, onFailure);
+            sponsorFailure(response.data, onFailure);
           })
           .catch(function onError(error) {
             console.log(error);         
           });
+      },
+
+      makeSponsor: function(id){
+        return $http.post(base + id + '/makesponsor');
       },
     };
   }

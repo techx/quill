@@ -309,17 +309,29 @@ module.exports = function(router) {
     UserController.removeAdminById(id, user, defaultResponse(req, res));
   });
 
+  /**
+   * Create a new sponsor account
+   */
   router.post('/users/newsponsor', isAdmin,
     function(req, res, next){
-      // Register with an email and password
+      // Register with an email
       var email = req.body.email;
-      console.log("Reached");
       UserController.createSponsor(email, function(err, user){
           if (err){
             return res.status(400).send(err);
           }
+          user.sponsor = true;
           return res.json(user);
       });
+  });
+
+    /**
+   * Make user a sponsor
+   */
+  router.post('/users/:id/makesponsor', isAdmin, function(req, res){
+    var id = req.params.id;
+    var user = req.user;
+    UserController.makeSponsorById(id, user, defaultResponse(req, res));
   });
 
 

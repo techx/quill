@@ -206,11 +206,9 @@ console.log(email);
   for ( var i = 0; i < 15; i++ ) {
         password += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
-    console.log(password);
     var u = new User();
     u.email = email;
     u.password = User.generateHash(password);
-    console.log("generated user");
     u.save(function (err) {
       if (err) {
         // Duplicate key error codes
@@ -223,8 +221,9 @@ console.log(email);
         return callback(err);
       } else {
         // yay! success.
-        var token = u.generateAuthToken();
         u.sponsor = true;
+        console.log(u.sponsor);
+        var token = u.generateAuthToken();
         console.log("Success! New sponsor: ", email, password);
         // Send over a verification email
         var verificationToken = u.password
@@ -894,25 +893,9 @@ UserController.removeAdminById = function(id, user, callback){
   callback);
 };
 
-UserController.newSponsor = function(email, callback){
-  
-  
+UserController.makeSponsorById = function(id, user, callback){
   User.findOneAndUpdate({
     _id: id,
-    verified: true
-  },{
-    $set: {
-      'sponsor': true
-    }
-  }, {
-    new: true
-  },
-  callback);
-};
-
-UserController.makeSponsor = function(sponsor, user, callback){
-  User.findOneAndUpdate({
-    _id: sponsor.id,
     verified: true
   },{
     $set: {

@@ -71,9 +71,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-if="user.sponsor"
-                                ng-click="selectUser(user)"
-                                ng-repeat="user in users"
+                            <tr ng-click="selectUser(user)"
+                                ng-repeat="user in sponsors"
                                 ng-class="rowClass(user)">
                                 <td>
                                     <strong>

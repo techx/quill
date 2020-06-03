@@ -13,7 +13,7 @@ angular.module('reg')
 
       $scope.pages = [];
       $scope.users = [];
-
+      $scope.sponsors = [];
       // Semantic-UI moves modal content into a dimmer at the top level.
       // While this is usually nice, it means that with our routing will generate
       // multiple modals if you change state. Kill the top level dimmer node on initial load
@@ -301,8 +301,12 @@ angular.module('reg')
         });
       };
 
-      function createSponsorSuccess() {
-        console.log("Success");
+      function createSponsorSuccess(res) {
+      console.log("Parameter:", res.user, "ID:", res.user._id);
+       UserService.makeSponsor(res.user._id).then(response => {
+       // TODO: Doesn't update. Tried new array to no avail
+        $scope.sponsors.push(response.data);
+	   });
 	  }
       function createSponsorError() {
        console.log("Error");
@@ -312,6 +316,11 @@ angular.module('reg')
         UserService.newSponsor(
           $scope.email, createSponsorSuccess, createSponsorError);
       };
+
+      $scope.sponsorFilter = function (user) { 
+            if(user != null)
+                return user.sponsor; 
+       };
 
       $scope.toggleAdmin = function($event, user, index) {
         $event.stopPropagation();
@@ -381,6 +390,7 @@ angular.module('reg')
         $scope.selectedUser.sections = generateSections(user);
         $('.long.user.modal')
           .modal('show');
+        console.log(user.sponsor);
       }
 
       function generateSections(user){
