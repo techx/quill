@@ -8,6 +8,7 @@ const AdminStatsCtrl = require('../views/admin/stats/adminStatsCtrl.js');
 const AdminUserCtrl = require('../views/admin/user/adminUserCtrl.js');
 const AdminUsersCtrl = require('../views/admin/users/adminUsersCtrl.js');
 const ApplicationCtrl = require('../views/application/applicationCtrl.js');
+const SponsorApplicationCtrl = require('../views/sponsor-application/sponsor_applicationCtrl.js');
 const ConfirmationCtrl = require('../views/confirmation/confirmationCtrl.js');
 const CheckInCtrl = require('../views/checkin/checkinCtrl.js');
 const DashboardCtrl = require('../views/dashboard/dashboardCtrl.js');
@@ -83,8 +84,27 @@ angular.module('reg')
         templateUrl: "views/application/application.html",
         controller: 'ApplicationCtrl',
         data: {
-          requireVerified: true,
-          requireNotAdmitted: true,
+          // isSponsor : false,
+          requireVerified: false,
+          requireNotAdmitted: true
+        },
+        resolve: {
+          currentUser: function(UserService){
+            return UserService.getCurrentUser();
+          },
+          settings: function(SettingsService){
+            return SettingsService.getPublicSettings();
+          }
+        }
+      })
+      .state('app.sponsorapplication', {
+        url: "/sponsorapplication",
+        templateUrl: "views/sponsor-application/sponsor_application.html",
+        controller: 'ApplicationCtrl',
+        data: {
+          // isSponsor : false,
+          requireVerified: false,
+          requireNotAdmitted: true
         },
         resolve: {
           currentUser: function(UserService){
@@ -230,7 +250,7 @@ angular.module('reg')
           }
         },
         templateUrl: "views/admin/sponsors/sponsors.html",
-        controller: 'AdminUsersCtrl'
+        controller: 'AdminSettingsCtrl'
       })
       .state('reset', {
         url: "/reset/:token",
@@ -269,6 +289,7 @@ angular.module('reg')
       var requireAdmin = transition.to().data.requireAdmin;
       var requireVerified = transition.to().data.requireVerified;
       var requireAdmitted = transition.to().data.requireAdmitted;
+      // var isSponsor = Session.getUser().sponsor
       var requireNotAdmitted = transition.to().data.requireNotAdmitted;
       var requireConfirmed = transition.to().data.requireConfirmed;
 
