@@ -350,6 +350,13 @@ module.exports = function(router) {
   });
 
 
+  router.post('/users/:id/updateSponsor', function(req, res){
+    var id = req.params.id;
+    console.log(req.body)
+    var user = req.body;
+    UserController.updateSponsorById(id, user, defaultResponse(req, res));
+  });
+
   // ---------------------------------------------
   // Settings [ADMIN ONLY!]
   // ---------------------------------------------
@@ -465,7 +472,7 @@ module.exports = function(router) {
     SettingsController.updateField('allowMinors', allowMinors, defaultResponse(req, res));
   });
 
-  
+
 
 
 };
