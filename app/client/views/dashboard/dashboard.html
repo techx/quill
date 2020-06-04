@@ -97,6 +97,27 @@
         </div>
 
         <div
+          ng-if="dashState('sponsorPending')"
+          class="description">
+          <p>
+            <strong>
+                {{ DASHBOARD.SPONSOR_PENDING }}
+            </strong>
+          </p>
+
+          <div class="ui purple button"
+               ui-sref="app.application">
+            Complete your application
+          </div>
+
+          <div class="ui purple button"
+               ui-sref="app.sponsorRequest">
+            Request to be a Sponsor
+          </div>
+
+        </div>
+
+        <div
           ng-if="dashState('openAndSubmitted')"
           class="description">
           <p>

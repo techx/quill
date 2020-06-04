@@ -7,6 +7,14 @@ angular.module('reg')
     var users = '/api/users';
     var base = users + '/';
 
+    function sponsorSuccess(data, cb){
+       if(cb) 
+        cb(data);
+    }
+    function sponsorFailure(data, cb){
+        console.log("failed!");
+    }
+
     return {
 
       // ----------------------
@@ -24,10 +32,12 @@ angular.module('reg')
         return $http.get(base);
       },
 
-      getPage: function(page, size, text){
+      getPage: function(page, size, text, gradYears, skills){
         return $http.get(users + '?' + $.param(
           {
             text: text,
+            grad: gradYears,
+            skills: skills,
             page: page ? page : 0,
             size: size ? size : 50
           })
@@ -38,6 +48,10 @@ angular.module('reg')
         return $http.put(base + id + '/profile', {
           profile: profile
         });
+      },
+
+      getResume: function(id) {
+        return $http.get(base + id + '/resume');
       },
 
       uploadResume: function(id, resume){
@@ -89,6 +103,14 @@ angular.module('reg')
         return $http.post(base + id + '/admit');
       },
 
+      grantResumeAccess: function(id){
+        return $http.post(base + id + '/grantresumeaccess');
+      },
+
+      removeResumeAccess: function(id){
+        return $http.post(base + id + '/removeresumeaccess');
+      },
+
       checkIn: function(id){
         return $http.post(base + id + '/checkin');
       },
@@ -105,10 +127,31 @@ angular.module('reg')
         return $http.post(base + id + '/removeadmin');
       },
 
+
       createWalkin: function(email){
         return $http.post(base + 'createwalkin', {
           email: email
         });
+      },
+
+      newSponsor: function(email, onSuccess, onFailure) {
+        return $http
+          .post(base + 'newsponsor', {
+            email: email,
+          })
+          .then(response => {
+            sponsorSuccess(response.data, onSuccess);
+          }, response => {
+            sponsorFailure(response.data, onFailure);
+          })
+          .catch(function onError(error) {
+            console.log(error);         
+          });
+      },
+
+      makeSponsor: function(id){
+        return $http.post(base + id + '/makesponsor');
+
       },
     };
   }

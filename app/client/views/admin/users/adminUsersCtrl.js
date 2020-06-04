@@ -7,17 +7,18 @@ angular.module('reg')
     '$state',
     '$stateParams',
     'UserService',
-    function($scope, $state, $stateParams, UserService){
+    'AuthService',
+    function($scope, $state, $stateParams, UserService, AuthService){
       $scope.queryText = $stateParams.query;
 
       $scope.pages = [];
       $scope.users = [];
-
+      $scope.sponsors = [];
       // Semantic-UI moves modal content into a dimmer at the top level.
       // While this is usually nice, it means that with our routing will generate
       // multiple modals if you change state. Kill the top level dimmer node on initial load
       // to prevent this.
-      $('.ui.dimmer').remove();
+      //$('.ui.dimmer').remove();
       // Populate the size of the modal for when it appears, with an arbitrary user.
       $scope.selectedUser = {};
       $scope.selectedUser.sections = generateSections({status: '', confirmation: {
@@ -174,6 +175,153 @@ angular.module('reg')
         });
       };
 
+      $scope.grantResumeAccess = function($event, user, index) {
+        $event.stopPropagation();
+
+        console.log(user);
+
+        swal({
+          buttons: {
+            cancel: {
+              text: "Cancel",
+              value: null,
+              visible: true
+            },
+            accept: {
+              className: "danger-button",
+              closeModal: false,
+              text: "Yes, grant resume access",
+              value: true,
+              visible: true
+            }
+          },
+          dangerMode: true,
+          icon: "warning",
+          text: "You are about to grant resume access to " + user.profile.name + "!",
+          title: "Whoa, wait a minute!"
+        }).then(value => {
+          if (!value) {
+            return;
+          }
+
+          swal({
+            buttons: {
+              cancel: {
+                text: "Cancel",
+                value: null,
+                visible: true
+              },
+              yes: {
+                className: "danger-button",
+                closeModal: false,
+                text: "Yes, grant this user resume access",
+                value: true,
+                visible: true
+              }
+            },
+            dangerMode: true,
+            title: "Are you sure?",
+            text: "Your account will be logged as having granted this user resume access. " +
+              "Remember, this power is a privilege.",
+            icon: "warning"
+          }).then(value => {
+            if (!value) {
+              return;
+            }
+            UserService
+              .grantResumeAccess(user._id)
+              .then(response => {
+                $scope.users[index] = response.data;
+                swal("Accepted", response.data.profile.name + ' has been granted resume access.', "success");
+              });
+          });
+        });
+      };
+
+      $scope.removeResumeAccess = function($event, user, index) {
+        $event.stopPropagation();
+
+        console.log(user);
+
+        swal({
+          buttons: {
+            cancel: {
+              text: "Cancel",
+              value: null,
+              visible: true
+            },
+            accept: {
+              className: "danger-button",
+              closeModal: false,
+              text: "Yes, remove resume access",
+              value: true,
+              visible: true
+            }
+          },
+          dangerMode: true,
+          icon: "warning",
+          text: "You are about to remove resume access from " + user.profile.name + "!",
+          title: "Whoa, wait a minute!"
+        }).then(value => {
+          if (!value) {
+            return;
+          }
+
+          swal({
+            buttons: {
+              cancel: {
+                text: "Cancel",
+                value: null,
+                visible: true
+              },
+              yes: {
+                className: "danger-button",
+                closeModal: false,
+                text: "Yes, remove this user's resume access",
+                value: true,
+                visible: true
+              }
+            },
+            dangerMode: true,
+            title: "Are you sure?",
+            text: "Your account will be logged as having removed this user's resume access. " +
+              "Remember, this power is a privilege.",
+            icon: "warning"
+          }).then(value => {
+            if (!value) {
+              return;
+            }
+            UserService
+              .removeResumeAccess(user._id)
+              .then(response => {
+                $scope.users[index] = response.data;
+                swal("Accepted", response.data.profile.name + ' has been rejected resume access.', "success");
+              });
+          });
+        });
+      };
+
+      function createSponsorSuccess(res) {
+      console.log("Parameter:", res.user, "ID:", res.user._id);
+       UserService.makeSponsor(res.user._id).then(response => {
+       // TODO: Doesn't update. Tried new array to no avail
+        $scope.sponsors.push(response.data);
+	   });
+	  }
+      function createSponsorError() {
+       console.log("Error");
+	  }
+
+      $scope.createSponsor = function(){
+        UserService.newSponsor(
+          $scope.email, createSponsorSuccess, createSponsorError);
+      };
+
+      $scope.sponsorFilter = function (user) { 
+            if(user != null)
+                return user.sponsor; 
+       };
+
       $scope.toggleAdmin = function($event, user, index) {
         $event.stopPropagation();
 
@@ -242,6 +390,7 @@ angular.module('reg')
         $scope.selectedUser.sections = generateSections(user);
         $('.long.user.modal')
           .modal('show');
+        console.log(user.sponsor);
       }
 
       function generateSections(user){

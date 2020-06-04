@@ -4,6 +4,8 @@ var mongoose   = require('mongoose'),
     jwt        = require('jsonwebtoken');
     JWT_SECRET = process.env.JWT_SECRET;
 
+mongoose.set('useFindAndModify', false);
+
 var profile = {
   // Basic info
   name: {
@@ -72,6 +74,7 @@ var profile = {
     }
   },
   resume: Boolean,
+  skills: [String],
   firstHackathon: String,
   numHackathons: Number,
   socialMedia: [String],
@@ -92,6 +95,23 @@ var profile = {
     max: 300,
   }
 };
+
+var sponsorFields = {
+    sponsorStatus: {
+        type:String, 
+        enum : {
+            values: ['incomplete', 'completedProfile', 'grantedResumeAccess']
+	    }
+    },
+    companyName: String,
+    sponsorshipTier: {
+        type: String,
+        enum: {
+            values: ['Kilo', 'Mega', 'Giga'] // Double check these!
+        }
+    },
+    pledgeAmount: Number
+}
 
 // Only after confirmed
 var confirmation = {
@@ -175,6 +195,29 @@ var status = {
   }
 };
 
+
+var userAtEvent = { 
+  /**
+   * AFTER user is checked in to event
+   * @type {Object}
+   */
+  receivedLunch: {
+    type: Boolean, 
+    default: false
+  },
+  receivedDinner: {
+    type: Boolean, 
+    default: false
+  }, 
+  workshopsAttended: { 
+    type: [String]
+  }, 
+  tablesVisited: { 
+    type: [String]
+  }
+};
+
+
 // define the schema for our admin model
 var schema = new mongoose.Schema({
 
@@ -198,6 +241,12 @@ var schema = new mongoose.Schema({
     type: Boolean,
     required: true,
     default: false,
+  },
+
+  sponsor: {
+    type: Boolean,
+    required: true,
+    default: false
   },
 
   timestamp: {
@@ -247,6 +296,10 @@ var schema = new mongoose.Schema({
   confirmation: confirmation,
 
   status: status,
+
+  sponsorFields: sponsorFields, 
+
+  userAtEvent: userAtEvent
 
 });
 

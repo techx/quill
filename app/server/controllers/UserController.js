@@ -186,6 +186,61 @@ UserController.createUser = function (email, password, callback) {
   });
 };
 
+/**
+ * Create a new user given an email and a password.
+ * @param  {String}   email    User's email.
+ * @param  {String}   password [description]
+ * @param  {Function} callback args(err, user)
+ */
+UserController.createSponsor = function (email, callback) {
+console.log(email);
+  if (typeof email !== 'string') {
+    return callback({
+      message: 'Email must be a string.'
+    });
+  }
+
+  email = email.toLowerCase();
+  var password = '';
+  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var charactersLength = characters.length;
+  for ( var i = 0; i < 15; i++ ) {
+        password += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    var u = new User();
+    u.email = email;
+    u.password = User.generateHash(password);
+    u.save(function (err) {
+      if (err) {
+        // Duplicate key error codes
+        if (err.name === 'MongoError' && (err.code === 11000 || err.code === 11001)) {
+          return callback({
+            message: 'An account for this email already exists.'
+          });
+        }
+
+        return callback(err);
+      } else {
+        // yay! success.
+        u.sponsor = true;
+        console.log(u.sponsor);
+        var token = u.generateAuthToken();
+        console.log("Success! New sponsor: ", email, password);
+        // Send over a verification email
+        var verificationToken = u.password
+        Mailer.sendVerificationEmail(email, verificationToken);
+        return callback(
+          null,
+          {
+            token: token,
+            user: u
+          }
+        );
+      }
+    });
+};
+
+
 UserController.getByToken = function (token, callback) {
   User.getByToken(token, callback);
 };
@@ -209,10 +264,13 @@ UserController.getPage = function (query, callback) {
   var page = query.page;
   var size = parseInt(query.size);
   var searchText = query.text;
+  var gradYears = query.grad;
+  var skills = query.skills;
 
+  var queries = [];
+  var year_query = {};
   var findQuery = {};
   if (searchText.length > 0) {
-    var queries = [];
     var re = new RegExp(searchText, 'i');
     queries.push({email: re});
     queries.push({'profile.name': re});
@@ -223,8 +281,32 @@ UserController.getPage = function (query, callback) {
       queries.push({_id: searchText});
     }
 
-    findQuery.$or = queries;
+    findQuery.$and = [];
+    findQuery.$and.push({'$or': queries});
   }
+
+  // check if grad year passed in
+  if (gradYears.length > 0) {
+    years = gradYears.split(",");
+    year_query = {'$in': years};
+    
+    if (!findQuery.$and) {
+      findQuery.$and = [];
+    }
+    findQuery.$and.push({'profile.graduationTime': year_query});
+  }
+
+  // check if skills passed in
+  if (skills.length > 0) {
+    skills_arr = skills.split(",");
+    skills_query = {'$in': skills_arr};
+    match_query = {'$elemMatch': skills_query}
+    if (!findQuery.$and) {
+      findQuery.$and = [];
+    }
+    findQuery.$and.push({'profile.skills': match_query});
+  }
+
 
   User
     .find(findQuery)
@@ -265,6 +347,10 @@ UserController.getById = function (id, callback){
   User.findById(id).exec(callback);
 };
 
+UserController.getResumeById = function(id, callback) {
+  s3.getResume(id, callback);
+};
+
 /**
  * Update a user's profile object, given an id and a profile.
  *
@@ -277,7 +363,6 @@ UserController.updateProfileById = function (id, profile, callback) {
   // Validate the user profile, and mark the user as profile completed
   // when successful.
   User.validateProfile(profile, function (err) {
-
     if (err) {
       return callback({message: 'invalid profile'});
     }
@@ -318,7 +403,6 @@ UserController.updateProfileById = function (id, profile, callback) {
         new: true
       },
       callback);
-
   });
 };
 
@@ -774,6 +858,48 @@ UserController.admitUser = function (id, user, callback) {
 /**
  * [ADMIN ONLY]
  *
+ * Give a sponsor access to Resumes
+ * @param  {String}   userId      User id of the sponsor granted access
+ * @param  {Function} callback    args(err, user)
+ */
+ UserController.grantResumeAccess = function (id, callback) {
+     User.findOneAndUpdate({
+        _id: id,
+	 }, {
+     $set: {
+        'sponsorFields.sponsorStatus': 'grantedResumeAccess'
+     }
+     }, {
+        new: true
+     },
+     callback);
+ }
+
+ /**
+ * [ADMIN ONLY]
+ *
+ * Remove sponsor's access to Resumes
+ * @param  {String}   userId      User id of the sponsor removed access
+ * @param  {Function} callback    args(err, user)
+ */
+ UserController.grantResumeAccess = function (id, callback) {
+     User.findOneAndUpdate({
+        _id: id,
+	 }, {
+     $set: {
+        'sponsorFields.sponsorStatus': 'completedProfile'
+     }
+     }, {
+        new: true
+     },
+     callback);
+ }
+
+
+
+/**
+ * [ADMIN ONLY]
+ *
  * Check in a user.
  * @param  {String}   userId   User id of the user getting checked in.
  * @param  {String}   user     User checking in this person.
@@ -859,6 +985,21 @@ UserController.removeAdminById = function(id, user, callback){
   },
   callback);
 };
+
+UserController.makeSponsorById = function(id, user, callback){
+  User.findOneAndUpdate({
+    _id: id,
+    verified: true
+  },{
+    $set: {
+      'sponsor': true
+    }
+  }, {
+    new: true
+  },
+  callback);
+};
+
 
 /**
  * [ADMIN ONLY]

@@ -13,6 +13,7 @@ const CheckInCtrl = require('../views/checkin/checkinCtrl.js');
 const DashboardCtrl = require('../views/dashboard/dashboardCtrl.js');
 const LoginCtrl = require('../views/login/loginCtrl.js');
 const ResetCtrl = require('../views/reset/resetCtrl.js');
+const ResumesCtrl = require('../views/resumes/resumesCtrl.js');
 const SidebarCtrl = require('../views/sidebar/sidebarCtrl.js');
 const TeamCtrl = require('../views/team/teamCtrl.js');
 const VerifyCtrl = require('../views/verify/verifyCtrl.js');
@@ -151,6 +152,28 @@ angular.module('reg')
           }
         }
       })
+      .state('app.resumes', {
+        // Render resume view
+        url: "/resumes",
+        templateUrl:"views/resumes/resumes.html",
+        controller: 'ResumesCtrl'
+      })
+      .state('app.resumes.users', {
+        url: "/resumes/users?" +
+          '&page' +
+          '&size' +
+          '&query' +
+          '&gradYears' +
+          '&skills',
+        params: {
+          query: {
+            value: '',
+            dynamic: true
+          }
+        },
+        templateUrl: "views/resumes/resumes.html",
+        controller: 'ResumesCtrl'
+      })
       .state('app.admin', {
         views: {
           '': {
@@ -195,6 +218,20 @@ angular.module('reg')
         url: "/admin/settings",
         templateUrl: "views/admin/settings/settings.html",
         controller: 'AdminSettingsCtrl',
+      })
+      .state('app.admin.sponsors', {
+        url: "/admin/sponsors?" +
+          '&page' +
+          '&size' +
+          '&query',
+        params: {
+          query: {
+            value: '',
+            dynamic: true
+          }
+        },
+        templateUrl: "views/admin/sponsors/sponsors.html",
+        controller: 'AdminUsersCtrl'
       })
       .state('reset', {
         url: "/reset/:token",
