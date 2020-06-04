@@ -343,7 +343,7 @@ UserController.getSponsorPage = function (query, callback) {
 
   var queries = [];
   var findQuery = {};
-  queries.push({'sponsor': true});
+  queries.push({sponsor: true});
   if (searchText.length > 0) {
     var re = new RegExp(searchText, 'i');
     queries.push({email: re});
@@ -354,10 +354,9 @@ UserController.getSponsorPage = function (query, callback) {
     if (searchText.match(/^[0-9a-fA-F]{24}$/)) {
       queries.push({_id: searchText});
     }
-
-    findQuery.$and = [];
-    findQuery.$and.push({'$or': queries});
   }
+  findQuery.$and = [];
+  findQuery.$and.push({'$or': queries});
 
   User
     .find(findQuery)

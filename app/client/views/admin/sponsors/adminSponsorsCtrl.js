@@ -58,11 +58,10 @@ angular.module('reg')
         });
       };
 
-      $scope.goUser = function($event, user){
+      $scope.goUser = function($event, sponsor){
         $event.stopPropagation();
-
         $state.go('app.admin.user', {
-          id: user._id
+          id: sponsor._id
         });
       };
 
