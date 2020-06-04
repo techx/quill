@@ -333,7 +333,6 @@ UserController.getPage = function (query, callback) {
 };
 
 UserController.getAllSponsors = function (callback) {
-    console.log("UserController.getAllSponsors");
   User.find({'sponsor': true}, callback);
 };
 
@@ -344,7 +343,7 @@ UserController.getSponsorPage = function (query, callback) {
 
   var queries = [];
   var findQuery = {};
-  queries.push({'sponsor':true});
+  queries.push({'sponsor': true});
   if (searchText.length > 0) {
     var re = new RegExp(searchText, 'i');
     queries.push({email: re});

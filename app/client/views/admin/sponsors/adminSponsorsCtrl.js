@@ -24,7 +24,8 @@ angular.module('reg')
       }, profile: ''});
 
       function updatePage(data){
-        $scope.sponsors = data.sponsors;
+        console.log(data);
+        $scope.sponsors = data.users;
         $scope.currentPage = data.page;
         $scope.pageSize = data.size;
 
@@ -195,7 +196,7 @@ angular.module('reg')
       $scope.createSponsor = function(){
         UserService.newSponsor($scope.email)
         .then(response => {
-                console.log(response);
+                ($scope.sponsors).push(response.data);
                 swal("Success", $scope.email + ' has been made a sponsor.', "success");
          });;
       };
@@ -205,18 +206,6 @@ angular.module('reg')
           return moment(time).format('MMMM Do YYYY, h:mm:ss a');
         }
       }
-
-      $scope.rowClass = function(user) {
-        if (user.admin){
-          return 'admin';
-        }
-        if (user.status.confirmed) {
-          return 'positive';
-        }
-        if (user.status.admitted && !user.status.confirmed) {
-          return 'warning';
-        }
-      };
 
       function selectUser(user){
         $scope.selectedUser = user;

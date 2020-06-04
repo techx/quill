@@ -6,7 +6,9 @@
     "\\app\\client\\src",
     "\\app\\client\\views",
     "\\app\\client\\views\\admin",
-    "\\app\\client\\views\\admin\\sponsors"
+    "\\app\\client\\views\\admin\\sponsors",
+    "\\app\\client\\views\\admin\\users"
   ],
+  "SelectedNode": "\\app\\client\\views\\admin\\users\\users.html",
   "PreviewInSolutionExplorer": false
 }

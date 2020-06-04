@@ -46,11 +46,14 @@
                         </div>
 
                         <div class="ui divider"></div>
+                        <div class="ui header">
+                            Pages
+                        </div>
                         <button ng-repeat="page in pages"
                                 ng-class="page == currentPage ? 'active pink' : ''"
-                                ng-click="goToSponsorPage(page)"
+                                ng-click="goToPage(page)"
                                 class="ui icon basic page button">
-                            {{page}}
+                            {{page + 1}}
                         </button>
                     </div>
                     <div class="thirteen wide column">
@@ -70,8 +73,7 @@
                         </thead>
                         <tbody>
                             <tr ng-click="selectUser(user)"
-                                ng-repeat="user in sponsors"
-                                ng-class="rowClass(user)">
+                                ng-repeat="user in sponsors">
                                 <td>
                                     <strong>
                                         {{user.profile.name}}
