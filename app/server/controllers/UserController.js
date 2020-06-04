@@ -207,6 +207,7 @@ UserController.createSponsor = function (email, callback) {
     u.email = email;
     u.password = User.generateHash(password);
     u.sponsor = true;
+    u.verified = true;
     u.save(function (err) {
       if (err) {
         // Duplicate key error codes
