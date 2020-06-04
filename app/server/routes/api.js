@@ -326,12 +326,27 @@ module.exports = function(router) {
   });
 
     /**
-   * Make user a sponsor
+   * [Unused] Make user a sponsor
    */
   router.post('/users/:id/makesponsor', isAdmin, function(req, res){
     var id = req.params.id;
     var user = req.user;
     UserController.makeSponsorById(id, user, defaultResponse(req, res));
+  });
+
+    /**
+   * [ADMIN ONLY]
+   *
+   * GET - Get all users, or a page at a time.
+   * ex. Paginate with ?page=0&size=100
+   */
+  router.get('/sponsors', isAdmin, function(req, res){
+    var query = req.query;
+    if (query.page && query.size){
+      UserController.getSponsorPage(query, defaultResponse(req, res));
+    } else {
+      UserController.getAllSponsors(defaultResponse(req, res));
+    }
   });
 
 

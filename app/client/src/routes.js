@@ -7,6 +7,7 @@ const AdminSettingsCtrl = require('../views/admin/settings/adminSettingsCtrl.js'
 const AdminStatsCtrl = require('../views/admin/stats/adminStatsCtrl.js');
 const AdminUserCtrl = require('../views/admin/user/adminUserCtrl.js');
 const AdminUsersCtrl = require('../views/admin/users/adminUsersCtrl.js');
+const AdminSponsorsCtrl = require('../views/admin/sponsors/adminSponsorsCtrl.js');
 const ApplicationCtrl = require('../views/application/applicationCtrl.js');
 const ConfirmationCtrl = require('../views/confirmation/confirmationCtrl.js');
 const CheckInCtrl = require('../views/checkin/checkinCtrl.js');
@@ -230,7 +231,7 @@ angular.module('reg')
           }
         },
         templateUrl: "views/admin/sponsors/sponsors.html",
-        controller: 'AdminUsersCtrl'
+        controller: 'AdminSponsorsCtrl'
       })
       .state('reset', {
         url: "/reset/:token",

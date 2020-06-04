@@ -2,7 +2,7 @@ const moment = require('moment');
 const swal = require('sweetalert');
 
 angular.module('reg')
-  .controller('AdminUsersCtrl',[
+  .controller('AdminSponsorsCtrl',[
     '$scope',
     '$state',
     '$stateParams',
@@ -11,7 +11,7 @@ angular.module('reg')
       $scope.queryText = $stateParams.query;
 
       $scope.pages = [];
-      $scope.users = [];
+      $scope.sponsors = [];
       // Semantic-UI moves modal content into a dimmer at the top level.
       // While this is usually nice, it means that with our routing will generate
       // multiple modals if you change state. Kill the top level dimmer node on initial load
@@ -24,7 +24,7 @@ angular.module('reg')
       }, profile: ''});
 
       function updatePage(data){
-        $scope.users = data.users;
+        $scope.sponsors = data.sponsors;
         $scope.currentPage = data.page;
         $scope.pageSize = data.size;
 
@@ -37,27 +37,20 @@ angular.module('reg')
 
 
       UserService
-        .getPage($stateParams.page, $stateParams.size, $stateParams.query)
+        .getSponsorPage($stateParams.page, $stateParams.size, $stateParams.query)
         .then(response => {
           updatePage(response.data);
         });
 
       $scope.$watch('queryText', function(queryText){
         UserService
-          .getPage($stateParams.page, $stateParams.size, queryText)
+          .getSponsorPage($stateParams.page, $stateParams.size, queryText)
           .then(response => {
             updatePage(response.data);
           });
       });
 
       $scope.goToPage = function(page){
-        $state.go('app.admin.users', {
-          page: page,
-          size: $stateParams.size || 50
-        });
-      };
-
-      $scope.goToSponsorPage = function(page){
         $state.go('app.admin.sponsors', {
           page: page,
           size: $stateParams.size || 50
@@ -69,114 +62,6 @@ angular.module('reg')
 
         $state.go('app.admin.user', {
           id: user._id
-        });
-      };
-
-      $scope.toggleCheckIn = function($event, user, index) {
-        $event.stopPropagation();
-
-        if (!user.status.checkedIn){
-          swal({
-            title: "Whoa, wait a minute!",
-            text: "You are about to check in " + user.profile.name + "!",
-            icon: "warning",
-            buttons: {
-              cancel: {
-                text: "Cancel",
-                value: null,
-                visible: true
-              },
-              checkIn: {
-                className: "danger-button",
-                closeModal: false,
-                text: "Yes, check them in",
-                value: true,
-                visible: true
-              }
-            }
-          })
-          .then(value => {
-            if (!value) {
-              return;
-            }
-
-            UserService
-              .checkIn(user._id)
-              .then(response => {
-                $scope.users[index] = response.data;
-                swal("Accepted", response.data.profile.name + " has been checked in.", "success");
-              });
-          });
-        } else {
-          UserService
-            .checkOut(user._id)
-            .then(response => {
-              $scope.users[index] = response.data;
-              swal("Accepted", response.data.profile.name + ' has been checked out.', "success");
-            });
-        }
-      };
-
-      $scope.acceptUser = function($event, user, index) {
-        $event.stopPropagation();
-
-        console.log(user);
-
-        swal({
-          buttons: {
-            cancel: {
-              text: "Cancel",
-              value: null,
-              visible: true
-            },
-            accept: {
-              className: "danger-button",
-              closeModal: false,
-              text: "Yes, accept them",
-              value: true,
-              visible: true
-            }
-          },
-          dangerMode: true,
-          icon: "warning",
-          text: "You are about to accept " + user.profile.name + "!",
-          title: "Whoa, wait a minute!"
-        }).then(value => {
-          if (!value) {
-            return;
-          }
-
-          swal({
-            buttons: {
-              cancel: {
-                text: "Cancel",
-                value: null,
-                visible: true
-              },
-              yes: {
-                className: "danger-button",
-                closeModal: false,
-                text: "Yes, accept this user",
-                value: true,
-                visible: true
-              }
-            },
-            dangerMode: true,
-            title: "Are you sure?",
-            text: "Your account will be logged as having accepted this user. " +
-              "Remember, this power is a privilege.",
-            icon: "warning"
-          }).then(value => {
-            if (!value) {
-              return;
-            }
-            UserService
-              .admitUser(user._id)
-              .then(response => {
-                $scope.users[index] = response.data;
-                swal("Accepted", response.data.profile.name + ' has been admitted.', "success");
-              });
-          });
         });
       };
 
@@ -236,7 +121,7 @@ angular.module('reg')
             UserService
               .grantResumeAccess(user._id)
               .then(response => {
-                $scope.users[index] = response.data;
+                $scope.sponsors[index] = response.data;
                 swal("Accepted", response.data.profile.name + ' has been granted resume access.', "success");
               });
           });
@@ -299,7 +184,7 @@ angular.module('reg')
             UserService
               .removeResumeAccess(user._id)
               .then(response => {
-                $scope.users[index] = response.data;
+                $scope.sponsors[index] = response.data;
                 swal("Accepted", response.data.profile.name + ' has been rejected resume access.', "success");
               });
           });
@@ -310,54 +195,9 @@ angular.module('reg')
       $scope.createSponsor = function(){
         UserService.newSponsor($scope.email)
         .then(response => {
+                console.log(response);
                 swal("Success", $scope.email + ' has been made a sponsor.', "success");
          });;
-      };
-
-
-      $scope.toggleAdmin = function($event, user, index) {
-        $event.stopPropagation();
-
-        if (!user.admin){
-          swal({
-            title: "Whoa, wait a minute!",
-            text: "You are about make " + user.profile.name + " an admin!",
-            icon: "warning",
-            buttons: {
-              cancel: {
-                text: "Cancel",
-                value: null,
-                visible: true
-              },
-              confirm: {
-                text: "Yes, make them an admin",
-                className: "danger-button",
-                closeModal: false,
-                value: true,
-                visible: true
-              }
-            }
-          }).then(value => {
-            if (!value) {
-              return;
-            }
-
-            UserService
-              .makeAdmin(user._id)
-              .then(response => {
-                $scope.users[index] = response.data;
-                swal("Made", response.data.profile.name + ' an admin.', "success");
-              });
-            }
-          );
-        } else {
-          UserService
-            .removeAdmin(user._id)
-            .then(response => {
-              $scope.users[index] = response.data;
-              swal("Removed", response.data.profile.name + ' as admin', "success");
-            });
-        }
       };
 
       function formatTime(time){
