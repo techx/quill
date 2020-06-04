@@ -1,0 +1,70 @@
+<div id="application" class="page">
+  <div class="divided title">
+    Sponsor Application
+  </div>
+
+  <div class="ui stackable page grid">
+    <div class="column">
+      <div class="ui form error"
+        ng-class="{'loading': loading}">
+
+        <div class="divided title">Disclaimer</div>
+
+        <div class="field">
+          <p>
+            Please fill out this application
+          </p>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="divided title">Basic Information</div>
+
+        <fieldset ng-disabled="regIsClosed">
+
+          <div class="field">
+            <label> Company Name* </label>
+            <input
+              name="companyName"
+              ng-model="user.companyName">
+          </div>
+
+          <div class="two fields">
+            <div class="field">
+              <label> Amount to Pledge* </label>
+              <input type="text"
+                name="PlegeAmount"
+                placeholder="500"
+                ng-model="user.pledgeAmount">
+            </div>
+            <div class="field">
+              <label> API link * </label>
+              <input type="text"
+                name="APILink"
+                ng-model="user.API">
+            </div>
+          </div>
+
+          <br>
+
+          <div class="divided title"> Additional Information </div>
+
+
+          <div class="field">
+            <label> Relevant Links* </label>
+            <textarea name="essay"
+              ng-model="user.links" />
+            </div>
+
+              <div class="field" ng-hide="regIsClosed">
+                <div class="fluid ui purple submit button"
+                  ng-click="submitForm()">
+                  Submit
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+      </div>
+    </div>
