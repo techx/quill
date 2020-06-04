@@ -302,11 +302,16 @@ angular.module('reg')
       };
 
       function createSponsorSuccess(res) {
-      console.log("Parameter:", res.user, "ID:", res.user._id);
-       UserService.makeSponsor(res.user._id).then(response => {
-       // TODO: Doesn't update. Tried new array to no avail
-        $scope.sponsors.push(response.data);
-	   });
+        $scope.users.push(res.user);
+        var index = $scope.users.findIndex(user => user._id === res.user._id);
+        console.log("User in Array: ", $scope.users[index]);
+        UserService
+        .makeSponsor(res.user._id)
+        .then(response => {
+            $scope.users[index] = response.data;
+        });
+        console.log("Object: ",res.user.sponsor);
+        console.log("Array: ", $scope.users[index].sponsor);
 	  }
       function createSponsorError() {
        console.log("Error");
