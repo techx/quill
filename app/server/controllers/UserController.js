@@ -162,7 +162,6 @@ UserController.createUser = function (email, password, callback) {
             message: 'An account for this email already exists.'
           });
         }
-
         return callback(err);
       } else {
         // yay! success.
@@ -171,7 +170,6 @@ UserController.createUser = function (email, password, callback) {
         // Send over a verification email
         var verificationToken = u.generateEmailVerificationToken();
         Mailer.sendVerificationEmail(email, verificationToken);
-
         return callback(
           null,
           {
@@ -186,13 +184,11 @@ UserController.createUser = function (email, password, callback) {
 };
 
 /**
- * Create a new user given an email and a password.
+ * Create a new sponsor given an email.
  * @param  {String}   email    User's email.
- * @param  {String}   password [description]
  * @param  {Function} callback args(err, user)
  */
 UserController.createSponsor = function (email, callback) {
-console.log(email);
   if (typeof email !== 'string') {
     return callback({
       message: 'Email must be a string.'
@@ -200,6 +196,7 @@ console.log(email);
   }
 
   email = email.toLowerCase();
+  // Generate random password
   var password = '';
   var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   var charactersLength = characters.length;
@@ -209,6 +206,7 @@ console.log(email);
     var u = new User();
     u.email = email;
     u.password = User.generateHash(password);
+    u.sponsor = true;
     u.save(function (err) {
       if (err) {
         // Duplicate key error codes
@@ -217,12 +215,9 @@ console.log(email);
             message: 'An account for this email already exists.'
           });
         }
-
         return callback(err);
       } else {
         // yay! success.
-        u.sponsor = true;
-        console.log(u.sponsor);
         var token = u.generateAuthToken();
         console.log("Success! New sponsor: ", email, password);
         // Send over a verification email
@@ -306,6 +301,64 @@ UserController.getPage = function (query, callback) {
     findQuery.$and.push({'profile.skills': match_query});
   }
 
+
+  User
+    .find(findQuery)
+    .sort({
+      'profile.name': 'asc'
+    })
+    .select('+status.admittedBy')
+    .skip(page * size)
+    .limit(size)
+    .exec(function (err, users) {
+      if (err || !users) {
+        return callback(err);
+      }
+
+      User.count(findQuery).exec(function (err, count) {
+
+        if (err) {
+          return callback(err);
+        }
+
+        return callback(null, {
+          users: users,
+          page: page,
+          size: size,
+          totalPages: Math.ceil(count / size)
+        });
+      });
+
+    });
+};
+
+UserController.getAllSponsors = function (callback) {
+    console.log("UserController.getAllSponsors");
+  User.find({'sponsor': true}, callback);
+};
+
+UserController.getSponsorPage = function (query, callback) {
+  var page = query.page;
+  var size = parseInt(query.size);
+  var searchText = query.text;
+
+  var queries = [];
+  var findQuery = {};
+  queries.push({'sponsor':true});
+  if (searchText.length > 0) {
+    var re = new RegExp(searchText, 'i');
+    queries.push({email: re});
+    queries.push({'profile.name': re});
+    queries.push({'teamCode': re});
+
+    // check if valid ObjectId passed, else will crash program
+    if (searchText.match(/^[0-9a-fA-F]{24}$/)) {
+      queries.push({_id: searchText});
+    }
+
+    findQuery.$and = [];
+    findQuery.$and.push({'$or': queries});
+  }
 
   User
     .find(findQuery)
@@ -893,6 +946,7 @@ UserController.removeAdminById = function(id, user, callback){
   callback);
 };
 
+// [UNUSED]
 UserController.makeSponsorById = function(id, user, callback){
   User.findOneAndUpdate({
     _id: id,

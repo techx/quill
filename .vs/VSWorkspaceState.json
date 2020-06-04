@@ -4,18 +4,9 @@
     "\\app",
     "\\app\\client",
     "\\app\\client\\src",
-    "\\app\\client\\src\\services",
-<<<<<<< Updated upstream
-    "\\app\\server",
-    "\\app\\server\\controllers",
-    "\\app\\server\\routes"
-=======
     "\\app\\client\\views",
     "\\app\\client\\views\\admin",
-    "\\app\\client\\views\\admin\\users",
-    "\\app\\server",
-    "\\app\\server\\controllers"
->>>>>>> Stashed changes
+    "\\app\\client\\views\\admin\\sponsors"
   ],
   "PreviewInSolutionExplorer": false
 }
