@@ -895,6 +895,33 @@ UserController.admitUser = function (id, user, callback) {
      callback);
  }
 
+UserController.markReceivedLunch = function(id, callback) {
+  User.findOneAndUpdate({
+    _id: id,
+    verified: true
+  }, { 
+    $set: {
+      'userAtEvent.receivedLunch': true
+    }
+  }, { 
+    new: true
+  },
+  callback);
+}
+
+UserController.markReceivedDinner = function(id, callback) {
+  User.findOneAndUpdate({
+    _id: id,
+    verified: true
+  }, { 
+    $set: {
+      'userAtEvent.receivedDinner': true
+    }
+  }, { 
+    new: true
+  },
+  callback);
+}
 
 
 /**

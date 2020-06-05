@@ -282,6 +282,20 @@ module.exports = function(router) {
     UserController.checkInById(id, user, defaultResponse(req, res));
   });
 
+
+  router.put('/users/:id/receivedlunch', isAdmin, function(req, res){
+    var id = req.params.id;
+
+    UserController.markReceivedLunch(id, defaultResponse(req, res));
+  });
+
+
+  router.put('/users/:id/receiveddinner', isAdmin, function(req, res){
+    var id = req.params.id;
+
+    UserController.markReceivedDinner(id, defaultResponse(req, res));
+  });
+
   /**
    * Check in a user. ADMIN ONLY, DUH
    */
@@ -381,6 +395,7 @@ module.exports = function(router) {
     SettingsController.updateField('acceptanceText', text, defaultResponse(req, res));
   });
 
+ 
   /**
    * Update the confirmation text.
    * body: {
@@ -404,6 +419,7 @@ module.exports = function(router) {
   });
 
 
+ 
 
   /**
    * Set the registration open and close times.
