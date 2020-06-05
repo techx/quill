@@ -110,7 +110,9 @@ var sponsorFields = {
             values: ['Kilo', 'Mega', 'Giga'] // Double check these!
         }
     },
-    pledgeAmount: Number
+    pledgeAmount: Number,
+    api: String,
+    links: String
 }
 
 // Only after confirmed

@@ -55,7 +55,6 @@ angular.module('reg')
 
       function _updateUser(e) {
         var profile = $scope.user.profile;
-
         UserService
           .updateSponsor(Session.getUserId(), $scope.user)
           .then(response => {

@@ -966,11 +966,11 @@ UserController.updateSponsorById = function(id, user, callback){
     _id: id,
   },{
     $set: {
-
-      'pledgeAmount': user.data.pledgeAmount,
-      'API' : user.data.API,
-      'companyName' : user.data.companyName,
-      'links': user.data.links
+      'sponsorFields.sponsorStatus': "completedProfile",
+      'sponsorFields.pledgeAmount': user.data.pledgeAmount,
+      'sponsorFields.api' : user.data.API,
+      'sponsorFields.companyName' : user.data.companyName,
+      'sponsorFields.links': user.data.links
     }
   },{
     new: true
