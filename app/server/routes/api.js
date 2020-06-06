@@ -37,6 +37,28 @@ module.exports = function(router) {
     });
   }
 
+  function isSponsor(req, res, next){
+
+    var token = getToken(req);
+
+    UserController.getByToken(token, function(err, user){
+
+      if (err) {
+        return res.status(500).send(err);
+      }
+
+      if (user && user.sponsor){
+        req.user = user;
+        return next();
+      }
+
+      return res.status(401).send({
+        message: 'Get outta here, punk!'
+      });
+
+    });
+  }
+
   /**
    * [Users API Only]
    *
@@ -296,6 +318,24 @@ module.exports = function(router) {
     UserController.markReceivedDinner(id, defaultResponse(req, res));
   });
 
+  router.put('/users/:id/addworkshopattended', isSponsor, function(req, res){
+    var id = req.params.id;
+    var token = getToken(req);
+
+    UserController.getByToken(token, (err, sponsor) => {
+      UserController.addWorkshopAttended(id, sponsor._id, defaultResponse(req, res));
+    });
+  });
+
+  router.put('/users/:id/addtablevisited', isSponsor, function(req, res){
+    var id = req.params.id;
+    var token = getToken(req);
+
+    UserController.getByToken(token, (err, sponsor) => {
+      UserController.addTableVisited(id, sponsor._id, defaultResponse(req, res));
+    });
+  });
+
   /**
    * Check in a user. ADMIN ONLY, DUH
    */
@@ -327,6 +367,7 @@ module.exports = function(router) {
   router.post('/users/createwalkin', isAdmin, function(req, res){
     var email = req.body.email;
     UserController.sendWalkInEmail(email, defaultResponse(req, res));
+  });
 
   /**
    * Create a new sponsor account
@@ -470,8 +511,4 @@ module.exports = function(router) {
     var allowMinors = req.body.allowMinors;
     SettingsController.updateField('allowMinors', allowMinors, defaultResponse(req, res));
   });
-
-  
-
-
 };

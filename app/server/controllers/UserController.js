@@ -1027,6 +1027,34 @@ UserController.makeSponsorById = function(id, user, callback){
   callback);
 };
 
+UserController.addWorkshopAttended = function(id, sponsor_id, callback){
+  User.findOneAndUpdate({
+    _id: id,
+    verified: true
+  },{
+    $push: {
+      'userAtEvent.workshopsAttended': sponsor_id
+    }
+  }, {
+    new: true
+  },
+  callback);
+}
+
+UserController.addTableVisited = function(id, sponsor_id, callback){
+  User.findOneAndUpdate({
+    _id: id,
+    verified: true
+  },{
+    $push: {
+      'userAtEvent.tablesVisited': sponsor_id
+    }
+  }, {
+    new: true
+  },
+  callback);
+}
+
 
 /**
  * [ADMIN ONLY]
