@@ -2,6 +2,7 @@
 db/
 node_modules/
 semantic/
+.env
 
 # Output
 app/client/build/
