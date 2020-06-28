@@ -289,7 +289,7 @@ UserController.getPage = function (query, callback) {
   if (gradYears.length > 0) {
     years = gradYears.split(",");
     year_query = {'$in': years};
-    
+
     if (!findQuery.$and) {
       findQuery.$and = [];
     }
@@ -896,31 +896,64 @@ UserController.admitUser = function (id, user, callback) {
  }
 
 UserController.markReceivedLunch = function(id, callback) {
-  User.findOneAndUpdate({
+
+  // Check if user already received meal
+  User.findOne({
     _id: id,
     verified: true
-  }, { 
-    $set: {
-      'userAtEvent.receivedLunch': true
+  }, function(err, user) {
+    if(err || !user) {
+      return callback(err, user);
     }
-  }, { 
-    new: true
-  },
-  callback);
+    else if(user.userAtEvent.receivedLunch) {
+      console.log('lunch');
+      return callback({"message" : "User has already received lunch"})
+    }
+    else {
+      User.findOneAndUpdate({
+        _id: id,
+        verified: true
+      }, {
+        $set: {
+          'userAtEvent.receivedLunch': true
+        }
+      }, {
+        new: true
+      },
+      callback);
+    }
+  });
+
+
+
 }
 
 UserController.markReceivedDinner = function(id, callback) {
-  User.findOneAndUpdate({
+
+  User.findOne({
     _id: id,
     verified: true
-  }, { 
-    $set: {
-      'userAtEvent.receivedDinner': true
+  }, function(err, user) {
+    if(err || !user) {
+      return callback(err, user);
     }
-  }, { 
-    new: true
-  },
-  callback);
+    else if(user.userAtEvent.receivedDinner) {
+      return callback({"message" : "User has already received dinner"})
+    }
+    else {
+      User.findOneAndUpdate({
+        _id: id,
+        verified: true
+      }, {
+        $set: {
+          'userAtEvent.receivedDinner': true
+        }
+      }, {
+        new: true
+      },
+      callback);
+    }
+  });
 }
 
 
@@ -1032,7 +1065,7 @@ UserController.addWorkshopAttended = function(id, sponsor_id, callback){
     _id: id,
     verified: true
   },{
-    $push: {
+    $addToSet: {
       'userAtEvent.workshopsAttended': sponsor_id
     }
   }, {
@@ -1046,7 +1079,7 @@ UserController.addTableVisited = function(id, sponsor_id, callback){
     _id: id,
     verified: true
   },{
-    $push: {
+    $addToSet: {
       'userAtEvent.tablesVisited': sponsor_id
     }
   }, {

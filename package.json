@@ -17,7 +17,6 @@
     "email-templates": "^5.0.2",
     "express": "^4.16.4",
     "file-saver": "^2.0.2",
-    "gulp": "^3.9.1",
     "gulp-buffer": "0.0.2",
     "gulp-tap": "^1.0.1",
     "isteven-angular-multiselect": "git+https://github.com/isteven/angular-multi-select.git",
@@ -52,6 +51,7 @@
     "build": "gulp build"
   },
   "devDependencies": {
+    "gulp": "^3.9.1",
     "gulp-clean-css": "^4.0.0",
     "gulp-concat": "^2.6.1",
     "gulp-ng-annotate": "^2.1.0",
