@@ -94,6 +94,7 @@ module.exports = function(router) {
    */
   function defaultResponse(req, res){
     return function(err, data){
+      // console.log(err)
       if (err){
         // SLACK ALERT!
         if (process.env.NODE_ENV === 'production'){
@@ -117,8 +118,10 @@ module.exports = function(router) {
                 }
               },
               function (error, response, body) {
-                return res.status(500).send({
-                  message: "Your error has been recorded, we'll get right on it!"
+                const status = err.custom_message ? 400 : 500
+                const message = err.custom_message ? err.custom_message : "Your error has been recorded, we'll get right on it!"
+                return res.status(status).send({
+                  message: message
                 });
               }
             );

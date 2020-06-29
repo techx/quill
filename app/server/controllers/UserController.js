@@ -907,7 +907,7 @@ UserController.markReceivedLunch = function(id, callback) {
     }
     else if(user.userAtEvent.receivedLunch) {
       console.log('lunch');
-      return callback({"message" : "User has already received lunch"})
+      return callback({"custom_message" : "User has already received lunch"})
     }
     else {
       User.findOneAndUpdate({
@@ -923,9 +923,6 @@ UserController.markReceivedLunch = function(id, callback) {
       callback);
     }
   });
-
-
-
 }
 
 UserController.markReceivedDinner = function(id, callback) {
@@ -938,7 +935,7 @@ UserController.markReceivedDinner = function(id, callback) {
       return callback(err, user);
     }
     else if(user.userAtEvent.receivedDinner) {
-      return callback({"message" : "User has already received dinner"})
+      return callback({"custom_message" : "User has already received dinner"})
     }
     else {
       User.findOneAndUpdate({
@@ -1060,6 +1057,28 @@ UserController.makeSponsorById = function(id, user, callback){
   callback);
 };
 
+/**
+ * [SPONSOR methods]
+ */
+
+ /** Filters the subset of user attributes returned
+ *  to a sponsor before executing a callback
+ * @param {Function} callback 
+ * @returns {Function} [filtered]
+ */
+function filterForSponsor(callback) {
+  return function(err, user) {
+    if (!err) {
+      // include id and profile
+      user = {
+        'id': user['id'],
+        'profile': user['profile']
+      }
+    }
+    callback(err, user);
+  }
+}
+
 UserController.addWorkshopAttended = function(id, sponsor_id, callback){
   User.findOneAndUpdate({
     _id: id,
@@ -1071,7 +1090,7 @@ UserController.addWorkshopAttended = function(id, sponsor_id, callback){
   }, {
     new: true
   },
-  callback);
+  filterForSponsor(callback));
 }
 
 UserController.addTableVisited = function(id, sponsor_id, callback){
@@ -1085,7 +1104,7 @@ UserController.addTableVisited = function(id, sponsor_id, callback){
   }, {
     new: true
   },
-  callback);
+  filterForSponsor(callback));
 }
 
 
