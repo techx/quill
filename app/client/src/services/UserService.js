@@ -6,6 +6,7 @@ angular.module('reg')
 
     var users = '/api/users';
     var base = users + '/';
+    var sponsors = '/api/sponsors';
 
     function sponsorSuccess(data, cb){
        if(cb) 
@@ -38,6 +39,16 @@ angular.module('reg')
             text: text,
             grad: gradYears,
             skills: skills,
+            page: page ? page : 0,
+            size: size ? size : 50
+          })
+        );
+      },
+
+      getSponsorPage: function(page, size, text){
+        return $http.get(sponsors + '?' + $.param(
+          {
+            text: text,
             page: page ? page : 0,
             size: size ? size : 50
           })
@@ -126,32 +137,30 @@ angular.module('reg')
       removeAdmin: function(id){
         return $http.post(base + id + '/removeadmin');
       },
-
-
       createWalkin: function(email){
         return $http.post(base + 'createwalkin', {
           email: email
         });
       },
-
       newSponsor: function(email, onSuccess, onFailure) {
         return $http
           .post(base + 'newsponsor', {
             email: email,
           })
-          .then(response => {
-            sponsorSuccess(response.data, onSuccess);
-          }, response => {
-            sponsorFailure(response.data, onFailure);
-          })
           .catch(function onError(error) {
-            console.log(error);         
+            console.log(error);
           });
       },
-
+      
+      updateSponsor : function(id, data){
+        return $http.post(base + id + '/updateSponsor', {
+          data : data
+        });
+      },
+      
+      // [UNUSED]
       makeSponsor: function(id){
         return $http.post(base + id + '/makesponsor');
-
       },
     };
   }

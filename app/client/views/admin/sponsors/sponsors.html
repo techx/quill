@@ -46,14 +46,15 @@
                         </div>
 
                         <div class="ui divider"></div>
-
+                        <div class="ui header">
+                            Pages
+                        </div>
                         <button ng-repeat="page in pages"
                                 ng-class="page == currentPage ? 'active pink' : ''"
                                 ng-click="goToPage(page)"
                                 class="ui icon basic page button">
-                            {{page}}
+                            {{page + 1}}
                         </button>
-
                     </div>
                     <div class="thirteen wide column">
                     <div class="ui header">
@@ -72,8 +73,7 @@
                         </thead>
                         <tbody>
                             <tr ng-click="selectUser(user)"
-                                ng-repeat="user in sponsors"
-                                ng-class="rowClass(user)">
+                                ng-repeat="user in sponsors">
                                 <td>
                                     <strong>
                                         {{user.profile.name}}
@@ -88,10 +88,10 @@
                                             class="ui circular mini basic icon button">
                                         <i class="linkify icon"></i>
                                     </button>
-                                    <i ng-if="user.sponsorFields.sponsorStatus == 'completedProfile'"
+                                    <i ng-if="user.sponsorFields.sponsorStatus == 'completedProfile' || user.sponsorFields.sponsorStatus == 'grantedResumeAccess'"
                                        class="green check circle icon">
                                     </i>
-                                    <i ng-if="!user.status.completedProfile == 'incomplete'"
+                                    <i ng-if="user.status.completedProfile == 'incomplete'"
                                        class="red remove circle icon">
                                     </i>
                                 </td>

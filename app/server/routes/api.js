@@ -162,6 +162,21 @@ module.exports = function(router) {
     }
   });
 
+      /**
+   * [ADMIN ONLY]
+   *
+   * GET - Get all sponsors, or a page at a time.
+   * ex. Paginate with ?page=0&size=100
+   */
+  router.get('/sponsors', isAdmin, function(req, res){
+    var query = req.query;
+    if (query.page && query.size){
+      UserController.getSponsorPage(query, defaultResponse(req, res));
+    } else {
+      UserController.getAllSponsors(defaultResponse(req, res));
+    }
+  });
+
   /**
    * [ADMIN ONLY]
    */
@@ -366,6 +381,38 @@ module.exports = function(router) {
     UserController.removeAdminById(id, user, defaultResponse(req, res));
   });
 
+  /**
+   * Create a new sponsor account
+   */
+  router.post('/users/newsponsor', isAdmin,
+    function(req, res, next){
+      // Register with an email
+      var email = req.body.email;
+      UserController.createSponsor(email, function(err, user){
+          if (err){
+            return res.status(400).send(err);
+          }
+          user.sponsor = true;
+          return res.json(user);
+      });
+  });
+
+    /**
+   * [Unused] Make user a sponsor
+   */
+  router.post('/users/:id/makesponsor', isAdmin, function(req, res){
+    var id = req.params.id;
+    var user = req.user;
+    UserController.makeSponsorById(id, user, defaultResponse(req, res));
+  });
+
+
+  router.post('/users/:id/updateSponsor', function(req, res){
+    var id = req.params.id;
+    console.log(req.body)
+    var user = req.body;
+    UserController.updateSponsorById(id, user, defaultResponse(req, res));
+  });
 
   router.post('/users/createwalkin', isAdmin, function(req, res){
     var email = req.body.email;
@@ -463,7 +510,6 @@ module.exports = function(router) {
   });
 
 
- 
 
   /**
    * Set the registration open and close times.
@@ -514,4 +560,8 @@ module.exports = function(router) {
     var allowMinors = req.body.allowMinors;
     SettingsController.updateField('allowMinors', allowMinors, defaultResponse(req, res));
   });
+
+
+
+
 };
