@@ -360,6 +360,63 @@ UserController.getSponsorPage = function (query, callback) {
   findQuery.$and = [];
   findQuery.$and.push({'$or': queries});
 
+
+  User
+    .find(findQuery)
+    .sort({
+      'profile.name': 'asc'
+    })
+    .select('+status.admittedBy')
+    .skip(page * size)
+    .limit(size)
+    .exec(function (err, users) {
+      if (err || !users) {
+        return callback(err);
+      }
+
+      User.count(findQuery).exec(function (err, count) {
+
+        if (err) {
+          return callback(err);
+        }
+
+        return callback(null, {
+          users: users,
+          page: page,
+          size: size,
+          totalPages: Math.ceil(count / size)
+        });
+      });
+
+    });
+};
+
+UserController.getAllSponsors = function (callback) {
+  User.find({'sponsor': true}, callback);
+};
+
+UserController.getSponsorPage = function (query, callback) {
+  var page = query.page;
+  var size = parseInt(query.size);
+  var searchText = query.text;
+
+  var queries = [];
+  var findQuery = {};
+  queries.push({sponsor: true});
+  if (searchText.length > 0) {
+    var re = new RegExp(searchText, 'i');
+    queries.push({email: re});
+    queries.push({'profile.name': re});
+    queries.push({'teamCode': re});
+
+    // check if valid ObjectId passed, else will crash program
+    if (searchText.match(/^[0-9a-fA-F]{24}$/)) {
+      queries.push({_id: searchText});
+    }
+  }
+  findQuery.$and = [];
+  findQuery.$and.push({'$or': queries});
+
   // check if grad year passed in
   if (gradYears.length > 0) {
     years = gradYears.split(",");
@@ -1183,6 +1240,24 @@ UserController.addTableVisited = function(id, sponsor_id, callback){
   filterForSponsor(callback));
 }
 
+UserController.updateSponsorById = function(id, user, callback){
+  console.log(id)
+  User.findOneAndUpdate({
+    _id: id,
+  },{
+    $set: {
+      'sponsorFields.sponsorStatus': "completedProfile",
+      'sponsorFields.pledgeAmount': user.data.pledgeAmount,
+      'sponsorFields.api' : user.data.API,
+      'sponsorFields.companyName' : user.data.companyName,
+      'sponsorFields.links': user.data.links
+    }
+  },{
+    new: true
+  },
+  callback);
+
+};
 
 /**
  * [ADMIN ONLY]

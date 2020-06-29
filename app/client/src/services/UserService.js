@@ -8,14 +8,6 @@ angular.module('reg')
     var base = users + '/';
     var sponsors = '/api/sponsors';
 
-    function sponsorSuccess(data, cb){
-       if(cb) 
-        cb(data);
-    }
-    function sponsorFailure(data, cb){
-        console.log("failed!");
-    }
-
     return {
 
       // ----------------------
