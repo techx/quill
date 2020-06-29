@@ -6,6 +6,7 @@ angular.module('reg')
 
     var users = '/api/users';
     var base = users + '/';
+    var sponsors = '/api/sponsors';
 
     return {
 
@@ -30,6 +31,16 @@ angular.module('reg')
             text: text,
             grad: gradYears,
             skills: skills,
+            page: page ? page : 0,
+            size: size ? size : 50
+          })
+        );
+      },
+
+      getSponsorPage: function(page, size, text){
+        return $http.get(sponsors + '?' + $.param(
+          {
+            text: text,
             page: page ? page : 0,
             size: size ? size : 50
           })
@@ -95,6 +106,14 @@ angular.module('reg')
         return $http.post(base + id + '/admit');
       },
 
+      grantResumeAccess: function(id){
+        return $http.post(base + id + '/grantresumeaccess');
+      },
+
+      removeResumeAccess: function(id){
+        return $http.post(base + id + '/removeresumeaccess');
+      },
+
       checkIn: function(id){
         return $http.post(base + id + '/checkin');
       },
@@ -109,6 +128,27 @@ angular.module('reg')
 
       removeAdmin: function(id){
         return $http.post(base + id + '/removeadmin');
+      },
+
+      newSponsor: function(email, onSuccess, onFailure) {
+        return $http
+          .post(base + 'newsponsor', {
+            email: email,
+          })
+          .catch(function onError(error) {
+            console.log(error);
+          });
+      },
+      
+      updateSponsor : function(id, data){
+        return $http.post(base + id + '/updateSponsor', {
+          data : data
+        });
+      },
+      
+      // [UNUSED]
+      makeSponsor: function(id){
+        return $http.post(base + id + '/makesponsor');
       },
     };
   }

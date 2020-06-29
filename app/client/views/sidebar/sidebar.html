@@ -16,10 +16,19 @@
     <div
       ui-sref-active="active"
       ui-sref="app.application"
-      ng-show="!currentUser.status.admitted && !currentUser.status.declined"
+      ng-show="!currentUser.status.admitted && !currentUser.status.declined && !currentUser.sponsor"
       class="item">
       Application
     </div>
+
+    <div
+      ui-sref-active="active"
+      ui-sref="app.sponsorapplication"
+      ng-show="currentUser.sponsor"
+      class="item">
+      Sponsor Application
+    </div>
+
 
     <div
       ui-sref-active="active"
@@ -33,6 +42,7 @@
     <div
       ui-sref-active="active"
       ui-sref="app.resumes"
+      ng-show="currentUser.sponsorFields.sponsorStatus == 'grantedResumeAccess'"
       class="item">
       Resumes
     </div>
@@ -40,7 +50,7 @@
     <div
       ui-sref-active="active"
       ui-sref="app.team"
-      ng-show="!currentUser.status.declined"
+      ng-show="!currentUser.status.declined && !currentUser.sponsor"
       class="item">
       Team
     </div>
@@ -71,5 +81,3 @@
   <img ng-show="!showSidebar" src="assets/images/logo.svg" />
   <span class="close" ng-show="showSidebar">&#x2715</span>
 </div>
-
-

@@ -162,7 +162,6 @@ UserController.createUser = function (email, password, callback) {
             message: 'An account for this email already exists.'
           });
         }
-
         return callback(err);
       } else {
         // yay! success.
@@ -171,7 +170,6 @@ UserController.createUser = function (email, password, callback) {
         // Send over a verification email
         var verificationToken = u.generateEmailVerificationToken();
         Mailer.sendVerificationEmail(email, verificationToken);
-
         return callback(
           null,
           {
@@ -184,6 +182,59 @@ UserController.createUser = function (email, password, callback) {
     });
   });
 };
+
+/**
+ * Create a new sponsor given an email.
+ * @param  {String}   email    User's email.
+ * @param  {Function} callback args(err, user)
+ */
+UserController.createSponsor = function (email, callback) {
+  if (typeof email !== 'string') {
+    return callback({
+      message: 'Email must be a string.'
+    });
+  }
+
+  email = email.toLowerCase();
+  // Generate random password
+  var password = '';
+  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var charactersLength = characters.length;
+  for ( var i = 0; i < 15; i++ ) {
+        password += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    var u = new User();
+    u.email = email;
+    u.password = User.generateHash(password);
+    u.sponsor = true;
+    u.verified = true;
+    u.save(function (err) {
+      if (err) {
+        // Duplicate key error codes
+        if (err.name === 'MongoError' && (err.code === 11000 || err.code === 11001)) {
+          return callback({
+            message: 'An account for this email already exists.'
+          });
+        }
+        return callback(err);
+      } else {
+        // yay! success.
+        var token = u.generateAuthToken();
+        console.log("Success! New sponsor: ", email, password);
+        // Send over a verification email
+        var verificationToken = u.password
+        Mailer.sendVerificationEmail(email, verificationToken);
+        return callback(
+          null,
+          {
+            token: token,
+            user: u
+          }
+        );
+      }
+    });
+};
+
 
 UserController.getByToken = function (token, callback) {
   User.getByToken(token, callback);
@@ -233,7 +284,7 @@ UserController.getPage = function (query, callback) {
   if (gradYears.length > 0) {
     years = gradYears.split(",");
     year_query = {'$in': years};
-    
+
     if (!findQuery.$and) {
       findQuery.$and = [];
     }
@@ -251,6 +302,62 @@ UserController.getPage = function (query, callback) {
     findQuery.$and.push({'profile.skills': match_query});
   }
 
+
+  User
+    .find(findQuery)
+    .sort({
+      'profile.name': 'asc'
+    })
+    .select('+status.admittedBy')
+    .skip(page * size)
+    .limit(size)
+    .exec(function (err, users) {
+      if (err || !users) {
+        return callback(err);
+      }
+
+      User.count(findQuery).exec(function (err, count) {
+
+        if (err) {
+          return callback(err);
+        }
+
+        return callback(null, {
+          users: users,
+          page: page,
+          size: size,
+          totalPages: Math.ceil(count / size)
+        });
+      });
+
+    });
+};
+
+UserController.getAllSponsors = function (callback) {
+  User.find({'sponsor': true}, callback);
+};
+
+UserController.getSponsorPage = function (query, callback) {
+  var page = query.page;
+  var size = parseInt(query.size);
+  var searchText = query.text;
+
+  var queries = [];
+  var findQuery = {};
+  queries.push({sponsor: true});
+  if (searchText.length > 0) {
+    var re = new RegExp(searchText, 'i');
+    queries.push({email: re});
+    queries.push({'profile.name': re});
+    queries.push({'teamCode': re});
+
+    // check if valid ObjectId passed, else will crash program
+    if (searchText.match(/^[0-9a-fA-F]{24}$/)) {
+      queries.push({_id: searchText});
+    }
+  }
+  findQuery.$and = [];
+  findQuery.$and.push({'$or': queries});
 
   User
     .find(findQuery)
@@ -710,6 +817,48 @@ UserController.admitUser = function (id, user, callback) {
 /**
  * [ADMIN ONLY]
  *
+ * Give a sponsor access to Resumes
+ * @param  {String}   userId      User id of the sponsor granted access
+ * @param  {Function} callback    args(err, user)
+ */
+ UserController.grantResumeAccess = function (id, callback) {
+     User.findOneAndUpdate({
+        _id: id,
+	 }, {
+     $set: {
+        'sponsorFields.sponsorStatus': 'grantedResumeAccess'
+     }
+     }, {
+        new: true
+     },
+     callback);
+ }
+
+ /**
+ * [ADMIN ONLY]
+ *
+ * Remove sponsor's access to Resumes
+ * @param  {String}   userId      User id of the sponsor removed access
+ * @param  {Function} callback    args(err, user)
+ */
+ UserController.grantResumeAccess = function (id, callback) {
+     User.findOneAndUpdate({
+        _id: id,
+	 }, {
+     $set: {
+        'sponsorFields.sponsorStatus': 'completedProfile'
+     }
+     }, {
+        new: true
+     },
+     callback);
+ }
+
+
+
+/**
+ * [ADMIN ONLY]
+ *
  * Check in a user.
  * @param  {String}   userId   User id of the user getting checked in.
  * @param  {String}   user     User checking in this person.
@@ -795,6 +944,41 @@ UserController.removeAdminById = function(id, user, callback){
   },
   callback);
 };
+
+// [UNUSED]
+UserController.makeSponsorById = function(id, user, callback){
+  User.findOneAndUpdate({
+    _id: id,
+    verified: true
+  },{
+    $set: {
+      'sponsor': true
+    }
+  }, {
+    new: true
+  },
+  callback);
+};
+
+UserController.updateSponsorById = function(id, user, callback){
+  console.log(id)
+  User.findOneAndUpdate({
+    _id: id,
+  },{
+    $set: {
+      'sponsorFields.sponsorStatus': "completedProfile",
+      'sponsorFields.pledgeAmount': user.data.pledgeAmount,
+      'sponsorFields.api' : user.data.API,
+      'sponsorFields.companyName' : user.data.companyName,
+      'sponsorFields.links': user.data.links
+    }
+  },{
+    new: true
+  },
+  callback);
+
+};
+
 
 /**
  * [ADMIN ONLY]
