@@ -7,7 +7,8 @@ angular.module('reg')
     '$state',
     '$stateParams',
     'UserService',
-    function($scope, $state, $stateParams, UserService){
+    'AuthService',
+    function($scope, $state, $stateParams, UserService, AuthService){
       $scope.queryText = $stateParams.query;
 
       $scope.pages = [];

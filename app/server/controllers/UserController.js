@@ -12,6 +12,7 @@ var moment = require('moment');
 var UserController = {};
 
 var maxTeamSize = process.env.TEAM_MAX_SIZE || 4;
+var tempPassword = process.env.TEMP_PASSWORD;
 
 // Tests a string if it ends with target s
 function endsWith(s, test) {
@@ -359,6 +360,86 @@ UserController.getSponsorPage = function (query, callback) {
   findQuery.$and = [];
   findQuery.$and.push({'$or': queries});
 
+
+  User
+    .find(findQuery)
+    .sort({
+      'profile.name': 'asc'
+    })
+    .select('+status.admittedBy')
+    .skip(page * size)
+    .limit(size)
+    .exec(function (err, users) {
+      if (err || !users) {
+        return callback(err);
+      }
+
+      User.count(findQuery).exec(function (err, count) {
+
+        if (err) {
+          return callback(err);
+        }
+
+        return callback(null, {
+          users: users,
+          page: page,
+          size: size,
+          totalPages: Math.ceil(count / size)
+        });
+      });
+
+    });
+};
+
+UserController.getAllSponsors = function (callback) {
+  User.find({'sponsor': true}, callback);
+};
+
+UserController.getSponsorPage = function (query, callback) {
+  var page = query.page;
+  var size = parseInt(query.size);
+  var searchText = query.text;
+
+  var queries = [];
+  var findQuery = {};
+  queries.push({sponsor: true});
+  if (searchText.length > 0) {
+    var re = new RegExp(searchText, 'i');
+    queries.push({email: re});
+    queries.push({'profile.name': re});
+    queries.push({'teamCode': re});
+
+    // check if valid ObjectId passed, else will crash program
+    if (searchText.match(/^[0-9a-fA-F]{24}$/)) {
+      queries.push({_id: searchText});
+    }
+  }
+  findQuery.$and = [];
+  findQuery.$and.push({'$or': queries});
+
+  // check if grad year passed in
+  if (gradYears.length > 0) {
+    years = gradYears.split(",");
+    year_query = {'$in': years};
+
+    if (!findQuery.$and) {
+      findQuery.$and = [];
+    }
+    findQuery.$and.push({'profile.graduationTime': year_query});
+  }
+
+  // check if skills passed in
+  if (skills.length > 0) {
+    skills_arr = skills.split(",");
+    skills_query = {'$in': skills_arr};
+    match_query = {'$elemMatch': skills_query}
+    if (!findQuery.$and) {
+      findQuery.$and = [];
+    }
+    findQuery.$and.push({'profile.skills': match_query});
+  }
+
+
   User
     .find(findQuery)
     .sort({
@@ -697,6 +778,98 @@ UserController.sendPasswordResetEmail = function (email, callback) {
 };
 
 /**
+ * Password reset email
+ * @param  {[type]}   email    [description]
+ * @param  {Function} callback [description]
+ * @return {[type]}            [description]
+ */
+UserController.sendWalkInEmail = function (email, callback) {
+  if (typeof email !== 'string') {
+    return callback({
+      message: 'Email must be a string.'
+    });
+  }
+
+  email = email.toLowerCase();
+  if (validator.isEmail(email)) {
+    console.log("validator");
+    var u = new User();
+
+    u.email = email;
+    u.password = User.generateHash(tempPassword);
+    u.save(function (err, data) {
+      if (err) {
+        // Duplicate key error codes
+        if (err.name === 'MongoError' && (err.code === 11000 || err.code === 11001)) {
+        }
+        callback(err, false);
+      } else {
+        // yay! success.
+        var token = u.generateAuthToken();
+
+        // Send over an email
+        var verificationToken = u.generateEmailVerificationToken();
+        Mailer.sendWalkinEmail(email, verificationToken);
+
+        return callback(
+          null,
+          {
+            token: token,
+            user: u
+          }
+        );
+      }
+    });
+  }
+};
+
+/**
+ * Reset a user's password to a given password, given a authentication token.
+ * @param  {String}   token       Authentication token
+ * @param  {String}   password    New Password
+ * @param  {Function} callback    args(err, user)
+ */
+UserController.createWalkInUser = function (token, password, callback) {
+  if (!password || !token) {
+    return callback({
+      message: 'Bad arguments'
+    });
+  }
+
+  if (password.length < 6) {
+    return callback({
+      message: 'Password must be 6 or more characters.'
+    });
+  }
+
+  User.verifyEmailVerificationToken(token, function (err, email) {
+    if (err || !email) {
+      return callback(err);
+    }
+
+    User.findOneAndUpdate({
+        email: email.toLowerCase()
+      }, {
+        $set: {
+          'verified': true,
+          'password': User.generateHash(password),
+          'status.allowRegister': true
+        }
+      }, {
+        new: true
+      }, function (err, user) {
+        if (err || !user) {
+          return callback(err);
+        }
+
+        return callback(null, {
+          message: 'Password successfully reset!'
+        });
+      });
+  });
+};
+
+/**
  * UNUSED
  *
  * Change a user's password, given their old password.
@@ -854,6 +1027,63 @@ UserController.admitUser = function (id, user, callback) {
      callback);
  }
 
+UserController.markReceivedLunch = function(id, callback) {
+
+  // Check if user already received meal
+  User.findOne({
+    _id: id,
+    verified: true
+  }, function(err, user) {
+    if(err || !user) {
+      return callback(err, user);
+    }
+    else if(user.userAtEvent.receivedLunch) {
+      console.log('lunch');
+      return callback({"custom_message" : "User has already received lunch"})
+    }
+    else {
+      User.findOneAndUpdate({
+        _id: id,
+        verified: true
+      }, {
+        $set: {
+          'userAtEvent.receivedLunch': true
+        }
+      }, {
+        new: true
+      },
+      callback);
+    }
+  });
+}
+
+UserController.markReceivedDinner = function(id, callback) {
+
+  User.findOne({
+    _id: id,
+    verified: true
+  }, function(err, user) {
+    if(err || !user) {
+      return callback(err, user);
+    }
+    else if(user.userAtEvent.receivedDinner) {
+      return callback({"custom_message" : "User has already received dinner"})
+    }
+    else {
+      User.findOneAndUpdate({
+        _id: id,
+        verified: true
+      }, {
+        $set: {
+          'userAtEvent.receivedDinner': true
+        }
+      }, {
+        new: true
+      },
+      callback);
+    }
+  });
+}
 
 
 /**
@@ -960,6 +1190,56 @@ UserController.makeSponsorById = function(id, user, callback){
   callback);
 };
 
+/**
+ * [SPONSOR methods]
+ */
+
+ /** Filters the subset of user attributes returned
+ *  to a sponsor before executing a callback
+ * @param {Function} callback 
+ * @returns {Function} [filtered]
+ */
+function filterForSponsor(callback) {
+  return function(err, user) {
+    if (!err) {
+      // include id and profile
+      user = {
+        'id': user['id'],
+        'profile': user['profile']
+      }
+    }
+    callback(err, user);
+  }
+}
+
+UserController.addWorkshopAttended = function(id, sponsor_id, callback){
+  User.findOneAndUpdate({
+    _id: id,
+    verified: true
+  },{
+    $addToSet: {
+      'userAtEvent.workshopsAttended': sponsor_id
+    }
+  }, {
+    new: true
+  },
+  filterForSponsor(callback));
+}
+
+UserController.addTableVisited = function(id, sponsor_id, callback){
+  User.findOneAndUpdate({
+    _id: id,
+    verified: true
+  },{
+    $addToSet: {
+      'userAtEvent.tablesVisited': sponsor_id
+    }
+  }, {
+    new: true
+  },
+  filterForSponsor(callback));
+}
+
 UserController.updateSponsorById = function(id, user, callback){
   console.log(id)
   User.findOneAndUpdate({
@@ -978,7 +1258,6 @@ UserController.updateSponsorById = function(id, user, callback){
   callback);
 
 };
-
 
 /**
  * [ADMIN ONLY]

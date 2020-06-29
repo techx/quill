@@ -155,4 +155,23 @@ module.exports = function(router){
       });
     });
 
+  /**
+   * Create a walk in user with a given token.
+   */
+   router.post('/walkin/:token',
+    function(req, res, next){
+      var token = req.params.token;
+      var pass = req.body.password;
+
+      UserController.createWalkInUser(token, pass, function(err, user){
+
+        if (err || !user){
+          return res.status(400).send(err);
+        }
+
+        return res.json(user);
+
+      });
+    });
+
 };
