@@ -112,7 +112,7 @@ angular.module('reg')
       },
 
       checkIn: function(id){
-        return $http.post(base + id + '/checkin');
+        return $http.put(base + id + '/checkin');
       },
 
       checkOut: function(id){
