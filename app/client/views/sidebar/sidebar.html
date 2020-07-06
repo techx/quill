@@ -42,7 +42,7 @@
     <div
       ui-sref-active="active"
       ui-sref="app.resumes"
-      ng-show="currentUser.sponsorFields.sponsorStatus == 'grantedResumeAccess'"
+      ng-show="currentUser.admin || currentUser.sponsorFields.sponsorStatus == 'grantedResumeAccess'"
       class="item">
       Resumes
     </div>
