@@ -393,6 +393,10 @@ UserController.declineById = function (id, callback){
  */
 UserController.verifyByToken = function(token, callback){
   User.verifyEmailVerificationToken(token, function(err, email){
+    if (!email) {
+      callback("Invalid token", null);
+      return;
+    }
     User.findOneAndUpdate({
       email: email.toLowerCase()
     },{
