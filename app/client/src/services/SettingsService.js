@@ -48,6 +48,11 @@ angular.module('reg')
           allowMinors: allowMinors 
         });
       },
+      updateAllowAllEmails: function(allowAllEmails){
+        return $http.put(base + 'allEmails', { 
+          allowAllEmails: allowAllEmails 
+        });
+      },
     };
 
   }

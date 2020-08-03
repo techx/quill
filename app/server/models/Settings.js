@@ -38,6 +38,9 @@ var schema = new mongoose.Schema({
   },
   allowMinors: {
     type: Boolean
+  },
+  allowAllEmails: {
+    type: Boolean
   }
 });
 

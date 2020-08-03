@@ -99,6 +99,17 @@ class="ui green segment">
               <label>Allow minors</label>
           </div>
         </div>
+        <div class="field">
+            <div class="ui toggle checkbox">
+                <input 
+                type="checkbox"
+                name="allowAllEmails"
+                ng-class="{true: 'checked', false: ''}[settings.allowAllEmails]"
+                ng-model="settings.allowAllEmails"
+                ng-change="updateAllowAllEmails()">
+                <label>Allow all emails</label>
+            </div>
+        </div>
       </div>
     </div>
   </div>
