@@ -91,7 +91,7 @@
                                     <i ng-if="user.sponsorFields.sponsorStatus == 'completedProfile' || user.sponsorFields.sponsorStatus == 'grantedResumeAccess'"
                                        class="green check circle icon">
                                     </i>
-                                    <i ng-if="user.status.completedProfile == 'incomplete'"
+                                    <i ng-if="!(user.sponsorFields.sponsorStatus == 'completedProfile' || user.sponsorFields.sponsorStatus == 'grantedResumeAccess')"
                                        class="red remove circle icon">
                                     </i>
                                 </td>

@@ -24,7 +24,6 @@ angular.module('reg')
       }, profile: ''});
 
       function updatePage(data){
-        console.log(data);
         $scope.sponsors = data.users;
         $scope.currentPage = data.page;
         $scope.pageSize = data.size;
@@ -211,7 +210,6 @@ angular.module('reg')
         $scope.selectedUser.sections = generateSections(user);
         $('.long.user.modal')
           .modal('show');
-        console.log(user.sponsor);
       }
 
       function generateSections(user){
