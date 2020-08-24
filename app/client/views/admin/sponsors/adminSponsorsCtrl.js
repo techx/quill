@@ -66,11 +66,23 @@ angular.module('reg')
 
       $scope.toggleResumeAccess = function($event, user, index) {
         $event.stopPropagation();
+        var name = "";
+        if(typeof user.profile.name == 'undefined') {
+          if(typeof user.sponsorFields.companyName == 'undefined') {
+            name = user.email;
+          }
+          else {
+            name = user.sponsorFields.companyName;
+          }
+        }
+        else {
+          name = user.profile.name;
+        }
 
         if (user.sponsorFields.sponsorStatus == 'completedProfile'){
           swal({
             title: "Whoa, wait a minute!",
-            text: "You are about make " + user.profile.name + " resume access!",
+            text: "You are about give " + name + " resume access!",
             icon: "warning",
             buttons: {
               cancel: {
@@ -95,17 +107,41 @@ angular.module('reg')
               .grantResumeAccess(user._id)
               .then(response => {
                 $scope.sponsors[index] = response.data;
-                swal("Gave", response.data.profile.name + ' resume access.', "success");
+                swal("Success!", "Gave " + name + ' resume access.', "success");
               });
             }
           );
         } else {
-          UserService
-            .removeResumeAccess(user._id)
-            .then(response => {
-              $scope.sponsors[index] = response.data;
-              swal("Removed", response.data.profile.name + ' resume access.', "success");
-            });
+          swal({
+            title: "Whoa, wait a minute!",
+            text: "You are about remove " + name + "'s resume access!",
+            icon: "warning",
+            buttons: {
+              cancel: {
+                text: "Cancel",
+                value: null,
+                visible: true
+              },
+              confirm: {
+                text: "Yes, remove their resume access",
+                className: "danger-button",
+                closeModal: false,
+                value: true,
+                visible: true
+              }
+            }
+          }).then(value => {
+            if (!value) {
+              return;
+            }
+            UserService
+              .removeResumeAccess(user._id)
+              .then(response => {
+                $scope.sponsors[index] = response.data;
+                swal("Success!", "Removed " + name + "'s resume access.", "success");
+              });
+            }
+          );
         }
       };
 
