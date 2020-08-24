@@ -107,11 +107,11 @@
                                 <td class="center aligned collapsing">
 
                                     <i ng-if="user.sponsorFields.sponsorStatus == 'completedProfile'" class="accept ui circular mini basic green icon button"
-                                       ng-click="grantResumeAccess($event, user, $index)">
+                                       ng-click="toggleResumeAccess($event, user, $index)">
                                         <i class="add user icon"></i>
                                     </i>
                                     <i ng-if="user.sponsorFields.sponsorStatus == 'grantedResumeAccess'" class="reject ui circular mini basic red icon button"
-                                       ng-click="removeResumeAccess($event, user, $index)">
+                                       ng-click="toggleResumeAccess($event, user, $index)">
                                         <i class="remove user icon"></i>
                                     </i>
                                 </td>

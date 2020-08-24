@@ -349,6 +349,24 @@ module.exports = function(router) {
     UserController.makeSponsorById(id, user, defaultResponse(req, res));
   });
 
+    /**
+   * Give resume access
+   */
+  router.post('/users/:id/grantresumeaccess', isAdmin, function(req, res){
+    var id = req.params.id;
+    var user = req.user;
+    UserController.grantResumeAccessById(id, user, defaultResponse(req, res));
+  });
+
+  /**
+   * Remove Resume access
+   */
+  router.post('/users/:id/removeresumeaccess', isAdmin, function(req, res){
+    var id = req.params.id;
+    var user = req.user;
+    UserController.removeResumeAccessById(id, user, defaultResponse(req, res));
+  });
+
 
   router.post('/users/:id/updateSponsor', function(req, res){
     var id = req.params.id;
