@@ -153,6 +153,7 @@ UserController.createUser = function (email, password, callback) {
     }
 
     var u = new User();
+    console.log(u);
     u.email = email;
     u.password = User.generateHash(password);
     u.save(function (err) {
@@ -1196,7 +1197,7 @@ UserController.makeSponsorById = function(id, user, callback){
 
  /** Filters the subset of user attributes returned
  *  to a sponsor before executing a callback
- * @param {Function} callback 
+ * @param {Function} callback
  * @returns {Function} [filtered]
  */
 function filterForSponsor(callback) {
