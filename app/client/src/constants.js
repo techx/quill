@@ -22,4 +22,13 @@ angular.module('reg')
     })
     .constant('TEAM',{
         NO_TEAM_REG_CLOSED: 'Unfortunately, it\'s too late to enter the lottery with a team.\nHowever, you can still form teams on your own before or during the event!',
+    })
+    .constant('SPONSORSHIP_COST', {
+        KILO: 500,
+        MEGA: 1000,
+        GIGA: 3000,
+        TITLE: 5000,
+        WORKSHOP: 750,
+        TIMED_COST: 500,
+        TIMED_RATE: 30,
     });

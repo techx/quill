@@ -12,45 +12,95 @@ angular.module('reg')
     'settings',
     'Session',
     'UserService',
-    function ($scope, $rootScope, $state, $http, currentUser, settings, Session, UserService) {
+    'SPONSORSHIP_COST',
+    function ($scope, $rootScope, $state, $http, currentUser, settings, Session, UserService, SPONSORSHIP_COST) {
 
       // Set up the user
       $scope.user = currentUser.data;
+      $scope.SPONSORSHIP_COST = SPONSORSHIP_COST;
+      $scope.isTitle = $scope.user.sponsorFields.tier === "title";
+      $scope.isGiga = $scope.user.sponsorFields.tier === "giga";
+      $scope.estimatedCost = 0;
 
-      // Is the student from UT?
-      $scope.isUtStudent = $scope.user.email.split('@')[1] == 'utexas.edu';
 
-      $scope.resume = null;
-      // If so, default them to adult: true
-      if ($scope.isUtStudent) {
-        $scope.user.profile.adult = true;
-      }
 
-      var socialMedia = {
-        'Facebook': false,
-        'Twitter': false,
-        'School Club': false,
-        'Website': false,
-        'Friend': false,
-        'MLH': false,
-      };
+      // Cost for timed events, i.e. opening/closing remarks
+      var timedCost = 0;
+      // Flat costs, i.e. workshops/tiers
+      var flatCosts = 0;
 
-      if ($scope.user.profile.socialMedia) {
-        $scope.user.profile.socialMedia.forEach(function (media) {
-          if (media in socialMedia) {
-            socialMedia[media] = true;
+      var totalCost = timedCost + flatCosts;
+
+      // Watch for changes in tier/workshop/times, as they effect the cost
+      $scope.$watchGroup([
+        'user.sponsorFields.tier',
+        'user.sponsorFields.workshop',
+      ],
+      function(newValue, oldValue, scope) {
+        console.log($scope.user);
+        var isTitle = $scope.user.sponsorFields.tier === "title";
+        var isGiga = $scope.user.sponsorFields.tier === "giga";
+
+        flatCosts = 0;
+
+        var newTier = newValue[0], newWorkshopValue = newValue[1];
+        // Compute tier cost
+        var tierCost = newTier ? $scope.SPONSORSHIP_COST[newTier.toUpperCase()] : 0;
+        flatCosts += tierCost;
+
+        // If not title sponsor, charge for workshops
+        if(!isTitle) {
+          if(newWorkshopValue) {
+            flatCosts += SPONSORSHIP_COST['WORKSHOP'];
           }
-        });
-      }
+        }
 
-      $scope.socialMedia = socialMedia;
-      $scope.skills = [];
-      $scope.regIsClosed = Date.now() > settings.data.timeClose || Date.now() < settings.data.timeOpen;
+        if(isGiga) {
+          $scope.user.sponsorFields.openingStatementTime = "60";
+          $scope.user.sponsorFields.closingStatementTime = "  ";
+        }
+        else if(isTitle) {
+          $scope.user.sponsorFields.openingStatementTime = "120";
+          $scope.user.sponsorFields.closingStatementTime = "60";
+        }
+        else {
+          $scope.user.sponsorFields.openingStatementTime = "";
+          $scope.user.sponsorFields.closingStatementTime = "";
+        }
 
-      // Populate the school dropdown
-      // populateSchools();
-      // populateMajors();
-      // populateSkills();
+        totalCost = timedCost + flatCosts;
+        $scope.isTitle = isTitle;
+        $scope.isGiga = isGiga;
+        $scope.estimatedCost = totalCost;
+      });
+
+      // Monitor opening/closing remarks
+      $scope.$watchGroup([
+        'user.sponsorFields.openingStatementTime',
+        'user.sponsorFields.closingStatementTime',
+      ],
+      function(newValue, oldValue, scope) {
+        var isTitle = $scope.user.sponsorFields.tier === "title";
+        var isGiga = $scope.user.sponsorFields.tier === "giga";
+
+        timedCosts = 0;
+
+        var newOpeningTime = newValue[0], newClosingTime = newValue[1];
+
+        if(isGiga) {
+          timedCost = (Number(newClosingTime) / SPONSORSHIP_COST['TIMED_RATE']) * SPONSORSHIP_COST['TIMED_COST'];
+        }
+        else if(isTitle) {
+          // Do nothing, costs already factored in
+        }
+        else {
+          timedCost = ((Number(newOpeningTime) + Number(newClosingTime)) / SPONSORSHIP_COST['TIMED_RATE']) * SPONSORSHIP_COST['TIMED_COST'];
+        }
+
+        totalCost = timedCost + flatCosts;
+        $scope.estimatedCost = totalCost;
+      });
+
       _setupForm();
 
       function _updateUser(e) {
@@ -67,82 +117,41 @@ angular.module('reg')
           });
       }
 
-      function isMinor() {
-        return !$scope.user.profile.adult;
-      }
-
-      function minorsAreAllowed() {
-        return settings.data.allowMinors;
-      }
-
-      function minorsValidation() {
-        // Are minors allowed to register?
-        if (isMinor() && !minorsAreAllowed()) {
-          return false;
-        }
-        return true;
-      }
-
-      function resumeValidation(value) {
-        return $scope.user.profile.resume || value;
-      }
-
-      function graduationValidation(value) {
-        const standing = $scope.user.profile.standing;
-        if (standing === 'M' || standing === 'D') {
-          $scope.user.profile.graduationTime = "Other";
-        }
-        return $scope.user.profile.graduationTime.length > 0 || value;
-      }
-
       function _setupForm() {
-        // Custom minors validation rule
-        $.fn.form.settings.rules.allowMinors = function (value) {
-          return minorsValidation();
-        };
-
-        $.fn.form.settings.rules.emptyResume = function (value) {
-          return resumeValidation(value);
-        };
-
-        $.fn.form.settings.rules.emptyGraduation = function (value) {
-          return graduationValidation(value);
-        };
-
         // Semantic-UI form validation
-        $('.ui.form').form({
-          inline: true,
-          fields: {
-            companyName: {
-              identifier: 'companyName',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please enter a company name.'
-                }
-              ]
-            },
-            PlegeAmount: {
-              identifier: 'PlegeAmount',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please enter an amount.'
-                }
-              ]
-            },
-            RelevantLinks: {
-              identifier: 'RelevantLinks',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please list some relevant links for your hackathon idea.'
-                }
-              ]
-            }
-          },
-          on: 'blur'
-        });
+        // $('.ui.form').form({
+        //   inline: true,
+        //   fields: {
+        //     companyName: {
+        //       identifier: 'companyName',
+        //       rules: [
+        //         {
+        //           type: 'empty',
+        //           prompt: 'Please enter a company name.'
+        //         }
+        //       ]
+        //     },
+        //     PlegeAmount: {
+        //       identifier: 'PlegeAmount',
+        //       rules: [
+        //         {
+        //           type: 'empty',
+        //           prompt: 'Please enter an amount.'
+        //         }
+        //       ]
+        //     },
+        //     RelevantLinks: {
+        //       identifier: 'RelevantLinks',
+        //       rules: [
+        //         {
+        //           type: 'empty',
+        //           prompt: 'Please list some relevant links for your hackathon idea.'
+        //         }
+        //       ]
+        //     }
+        //   },
+        //   on: 'blur'
+        // });
       }
 
       $scope.submitForm = function () {
