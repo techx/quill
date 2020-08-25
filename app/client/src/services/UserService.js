@@ -115,7 +115,7 @@ angular.module('reg')
       },
 
       checkIn: function(id){
-        return $http.post(base + id + '/checkin');
+        return $http.put(base + id + '/checkin');
       },
 
       checkOut: function(id){
@@ -129,7 +129,11 @@ angular.module('reg')
       removeAdmin: function(id){
         return $http.post(base + id + '/removeadmin');
       },
-
+      createWalkin: function(email){
+        return $http.post(base + 'createwalkin', {
+          email: email
+        });
+      },
       newSponsor: function(email, onSuccess, onFailure) {
         return $http
           .post(base + 'newsponsor', {

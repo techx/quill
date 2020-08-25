@@ -37,6 +37,28 @@ module.exports = function(router) {
     });
   }
 
+  function isSponsor(req, res, next){
+
+    var token = getToken(req);
+
+    UserController.getByToken(token, function(err, user){
+
+      if (err) {
+        return res.status(500).send(err);
+      }
+
+      if (user && user.sponsor){
+        req.user = user;
+        return next();
+      }
+
+      return res.status(401).send({
+        message: 'Get outta here, punk!'
+      });
+
+    });
+  }
+
   /**
    * [Users API Only]
    *
@@ -72,6 +94,7 @@ module.exports = function(router) {
    */
   function defaultResponse(req, res){
     return function(err, data){
+      // console.log(err)
       if (err){
         // SLACK ALERT!
         if (process.env.NODE_ENV === 'production'){
@@ -95,8 +118,10 @@ module.exports = function(router) {
                 }
               },
               function (error, response, body) {
-                return res.status(500).send({
-                  message: "Your error has been recorded, we'll get right on it!"
+                const status = err.custom_message ? 400 : 500
+                const message = err.custom_message ? err.custom_message : "Your error has been recorded, we'll get right on it!"
+                return res.status(status).send({
+                  message: message
                 });
               }
             );
@@ -291,10 +316,42 @@ module.exports = function(router) {
   /**
    * Check in a user. ADMIN ONLY, DUH
    */
-  router.post('/users/:id/checkin', isAdmin, function(req, res){
+  router.put('/users/:id/checkin', isAdmin, function(req, res){
     var id = req.params.id;
     var user = req.user;
     UserController.checkInById(id, user, defaultResponse(req, res));
+  });
+
+
+  router.put('/users/:id/receivedlunch', isAdmin, function(req, res){
+    var id = req.params.id;
+
+    UserController.markReceivedLunch(id, defaultResponse(req, res));
+  });
+
+
+  router.put('/users/:id/receiveddinner', isAdmin, function(req, res){
+    var id = req.params.id;
+
+    UserController.markReceivedDinner(id, defaultResponse(req, res));
+  });
+
+  router.put('/users/:id/addworkshopattended', isSponsor, function(req, res){
+    var id = req.params.id;
+    var token = getToken(req);
+
+    UserController.getByToken(token, (err, sponsor) => {
+      UserController.addWorkshopAttended(id, sponsor._id, defaultResponse(req, res));
+    });
+  });
+
+  router.put('/users/:id/addtablevisited', isSponsor, function(req, res){
+    var id = req.params.id;
+    var token = getToken(req);
+
+    UserController.getByToken(token, (err, sponsor) => {
+      UserController.addTableVisited(id, sponsor._id, defaultResponse(req, res));
+    });
   });
 
   /**
@@ -375,6 +432,12 @@ module.exports = function(router) {
     UserController.updateSponsorById(id, user, defaultResponse(req, res));
   });
 
+  router.post('/users/createwalkin', isAdmin, function(req, res){
+    var email = req.body.email;
+    UserController.sendWalkInEmail(email, defaultResponse(req, res));
+  });
+
+
   // ---------------------------------------------
   // Settings [ADMIN ONLY!]
   // ---------------------------------------------
@@ -416,6 +479,7 @@ module.exports = function(router) {
     SettingsController.updateField('acceptanceText', text, defaultResponse(req, res));
   });
 
+ 
   /**
    * Update the confirmation text.
    * body: {

@@ -197,6 +197,29 @@ var status = {
   }
 };
 
+
+var userAtEvent = { 
+  /**
+   * AFTER user is checked in to event
+   * @type {Object}
+   */
+  receivedLunch: {
+    type: Boolean, 
+    default: false
+  },
+  receivedDinner: {
+    type: Boolean, 
+    default: false
+  }, 
+  workshopsAttended: { 
+    type: [String]
+  }, 
+  tablesVisited: { 
+    type: [String]
+  }
+};
+
+
 // define the schema for our admin model
 var schema = new mongoose.Schema({
 
@@ -276,7 +299,9 @@ var schema = new mongoose.Schema({
 
   status: status,
 
-  sponsorFields: sponsorFields
+  sponsorFields: sponsorFields, 
+
+  userAtEvent: userAtEvent
 
 });
 
