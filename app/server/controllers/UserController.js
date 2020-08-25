@@ -1259,6 +1259,35 @@ UserController.updateSponsorById = function(id, user, callback){
 
 };
 
+UserController.grantResumeAccessById = function(id, user, callback){
+  User.findOneAndUpdate({
+    _id: id,
+    verified: true
+  },{
+    $set: {
+      'sponsorFields.sponsorStatus': 'grantedResumeAccess'
+    }
+  }, {
+    new: true
+  },
+  callback);
+};
+
+UserController.removeResumeAccessById = function(id, user, callback){
+  User.findOneAndUpdate({
+    _id: id,
+    verified: true
+  },{
+    $set: {
+      'sponsorFields.sponsorStatus': 'completedProfile'
+    }
+  }, {
+    new: true
+  },
+  callback);
+};
+
+
 /**
  * [ADMIN ONLY]
  */

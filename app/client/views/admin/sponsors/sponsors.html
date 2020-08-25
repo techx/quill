@@ -56,7 +56,7 @@
                             {{page + 1}}
                         </button>
                     </div>
-                    <div class="thirteen wide column">
+                    <div class="thirteen wide column" id="table-container">
                     <div class="ui header">
                         Sponsors
                     </div>
@@ -91,7 +91,7 @@
                                     <i ng-if="user.sponsorFields.sponsorStatus == 'completedProfile' || user.sponsorFields.sponsorStatus == 'grantedResumeAccess'"
                                        class="green check circle icon">
                                     </i>
-                                    <i ng-if="user.status.completedProfile == 'incomplete'"
+                                    <i ng-if="!(user.sponsorFields.sponsorStatus == 'completedProfile' || user.sponsorFields.sponsorStatus == 'grantedResumeAccess')"
                                        class="red remove circle icon">
                                     </i>
                                 </td>
@@ -107,11 +107,11 @@
                                 <td class="center aligned collapsing">
 
                                     <i ng-if="user.sponsorFields.sponsorStatus == 'completedProfile'" class="accept ui circular mini basic green icon button"
-                                       ng-click="grantResumeAccess($event, user, $index)">
+                                       ng-click="toggleResumeAccess($event, user, $index)">
                                         <i class="add user icon"></i>
                                     </i>
                                     <i ng-if="user.sponsorFields.sponsorStatus == 'grantedResumeAccess'" class="reject ui circular mini basic red icon button"
-                                       ng-click="removeResumeAccess($event, user, $index)">
+                                       ng-click="toggleResumeAccess($event, user, $index)">
                                         <i class="remove user icon"></i>
                                     </i>
                                 </td>
