@@ -44,7 +44,7 @@ angular.module('reg')
           case 'unverified':
             return !user.verified;
           case 'openAndIncomplete':
-            return regIsOpen && user.verified && !user.status.completedProfile;
+            return regIsOpen && user.verified && !user.status.completedProfile && !user.status.sponsor;
           case 'openAndSubmitted':
             return regIsOpen && user.status.completedProfile && !user.status.admitted;
           case 'closedAndIncomplete':
@@ -61,6 +61,12 @@ angular.module('reg')
               user.status.admitted &&
               !user.status.confirmed &&
               !user.status.declined;
+          case 'isSponsorAndIncomplete': 
+            return user.verified && user.sponsor && (user.sponsorFields.sponsorStatus === 'incomplete'); 
+          case 'isSponsorAndComplete':
+            return user.verified && user.sponsor && (user.sponsorFields.sponsorStatus === 'completedProfile');
+          case 'isSponsorAndGrantedAccess':
+            return user.verified && user.sponsor && (user.sponsorFields.sponsorStatus === 'grantedResumeAccess');
           case 'confirmed':
             return user.status.admitted && user.status.confirmed && !user.status.declined;
           case 'declined':

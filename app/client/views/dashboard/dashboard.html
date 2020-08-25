@@ -97,6 +97,53 @@
         </div>
 
         <div
+          ng-if="dashState('isSponsorAndIncomplete')"
+          class="description">
+          <p>
+            <strong>
+                {{ DASHBOARD.INCOMPLETE_TITLE }}
+            </strong>
+          </p>
+          <p>
+            {{ DASHBOARD.SPONSOR_INCOMPLETE }}
+          </p>
+
+          <div class="ui purple button"
+                ui-sref="app.sponsorapplication">
+            Complete your application
+          </div>
+
+        </div>
+
+      <div
+        ng-if="dashState('isSponsorAndComplete')"
+        class="description">
+        <p>
+          <strong>
+              {{ DASHBOARD.INCOMPLETE_TITLE }}
+          </strong>
+        </p>
+        <p>
+          {{ DASHBOARD.SPONSOR_COMPLETE }}
+        </p>
+
+      </div>
+
+    <!-- <div
+      ng-if="dashState('isSponsorAndGrantedAccess')"
+      class="description">
+      <p>
+        <strong>
+            {{ DASHBOARD.INCOMPLETE_TITLE }}
+        </strong>
+      </p>
+      <p>
+        {{ DASHBOARD.SPONSOR_GRANTED_ACCESS }}
+      </p>
+
+    </div>  -->
+
+        <div
           ng-if="dashState('sponsorPending')"
           class="description">
           <p>

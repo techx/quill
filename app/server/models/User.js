@@ -100,7 +100,8 @@ var sponsorFields = {
     sponsorStatus: {
         type:String, 
         enum : {
-            values: ['incomplete', 'completedProfile', 'grantedResumeAccess']
+            values: ['incomplete', 'completedProfile', 'grantedResumeAccess'], 
+            default: 'incomplete'
 	    }
     },
     companyName: String,
