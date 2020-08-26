@@ -7,8 +7,8 @@
     <div class="column">
       <div class="ui form error"
         ng-class="{'loading': loading}">
-        <div>{{ user | json }}</div>
-        <div>isTitle: {{ isTitle }}</div>
+        <!-- <div>{{ user | json }}</div>
+        <div>isTitle: {{ isTitle }}</div> -->
         <div class="divided title">Disclaimer</div>
 
         <div class="field">
@@ -34,13 +34,14 @@ After filling out this form and providing payment, you will be granted access to
               type="text"
               name="companyName"
               ng-model="user.sponsorFields.companyName">
+          </div>
+          <div class="field">
             <label> Representative Email* </label>
             <input
               type="email"
               name="representativeEmail"
               ng-model="user.sponsorFields.representativeEmail">
           </div>
-
           <div class="two fields">
             <div class="field">
               <label> Representative First Name* </label>
@@ -62,7 +63,8 @@ After filling out this form and providing payment, you will be granted access to
           <div class="field">
             <label> Tier* </label>
             <select name="tier" ng-model="user.sponsorFields.tier" id="tier" style="padding: .52em 1em">
-              <option selected value="kilo">Kilo</option>
+              <option value="">Select Tier</option>
+              <option value="kilo">Kilo</option>
               <option value="mega">Mega</option>
               <option value="giga">Giga</option>
               <option value="title">Title</option>
@@ -105,7 +107,7 @@ After filling out this form and providing payment, you will be granted access to
             </select>
           </div>
 
-          <div id="estimated-cost">Estimated Cost: {{ estimatedCost }}</div>
+          <div id="estimated-cost">Estimated Cost: {{ user.sponsorFields.estimatedCost }}</div>
           <br>
 
           <div class="divided title"> Other Notes </div>
@@ -113,7 +115,7 @@ After filling out this form and providing payment, you will be granted access to
 
           <div class="field">
             <textarea name="essay"
-              ng-model="user.notes" />
+              ng-model="user.sponsorFields.notes" />
             </div>
 
               <div class="field" ng-hide="regIsClosed">
