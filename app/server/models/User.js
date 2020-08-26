@@ -105,6 +105,7 @@ var sponsorFields = {
         },
     },
     companyName: String,
+    representativeEmail: String,
     representativeFirstName: String,
     representativeLastName: String,
     tier: {

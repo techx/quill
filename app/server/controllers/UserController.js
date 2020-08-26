@@ -1248,10 +1248,16 @@ UserController.updateSponsorById = function(id, user, callback){
   },{
     $set: {
       'sponsorFields.sponsorStatus': "completedProfile",
-      'sponsorFields.pledgeAmount': user.data.pledgeAmount,
-      'sponsorFields.api' : user.data.API,
-      'sponsorFields.companyName' : user.data.companyName,
-      'sponsorFields.links': user.data.links
+      'sponsorFields.tier': user.data.sponsorFields.tier,
+      'sponsorFields.workshop': user.data.sponsorFields.workshop,
+      'sponsorFields.estimatedCost': user.data.sponsorFields.estimatedCost,
+      'sponsorFields.companyName': user.data.sponsorFields.companyName,
+      'sponsorFields.representativeFirstName': user.data.sponsorFields.representativeFirstName,
+      'sponsorFields.representativeLastName': user.data.sponsorFields.representativeLastName,
+      'sponsorFields.openingStatementTime': Number(user.data.sponsorFields.openingStatementTime),
+      'sponsorFields.closingStatementTime': Number(user.data.sponsorFields.closingStatementTime),
+      'sponsorFields.otherNotes': user.data.sponsorFields.otherNotes,
+      'sponsorFields.representativeEmail': user.data.sponsorFields.representativeEmail,
     }
   },{
     new: true
