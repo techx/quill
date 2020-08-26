@@ -17,6 +17,11 @@ angular.module('reg')
 
       // Set up the user
       $scope.user = currentUser.data;
+
+      var storedOpeningStatementTime = currentUser.data.sponsorFields.openingStatementTime + "";
+      var storedClosingStatementTime = currentUser.data.sponsorFields.closingStatementTime + "";
+      $scope.user.sponsorFields.openingStatementTime = storedOpeningStatementTime;
+      $scope.user.sponsorFields.closingStatementTime = storedClosingStatementTime;
       $scope.SPONSORSHIP_COST = SPONSORSHIP_COST;
       $scope.isTitle = $scope.user.sponsorFields.tier === "title";
       $scope.isGiga = $scope.user.sponsorFields.tier === "giga";
@@ -43,15 +48,15 @@ angular.module('reg')
 
         if(isGiga) {
           $scope.user.sponsorFields.openingStatementTime = "60";
-          $scope.user.sponsorFields.closingStatementTime = "0";
+          $scope.user.sponsorFields.closingStatementTime = storedClosingStatementTime;
         }
         else if(isTitle) {
           $scope.user.sponsorFields.openingStatementTime = "120";
           $scope.user.sponsorFields.closingStatementTime = "60";
         }
         else {
-          $scope.user.sponsorFields.openingStatementTime = "0";
-          $scope.user.sponsorFields.closingStatementTime = "0";
+          $scope.user.sponsorFields.openingStatementTime = storedOpeningStatementTime;
+          $scope.user.sponsorFields.closingStatementTime = storedClosingStatementTime;
         }
 
         totalCost = tierCost + addOnsCost;

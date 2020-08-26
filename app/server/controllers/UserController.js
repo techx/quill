@@ -1256,7 +1256,7 @@ UserController.updateSponsorById = function(id, user, callback){
       'sponsorFields.representativeLastName': user.data.sponsorFields.representativeLastName,
       'sponsorFields.openingStatementTime': Number(user.data.sponsorFields.openingStatementTime),
       'sponsorFields.closingStatementTime': Number(user.data.sponsorFields.closingStatementTime),
-      'sponsorFields.notes': user.data.sponsorFields.notes,
+      'sponsorFields.otherNotes': user.data.sponsorFields.otherNotes,
       'sponsorFields.representativeEmail': user.data.sponsorFields.representativeEmail,
     }
   },{

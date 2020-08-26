@@ -143,13 +143,13 @@ angular.module('reg')
             console.log(error);
           });
       },
-      
+
       updateSponsor : function(id, data){
         return $http.post(base + id + '/updateSponsor', {
           data : data
         });
       },
-      
+
       // [UNUSED]
       makeSponsor: function(id){
         return $http.post(base + id + '/makesponsor');

@@ -7,8 +7,7 @@
     <div class="column">
       <div class="ui form error"
         ng-class="{'loading': loading}">
-        <!-- <div>{{ user | json }}</div>
-        <div>isTitle: {{ isTitle }}</div> -->
+        <!-- <div>{{ user | json }}</div> -->
         <div class="divided title">Disclaimer</div>
 
         <div class="field">
@@ -20,7 +19,7 @@
             Please fill out the following form with details concerning communication and your sponsorship package. Reach out to your point of contact for more information on our tiers.
             <br><br>
             After filling out this form and providing payment, you will be granted access to our resume book either before or after the event (depending on your sponsorship tier).
-            <br><br> 
+            <br><br>
             <strong>Payments are neither made nor tracked through this portal. This form is simply for our bookkeeping purposes. If you need to verify details of your payment, please reach out to your point of contact.</strong>
           </p>
         </div>
@@ -104,7 +103,7 @@
               <div class="ui basic label">
                 sec
               </div>
-            </div>            
+            </div>
           </div>
 
           <div class="field">
@@ -119,7 +118,7 @@
                 <option value="30">30</option>
                 <option value="60">60</option>
                 <option ng-if="isTitle" value="120">120</option>
-              </select>                
+              </select>
               <div class="ui basic label">
                 sec
               </div>
@@ -140,8 +139,8 @@
 
           <div class="divided title"> Other Notes </div>
           <div class="field">
-            <textarea name="essay"
-              ng-model="user.sponsorFields.notes"
+            <textarea name="otherNotes"
+              ng-model="user.sponsorFields.otherNotes"
               placeholder="Anything else you would like us to know :)"/>
             </div>
 
