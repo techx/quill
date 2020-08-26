@@ -274,8 +274,8 @@
               name="resume"
               accept="application/pdf"
               ng-model="user.profile.resume"
-              id="resumeInput">
-              <!-- onchange="angular.element(this).scope().uploadResume(this.files)"> -->
+              id="resumeInput"
+              onchange="angular.element(this).scope().uploadResume(this.files)">
           </div>
 
           <!-- This works for selecting a single skill, but not multiple... need to use multiselect -->
