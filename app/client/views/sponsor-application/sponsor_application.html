@@ -14,13 +14,16 @@
         <div class="field">
           <p>
             Thank you so much for your interest in sponsoring HackTX 2020!
-To learn more about the event, visit the <a href="https://hacktx.com">HackTX event page</a>.
-Please fill out the following form with details concerning communication and your sponsorship package. Information on our sponsorship tiers can be found <link pdf>here</link> and by reaching out to your point of contact.
-After filling out this form and providing payment, you will be granted access to our resume book either before or after the event (depending on your sponsorship tier).
-<strong>Payments are neither made nor tracked through this portal. This form is simply for our bookkeeping purposes. If you need to verify details of your payment, please reach out to your point of contact.</strong>
+            <br><br>
+            To learn more about the event, visit the <a href="https://hacktx.com">HackTX event page</a>.
+            <br><br>
+            Please fill out the following form with details concerning communication and your sponsorship package. Reach out to your point of contact for more information on our tiers.
+            <br><br>
+            After filling out this form and providing payment, you will be granted access to our resume book either before or after the event (depending on your sponsorship tier).
+            <br><br> 
+            <strong>Payments are neither made nor tracked through this portal. This form is simply for our bookkeeping purposes. If you need to verify details of your payment, please reach out to your point of contact.</strong>
           </p>
         </div>
-
         <br>
         <br>
 
@@ -72,50 +75,74 @@ After filling out this form and providing payment, you will be granted access to
           </div>
 
           <div class="field">
-            <label> Workshop </label>
-            <div ng-if="!isTitle">Note: This will incur an additional cost of $750</div>
-            <div ng-if="isTitle">Note: By checking this off, you may host up to 2 workshops/virtual events</div>
-            <input type="checkbox"
-                   name="workshop"
-                   ng-model="user.sponsorFields.workshop">
+            <label ng-if="!isTitle"> Workshop (Add $750)</label>
+            <label ng-if="isTitle"> Workshop</label>
+            <div class="ui checkbox">
+              <input type="checkbox"
+                name="workshop"
+                ng-model="user.sponsorFields.workshop"
+                ng-disabled="isTitle">
+              <label ng-if="!isTitle">We would like to host a virtual event workshop.</label>
+              <label ng-if="isTitle">2 workshops/virtual events are included as part of title tier</label>
+
+            </div>
           </div>
 
           <div class="field">
-            <label>Amount of Time for Opening Statement (seconds)</label>
-            <select ng-if="!isTitle && !isGiga" name="tier" type="number" ng-model="user.sponsorFields.openingStatementTime" id="tier">
-              <option value="0">0</option>
-              <option value="30">30</option>
-              <option value="60">60</option>
-            </select>
-            <select ng-if="isGiga" name="tier" disabled type="number" ng-model="user.sponsorFields.openingStatementTime" id="tier">
-              <option selected value="60">60</option>
-            </select>
-            <select ng-if="isTitle" name="tier" disabled type="number" ng-model="user.sponsorFields.openingStatementTime" id="tier">
-              <option selected value="120">120</option>
-            </select>
+            <label ng-if="!isTitle && !isGiga">Opening Statement Time (Add $500 per 30 seconds)</label>
+            <label ng-if="isTitle || isGiga">Opening Statement Time</label>
+            <p>
+              Speaking during our opening ceremony is a great way to draw attention to your company!
+            </p>
+            <div class="ui right labeled input">
+              <select class="ui compact selection dropdown" type="number" ng-model="user.sponsorFields.openingStatementTime" id="tier" ng-disabled="isGiga || isTitle">
+                <option value="0">0</option>
+                <option value="30">30</option>
+                <option value="60">60</option>
+                <option ng-if="isTitle" value="120">120</option>
+              </select>
+              <div class="ui basic label">
+                sec
+              </div>
+            </div>            
           </div>
 
           <div class="field">
-            <label>Amount of Time for Closing Statement (seconds)</label>
-            <select ng-if="!isTitle" name="tier" type="number" ng-model="user.sponsorFields.closingStatementTime" id="tier">
-              <option value="0">0</option>
-              <option value="30">30</option>
-              <option value="60">60</option>
-            </select>
-            <select ng-if="isTitle" disabled name="tier" type="number" ng-model="user.sponsorFields.closingStatementTime" id="tier">
-              <option value="60">60</option>
-            </select>
+            <label ng-if="!isTitle && !isGiga">Closing Remarks Time (Add $500 per 30 seconds)</label>
+            <label ng-if="isTitle || isGiga">Closing Remarks Time</label>
+            <p>
+              Speaking during our closing ceremony is a great way for your company to leave a lasting impact on our attendees!
+            </p>
+            <div class="ui right labeled input">
+              <select class="ui compact selection dropdown" type="number" ng-model="user.sponsorFields.closingStatementTime" id="tier" ng-disabled="isTitle">
+                <option value="0">0</option>
+                <option value="30">30</option>
+                <option value="60">60</option>
+                <option ng-if="isTitle" value="120">120</option>
+              </select>                
+              <div class="ui basic label">
+                sec
+              </div>
+            </div>
           </div>
 
-          <div id="estimated-cost">Estimated Cost: {{ user.sponsorFields.estimatedCost }}</div>
+          <div class="field">
+            <label>Pledge Total</label>
+            <div class="ui labeled input">
+              <label for="estimated-cost" class="ui label">$</label>
+              <input type="text"
+                name="estimatedCost"
+                ng-model="user.sponsorFields.estimatedCost"
+                id="estimated-cost">
+            </div>
+          </div>
           <br>
 
           <div class="divided title"> Other Notes </div>
-
-
           <div class="field">
             <textarea name="essay"
-              ng-model="user.sponsorFields.notes" />
+              ng-model="user.sponsorFields.notes"
+              placeholder="Anything else you would like us to know :)"/>
             </div>
 
               <div class="field" ng-hide="regIsClosed">

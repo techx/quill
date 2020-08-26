@@ -113,6 +113,11 @@ angular.module('reg')
       }
 
       function _setupForm() {
+
+        $.fn.form.settings.rules.dollarAmount = function (inputValue) {
+          return inputValue > 0;
+        }
+
         //Semantic-UI form validation
         $('.ui.form').form({
           inline: true,
@@ -166,6 +171,19 @@ angular.module('reg')
                 }
               ]
             },
+            estimatedCost: {
+              identifier: 'estimatedCost',
+              rules: [
+                {
+                  type: 'number',
+                  prompt: 'Please input a valid dollar amount.'
+                },
+                {
+                  type: 'dollarAmount',
+                  prompt: 'Please input a valid dollar amount.'
+                }
+              ]
+            }
           },
           on: 'blur'
         });
