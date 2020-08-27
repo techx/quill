@@ -19,6 +19,7 @@ angular.module('reg')
       var user = currentUser.data;
       $scope.user = user;
       $scope.timeClose = Utils.formatTime(Settings.timeClose);
+      $scope.sponsorTimeClose = Utils.formatTime(Settings.sponsorTimeClose);
       $scope.userTimeConfirm = Utils.formatTime(user.status.confirmBy);
 
       $scope.DASHBOARD = DASHBOARD;
@@ -26,6 +27,7 @@ angular.module('reg')
       for (var msg in $scope.DASHBOARD) {
         if ($scope.DASHBOARD[msg].includes('[APP_DEADLINE]')) {
           $scope.DASHBOARD[msg] = $scope.DASHBOARD[msg].replace('[APP_DEADLINE]', Utils.formatTime(Settings.timeClose));
+          $scope.DASHBOARD[msg] = $scope.DASHBOARD[msg].replace('[APP_DEADLINE]', Utils.formatTime(Settings.sponsorTimeClose));
         }
         if ($scope.DASHBOARD[msg].includes('[CONFIRM_DEADLINE]')) {
           $scope.DASHBOARD[msg] = $scope.DASHBOARD[msg].replace('[CONFIRM_DEADLINE]', Utils.formatTime(user.status.confirmBy));
@@ -44,29 +46,31 @@ angular.module('reg')
           case 'unverified':
             return !user.verified;
           case 'openAndIncomplete':
-            return regIsOpen && user.verified && !user.status.completedProfile && !user.status.sponsor;
+            return regIsOpen && user.verified && !user.status.completedProfile && !user.sponsor;
           case 'openAndSubmitted':
-            return regIsOpen && user.status.completedProfile && !user.status.admitted;
+            return regIsOpen && user.status.completedProfile && !user.status.admitted && !user.sponsor;
           case 'closedAndIncomplete':
-            return !regIsOpen && !user.status.completedProfile && !user.status.admitted;
+            return !regIsOpen && !user.status.completedProfile && !user.status.admitted && !user.sponsor;
           case 'closedAndSubmitted': // Waitlisted State
-            return !regIsOpen && user.status.completedProfile && !user.status.admitted;
+            return !regIsOpen && user.status.completedProfile && !user.status.admitted && !user.sponsor;
           case 'admittedAndCanConfirm':
             return !pastConfirmation &&
               user.status.admitted &&
               !user.status.confirmed &&
-              !user.status.declined;
+              !user.status.declined &&
+              !user.sponsor;
           case 'admittedAndCannotConfirm':
             return pastConfirmation &&
               user.status.admitted &&
               !user.status.confirmed &&
-              !user.status.declined;
-          case 'isSponsorAndIncomplete': 
-            return user.verified && user.sponsor && (user.sponsorFields.sponsorStatus === 'incomplete'); 
-          case 'isSponsorAndComplete':
-            return user.verified && user.sponsor && (user.sponsorFields.sponsorStatus === 'completedProfile');
-          case 'isSponsorAndGrantedAccess':
-            return user.verified && user.sponsor && (user.sponsorFields.sponsorStatus === 'grantedResumeAccess');
+              !user.status.declined &&
+              !user.sponsor;
+              case 'isSponsorAndIncomplete': 
+              return user.verified && user.sponsor && (user.sponsorFields.sponsorStatus === 'incomplete'); 
+            case 'isSponsorAndComplete':
+              return user.verified && user.sponsor && (user.sponsorFields.sponsorStatus === 'completedProfile');
+            case 'isSponsorAndGrantedAccess':
+              return user.verified && user.sponsor && (user.sponsorFields.sponsorStatus === 'grantedResumeAccess');
           case 'confirmed':
             return user.status.admitted && user.status.confirmed && !user.status.declined;
           case 'declined':

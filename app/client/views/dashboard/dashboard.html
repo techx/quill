@@ -61,12 +61,23 @@
 
         <div
           ng-class="settings.timeClose"
-          ng-if="!dashState('admittedAndCanConfirm') || !dashState('admittedAndCannotConfirm') || !dashState('confirmed') || !dashState('declined')">
+          ng-if="(!dashState('admittedAndCanConfirm') || !dashState('admittedAndCannotConfirm') || !dashState('confirmed') || !dashState('declined')) && !dashState('isSponsorAndIncomplete') && !dashState('isSponsorAndGrantedAccess') && !dashState('isSponsorAndComplete')">
           <strong>
             Registration Deadline:
           </strong>
           {{ timeClose }}
         </div>
+
+
+        <div
+          ng-class="settings.sponsorTimeClose"
+          ng-if=" dashState('isSponsorAndIncomplete') ">
+          <strong>
+            Application Deadline:
+          </strong>
+          {{ sponsorTimeClose }}
+        </div>
+
 
         <div
           ng-class="settings.timeConfirm"
@@ -95,6 +106,58 @@
           </div>
 
         </div>
+
+
+        <div
+          ng-if="dashState('isSponsorAndIncomplete')"
+          class="description">
+          <p>
+            <strong>
+                {{ DASHBOARD.INCOMPLETE_TITLE }}
+            </strong>
+          </p>
+          <p>
+            {{ DASHBOARD.SPONSOR_INCOMPLETE }}
+          </p>
+
+          <div class="ui purple button"
+                ui-sref="app.sponsorapplication">
+            Complete your application
+          </div>
+
+        </div>
+
+
+      <div
+        ng-if="dashState('isSponsorAndComplete')"
+        class="description">
+        <p>
+          <strong>
+              {{ DASHBOARD.SPONSOR_PENDING }}
+          </strong>
+        </p>
+        <p>
+          {{ DASHBOARD.SPONSOR_COMPLETE }}
+        </p>
+
+      </div>
+
+
+      <div
+        ng-if="dashState('isSponsorAndGrantedAccess')"
+        class="description">
+        <p>
+          <strong>
+              {{ DASHBOARD.SPONSOR_CONFIRMED }}
+          </strong>
+        </p>
+        <p>
+          {{ DASHBOARD.SPONSOR_GRANTED_ACCESS }}
+        </p>
+
+      </div> 
+
+
 
         <div
           ng-if="dashState('sponsorPending')"
