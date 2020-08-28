@@ -14,6 +14,8 @@ $status-submitted-color: lighten($primary, 20%);
 $status-admitted-color: $primary;
 $status-confirmed-color: $secondary;
 $status-checkedin-color: $secondary;
+$status-pending-color: $tertiary;
+$status-approved-color: $secondary;
 $status-waitlist-color: $tertiary;
 $status-declined-color: $tertiary;
 $status-rejected-color: red; // Not used
