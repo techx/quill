@@ -9,10 +9,11 @@ angular.module('reg')
       getPublicSettings: function(){
         return $http.get(base);
       },
-      updateRegistrationTimes: function(open, close){
+      updateRegistrationTimes: function(open, close, sponsorClose){
         return $http.put(base + 'times', {
           timeOpen: open,
           timeClose: close,
+          sponsorTimeClose: sponsorClose,
         });
       },
       updateConfirmationTime: function(time){

@@ -124,11 +124,10 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="user in users" ng-class="rowClass(user)">
+            <tr ng-repeat="user in users" ng-class="rowClass(user)" ng-if="user.profile.resume">
               <td>
                 <input type="checkbox"
                 ng-model="user.checked"
-                ng-if="user.profile.resume"
                 ng-change="updateCheckedCount(user)">
               </td>
               <td ng-click="selectUser(user)">

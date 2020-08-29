@@ -7,10 +7,6 @@
     margin-bottom: 6px;
   }
 
-  #table-container {
-    overflow-x: auto;
-  }
-
   table.users {
 
     tr {
@@ -25,4 +21,8 @@
     }
 
   }
+}
+
+#table-container {
+  overflow-x: auto;
 }

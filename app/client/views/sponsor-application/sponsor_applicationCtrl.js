@@ -12,45 +12,95 @@ angular.module('reg')
     'settings',
     'Session',
     'UserService',
-    function ($scope, $rootScope, $state, $http, currentUser, settings, Session, UserService) {
+    'SPONSORSHIP_COST',
+    function ($scope, $rootScope, $state, $http, currentUser, settings, Session, UserService, SPONSORSHIP_COST) {
 
       // Set up the user
       $scope.user = currentUser.data;
 
-      // Is the student from UT?
-      $scope.isUtStudent = $scope.user.email.split('@')[1] == 'utexas.edu';
+      var storedOpeningStatementTime = currentUser.data.sponsorFields.openingStatementTime + "";
+      var storedClosingStatementTime = currentUser.data.sponsorFields.closingStatementTime + "";
+      $scope.user.sponsorFields.openingStatementTime = storedOpeningStatementTime;
+      $scope.user.sponsorFields.closingStatementTime = storedClosingStatementTime;
+      $scope.SPONSORSHIP_COST = SPONSORSHIP_COST;
+      $scope.isTitle = $scope.user.sponsorFields.tier === "title";
+      $scope.isGiga = $scope.user.sponsorFields.tier === "giga";
 
-      $scope.resume = null;
-      // If so, default them to adult: true
-      if ($scope.isUtStudent) {
-        $scope.user.profile.adult = true;
-      }
+      // Cost for timed events, i.e. opening/closing remarks
+      var addOnsCost = 0;
+      // Flat costs, i.e. workshops/tiers
+      var tierCost = 0;
 
-      var socialMedia = {
-        'Facebook': false,
-        'Twitter': false,
-        'School Club': false,
-        'Website': false,
-        'Friend': false,
-        'MLH': false,
-      };
+      var totalCost = addOnsCost + tierCost;
 
-      if ($scope.user.profile.socialMedia) {
-        $scope.user.profile.socialMedia.forEach(function (media) {
-          if (media in socialMedia) {
-            socialMedia[media] = true;
+      // Watch for changes in tier/workshop/times, as they effect the cost
+      $scope.$watchGroup([
+        'user.sponsorFields.tier',
+      ],
+      function(newValue, oldValue, scope) {
+        console.log($scope.user);
+        var isTitle = $scope.user.sponsorFields.tier === "title";
+        var isGiga = $scope.user.sponsorFields.tier === "giga";
+
+        var newTier = newValue[0];
+        // Compute tier cost
+        tierCost = newTier ? $scope.SPONSORSHIP_COST[newTier.toUpperCase()] : 0;
+
+        if(isGiga) {
+          $scope.user.sponsorFields.openingStatementTime = "60";
+          $scope.user.sponsorFields.closingStatementTime = storedClosingStatementTime;
+        }
+        else if(isTitle) {
+          $scope.user.sponsorFields.openingStatementTime = "120";
+          $scope.user.sponsorFields.closingStatementTime = "60";
+        }
+        else {
+          $scope.user.sponsorFields.openingStatementTime = storedOpeningStatementTime;
+          $scope.user.sponsorFields.closingStatementTime = storedClosingStatementTime;
+        }
+
+        totalCost = tierCost + addOnsCost;
+        $scope.isTitle = isTitle;
+        $scope.isGiga = isGiga;
+        $scope.user.sponsorFields.estimatedCost = totalCost;
+      });
+
+      // Monitor add-ons
+      $scope.$watchGroup([
+        'user.sponsorFields.openingStatementTime',
+        'user.sponsorFields.closingStatementTime',
+        'user.sponsorFields.workshop',
+      ],
+      function(newValue, oldValue, scope) {
+        var isTitle = $scope.user.sponsorFields.tier === "title";
+        var isGiga = $scope.user.sponsorFields.tier === "giga";
+
+        addOnsCost = 0;
+
+        var newOpeningTime = newValue[0], newClosingTime = newValue[1],  newWorkshopValue = newValue[2];
+
+        // If not title sponsor, charge for workshops
+        if(!isTitle) {
+          if(newWorkshopValue) {
+            addOnsCost += SPONSORSHIP_COST['WORKSHOP'];
           }
-        });
-      }
+        }
 
-      $scope.socialMedia = socialMedia;
-      $scope.skills = [];
-      $scope.regIsClosed = Date.now() > settings.data.timeClose || Date.now() < settings.data.timeOpen;
+        // Compute rate for opening/closing remarks
+        if(isGiga) {
+          addOnsCost += (Number(newClosingTime) / SPONSORSHIP_COST['TIMED_RATE']) * SPONSORSHIP_COST['TIMED_COST'];
+        }
+        else if(isTitle) {
+          // Do nothing, costs already factored in
+        }
+        else {
+          addOnsCost += ((Number(newOpeningTime) + Number(newClosingTime)) / SPONSORSHIP_COST['TIMED_RATE']) * SPONSORSHIP_COST['TIMED_COST'];
+        }
 
-      // Populate the school dropdown
-      // populateSchools();
-      // populateMajors();
-      // populateSkills();
+        totalCost = tierCost + addOnsCost;
+        $scope.user.sponsorFields.estimatedCost = totalCost;
+      });
+
       _setupForm();
 
       function _updateUser(e) {
@@ -67,49 +117,13 @@ angular.module('reg')
           });
       }
 
-      function isMinor() {
-        return !$scope.user.profile.adult;
-      }
-
-      function minorsAreAllowed() {
-        return settings.data.allowMinors;
-      }
-
-      function minorsValidation() {
-        // Are minors allowed to register?
-        if (isMinor() && !minorsAreAllowed()) {
-          return false;
-        }
-        return true;
-      }
-
-      function resumeValidation(value) {
-        return $scope.user.profile.resume || value;
-      }
-
-      function graduationValidation(value) {
-        const standing = $scope.user.profile.standing;
-        if (standing === 'M' || standing === 'D') {
-          $scope.user.profile.graduationTime = "Other";
-        }
-        return $scope.user.profile.graduationTime.length > 0 || value;
-      }
-
       function _setupForm() {
-        // Custom minors validation rule
-        $.fn.form.settings.rules.allowMinors = function (value) {
-          return minorsValidation();
-        };
 
-        $.fn.form.settings.rules.emptyResume = function (value) {
-          return resumeValidation(value);
-        };
+        $.fn.form.settings.rules.dollarAmount = function (inputValue) {
+          return inputValue > 0;
+        }
 
-        $.fn.form.settings.rules.emptyGraduation = function (value) {
-          return graduationValidation(value);
-        };
-
-        // Semantic-UI form validation
+        //Semantic-UI form validation
         $('.ui.form').form({
           inline: true,
           fields: {
@@ -122,21 +136,56 @@ angular.module('reg')
                 }
               ]
             },
-            PlegeAmount: {
-              identifier: 'PlegeAmount',
+            representativeEmail: {
+              identifier: 'representativeEmail',
               rules: [
                 {
                   type: 'empty',
-                  prompt: 'Please enter an amount.'
+                  prompt: 'Please enter a email.'
+                },
+                {
+                  type: 'email',
+                  prompt: 'Please enter a valid email.'
                 }
               ]
             },
-            RelevantLinks: {
-              identifier: 'RelevantLinks',
+            representativeFirstName: {
+              identifier: 'representativeFirstName',
               rules: [
                 {
                   type: 'empty',
-                  prompt: 'Please list some relevant links for your hackathon idea.'
+                  prompt: 'Please enter a first name.'
+                }
+              ]
+            },
+            representativeLastName: {
+              identifier: 'representativeLastName',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please enter a first name.'
+                }
+              ]
+            },
+            tier: {
+              identifier: 'tier',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please select a valid tier.'
+                }
+              ]
+            },
+            estimatedCost: {
+              identifier: 'estimatedCost',
+              rules: [
+                {
+                  type: 'number',
+                  prompt: 'Please input a valid dollar amount.'
+                },
+                {
+                  type: 'dollarAmount',
+                  prompt: 'Please input a valid dollar amount.'
                 }
               ]
             }

@@ -1,3 +1,120 @@
 // Branding overrides
 //
 // Copy variables from `_branding.scss` to this file to override default values.
+
+// $base-color : #0f3857;
+// $base-color: #0f3857;
+// $field-color: #0b2135;
+$field-color: #0f3857;
+$base-color: #0b2135;
+// $base-color: #fff;
+
+body {
+    color: $tertiary !important;
+}
+
+.ui.segment {
+    background-color: $base-color !important;
+    border: 1px solid $secondary !important;
+}
+
+.field {
+    label {
+        color: $tertiary !important;
+    }
+}
+
+input, select, textarea, .ui.label {
+    background-color: $field-color !important;
+    border: 1px solid $secondary !important;
+    color: $tertiary !important;
+}
+
+.checkboxLayer {
+    background-color: $field-color !important;
+}
+
+.checkBoxContainer {
+    overflow-x: hidden !important;
+    overflow-y: scroll !important;
+    height: 400px;
+}
+
+.multiSelect {
+    button, .caret {
+        background-image: none !important;
+        background-color: $field-color !important;
+        color: $tertiary !important;
+    }
+
+    .caret {
+        border-top: 4px solid $tertiary !important;
+    }
+}
+
+.ui.label {
+    label {
+        color: $base-color !important;
+    }
+}
+
+.ui.table {
+    background-color: $tertiary !important;
+}
+
+.ui.header {
+    color: $tertiary !important;
+}
+
+#base {
+    > .content {
+        background-color: $base-color !important;
+    }
+}
+
+#login {
+    background-image: url('../assets/images/login-back.gif');
+    background-size: cover;
+
+    > .container {
+        > .content {
+            .ui.segment {
+                border-radius: 30px;
+                label, input {
+                    color: $tertiary !important;
+                }
+                input {
+                    background-color: $field-color !important;
+                }
+            }
+        }
+    }
+}
+
+.item a {
+    background-color: $field-color !important;
+    border-color: $secondary;
+    border-style: solid;
+    border-width: 1px 0.5px 1px 0.5px;
+    color: $tertiary !important;
+}
+
+th {
+    background-color: $field-color !important;
+    border: 0.25px solid lighten($secondary, 0.4) !important;
+    color: $tertiary !important;
+}
+
+// #sidebar {
+//     .item, .note {
+//         color: black;
+//     }
+// }
+
+// #sponsor-application {
+//     .ui.basic.label, .ui.label {
+//         background-color: $field-color !important;
+//         border: 1px solid $secondary;
+//         color: $tertiary;
+//     }
+// }

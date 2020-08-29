@@ -61,7 +61,7 @@ var profile = {
     type: String,
     enum: {
       values: [
-        'Fall 2019', 
+        'Fall 2019',
         'Spring 2020',
         'Fall 2020',
         'Spring 2021',
@@ -98,22 +98,35 @@ var profile = {
 
 var sponsorFields = {
     sponsorStatus: {
-        type:String, 
+        type: String,
         enum : {
-            values: ['incomplete', 'completedProfile', 'grantedResumeAccess']
-	    }
+            values: ['incomplete', 'completedProfile', 'grantedResumeAccess'],
+            default: 'incomplete'
+        },
     },
     companyName: String,
-    sponsorshipTier: {
+    representativeEmail: String,
+    representativeFirstName: String,
+    representativeLastName: String,
+    tier: {
         type: String,
         enum: {
-            values: ['Kilo', 'Mega', 'Giga'] // Double check these!
-        }
+            values: ['Kilo', 'Mega', 'Giga', 'Title', ""] // Double check these!
+        },
+        default: ""
     },
-    pledgeAmount: Number,
-    api: String,
-    links: String
-}
+    workshop: {
+      type: Boolean,
+      default: false
+    },
+    openingStatementTime: Number,
+    closingStatementTime: Number,
+    estimatedCost: {
+      type: Number,
+      default: 0
+    },
+    otherNotes: String,
+};
 
 // Only after confirmed
 var confirmation = {
@@ -198,23 +211,23 @@ var status = {
 };
 
 
-var userAtEvent = { 
+var userAtEvent = {
   /**
    * AFTER user is checked in to event
    * @type {Object}
    */
   receivedLunch: {
-    type: Boolean, 
+    type: Boolean,
     default: false
   },
   receivedDinner: {
-    type: Boolean, 
+    type: Boolean,
     default: false
-  }, 
-  workshopsAttended: { 
+  },
+  workshopsAttended: {
     type: [String]
-  }, 
-  tablesVisited: { 
+  },
+  tablesVisited: {
     type: [String]
   }
 };
@@ -299,7 +312,7 @@ var schema = new mongoose.Schema({
 
   status: status,
 
-  sponsorFields: sponsorFields, 
+  sponsorFields: sponsorFields,
 
   userAtEvent: userAtEvent
 
@@ -418,7 +431,7 @@ schema.statics.validateProfile = function(profile, cb){
     profile.adult &&
     profile.school.length > 0 &&
     [
-        'Fall 2019', 
+        'Fall 2019',
         'Spring 2020',
         'Fall 2020',
         'Spring 2021',
@@ -464,6 +477,14 @@ schema.virtual('status.name').get(function(){
 
   if (!this.verified){
     return "unverified";
+  }
+
+  if(this.sponsor && this.sponsorFields.sponsorStatus === 'completedProfile') {
+    return "pending";
+  }
+
+  if(this.sponsor && this.sponsorFields.sponsorStatus === 'grantedResumeAccess') {
+    return "approved";
   }
 
   return "incomplete";
