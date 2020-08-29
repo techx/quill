@@ -58,7 +58,7 @@ body {
   height: 100%;
   width: 100%;
   font-size: 1.02em;
-  color: $brand-tertiary;
+  color: #000;
 }
 
 body {
@@ -114,14 +114,9 @@ input {
   }
 }
 
-.ui.form select {
-  height: 2.5em;
-}
-
-.ui.selection.dropdown {
-  padding-top: 0.7em;
-  padding-bottom: 0.7em;
-}
+// .ui.form select {
+//   height: 2.5em;
+// }
 
 fieldset {
   padding: 0;
