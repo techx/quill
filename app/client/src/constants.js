@@ -2,7 +2,7 @@ const angular = require('angular');
 
 angular.module('reg')
     .constant('EVENT_INFO', {
-        NAME: 'HackTX 2019',
+        NAME: 'HackTX 2020',
     })
     .constant('DASHBOARD', {
         UNVERIFIED: 'You should have received an email asking you verify your email. Click the link in the email and you can start your application!',

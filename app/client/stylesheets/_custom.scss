@@ -1,3 +1,46 @@
 // Branding overrides
 //
 // Copy variables from `_branding.scss` to this file to override default values.
+
+// $base-color : #0f3857;
+// $base-color: #0f3857;
+// $field-color: #0b2135;
+$field-color: #0f3857;
+$base-color: #0b2135;
+// $base-color: #fff;
+
+.ui.segment {
+        background-color: $base-color;
+        border: 1px solid $secondary;}
+
+.field {
+    label {
+        color: $tertiary !important;
+    }
+    input, select, textarea {
+        background-color: $field-color !important;
+        border: 1px solid $secondary !important;
+        color: $tertiary !important;
+    }
+}
+
+.ui.table {
+    background-color: $tertiary !important;
+}
+
+.ui.header {
+    color: $tertiary !important;
+}
+
+#login {
+    background-image: url('../assets/images/login-back.gif');
+    background-size: cover;
+
+    > .container {
+        > .content {
+            .ui.segment {
+                border-radius: 30px;
+            }
+        }
+    }
+}

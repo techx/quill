@@ -65,7 +65,7 @@ angular.module('reg')
               !user.status.confirmed &&
               !user.status.declined &&
               !user.sponsor;
-              case 'isSponsorAndIncomplete': 
+          case 'isSponsorAndIncomplete': 
               return user.verified && user.sponsor && (user.sponsorFields.sponsorStatus === 'incomplete'); 
             case 'isSponsorAndComplete':
               return user.verified && user.sponsor && (user.sponsorFields.sponsorStatus === 'completedProfile');

@@ -4,9 +4,9 @@ $font-body: 'Lato', 'Helvetica Neue', 'Helvetica', sans-serif;
 $font-header: 'Montserrat', 'Helvetica Neue', 'Helvetica', sans-serif;
 
 // Login screen variables
-$login-bg-color: #F7F7F7;
+$login-bg-color: $base-color;
 $login-color: $primary;
-$register-color: $tertiary;
+$register-color: #ec483f;
 
 $status-unverified-color: rgb(82, 82, 82);
 $status-incomplete-color: #F5F5F5;
@@ -56,6 +56,7 @@ body {
   height: 100%;
   width: 100%;
   font-size: 1.02em;
+  color: $brand-tertiary;
 }
 
 body {
