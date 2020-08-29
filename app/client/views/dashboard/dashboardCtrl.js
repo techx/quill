@@ -66,10 +66,12 @@ angular.module('reg')
               !user.status.declined &&
               !user.sponsor;
           case 'isSponsorAndIncomplete': 
-              return user.verified && user.sponsor && (user.sponsorFields.sponsorStatus === 'incomplete'); 
-            case 'isSponsorAndComplete':
+              return user.verified && user.sponsor &&
+              (user.sponsorFields.sponsorStatus !== 'completedProfile') &&
+              (user.sponsorFields.sponsorStatus !== 'grantedResumeAccess'); 
+          case 'isSponsorAndComplete':
               return user.verified && user.sponsor && (user.sponsorFields.sponsorStatus === 'completedProfile');
-            case 'isSponsorAndGrantedAccess':
+          case 'isSponsorAndGrantedAccess':
               return user.verified && user.sponsor && (user.sponsorFields.sponsorStatus === 'grantedResumeAccess');
           case 'confirmed':
             return user.status.admitted && user.status.confirmed && !user.status.declined;

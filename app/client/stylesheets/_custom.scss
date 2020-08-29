@@ -24,6 +24,12 @@ $base-color: #0b2135;
     }
 }
 
+.ui.label {
+    label {
+        color: $base-color !important;
+    }
+}
+
 .ui.table {
     background-color: $tertiary !important;
 }
@@ -42,5 +48,19 @@ $base-color: #0b2135;
                 border-radius: 30px;
             }
         }
+    }
+}
+
+#sidebar {
+    .item, .note {
+        color: black;
+    }
+}
+
+#sponsor-application {
+    .ui.basic.label, .ui.label {
+        background-color: $field-color !important;
+        border: 1px solid $secondary;
+        color: $tertiary;
     }
 }

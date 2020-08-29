@@ -479,6 +479,14 @@ schema.virtual('status.name').get(function(){
     return "unverified";
   }
 
+  if(this.sponsor && this.sponsorFields.sponsorStatus === 'completedProfile') {
+    return "pending";
+  }
+
+  if(this.sponsor && this.sponsorFields.sponsorStatus === 'grantedResumeAccess') {
+    return "approved";
+  }
+
   return "incomplete";
 
 });
