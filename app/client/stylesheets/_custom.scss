@@ -7,6 +7,8 @@
 // $field-color: #0b2135;
 $field-color: #0f3857;
 $base-color: #0b2135;
+$register-color: #ec483f;
+$status-submitted-color: lighten($register-color, 10%);
 // $base-color: #fff;
 
 body {
@@ -46,7 +48,9 @@ input, select, textarea, .ui.label {
         background-color: $field-color !important;
         color: $tertiary !important;
     }
-
+    button {
+        border: 1px solid $secondary !important;
+    }
     .caret {
         border-top: 4px solid $tertiary !important;
     }
@@ -105,11 +109,11 @@ th {
     color: $tertiary !important;
 }
 
-// #sidebar {
-//     .item, .note {
-//         color: black;
-//     }
-// }
+#sidebar {
+    .item, .note {
+        color: black;
+    }
+}
 
 // #sponsor-application {
 //     .ui.basic.label, .ui.label {

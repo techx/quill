@@ -6,11 +6,11 @@ $font-header: 'Montserrat', 'Helvetica Neue', 'Helvetica', sans-serif;
 // Login screen variables
 $login-bg-color: $base-color;
 $login-color: $primary;
-$register-color: #ec483f;
+// $register-color: $tertiary;
 
 $status-unverified-color: rgb(82, 82, 82);
 $status-incomplete-color: #F5F5F5;
-$status-submitted-color: lighten($primary, 20%);
+// $status-submitted-color: lighten($primary, 20%);
 $status-admitted-color: $primary;
 $status-confirmed-color: $primary;
 $status-checkedin-color: $primary;
