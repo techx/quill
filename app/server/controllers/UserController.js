@@ -223,9 +223,13 @@ UserController.createSponsor = function (email, callback) {
         // yay! success.
         var token = u.generateAuthToken();
         console.log("Success! New sponsor: ", email, password);
-        // Send over a verification email
-        var verificationToken = u.password
-        Mailer.sendVerificationEmail(email, verificationToken);
+        u.email = email;
+        u.password = password;
+        // Send over an email with credentials
+        Mailer.sendSponsorEmailandPassword(email, password);
+
+        // Verification email function on hold
+        //Mailer.sendVerificationEmail(email, token);
         return callback(
           null,
           {
