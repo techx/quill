@@ -12,7 +12,7 @@ angular.module('reg')
     'settings',
     'Session',
     'UserService',
-    function($scope, $rootScope, $state, $http, currentUser, settings, Session, UserService) {
+    function ($scope, $rootScope, $state, $http, currentUser, settings, Session, UserService) {
 
       // Set up the user
       $scope.user = currentUser.data;
@@ -21,13 +21,12 @@ angular.module('reg')
       $scope.isUtStudent = $scope.user.email.split('@')[1] == 'utexas.edu';
 
       $scope.resume = null;
-
       // If so, default them to adult: true
-      if ($scope.isUtStudent){
+      if ($scope.isUtStudent) {
         $scope.user.profile.adult = true;
       }
-    
-       var socialMedia = {
+
+      var socialMedia = {
         'Facebook': false,
         'Twitter': false,
         'School Club': false,
@@ -36,34 +35,35 @@ angular.module('reg')
         'MLH': false,
       };
 
-      if ($scope.user.profile.socialMedia){
-        $scope.user.profile.socialMedia.forEach(function(media){
-          if (media in socialMedia){
+      if ($scope.user.profile.socialMedia) {
+        $scope.user.profile.socialMedia.forEach(function (media) {
+          if (media in socialMedia) {
             socialMedia[media] = true;
           }
         });
       }
 
       $scope.socialMedia = socialMedia;
-
+      $scope.skills = [];
       $scope.regIsClosed = Date.now() > settings.data.timeClose || Date.now() < settings.data.timeOpen;
-     
+
       // Populate the school dropdown
       populateSchools();
       populateMajors();
+      populateSkills();
       _setupForm();
 
       /**
        * TODO: JANK WARNING
        */
-      function populateSchools(){
+      function populateSchools() {
         $http
           .get('/assets/schools.json')
-          .then(function(res){
+          .then(function (res) {
             var schools = res.data;
             var email = $scope.user.email.split('@')[1];
 
-            if (schools[email]){
+            if (schools[email]) {
               $scope.user.profile.school = schools[email].school;
               $scope.autoFilledSchool = true;
             }
@@ -71,32 +71,32 @@ angular.module('reg')
 
         $http
           .get('/assets/schools.csv')
-          .then(function(res){
+          .then(function (res) {
             $scope.schools = res.data.split('\n');
             $scope.schools.push('Other');
 
             var content = [];
 
-            for(i = 0; i < $scope.schools.length; i++) {
+            for (i = 0; i < $scope.schools.length; i++) {
               $scope.schools[i] = $scope.schools[i].trim();
-              content.push({title: $scope.schools[i]})
+              content.push({ title: $scope.schools[i] })
             }
 
             $('#school.ui.search')
               .search({
                 source: content,
                 cache: true,
-                onSelect: function(result, response) {
+                onSelect: function (result, response) {
                   $scope.user.profile.school = result.title.trim();
                 }
               })
           });
       }
 
-      function populateMajors(){
+      function populateMajors() {
         $http
           .get('/assets/majors.csv')
-          .then(function(res){
+          .then(function (res) {
             $scope.majors = res.data.split('\n');
             $scope.majors.push('Other');
 
@@ -104,43 +104,56 @@ angular.module('reg')
 
             for (i = 0; i < $scope.majors.length; i++) {
               $scope.majors[i] = $scope.majors[i].trim();
-              content.push({title: $scope.majors[i]})
+              content.push({ title: $scope.majors[i] })
             }
 
             $('#major.ui.search')
               .search({
                 source: content,
                 cache: true,
-                onSelect: function(result, response) {
+                onSelect: function (result, response) {
                   $scope.user.profile.major = result.title.trim();
                 }
               })
           });
       }
 
+      function populateSkills() {
+        $http
+          .get('/assets/skills.csv')
+          .then(function (res) {
+            res.data.split('\n').forEach(element => {
+              $scope.skills.push({ 'name': element, 'selected': false });
+            });
+            $scope.skills.push({ 'name': 'Other', 'selected': false });
+          });
+      }
 
-
-      function _updateUser(e){
+      function _updateUser(e) {
         var profile = $scope.user.profile;
 
         // Get the dietary restrictions as an array
         var drs = [];
-        Object.keys($scope.socialMedia).forEach(function(key){
-          if ($scope.socialMedia[key]){
+        Object.keys($scope.socialMedia).forEach(function (key) {
+          if ($scope.socialMedia[key]) {
             drs.push(key);
           }
         });
         profile.socialMedia = drs;
 
         profile.name = util.format("%s %s", profile.firstName.trim(), profile.lastName.trim());
-          
+
+        $scope.outputSkills.forEach(skill => {
+          profile.skills.push(skill.name);
+        });
+
         UserService
           .updateProfile(Session.getUserId(), $scope.user.profile)
           .then(response => {
             swal("Awesome!", "Your application has been saved.", "success")
-            .then(value => {
-              $state.go("app.dashboard");
-            });
+              .then(value => {
+                $state.go("app.dashboard");
+              });
           }, response => {
             swal("Uh oh!", "Something went wrong.", "error");
           });
@@ -169,12 +182,12 @@ angular.module('reg')
       function graduationValidation(value) {
         const standing = $scope.user.profile.standing;
         if (standing === 'M' || standing === 'D') {
-            $scope.user.profile.graduationTime = "Other";
+          $scope.user.profile.graduationTime = "Other";
         }
         return $scope.user.profile.graduationTime.length > 0 || value;
       }
 
-      function _setupForm(){
+      function _setupForm() {
         // Custom minors validation rule
         $.fn.form.settings.rules.allowMinors = function (value) {
           return minorsValidation();
@@ -184,7 +197,7 @@ angular.module('reg')
           return resumeValidation(value);
         };
 
-        $.fn.form.settings.rules.emptyGraduation = function(value) {
+        $.fn.form.settings.rules.emptyGraduation = function (value) {
           return graduationValidation(value);
         };
 
@@ -332,15 +345,15 @@ angular.module('reg')
         });
       }
 
-      $scope.submitForm = function(){
-        if ($('.ui.form').form('is valid')){
+      $scope.submitForm = function () {
+        if ($('.ui.form').form('is valid')) {
           _updateUser();
         } else {
           swal("Uh oh!", "Please Fill The Required Fields", "error");
         }
       };
 
-      $scope.uploadResume = function(files) {
+      $scope.uploadResume = function (files) {
         $scope.notEmpty = files.length > 1;
         UserService
           .uploadResume(Session.getUserId(), files[0])
@@ -349,5 +362,5 @@ angular.module('reg')
           }, response => {
             $scope.user.profile.resume = false
           });
-       }
+      }
     }]);

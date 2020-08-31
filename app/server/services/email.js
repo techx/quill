@@ -28,6 +28,7 @@ if(EMAIL_HEADER_IMAGE.indexOf("https") == -1){
 
 var NODE_ENV = process.env.NODE_ENV;
 
+//If using regular emails to send from
 var options = {
     host: EMAIL_HOST,
     port: EMAIL_PORT,
@@ -37,6 +38,14 @@ var options = {
         pass: EMAIL_PASS
     }
 };
+// //If using SendGrid API
+// var options = {
+//   service: "SendGrid",
+//   auth: {
+//       user: EMAIL_USER,
+//       pass: EMAIL_PASS
+//   }
+// };
 
 var transporter = nodemailer.createTransport(smtpTransport(options));
 
@@ -90,7 +99,6 @@ function sendOne(templateName, options, data, callback) {
  * @return {[type]}            [description]
  */
 controller.sendVerificationEmail = function(email, token, callback) {
-
   var options = {
     to: email,
     subject: "["+HACKATHON_NAME+"] - Verify your email"
@@ -113,7 +121,46 @@ controller.sendVerificationEmail = function(email, token, callback) {
     if (info){
       console.log(info.message);
     }
-    if (callback){
+    if (callback){ 
+      callback(err, info);
+    }
+  });
+
+};
+
+/**
+ * Send an email to a sponsor with their login credientials.
+ * @param  {[type]}   email    [description]
+ * @param  {[type]}   password    [description]
+ * @param  {Function} callback [description]
+ * @return {[type]}            [description]
+ */
+controller.sendSponsorEmailandPassword = function(email, password, callback) {
+  var options = {
+    to: email,
+    subject: "["+HACKATHON_NAME+"] - Sponsor: Here is your login information!"
+  };
+
+  var locals = {
+    title: 'Here are your credentials! Don\'t share this with anyone else!',
+    subtitle: 'Thanks for signing up!',
+    body: 'Your password is: ' + password,
+  };
+
+  /**
+   * Eamil-verify takes a few template values:
+   * {
+   *   verifyUrl: the url that the user must visit to verify their account
+   * }
+   */
+  sendOne('email-basic', options, locals, function(err, info){
+    if (err){
+      console.log(err);
+    }
+    if (info){
+      console.log(info.message);
+    }
+    if (callback){ 
       callback(err, info);
     }
   });

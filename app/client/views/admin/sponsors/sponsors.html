@@ -1,0 +1,126 @@
+<div class="ui segment">
+    <div class="ui stackable one column grid">
+        <div class="column">
+            <div class="ui pink segment">
+                <div class="ui form">
+                    <div class="ui header">
+                        Create Sponsor Account
+                    </div>
+                    <div class="ui form input">
+                        <input type="text" size="50"
+                               id="email"
+                               placeholder="sponsor@example.com"
+                               ng-model="email">
+                    </div>
+                    <div class="ui divider"></div>
+                    <div class="ui field">
+                        <div class="ui pink button"
+                             ng-click="createSponsor()">
+                            Add Sponsor
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ui divider"></div>
+    <div class="three wide column">
+        <div class="column">
+            <div class="ui pink segment">
+                <div class="ui stackable grid">
+                    <div class="three wide column">
+                        <div class="ui header">
+                            Search
+                        </div>
+                        <div class="ui form">
+                            <div class="field">
+                                <div class="ui icon fluid input">
+                                    <input type="text"
+                                           placeholder="Search..."
+                                           ng-model="queryText"
+                                           ng-model-options="{debounce: 300}">
+                                    <i class="search icon"></i>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="ui divider"></div>
+                        <div class="ui header">
+                            Pages
+                        </div>
+                        <button ng-repeat="page in pages"
+                                ng-class="page == currentPage ? 'active pink' : ''"
+                                ng-click="goToPage(page)"
+                                class="ui icon basic page button">
+                            {{page + 1}}
+                        </button>
+                    </div>
+                    <div class="thirteen wide column" id="table-container">
+                    <div class="ui header">
+                        Sponsors
+                    </div>
+                    <table class="ui celled selectable compact sponsors table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>E-mail address</th>
+                                <th>Company Name</th>
+                                <th class="center aligned">Completed Profile</th>
+                                <th class="center aligned">Resume Access</th>
+                                <th class="center aligned">Change Access</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-click="selectUser(user)"
+                                ng-repeat="user in sponsors">
+                                <td>
+                                    <strong>
+                                        {{user.profile.name}}
+                                        &nbsp;
+                                    </strong>
+                                </td>
+                                <td>{{user.email}}</td>
+                                <td>{{user.sponsorFields.companyName}}</td>
+                                <td class="center aligned collapsing">
+                                    <!-- Completed Profile -->
+                                    <button ng-click="goUser($event, user)"
+                                            class="ui circular mini basic icon button">
+                                        <i class="linkify icon"></i>
+                                    </button>
+                                    <i ng-if="user.sponsorFields.sponsorStatus == 'completedProfile' || user.sponsorFields.sponsorStatus == 'grantedResumeAccess'"
+                                       class="green check circle icon">
+                                    </i>
+                                    <i ng-if="!(user.sponsorFields.sponsorStatus == 'completedProfile' || user.sponsorFields.sponsorStatus == 'grantedResumeAccess')"
+                                       class="red remove circle icon">
+                                    </i>
+                                </td>
+                                <td class="center aligned collapsing">
+                                    <!-- Resume Access Status -->
+                                        <i ng-if="user.sponsorFields.sponsorStatus == 'grantedResumeAccess'"
+                                           class="green check circle icon">
+                                        </i>
+                                        <i ng-if="user.sponsorFields.sponsorStatus != 'grantedResumeAccess'"
+                                           class="red remove circle icon">
+                                        </i>
+                                </td>
+                                <td class="center aligned collapsing">
+
+                                    <i ng-if="user.sponsorFields.sponsorStatus == 'completedProfile'" class="accept ui circular mini basic green icon button"
+                                       ng-click="toggleResumeAccess($event, user, $index)">
+                                        <i class="add user icon"></i>
+                                    </i>
+                                    <i ng-if="user.sponsorFields.sponsorStatus == 'grantedResumeAccess'" class="reject ui circular mini basic red icon button"
+                                       ng-click="toggleResumeAccess($event, user, $index)">
+                                        <i class="remove user icon"></i>
+                                    </i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
