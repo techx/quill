@@ -4,6 +4,8 @@ var mongoose   = require('mongoose'),
     jwt        = require('jsonwebtoken');
     JWT_SECRET = process.env.JWT_SECRET;
 
+mongoose.set('useFindAndModify', false);
+
 var profile = {
   // Basic info
   name: {
@@ -59,7 +61,7 @@ var profile = {
     type: String,
     enum: {
       values: [
-        'Fall 2019', 
+        'Fall 2019',
         'Spring 2020',
         'Fall 2020',
         'Spring 2021',
@@ -72,6 +74,7 @@ var profile = {
     }
   },
   resume: Boolean,
+  skills: [String],
   firstHackathon: String,
   numHackathons: Number,
   socialMedia: [String],
@@ -91,6 +94,38 @@ var profile = {
     min: 0,
     max: 300,
   }
+};
+
+var sponsorFields = {
+    sponsorStatus: {
+        type: String,
+        enum : {
+            values: ['incomplete', 'completedProfile', 'grantedResumeAccess'],
+            default: 'incomplete'
+        },
+    },
+    companyName: String,
+    representativeEmail: String,
+    representativeFirstName: String,
+    representativeLastName: String,
+    tier: {
+        type: String,
+        enum: {
+            values: ['Kilo', 'Mega', 'Giga', 'Title', ""] // Double check these!
+        },
+        default: ""
+    },
+    workshop: {
+      type: Boolean,
+      default: false
+    },
+    openingStatementTime: Number,
+    closingStatementTime: Number,
+    estimatedCost: {
+      type: Number,
+      default: 0
+    },
+    otherNotes: String,
 };
 
 // Only after confirmed
@@ -175,6 +210,29 @@ var status = {
   }
 };
 
+
+var userAtEvent = {
+  /**
+   * AFTER user is checked in to event
+   * @type {Object}
+   */
+  receivedLunch: {
+    type: Boolean,
+    default: false
+  },
+  receivedDinner: {
+    type: Boolean,
+    default: false
+  },
+  workshopsAttended: {
+    type: [String]
+  },
+  tablesVisited: {
+    type: [String]
+  }
+};
+
+
 // define the schema for our admin model
 var schema = new mongoose.Schema({
 
@@ -198,6 +256,12 @@ var schema = new mongoose.Schema({
     type: Boolean,
     required: true,
     default: false,
+  },
+
+  sponsor: {
+    type: Boolean,
+    required: true,
+    default: false
   },
 
   timestamp: {
@@ -247,6 +311,10 @@ var schema = new mongoose.Schema({
   confirmation: confirmation,
 
   status: status,
+
+  sponsorFields: sponsorFields,
+
+  userAtEvent: userAtEvent
 
 });
 
@@ -363,7 +431,7 @@ schema.statics.validateProfile = function(profile, cb){
     profile.adult &&
     profile.school.length > 0 &&
     [
-        'Fall 2019', 
+        'Fall 2019',
         'Spring 2020',
         'Fall 2020',
         'Spring 2021',
@@ -409,6 +477,14 @@ schema.virtual('status.name').get(function(){
 
   if (!this.verified){
     return "unverified";
+  }
+
+  if(this.sponsor && this.sponsorFields.sponsorStatus === 'completedProfile') {
+    return "pending";
+  }
+
+  if(this.sponsor && this.sponsorFields.sponsorStatus === 'grantedResumeAccess') {
+    return "approved";
   }
 
   return "incomplete";

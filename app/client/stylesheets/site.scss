@@ -4,16 +4,18 @@ $font-body: 'Lato', 'Helvetica Neue', 'Helvetica', sans-serif;
 $font-header: 'Montserrat', 'Helvetica Neue', 'Helvetica', sans-serif;
 
 // Login screen variables
-$login-bg-color: #F7F7F7;
+$login-bg-color: $base-color;
 $login-color: $primary;
-$register-color: $tertiary;
+// $register-color: $tertiary;
 
 $status-unverified-color: rgb(82, 82, 82);
 $status-incomplete-color: #F5F5F5;
-$status-submitted-color: lighten($primary, 20%);
+// $status-submitted-color: lighten($primary, 20%);
 $status-admitted-color: $primary;
-$status-confirmed-color: $secondary;
-$status-checkedin-color: $secondary;
+$status-confirmed-color: $primary;
+$status-checkedin-color: $primary;
+$status-pending-color: $tertiary;
+$status-approved-color: $primary;
 $status-waitlist-color: $tertiary;
 $status-declined-color: $tertiary;
 $status-rejected-color: red; // Not used
@@ -56,6 +58,7 @@ body {
   height: 100%;
   width: 100%;
   font-size: 1.02em;
+  color: #000;
 }
 
 body {
@@ -111,9 +114,9 @@ input {
   }
 }
 
-.ui.form select {
-  height: 2.5em;
-}
+// .ui.form select {
+//   height: 2.5em;
+// }
 
 fieldset {
   padding: 0;

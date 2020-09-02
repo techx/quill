@@ -39,8 +39,17 @@
         background: $status-admitted-color;
       }
 
+      &.pending {
+        background: $status-pending-color;
+        color: black;
+      }
+
       &.confirmed {
         background: $status-confirmed-color;
+      }
+
+      &.approved {
+        background: $status-approved-color;
       }
 
       &.checked.in {

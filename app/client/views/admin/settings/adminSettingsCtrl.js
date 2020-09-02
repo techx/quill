@@ -22,6 +22,7 @@ angular.module('reg')
          // Format the dates in settings.
         settings.timeOpen = new Date(settings.timeOpen);
         settings.timeClose = new Date(settings.timeClose);
+        settings.sponsorTimeClose = new Date(settings.sponsorTimeClose);
         settings.timeConfirm = new Date(settings.timeConfirm);
 
         $scope.settings = settings;
@@ -102,8 +103,9 @@ angular.module('reg')
         // Clean the dates and turn them to ms.
         var open = cleanDate($scope.settings.timeOpen).getTime();
         var close = cleanDate($scope.settings.timeClose).getTime();
+        var sponsorClose = cleanDate($scope.settings.sponsorTimeClose).getTime();
 
-        if (open < 0 || close < 0 || open === undefined || close === undefined){
+        if (open < 0 || close < 0 || sponsorClose < 0 || open === undefined || close === undefined || sponsorClose === undefined){
           return swal('Oops...', 'You need to enter valid times.', 'error');
         }
         if (open >= close){
@@ -112,7 +114,7 @@ angular.module('reg')
         }
 
         SettingsService
-          .updateRegistrationTimes(open, close)
+          .updateRegistrationTimes(open, close, sponsorClose)
           .then(response => {
             updateSettings(response.data);
             swal("Looks good!", "Registration Times Updated", "success");
