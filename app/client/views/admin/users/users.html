@@ -45,14 +45,14 @@
         <div class="content">
 
           <div>
-            <div class="ui header">
+            <div class="ui header black-text">
               Status:
               <div
                 class="ui label">
                 {{selectedUser.status.name.toUpperCase()}}
               </div>
             </div>
-            <p>
+            <p class="black-text">
               <strong> Admitted by: </strong> {{selectedUser.status.admittedBy ? selectedUser.status.admittedBy : 'N/A'}}
             </p>
           </div>
@@ -62,7 +62,7 @@
 
             <h3> {{section.title}} </h3>
 
-            <p ng-repeat="field in section.fields">
+            <p ng-repeat="field in section.fields" class="black-text">
               <strong> {{field.name}}: </strong>
 
               <span ng-show="field.type === 'boolean'">

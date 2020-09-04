@@ -93,6 +93,53 @@ var profile = {
     type: String,
     min: 0,
     max: 300,
+  },
+
+  experienceLevel: {
+    type: String,
+    enum : {
+      values: 'L M H'.split(' ')
+    }
+  }, 
+  apprehensions: {
+    type: String,
+    enum : {
+      values: 'T F K G S'.split(' ')
+    }
+  },
+
+  // mailing fields
+  usStudent: {
+    type: Boolean,
+    default: false,
+  }, 
+  swag: {
+    type: Boolean,
+    default: false,
+  },
+  streetAddress: {
+    type: String,
+    min: 1,
+    max: 150,
+  },
+  aptNumber: {
+    type: String,
+    min: 0,
+    max: 50,
+  },
+  city: {
+    type: String,
+    min: 1,
+    max: 50,
+  },
+  state: {
+    type: String,
+    default: "TX"
+  },
+  zip: {
+    type: String,
+    min: 5,
+    max: 5,
   }
 };
 
@@ -314,8 +361,7 @@ var schema = new mongoose.Schema({
 
   sponsorFields: sponsorFields,
 
-  userAtEvent: userAtEvent
-
+  userAtEvent: userAtEvent,
 });
 
 schema.set('toJSON', {
@@ -441,7 +487,67 @@ schema.statics.validateProfile = function(profile, cb){
         'Spring 2023',
         'Other'
     ].indexOf(profile.graduationTime) > -1 &&
-    ['M', 'F', 'O', 'N'].indexOf(profile.gender) > -1
+    ['M', 'F', 'O', 'N'].indexOf(profile.gender) > -1 &&
+
+    // mailing
+    (!profile.usStudent || !profile.swag || (
+      profile.streetAddress.length > 0 &&
+      profile.city.length > 0 &&
+      profile.zip.length == 5 &&
+      [
+        "TX",
+        "AL",
+        "AK",
+        "AZ",
+        "AR",
+        "CA",
+        "CO",
+        "CT",
+        "DE",
+        "DC",
+        "FL",
+        "GA",
+        "HI",
+        "ID",
+        "IL",
+        "IN",
+        "IA",
+        "KS",
+        "KY",
+        "LA",
+        "ME",
+        "MD",
+        "MA",
+        "MI",
+        "MN",
+        "MS",
+        "MO",
+        "MT",
+        "NE",
+        "NV",
+        "NH",
+        "NJ",
+        "NM",
+        "NY",
+        "NC",
+        "ND",
+        "OH",
+        "OK",
+        "OR",
+        "PA",
+        "RI",
+        "SC",
+        "SD",
+        "TN",
+        "UT",
+        "VT",
+        "VA",
+        "WA",
+        "WV",
+        "WI",
+        "WY",
+      ].indexOf(profile.state) > -1
+    ))
     ));
 };
 

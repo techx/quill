@@ -13,16 +13,16 @@
         <div class="field">
           <p>
             Filling out this form will register you for HackTX 2020, a Freetail
-            Hackers hackathon presented at the AT&T Conference Center in Austin,
-            TX from November 2nd, 2019 to November 3rd, 2019.
+            Hackers 36 hour hackathon hosted virtually from October 23rd, 2020
+            to October 25th, 2020.
             <strong>You must be at least 18 years old to register.</strong>
             <br><br>
             To learn more about the event, visit
             <a href="https://hacktx.com">the HackTX event page</a>.
             <br><br>
             Since space is limited, we will limited acceptances. We have two
-            rounds of acceptances -- an early bird deadline on September 27th
-            and a general application deadline of October 11th.
+            rounds of acceptances -- an early bird deadline on September 18th
+            and a general application deadline of October 9th.
             <br><br>
             <strong>Registering does not guarantee a spot at HackTX 2020.</strong>
             <br><br>
@@ -243,22 +243,22 @@
               name="graduation"
               ng-model="user.profile.graduationTime">
               <option value="">Graduation Time</option>
-              <option ng-show="user.profile.standing === 'S'" value="Fall 2019">Fall
-                2019</option>
-              <option ng-show="user.profile.standing === 'S'" value="Spring 2020">
-                Spring 2020</option>
-              <option ng-show="user.profile.standing === 'J'" value="Fall 2020">Fall
+              <option ng-show="user.profile.standing === 'S'" value="Fall 2020">Fall
                 2020</option>
-              <option ng-show="user.profile.standing === 'J'" value="Spring 2021">
+              <option ng-show="user.profile.standing === 'S'" value="Spring 2021">
                 Spring 2021</option>
-              <option ng-show="user.profile.standing === 'P'" value="Fall 2021">Fall
+              <option ng-show="user.profile.standing === 'J'" value="Fall 2021">Fall
                 2021</option>
-              <option ng-show="user.profile.standing === 'P'" value="Spring 2022">
+              <option ng-show="user.profile.standing === 'J'" value="Spring 2022">
                 Spring 2022</option>
-              <option ng-show="user.profile.standing === 'F'" value="Fall 2022">Fall
+              <option ng-show="user.profile.standing === 'P'" value="Fall 2022">Fall
                 2022</option>
-              <option ng-show="user.profile.standing === 'F'" value="Spring 2023">
+              <option ng-show="user.profile.standing === 'P'" value="Spring 2023">
                 Spring 2023</option>
+              <option ng-show="user.profile.standing === 'F'" value="Fall 2023">Fall
+                2023</option>
+              <option ng-show="user.profile.standing === 'F'" value="Spring 2024">
+                Spring 2024</option>
               <option value="Other">Other</option>
             </select>
           </div>
@@ -326,6 +326,32 @@
                 ng-model="user.profile.numHackathons">
             </div>
           </div>
+          
+          <div class="field" ng-show="user.profile.firstHackathon === 'yes'">
+            <label> What are you most apprehensive about for your first hackathon? </label>
+            <select
+              name="apprehensions"
+              ng-model="user.profile.apprehensions">
+              <option value="">Select an option</option>
+              <option value="T">Thinking of a good project idea</option>
+              <option value="F">Finding a team</option>
+              <option value="K">Knowing where and how to start my hack</option>
+              <option value="G">Getting help with technical things / executing my idea throughout the event</option>
+              <option value="S">Something else (please tell us in the Additional Notes section!)</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label> Would you consider yourself a beginner in computer science/technology? </label>
+            <select
+              name="experienceLevel"
+              ng-model="user.profile.experienceLevel">
+              <option value="">Select an option</option>
+              <option value="L">Yes, I’ve never programmed before / haven’t had much experience programming.</option>
+              <option value="M">Yes, I have experience programming here and there (intro. CS classes, etc.) but I haven’t completed a project on my own.</option>
+              <option value="H">No.</option>
+            </select>
+          </div>
 
           <br><br>
 
@@ -345,14 +371,108 @@
           </div>
 
           <div class="field">
-            <label> Do you need reimbursement?* </label>
-            <select name="reimbursement"
-              ng-model="user.profile.reimbursement">
-              <option value="O">Yes, out of state</option>
-              <option value="I">Yes, in state</option>
-              <option value="N">No</option>
-            </select>
+            <label> Will you be participating in HackTX from within the US or internationally? </label>
+            <div class="ui checkbox">
+              <input type="checkbox" ng-model="user.profile.usStudent">
+              <label>I will be participating from within the US. </label>
+            </div>
           </div>
+
+          <div class="field">
+            <label> Would like us to ship HackTX swag to you following the event? </label>
+            <div class="ui checkbox">
+              <input type="checkbox" ng-model="user.profile.swag">
+              <label>I would like to receive swag and am able to provide a mailing address. </label>
+            </div>
+          </div>
+          <div class="field" ng-show="user.profile.swag && !user.profile.usStudent">
+            <p>
+              For international participants, we will send a form requesting your mailing address later.
+            </p>
+          </div>
+          <div class="field" ng-show="user.profile.swag && user.profile.usStudent">
+            <div class="sixteen wide field">
+              <label>Mailing address to ship swag to. </label>
+              <div class="two fields">
+                <div class="twelve wide field">
+                  <input type="text" name="streetAddress" ng-model="user.profile.streetAddress" placeholder="Street Address">
+                </div>
+                <div class="four wide field">
+                  <input type="text" name="aptNum" ng-model="user.profile.aptNum" placeholder="Apt #">
+                </div>
+              </div>
+            </div>
+            <div class="fields">
+              <div class="six wide field">
+                <label>City</label>
+                <input type="text" name="city" ng-model="user.profile.city" placeholder="City">
+              </div>
+              <div class="five wide field">
+                <label>State</label>
+                <select
+                  name="state"
+                  ng-model="user.profile.state">
+                  <option value="TX" selected>Texas</option>
+                  <option value="AL">Alabama</option>
+                  <option value="AK">Alaska</option>
+                  <option value="AZ">Arizona</option>
+                  <option value="AR">Arkansas</option>
+                  <option value="CA">California</option>
+                  <option value="CO">Colorado</option>
+                  <option value="CT">Connecticut</option>
+                  <option value="DE">Delaware</option>
+                  <option value="DC">District Of Columbia</option>
+                  <option value="FL">Florida</option>
+                  <option value="GA">Georgia</option>
+                  <option value="HI">Hawaii</option>
+                  <option value="ID">Idaho</option>
+                  <option value="IL">Illinois</option>
+                  <option value="IN">Indiana</option>
+                  <option value="IA">Iowa</option>
+                  <option value="KS">Kansas</option>
+                  <option value="KY">Kentucky</option>
+                  <option value="LA">Louisiana</option>
+                  <option value="ME">Maine</option>
+                  <option value="MD">Maryland</option>
+                  <option value="MA">Massachusetts</option>
+                  <option value="MI">Michigan</option>
+                  <option value="MN">Minnesota</option>
+                  <option value="MS">Mississippi</option>
+                  <option value="MO">Missouri</option>
+                  <option value="MT">Montana</option>
+                  <option value="NE">Nebraska</option>
+                  <option value="NV">Nevada</option>
+                  <option value="NH">New Hampshire</option>
+                  <option value="NJ">New Jersey</option>
+                  <option value="NM">New Mexico</option>
+                  <option value="NY">New York</option>
+                  <option value="NC">North Carolina</option>
+                  <option value="ND">North Dakota</option>
+                  <option value="OH">Ohio</option>
+                  <option value="OK">Oklahoma</option>
+                  <option value="OR">Oregon</option>
+                  <option value="PA">Pennsylvania</option>
+                  <option value="RI">Rhode Island</option>
+                  <option value="SC">South Carolina</option>
+                  <option value="SD">South Dakota</option>
+                  <option value="TN">Tennessee</option>
+                  <option value="UT">Utah</option>
+                  <option value="VT">Vermont</option>
+                  <option value="VA">Virginia</option>
+                  <option value="WA">Washington</option>
+                  <option value="WV">West Virginia</option>
+                  <option value="WI">Wisconsin</option>
+                  <option value="WY">Wyoming</option>
+                </select>
+              </div>  
+              <div class="five wide field">
+                <label>Zip Code</label>
+                <input type="text" name="zip" ng-model="user.profile.zip" placeholder="Zip Code">
+              </div>
+            </div>
+          </div>
+
+            
 
           <div class="field">
             <label> Why do you want to attend HackTX?* </label>

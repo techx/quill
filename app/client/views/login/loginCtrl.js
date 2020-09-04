@@ -11,6 +11,7 @@ angular.module('reg')
       // Is registration open?
       var Settings = settings.data;
       $scope.regIsOpen = Utils.isRegOpen(Settings);
+      $scope.regIsClosed = Utils.isRegClosed(Settings);
 
       // Start state for login
       $scope.loginState = 'login';

@@ -14,6 +14,10 @@
           {{error}}
         </div>
 
+        <div class="ui small floating compact info message" ng-show="!regIsOpen && !regIsClosed">
+          <p style="text-align: center;"><strong>Registration opens Monday, September 7, 12:00 pm (Central)</strong></p>
+        </div>
+
         <div ng-show="loginState === 'login'">
           <div class="ui login-password form">
             <form ng-submit="login()">

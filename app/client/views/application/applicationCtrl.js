@@ -16,6 +16,7 @@ angular.module('reg')
 
       // Set up the user
       $scope.user = currentUser.data;
+      console.log($scope.user)
 
       // Is the student from UT?
       $scope.isUtStudent = $scope.user.email.split('@')[1] == 'utexas.edu';
@@ -187,6 +188,18 @@ angular.module('reg')
         return $scope.user.profile.graduationTime.length > 0 || value;
       }
 
+      function apprehensionValidation(value) {
+        return $scope.user.profile.firstHackathon && $scope.user.profile.apprehensions.length > 0
+      }
+
+      function addressValidation(value) {
+        return !$scope.user.profile.swag || value.length > 0
+      }
+
+      function zipCodeValidation(value) {
+        return !$scope.user.profile.swag || value.length == 5
+      }
+
       function _setupForm() {
         // Custom minors validation rule
         $.fn.form.settings.rules.allowMinors = function (value) {
@@ -200,6 +213,18 @@ angular.module('reg')
         $.fn.form.settings.rules.emptyGraduation = function (value) {
           return graduationValidation(value);
         };
+
+        $.fn.form.settings.rules.emptyApprehension = function (value) {
+          return apprehensionValidation(value);
+        }
+
+        $.fn.form.settings.rules.emptyMailingAddress = function (value) {
+          return addressValidation(value);
+        }
+
+        $.fn.form.settings.rules.validZipCode = function (value) {
+          return zipCodeValidation(value);
+        }
 
         // Semantic-UI form validation
         $('.ui.form').form({
@@ -339,7 +364,61 @@ angular.module('reg')
                   prompt: 'Please tell us why you want to attend HackTX.'
                 }
               ]
-            }
+            },
+            experienceLevel: {
+              identifier: 'experienceLevel',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please tell us your comfort level with technology.'
+                }
+              ]
+            }, 
+            apprehensions: {
+              identifier: 'apprehensions',
+              rules: [
+                {
+                  type: 'emptyApprehension',
+                  prompt: 'Please tell us what you are most nervous about.'
+                }
+              ]
+            },
+            streetAddress: {
+              identifier: 'streetAddress',
+              rules: [
+                {
+                  type: 'emptyMailingAddress',
+                  prompt: 'Please provide a mailing address'
+                }
+              ]
+            },
+            city: {
+              identifier: 'city',
+              rules: [
+                {
+                  type: 'emptyMailingAddress',
+                  prompt: 'Please provide the city for your mailing address'
+                }
+              ]
+            },
+            state: {
+              identifier: 'state',
+              rules: [
+                {
+                  type: 'emptyMailingAddress',
+                  prompt: 'Please provide the state for your mailing address'
+                }
+              ]
+            },
+            zip: {
+              identifier: 'zip',
+              rules: [
+                {
+                  type: 'validZipCode',
+                  prompt: 'Please provide a valid 5-digit zip code'
+                }
+              ]
+            },
           },
           on: 'blur'
         });

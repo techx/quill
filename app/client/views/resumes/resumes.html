@@ -75,7 +75,7 @@
           </div>
           <div class="content">
 
-            <div>
+            <div class="black-text">
               <p>
                 <strong> Resume: </strong>
               </p>
@@ -88,7 +88,7 @@
 
               <h3> {{section.title}} </h3>
 
-              <p ng-repeat="field in section.fields">
+              <p ng-repeat="field in section.fields" class="black-text">
                 <strong> {{field.name}}: </strong>
 
                 <span ng-show="field.type === 'boolean'">
