@@ -12,7 +12,8 @@ angular.module('reg')
       var Settings = settings.data;
       $scope.regIsOpen = Utils.isRegOpen(Settings);
       $scope.regIsClosed = Utils.isRegClosed(Settings);
-
+      $scope.formattedTime = 'Registration opens ' + Utils.formatTime(Settings.timeOpen);
+      console.log($scope.formattedTime)
       // Start state for login
       $scope.loginState = 'login';
 
