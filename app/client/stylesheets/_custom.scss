@@ -13,6 +13,7 @@ $status-submitted-color: lighten($register-color, 10%);
 
 body {
     color: $tertiary !important;
+    background-color: $base-color;
 }
 
 .ui.segment {

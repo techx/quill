@@ -138,13 +138,20 @@ controller.sendVerificationEmail = function(email, token, callback) {
 controller.sendSponsorEmailandPassword = function(email, password, callback) {
   var options = {
     to: email,
-    subject: "["+HACKATHON_NAME+"] - Sponsor: Here is your login information!"
+    subject: "["+HACKATHON_NAME+"] - Sponsor: Accessing the Sponsors Portal!"
   };
 
   var locals = {
-    title: 'Here are your credentials! Don\'t share this with anyone else!',
-    subtitle: 'Thanks for signing up!',
-    body: 'Your password is: ' + password,
+    title: 'Accessing the HackTX Sponsors Portal',
+    body: "Thank you for your interest in sponsoring HackTX! As part of your sponsorship, \
+           we will grant you access to our attendees' resumes through the sponsors portal. \
+           Before we do this, please log in to the account we have set up for you and fill \
+           out our application so we have all the necessary information on your sponsorship. \
+           If you have questions at any point, please reach out to your point of contact. \n\n \
+           Here are your credentials: \n \
+           Email: " + email + "\nPassword: " + password,
+    actionUrl: ROOT_URL + '/login',
+    actionName: 'Login to your Account'
   };
 
   /**
