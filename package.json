@@ -8,7 +8,7 @@
     "angular-qrcode": "^7.2.0",
     "angular-ui-router": "^1.0.20",
     "async": "^2.6.1",
-    "aws-sdk": "^2.528.0",
+    "aws-sdk": "^2.747.0",
     "bcrypt": "^3.0.8",
     "body-parser": "^1.18.3",
     "browserify": "^16.2.3",

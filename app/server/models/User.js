@@ -166,6 +166,10 @@ var sponsorFields = {
       type: Boolean,
       default: false
     },
+    paid: {
+      type: Boolean,
+      default: false
+    },
     openingStatementTime: Number,
     closingStatementTime: Number,
     estimatedCost: {

@@ -267,6 +267,7 @@ UserController.getPage = function (query, callback) {
   var searchText = query.text;
   var gradYears = query.grad;
   var skills = query.skills;
+  var usStudent = query.usStudent; 
 
   var queries = [];
   var year_query = {};
@@ -307,6 +308,15 @@ UserController.getPage = function (query, callback) {
     }
     findQuery.$and.push({'profile.skills': match_query});
   }
+
+console.log("usStudent " + usStudent); 
+  if (usStudent === "true") {
+    console.log("inside");
+    if (!findQuery.$and) {
+      findQuery.$and = []
+    }
+  findQuery.$and.push({'profile.usStudent' : true});
+}
 
 
   User
@@ -1175,6 +1185,7 @@ UserController.updateSponsorById = function(id, user, callback){
       'sponsorFields.sponsorStatus': "completedProfile",
       'sponsorFields.tier': user.data.sponsorFields.tier,
       'sponsorFields.workshop': user.data.sponsorFields.workshop,
+      'sponsorFields.paid': user.data.sponsorFields.paid,
       'sponsorFields.estimatedCost': user.data.sponsorFields.estimatedCost,
       'sponsorFields.companyName': user.data.sponsorFields.companyName,
       'sponsorFields.representativeFirstName': user.data.sponsorFields.representativeFirstName,

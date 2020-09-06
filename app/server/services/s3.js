@@ -12,6 +12,7 @@ var s3 = new AWS.S3();
 var controller = {};
 
 function uploadResume(file, fileName, callback) {
+  console.log("bucket name" + process.env.BUCKET_NAME); 
   var params = {
     Bucket: process.env.BUCKET_NAME,
     Key: util.format('resumes/%s', fileName),
@@ -28,6 +29,7 @@ function uploadResume(file, fileName, callback) {
 }
 
 function getResume(fileName, callback) {
+  console.log("bucket name" + process.env.BUCKET_NAME); 
   var params = {
     Bucket: process.env.BUCKET_NAME,
     Key: util.format('resumes/%s.pdf', fileName),

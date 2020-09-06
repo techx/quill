@@ -52,6 +52,17 @@
           on-reset="onClearYears()">
         </div>
 
+        <div class="ui header">
+          Filter by US-only
+          <div class="ui checkbox">
+            <input type="checkbox"
+              name="usStudent"
+              ng-model="user.profile.usStudent"
+              ng-change="onSelectLocation(data)">
+            <label>United States</label>
+          </div>
+        </div>
+
         <div class="ui divider"></div>
 
         <button ng-repeat="page in pages" ng-class="page == currentPage ?

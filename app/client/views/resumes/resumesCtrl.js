@@ -25,6 +25,8 @@ angular.module('reg')
 
       $scope.selectedSkills = [];
       $scope.selectedGrad = [];
+      $scope.selectedLocation = [];  
+
       $scope.gradChoices = [
         { semester: 'Fall 2020', selected: false },
         { semester: 'Spring 2021', selected: false },
@@ -117,10 +119,22 @@ angular.module('reg')
           });
       });
 
+      $scope.onSelectLocation = function(data, user) {
+        // console.log("data selected" + data); 
+        console.log("scope " + $scope.user.profile.usStudent);
+        console.log("cats"); 
+        // if (data) {
+        //     $scope.usStudent = (data.selected && user.profile.usStudent); 
+        // } else { 
+        //   $scope.usStudent = false; 
+        // }
+        updateFilters();
+      }
 
+      
       $scope.goToPage = function (page) {
         UserService
-          .getPage(page, $scope.size || 50, $scope.queryText, $scope.selectedGrad.toString(), $scope.selectedSkills.toString())
+          .getPage(page, $scope.size || 50, $scope.queryText, $scope.selectedGrad.toString(), $scope.selectedSkills.toString(), $scope.user.profile.usStudent)
           .then(response => {
             updatePage(response.data);
           });
@@ -128,7 +142,7 @@ angular.module('reg')
 
       function updateFilters() {
         UserService
-        .getPage(0, $scope.pageSize, $scope.queryText, $scope.selectedGrad.toString(), $scope.selectedSkills.toString())
+        .getPage(0, $scope.pageSize, $scope.queryText, $scope.selectedGrad.toString(), $scope.selectedSkills.toString(), $scope.user.profile.usStudent)
         .then(response => {
           updatePage(response.data);
         });

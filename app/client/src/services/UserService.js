@@ -25,12 +25,14 @@ angular.module('reg')
         return $http.get(base);
       },
 
-      getPage: function(page, size, text, gradYears, skills){
+      getPage: function(page, size, text, gradYears, skills, usStudent){
+        console.log("here");
         return $http.get(users + '?' + $.param(
           {
             text: text,
             grad: gradYears,
             skills: skills,
+            usStudent: usStudent,
             page: page ? page : 0,
             size: size ? size : 50
           })
