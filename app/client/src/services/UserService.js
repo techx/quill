@@ -26,7 +26,6 @@ angular.module('reg')
       },
 
       getPage: function(page, size, text, gradYears, skills, usStudent){
-        console.log("here");
         return $http.get(users + '?' + $.param(
           {
             text: text,
