@@ -138,14 +138,24 @@ controller.sendVerificationEmail = function(email, token, callback) {
 controller.sendSponsorEmailandPassword = function(email, password, callback) {
   var options = {
     to: email,
-    subject: "["+HACKATHON_NAME+"] - Sponsor: Here is your login information!"
+    subject: "["+HACKATHON_NAME+"] - Sponsor: Accessing the Sponsors Portal!"
   };
 
   var locals = {
-    title: 'Here are your credentials! Don\'t share this with anyone else!',
-    subtitle: 'Thanks for signing up!',
-    body: 'Your password is: ' + password,
+    title: 'Accessing the HackTX Sponsors Portal',
+    actionUrl: ROOT_URL + '/login',
+    actionName: 'Login to your Account',
+    body: "Thank you for your interest in sponsoring HackTX! As part of your sponsorship, \
+          we will grant you access to our attendees' resumes through the sponsors portal. \
+          Before we do this, please log in and fill out our sponsorship application so we \
+          have all the necessary information needed from you. We have set up an account \
+          with this email and the password provided below. If you have any questions at any \
+          point, please reach out to your point of contact. And we hope to see you soon at \
+          HackTX!",        
+    password: password
   };
+
+    
 
   /**
    * Eamil-verify takes a few template values:
@@ -153,7 +163,7 @@ controller.sendSponsorEmailandPassword = function(email, password, callback) {
    *   verifyUrl: the url that the user must visit to verify their account
    * }
    */
-  sendOne('email-basic', options, locals, function(err, info){
+  sendOne('email-sponsors', options, locals, function(err, info){
     if (err){
       console.log(err);
     }

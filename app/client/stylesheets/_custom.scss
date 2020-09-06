@@ -13,6 +13,7 @@ $status-submitted-color: lighten($register-color, 10%);
 
 body {
     color: $tertiary !important;
+    background-color: $base-color;
 }
 
 .ui.segment {
@@ -54,6 +55,10 @@ input, select, textarea, .ui.label {
     .caret {
         border-top: 4px solid $tertiary !important;
     }
+}
+
+.multiSelect .multiSelectItem .acol label {
+    color: $tertiary !important;
 }
 
 .ui.label {

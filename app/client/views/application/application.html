@@ -328,7 +328,7 @@
           </div>
           
           <div class="field" ng-show="user.profile.firstHackathon === 'yes'">
-            <label> What are you most apprehensive about for your first hackathon? </label>
+            <label> What are you most apprehensive about for your first hackathon?* </label>
             <select
               name="apprehensions"
               ng-model="user.profile.apprehensions">
@@ -342,7 +342,7 @@
           </div>
 
           <div class="field">
-            <label> Would you consider yourself a beginner in computer science/technology? </label>
+            <label> Would you consider yourself a beginner in computer science/technology?* </label>
             <select
               name="experienceLevel"
               ng-model="user.profile.experienceLevel">
@@ -478,28 +478,34 @@
             <label> Why do you want to attend HackTX?* </label>
             <textarea name="essay"
               ng-model="user.profile.essay" />
+          </div>
+
+          <div class="field">
+            <label> What would you like to see at HackTX? (Your feedback will be helpful in planning our first HackTX)* </label>
+            <textarea name="desires"
+              ng-model="user.profile.desires" />
+          </div>
+
+          <div class="field">
+            <label> Anything else you'd like to tell us? </label>
+            <textarea name="description"
+              ng-model="user.profile.description" />
             </div>
 
+            <br>
+            <br>
+
+            <div class="divided title">That's a wrap!</div>
             <div class="field">
-              <label> Anything else you'd like to tell us? </label>
-              <textarea name="description"
-                ng-model="user.profile.description" />
-              </div>
-
-              <br>
-              <br>
-
-              <div class="divided title">That's a wrap!</div>
-              <div class="field">
-                <p>
-                  Thanks so much for filling this form out. We'll be in touch
-                  via the email that you listed in this form. You should be
-                  notified of your acceptance within a week or so. Please
-                  <a href="mailto:hello@freetailhackers.com">email us</a>
-                  if you have any questions! Good luck and we hope to see you
-                  there : )
-                </p>
-              </div>
+              <p>
+                Thanks so much for filling this form out. We'll be in touch
+                via the email that you listed in this form. You should be
+                notified of your acceptance within a week or so. Please
+                <a href="mailto:hello@freetailhackers.com">email us</a>
+                if you have any questions! Good luck and we hope to see you
+                there : )
+              </p>
+            </div>
 
               <div class="field" ng-hide="regIsClosed">
                 <div class="fluid ui purple submit button"

@@ -189,7 +189,9 @@ angular.module('reg')
       }
 
       function apprehensionValidation(value) {
-        return $scope.user.profile.firstHackathon && $scope.user.profile.apprehensions.length > 0
+        console.log($scope.user.profile.firstHackathon)
+        console.log($scope.user.profile.apprehensions)
+        return $scope.user.profile.firstHackathon === 'no' || $scope.user.profile.apprehensions
       }
 
       function addressValidation(value) {
@@ -362,6 +364,15 @@ angular.module('reg')
                 {
                   type: 'empty',
                   prompt: 'Please tell us why you want to attend HackTX.'
+                }
+              ]
+            },
+            desires: {
+              identifier: 'desires',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please tell us what you want to see at HackTX.'
                 }
               ]
             },
