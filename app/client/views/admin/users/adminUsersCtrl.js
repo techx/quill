@@ -426,13 +426,30 @@ angular.module('reg')
                 value: user.profile.school
               },{
                 name: 'Graduation Year',
-                value: user.profile.graduationYear
+                value: user.profile.graduationTime
               },{
                 name: 'Description',
                 value: user.profile.description
               },{
+                name: 'Apprehensions',
+                value: user.profile.apprehensions
+              },{
+                name: 'Experience Level',
+                value: user.profile.experienceLevel
+              },
+              {
+                name: 'US Student',
+                value: user.profile.usStudent
+              },{
+                name: 'Wants Swag',
+                value: user.profile.swag
+              },
+              {
                 name: 'Essay',
                 value: user.profile.essay
+              },{
+                name: 'Hopes for HackTX',
+                value: user.profile.desires
               }
             ]
           },{

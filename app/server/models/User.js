@@ -89,6 +89,11 @@ var profile = {
     min: 0,
     max: 1500
   },
+  desires: {
+    type: String,
+    min: 0,
+    max: 1500
+  },
   description: {
     type: String,
     min: 0,

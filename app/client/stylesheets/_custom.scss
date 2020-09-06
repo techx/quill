@@ -57,6 +57,10 @@ input, select, textarea, .ui.label {
     }
 }
 
+.multiSelect .multiSelectItem .acol label {
+    color: $tertiary !important;
+}
+
 .ui.label {
     label {
         color: $base-color !important;

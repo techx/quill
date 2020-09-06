@@ -145,8 +145,8 @@ function calculateStats(){
         newStats.demo.schools[email].declined += user.status.declined ? 1 : 0;
 
         // Count graduation years
-        if (user.profile.graduationYear){
-          newStats.demo.year[user.profile.graduationYear] += 1;
+        if (user.profile.graduationTime){
+          newStats.demo.year[user.profile.graduationTime] += 1;
         }
 
         // Grab the team name if there is one

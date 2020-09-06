@@ -367,6 +367,15 @@ angular.module('reg')
                 }
               ]
             },
+            desires: {
+              identifier: 'desires',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please tell us what you want to see at HackTX.'
+                }
+              ]
+            },
             experienceLevel: {
               identifier: 'experienceLevel',
               rules: [
