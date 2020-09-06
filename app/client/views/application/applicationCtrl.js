@@ -189,7 +189,9 @@ angular.module('reg')
       }
 
       function apprehensionValidation(value) {
-        return $scope.user.profile.firstHackathon && $scope.user.profile.apprehensions.length > 0
+        console.log($scope.user.profile.firstHackathon)
+        console.log($scope.user.profile.apprehensions)
+        return $scope.user.profile.firstHackathon === 'no' || $scope.user.profile.apprehensions
       }
 
       function addressValidation(value) {
