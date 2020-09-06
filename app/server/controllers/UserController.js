@@ -311,7 +311,6 @@ UserController.getPage = function (query, callback) {
 
 console.log("usStudent " + usStudent); 
   if (usStudent === "true") {
-    console.log("inside");
     if (!findQuery.$and) {
       findQuery.$and = []
     }

@@ -120,14 +120,6 @@ angular.module('reg')
       });
 
       $scope.onSelectLocation = function(data, user) {
-        // console.log("data selected" + data); 
-        console.log("scope " + $scope.user.profile.usStudent);
-        console.log("cats"); 
-        // if (data) {
-        //     $scope.usStudent = (data.selected && user.profile.usStudent); 
-        // } else { 
-        //   $scope.usStudent = false; 
-        // }
         updateFilters();
       }
 
