@@ -124,6 +124,15 @@ th {
     color: #000000 !important;
 }
 
+#dashboard { 
+    .waitlist.state, .declined.state {
+        background-color: $tertiary !important;
+        border: 1px solid $secondary;
+        color: $field-color !important;
+    }
+}
+
+
 // #sponsor-application {
 //     .ui.basic.label, .ui.label {
 //         background-color: $field-color !important;
