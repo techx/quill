@@ -25,8 +25,6 @@ angular.module('reg')
 
       $scope.selectedSkills = [];
       $scope.selectedGrad = [];
-      $scope.selectedLocation = [];  
-
       $scope.gradChoices = [
         { semester: 'Fall 2020', selected: false },
         { semester: 'Spring 2021', selected: false },
