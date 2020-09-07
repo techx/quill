@@ -21,7 +21,7 @@ angular.module('reg')
       $scope.selectedUser = {};
       $scope.selectedUser.sections = generateSections({status: '', confirmation: {
         dietaryRestrictions: []
-      }, profile: ''});
+      }, profile: '', sponsorFields: ''});
 
       function updatePage(data){
         $scope.sponsors = data.users;
@@ -173,6 +173,7 @@ angular.module('reg')
       }
 
       function generateSections(user){
+        console.log(user)
         return [
           {
             name: 'Basic Info',
@@ -184,125 +185,43 @@ angular.module('reg')
                 name: 'Last Updated',
                 value: formatTime(user.lastUpdated)
               },{
-                name: 'Confirm By',
-                value: formatTime(user.status.confirmBy) || 'N/A'
-              },{
-                name: 'Checked In',
-                value: formatTime(user.status.checkInTime) || 'N/A'
-              },{
                 name: 'Email',
                 value: user.email
-              },{
-                name: 'Team',
-                value: user.teamCode || 'None'
               }
             ]
           },{
-            name: 'Profile',
+            name: 'Company Profile',
             fields: [
               {
-                name: 'Name',
-                value: user.profile.name
+                name: 'Company Name',
+                value: user.sponsorFields.companyName
               },{
-                name: 'Gender',
-                value: user.profile.gender
+                name: 'Representative Name',
+                value: user.sponsorFields.representativeFirstName + " " + user.sponsorFields.representativeLastName
               },{
-                name: 'School',
-                value: user.profile.school
+                name: 'Representative Email',
+                value: user.sponsorFields.representativeEmail
               },{
-                name: 'Graduation Year',
-                value: user.profile.graduationTime
+                name: 'Sponsorship Tier',
+                value: user.sponsorFields.tier
               },{
-                name: 'Description',
-                value: user.profile.description
+                name: 'Include Workshop',
+                value: user.sponsorFields.workshop
               },{
-                name: 'Essay',
-                value: user.profile.essay
-              }
-            ]
-          },{
-            name: 'Confirmation',
-            fields: [
-              {
-                name: 'Phone Number',
-                value: user.confirmation.phoneNumber
+                name: 'Opening Statement Time',
+                value: user.sponsorFields.openingStatementTime
               },{
-                name: 'Dietary Restrictions',
-                value: user.confirmation.dietaryRestrictions.join(', ')
+                name: 'Closing Remarks Time',
+                value: user.sponsorFields.closingStatementTime
               },{
-                name: 'Shirt Size',
-                value: user.confirmation.shirtSize
+                name: 'Estimated Cost',
+                value: user.sponsorFields.estimatedCost
               },{
-                name: 'Major',
-                value: user.confirmation.major
+                name: 'Already Paid',
+                value: user.sponsorFields.paid
               },{
-                name: 'Github',
-                value: user.confirmation.github
-              },{
-                name: 'Website',
-                value: user.confirmation.website
-              },{
-                name: 'Needs Hardware',
-                value: user.confirmation.wantsHardware,
-                type: 'boolean'
-              },{
-                name: 'Hardware Requested',
-                value: user.confirmation.hardware
-              }
-            ]
-          },{
-            name: 'Hosting',
-            fields: [
-              {
-                name: 'Needs Hosting Friday',
-                value: user.confirmation.hostNeededFri,
-                type: 'boolean'
-              },{
-                name: 'Needs Hosting Saturday',
-                value: user.confirmation.hostNeededSat,
-                type: 'boolean'
-              },{
-                name: 'Gender Neutral',
-                value: user.confirmation.genderNeutral,
-                type: 'boolean'
-              },{
-                name: 'Cat Friendly',
-                value: user.confirmation.catFriendly,
-                type: 'boolean'
-              },{
-                name: 'Smoking Friendly',
-                value: user.confirmation.smokingFriendly,
-                type: 'boolean'
-              },{
-                name: 'Hosting Notes',
-                value: user.confirmation.hostNotes
-              }
-            ]
-          },{
-            name: 'Travel',
-            fields: [
-              {
-                name: 'Needs Reimbursement',
-                value: user.confirmation.needsReimbursement,
-                type: 'boolean'
-              },{
-                name: 'Received Reimbursement',
-                value: user.confirmation.needsReimbursement && user.status.reimbursementGiven
-              },{
-                name: 'Address',
-                value: user.confirmation.address ? [
-                  user.confirmation.address.line1,
-                  user.confirmation.address.line2,
-                  user.confirmation.address.city,
-                  ',',
-                  user.confirmation.address.state,
-                  user.confirmation.address.zip,
-                  ',',
-                  user.confirmation.address.country,
-                ].join(' ') : ''
-              },{
-                name: 'Additional Notes',
-                value: user.confirmation.notes
+                name: 'Other Notes',
+                value: user.sponsorFields.otherNotes
               }
             ]
           }

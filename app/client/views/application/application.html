@@ -227,6 +227,7 @@
             <label>Class Standing*</label>
             <select name="standing"
               ng-model="user.profile.standing">
+              <option value="">Class Standing</option>
               <option value="F">Undergraduate Freshman</option>
               <option value="P">Undergraduate Sophomore</option>
               <option value="J">Undergraduate Junior</option>
@@ -241,7 +242,7 @@
             <label>Graduation*</label>
             <select
               name="graduation"
-              ng-model="user.profile.graduationTime">
+              ng-model="user.profile.graduationTime" ng-init="user.profile.graduationTime=''">
               <option value="">Graduation Time</option>
               <option ng-show="user.profile.standing === 'S'" value="Fall 2020">Fall
                 2020</option>

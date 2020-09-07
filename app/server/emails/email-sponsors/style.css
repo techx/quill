@@ -171,7 +171,7 @@ h4{
 .preheaderContent a:link, .preheaderContent a:visited, /* Yahoo! Mail Override */ .preheaderContent a .yshortcuts /* Yahoo! Mail Override */{
   /*@editable*/ color:#606060;
   /*@editable*/ font-weight:normal;
-  /*@editable*/ text-decoration:underline;
+  /* @editable text-decoration:underline; */
 }
 
 /**
@@ -213,7 +213,7 @@ h4{
 .headerContent a:link, .headerContent a:visited, /* Yahoo! Mail Override */ .headerContent a .yshortcuts /* Yahoo! Mail Override */{
   /*@editable*/ color:#EB4102;
   /*@editable*/ font-weight:normal;
-  /*@editable*/ text-decoration:underline;
+  /* @editable text-decoration:underline; */
 }
 
 #headerImage{
@@ -260,7 +260,7 @@ h4{
 .bodyContent a:link, .bodyContent a:visited, /* Yahoo! Mail Override */ .bodyContent a .yshortcuts /* Yahoo! Mail Override */{
   /*@editable*/ color:#EB4102;
   /*@editable*/ font-weight:normal;
-  /*@editable*/ text-decoration:underline;
+  /* @editable text-decoration:underline; */
 }
 
 .bodyContent img{
@@ -315,7 +315,7 @@ h4{
 .footerContent a:link, .footerContent a:visited, /* Yahoo! Mail Override */ .footerContent a .yshortcuts, .footerContent a span /* Yahoo! Mail Override */{
   /*@editable*/ color:#606060;
   /*@editable*/ font-weight:normal;
-  /*@editable*/ text-decoration:underline;
+  /* @editable text-decoration:underline; */
 }
 
 /* /\/\/\/\/\/\/\/\/ MOBILE STYLES /\/\/\/\/\/\/\/\/ */

@@ -94,8 +94,8 @@
               Speaking during our opening ceremony is a great way to draw attention to your company!
             </p>
             <div class="ui right labeled input">
-              <select class="ui compact selection dropdown" type="number" ng-model="user.sponsorFields.openingStatementTime" id="tier" ng-disabled="isGiga || isTitle">
-                <option value="0">0</option>
+              <select class="ui compact selection dropdown" type="number" ng-model="user.sponsorFields.openingStatementTime" ng-init="user.sponsorFields.openingStatementTime='0'" id="tier" ng-disabled="isGiga || isTitle">
+                <option value="0" selected>0</option>
                 <option value="30">30</option>
                 <option value="60">60</option>
                 <option ng-if="isTitle" value="120">120</option>
@@ -114,7 +114,7 @@
             </p>
             <div class="ui right labeled input">
               <select class="ui compact selection dropdown" type="number" ng-model="user.sponsorFields.closingStatementTime" id="tier" ng-disabled="isTitle">
-                <option value="0">0</option>
+                <option value="0" selected>0</option>
                 <option value="30">30</option>
                 <option value="60">60</option>
                 <option ng-if="isTitle" value="120">120</option>

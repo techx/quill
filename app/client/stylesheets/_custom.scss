@@ -43,6 +43,10 @@ input, select, textarea, .ui.label {
     height: 400px;
 }
 
+.ui.checkbox label {
+    color: $tertiary !important;
+}
+
 .multiSelect {
     button, .caret {
         background-image: none !important;

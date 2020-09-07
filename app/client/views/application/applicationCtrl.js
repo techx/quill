@@ -16,7 +16,7 @@ angular.module('reg')
 
       // Set up the user
       $scope.user = currentUser.data;
-      console.log($scope.user)
+      // console.log($scope.user)
 
       // Is the student from UT?
       $scope.isUtStudent = $scope.user.email.split('@')[1] == 'utexas.edu';
@@ -185,13 +185,11 @@ angular.module('reg')
         if (standing === 'M' || standing === 'D') {
           $scope.user.profile.graduationTime = "Other";
         }
-        return $scope.user.profile.graduationTime.length > 0 || value;
+        return $scope.user.profile.standing != undefined && ($scope.user.profile.graduationTime.length > 0 || value);
       }
 
       function apprehensionValidation(value) {
-        console.log($scope.user.profile.firstHackathon)
-        console.log($scope.user.profile.apprehensions)
-        return $scope.user.profile.firstHackathon === 'no' || $scope.user.profile.apprehensions
+        return $scope.user.profile.firstHackathon === 'no' || $scope.user.profile.apprehensions != undefined  
       }
 
       function addressValidation(value) {
