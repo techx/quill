@@ -84,19 +84,19 @@
             <label> Birthday* </label>
             <input type="text"
               name="birthday"
-              placeholder="11/01/2019"
+              placeholder="10/23/2020"
               ng-model="user.profile.birthday">
           </div>
 
           <div class="field">
             <p>
               Checking the box below affirms that you are or will be 18 years or
-              older by November 1st, 2019.
+              older by October 23rd, 2020.
             </p>
             <p>
               <strong>
-                We will be checking ID. If you are a minor, you will be turned
-                away at the door.
+                We will be checking ID. If you are a minor, you will not be 
+                allowed to participate. 
               </strong>
             </p>
             <div class="ui checkbox">
@@ -242,7 +242,7 @@
             <label>Graduation*</label>
             <select
               name="graduation"
-              ng-model="user.profile.graduationTime" ng-init="user.profile.graduationTime=''">
+              ng-model="user.profile.graduationTime">
               <option value="">Graduation Time</option>
               <option ng-show="user.profile.standing === 'S'" value="Fall 2020">Fall
                 2020</option>

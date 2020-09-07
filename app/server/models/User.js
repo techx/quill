@@ -61,14 +61,14 @@ var profile = {
     type: String,
     enum: {
       values: [
-        'Fall 2019',
-        'Spring 2020',
         'Fall 2020',
         'Spring 2021',
         'Fall 2021',
         'Spring 2022',
         'Fall 2022',
         'Spring 2023',
+        'Fall 2023',
+        'Spring 2024',
         'Other'
       ]
     }
@@ -486,14 +486,14 @@ schema.statics.validateProfile = function(profile, cb){
     profile.adult &&
     profile.school.length > 0 &&
     [
-        'Fall 2019',
-        'Spring 2020',
         'Fall 2020',
         'Spring 2021',
         'Fall 2021',
         'Spring 2022',
         'Fall 2022',
         'Spring 2023',
+        'Fall 2023',
+        'Spring 2024',
         'Other'
     ].indexOf(profile.graduationTime) > -1 &&
     ['M', 'F', 'O', 'N'].indexOf(profile.gender) > -1 &&
