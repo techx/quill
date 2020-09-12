@@ -27,6 +27,15 @@ body {
     }
 }
 
+.ui.basic.button {
+    border: 1px solid $secondary !important;
+    color: $secondary !important;
+}
+
+.ui.basic.pink.active.button {
+    border: none !important;
+}
+
 input, select, textarea, .ui.label {
     background-color: $field-color !important;
     border: 1px solid $secondary !important;
