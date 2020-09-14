@@ -268,6 +268,7 @@ UserController.getPage = function (query, callback) {
   var gradYears = query.grad;
   var skills = query.skills;
   var usStudent = query.usStudent; 
+  var resumeOnly = query.resume;
 
   var queries = [];
   var year_query = {};
@@ -309,13 +310,19 @@ UserController.getPage = function (query, callback) {
     findQuery.$and.push({'profile.skills': match_query});
   }
 
-console.log("usStudent " + usStudent); 
   if (usStudent === "true") {
     if (!findQuery.$and) {
       findQuery.$and = []
     }
-  findQuery.$and.push({'profile.usStudent' : true});
-}
+    findQuery.$and.push({'profile.usStudent' : true});
+  }
+
+  if (resumeOnly === "true") {
+    if (!findQuery.$and) {
+      findQuery.$and = []
+    }
+    findQuery.$and.push({'profile.resume': true});
+  }
 
 
   User
@@ -973,7 +980,6 @@ UserController.markReceivedLunch = function(id, callback) {
       return callback(err, user);
     }
     else if(user.userAtEvent.receivedLunch) {
-      console.log('lunch');
       return callback({"custom_message" : "User has already received lunch"})
     }
     else {
@@ -1176,7 +1182,6 @@ UserController.addTableVisited = function(id, sponsor_id, callback){
 }
 
 UserController.updateSponsorById = function(id, user, callback){
-  console.log(id)
   User.findOneAndUpdate({
     _id: id,
   },{

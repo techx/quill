@@ -22,6 +22,7 @@ angular.module('reg')
       $scope.pages = [];
       $scope.users = [];
       $scope.skillChoices = [];
+      $scope.usStudent = false;
 
       $scope.selectedSkills = [];
       $scope.selectedGrad = [];
@@ -104,27 +105,31 @@ angular.module('reg')
       }
 
       UserService
-        .getPage($stateParams.page, $stateParams.size, $stateParams.query, $stateParams.gradYears, $stateParams.skills)
+        .getPage($stateParams.page, $stateParams.size, $stateParams.query, $stateParams.gradYears, $stateParams.skills, true)
         .then(response => {
           updatePage(response.data);
         });
 
       $scope.$watch('queryText', function (queryText) {
         UserService
-          .getPage(0, $scope.pageSize, queryText, $scope.selectedGrad.toString(), $scope.selectedSkills.toString())
+          .getPage(0, $scope.pageSize, queryText, $scope.selectedGrad.toString(), $scope.selectedSkills.toString(), $scope.usStudent, true)
           .then(response => {
             updatePage(response.data);
           });
       });
 
-      $scope.onSelectLocation = function(data, user) {
-        updateFilters();
-      }
+      $scope.$watch('usStudent', function (usStudent) {
+        UserService
+          .getPage(0, $scope.pageSize, $scope.queryText, $scope.selectedGrad.toString(), $scope.selectedSkills.toString(), usStudent, true)
+          .then(response => {
+            updatePage(response.data);
+          });
+      });
 
       
       $scope.goToPage = function (page) {
         UserService
-          .getPage(page, $scope.size || 50, $scope.queryText, $scope.selectedGrad.toString(), $scope.selectedSkills.toString(), $scope.user.profile.usStudent)
+          .getPage(page, $scope.size || 50, $scope.queryText, $scope.selectedGrad.toString(), $scope.selectedSkills.toString(), $scope.usStudent, true)
           .then(response => {
             updatePage(response.data);
           });
@@ -132,7 +137,7 @@ angular.module('reg')
 
       function updateFilters() {
         UserService
-        .getPage(0, $scope.pageSize, $scope.queryText, $scope.selectedGrad.toString(), $scope.selectedSkills.toString(), $scope.user.profile.usStudent)
+        .getPage(0, $scope.pageSize, $scope.queryText, $scope.selectedGrad.toString(), $scope.selectedSkills.toString(), $scope.usStudent, true)
         .then(response => {
           updatePage(response.data);
         });

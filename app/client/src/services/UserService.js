@@ -25,7 +25,7 @@ angular.module('reg')
         return $http.get(base);
       },
 
-      getPage: function(page, size, text, gradYears, skills, usStudent){
+      getPage: function(page, size, text, gradYears, skills, usStudent, resume){
         return $http.get(users + '?' + $.param(
           {
             text: text,
@@ -33,7 +33,8 @@ angular.module('reg')
             skills: skills,
             usStudent: usStudent,
             page: page ? page : 0,
-            size: size ? size : 50
+            size: size ? size : 50,
+            resume: resume
           })
         );
       },

@@ -56,8 +56,8 @@
           <div class="ui checkbox">
             <input type="checkbox"
               name="usStudent"
-              ng-model="user.profile.usStudent"
-              ng-change="onSelectLocation(data)">
+              ng-model="usStudent"
+              >
             <label>US Students only</label>
           </div>
         </div>
@@ -134,7 +134,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="user in users" ng-class="rowClass(user)" ng-if="user.profile.resume">
+            <tr ng-repeat="user in users" ng-class="rowClass(user)">
               <td>
                 <input type="checkbox"
                 ng-model="user.checked"
