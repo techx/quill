@@ -381,4 +381,50 @@ controller.sendConfirmationEmail = function(user, callback) {
 
 };
 
+/**
+ * Send a reminder to fill out the application.
+ * @param  {[type]}   email    [description]
+ * @param  {[type]}   token    [description]
+ * @param  {Function} callback [description]
+ */
+controller.sendApplicationReminderEmail = function(email, callback) {
+
+  var options = {
+    to: email,
+    subject: "["+HACKATHON_NAME+"] - Finish your Application!"
+  };
+
+  var locals = {
+    title: 'Finish your Application',
+    subtitle: '',
+    description: 'We noticed that you made an account for ' + HACKATHON_NAME + ' but have \
+                  not finished filling out the application! If you are still interested in \
+                  participating, make sure to get your application submitted by <strong>11:59pm central time \
+                  on either September 18 (early bird deadline) or October 9 (regular deadline).</strong><br><br> \
+                  Make sure that a confirmation message appears when you submit your application. If you \
+                  have trouble submitting, email hello@freetailhackers.com .',
+    actionUrl: ROOT_URL + '/login',
+    actionName: "Login to your Account"
+  };
+
+  /**
+   * Eamil-verify takes a few template values:
+   * {
+   *   verifyUrl: the url that the user must visit to verify their account
+   * }
+   */
+  sendOne('email-link-action', options, locals, function(err, info){
+    if (err){
+      console.log(err);
+    }
+    if (info){
+      console.log(info.message);
+    }
+    if (callback){
+      callback(err, info);
+    }
+  });
+
+};
+
 module.exports = controller;

@@ -1234,6 +1234,18 @@ UserController.removeResumeAccessById = function(id, user, callback){
   callback);
 };
 
+/**
+ * [ADMIN ONLY]
+ *
+ * Send an application reminder.
+ * @param  {String}   userId   User id
+ * @param  {String}   user     User sending the email
+ * @param  {Function} callback args(err, user)
+ */
+UserController.sendApplicationReminder = function (email, callback) {
+      Mailer.sendApplicationReminderEmail(email);
+};
+
 
 /**
  * [ADMIN ONLY]
