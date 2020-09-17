@@ -1,8 +1,6 @@
 require('dotenv').load();
 var mongoose        = require('mongoose');
 var database        = process.env.DATABASE;
-console.log(database);
-console.log("OKKK")
 mongoose.connect(database);
 
 var User = require('../app/server/models/User');
