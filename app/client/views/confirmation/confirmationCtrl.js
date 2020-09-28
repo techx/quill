@@ -102,6 +102,10 @@ angular.module('reg')
 
       function _setupForm(){
         // Semantic-UI form validation
+        $.fn.form.settings.rules.validShirtSize = function (value) {
+          return !$scope.user.profile.swag || ($scope.user.confirmation.shirtSize !== undefined && $scope.user.confirmation.shirtSize.length > 0);
+        };
+
         $('.ui.form').form({
           inline: true,
           fields: {
@@ -109,7 +113,7 @@ angular.module('reg')
               identifier: 'shirt',
               rules: [
                 {
-                  type: 'empty',
+                  type: 'validShirtSize',
                   prompt: 'Please give us a shirt size!'
                 }
               ]

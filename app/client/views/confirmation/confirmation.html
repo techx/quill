@@ -36,7 +36,7 @@
             </div>
           </div> -->
 
-          <div class="field" ng-if="user.profile.swag">
+          <div class="field" ng-show="user.profile.swag">
             <p>
               Please note that even though we will try our hardest, we will not be able to guarantee swag for all our attendees this year.
             </p>
@@ -142,54 +142,7 @@
               </div>
             </div>
           </div>
-            <div ng-show="user.profile.swag && !user.profile.usStudent">
-              <div class="field">
-                <label> Address Line 1 - Street address, P.O. box, company name, c/o </label>
-                <input
-                  type="text"
-                  name="addressLine1"
-                  ng-model="selectedUser.confirmation.address.line1">
-              </div>
-        
-              <div class="field">
-                <label> Address Line 2 - Apartment, suite, unit, building, floor, etc. </label>
-                <input
-                  type="text"
-                  name="addressLine2"
-                  ng-model="selectedUser.confirmation.address.line2">
-              </div>
-        
-              <div class="four fields">
-                <div class="field">
-                  <label> City </label>
-                  <input
-                    type="text"
-                    name="city"
-                    ng-model="selectedUser.confirmation.address.city">
-                </div>
-                <div class="field">
-                  <label> State/Province/Region </label>
-                  <input
-                    type="text"
-                    name="state"
-                    ng-model="selectedUser.confirmation.address.state">
-                </div>
-                <div class="field">
-                  <label> ZIP </label>
-                  <input
-                    type="text"
-                    name="zip"
-                    ng-model="selectedUser.confirmation.address.zip">
-                </div>
-                <div class="field">
-                  <label> Country </label>
-                  <input
-                    type="text"
-                    name="country"
-                    ng-model="selectedUser.confirmation.address.country">
-                </div>
-              </div>
-            </div>
+            
 
           <!-- <div class="field">
             <label>
