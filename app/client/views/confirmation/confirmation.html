@@ -8,11 +8,11 @@
 
       <div class="ui form error">
 
-        <div class="divided title">Basic Details</div>
+        <div class="divided title" ng-if="user.profile.swag">Swag</div>
 
         <fieldset ng-disabled="pastConfirmation">
 
-          <div class="field">
+          <!-- <div class="field">
             <label> Dietary Restrictions </label>
 
             <p>
@@ -22,9 +22,9 @@
               We'll make sure you get fed :)
             </p>
 
-          </div>
+          </div> -->
 
-          <div class="inline fields">
+          <!-- <div class="inline fields">
             <div class="field"
               ng-repeat="(key, value) in dietaryRestrictions">
 
@@ -34,13 +34,13 @@
               </div>
 
             </div>
-          </div>
+          </div> -->
 
-          <div class="field">
-            <label> Shirt Size (required) </label>
+          <div class="field" ng-if="user.profile.swag">
             <p>
-              Let's get you some swag!
+              Please note that even though we will try our hardest, we will not be able to guarantee swag for all our attendees this year.
             </p>
+
             <select
               name="shirt"
               ng-model="user.confirmation.shirtSize"
@@ -61,7 +61,137 @@
             </select>
           </div>
 
-          <div class="field">
+          <div class="field" ng-show="user.profile.swag && user.profile.usStudent">
+            <div class="sixteen wide field">
+              <label>Mailing address to ship swag to. </label>
+              <div class="two fields">
+                <div class="twelve wide field">
+                  <input type="text" name="streetAddress" ng-model="user.profile.streetAddress" placeholder="Street Address">
+                </div>
+                <div class="four wide field">
+                  <input type="text" name="aptNumber" ng-model="user.profile.aptNumber" placeholder="Apt #">
+                </div>
+              </div>
+            </div>
+            <div class="fields">
+              <div class="six wide field">
+                <label>City</label>
+                <input type="text" name="city" ng-model="user.profile.city" placeholder="City">
+              </div>
+              <div class="five wide field">
+                <label>State</label>
+                <select
+                  name="state"
+                  ng-model="user.profile.state">
+                  <option value="TX" selected>Texas</option>
+                  <option value="AL">Alabama</option>
+                  <option value="AK">Alaska</option>
+                  <option value="AZ">Arizona</option>
+                  <option value="AR">Arkansas</option>
+                  <option value="CA">California</option>
+                  <option value="CO">Colorado</option>
+                  <option value="CT">Connecticut</option>
+                  <option value="DE">Delaware</option>
+                  <option value="DC">District Of Columbia</option>
+                  <option value="FL">Florida</option>
+                  <option value="GA">Georgia</option>
+                  <option value="HI">Hawaii</option>
+                  <option value="ID">Idaho</option>
+                  <option value="IL">Illinois</option>
+                  <option value="IN">Indiana</option>
+                  <option value="IA">Iowa</option>
+                  <option value="KS">Kansas</option>
+                  <option value="KY">Kentucky</option>
+                  <option value="LA">Louisiana</option>
+                  <option value="ME">Maine</option>
+                  <option value="MD">Maryland</option>
+                  <option value="MA">Massachusetts</option>
+                  <option value="MI">Michigan</option>
+                  <option value="MN">Minnesota</option>
+                  <option value="MS">Mississippi</option>
+                  <option value="MO">Missouri</option>
+                  <option value="MT">Montana</option>
+                  <option value="NE">Nebraska</option>
+                  <option value="NV">Nevada</option>
+                  <option value="NH">New Hampshire</option>
+                  <option value="NJ">New Jersey</option>
+                  <option value="NM">New Mexico</option>
+                  <option value="NY">New York</option>
+                  <option value="NC">North Carolina</option>
+                  <option value="ND">North Dakota</option>
+                  <option value="OH">Ohio</option>
+                  <option value="OK">Oklahoma</option>
+                  <option value="OR">Oregon</option>
+                  <option value="PA">Pennsylvania</option>
+                  <option value="RI">Rhode Island</option>
+                  <option value="SC">South Carolina</option>
+                  <option value="SD">South Dakota</option>
+                  <option value="TN">Tennessee</option>
+                  <option value="UT">Utah</option>
+                  <option value="VT">Vermont</option>
+                  <option value="VA">Virginia</option>
+                  <option value="WA">Washington</option>
+                  <option value="WV">West Virginia</option>
+                  <option value="WI">Wisconsin</option>
+                  <option value="WY">Wyoming</option>
+                </select>
+              </div>  
+              <div class="five wide field">
+                <label>Zip Code</label>
+                <input type="text" name="zip" ng-model="user.profile.zip" placeholder="Zip Code">
+              </div>
+            </div>
+          </div>
+            <div ng-show="user.profile.swag && !user.profile.usStudent">
+              <div class="field">
+                <label> Address Line 1 - Street address, P.O. box, company name, c/o </label>
+                <input
+                  type="text"
+                  name="addressLine1"
+                  ng-model="selectedUser.confirmation.address.line1">
+              </div>
+        
+              <div class="field">
+                <label> Address Line 2 - Apartment, suite, unit, building, floor, etc. </label>
+                <input
+                  type="text"
+                  name="addressLine2"
+                  ng-model="selectedUser.confirmation.address.line2">
+              </div>
+        
+              <div class="four fields">
+                <div class="field">
+                  <label> City </label>
+                  <input
+                    type="text"
+                    name="city"
+                    ng-model="selectedUser.confirmation.address.city">
+                </div>
+                <div class="field">
+                  <label> State/Province/Region </label>
+                  <input
+                    type="text"
+                    name="state"
+                    ng-model="selectedUser.confirmation.address.state">
+                </div>
+                <div class="field">
+                  <label> ZIP </label>
+                  <input
+                    type="text"
+                    name="zip"
+                    ng-model="selectedUser.confirmation.address.zip">
+                </div>
+                <div class="field">
+                  <label> Country </label>
+                  <input
+                    type="text"
+                    name="country"
+                    ng-model="selectedUser.confirmation.address.country">
+                </div>
+              </div>
+            </div>
+
+          <!-- <div class="field">
             <label>
               Will you be needing hardware?
             </label>
@@ -69,16 +199,16 @@
               <input type="checkbox" ng-model="user.confirmation.wantsHardware">
               <label> Yes, I would like to use hardware in my hack. </label>
             </div>
-          </div>
+          </div> -->
 
-          <div
+          <!-- <div
             class="field"
             ng-show="user.confirmation.wantsHardware">
             <label>
               What kind of hardware would be useful for you?
             </label>
             <input type="text" ng-model="user.confirmation.hardware">
-          </div>
+          </div> -->
 
 
           <br>
@@ -153,36 +283,55 @@
           <br>
           <br>
 
-          <div class="divided title">Legal</div>
+          <div class="divided title" ng-if="!isMinor">Legal</div>
+          <div class="divided title" ng-if="isMinor">Legal (MUST BE FILLED OUT BY PARENT OR GUARDIAN)</div>
 
           <p>
             By continuing to complete this form, you agree that your electronic signature is the legally binding equivalent to your handwritten signature. Whenever you execute an electronic signature, it has the same validity and meaning as your handwritten signature. You will not, at any time in the future, repudiate the meaning of your electronic signature or claim that your electronic signature is not legally binding.
           </p>
 
           <div class="field">
-            <label>Release and Indemnification Agreement</label>
+            <label ng-if="!isMinor">Release and Indemnification Agreement</label>
+            <label ng-if="isMinor">Release and Indemnification Agreement</label>
             <p>
-                <a target="_blank" href="/forms/liability">Release and Indemnification Agreement</a>
+                <a ng-if="!isMinor" target="_blank" href="/forms/liability">Release and Indemnification Agreement</a>
+                <a ng-if="isMinor" target="_blank" href="/forms/minor_liability">Release and Indemnification Agreement</a>
             </p>
-            <p>
-                For legal reason, we ask you to read and accept the terms of our liability waiver. Again, as mentioned in the application process - you <strong> must </strong> be 18 years or older by the day of the event, or <strong> we will refuse you admission at the door. We will be checking ID. </strong>
+            <p ng-if="!isMinor">
+                For legal reason, we ask you to read and accept the terms of our liability waiver. Again, as mentioned in the application process - you <strong> must </strong> be 18 years or older by the day of the event, or <strong> we will refuse you admission. We will be checking ID. </strong>
             </p>
-            <p>
+            <p ng-if="isMinor">
+              For legal reason, we ask you to read and accept the terms of our liability waiver. Again, as mentioned in the application process - your child <strong> must </strong> be a currently enrolled student at the University of Texas at Austin to participate or we will refuse you admission. We will be checking ID. </strong>
+            </p>
+            <p ng-if="!isMinor">
                 By writing my name below, I affirm that I have read and accepted the terms of the liability waiver above, and will be 18 years or older at the time of the event.
+            </p>
+            <p ng-if="isMinor">
+              By writing my name below, I affirm that I have read and accepted the terms of the liability waiver above, and my child is a currently enrolled student at the University of Texas at Austin.
             </p>
             <input type="text"
                    name="signatureLiabilityWaiver"
                    placeholder="Your Full Legal Name"
-                   ng-model="user.confirmation.signatureLiability">
+                   ng-model="user.confirmation.signatureLiability"
+                   ng-if="!isMinor">
+            <input type="text"
+                   name="signatureLiabilityWaiver"
+                   placeholder="Parent or Guardian Full Legal Name"
+                   ng-model="user.confirmation.signatureLiability"
+                   ng-if="isMinor">
           </div>
 
           <div class="field">
             <label>Photo Release</label>
             <p>
-                <a target="_blank" href="/forms/photoRelease">Photograph Release Form</a>
+                <a ng-if="!isMinor" target="_blank" href="/forms/photoRelease">Photograph Release Form</a>
+                <a ng-if="isMinor" target="_blank" href="/forms/minor_photoRelease">Photograph Release Form</a>
             </p>
-            <p>
+            <p ng-if="!isMinor">
                 Signing this photo release means if we take photos or photos of you, we can share it with the world.
+            </p>
+            <p ng-if="isMinor">
+              Signing this photo release means if we take photos or photos of your child, we can share it with the world.
             </p>
             <p>
                 By writing my name below, I affirm that I have read and accepted the terms of the photo release above.             
@@ -190,7 +339,13 @@
             <input type="text"
                    name="signaturePhotoRelease"
                    placeholder="Your Full Legal Name"
-                   ng-model="user.confirmation.signaturePhotoRelease">
+                   ng-model="user.confirmation.signaturePhotoRelease"
+                   ng-if="!isMinor">
+            <input type="text"
+                   name="signaturePhotoRelease"
+                   placeholder="Parent or Guardian Full Legal Name"
+                   ng-model="user.confirmation.signaturePhotoRelease"
+                   ng-if="isMinor">
           </div>
 
           <div class="field">
@@ -202,16 +357,28 @@
                 Hacker Code of Conduct
               </a>
             </p>
-            <p>
+            <p ng-if="!isMinor">
               It is extremely important to us that attendees follow a set of guidelines to make the event fun for everyone involved. Please read through and make sure you understand what we will be expecting of you.
             </p>
-            <p>
+            <p ng-if="isMinor">
+              It is extremely important to us that attendees follow a set of guidelines to make the event fun for everyone involved. Please read through and make sure you understand what we will be expecting of your child.
+            </p>
+            <p ng-if="!isMinor">
               By writing my name below, I affirm that I have read and will abide by the MLH code of conduct detailed above.
+            </p>
+            <p ng-if="isMinor">
+              By writing my name below, I affirm that I have read and will ensure that my child abides by the MLH code of conduct detailed above.
             </p>
             <input type="text"
                    name="signatureCodeOfConduct"
                    placeholder="Your Full Legal Name"
-                   ng-model="user.confirmation.signatureCodeOfConduct">
+                   ng-model="user.confirmation.signatureCodeOfConduct"
+                   ng-if="!isMinor">
+            <input type="text"
+                   name="signatureCodeOfConduct"
+                   placeholder="Parent or Guardian Full Legal Name"
+                   ng-model="user.confirmation.signatureCodeOfConduct"
+                   ng-if="isMinor">
           </div>
 
           <br>
@@ -219,16 +386,28 @@
 
           <div class="field">
             <label>Affliation with MLH</label>
-            <p>
+            <p ng-if="!isMinor">
                 Signing this form means we can share your information with MLH to help them make new and better hackathons.
             </p>
-            <p>
+            <p ng-if="isMinor">
+              Signing this form means we can share your child's information with MLH to help them make new and better hackathons.
+            </p>
+            <p ng-if="!isMinor">
             By writing my name below, I authorize you to share my application/registration information for event administration, ranking, MLH administration, pre- and post-event informational e-mails, and occasional messages about hackathons in-line with the <a href="https://mlh.io/privacy" targer="_blank">MLH Privacy Policy</a>. I further agree to the terms of both the <a href="https://github.com/MLH/mlh-policies/tree/master/prize-terms-and-conditions" target="_blank">MLH Contest Terms and Conditions</a> and the <a href="https://mlh.io/privacy" target="_blank">MLH Privacy Policy</a>.
             </p>
+            <p ng-if="isMinor">
+              By writing my name below, I authorize you to share my child's application/registration information for event administration, ranking, MLH administration, pre- and post-event informational e-mails, and occasional messages about hackathons in-line with the <a href="https://mlh.io/privacy" targer="_blank">MLH Privacy Policy</a>. I further agree to the terms of both the <a href="https://github.com/MLH/mlh-policies/tree/master/prize-terms-and-conditions" target="_blank">MLH Contest Terms and Conditions</a> and the <a href="https://mlh.io/privacy" target="_blank">MLH Privacy Policy</a>.
+              </p>
             <input type="text"
                    name="signatureAffliationMlh"
                    placeholder="Your Full Legal Name"
-                   ng-model="user.confirmation.signatureAffliationMlh">
+                   ng-model="user.confirmation.signatureAffliationMlh"
+                   ng-if="!isMinor">
+            <input type="text"
+                   name="signatureAffliationMlh"
+                   placeholder="Parent or Guardian Full Legal Name"
+                   ng-model="user.confirmation.signatureAffliationMlh"
+                   ng-if="isMinor">
           </div>
 
           <br>

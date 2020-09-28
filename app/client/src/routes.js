@@ -136,9 +136,23 @@ angular.module('reg')
           requireAdmitted: true
         }
       })
+      .state('app.minor_liability', {
+        url: "/forms/minor_liability",
+        templateUrl: "views/forms/minor_liability.html",
+        data: {
+          requireAdmitted: true
+        }
+      })
       .state('app.photoRelease', {
         url: "/forms/photoRelease",
         templateUrl: "views/forms/photo.html",
+        data: {
+          requireAdmitted: true
+        }
+      })
+      .state('app.minor_photoRelease', {
+        url: "/forms/minor_photoRelease",
+        templateUrl: "views/forms/minor_photo.html",
         data: {
           requireAdmitted: true
         }
