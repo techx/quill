@@ -44,7 +44,7 @@
             <select
               name="shirt"
               ng-model="user.confirmation.shirtSize"
-              required>
+              >
               <option value="">Shirt Size</option>
               <option value="XS">Unisex X-Small</option>
               <option value="S">Unisex Small</option>
@@ -214,7 +214,7 @@
           <br>
           <br>
 
-          <div class="divided title"> Social Media </div>
+          <!-- <div class="divided title"> Social Media </div>
 
           <div class="field">
             <label> Github </label>
@@ -242,7 +242,7 @@
 
 
           <br>
-          <br>
+          <br> -->
 
           <div class="divided title">Emergency Contact</div>
 
@@ -311,14 +311,9 @@
             </p>
             <input type="text"
                    name="signatureLiabilityWaiver"
-                   placeholder="Your Full Legal Name"
+                   placeholder="{{signaturePlaceholder}}"
                    ng-model="user.confirmation.signatureLiability"
-                   ng-if="!isMinor">
-            <input type="text"
-                   name="signatureLiabilityWaiver"
-                   placeholder="Parent or Guardian Full Legal Name"
-                   ng-model="user.confirmation.signatureLiability"
-                   ng-if="isMinor">
+                   required>
           </div>
 
           <div class="field">
@@ -338,14 +333,8 @@
             </p>
             <input type="text"
                    name="signaturePhotoRelease"
-                   placeholder="Your Full Legal Name"
-                   ng-model="user.confirmation.signaturePhotoRelease"
-                   ng-if="!isMinor">
-            <input type="text"
-                   name="signaturePhotoRelease"
-                   placeholder="Parent or Guardian Full Legal Name"
-                   ng-model="user.confirmation.signaturePhotoRelease"
-                   ng-if="isMinor">
+                   placeholder="{{signaturePlaceholder}}"
+                   ng-model="user.confirmation.signaturePhotoRelease">
           </div>
 
           <div class="field">
@@ -371,14 +360,8 @@
             </p>
             <input type="text"
                    name="signatureCodeOfConduct"
-                   placeholder="Your Full Legal Name"
-                   ng-model="user.confirmation.signatureCodeOfConduct"
-                   ng-if="!isMinor">
-            <input type="text"
-                   name="signatureCodeOfConduct"
-                   placeholder="Parent or Guardian Full Legal Name"
-                   ng-model="user.confirmation.signatureCodeOfConduct"
-                   ng-if="isMinor">
+                   placeholder="{{signaturePlaceholder}}"
+                   ng-model="user.confirmation.signatureCodeOfConduct">
           </div>
 
           <br>
@@ -400,14 +383,8 @@
               </p>
             <input type="text"
                    name="signatureAffliationMlh"
-                   placeholder="Your Full Legal Name"
-                   ng-model="user.confirmation.signatureAffliationMlh"
-                   ng-if="!isMinor">
-            <input type="text"
-                   name="signatureAffliationMlh"
-                   placeholder="Parent or Guardian Full Legal Name"
-                   ng-model="user.confirmation.signatureAffliationMlh"
-                   ng-if="isMinor">
+                   placeholder="{{signaturePlaceholder}}"
+                   ng-model="user.confirmation.signatureAffliationMlh">
           </div>
 
           <br>
@@ -418,7 +395,7 @@
           <div class="field">
             <label> We're hosting this event for you, so let us know what you want to see!</label>
             <p>
-              Give us some ideas of what kind of workshops you'd like to see. Do you want to learn how to build workout Android app? How to survive a 12-hour hackathon? How to use APIs? We want to create the best event experience and that depends on you telling us what you want : )
+              Give us some ideas of what kind of workshops you'd like to see. Do you want to learn how to build workout Android app? How to survive a 36-hour hackathon? How to use APIs? We want to create the best event experience and that depends on you telling us what you want : )
             </p>
           </div>
 
@@ -439,11 +416,21 @@
               <label> What type of workshops would you like to see the most? </label>
               <select name="workshops" ng-model="user.confirmation.workshops">
                 <option value=""> Workshop </option>
-                <option value="MobileApps"> Mobile Apps </option>
-                <option value="APIs"> How to Use APIs </option>
                 <option value="Hackathon101"> Hackathon 101: How to survive an invention marathon </option>
-                <option value="Blockchain"> How to build a Dapp using a Blockchain </option>
+                <option value="WebDevelopment">Web Development</option>
+                <option value="MobileDevelopment">Mobile Development</option>
+                <option value="APIs"> How to Use APIs </option>
+                <option value="ML">Intro to Machine Learning</option>
+                <option value="UI">UI Design</option>
+                <option value="Database">Working with Databases</option>
+                <option value="Security">Security and Authentication</option>
+                <option value="Git">Git Tutorial</option>
               </select>
+          </div>
+
+          <div class="field">
+            <label> If you want workshops on any other or more advanced topics, tell us here!  </label>
+            <textarea ng-model="user.confirmation.otherWorkshopIdeas"></textarea>
           </div>
 
           <div class="field">

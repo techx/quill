@@ -213,7 +213,8 @@ var confirmation = {
   signatureLiability: String,
   signaturePhotoRelease: String,
   signatureCodeOfConduct: String,
-  signatureAffliationMlh: String
+  signatureAffliationMlh: String,
+  otherWorkshopIdeas: String,
 };
 
 var status = {

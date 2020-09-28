@@ -17,7 +17,7 @@ angular.module('reg')
       $scope.pastConfirmation = Date.now() > user.status.confirmBy;
 
       $scope.isMinor = new Date('10/23/2002') < new Date(user.profile.birthday);
-      console.log("IS MINOR IS " + $scope.isMinor);
+      $scope.signaturePlaceholder = $scope.isMinor ? "Parent or Guardian Full Legal Name" : "Your Full Legal Name";
 
       $scope.formatTime = Utils.formatTime;
 
