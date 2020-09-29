@@ -92,9 +92,15 @@ angular.module('reg')
         UserService
           .updateConfirmation(user._id, confirmation)
           .then(response => {
-            swal("Woo!", "You're confirmed!", "success").then(value => {
-              $state.go("app.dashboard");
-            });
+            UserService
+                .updateProfile(user._id, $scope.user.profile)
+                .then(response => {
+                  swal("Woo!", "You're confirmed!", "success").then(value => {
+                    $state.go("app.dashboard");
+                  });
+                }, response => {
+                swal("Uh oh!", "Something went wrong.", "error");
+              });
           }, response => {
             swal("Uh oh!", "Something went wrong.", "error");
           });
