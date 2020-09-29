@@ -358,7 +358,7 @@ controller.sendDeferredEmail = function(email, callback) {
     var locals = {
       title: 'You\'ve been deferred',
       subtitle: '',
-      description: 'While we don\'t have a spot for you at HackTX right now, we will review your application once more after registration closes on October 9th. Take this as an opportunity to edit your application responses (which our team will review again), and we promise to get back to you soon!',
+      description: 'This isn\'t bad news! It just means that we felt your application did not answer enough about you and your hopes for HackTX. We would still love to see you there so please take this opportunity to edit your application responses, and our team will be more than happy to review it once more after the final registration deadline on October 9th.',
       actionUrl: ROOT_URL,
       actionName: "Go to Your Dashboard"
     };
