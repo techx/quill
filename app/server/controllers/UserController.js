@@ -932,6 +932,53 @@ UserController.admitUser = function (id, user, callback) {
 /**
  * [ADMIN ONLY]
  *
+ * Defer a user.
+ * @param  {String}   userId   User id of the defer
+ * @param  {String}   user     User doing the deferring
+ * @param  {Function} callback args(err, user)
+ */
+UserController.deferUser = function (id, user, callback) {
+  User.findOne({
+    _id: id,
+    verified: true
+  }, function(err, user) {
+    if(err || !user) {
+      return callback(err, user);
+    }
+    else {
+      console.log("Sending that email!!!")
+      Mailer.sendDeferredEmail(user.email);
+    }
+  });
+  
+  Settings.getRegistrationTimes(function (err, times) {
+    User
+      .findOneAndUpdate({
+          _id: id,
+          verified: true
+        }, {
+          $set: {
+            'status.admitted': true,
+            'status.admittedBy': user.email,
+            'status.confirmBy': times.timeConfirm
+          }
+        }, {
+          new: true
+        },
+        function (err, userTo) {
+          if (err || !userTo) {
+            return callback(err, userTo);
+          }
+          Mailer.sendAcceptanceEmail(userTo.email, userTo.status.confirmBy);
+          return callback(err, userTo);
+        });
+  });
+
+};
+
+/**
+ * [ADMIN ONLY]
+ *
  * Give a sponsor access to Resumes
  * @param  {String}   userId      User id of the sponsor granted access
  * @param  {Function} callback    args(err, user)

@@ -344,6 +344,46 @@ controller.sendAcceptanceEmail = function(email, confirmBy, callback) {
 };
 
 /**
+ * Send a deferrence email.
+ * @param  {[type]}   email    [description]
+ * @param  {Function} callback [description]
+ */
+controller.sendDeferredEmail = function(email, callback) {
+
+  var options = {
+    to: email,
+    subject: "["+HACKATHON_NAME+"] - Application Update"
+  };
+
+    var locals = {
+      title: 'You\'ve been deferred',
+      subtitle: '',
+      description: 'While we don\'t have a spot for you at HackTX right now, we will review your application once more after registration closes on October 9th. Take this as an opportunity to edit your application responses (which our team will review again), and we promise to get back to you soon!',
+      actionUrl: ROOT_URL,
+      actionName: "Go to Your Dashboard"
+    };
+
+  /**
+   * Eamil-verify takes a few template values:
+   * {
+   *   verifyUrl: the url that the user must visit to verify their account
+   * }
+   */
+  sendOne('email-link-action', options, locals, function(err, info){
+    if (err){
+      console.log(err);
+    }
+    if (info){
+      console.log(info.message);
+    }
+    if (callback) {
+      callback(err, info);
+    }
+  });
+
+};
+
+/**
  * Send a confirmation email.
  * @param  {[type]}   email    [description]
  * @param  {Function} callback [description]
