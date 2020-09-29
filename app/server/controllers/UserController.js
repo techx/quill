@@ -950,30 +950,6 @@ UserController.deferUser = function (id, user, callback) {
       Mailer.sendDeferredEmail(user.email);
     }
   });
-  
-  Settings.getRegistrationTimes(function (err, times) {
-    User
-      .findOneAndUpdate({
-          _id: id,
-          verified: true
-        }, {
-          $set: {
-            'status.admitted': true,
-            'status.admittedBy': user.email,
-            'status.confirmBy': times.timeConfirm
-          }
-        }, {
-          new: true
-        },
-        function (err, userTo) {
-          if (err || !userTo) {
-            return callback(err, userTo);
-          }
-          Mailer.sendAcceptanceEmail(userTo.email, userTo.status.confirmBy);
-          return callback(err, userTo);
-        });
-  });
-
 };
 
 /**
