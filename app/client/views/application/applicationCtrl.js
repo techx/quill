@@ -193,11 +193,11 @@ angular.module('reg')
       }
 
       function addressValidation(value) {
-        return !$scope.user.profile.swag || value.length > 0
+        return !$scope.user.profile.swag || !$scope.user.profile.usStudent || value.length > 0
       }
 
       function zipCodeValidation(value) {
-        return !$scope.user.profile.swag || value.length == 5
+        return !$scope.user.profile.swag || !$scope.user.profile.usStudent || value.length == 5
       }
 
       function _setupForm() {
