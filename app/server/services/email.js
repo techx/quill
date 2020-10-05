@@ -340,7 +340,6 @@ controller.sendAcceptanceEmail = function(email, confirmBy, callback) {
       callback(err, info);
     }
   });
-
 };
 
 /**
@@ -445,6 +444,51 @@ controller.sendApplicationReminderEmail = function(email, callback) {
                   have trouble submitting, email hello@freetailhackers.com .',
     actionUrl: ROOT_URL + '/login',
     actionName: "Login to your Account"
+  };
+
+  /**
+   * Eamil-verify takes a few template values:
+   * {
+   *   verifyUrl: the url that the user must visit to verify their account
+   * }
+   */
+  sendOne('email-link-action', options, locals, function(err, info){
+    if (err){
+      console.log(err);
+    }
+    if (info){
+      console.log(info.message);
+    }
+    if (callback){
+      callback(err, info);
+    }
+  });
+
+};
+
+/**
+ * Send a reminder to fill out the application.
+ * @param  {[type]}   email    [description]
+ * @param  {[type]}   token    [description]
+ * @param  {Function} callback [description]
+ */
+controller.sendConfirmationReminderEmail = function(email, callback) {
+
+  var options = {
+    to: email,
+    subject: "["+HACKATHON_NAME+"] - Finish your Application!"
+  };
+
+  var locals = {
+    title: 'Accept Your Spot!!',
+    subtitle: '',
+    description: 'Congrats again on your acceptance to ' + HACKATHON_NAME + '! We noticed that you \
+                  have not let us know of your decision to attend yet. You can either confirm or deny your spot \
+                  through the registration portal. We have extended the deadline to Octber 9th 11:59 pm CT, \
+                  but please don\'t wait to get this done! If you \
+                  have trouble confirming your spot, email hello@freetailhackers.com .',
+    actionUrl: ROOT_URL + '/login',
+    actionName: "Confirm your Spot"
   };
 
   /**
