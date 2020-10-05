@@ -476,7 +476,7 @@ controller.sendConfirmationReminderEmail = function(email, callback) {
 
   var options = {
     to: email,
-    subject: "["+HACKATHON_NAME+"] - Finish your Application!"
+    subject: "["+HACKATHON_NAME+"] - Accept Your Spot!!"
   };
 
   var locals = {
