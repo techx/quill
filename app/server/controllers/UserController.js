@@ -1269,6 +1269,39 @@ UserController.sendApplicationReminder = function (email, callback) {
       Mailer.sendApplicationReminderEmail(email);
 };
 
+/**
+ * [ADMIN ONLY]
+ *
+ * Send a confirmation reminder.
+ * @param  {String}   userId   User id
+ * @param  {String}   user     User sending the email
+ * @param  {Function} callback args(err, user)
+ */
+UserController.sendConfirmationReminder = function (id, callback) {
+  Settings.getRegistrationTimes(function (err, times) {
+    User
+      .findOneAndUpdate({
+          '_id': id,
+          'verified': true,
+          'status.admitted': true,
+          'status.confirmed': false,
+        }, {
+          $set: {
+            'status.confirmBy': times.timeConfirm
+          }
+        }, {
+          new: true
+        },
+        function (err, userTo) {
+          if (err || !userTo) {
+            return callback(err, userTo);
+          }
+          Mailer.sendConfirmationReminderEmail(userTo.email);
+          return callback(err, userTo);
+        });
+  });
+}
+
 
 /**
  * [ADMIN ONLY]
