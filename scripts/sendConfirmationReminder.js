@@ -14,7 +14,8 @@ User
     .find({ "verified": true, "status.admitted": true, "status.confirmed": false})
     .exec(function(err, ids) {
         ids.forEach(function(id) {
-            UserController.sendConfirmationReminder(id._id, user, function() {});
-            console.log(util.format("sent reminder to %s", id.email));
+            UserController.sendConfirmationReminder(id._id, function() {
+                console.log(util.format("sent reminder to %s", id.email));
+            });
         });
     });
