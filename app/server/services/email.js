@@ -439,7 +439,7 @@ controller.sendApplicationReminderEmail = function(email, callback) {
     description: 'We noticed that you made an account for ' + HACKATHON_NAME + ' but have \
                   not finished filling out the application. Registration closes <strong>TONIGHT at \
                   11:59pm central time</strong>, so get your application submitted by \
-                  then if you are still interested in participating!! Make sure that a confirmation \
+                  then if you are still interested in participating!!<br><br> Make sure that a confirmation \
                   message appears when you submit your application. If you have trouble submitting, \
                   email hello@freetailhackers.com.',
     actionUrl: ROOT_URL + '/login',
