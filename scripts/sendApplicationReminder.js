@@ -11,7 +11,7 @@ var UserController = require('../app/server/controllers/UserController');
 var user = { email: process.env.ADMIN_EMAIL };
 
 User
-    .find({ "verified": true, "status.completedProfile": false})
+    .find({"status.completedProfile": false})
     .exec(function(err, ids) {
         ids.forEach(function(id) {
             UserController.sendApplicationReminder(id.email, user, function() {});

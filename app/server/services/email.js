@@ -430,18 +430,18 @@ controller.sendApplicationReminderEmail = function(email, callback) {
 
   var options = {
     to: email,
-    subject: "["+HACKATHON_NAME+"] - Finish your Application!"
+    subject: "["+HACKATHON_NAME+"] - Last Day to Register for HackTX 2020!"
   };
 
   var locals = {
     title: 'Finish your Application',
     subtitle: '',
     description: 'We noticed that you made an account for ' + HACKATHON_NAME + ' but have \
-                  not finished filling out the application! If you are still interested in \
-                  participating, make sure to get your application submitted by <strong>11:59pm central time \
-                  on either September 18 (early bird deadline) or October 9 (regular deadline).</strong><br><br> \
-                  Make sure that a confirmation message appears when you submit your application. If you \
-                  have trouble submitting, email hello@freetailhackers.com .',
+                  not finished filling out the application. Registration closes <strong>TONIGHT at \
+                  11:59pm central time</strong>, so get your application submitted by \
+                  then if you are still interested in participating!! Make sure that a confirmation \
+                  message appears when you submit your application. If you have trouble submitting, \
+                  email hello@freetailhackers.com.',
     actionUrl: ROOT_URL + '/login',
     actionName: "Login to your Account"
   };
