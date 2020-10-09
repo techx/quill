@@ -430,7 +430,7 @@ controller.sendApplicationReminderEmail = function(email, callback) {
 
   var options = {
     to: email,
-    subject: "["+HACKATHON_NAME+"] - Last Day to Register for HackTX 2020!"
+    subject: "["+HACKATHON_NAME+"] - Last Day to Register!!"
   };
 
   var locals = {
@@ -476,17 +476,16 @@ controller.sendConfirmationReminderEmail = function(email, callback) {
 
   var options = {
     to: email,
-    subject: "["+HACKATHON_NAME+"] - Accept Your Spot!!"
+    subject: "["+HACKATHON_NAME+"] - Last Chance To Accept Your Spot!!"
   };
 
   var locals = {
     title: 'Accept Your Spot!!',
     subtitle: '',
-    description: 'Congrats again on your acceptance to ' + HACKATHON_NAME + '! We noticed that you \
-                  have not let us know of your decision to attend yet. You can either confirm or deny your spot \
-                  through the registration portal. We have extended the deadline to Octber 9th 11:59 pm CT, \
-                  but please don\'t wait to get this done! If you \
-                  have trouble confirming your spot, email hello@freetailhackers.com .',
+    description: 'Congrats again on your acceptance to ' + HACKATHON_NAME + '! Just a reminder that \
+                  your admission will expire <strong>TONIGHT at 11:59pm central time</strong>. You can \
+                  confirm or deny your spot through the registration portal. If you run into any trouble, \
+                  email hello@freetailhackers.com.'
     actionUrl: ROOT_URL + '/login',
     actionName: "Confirm your Spot"
   };
