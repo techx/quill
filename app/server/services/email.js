@@ -485,7 +485,7 @@ controller.sendConfirmationReminderEmail = function(email, callback) {
     description: 'Congrats again on your acceptance to ' + HACKATHON_NAME + '! Just a reminder that \
                   your admission will expire <strong>TONIGHT at 11:59pm central time</strong>. You can \
                   confirm or deny your spot through the registration portal. If you run into any trouble, \
-                  email hello@freetailhackers.com.'
+                  email hello@freetailhackers.com.',
     actionUrl: ROOT_URL + '/login',
     actionName: "Confirm your Spot"
   };
