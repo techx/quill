@@ -3,6 +3,7 @@ var mongoose   = require('mongoose'),
     validator  = require('validator'),
     jwt        = require('jsonwebtoken');
     JWT_SECRET = process.env.JWT_SECRET;
+    JWT_SECRET_DISCORD = process.env.JWT_SECRET_DISCORD;
 
 mongoose.set('useFindAndModify', false);
 
@@ -444,6 +445,31 @@ schema.statics.validateProfile = function(profile, cb){
     ['M', 'F', 'O', 'N'].indexOf(profile.gender) > -1
     ));
 };
+
+// Discord Stuff
+
+// Generate auth token for discord
+schema.methods.generateDiscordToken = function(){
+  return jwt.sign(this._id, JWT_SECRET_DISCORD);
+};
+
+/**
+ * Verify an an email verification token.
+ * @param  {[type]}   token token
+ * @param  {Function} cb    args(err, email)
+ */
+schema.statics.verifyDiscordToken = function(token, callback){
+  jwt.verify(token, JWT_SECRET_DISCORD, function(err, id) {
+    console.log("verifying id, _id: " + id);
+    if(err || !id) {
+      return callback({"message": "Error: could not verify token"});
+    }
+
+    return callback(err, id);
+  });
+};
+
+
 
 //=========================================
 // Virtuals

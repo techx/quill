@@ -20,6 +20,7 @@ const SidebarCtrl = require('../views/sidebar/sidebarCtrl.js');
 const TeamCtrl = require('../views/team/teamCtrl.js');
 const VerifyCtrl = require('../views/verify/verifyCtrl.js');
 const WalkinCtrl = require('../views/walkin/walkinCtrl.js');
+const DiscordCtrl = require('../views/discord/discordCtrl');
 
 angular.module('reg')
   .config([
@@ -252,6 +253,10 @@ angular.module('reg')
         },
         templateUrl: "views/admin/sponsors/sponsors.html",
         controller: 'AdminSponsorsCtrl'
+      })
+      .state('app.discord', {
+        url: "/discord",
+        templateUrl: "views/discord/discord.html",
       })
       .state('reset', {
         url: "/reset/:token",

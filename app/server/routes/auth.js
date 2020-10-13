@@ -95,7 +95,7 @@ module.exports = function(router){
         });
       });
   });
-  
+
 
   /**
    * Reset user's password.
@@ -171,6 +171,36 @@ module.exports = function(router){
 
         return res.json(user);
 
+      });
+    });
+
+    /**
+     * Create an auth token that can be passed into the discord bot to make sure that people
+     * in the server are actually in attendance at HackTX
+     */
+
+    router.post('/discord/generate_token', function(req, res, next) {
+      var token = req.body.token;
+
+      UserController.generateDiscordToken(token, function(err, discordToken) {
+        if(err || !token) {
+          res.status(400).send(err);
+        }
+
+        return res.json({discordToken});
+      });
+    });
+
+    router.post('/discord/verify_user/:token', function(req, res, next) {
+      var discordToken = req.params.token;
+      console.log("input token: " + discordToken);
+
+      UserController.verifyDiscordToken(discordToken, function(err, user) {
+        if(err || !user) {
+          res.status(400).send(err);
+        }
+
+        return res.json(user);
       });
     });
 

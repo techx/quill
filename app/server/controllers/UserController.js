@@ -171,6 +171,8 @@ UserController.createUser = function (email, password, callback) {
 
         // Send over a verification email
         var verificationToken = u.generateEmailVerificationToken();
+        var discord = u.generateDiscordToken();
+        console.log(discord);
         Mailer.sendVerificationEmail(email, verificationToken);
         return callback(
           null,
@@ -1273,5 +1275,35 @@ UserController.updateSponsorById = function(id, user, callback){
 UserController.getStats = function (callback) {
   return callback(null, Stats.getUserStats());
 };
+
+UserController.generateDiscordToken = function(token, callback) {
+  User.getByToken(token, function(err, token, user) {
+    if(!user) return callback({"message" : "Error, user does not exist."});
+    // Okay, there is a user tha thas this token
+    let discordToken = user.generateDiscordToken();
+    return callback(null, discordToken);
+  });
+}
+
+UserController.verifyDiscordToken = function (token, callback) {
+  User.verifyDiscordToken(token, function (err, _id) {
+    // Fix this later
+    if(err) {
+      callback(err);
+    }
+
+    User.findOneAndUpdate({
+      _id
+      }, {
+        $set: {
+          'verified_discord': true
+        }
+      }, {
+        new: true
+      },
+      callback);
+  });
+};
+
 
 module.exports = UserController;

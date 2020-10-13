@@ -56,6 +56,14 @@
     </div>
 
     <div
+    ui-sref-active="active"
+    ui-sref="app.discord"
+    ng-show="!currentUser.status.declined && !currentUser.sponsor"
+    class="item">
+    Discord
+  </div>
+
+    <div
       ui-sref-active="active"
       ui-sref="app.admin.stats"
       class="item"
