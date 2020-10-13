@@ -257,6 +257,12 @@ angular.module('reg')
       .state('app.discord', {
         url: "/discord",
         templateUrl: "views/discord/discord.html",
+        resolve: {
+          currentUser: function(UserService){
+            return UserService.getCurrentUser();
+          },
+        },
+        controller: "DiscordCtrl"
       })
       .state('reset', {
         url: "/reset/:token",

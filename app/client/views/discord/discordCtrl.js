@@ -3,18 +3,27 @@ const showdown = require('showdown');
 const swal = require('sweetalert');
 
 angular.module('reg')
-  .controller('DashboardCtrl', [
+  .controller('DiscordCtrl', [
     '$rootScope',
     '$scope',
-    '$sce',
+    '$stateParams',
     'currentUser',
-    'settings',
-    'Utils',
     'AuthService',
-    'UserService',
-    'EVENT_INFO',
-    'DASHBOARD',
-    function($rootScope,$scope,currentUser){
-      var user = currentUser.data;
-      $scope.user = user;
+    function($rootScope, $scope, $stateParams, currentUser, AuthService) {
+      $scope.user = currentUser.data;
+      $scope.text = "Loading...";
+
+      function onSuccess(res) {
+          console.log('success');
+          $scope.text = "!verify " + res.data.discordToken;
+        }
+
+      function onFailure() {
+          console.log('failed');
+      }
+
+      $scope.getText = function() {
+          console.log(AuthService);
+          AuthService.getDiscordToken(onSuccess, onFailure);
+      }
 }]);

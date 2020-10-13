@@ -1277,26 +1277,35 @@ UserController.getStats = function (callback) {
 };
 
 UserController.generateDiscordToken = function(token, callback) {
-  User.getByToken(token, function(err, token, user) {
+  User.getByToken(token, function(err, user) {
     if(!user) return callback({"message" : "Error, user does not exist."});
     // Okay, there is a user tha thas this token
+    console.log("user " + user);
     let discordToken = user.generateDiscordToken();
+    console.log("token: " + discordToken);
     return callback(null, discordToken);
   });
 }
 
-UserController.verifyDiscordToken = function (token, callback) {
+UserController.verifyDiscordToken = function (token, discordID, callback) {
+  if(!token || !discordID) {
+    return callback({"message": "Error, not enough parameters passed into verify method."});
+  }
+
   User.verifyDiscordToken(token, function (err, _id) {
     // Fix this later
+    console.log("decoded id: " + _id);
     if(err) {
-      callback(err);
+      return callback(err);
     }
+
 
     User.findOneAndUpdate({
       _id
       }, {
         $set: {
-          'verified_discord': true
+          'discord.verified': true,
+          'discord.userID': discordID,
         }
       }, {
         new: true

@@ -3,7 +3,12 @@ var _         = require('underscore');
 var SettingsController = require('../controllers/SettingsController');
 var UserController = require('../controllers/UserController');
 
+function getToken(req){
+  return req.headers['x-access-token'];
+}
+
 module.exports = function(router){
+
 
   // ---------------------------------------------
   // AUTHENTICATION
@@ -180,22 +185,27 @@ module.exports = function(router){
      */
 
     router.post('/discord/generate_token', function(req, res, next) {
-      var token = req.body.token;
+      var token = getToken(req);
+      console.log(token);
 
       UserController.generateDiscordToken(token, function(err, discordToken) {
-        if(err || !token) {
+        //console.log("i'm should be returning this " + discordToken);
+        if(err || !discordToken) {
           res.status(400).send(err);
         }
+
+        console.log("discord token: " + discordToken);
 
         return res.json({discordToken});
       });
     });
 
-    router.post('/discord/verify_user/:token', function(req, res, next) {
-      var discordToken = req.params.token;
-      console.log("input token: " + discordToken);
+    router.post('/discord/verify_user', function(req, res, next) {
+      var discordToken = req.body.token;
+      var discordID = req.body.userID;
 
-      UserController.verifyDiscordToken(discordToken, function(err, user) {
+
+      UserController.verifyDiscordToken(discordToken, discordID, function(err, user) {
         if(err || !user) {
           res.status(400).send(err);
         }
