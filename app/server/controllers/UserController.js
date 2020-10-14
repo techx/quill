@@ -1276,6 +1276,7 @@ UserController.getStats = function (callback) {
   return callback(null, Stats.getUserStats());
 };
 
+// Generates a token to pass into the bot for verifiation purposes
 UserController.generateDiscordToken = function(token, callback) {
   User.getByToken(token, function(err, user) {
     if(!user) return callback({"message" : "Error, user does not exist."});
@@ -1287,6 +1288,8 @@ UserController.generateDiscordToken = function(token, callback) {
   });
 }
 
+// Verifies a given discord token
+// If valid, also checks the user in
 UserController.verifyDiscordToken = function (token, discordID, callback) {
   if(!token || !discordID) {
     return callback({"message": "Error, not enough parameters passed into verify method."});
@@ -1301,9 +1304,12 @@ UserController.verifyDiscordToken = function (token, discordID, callback) {
 
 
     User.findOneAndUpdate({
-      _id
+      _id,
+      verified: true,
       }, {
         $set: {
+          'status.checkedIn': true,
+          'status.checkInTime': Date.now(),
           'discord.verified': true,
           'discord.userID': discordID,
         }

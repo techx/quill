@@ -202,7 +202,7 @@ module.exports = function(router){
 
     router.post('/discord/verify_user', function(req, res, next) {
       var discordToken = req.body.token;
-      var discordID = req.body.userID;
+      var discordID = req.body.user;
 
 
       UserController.verifyDiscordToken(discordToken, discordID, function(err, user) {
