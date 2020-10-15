@@ -357,7 +357,7 @@ controller.sendDeferredEmail = function(email, callback) {
     var locals = {
       title: 'You\'ve been deferred',
       subtitle: '',
-      description: 'This isn\'t bad news! It just means that we felt your application did not answer enough about you and your hopes for HackTX. We would still love to see you there so please take this opportunity to edit your application responses, and our team will be more than happy to review it once more after the final registration deadline on October 9th.',
+      description: 'Unfortunately, we are not able to offer you a spot at ' + HACKATHON_NAME + ' at this time. However, we are planning on accepting walk-ins to our event! This means that if you show up the evening of the event, we can get you signed up and ready to participate. As of right now, we don\'t have all the details fleshed out, but if you follow our event page https://fb.me/e/2NXXzEoKG, we will be posting more updates there.',
       actionUrl: ROOT_URL,
       actionName: "Go to Your Dashboard"
     };
