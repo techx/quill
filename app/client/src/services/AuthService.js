@@ -119,6 +119,12 @@ angular.module('reg')
           .then(onSuccess, onFailure);
       };
 
+      authService.getDiscordToken = function(onSuccess, onFailure) {
+        return $http
+        .post('/auth/discord/generate_token')
+        .then(onSuccess, onFailure);
+      };
+
       return authService;
     }
   ]);

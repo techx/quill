@@ -205,7 +205,7 @@
             ui-sref="app.team">
             Create or join a team
           </div>
-                       
+
           <div
             class="ui pink button"
             ng-show="user.teamCode"
@@ -322,13 +322,21 @@
           </div>
 
           <div class="ui blue button"
-               ui-sref="app.checkin">
+               ui-sref="app.discord">
             Check into HackTX
           </div>
 
           <div class="ui red button"
                ng-click="declineAdmission()">
             Sorry, I can't make it
+          </div>
+
+          <div class="ui blue button"
+          ng-click="showModal = true"
+          ng-init="showModal = false"
+          ui-sref="app.discord"
+          >
+            Discord
           </div>
 
         </div>

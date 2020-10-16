@@ -1,0 +1,21 @@
+<div id="discord" class="page">
+    <div class="divided title">
+      Discord
+    </div>
+    <!-- <div>{{ user | json }}</div> -->
+    <div class="ui stackable centered page grid">
+      <div class="column">
+          <div class="discord-text">
+            This year for HackTX, we will be using Discord as a primary means of communication.
+            However, in order to have full access to the Discord server, we will require all attendees to verify their attendance.
+            Please copy and paste the following line into the channel #rules to verify your identity.
+          </div>
+          <br />
+          <p
+            class="paste"
+            ng-init="getText()"
+          >
+          {{text}}
+        </p>
+    </div>
+  </div>

@@ -2,7 +2,9 @@ var mongoose   = require('mongoose'),
     bcrypt     = require('bcrypt'),
     validator  = require('validator'),
     jwt        = require('jsonwebtoken');
+const { string } = require('underscore');
     JWT_SECRET = process.env.JWT_SECRET;
+    JWT_SECRET_DISCORD = process.env.JWT_SECRET_DISCORD;
 
 mongoose.set('useFindAndModify', false);
 
@@ -289,6 +291,16 @@ var userAtEvent = {
   }
 };
 
+var discord = {
+  verified: {
+    type: Boolean,
+    default: false
+  },
+  userID: {
+    type: String,
+  }
+}
+
 
 // define the schema for our admin model
 var schema = new mongoose.Schema({
@@ -372,6 +384,9 @@ var schema = new mongoose.Schema({
   sponsorFields: sponsorFields,
 
   userAtEvent: userAtEvent,
+
+  discord: discord
+
 });
 
 schema.set('toJSON', {
@@ -560,6 +575,33 @@ schema.statics.validateProfile = function(profile, cb){
     ))
     ));
 };
+
+// Discord Stuff
+
+// Generate auth token for discord
+schema.methods.generateDiscordToken = function(){
+  //console.log("_id: " + this._id);
+  //console.log(JWT_SECRET_DISCORD);
+  return jwt.sign(this._id, JWT_SECRET_DISCORD);
+};
+
+/**
+ * Verify an an email verification token.
+ * @param  {[type]}   token token
+ * @param  {Function} cb    args(err, email)
+ */
+schema.statics.verifyDiscordToken = function(token, callback){
+  jwt.verify(token, JWT_SECRET_DISCORD, function(err, id) {
+    //console.log("verifying id, _id: " + id);
+    if(err || !id) {
+      return callback({"message": "Error: could not verify token"});
+    }
+
+    return callback(err, id);
+  });
+};
+
+
 
 //=========================================
 // Virtuals
