@@ -5,7 +5,8 @@
 
     .paste {
         text-align: center;
-        background-color: pink;
+        background-color: $field-color;
+        border: 1px solid $secondary;
         padding: 10px;
         word-wrap: break-word;
     }
