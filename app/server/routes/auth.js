@@ -206,6 +206,7 @@ module.exports = function(router){
 
 
       UserController.verifyDiscordToken(discordToken, discordID, function(err, user) {
+
         if(err || !user) {
           res.status(400).send(err);
         }

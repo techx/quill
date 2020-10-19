@@ -1339,21 +1339,36 @@ UserController.verifyDiscordToken = function (token, discordID, callback) {
       return callback(err);
     }
 
-
-    User.findOneAndUpdate({
+    User.findOne({
       _id,
-      verified: true,
-      }, {
-        $set: {
-          'status.checkedIn': true,
-          'status.checkInTime': Date.now(),
-          'discord.verified': true,
-          'discord.userID': discordID,
-        }
-      }, {
-        new: true
-      },
-      callback);
+      verified : true,
+    }, function(err, user) {
+      if(!user.verified) {
+        return callback({"message" : "Error, this account is not verified.  Please verify your HackTX account before using this command"});
+      }
+
+      if(user.discord.verified) {
+        return callback({"message" : "Error, this user has already verified their account with Discord.  If you believe this is incorrect, please contact an organizer."});
+      }
+
+      User.findOneAndUpdate({
+        _id,
+        verified: true,
+        "discord.verified": false
+        }, {
+          $set: {
+            'status.checkedIn': true,
+            'status.checkInTime': Date.now(),
+            'discord.verified': true,
+            'discord.userID': discordID,
+          }
+        }, {
+          new: true
+        },
+        callback);
+    })
+
+
   });
 };
 
