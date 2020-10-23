@@ -924,7 +924,7 @@ UserController.admitUser = function (id, user, callback) {
           if (err || !userTo) {
             return callback(err, userTo);
           }
-          Mailer.sendAcceptanceEmail(userTo.email, userTo.status.confirmBy);
+          // Mailer.sendAcceptanceEmail(userTo.email, userTo.status.confirmBy);
           return callback(err, userTo);
         });
   });
@@ -1367,10 +1367,22 @@ UserController.verifyDiscordToken = function (token, discordID, callback) {
         },
         callback);
     })
-
-
   });
 };
 
+// Verifies a given discord token
+// If valid, also checks the user in
+UserController.setDiscordDefault = function (_id, callback) {
+      User.findOneAndUpdate({
+        _id,
+        }, {
+          $set: {
+            'discord.verified': false,
+          }
+        }, {
+          new: true
+        },
+        callback);
+    };
 
 module.exports = UserController;
