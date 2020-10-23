@@ -924,7 +924,7 @@ UserController.admitUser = function (id, user, callback) {
           if (err || !userTo) {
             return callback(err, userTo);
           }
-          // Mailer.sendAcceptanceEmail(userTo.email, userTo.status.confirmBy);
+          Mailer.sendAcceptanceEmail(userTo.email, userTo.status.confirmBy);
           return callback(err, userTo);
         });
   });
