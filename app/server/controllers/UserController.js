@@ -271,7 +271,6 @@ UserController.getPage = function (query, callback) {
   var skills = query.skills;
   var usStudent = query.usStudent; 
   var resumeOnly = query.resume;
-
   var queries = [];
   var year_query = {};
   var findQuery = {};
@@ -344,6 +343,11 @@ UserController.getPage = function (query, callback) {
 
         if (err) {
           return callback(err);
+        }
+
+        if (size == 0 && page == 0) {
+          // we only want user IDs in this case
+          users = users.map((user) => {return user._id})
         }
 
         return callback(null, {
@@ -1286,7 +1290,7 @@ UserController.sendConfirmationReminder = function (id, callback) {
           '_id': id,
           'verified': true,
           'status.admitted': true,
-          'status.confirmed': false,
+          'status.confirmed': true,
         }, {
           $set: {
             'status.confirmBy': times.timeConfirm
@@ -1298,7 +1302,7 @@ UserController.sendConfirmationReminder = function (id, callback) {
           if (err || !userTo) {
             return callback(err, userTo);
           }
-          Mailer.sendConfirmationReminderEmail(userTo.email);
+          // Mailer.sendConfirmationReminderEmail(userTo.email);
           return callback(err, userTo);
         });
   });
@@ -1384,5 +1388,6 @@ UserController.setDiscordDefault = function (_id, callback) {
         },
         callback);
     };
+
 
 module.exports = UserController;

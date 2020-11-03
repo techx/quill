@@ -39,6 +39,20 @@ angular.module('reg')
         );
       },
 
+      getIDs: function(text, gradYears, skills, usStudent, resume){
+        return $http.get(users + '?' + $.param(
+          {
+            text: text,
+            grad: gradYears,
+            skills: skills,
+            usStudent: usStudent,
+            page: 0,
+            size: 0,
+            resume: resume
+          })
+        );
+      },
+
       getSponsorPage: function(page, size, text){
         return $http.get(sponsors + '?' + $.param(
           {
