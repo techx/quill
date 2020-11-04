@@ -33,20 +33,7 @@
     "sweetalert": "^2.1.2",
     "underscore": "^1.10.2",
     "validator": "^10.11.0",
-    "vinyl-source-stream": "^2.0.0"
-  },
-  "scripts": {
-    "mongo": "mongod --dbpath db",
-    "start": "node app.js",
-    "dev": "nodemon app.js",
-    "watch": "gulp server",
-    "prod": "gulp build && node app.js",
-    "config": "cp .env.config .env",
-    "test": "jest --forceExit",
-    "test:accessibility": "pa11y-ci",
-    "eslint": "./node_modules/.bin/eslint './**/*.js'"
-  },
-  "devDependencies": {
+    "vinyl-source-stream": "^2.0.0",
     "eslint": "^6.8.0",
     "gulp": "^3.9.1",
     "gulp-clean-css": "^4.3.0",
@@ -60,6 +47,20 @@
     "nodemon": "^1.19.4",
     "pa11y-ci": "^2.3.0",
     "supertest": "^4.0.2"
+  },
+  "scripts": {
+    "mongo": "mongod --dbpath db",
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "watch": "gulp server",
+    "prod": "gulp build && node app.js",
+    "config": "cp .env.config .env",
+    "test": "jest --forceExit",
+    "test:accessibility": "pa11y-ci",
+    "eslint": "./node_modules/.bin/eslint './**/*.js'"
+  },
+  "devDependencies": {
+    
   },
   "engines": {
     "node": "10.17.0"
