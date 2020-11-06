@@ -70,6 +70,7 @@ angular.module('reg')
         $scope.users = data.users;
         $scope.currentPage = data.page;
         $scope.pageSize = data.size;
+        $scope.totalSize = (data.totalPages == 1) ? $scope.users.length : $scope.pageSize * (data.totalPages-1);
 
         var p = [];
         for (var i = 0; i < data.totalPages; i++) {
@@ -79,8 +80,9 @@ angular.module('reg')
 
         // check boxes of selected users on the page the user has changed to
         for(var i = 0; i < $scope.users.length; i++) { 
-          if($scope.selectedUsers.has($scope.users[i])) {
-            $scope.user[i].checked = true; 
+          var user = $scope.users[i];
+          if($scope.selectedUsers.has(getUserKey(user))) {
+            user.checked = true; 
           }
         }
       }
@@ -138,7 +140,7 @@ angular.module('reg')
       
       $scope.goToPage = function (page) {
         UserService
-          .getPage(page, $scope.size || 50, $scope.queryText, $scope.selectedGrad.toString(), $scope.selectedSkills.toString(), $scope.usStudent, true)
+          .getPage(page, $scope.pageSize || 50, $scope.queryText, $scope.selectedGrad.toString(), $scope.selectedSkills.toString(), $scope.usStudent, true)
           .then(response => {
             updatePage(response.data);
           });
@@ -161,14 +163,12 @@ angular.module('reg')
       }
 
       $scope.updateCheckedCount = function(user){
-
         if(user.checked) {
           if (user._id) {
-            $scope.selectedUsers.add(user);
-
-            }
+            $scope.selectedUsers.add(getUserKey(user));
+          }
         } else { 
-          $scope.selectedUsers.remove(user); 
+          $scope.selectedUsers.delete(getUserKey(user)); 
           // zip.remove("resume" + user._id + ".pdf");
         }
       }
@@ -177,61 +177,50 @@ angular.module('reg')
         return $scope.selectedUsers.size; 
       };
 
-      $scope.downloadCheckedResumes = function(data) {
+      $scope.downloadCheckedResumes = function() {
         var it = $scope.selectedUsers.values();
         var val = null; 
         var index = 0; 
-
+        var promises = []
+        var names = []
+        var ids = []
         while (index < $scope.selectedUsers.size) {
           val=it.next().value;
-          console.log("hello" + val); 
-          UserService
-          .getResume(val._id)
-          .then(pdfPath => {
-            // Asynchronous download of PDF
-            var loadingTask = pdfjsLib.getDocument(pdfPath.data.Body);
-            loadingTask.promise.then(function (pdf) {
-              zip.file("resume_" + "user.profile.lastName" + "_" + user.profile.firstName + ".pdf", pdfPath.data.Body.data)
-            });
-          });
-          index++; 
+          var id = val.substring(0, val.indexOf('_'));
+          ids.push(id);
+          names.push(val.substring(val.indexOf('_')+1));
+          promises.push(UserService.getResume(id));
+          index++;
         }
-
-        //selectedUsers and zip 
-        zip.generateAsync({type:"blob"})
-       .then(function(content) {
-           FileSaver.saveAs(content, "resumes.zip");
-       }); 
-
-       //clear after a download happens
-       $scope.selectedUsers.clear(); 
-
-      };
+        Promise.allSettled(promises).then((responses) => {
+          for (var i = 0; i < responses.length; i++) {
+            zip.file("resume_" + names[i] + "_" + ids[i] + ".pdf", responses[i].value.data.Body.data);
+          }
+          zip.generateAsync({type:"blob"}).then(function(content) {
+            FileSaver.saveAs(content, "resumes.zip");
+            $scope.selectedUsers.clear();
+          });
+        });
+      } 
 
       $scope.selectAllResumesOnCurrPage = function() {
         for(var i = 0; i < $scope.users.length; i++) { 
-          $scope.users[i].checked = true; 
-          $scope.selectedUsers.add($scope.users[i]);
+          var user = $scope.users[i];
+          user.checked = true; 
+          $scope.selectedUsers.add(getUserKey(user));
         }
-       };
+      };
 
-
-      $scope.selectAllResumes = function() {
+      $scope.downloadAllMatchingResumes = function() {
        UserService
         .getIDs($scope.queryText, $scope.selectedGrad.toString(), $scope.selectedSkills.toString(), $scope.usStudent, true)
         .then(response => {
-          $scope.ids = response.data.users;
-
-        for(var i = 0; i < $scope.ids.length; i++) {
-          var userId = $scope.ids[i];
-          $scope.selectedUsers.add(userId);
-        }
+          for (var i = 0; i < response.data.users.length; i++) {
+            $scope.selectedUsers.add(response.data.users[i]);
+          }
+          $scope.downloadCheckedResumes();
         });
-
-        for(var i = 0; i < $scope.users.length; i++) { 
-          $scope.users[i].checked = true; 
-        }
-      };
+      }
 
       $scope.deselectAllResumes = function() {
          for(var i = 0; i < $scope.users.length; i++) { 
@@ -271,7 +260,7 @@ angular.module('reg')
                   };
                   var renderTask = page.render(renderContext);
                   renderTask.promise.then(function () {
-                    console.log('Page rendered');
+                    // console.log('Page rendered');
                   });
                 });
               }, function (reason) {
@@ -280,6 +269,18 @@ angular.module('reg')
               });
             });
         }
+      }
+
+      function getUserKey(user) {
+        return user._id + "_" + user.profile.lastName + "_" + user.profile.firstName
+      }
+
+      $scope.hasSelectedResumes = function() {
+        return $scope.selectedUsers.size > 0;
+      }
+
+      $scope.hasMatchingResumes = function() {
+        return $scope.totalSize > 0;
       }
 
       $scope.rowClass = function (user) {

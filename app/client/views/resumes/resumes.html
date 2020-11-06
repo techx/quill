@@ -63,13 +63,11 @@
         </div>
 
         <button
-        ng-class="'active pink'"
         ng-click="selectAllResumesOnCurrPage()"
         class="ui icon basic page button"> Select All
       </button>
 
         <button
-        ng-class="'active pink'"
         ng-click="deselectAllResumes()"
         class="ui icon basic page button"> Deselect All
       </button>
@@ -84,6 +82,16 @@
 
       </div>
       <div id="table-container" class="thirteen wide column">
+        <button
+        ng-if="hasSelectedResumes()"
+        ng-click="downloadCheckedResumes(data)"
+        class="ui icon basic page button"> Download {{getCheckedCount()}} Selected Resume(s)
+      </button>
+      <button
+        ng-if="hasMatchingResumes()"
+        ng-click="downloadAllMatchingResumes(data)"
+        class="ui icon basic page button"> Download {{totalSize}}+ Matching Resume(s)
+      </button>
         <div class="ui header">
           Users
         </div>
@@ -166,11 +174,6 @@
             </tr>
           </tbody>
         </table>
-        <button
-        ng-class="'active pink'"
-        ng-click="downloadCheckedResumes(data)"
-        class="ui icon basic page button"> Download {{getCheckedCount()}} Resume(s)
-      </button>
       </div>
     </div>
   </div>
