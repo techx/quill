@@ -49,7 +49,7 @@ angular.module('reg')
       $scope.file = null;
       $scope.fileData = null;
 
-      if (user.confirmation.hasResume) {
+      if (user.confirmation && user.confirmation.hasResume) {
         UserService
           .getResume(user.id)
           .then(res => {
