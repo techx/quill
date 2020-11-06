@@ -153,7 +153,6 @@ UserController.createUser = function (email, password, callback) {
     }
 
     var u = new User();
-    console.log(u);
     u.email = email;
     u.password = User.generateHash(password);
     u.save(function (err) {
@@ -172,7 +171,6 @@ UserController.createUser = function (email, password, callback) {
         // Send over a verification email
         var verificationToken = u.generateEmailVerificationToken();
         var discord = u.generateDiscordToken();
-        console.log(discord);
         Mailer.sendVerificationEmail(email, verificationToken);
         return callback(
           null,
@@ -347,7 +345,7 @@ UserController.getPage = function (query, callback) {
 
         if (size == 0 && page == 0) {
           // we only want user IDs in this case
-          users = users.map((user) => {return user._id})
+          users = users.map((user) => {return user._id + "_" + user.profile.lastName + "_" + user.profile.firstName})
         }
 
         return callback(null, {
@@ -740,7 +738,7 @@ UserController.sendWalkInEmail = function (email, callback) {
 
   email = email.toLowerCase();
   if (validator.isEmail(email)) {
-    console.log("validator");
+    // console.log("validator");
     var u = new User();
 
     u.email = email;
@@ -952,7 +950,6 @@ UserController.deferUser = function (id, user, callback) {
       return callback(err, user);
     }
     else {
-      console.log("Sending that email!!!")
       Mailer.sendDeferredEmail(user.email);
     }
   });
@@ -1322,9 +1319,7 @@ UserController.generateDiscordToken = function(token, callback) {
   User.getByToken(token, function(err, user) {
     if(!user) return callback({"message" : "Error, user does not exist."});
     // Okay, there is a user tha thas this token
-    console.log("user " + user);
     let discordToken = user.generateDiscordToken();
-    console.log("token: " + discordToken);
     return callback(null, discordToken);
   });
 }
@@ -1338,7 +1333,7 @@ UserController.verifyDiscordToken = function (token, discordID, callback) {
 
   User.verifyDiscordToken(token, function (err, _id) {
     // Fix this later
-    console.log("decoded id: " + _id);
+    // console.log("decoded id: " + _id);
     if(err) {
       return callback(err);
     }
