@@ -102,7 +102,6 @@ angular.module('reg')
       }
 
       $scope.submitForm = function(){
-        console.log("hello");
         if ($('.ui.form').form('is valid')){
           _updateUser();
         } else {
