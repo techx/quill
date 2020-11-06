@@ -62,6 +62,18 @@
           </div>
         </div>
 
+        <button
+        ng-class="'active pink'"
+        ng-click="selectAllResumesOnCurrPage()"
+        class="ui icon basic page button"> Select All
+      </button>
+
+        <button
+        ng-class="'active pink'"
+        ng-click="deselectAllResumes()"
+        class="ui icon basic page button"> Deselect All
+      </button>
+
         <div class="ui divider"></div>
 
         <button ng-repeat="page in pages" ng-class="page == currentPage ?
@@ -156,7 +168,7 @@
         </table>
         <button
         ng-class="'active pink'"
-        ng-click="downloadCheckedResumes(user)"
+        ng-click="downloadCheckedResumes(data)"
         class="ui icon basic page button"> Download {{getCheckedCount()}} Resume(s)
       </button>
       </div>

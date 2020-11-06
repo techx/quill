@@ -21,6 +21,8 @@ angular.module('reg')
 
       $scope.pages = [];
       $scope.users = [];
+      $scope.ids = []; 
+      $scope.selectedUsers = new Set(); 
       $scope.skillChoices = [];
       $scope.usStudent = false;
 
@@ -74,6 +76,13 @@ angular.module('reg')
           p.push(i);
         }
         $scope.pages = p;
+
+        // check boxes of selected users on the page the user has changed to
+        for(var i = 0; i < $scope.users.length; i++) { 
+          if($scope.selectedUsers.has($scope.users[i])) {
+            $scope.user[i].checked = true; 
+          }
+        }
       }
 
       $scope.onSelectYear = function(data) {
@@ -141,6 +150,8 @@ angular.module('reg')
         .then(response => {
           updatePage(response.data);
         });
+
+
       }
 
       function formatTime(time) {
@@ -150,36 +161,84 @@ angular.module('reg')
       }
 
       $scope.updateCheckedCount = function(user){
+
         if(user.checked) {
           if (user._id) {
-            UserService
-              .getResume(user._id)
-              .then(pdfPath => {
-                // Asynchronous download of PDF
-                var loadingTask = pdfjsLib.getDocument(pdfPath.data.Body);
-                loadingTask.promise.then(function (pdf) {
-                  zip.file("resume" + user._id + ".pdf", pdfPath.data.Body.data);
-                });
-              });
+            $scope.selectedUsers.add(user);
+
             }
         } else { 
-          zip.remove("resume" + user._id + ".pdf");
+          $scope.selectedUsers.remove(user); 
+          // zip.remove("resume" + user._id + ".pdf");
         }
       }
 
       $scope.getCheckedCount = function() {
-        return $scope.users.filter(function(resume){
-          return resume.checked;
-        }).length;
+        return $scope.selectedUsers.size; 
       };
 
-      $scope.downloadCheckedResumes = function() {
+      $scope.downloadCheckedResumes = function(data) {
+        var it = $scope.selectedUsers.values();
+        var val = null; 
+        var index = 0; 
+
+        while (index < $scope.selectedUsers.size) {
+          val=it.next().value;
+          console.log("hello" + val); 
+          UserService
+          .getResume(val._id)
+          .then(pdfPath => {
+            // Asynchronous download of PDF
+            var loadingTask = pdfjsLib.getDocument(pdfPath.data.Body);
+            loadingTask.promise.then(function (pdf) {
+              zip.file("resume_" + "user.profile.lastName" + "_" + user.profile.firstName + ".pdf", pdfPath.data.Body.data)
+            });
+          });
+          index++; 
+        }
+
+        //selectedUsers and zip 
         zip.generateAsync({type:"blob"})
        .then(function(content) {
            FileSaver.saveAs(content, "resumes.zip");
        }); 
+
+       //clear after a download happens
+       $scope.selectedUsers.clear(); 
+
       };
 
+      $scope.selectAllResumesOnCurrPage = function() {
+        for(var i = 0; i < $scope.users.length; i++) { 
+          $scope.users[i].checked = true; 
+          $scope.selectedUsers.add($scope.users[i]);
+        }
+       };
+
+
+      $scope.selectAllResumes = function() {
+       UserService
+        .getIDs($scope.queryText, $scope.selectedGrad.toString(), $scope.selectedSkills.toString(), $scope.usStudent, true)
+        .then(response => {
+          $scope.ids = response.data.users;
+
+        for(var i = 0; i < $scope.ids.length; i++) {
+          var userId = $scope.ids[i];
+          $scope.selectedUsers.add(userId);
+        }
+        });
+
+        for(var i = 0; i < $scope.users.length; i++) { 
+          $scope.users[i].checked = true; 
+        }
+      };
+
+      $scope.deselectAllResumes = function() {
+         for(var i = 0; i < $scope.users.length; i++) { 
+           $scope.users[i].checked = false; 
+         }
+         $scope.selectedUsers.clear();
+       };
 
       function getResume(user) {
         if (user._id) {
