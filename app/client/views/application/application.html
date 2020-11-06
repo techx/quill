@@ -13,7 +13,7 @@
         <fieldset ng-disabled="regIsClosed">
 
         <div class="field">
-          <label> Email </label>
+          <label> Email* </label>
           <input type="email"
                  name="email"
                  disabled="disabled"
@@ -21,14 +21,14 @@
         </div>
 
         <div class="field">
-          <label> Full Name </label>
+          <label> Full Name* </label>
           <input type="text"
                  name="name"
                  ng-model="user.profile.name">
         </div>
 
         <div class="field" ng-show="autoFilledSchool">
-          <label> School </label>
+          <label> School* </label>
           <input class="ui input"
                  disabled="disabled"
                  ng-show="autoFilledSchool"
@@ -36,7 +36,7 @@
         </div>
 
         <div class="field" ng-show="!autoFilledSchool">
-          <label> School </label>
+          <label> School* </label>
           <div id="school" class="ui search">
             <div class="ui input">
               <input class="prompt" type="text" placeholder="School" name="school" ng-model="user.profile.school">                
@@ -46,7 +46,7 @@
         </div>
 
         <div class="field">
-          <label>Graduation Year</label>
+          <label>Graduation Year*</label>
           <select
             name="year"
             ng-model="user.profile.graduationYear">
@@ -59,7 +59,7 @@
         </div>
 
         <div class="field">
-          <label>Gender</label>
+          <label>Gender*</label>
           <select
             name="gender"
             ng-model="user.profile.gender">
@@ -72,36 +72,100 @@
         </div>
 
         <div class="field">
-          <label>I would describe myself as a...</label>
-          <input type="text"
-                 placeholder="Designer, Data Scientist, iOS Wizard, Hacker Extraordinaire"
-                 ng-model="user.profile.description">
+          <label>Race*</label>
+          <select
+            name="race"
+            ng-model="user.profile.race">
+            <option value="">Race</option>
+            <option value="NA">Native American</option>
+            <option value="API">Asian/Pacific Islander</option>
+            <option value="BAA">Black or African American</option>
+            <option value="H">Hispanic</option>
+            <option value="WC">White / Caucasian</option>
+            <option value="MO">Multiple / Other</option>
+            <option value="none">Prefer not to answer</option>
+          </select>
         </div>
 
         <div class="field">
-          <label>
-              What would you like to learn or get out of HackMIT? (optional)
-          </label>
-          <textarea ng-model="user.profile.essay">
-          </textarea>
+          <label>Major*</label>
+          <input
+            type="text"
+            name="major"
+            placeholder="Computer Science" 
+            ng-model="user.profile.major">
         </div>
 
-        <div class="field"
-             ng-hide="isMitStudent">
-          <p>
-            Because of limitations imposed by MIT, we are not legally allowed to host
-            non-MIT minors (those under 18) for HackMIT 2015. Checking the box below affirms that you are or will be 18 years or older by September 19th, 2015.
-          </p>
-          <p>
-            <strong>
-            We will be checking ID. If you are a non-MIT minor, you will be turned away at the door.
-            </strong>
-          </p>
-          <div class="ui checkbox">
-            <input type="checkbox" id="adult" ng-model="user.profile.adult">
-            <label for="adult">I am 18 or older.</label>
-          </div>
+        <br>
+        <br>
+
+
+        <!-- <div class="field">
+          <label>Please provide a mailing address for us to ship swag to</label>
+          <input
+            type="text"
+            ng-model="user.profile.address">
+        </div> -->
+
+        <!-- <div class="field">
+          <label>Please upload your resume (as a PDF)*</label>
+          <input
+            type="file"
+            id="resume"
+            accept="application/pdf"
+            fileread="user.profile.resume"
+            style="background-color: #f1e8b8; border: 0; padding-left: 0">
+        </div> -->
+
+        <!-- <pdf ng-hide="!user.profile.resume" src="user.profile.resume"></pdf> -->
+
+        <div class="divided title">Hackathon Stuff</div>
+
+        <div class="field">
+          <label>How many hackathons have you attended?</label>
+          <input
+            type="number"
+            min="0"
+            max="100"
+            ng-model="user.profile.hackathons">
         </div>
+
+        <div class="field">
+          <label>How did you hear about HackUTD?</label>
+          <input
+            type="text"
+            placeholder="Social Media"
+            ng-model="user.profile.referrer">
+        </div>
+
+        <div class="field">
+          <label>What prize would you like to win?</label>
+          <input
+            type="text"
+            ng-model="user.profile.prize">
+        </div>
+
+        <div class="field">
+          <label>Is there a specific workshop you’d like to have at HackUTD?</label>
+          <input
+            type="text"
+            ng-model="user.profile.workshop">
+        </div>
+
+        <div class="field">
+          <label>Is there a specific project you hope to complete at HackUTD?</label>
+          <input
+            type="text"
+            ng-model="user.profile.project">
+        </div>
+
+        <!-- <div class="field">
+          <p></p>
+          <div class="ui checkbox">
+            <input type="checkbox" id="mlhShare" ng-model="user.profile.mlhShare">
+            <label for="mlhShare">I authorize you to share my application/registration information for event administration, ranking, MLH administration, pre- and post-event informational e-mails, and occasional messages about hackathons in-line with the <a href="mlh.io/privacy">MLH Privacy Policy</a>. I further agree to the terms of both the <a href="www.github.com/MLH/mlh-policies/tree/master/prize-terms-and-conditions">MLH Contest Terms and Conditions</a> and the <a href="mlh.io/privacy">MLH Privacy Policy</a>.*</label>
+          </div>
+        </div> -->
 
         <br>
 

@@ -1,4 +1,5 @@
 const angular = require('angular');
+
 const SettingsService = require('./services/SettingsService.js');
 const UserService = require('./services/UserService.js');
 

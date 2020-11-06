@@ -326,6 +326,7 @@ module.exports = function(router) {
     // Accept the hacker. Admin only
     var id = req.params.id;
     var user = req.user;
+    console.log("here4")
     UserController.admitUser(id, user, defaultResponse(req, res));
   });
 

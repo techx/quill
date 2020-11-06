@@ -15,9 +15,19 @@
     "csv-express": "^1.2.2",
     "dotenv": "^6.2.0",
     "email-templates": "^5.1.0",
+    "eslint": "^6.8.0",
     "express": "^4.17.1",
+    "gulp": "^3.9.1",
     "gulp-buffer": "0.0.2",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-ng-annotate": "^2.1.0",
+    "gulp-nodemon": "^2.5.0",
+    "gulp-sass": "^4.1.0",
+    "gulp-sourcemaps": "^2.6.5",
     "gulp-tap": "^1.0.1",
+    "gulp-uglify": "^3.0.2",
+    "jest": "^24.9.0",
     "jquery": "^3.5.1",
     "json2csv": "^4.5.4",
     "jsonwebtoken": "5.0.4",
@@ -28,25 +38,15 @@
     "morgan": "^1.10.0",
     "nodemailer": "^4.7.0",
     "nodemailer-smtp-transport": "^2.7.4",
+    "nodemon": "^1.19.4",
+    "pa11y-ci": "^2.3.0",
     "request": "^2.88.2",
     "showdown": "^1.9.1",
+    "supertest": "^4.0.2",
     "sweetalert": "^2.1.2",
     "underscore": "^1.10.2",
     "validator": "^10.11.0",
-    "vinyl-source-stream": "^2.0.0",
-    "eslint": "^6.8.0",
-    "gulp": "^3.9.1",
-    "gulp-clean-css": "^4.3.0",
-    "gulp-concat": "^2.6.1",
-    "gulp-ng-annotate": "^2.1.0",
-    "gulp-nodemon": "^2.5.0",
-    "gulp-sass": "^4.1.0",
-    "gulp-sourcemaps": "^2.6.5",
-    "gulp-uglify": "^3.0.2",
-    "jest": "^24.9.0",
-    "nodemon": "^1.19.4",
-    "pa11y-ci": "^2.3.0",
-    "supertest": "^4.0.2"
+    "vinyl-source-stream": "^2.0.0"
   },
   "scripts": {
     "mongo": "mongod --dbpath db",
@@ -59,9 +59,7 @@
     "test:accessibility": "pa11y-ci",
     "eslint": "./node_modules/.bin/eslint './**/*.js'"
   },
-  "devDependencies": {
-    
-  },
+  "devDependencies": {},
   "engines": {
     "node": "10.17.0"
   }

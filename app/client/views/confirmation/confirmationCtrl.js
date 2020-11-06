@@ -1,6 +1,45 @@
 const swal = require('sweetalert');
 
 angular.module('reg')
+.directive("fileread", [function () {
+  return {
+      scope: {
+          fileread: "="
+      },
+      link: function (scope, element, attributes) {
+          element.bind("change", function (changeEvent) {
+              scope.$apply(function () {
+                  const file = changeEvent.target.files[0];
+                
+                  const reader = new FileReader();
+                  reader.addEventListener('load', (event) => {
+                    scope.$apply(function(){
+                      scope.fileread = event.target.result;
+                      console.log(scope.fileread);
+                    })
+                  });
+                  reader.readAsDataURL(file);
+              });
+          });
+      }
+  }
+}])
+.directive('pdf', ['$compile', function ($compile) {
+  return {
+      restrict: 'E',
+      scope: {
+          src: "=",
+          height: "="
+      },
+      link: function (scope, element, attr) {
+          function update(url) {
+                  element.html('<object data="' + url + '" type="application/pdf" width="100%" style="height: 30rem;"></object>');
+                  $compile(element.contents())(scope);
+          }
+          scope.$watch('src', update);
+      }
+  };
+}])
   .controller('ConfirmationCtrl', [
     '$scope',
     '$rootScope',
@@ -22,39 +61,8 @@ angular.module('reg')
 
       $scope.fileName = user._id + "_" + user.profile.name.split(" ").join("_");
 
-      // -------------------------------
-      // All this just for dietary restriction checkboxes fml
-
-      var dietaryRestrictions = {
-        'Vegetarian': false,
-        'Vegan': false,
-        'Halal': false,
-        'Kosher': false,
-        'Nut Allergy': false
-      };
-
-      if (user.confirmation.dietaryRestrictions){
-        user.confirmation.dietaryRestrictions.forEach(function(restriction){
-          if (restriction in dietaryRestrictions){
-            dietaryRestrictions[restriction] = true;
-          }
-        });
-      }
-
-      $scope.dietaryRestrictions = dietaryRestrictions;
-
-      // -------------------------------
-
       function _updateUser(e){
         var confirmation = $scope.user.confirmation;
-        // Get the dietary restrictions as an array
-        var drs = [];
-        Object.keys($scope.dietaryRestrictions).forEach(function(key){
-          if ($scope.dietaryRestrictions[key]){
-            drs.push(key);
-          }
-        });
-        confirmation.dietaryRestrictions = drs;
 
         UserService
           .updateConfirmation(user._id, confirmation)
@@ -80,49 +88,25 @@ angular.module('reg')
                 }
               ]
             },
-            phone: {
-              identifier: 'phone',
+            mlhShare: {
+              identifier: 'mlhShare',
               rules: [
                 {
-                  type: 'empty',
-                  prompt: 'Please enter a phone number.'
+                  type: 'checked',
+                  prompt: 'You must agree to the MLH policies.'
                 }
               ]
-            },
-            signatureLiability: {
-              identifier: 'signatureLiabilityWaiver',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please type your digital signature.'
-                }
-              ]
-            },
-            signaturePhotoRelease: {
-              identifier: 'signaturePhotoRelease',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please type your digital signature.'
-                }
-              ]
-            },
-            signatureCodeOfConduct: {
-              identifier: 'signatureCodeOfConduct',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please type your digital signature.'
-                }
-              ]
-            },
+            }
           }
         });
       }
 
       $scope.submitForm = function(){
+        console.log("hello");
         if ($('.ui.form').form('is valid')){
           _updateUser();
+        } else {
+          swal("Uh oh!", "Please Fill The Required Fields", "error");
         }
       };
 

@@ -97,6 +97,7 @@ angular.module('reg')
       },
 
       admitUser: function(id){
+        console.log("here3")
         return $http.post(base + id + '/admit');
       },
 

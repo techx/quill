@@ -13,12 +13,6 @@ var profile = {
     max: 100,
   },
 
-  adult: {
-    type: Boolean,
-    required: true,
-    default: false,
-  },
-
   school: {
     type: String,
     min: 1,
@@ -32,18 +26,6 @@ var profile = {
     }
   },
 
-  description: {
-    type: String,
-    min: 0,
-    max: 300
-  },
-
-  essay: {
-    type: String,
-    min: 0,
-    max: 1500
-  },
-
   // Optional info for demographics
   gender: {
     type: String,
@@ -52,28 +34,47 @@ var profile = {
     }
   },
 
+  race: {
+    type: String,
+    enum: {
+      values: 'NA API BAA H WC MO none'.split(' ')
+    }
+  },
+
+  major: String,
+
+  hackathons: {
+    type: Number,
+    min: 0,
+    max: 100
+  },
+
+  referrer: String,
+  prize: String,
+  workshop: String,
+  project: String
 };
 
 // Only after confirmed
 var confirmation = {
-  phoneNumber: String,
-  dietaryRestrictions: [String],
+  // phoneNumber: String,
+  // dietaryRestrictions: [String],
   shirtSize: {
     type: String,
     enum: {
       values: 'XS S M L XL XXL WXS WS WM WL WXL WXXL'.split(' ')
     }
   },
-  wantsHardware: Boolean,
-  hardware: String,
+  // wantsHardware: Boolean,
+  // hardware: String,
 
-  major: String,
-  github: String,
-  twitter: String,
-  website: String,
-  resume: String,
+  // major: String,
+  // github: String,
+  // twitter: String,
+  // website: String,
+  // resume: String,
 
-  needsReimbursement: Boolean,
+  // needsReimbursement: Boolean,
   address: {
     name: String,
     line1: String,
@@ -83,20 +84,24 @@ var confirmation = {
     zip: String,
     country: String
   },
-  receipt: String,
+  // receipt: String,
 
-  hostNeededFri: Boolean,
-  hostNeededSat: Boolean,
-  genderNeutral: Boolean,
-  catFriendly: Boolean,
-  smokingFriendly: Boolean,
-  hostNotes: String,
+  // hostNeededFri: Boolean,
+  // hostNeededSat: Boolean,
+  // genderNeutral: Boolean,
+  // catFriendly: Boolean,
+  // smokingFriendly: Boolean,
+  // hostNotes: String,
 
   notes: String,
 
-  signatureLiability: String,
-  signaturePhotoRelease: String,
-  signatureCodeOfConduct: String,
+  mlhShare: Boolean,
+
+  resume: String
+
+  // signatureLiability: String,
+  // signaturePhotoRelease: String,
+  // signatureCodeOfConduct: String,
 };
 
 var status = {
@@ -142,10 +147,6 @@ var status = {
   },
   confirmBy: {
     type: Number
-  },
-  reimbursementGiven: {
-    type: Boolean,
-    default: false
   }
 };
 
@@ -331,7 +332,6 @@ schema.statics.getByToken = function(token, callback){
 schema.statics.validateProfile = function(profile, cb){
   return cb(!(
     profile.name.length > 0 &&
-    profile.adult &&
     profile.school.length > 0 &&
     ['2021', '2022', '2023', '2024'].indexOf(profile.graduationYear) > -1 &&
     ['M', 'F', 'O', 'N'].indexOf(profile.gender) > -1
