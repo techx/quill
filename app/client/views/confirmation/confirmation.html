@@ -16,11 +16,7 @@
             <p>
               Let's get you some swag!
             </p>
-            <select
-              name="shirt"
-              ng-model="user.confirmation.shirtSize"
-              style="background-color: #F7F2D7"
-              required>
+            <select name="shirt" ng-model="user.confirmation.shirtSize" style="background-color: #F7F2D7" required>
               <option value="">Shirt Size</option>
               <option value="XS">Unisex X-Small</option>
               <option value="S">Unisex Small</option>
@@ -50,61 +46,41 @@
 
             <div class="field">
               <label>Full Name</label>
-              <input type="text"
-                     name="name"
-                     ng-model="user.confirmation.address.name"
-                     style="background-color: #F7F2D7">
+              <input type="text" name="name" ng-model="user.confirmation.address.name"
+                style="background-color: #F7F2D7">
             </div>
 
             <div class="field">
               <label> Address Line 1 - Street address, P.O. box, company name, c/o </label>
-              <input
-                type="text"
-                name="addressLine1"
-                ng-model="user.confirmation.address.line1"
+              <input type="text" name="addressLine1" ng-model="user.confirmation.address.line1"
                 style="background-color: #F7F2D7">
             </div>
 
             <div class="field">
               <label> Address Line 2 - Apartment, suite, unit, building, floor, etc. </label>
-              <input
-                type="text"
-                name="addressLine2"
-                ng-model="user.confirmation.address.line2"
+              <input type="text" name="addressLine2" ng-model="user.confirmation.address.line2"
                 style="background-color: #F7F2D7">
             </div>
 
             <div class="four fields">
               <div class="field">
                 <label> City </label>
-                <input
-                  type="text"
-                  name="city"
-                  ng-model="user.confirmation.address.city"
+                <input type="text" name="city" ng-model="user.confirmation.address.city"
                   style="background-color: #F7F2D7">
               </div>
               <div class="field">
                 <label> State/Province/Region </label>
-                <input
-                  type="text"
-                  name="state"
-                  ng-model="user.confirmation.address.state"
+                <input type="text" name="state" ng-model="user.confirmation.address.state"
                   style="background-color: #F7F2D7">
               </div>
               <div class="field">
                 <label> ZIP </label>
-                <input
-                  type="text"
-                  name="zip"
-                  ng-model="user.confirmation.address.zip"
+                <input type="text" name="zip" ng-model="user.confirmation.address.zip"
                   style="background-color: #F7F2D7">
               </div>
               <div class="field">
                 <label> Country </label>
-                <input
-                  type="text"
-                  name="country"
-                  ng-model="user.confirmation.address.country"
+                <input type="text" name="country" ng-model="user.confirmation.address.country"
                   style="background-color: #F7F2D7">
               </div>
             </div>
@@ -115,28 +91,29 @@
 
           <div class="divided title">Resume</div>
           <div class="field">
-          <label>Please upload your resume (as a PDF)*</label>
-          <input
-            type="file"
-            id="resume"
-            accept="application/pdf"
-            fileread="user.confirmation.resume"
-            style="background-color: #f1e8b8; border: 0; padding-left: 0">
-        </div>
+            <label>Please upload your resume (as a PDF)*</label>
+            <input type="file" id="resume" accept="application/pdf" onfilechange="onFileChange"
+              style="background-color: #f1e8b8; border: 0; padding-left: 0">
+          </div>
 
-        <pdf ng-hide="!user.confirmation.resume" src="user.confirmation.resume"></pdf>
+          <pdf ng-hide="!fileData" src="fileData"></pdf>
 
-        <br>
-        <br>
+          <br>
+          <br>
           <div class="divided title">Legal</div>
 
           <div class="field">
             <p></p>
             <div class="ui checkbox">
               <input type="checkbox" id="mlhShare" ng-model="user.confirmation.mlhShare">
-              <label for="mlhShare">I authorize you to share my application/registration information for event administration, ranking, MLH administration, pre- and post-event informational e-mails, and occasional messages about hackathons in-line with the <a href="mlh.io/privacy">MLH Privacy Policy</a>. I further agree to the terms of both the <a href="www.github.com/MLH/mlh-policies/tree/master/prize-terms-and-conditions">MLH Contest Terms and Conditions</a> and the <a href="mlh.io/privacy">MLH Privacy Policy</a>.</label>
+              <label for="mlhShare">I authorize you to share my application/registration information for event
+                administration, ranking, MLH administration, pre- and post-event informational e-mails, and occasional
+                messages about hackathons in-line with the <a href="mlh.io/privacy">MLH Privacy Policy</a>. I further
+                agree to the terms of both the <a
+                  href="www.github.com/MLH/mlh-policies/tree/master/prize-terms-and-conditions">MLH Contest Terms and
+                  Conditions</a> and the <a href="mlh.io/privacy">MLH Privacy Policy</a>.</label>
             </div>
-          </div> 
+          </div>
 
           <br>
           <br>
@@ -150,14 +127,11 @@
             <p>
               If there's anything else you need to let us know, tell us here!
             </p>
-            <textarea style="background-color: #F7F2D7"
-              ng-model="user.confirmation.notes"></textarea>
+            <textarea style="background-color: #F7F2D7" ng-model="user.confirmation.notes"></textarea>
           </div>
 
           <div class="field" ng-hide="regIsClosed">
-            <button type="submit"
-                    class="fluid ui purple button"
-                    ng-click="submitForm()">
+            <button type="submit" class="fluid ui purple button" ng-click="submitForm()">
               Submit
             </button>
           </div>

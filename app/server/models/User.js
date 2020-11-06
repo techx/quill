@@ -97,7 +97,7 @@ var confirmation = {
 
   mlhShare: Boolean,
 
-  resume: String
+  hasResume: Boolean,
 
   // signatureLiability: String,
   // signaturePhotoRelease: String,

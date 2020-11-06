@@ -46,6 +46,21 @@ angular.module('reg')
         });
       },
 
+      updateResume: function(id, file){
+        if (file) {
+          var formData = new FormData();
+          formData.append('file', file);
+          return $http.post(base + id + '/resume', formData, {
+            headers: {'Content-Type': undefined}
+          })
+        }
+        return Promise.resolve();
+      },
+
+      getResume: function(id) {
+        return $http.get(base + id + '/resume');
+      },
+
       declineAdmission: function(id){
         return $http.post(base + id + '/decline');
       },
@@ -97,7 +112,6 @@ angular.module('reg')
       },
 
       admitUser: function(id){
-        console.log("here3")
         return $http.post(base + id + '/admit');
       },
 

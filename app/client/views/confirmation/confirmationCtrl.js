@@ -1,45 +1,38 @@
 const swal = require('sweetalert');
 
 angular.module('reg')
-.directive("fileread", [function () {
-  return {
+  .directive("onfilechange", [function () {
+    return {
       scope: {
-          fileread: "="
+        onfilechange: "&"
       },
       link: function (scope, element, attributes) {
-          element.bind("change", function (changeEvent) {
-              scope.$apply(function () {
-                  const file = changeEvent.target.files[0];
-                
-                  const reader = new FileReader();
-                  reader.addEventListener('load', (event) => {
-                    scope.$apply(function(){
-                      scope.fileread = event.target.result;
-                      console.log(scope.fileread);
-                    })
-                  });
-                  reader.readAsDataURL(file);
-              });
+        element.bind("change", function (changeEvent) {
+          scope.$apply(function () {
+            console.log("changed");
+            const file = changeEvent.target.files[0];
+            scope.onfilechange()(file);
           });
+        });
       }
-  }
-}])
-.directive('pdf', ['$compile', function ($compile) {
-  return {
+    }
+  }])
+  .directive('pdf', ['$compile', function ($compile) {
+    return {
       restrict: 'E',
       scope: {
-          src: "=",
-          height: "="
+        src: "=",
+        height: "="
       },
       link: function (scope, element, attr) {
-          function update(url) {
-                  element.html('<object data="' + url + '" type="application/pdf" width="100%" style="height: 30rem;"></object>');
-                  $compile(element.contents())(scope);
-          }
-          scope.$watch('src', update);
+        function update(url) {
+          element.html('<object data="' + url + '" type="application/pdf" width="100%" style="height: 30rem;"></object>');
+          $compile(element.contents())(scope);
+        }
+        scope.$watch('src', update);
       }
-  };
-}])
+    };
+  }])
   .controller('ConfirmationCtrl', [
     '$scope',
     '$rootScope',
@@ -47,11 +40,22 @@ angular.module('reg')
     'currentUser',
     'Utils',
     'UserService',
-    function($scope, $rootScope, $state, currentUser, Utils, UserService){
+    function ($scope, $rootScope, $state, currentUser, Utils, UserService) {
 
       // Set up the user
       var user = currentUser.data;
       $scope.user = user;
+
+      $scope.file = null;
+      $scope.fileData = null;
+
+      if (user.confirmation.hasResume) {
+        UserService
+          .getResume(user.id)
+          .then(res => {
+            $scope.fileData = 'data:application/pdf;base64,' + res.data.file;
+          });
+      }
 
       $scope.pastConfirmation = Date.now() > user.status.confirmBy;
 
@@ -59,23 +63,26 @@ angular.module('reg')
 
       _setupForm();
 
-      $scope.fileName = user._id + "_" + user.profile.name.split(" ").join("_");
-
-      function _updateUser(e){
-        var confirmation = $scope.user.confirmation;
-
+      function _updateUser(e) {
         UserService
-          .updateConfirmation(user._id, confirmation)
-          .then(response => {
-            swal("Woo!", "You're confirmed!", "success").then(value => {
-              $state.go("app.dashboard");
-            });
-          }, response => {
-            swal("Uh oh!", "Something went wrong.", "error");
-          });
+          .updateResume(user._id, $scope.file)
+          .then(r => {
+            user.confirmation.hasResume = true;
+            var confirmation = $scope.user.confirmation;
+
+            UserService
+              .updateConfirmation(user._id, confirmation)
+              .then(response => {
+                swal("Woo!", "You're confirmed!", "success").then(value => {
+                  $state.go("app.dashboard");
+                });
+              }, response => {
+                swal("Uh oh!", "Something went wrong.", "error");
+              });
+          }, r => swal("Uh oh!", "Something went wrong... Try again?", "error"));
       }
 
-      function _setupForm(){
+      function _setupForm() {
         // Semantic-UI form validation
         $('.ui.form').form({
           fields: {
@@ -101,8 +108,19 @@ angular.module('reg')
         });
       }
 
-      $scope.submitForm = function(){
-        if ($('.ui.form').form('is valid')){
+      $scope.onFileChange = function (file) {
+        $scope.file = file;
+        const reader = new FileReader();
+        reader.addEventListener('load', (event) => {
+          $scope.$apply(function(){
+            $scope.fileData = event.target.result;
+          })
+        });
+        reader.readAsDataURL(file);
+      }
+
+      $scope.submitForm = function () {
+        if ($('.ui.form').form('is valid')) {
           _updateUser();
         } else {
           swal("Uh oh!", "Please Fill The Required Fields", "error");

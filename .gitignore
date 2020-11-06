@@ -10,3 +10,6 @@ app/client/build/
 # macOS
 .DS_Store
 .python-version
+
+# firebase
+service-account-credentials.json
