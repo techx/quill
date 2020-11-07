@@ -225,7 +225,7 @@ angular.module('reg')
               identifier: 'mlhShare',
               rules: [
                 {
-                  type: 'empty',
+                  type: 'checked',
                   prompt: 'Please agree to the MLH privacy policy.'
                 }
               ]
@@ -234,7 +234,7 @@ angular.module('reg')
               identifier: 'coc',
               rules: [
                 {
-                  type: 'empty',
+                  type: 'checked',
                   prompt: 'Please agree to the MLH Code of Conduct.'
                 }
               ]
