@@ -58,7 +58,7 @@
               <option value="">Gender</option>
               <option value="M">Male</option>
               <option value="F">Female</option>
-              <option value="O">Other</option>
+              <option value="O">Non-binary / Other</option>
               <option value="N">I prefer not to answer.</option>
             </select>
           </div>
@@ -104,6 +104,11 @@
               <option value="F">Friends</option>
               <option value="PROF">Professors</option>
               <option value="HACK">Another hackathon</option>
+              <option value="HMAIL">HackUTD Mailing List</option>
+              <option value="AMAIL">ACM Mailing List</option>
+              <option value="GJ">HackUTD Game Jam</option>
+              <option value="ACMD">ACM Discord</option>
+              <option value="MLH">MLH</option>
               <option value="O">Other</option>
             </select>
           </div>
@@ -206,10 +211,17 @@
               <input type="checkbox" id="mlhShare" ng-model="user.profile.mlhShare">
               <label for="mlhShare">I authorize you to share my application/registration information for event
                 administration, ranking, MLH administration, pre- and post-event informational e-mails, and occasional
-                messages about hackathons in-line with the <a href="mlh.io/privacy">MLH Privacy Policy</a>. I further
+                messages about hackathons in-line with the <a href="https://mlh.io/privacy">MLH Privacy Policy</a>. I further
                 agree to the terms of both the <a
-                  href="www.github.com/MLH/mlh-policies/tree/master/prize-terms-and-conditions">MLH Contest Terms and
-                  Conditions</a> and the <a href="mlh.io/privacy">MLH Privacy Policy</a>.*</label>
+                  href="https://www.github.com/MLH/mlh-policies/tree/master/prize-terms-and-conditions">MLH Contest Terms and
+                  Conditions</a> and the <a href="https://mlh.io/privacy">MLH Privacy Policy</a>.*</label>
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="ui checkbox">
+              <input type="checkbox" id="coc" ng-model="user.profile.coc">
+              <label for="coc">I will at all times abide by and conform to the <a href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf">Major League Hacking Code of Conduct</a> while at the event.</label>
             </div>
           </div>
 

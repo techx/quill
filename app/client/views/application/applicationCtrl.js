@@ -230,6 +230,15 @@ angular.module('reg')
                 }
               ]
             },
+            coc: {
+              identifier: 'coc',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please agree to the MLH Code of Conduct.'
+                }
+              ]
+            },
             
           }
         });

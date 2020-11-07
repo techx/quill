@@ -49,7 +49,7 @@ var profile = {
   referrer: {
     type: String,
     enum: {
-      values: 'YT FB IG TWT LI F PROF HACK O'.split(' ')
+      values: 'YT FB IG TWT LI F PROF HACK HMAIL AMAIL GJ ACMD MLH O'.split(' ')
     }
   },
 
@@ -84,6 +84,7 @@ var profile = {
 
   notes: String,
   mlhShare: Boolean,
+  coc: Boolean,
 
   hasResume: {
     type: Boolean,
