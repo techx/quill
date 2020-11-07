@@ -256,7 +256,7 @@ angular.module('reg')
       }
 
       $scope.submitForm = function () {
-        if ($('.ui.form').form('is valid')) {
+        if ($('.ui.form').form('is valid') && ($scope.file || $scope.fileData)) {
           _updateUser();
         } else {
           swal("Uh oh!", "Please Fill The Required Fields", "error");

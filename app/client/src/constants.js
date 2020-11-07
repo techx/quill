@@ -5,7 +5,7 @@ angular.module('reg')
         NAME: 'HackUTD VII Seas',
     })
     .constant('DASHBOARD', {
-        UNVERIFIED: 'You should have received an email asking you verify your email. Click the link in the email and you can start your application!',
+        UNVERIFIED: 'You should have received an email asking you verify your email. Click the link in the email and you can start your application! Make sure to check your spam!',
         INCOMPLETE_TITLE: 'You still need to complete your application!',
         INCOMPLETE: 'If you do not complete your application before [APP_DEADLINE], you will not be considered for admission!',
         SUBMITTED_TITLE: 'Your application has been submitted!',
