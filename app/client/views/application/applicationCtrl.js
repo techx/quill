@@ -140,6 +140,24 @@ angular.module('reg')
                 }
               ]
             },
+            graduationYear: {
+              identifier: 'graduationYear',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please enter your graduation year.'
+                }
+              ]
+            },
+            age: {
+              identifier: 'age',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please enter your age.'
+                }
+              ]
+            },
             school: {
               identifier: 'school',
               rules: [

@@ -18,6 +18,12 @@ var profile = {
     }
   },
 
+  age: {
+    type: Number,
+    min: 18,
+    max: 100
+  },
+
   gender: {
     type: String,
     enum : {
@@ -61,7 +67,10 @@ var profile = {
   },
 
   github: String,
+  linkedin: String,
   website: String,
+
+  joke: String,
 
   address: {
     name: String,

@@ -48,6 +48,11 @@
           </div>
 
           <div class="field">
+            <label>Age*</label>
+            <input type="number" min="18" max="100" ng-model="user.profile.age">
+          </div>
+
+          <div class="field">
             <label>Gender*</label>
             <select name="gender" ng-model="user.profile.gender">
               <option value="">Gender</option>
@@ -147,13 +152,12 @@
             </p>
 
             <div class="field">
-              <label>Full Name*</label>
-              <input type="text" name="name" ng-model="user.profile.address.name"
-                style="background-color: #F7F2D7">
+              <label>Full Name</label>
+              <input type="text" name="name" ng-model="user.profile.address.name" style="background-color: #F7F2D7">
             </div>
 
             <div class="field">
-              <label> Address Line 1 - Street address, P.O. box, company name, c/o *</label>
+              <label> Address Line 1 - Street address, P.O. box, company name, c/o</label>
               <input type="text" name="addressLine1" ng-model="user.profile.address.line1"
                 style="background-color: #F7F2D7">
             </div>
@@ -166,19 +170,16 @@
 
             <div class="three fields">
               <div class="field">
-                <label> City* </label>
-                <input type="text" name="city" ng-model="user.profile.address.city"
-                  style="background-color: #F7F2D7">
+                <label> City </label>
+                <input type="text" name="city" ng-model="user.profile.address.city" style="background-color: #F7F2D7">
               </div>
               <div class="field">
-                <label> State* </label>
-                <input type="text" name="state" ng-model="user.profile.address.state"
-                  style="background-color: #F7F2D7">
+                <label> State </label>
+                <input type="text" name="state" ng-model="user.profile.address.state" style="background-color: #F7F2D7">
               </div>
               <div class="field">
-                <label> ZIP* </label>
-                <input type="text" name="zip" ng-model="user.profile.address.zip"
-                  style="background-color: #F7F2D7">
+                <label> ZIP </label>
+                <input type="text" name="zip" ng-model="user.profile.address.zip" style="background-color: #F7F2D7">
               </div>
             </div>
           </div>
@@ -219,14 +220,22 @@
 
           <div class="field">
             <label>GitHub</label>
-            <input type="text" name="zip" ng-model="user.profile.github"
-                  style="background-color: #F7F2D7">
+            <input type="text" name="zip" ng-model="user.profile.github" style="background-color: #F7F2D7">
+          </div>
+
+          <div class="field">
+            <label>LinkedIn</label>
+            <input type="text" name="zip" ng-model="user.profile.linkedin" style="background-color: #F7F2D7">
           </div>
 
           <div class="field">
             <label>Personal website</label>
-            <input type="text" name="zip" ng-model="user.profile.website"
-                  style="background-color: #F7F2D7">
+            <input type="text" name="zip" ng-model="user.profile.website" style="background-color: #F7F2D7">
+          </div>
+
+          <div class="field">
+            <label>What's your favorite joke?</label>
+            <input type="text" name="zip" ng-model="user.profile.joke" style="background-color: #F7F2D7">
           </div>
 
           <div class="field">
