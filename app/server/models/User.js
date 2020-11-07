@@ -7,26 +7,17 @@ var mongoose   = require('mongoose'),
 var profile = {
 
   // Basic info
-  name: {
-    type: String,
-    min: 1,
-    max: 100,
-  },
+  name: String,
 
-  school: {
-    type: String,
-    min: 1,
-    max: 150,
-  },
+  school: String,
 
   graduationYear: {
     type: String,
     enum: {
-      values: '2021 2022 2023 2024'.split(' '),
+      values: '2021 2022 2023 2024'.split(' ')
     }
   },
 
-  // Optional info for demographics
   gender: {
     type: String,
     enum : {
@@ -49,32 +40,29 @@ var profile = {
     max: 100
   },
 
-  referrer: String,
-  prize: String,
-  workshop: String,
-  project: String
-};
+  referrer: {
+    type: String,
+    enum: {
+      values: 'YT FB IG TWT LI F PROF HACK O'.split(' ')
+    }
+  },
 
-// Only after confirmed
-var confirmation = {
-  // phoneNumber: String,
-  // dietaryRestrictions: [String],
+  referrerOther: String,
+
+  prize: String,
+
+  workshop: String,
+
   shirtSize: {
     type: String,
     enum: {
       values: 'XS S M L XL XXL WXS WS WM WL WXL WXXL'.split(' ')
     }
   },
-  // wantsHardware: Boolean,
-  // hardware: String,
 
-  // major: String,
-  // github: String,
-  // twitter: String,
-  // website: String,
-  // resume: String,
+  github: String,
+  website: String,
 
-  // needsReimbursement: Boolean,
   address: {
     name: String,
     line1: String,
@@ -84,24 +72,22 @@ var confirmation = {
     zip: String,
     country: String
   },
-  // receipt: String,
-
-  // hostNeededFri: Boolean,
-  // hostNeededSat: Boolean,
-  // genderNeutral: Boolean,
-  // catFriendly: Boolean,
-  // smokingFriendly: Boolean,
-  // hostNotes: String,
 
   notes: String,
-
   mlhShare: Boolean,
 
-  hasResume: Boolean,
+  hasResume: {
+    type: Boolean,
+    default: false,
+  },
+};
 
-  // signatureLiability: String,
-  // signaturePhotoRelease: String,
-  // signatureCodeOfConduct: String,
+// Only after confirmed
+var confirmation = {
+  confirmed: {
+    type: Boolean,
+    default: false
+  }
 };
 
 var status = {
