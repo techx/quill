@@ -52,6 +52,10 @@
               </button>
             </div>
           </div>
+
+          <div class="ui form open-date" ng-hide="regIsOpen">
+            Registrations opens on <b>{{ timeOpen }}</b>
+          </div>
         </div>
 
         <div ng-show="loginState === 'forgot'">
@@ -61,7 +65,7 @@
                 <label> Email</label>
                 <input type="email"
                        id='email'
-                       placeholder="foo@bar.edu"
+                       placeholder="foo@bar.in"
                        ng-model="email">
               </div>
               <div class="field">

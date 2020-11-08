@@ -14,6 +14,7 @@ angular.module('reg')
 
       // Start state for login
       $scope.loginState = 'login';
+      $scope.timeOpen = Utils.formatTime(Settings.timeOpen);
 
       function onSuccess() {
         $state.go('app.dashboard');

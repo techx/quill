@@ -143,15 +143,6 @@ angular.module('reg')
                   prompt: 'Please select a gender.'
                 }
               ]
-            },
-            adult: {
-              identifier: 'adult',
-              rules: [
-                {
-                  type: 'allowMinors',
-                  prompt: 'You must be an adult, or an MIT student.'
-                }
-              ]
             }
           }
         });

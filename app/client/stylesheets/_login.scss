@@ -5,6 +5,11 @@
   background: $login-bg; 
   background-size: cover;
 
+  .open-date {
+    margin-top: 15px;
+    text-align: center;
+  }
+
   > .container {
     position: relative;
     top: 50%;
