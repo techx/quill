@@ -30,7 +30,8 @@ angular.module('reg')
       }
 
       $scope.joinTeam = function(){
-        UserService
+        if ($scope.code) {
+          UserService
           .joinOrCreateTeam($scope.code)
           .then(response => {
             $scope.error = null;
@@ -39,6 +40,7 @@ angular.module('reg')
           }, response => {
             $scope.error = response.data.message;
           });
+        }
       };
 
       $scope.leaveTeam = function(){
