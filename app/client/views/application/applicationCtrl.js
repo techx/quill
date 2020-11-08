@@ -140,8 +140,8 @@ angular.module('reg')
                 }
               ]
             },
-            graduationYear: {
-              identifier: 'graduationYear',
+            gradYear: {
+              identifier: 'gradYear',
               rules: [
                 {
                   type: 'empty',
