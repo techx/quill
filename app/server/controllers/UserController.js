@@ -278,7 +278,7 @@ UserController.updateProfileById = function (id, profile, callback){
     // Check if its within the registration window.
     Settings.getRegistrationTimes(function(err, times){
       if (err) {
-        callback(err);
+        return callback(err);
       }
 
       var now = Date.now();
@@ -294,23 +294,23 @@ UserController.updateProfileById = function (id, profile, callback){
           message: "Sorry, registration is closed."
         });
       }
-    });
 
-    User.findOneAndUpdate({
-      _id: id,
-      verified: true
-    },
-      {
-        $set: {
-          'lastUpdated': Date.now(),
-          'profile': profile,
-          'status.completedProfile': true
-        }
+      User.findOneAndUpdate({
+        _id: id,
+        verified: true
       },
-      {
-        new: true
-      },
-      callback);
+        {
+          $set: {
+            'lastUpdated': Date.now(),
+            'profile': profile,
+            'status.completedProfile': true
+          }
+        },
+        {
+          new: true
+        },
+        callback);
+    });
 
   });
 };
