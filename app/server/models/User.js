@@ -38,6 +38,12 @@ var profile = {
     max: 300
   },
 
+  field: {
+    type: String,
+    min: 0,
+    max: 300
+  },
+
   essay: {
     type: String,
     min: 0,

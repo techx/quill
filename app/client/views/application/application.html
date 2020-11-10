@@ -45,7 +45,7 @@
           </div>
         </div>
 
-        <div class="field">
+        <!-- <div class="field">
           <label>Graduation Year</label>
           <select
             name="year"
@@ -56,7 +56,7 @@
             <option value="2018">2018</option>
             <option value="2019">2019</option>
           </select>
-        </div>
+        </div> -->
 
         <div class="field">
           <label>Gender</label>
@@ -74,19 +74,26 @@
         <div class="field">
           <label>I would describe myself as a...</label>
           <input type="text"
-                 placeholder="Designer, Data Scientist, iOS Wizard, Hacker Extraordinaire"
+                 placeholder="Designer, Data Scientist, Entrepreneur, Hacker"
                  ng-model="user.profile.description">
         </div>
 
         <div class="field">
+          <label>My field of study is...</label>
+          <input type="text"
+                 placeholder="Urban Planning, Data Science, Architecture"
+                 ng-model="user.profile.field">
+        </div>
+
+        <div class="field">
           <label>
-              What would you like to learn or get out of HackMIT? (optional)
+              What would you like to learn or get out of SmartMove? (optional)
           </label>
           <textarea ng-model="user.profile.essay">
           </textarea>
         </div>
 
-        <div class="field"
+        <!-- <div class="field"
              ng-hide="isMitStudent">
           <p>
             Because of limitations imposed by MIT, we are not legally allowed to host
@@ -101,7 +108,7 @@
             <input type="checkbox" id="adult" ng-model="user.profile.adult">
             <label for="adult">I am 18 or older.</label>
           </div>
-        </div>
+        </div> -->
 
         <br>
 

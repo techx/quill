@@ -138,14 +138,21 @@
       </div>
 
       <div class="field">
+        <label>My field of study is...</label>
+        <input type="text"
+               placeholder="Urban Planner, Data Science, Architecture"
+               ng-model="selectedUser.profile.field">
+      </div>
+
+      <div class="field">
         <label>
-            What would you like to learn or get out of HackMIT? (optional)
+            What would you like to learn or get out of SmartMove? (optional)
         </label>
         <textarea ng-model="selectedUser.profile.essay">
         </textarea>
       </div>
 
-      <div class="field"
+      <!-- <div class="field"
            ng-hide="isMitStudent">
         <p>
           Because of limitations imposed by MIT, we are not legally allowed to host
@@ -160,7 +167,7 @@
           <input type="checkbox" id="adult" ng-model="selectedUser.profile.adult">
           <label for="adult">I am 18 or older.</label>
         </div>
-      </div>
+      </div> -->
 
       <div class="field">
         <div
