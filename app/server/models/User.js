@@ -337,9 +337,9 @@ schema.statics.getByToken = function(token, callback){
 schema.statics.validateProfile = function(profile, cb){
   return cb(!(
     profile.name.length > 0 &&
-    profile.adult &&
+    /* profile.adult && */
     profile.school.length > 0 &&
-    ['2016', '2017', '2018', '2019'].indexOf(profile.graduationYear) > -1 &&
+    /* ['2016', '2017', '2018', '2019'].indexOf(profile.graduationYear) > -1 && */
     ['M', 'F', 'O', 'N'].indexOf(profile.gender) > -1
     ));
 };
