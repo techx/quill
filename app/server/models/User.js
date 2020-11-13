@@ -54,7 +54,7 @@ var profile = {
   gender: {
     type: String,
     enum : {
-      values: 'M F O N'.split(' ')
+      values: 'M F T O N'.split(' ')
     }
   },
 
@@ -340,7 +340,7 @@ schema.statics.validateProfile = function(profile, cb){
     /* profile.adult && */
     profile.school.length > 0 &&
     /* ['2016', '2017', '2018', '2019'].indexOf(profile.graduationYear) > -1 && */
-    ['M', 'F', 'O', 'N'].indexOf(profile.gender) > -1
+    ['M', 'F', 'T', 'O', 'N'].indexOf(profile.gender) > -1
     ));
 };
 
