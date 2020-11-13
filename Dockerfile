@@ -1,4 +1,5 @@
-FROM node:10.17.0-buster-slim
+FROM node:10.16.0-buster
+
 
 WORKDIR /usr/app/src
 EXPOSE 3000
