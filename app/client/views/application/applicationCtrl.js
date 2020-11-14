@@ -14,7 +14,8 @@ angular.module('reg')
     function($scope, $rootScope, $state, $http, currentUser, settings, Session, UserService) {
 
       // Set up the user
-      $scope.user = currentUser.data;
+      var user = currentUser.data;
+      $scope.user = user;
 
       // Is the student from MIT?
       $scope.isMitStudent = $scope.user.email.split('@')[1] == 'mit.edu';
@@ -70,14 +71,38 @@ angular.module('reg')
           });
       }
 
-      function _updateUser(e){
+      function _confirmUser(e){
+        console.log('confirm')
+        var confirmation = $scope.user.confirmation;
+        console.log(confirmation)
+        // Get the dietary restrictions as an array
+        /* var drs = [];
+        Object.keys($scope.dietaryRestrictions).forEach(function(key){
+          if ($scope.dietaryRestrictions[key]){
+            drs.push(key);
+          }
+        });
+        confirmation.dietaryRestrictions = drs; */
+
         UserService
-          .updateProfile(Session.getUserId(), $scope.user.profile)
+          .updateConfirmation(user._id, confirmation)
           .then(response => {
-            swal("Awesome!", "Your application has been saved.", "success").then(value => {
+            swal("Woo!", "You're in!", "success").then(value => {
               $state.go("app.dashboard");
             });
           }, response => {
+            swal("Uh oh!", "Something went wrong.", "error");
+          });
+      }
+
+      function _updateUser(e){
+        console.log($scope.user.profile)
+        UserService
+          .updateProfile(Session.getUserId(), $scope.user.profile)
+          .then(response => {
+            _confirmUser()
+          }, response => {
+            console.log(response);
             swal("Uh oh!", "Something went wrong.", "error");
           });
       }
@@ -123,6 +148,15 @@ angular.module('reg')
                 {
                   type: 'empty',
                   prompt: 'Please enter your school name.'
+                }
+              ]
+            },
+            nationality: {
+              identifier: 'nationality',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please enter your nationality.'
                 }
               ]
             },

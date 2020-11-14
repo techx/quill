@@ -25,6 +25,18 @@ var profile = {
     max: 150,
   },
 
+  field: {
+    type: String,
+    min: 1,
+    max: 150,
+  },
+
+  nationality: {
+    type: String,
+    min: 1,
+    max: 150,
+  },
+
   graduationYear: {
     type: String,
     enum: {
@@ -33,12 +45,6 @@ var profile = {
   },
 
   description: {
-    type: String,
-    min: 0,
-    max: 300
-  },
-
-  field: {
     type: String,
     min: 0,
     max: 300
@@ -57,6 +63,12 @@ var profile = {
       values: 'M F T O N'.split(' ')
     }
   },
+
+  age: {
+    type: Number,
+    min: 18,
+    max: 110
+  }
 
 };
 
@@ -339,6 +351,7 @@ schema.statics.validateProfile = function(profile, cb){
     profile.name.length > 0 &&
     /* profile.adult && */
     profile.school.length > 0 &&
+    profile.nationality.length > 0 &&
     /* ['2016', '2017', '2018', '2019'].indexOf(profile.graduationYear) > -1 && */
     ['M', 'F', 'T', 'O', 'N'].indexOf(profile.gender) > -1
     ));
