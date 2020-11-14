@@ -151,6 +151,15 @@ angular.module('reg')
                 }
               ]
             },
+            course: {
+              identifier: 'course',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please enter your course name.'
+                }
+              ]
+            },
             nationality: {
               identifier: 'nationality',
               rules: [
@@ -175,6 +184,42 @@ angular.module('reg')
                 {
                   type: 'empty',
                   prompt: 'Please select a gender.'
+                }
+              ]
+            },
+            signatureLiability: {
+              identifier: 'signatureLiabilityWaiver',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please type your digital signature.'
+                }
+              ]
+            },
+            signaturePhotoRelease: {
+              identifier: 'signaturePhotoRelease',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please type your digital signature.'
+                }
+              ]
+            },
+            signatureCodeOfConduct: {
+              identifier: 'signatureCodeOfConduct',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please type your digital signature.'
+                }
+              ]
+            },
+            declaration: {
+              identifier: 'declaration',
+              rules: [
+                {
+                  type   : 'checked',
+                  prompt : 'You must agree to the declaration'
                 }
               ]
             }
