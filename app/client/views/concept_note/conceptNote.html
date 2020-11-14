@@ -1,0 +1,52 @@
+<div class="page">
+  <div class="divided title">
+    Concept Note Submission
+  </div>
+
+  <div class="ui stackable page grid">
+    <div class="column">
+
+      <div class="ui form">
+
+        <div class="divided title">Theme</div>
+
+        <fieldset ng-disabled="pastConfirmation">
+
+          <div class="field">
+            <label>Select a Theme (required)</label>
+            <select
+              name="gender"
+              ng-model="user.profile.gender">
+              <option value="">Theme</option>
+              <option value="T">Restoring Public Transport Ridership</option>
+              <option value="F">Achieving Sustainable Public Transport and Resilience</option>
+              <option value="M">Equity in Mobility</option>
+            </select>
+          </div>
+
+          <br/>
+
+          <div class="divided title">Concept Note</div>
+
+          <div class="field">
+            <label> Please upload your concept note document </label>
+            <input type="text"
+                   name="signatureLiabilityWaiver"
+                   placeholder="Your Full Legal Name"
+                   ng-model="user.confirmation.signatureLiability">
+          </div>
+
+
+          <div class="field" ng-hide="regIsClosed">
+            <button type="submit"
+                    class="fluid ui purple button"
+                    ng-click="submitForm()">
+              Submit
+            </button>
+          </div>
+
+        </fieldset>
+      </div>
+    </div>
+  </div>
+</div>

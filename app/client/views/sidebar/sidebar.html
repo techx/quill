@@ -21,12 +21,20 @@
       Application
     </div>
 
-    <div
+    <!-- <div
       ui-sref-active="active"
       ui-sref="app.confirmation"
       ng-show="!pastConfirmation && currentUser.status.admitted && !currentUser.status.declined"
       class="item">
       Confirmation
+    </div> -->
+
+    <div
+      ui-sref-active="active"
+      ui-sref="app.concept_note"
+      ng-show="!pastConfirmation && currentUser.status.admitted && !currentUser.status.declined && currentUser.status.completedProfile"
+      class="item">
+      Concept Note Submission
     </div>
 
     <div
