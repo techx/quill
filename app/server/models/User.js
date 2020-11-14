@@ -19,6 +19,12 @@ var profile = {
     default: false,
   },
 
+  declaration: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
+
   school: {
     type: String,
     min: 1,
@@ -61,6 +67,13 @@ var profile = {
     type: String,
     enum : {
       values: 'M F T O N'.split(' ')
+    }
+  },
+
+  course: {
+    type: String,
+    enum : {
+      values: 'UG PG PHD PDOC RF PROF'.split(' ')
     }
   },
 
@@ -352,7 +365,9 @@ schema.statics.validateProfile = function(profile, cb){
     /* profile.adult && */
     profile.school.length > 0 &&
     profile.nationality.length > 0 &&
+    profile.declaration == true &&
     /* ['2016', '2017', '2018', '2019'].indexOf(profile.graduationYear) > -1 && */
+    ['UG', 'PG', 'PHD', 'PDOC', 'RF', 'PROF'].indexOf(profile.course) > -1 &&
     ['M', 'F', 'T', 'O', 'N'].indexOf(profile.gender) > -1
     ));
 };

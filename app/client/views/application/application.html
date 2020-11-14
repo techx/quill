@@ -5,7 +5,7 @@
 
   <div class="ui stackable page grid">
     <div class="column">
-      <div class="ui form"
+      <form class="ui form"
             ng-class="{'loading': loading}">
 
         <div class="divided title">Basic Information</div>
@@ -188,7 +188,7 @@
           <div class="divided title">Legal</div>
 
           <div class="field">
-            <label> Liability Waiver </label>
+            <label> Liability Waiver (required) </label>
             <p>
               <a
                 target="_blank"
@@ -211,7 +211,7 @@
           </br>
 
           <div class="field">
-            <label> Photo Release </label>
+            <label> Photo Release (required) </label>
             <p>
               <a
                 target="_blank"
@@ -234,7 +234,7 @@
           </br>
 
           <div class="field">
-            <label> Code of Conduct </label>
+            <label> Code of Conduct (required) </label>
             <p>
               <a
                 target="_blank"
@@ -270,6 +270,19 @@
               ng-model="user.confirmation.notes"></textarea>
           </div>
 
+          <br/>
+
+          <div class="field">
+            <div class="ui checkbox">
+              <input type="checkbox" id="declaration" name="declaration" ng-model="user.profile.declaration">
+              <label for="declaration">
+                <p>
+                  I hereby declare that the information provided is true and correct. <strong>I further understand that any false statements may result in denial of participation and revocation of rewards.</strong>
+                </p>
+              </label>
+            </div>
+          </div>
+
           <!-- <div class="field" ng-hide="regIsClosed">
             <button type="submit"
                     class="fluid ui purple button"
@@ -291,7 +304,7 @@
         </div>
 
 
-      </div>
+      </form>
     </div>
   </div>
 </div>
