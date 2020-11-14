@@ -22,6 +22,10 @@ angular.module('reg')
         settings.timeOpen = new Date(settings.timeOpen);
         settings.timeClose = new Date(settings.timeClose);
         settings.timeConfirm = new Date(settings.timeConfirm);
+        settings.timeConceptNoteOpen = new Date(settings.timeConceptNoteOpen);
+        settings.timeConceptNoteClose = new Date(settings.timeConceptNoteClose);
+        settings.timeSolutionsOpen = new Date(settings.timeSolutionsOpen);
+        settings.timeSolutionsClose = new Date(settings.timeSolutionsClose);
 
         $scope.settings = settings;
       }
@@ -95,6 +99,48 @@ angular.module('reg')
 
         SettingsService
           .updateRegistrationTimes(open, close)
+          .then(response => {
+            updateSettings(response.data);
+            swal("Looks good!", "Registration Times Updated", "success");
+          });
+      };
+
+      $scope.updateConceptNoteSubmissionTimes = function(){
+        // Clean the dates and turn them to ms.
+        var open = cleanDate($scope.settings.timeConceptNoteOpen).getTime();
+        var close = cleanDate($scope.settings.timeConceptNoteClose).getTime();
+
+        if (open < 0 || close < 0 || open === undefined || close === undefined){
+          return swal('Oops...', 'You need to enter valid times.', 'error');
+        }
+        if (open >= close){
+          swal('Oops...', 'Submission cannot open after it closes.', 'error');
+          return;
+        }
+
+        SettingsService
+          .updateConceptNoteSubmissionTimes(open, close)
+          .then(response => {
+            updateSettings(response.data);
+            swal("Looks good!", "Registration Times Updated", "success");
+          });
+      };
+
+      $scope.updateSolutionSubmissionTimes = function(){
+        // Clean the dates and turn them to ms.
+        var open = cleanDate($scope.settings.timeSolutionsOpen).getTime();
+        var close = cleanDate($scope.settings.timeSolutionsClose).getTime();
+
+        if (open < 0 || close < 0 || open === undefined || close === undefined){
+          return swal('Oops...', 'You need to enter valid times.', 'error');
+        }
+        if (open >= close){
+          swal('Oops...', 'Submission cannot open after it closes.', 'error');
+          return;
+        }
+
+        SettingsService
+          .updateSolutionSubmissionTimes(open, close)
           .then(response => {
             updateSettings(response.data);
             swal("Looks good!", "Registration Times Updated", "success");

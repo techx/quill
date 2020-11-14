@@ -22,6 +22,22 @@ var schema = new mongoose.Schema({
     type: Number,
     default: 604800000 // Date of confirmation
   },
+  timeConceptNoteOpen: {
+    type: Number,
+    default: 0
+  },
+  timeConceptNoteClose: {
+    type: Number,
+    default: Date.now() + 31104000000 // Add a year from now.
+  },
+  timeSolutionsOpen: {
+    type: Number,
+    default: 0
+  },
+  timeSolutionsClose: {
+    type: Number,
+    default: Date.now() + 31104000000 // Add a year from now.
+  },
   whitelistedEmails: {
     type: [String],
     select: false,

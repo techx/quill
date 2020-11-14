@@ -8,7 +8,7 @@ const AdminStatsCtrl = require('../views/admin/stats/adminStatsCtrl.js');
 const AdminUserCtrl = require('../views/admin/user/adminUserCtrl.js');
 const AdminUsersCtrl = require('../views/admin/users/adminUsersCtrl.js');
 const ApplicationCtrl = require('../views/application/applicationCtrl.js');
-const ConfirmationCtrl = require('../views/confirmation/confirmationCtrl.js');
+const ConceptNoteCtrl = require('../views/concept_note/conceptNoteCtrl.js');
 const DashboardCtrl = require('../views/dashboard/dashboardCtrl.js');
 const LoginCtrl = require('../views/login/loginCtrl.js');
 const ResetCtrl = require('../views/reset/resetCtrl.js');
@@ -92,10 +92,10 @@ angular.module('reg')
           }
         }
       })
-      .state('app.confirmation', {
-        url: "/confirmation",
-        templateUrl: "views/confirmation/confirmation.html",
-        controller: 'ConfirmationCtrl',
+      .state('app.concept_note', {
+        url: "/note",
+        templateUrl: "views/concept_note/conceptNote.html",
+        controller: 'ConceptNoteCtrl',
         data: {
           requireAdmitted: true
         },

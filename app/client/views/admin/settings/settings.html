@@ -49,24 +49,31 @@
       <div class="ui form">
 
         <div class="ui header">
-          Confirmation Date
+          Concept Note Submission Date
         </div>
 
         <p>
-          Any users that are accepted will have to confirm by the date selected.
+          Users will be able to submit a concept note within the time period specified.
         </p>
 
         <div class="field">
           <label>
-            Confirm By: {{ formatDate(settings.timeConfirm) }}
+            Opens: {{ formatDate(settings.timeConceptNoteOpen) }}
           </label>
-          <input type="datetime-local" ng-model="settings.timeConfirm">
+          <input type="datetime-local" ng-model="settings.timeConceptNoteOpen">
+        </div>
+
+        <div class="field">
+          <label>
+            Closes: {{ formatDate(settings.timeConceptNoteClose) }}
+          </label>
+          <input type="datetime-local" ng-model="settings.timeConceptNoteClose">
         </div>
 
         <div class="ui field">
           <div
             class="ui green button"
-            ng-click="updateConfirmationTime()">
+            ng-click="updateConceptNoteSubmissionTimes()">
             Update
           </div>
         </div>
@@ -74,6 +81,49 @@
     </div>
 
   </div>
+
+  <div class="column">
+
+    <!-- Reigstration Open/Close -->
+    <div
+      ng-class="{'loading': loading}"
+      class="ui red segment">
+      <div class="ui form">
+
+        <div class="ui header">
+          Solutions Submission Date
+        </div>
+
+        <p>
+          Users will be able to submit solutions the time period specified.
+        </p>
+
+        <div class="field">
+          <label>
+            Opens: {{ formatDate(settings.timeSolutionsOpen) }}
+          </label>
+          <input type="datetime-local" ng-model="settings.timeSolutionsOpen">
+        </div>
+
+        <div class="field">
+          <label>
+            Closes: {{ formatDate(settings.timeSolutionsClose) }}
+          </label>
+          <input type="datetime-local" ng-model="settings.timeSolutionsClose">
+        </div>
+
+        <div class="ui field">
+          <div
+            class="ui green button"
+            ng-click="updateSolutionSubmissionTimes()">
+            Update
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
 </div>
 
 <!-- Additional Options -->

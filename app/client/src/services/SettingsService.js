@@ -20,6 +20,18 @@ angular.module('reg')
           time: time
         });
       },
+      updateConceptNoteSubmissionTimes: function(open, close){
+        return $http.put(base + 'concept-note-dates', {
+          timeConceptNoteOpen: open,
+          timeConceptNoteClose: close
+        });
+      },
+      updateSolutionSubmissionTimes: function(open, close){
+        return $http.put(base + 'solution-dates', {
+          timeSolutionsOpen: open,
+          timeSolutionsClose: close
+        });
+      },
       getWhitelistedEmails: function(){
         return $http.get(base + 'whitelist');
       },

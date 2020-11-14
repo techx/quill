@@ -430,6 +430,30 @@ module.exports = function(router) {
   });
 
   /**
+   * Update the concept note submission date.
+   * body: {
+   *   time: Number
+   * }
+   */
+  router.put('/settings/concept-note-dates', isAdmin, function(req, res){
+    var open = req.body.timeConceptNoteOpen;
+    var close = req.body.timeConceptNoteClose;
+    SettingsController.updateConceptNoteSubmissionTimes(open, close, defaultResponse(req, res));
+  });
+
+  /**
+   * Update the concept note submission date.
+   * body: {
+   *   time: Number
+   * }
+   */
+  router.put('/settings/solution-dates', isAdmin, function(req, res){
+    var open = req.body.timeSolutionsOpen;
+    var close = req.body.timeSolutionsClose;
+    SettingsController.updateSolutionSubmissionTimes(open, close, defaultResponse(req, res));
+  });
+
+  /**
    * Set the registration open and close times.
    * body : {
    *   timeOpen: Number,

@@ -73,6 +73,66 @@ SettingsController.updateRegistrationTimes = function(open, close, callback){
 };
 
 /**
+ * Set the time window for concept note submission.
+ * If either open or close are null, do not change that time.
+ * @param  {Number}   open     Open time in ms
+ * @param  {Number}   close    Close time in ms
+ * @param  {Function} callback args(err, settings)
+ */
+SettingsController.updateConceptNoteSubmissionTimes = function(open, close, callback){
+  var updatedTimes = {};
+
+  if (close <= open){
+    return callback({
+      message: "Submission cannot close before or at exactly the same time it opens."
+    });
+  }
+
+  if (open){
+    updatedTimes.timeConceptNoteOpen = open;
+  }
+
+  if (close){
+    updatedTimes.timeConceptNoteClose = close;
+  }
+
+  Settings
+    .findOneAndUpdate({},{
+      $set: updatedTimes
+    }, {new: true}, callback);
+};
+
+/**
+ * Set the time window for concept note submission.
+ * If either open or close are null, do not change that time.
+ * @param  {Number}   open     Open time in ms
+ * @param  {Number}   close    Close time in ms
+ * @param  {Function} callback args(err, settings)
+ */
+SettingsController.updateSolutionSubmissionTimes = function(open, close, callback){
+  var updatedTimes = {};
+
+  if (close <= open){
+    return callback({
+      message: "Submission cannot close before or at exactly the same time it opens."
+    });
+  }
+
+  if (open){
+    updatedTimes.timeSolutionsOpen = open;
+  }
+
+  if (close){
+    updatedTimes.timeSolutionsClose = close;
+  }
+
+  Settings
+    .findOneAndUpdate({},{
+      $set: updatedTimes
+    }, {new: true}, callback);
+};
+
+/**
  * Get the open and close time for registration.
  * @param  {Function} callback args(err, times : {timeOpen, timeClose})
  */
