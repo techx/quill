@@ -102,6 +102,9 @@ angular.module('reg')
         resolve: {
           currentUser: function(UserService){
             return UserService.getCurrentUser();
+          },
+          settings: function(SettingsService){
+            return SettingsService.getPublicSettings();
           }
         }
       })

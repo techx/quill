@@ -6,15 +6,17 @@ angular.module('reg')
     '$rootScope',
     '$state',
     'currentUser',
+    'settings',
     'Utils',
     'UserService',
-    function($scope, $rootScope, $state, currentUser, Utils, UserService){
+    function($scope, $rootScope, $state, currentUser, settings, Utils, UserService){
 
       // Set up the user
       var user = currentUser.data;
       $scope.user = user;
 
       $scope.pastConfirmation = Date.now() > user.status.confirmBy;
+      $scope.conceptNoteStartDate = Utils.formatTime(settings.data.timeConceptNoteOpen);
 
       $scope.formatTime = Utils.formatTime;
 
