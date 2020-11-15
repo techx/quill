@@ -97,7 +97,7 @@ angular.module('reg')
         templateUrl: "views/concept_note/conceptNote.html",
         controller: 'ConceptNoteCtrl',
         data: {
-          requireAdmitted: true
+          requireVerified: true
         },
         resolve: {
           currentUser: function(UserService){
