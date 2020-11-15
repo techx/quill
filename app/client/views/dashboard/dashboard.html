@@ -68,14 +68,14 @@
           {{ timeClose }}
         </div>
 
-        <div
+        <!-- <div
           ng-class="settings.timeConfirm"
           ng-if="dashState('admittedAndCanConfirm') || dashState('admittedAndCannotConfirm') || dashState('confirmed') || dashState('declined')">
           <strong>
             Confirmation Deadline:
           </strong>
           {{ timeConfirm }}
-        </div>
+        </div> -->
 
         <div
           ng-if="dashState('openAndIncomplete')"
@@ -91,7 +91,7 @@
 
           <div class="ui purple button"
                ui-sref="app.application">
-            Complete your application
+            Complete your registration application
           </div>
 
         </div>
@@ -216,6 +216,24 @@
           ng-if="dashState('confirmed')">
 
           <div
+            class="ui pink button"
+            ng-show="!user.teamCode"
+            ui-sref="app.team">
+            Create or join a team
+          </div>
+
+          <br/>
+          <br/>
+
+          <p>A concept note can only be submitted by a team even if it is a single member team.</p>
+
+        </div>
+
+        <!-- <div
+          class="description"
+          ng-if="dashState('confirmed')">
+
+          <div
             ng-show="!pastConfirmation"
             class="markdown">
             <h4>
@@ -238,7 +256,7 @@
             Sorry, I can't make it
           </div>
 
-        </div>
+        </div> -->
 
         <div
           class="description"
