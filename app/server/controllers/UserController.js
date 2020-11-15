@@ -447,6 +447,8 @@ UserController.getTeammates = function(id, callback){
  */
 UserController.createOrJoinTeam = function(id, code, callback){
 
+  code = code.toLowerCase();
+
   if (!code){
     return callback({
       message: "Please enter a team name."
