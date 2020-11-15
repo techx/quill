@@ -434,7 +434,7 @@ UserController.getTeammates = function(id, callback){
       .find({
         teamCode: code
       })
-      .select('profile.name')
+      .select('profile.name profile.nationality')
       .exec(callback);
   });
 };

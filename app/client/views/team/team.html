@@ -51,6 +51,7 @@
 
         <div
           ng-show="user.teamCode">
+          <p><strong>{{ nationalityWarning }}</strong></p>
           <div class="form">
             <div class="title">
               Your Team Name:
@@ -74,7 +75,7 @@
           <p
             ng-repeat="user in teammates"
             class="item">
-            {{user.profile.name || 'Somebody (has not filled out their profile!)'}}
+            {{user.profile.name || 'Somebody (has not filled out their profile!)'}} {{nationality}}
           </p>
 
           <div
