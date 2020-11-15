@@ -139,6 +139,11 @@ angular.module('reg')
                 {
                   type: 'empty',
                   prompt: 'Please enter your name.'
+                },
+                {
+                  type: 'regExp',
+                  value: /^([a-zA-Z]+\s)*[a-zA-Z]+$/i,
+                  prompt: 'Name can only contain characters.'
                 }
               ]
             },
@@ -148,6 +153,11 @@ angular.module('reg')
                 {
                   type: 'empty',
                   prompt: 'Please enter your school name.'
+                },
+                {
+                  type: 'regExp',
+                  value: /^([a-zA-Z]+\s)*[a-zA-Z]+$/i,
+                  prompt: 'School can only contain characters.'
                 }
               ]
             },
@@ -157,6 +167,11 @@ angular.module('reg')
                 {
                   type: 'empty',
                   prompt: 'Please enter your phone number.'
+                },
+                {
+                  type: 'regExp',
+                  value: /^([0-9+]+\s)*[0-9+]+$/i,
+                  prompt: 'Phone number can only contain +, SPACE and [0-9] digits.'
                 }
               ]
             },
@@ -175,6 +190,11 @@ angular.module('reg')
                 {
                   type: 'empty',
                   prompt: 'Please enter your nationality.'
+                },
+                {
+                  type: 'regExp',
+                  value: /^([a-zA-Z]+\s)*[a-zA-Z]+$/i,
+                  prompt: 'Nationality can only contain characters.'
                 }
               ]
             },
@@ -202,6 +222,11 @@ angular.module('reg')
                 {
                   type: 'empty',
                   prompt: 'Please type your digital signature.'
+                },
+                {
+                  type: 'regExp',
+                  value: /^([a-zA-Z]+\s)*[a-zA-Z]+$/i,
+                  prompt: 'Your Digital Signature can only contain characters.'
                 }
               ]
             },
@@ -211,6 +236,11 @@ angular.module('reg')
                 {
                   type: 'empty',
                   prompt: 'Please type your digital signature.'
+                },
+                {
+                  type: 'regExp',
+                  value: /^([a-zA-Z]+\s)*[a-zA-Z]+$/i,
+                  prompt: 'Your Digital Signature can only contain characters.'
                 }
               ]
             },
@@ -220,6 +250,11 @@ angular.module('reg')
                 {
                   type: 'empty',
                   prompt: 'Please type your digital signature.'
+                },
+                {
+                  type: 'regExp',
+                  value: /^([a-zA-Z]+\s)*[a-zA-Z]+$/i,
+                  prompt: 'Your Digital Signature can only contain characters.'
                 }
               ]
             },
@@ -231,6 +266,39 @@ angular.module('reg')
                   prompt : 'You must agree to the declaration'
                 }
               ]
+            },
+            age: {
+              identifier: 'age',
+              rules: [
+                {
+                  type: 'integer',
+                  prompt: '{name} must be an integer'
+                },
+                {
+                  type: 'integer[8..110]',
+                  prompt: 'Participant must be an adult.'
+                }
+              ]
+            },
+            github: {
+              identifier: 'github',
+              rules: [
+                {
+                  type: 'regExp',
+                  value: '/(^$|^(https://){0,1}(github.com/)+(.)*)/i',
+                  prompt: 'Not a valid github link.'
+                }
+              ]
+            },
+            twitter: {
+              identifier: 'twitter',
+              rules: [
+                {
+                  type: 'regExp',
+                  value: '/(^$|^(https://){0,1}(twitter.com/)+(.)*)/i',
+                  prompt: 'Not a valid twitter link.'
+                }
+              ]
             }
           }
         });
@@ -240,7 +308,7 @@ angular.module('reg')
         if ($('.ui.form').form('is valid')){
           _updateUser();
         } else {
-          swal("Uh oh!", "Please Fill The Required Fields", "error");
+          swal("Uh oh!", "Please Fill The Required Fields Correctly", "error");
         }
       };
     }]);
