@@ -1,7 +1,7 @@
 const swal = require('sweetalert');
 
 angular.module('reg')
-  .controller('ConfirmationCtrl', [
+  .controller('ConceptNoteCtrl', [
     '$scope',
     '$rootScope',
     '$state',
