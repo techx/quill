@@ -19,7 +19,7 @@ angular.module('reg')
       }
 
       $scope.TEAM = TEAM;
-      $scope.nationalityWarning = 'A team should have at least one participant of Indian nationality. If this criteria is not met your team would be disqualified.'
+      $scope.nationalityWarning = 'A team should have at least one participant of Indian nationality. If this criteria is not met, your team would be disqualified.'
 
       function _populateTeammates() {
         UserService
