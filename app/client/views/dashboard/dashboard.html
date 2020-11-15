@@ -61,7 +61,7 @@
 
         <div
           ng-class="settings.timeClose"
-          ng-if="!dashState('admittedAndCanConfirm') || !dashState('admittedAndCannotConfirm') || !dashState('confirmed') || !dashState('declined')">
+          ng-if="!dashState('confirmed')">
           <strong>
             Registration Deadline:
           </strong>
@@ -222,11 +222,24 @@
             Create or join a team
           </div>
 
-          <br/>
-          <br/>
+          
 
-          <p>A concept note can only be submitted by a team even if it is a single member team.</p>
+          <p ng-show="!user.teamCode">
+            <br/>
+            <br/>
+            A concept note can only be submitted by a team even if it is a single member team.</p>
 
+        </div>
+
+        <div
+          class="description"
+          ng-if="dashState('confirmed') && user.teamCode">
+
+          <div
+            class="ui pink button"
+            ui-sref="app.concept_note">
+            Submit concept note
+          </div>
         </div>
 
         <!-- <div
