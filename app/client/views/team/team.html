@@ -2,6 +2,7 @@
   <div class="divided title">
     Team
   </div>
+  
   <div class="ui stackable centered page grid">
     <div class="column">
       <div
@@ -11,6 +12,9 @@
       </div>
 
       <div class="ui segment">
+        <p ng-show="!user.teamCode && regIsOpen">Create a team with a unique name here. Share this name with your teammates so that they can join your team after they register at hack.dataspace.mobi.  
+          <strong>Remember that it is mandatory to have at least one person of Indian nationality in your team.</strong> A team can have a maximum of four members. Read the <a href="https://smartmove.niua.org/#/guidelines">challenge guidelines</a> for more details.
+          </p>
         <div
           ng-show="!user.teamCode && !regIsOpen">
           <p>
