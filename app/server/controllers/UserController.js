@@ -469,7 +469,7 @@ UserController.createOrJoinTeam = function(id, code, callback){
     // Check to see if this team is joinable (< team max size)
     if (users.length >= maxTeamSize){
       return callback({
-        message: "Team is full."
+        message: "Team is full. If you need assistance to join or leave a team contact smartmove@niua.org"
       });
     }
 
