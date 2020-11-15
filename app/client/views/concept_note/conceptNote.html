@@ -8,9 +8,24 @@
 
       <div class="ui form">
 
-        <div class="divided title">Theme</div>
+        <div ng-show="!user.teamCode">
 
-        <fieldset ng-disabled="">
+          <p>Please create or join a team to submit the concept note.</p>
+
+          <div
+            class="ui pink button"
+            ng-show="!user.teamCode"
+            ui-sref="app.team">
+            Create or join a team
+          </div>
+
+        </div>
+
+        
+
+        <fieldset ng-show="user.teamCode">
+
+          <div class="divided title">Theme</div>
 
           <div class="field">
             <label>Select a Theme (required)</label>
@@ -33,7 +48,7 @@
             <input type="text"
                    name="conceptNoteURL"
                    placeholder="https://google.drive.com/..."
-                   ng-model="">
+                   >
           </div>
 
           <p><strong>We're working on a concept note template. This form will be enabled in a couple of days.</strong></p>
