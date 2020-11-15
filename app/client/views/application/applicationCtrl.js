@@ -151,6 +151,15 @@ angular.module('reg')
                 }
               ]
             },
+            phone: {
+              identifier: 'phone',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please enter your phone number.'
+                }
+              ]
+            },
             course: {
               identifier: 'course',
               rules: [
