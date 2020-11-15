@@ -391,7 +391,7 @@ schema.virtual('status.name').get(function(){
   }
 
   if (this.status.confirmed) {
-    return "confirmed";
+    return "registered";
   }
 
   if (this.status.admitted) {
