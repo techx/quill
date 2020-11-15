@@ -31,18 +31,18 @@
 
     <div
       ui-sref-active="active"
-      ui-sref="app.concept_note"
-      ng-show="!pastConfirmation && currentUser.status.admitted && !currentUser.status.declined && currentUser.status.completedProfile"
-      class="item">
-      Concept Note Submission
-    </div>
-
-    <div
-      ui-sref-active="active"
       ui-sref="app.team"
       ng-show="!currentUser.status.declined"
       class="item">
       Team
+    </div>
+
+    <div
+      ui-sref-active="active"
+      ui-sref="app.concept_note"
+      ng-show="!pastConfirmation && currentUser.status.admitted && !currentUser.status.declined && currentUser.status.completedProfile"
+      class="item">
+      Concept Note Submission
     </div>
 
     <div
