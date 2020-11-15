@@ -10,7 +10,7 @@
 
         <div class="divided title">Theme</div>
 
-        <fieldset ng-disabled="pastConfirmation">
+        <fieldset ng-disabled="">
 
           <div class="field">
             <label>Select a Theme (required)</label>
@@ -31,16 +31,19 @@
           <div class="field">
             <label> Please upload your concept note document </label>
             <input type="text"
-                   name="signatureLiabilityWaiver"
-                   placeholder="Your Full Legal Name"
-                   ng-model="user.confirmation.signatureLiability">
+                   name="conceptNoteURL"
+                   placeholder="https://google.drive.com/..."
+                   ng-model="">
           </div>
 
+          <p><strong>We're working on a concept note template. This form will be enabled in a couple of days.</strong></p>
 
-          <div class="field" ng-hide="regIsClosed">
+
+          <div class="field">
             <button type="submit"
                     class="fluid ui purple button"
-                    ng-click="submitForm()">
+                    ng-click="submitForm()"
+                    disabled>
               Submit
             </button>
           </div>
