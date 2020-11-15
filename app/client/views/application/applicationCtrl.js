@@ -27,6 +27,7 @@ angular.module('reg')
 
       // Populate the school dropdown
       populateSchools();
+      populateNationality();
       _setupForm();
 
       $scope.regIsClosed = Date.now() > settings.data.timeClose;
@@ -66,6 +67,32 @@ angular.module('reg')
                 cache: true,
                 onSelect: function(result, response) {
                   $scope.user.profile.school = result.title.trim();
+                }
+              });
+          });
+      }
+
+      function populateNationality(){
+
+        $http
+          .get('/assets/nationality.csv')
+          .then(function(res){
+            $scope.nationality = res.data.split('\n');
+            $scope.nationality.push('Other');
+
+            var content = [];
+
+            for(i = 0; i < $scope.nationality.length; i++) {
+              $scope.nationality[i] = $scope.nationality[i].trim();
+              content.push({title: $scope.nationality[i]});
+            }
+
+            $('#nationality.ui.search')
+              .search({
+                source: content,
+                cache: true,
+                onSelect: function(result, response) {
+                  $scope.user.profile.nationality = result.title.trim();
                 }
               });
           });

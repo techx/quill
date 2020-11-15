@@ -32,10 +32,12 @@
           <p>
             Remember that it is mandatory to have at least one person of Indian nationality in your team. Read the <a href="https://smartmove.niua.org/#/guidelines">challenge guidelines</a> for more details.
           </p>
-          <input type="text"
-                 name="nationality"
-                 placeholder="Indian"
-                 ng-model="user.profile.nationality">
+          <div id="nationality" class="ui search">
+            <div class="ui input">
+              <input class="prompt" type="text" placeholder="Indian, Mexican" name="nationality" ng-model="user.profile.nationality">                
+            </div>
+            <div class="results"></div>
+          </div>
         </div>
 
         <div class="field" ng-show="autoFilledSchool">
