@@ -1,0 +1,12 @@
+[Unit]
+Description=Service to start quill
+
+[Service]
+Type=simple
+User=ubuntu
+StandardOutput=syslog
+StandardError=syslog
+WorkingDirectory=/home/ubuntu/quill
+ExecStart=/home/ubuntu/.nvm/versions/node/v12.19.0/bin/npm run prod
+Restart=always
+RestartSec=1
