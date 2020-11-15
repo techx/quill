@@ -43,6 +43,10 @@
         background: $status-confirmed-color;
       }
 
+      &.registered {
+        background: $status-confirmed-color;
+      }
+
       &.checked.in {
         background: $status-checkedin-color;
       }
