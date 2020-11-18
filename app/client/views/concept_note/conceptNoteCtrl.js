@@ -14,7 +14,7 @@ angular.module('reg')
       // Set up the user
       var user = currentUser.data;
       $scope.user = user;
-
+      // console.log(user);
       $scope.pastConfirmation = Date.now() > user.status.confirmBy;
       $scope.conceptNoteStartDate = Utils.formatTime(settings.data.timeConceptNoteOpen);
 
@@ -68,6 +68,7 @@ angular.module('reg')
             swal("Uh oh!", "Something went wrong.", "error");
           });
       }
+
 
       function _setupForm(){
         // Semantic-UI form validation
@@ -123,9 +124,17 @@ angular.module('reg')
       }
 
       $scope.submitForm = function(){
-        if ($('.ui.form').form('is valid')){
-          _updateUser();
-        }
+        UserService
+          .updateTheme($scope.user._id, $scope.user.theme)
+          .then(response => {
+            // _updateUser();
+            swal("Woo!", "You're confirmed!", "success").then(value => {
+              $state.go("app.note");
+            });
+          }, response => {
+            // console.log(response);
+            swal("Uh oh!", "Something went wrong.", "error");
+          });
       };
 
     }]);

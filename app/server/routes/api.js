@@ -242,6 +242,19 @@ module.exports = function(router) {
   /**
    * [OWNER/ADMIN]
    *
+   * PUT - Update a specific user's theme.
+   */
+  router.put('/users/:id/theme', isOwnerOrAdmin, function(req, res){
+    var theme = req.body.theme;
+    var id = req.params.id;
+
+    UserController.updateThemeById(id, theme , defaultResponse(req, res));
+  });
+
+
+  /**
+   * [OWNER/ADMIN]
+   *
    * PUT - Update a specific user's confirmation information.
    */
   router.put('/users/:id/confirm', isOwnerOrAdmin, function(req, res){

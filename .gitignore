@@ -3,6 +3,7 @@ db/
 node_modules/
 semantic/
 .env
+package-lock.json
 
 # Output
 app/client/build/

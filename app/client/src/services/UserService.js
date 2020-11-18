@@ -40,6 +40,12 @@ angular.module('reg')
         });
       },
 
+      updateTheme: function(id, theme){
+        return $http.put(base + id + '/theme', {
+          theme: theme
+        });
+      },
+
       updateConfirmation: function(id, confirmation){
         return $http.put(base + id + '/confirm', {
           confirmation: confirmation

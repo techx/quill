@@ -85,6 +85,14 @@ var profile = {
 
 };
 
+var theme={
+  name: {
+    type: String,
+    min: 1,
+    max: 100,
+  },
+};
+
 // Only after confirmed
 var confirmation = {
   phoneNumber: String,
@@ -243,6 +251,9 @@ var schema = new mongoose.Schema({
    * Profile validation will exist here.
    */
   profile: profile,
+
+  // User theme
+  theme:theme,
 
   /**
    * Confirmation information

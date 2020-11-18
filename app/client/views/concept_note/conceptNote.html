@@ -1,68 +1,72 @@
 <div class="page">
-  <div class="divided title">
-    Concept Note Submission
-  </div>
+  <div class="divided title">Concept Note Submission</div>
 
   <div class="ui stackable centered page grid">
     <div class="column">
-
       <div class="ui form">
-
-        <div ng-show="!user.teamCode" style="text-align: center;">
-
+        <div ng-show="!user.teamCode" style="text-align: center">
           <p>Please create or join a team to submit the concept note.</p>
 
           <div
             class="ui pink button"
             ng-show="!user.teamCode"
-            ui-sref="app.team">
+            ui-sref="app.team"
+          >
             Create or join a team
           </div>
-
         </div>
 
-        
-
         <fieldset ng-show="user.teamCode">
-
           <div class="divided title">Theme</div>
 
           <div class="field">
             <label>Select a Theme (required)</label>
-            <select
-              name="gender"
-              ng-model="user.profile.gender">
-              <option value="">Theme</option>
-              <option value="T">Restoring Public Transport Ridership</option>
-              <option value="F">Achieving Sustainable Public Transport and Resilience</option>
-              <option value="M">Equity in Mobility</option>
+            <select name="theme" ng-model="user.theme">
+              <option value=" ">Theme</option>
+              <option value="Restoring">Restoring Public Transport Ridership</option>
+              <option value="Sustainable">
+                Achieving Sustainable Public Transport and Resilience
+              </option>
+              <option value="Mobility">Equity in Mobility</option>
             </select>
           </div>
-
-          <br/>
+          <div class="field">
+            <button
+              type="submit"
+              class="fluid ui purple button"
+              ng-click="submitForm()"
+            >
+              Save
+            </button>
+          </div>
+          <br />
 
           <div class="divided title">Concept Note</div>
 
           <div class="field">
             <label> Please upload your concept note document </label>
-            <input type="text"
-                   name="conceptNoteURL"
-                   placeholder="https://google.drive.com/..."
-                   >
+            <input
+              type="text"
+              name="conceptNoteURL"
+              placeholder="https://google.drive.com/..."
+            />
           </div>
 
-          <p>Submissions accepted from <strong>{{ conceptNoteStartDate }}</strong></p>
-
+          <p>
+            Submissions accepted from
+            <strong>{{ conceptNoteStartDate }}</strong>
+          </p>
 
           <div class="field">
-            <button type="submit"
-                    class="fluid ui purple button"
-                    ng-click="submitForm()"
-                    disabled>
+            <button
+              type="submit"
+              class="fluid ui purple button"
+              ng-click="submitForm()"
+              disabled
+            >
               Submit
             </button>
           </div>
-
         </fieldset>
       </div>
     </div>
