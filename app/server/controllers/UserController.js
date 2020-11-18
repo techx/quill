@@ -137,7 +137,7 @@ UserController.createUser = function(email, password, callback) {
 
   if (typeof email !== "string"){
     return callback({
-      message: "Email must be a string."
+      message: "Please enter a valid email to Login/Register."
     });
   }
 
@@ -314,6 +314,34 @@ UserController.updateProfileById = function (id, profile, callback){
     });
 
   });
+};
+
+/**
+ * Update a user's theme object, given an id and a theme.
+ *
+ * @param  {String}   id       Id of the user
+ * @param  {Object}   theme  theme object
+ * @param  {Function} callback Callback with args (err, user)
+ */
+UserController.updateThemeById = function (id, theme, callback){
+
+  User.findOneAndUpdate({
+    _id: id,
+    verified: true
+  },
+    {
+      $set: {
+        'lastUpdated': Date.now(),
+        'theme': theme,
+        'status.completedProfile': true,
+        'status.admitted': true
+      }
+    },
+    {
+      new: true
+    },
+    callback);
+
 };
 
 /**

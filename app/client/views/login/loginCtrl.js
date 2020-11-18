@@ -12,29 +12,41 @@ angular.module('reg')
       var Settings = settings.data;
       $scope.regIsOpen = Utils.isRegOpen(Settings);
 
+      // toggle button
+      $scope.myValue = true;
       // Start state for login
       $scope.loginState = 'login';
       $scope.timeOpen = Utils.formatTime(Settings.timeOpen);
 
       function onSuccess() {
         $state.go('app.dashboard');
-      }
+      };
 
       function onError(data){
         $scope.error = data.message;
-      }
+      };
 
       function resetError(){
         $scope.error = null;
-      }
+      };
 
       $scope.login = function(){
+        $scope.myValue = true;
         resetError();
         AuthService.loginWithPassword(
           $scope.email, $scope.password, onSuccess, onError);
       };
 
+      $scope.showRegister = function(){
+        $scope.myValue = false;
+      };
+
+      $scope.showLogin = function(){
+        $scope.myValue = true;
+      };
+
       $scope.register = function(){
+        $scope.myValue = false;
         resetError();
         AuthService.register(
           $scope.email, $scope.password, onSuccess, onError);

@@ -2,53 +2,77 @@
   <div class="container">
     <div class="content">
       <div class="ui segment">
-
         <div class="logo">
-          <img src="assets/images/logo-color.svg">
+          <img src="assets/images/logo-color.svg" />
         </div>
 
         <div class="ui divider"></div>
 
-        <div class="ui small error message"
-             ng-show="error">
-          {{error}}
-        </div>
+        <div class="ui small error message" ng-show="error">{{error}}</div>
 
         <div ng-show="loginState === 'login'">
           <div class="ui login-password form">
             <form ng-submit="login()">
               <div class="field">
                 <label> Email</label>
-                <input type="email"
-                       id='email'
-                       placeholder="foo@bar.edu"
-                       ng-model="email">
+                <input
+                  type="email"
+                  id="email"
+                  placeholder="foo@bar.edu"
+                  ng-model="email"
+                />
               </div>
               <div class="field">
                 <label> Password</label>
-                <input type="password"
-                       id='password'
-                       placeholder="Password (at least 6 characters)"
-                       ng-model="password" required>
+                <input
+                  type="password"
+                  id="password"
+                  placeholder="Password (at least 6 characters)"
+                  ng-model="password"
+                  required
+                />
               </div>
-              <div class="field">
-                <button id="login-password"
-                        type="submit"
-                        class="fluid ui login button pa11y-click-login">
-                        Login
+              <div class="field" ng-show="myValue">
+                <button
+                  id="login-password"
+                  type="submit"
+                  class="fluid ui login button pa11y-click-login"
+                >
+                  Login
+                </button>
+              </div>
+              <div class="field" ng-show="myValue">
+                <button
+                  id="register"
+                  type="button"
+                  class="fluid ui register button"
+                  ng-click="showRegister()"
+                >
+                  Create an Account
                 </button>
               </div>
             </form>
           </div>
-
           <div class="ui form" ng-show="regIsOpen">
             <div class="ui divider"></div>
-            <div class="field">
-              <button id="register"
-                      type="submit"
-                      class="fluid ui register button"
-                      ng-click="register()">
-                      Register
+            <div class="field" ng-hide="myValue">
+              <button
+                id="register"
+                type="submit"
+                class="fluid ui register button"
+                ng-click="register()"
+              >
+                Register
+              </button>
+            </div>
+            <div class="field" ng-hide="myValue">
+              <button
+                id="login-password"
+                type="button"
+                class="fluid ui login button pa11y-click-login"
+                ng-click="showLogin()"
+              >
+                Login Now
               </button>
             </div>
           </div>
@@ -63,16 +87,20 @@
             <form ng-submit="sendResetEmail()">
               <div class="field">
                 <label> Email</label>
-                <input type="email"
-                       id='email'
-                       placeholder="foo@bar.in"
-                       ng-model="email">
+                <input
+                  type="email"
+                  id="email"
+                  placeholder="foo@bar.in"
+                  ng-model="email"
+                />
               </div>
               <div class="field">
-                <button id="forgot-password"
-                        type="submit"
-                        class="fluid ui login button">
-                        Send Reset Email
+                <button
+                  id="forgot-password"
+                  type="submit"
+                  class="fluid ui login button"
+                >
+                  Send Reset Email
                 </button>
               </div>
             </form>
@@ -82,9 +110,7 @@
         <div class="ui divider"></div>
 
         <div ng-show="loginState === 'login'" class="forgot">
-          <a href="#" ng-click="setLoginState('forgot')">
-            Forgot Password?
-          </a>
+          <a href="#" ng-click="setLoginState('forgot')"> Forgot Password? </a>
         </div>
 
         <div ng-show="loginState === 'forgot'" class="forgot">
@@ -92,10 +118,7 @@
             {{regIsOpen ? 'Login or Register' : 'Login'}}
           </a>
         </div>
-
-
       </div>
     </div>
-
   </div>
 </div>
