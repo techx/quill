@@ -1,64 +1,55 @@
 <div id="team" class="page">
-  <div class="divided title">
-    Team
-  </div>
-  
+  <div class="divided title">Team</div>
+
   <div class="ui stackable centered page grid">
     <div class="column">
-      <div
-        class="ui error message"
-        ng-show="error">
-        {{error}}
-      </div>
 
       <div class="ui segment">
-        <p ng-show="!user.teamCode && regIsOpen">Create a team with a unique name here. Share this name with your teammates so that they can join your team after they register at hack.dataspace.mobi.  
-          <strong>Remember that it is mandatory to have at least one person of Indian nationality in your team.</strong> A team can have a maximum of four members. Read the <a href="https://smartmove.niua.org/#/guidelines">challenge guidelines</a> for more details.
-          </p>
-        <div
-          ng-show="!user.teamCode && !regIsOpen">
-          <p>
-            {{ TEAM.NO_TEAM_REG_CLOSED }}
-          </p>
+        <p ng-show="!user.teamCode && regIsOpen">
+          Create a team with a unique name here. Share this name with your
+          teammates so that they can join your team after they register at
+          hack.dataspace.mobi.
+          <strong
+            >Remember that it is mandatory to have at least one person of Indian
+            nationality in your team.</strong
+          >
+          A team can have a maximum of four members. Read the
+          <a href="https://smartmove.niua.org/#/guidelines"
+            >challenge guidelines</a
+          >
+          for more details.
+        </p>
+        <div ng-show="!user.teamCode && !regIsOpen">
+          <p>{{ TEAM.NO_TEAM_REG_CLOSED }}</p>
         </div>
-        <div
-          class="ui form"
-          ng-show="!user.teamCode && regIsOpen">
+        <div class="ui form" ng-show="!user.teamCode && regIsOpen">
+          <div class="title">Create a Team</div>
 
-          <div class="title">
-            Join or Create a Team
-          </div>
-
-          <br>
+          <br />
 
           <div class="field">
             <input
               class="ui input"
               type="text"
               placeholder="Choose your team name..."
-              ng-model="code">
+              ng-model="code"
+            />
           </div>
 
           <div class="field">
-            <button
-              class="ui fluid pink button"
-              ng-click="joinTeam()">
-              Join or Create Team
+            <button class="ui fluid pink button" ng-click="joinTeam()">
+              Create Team
             </button>
           </div>
-
         </div>
 
-        <div
-          ng-show="user.teamCode">
+        <div ng-show="user.teamCode">
           <p><strong>{{ nationalityWarning }}</strong></p>
           <div class="form">
-            <div class="title">
-              Your Team Name:
-            </div>
+            <div class="title">Your Team Name:</div>
           </div>
-          <br>
-          <div class="subheader" style="text-transform: capitalize;">
+          <br />
+          <div class="subheader" style="text-transform: capitalize">
             {{user.teamCode}}
           </div>
 
@@ -67,30 +58,44 @@
           <div class="ui divider"></div>
 
           <div class="form">
-            <div class="title">
-              Your Team:
+            <div class="title">Your Team:</div>
+          </div>
+
+          <p ng-repeat="user in teammates" class="item">
+            {{user.profile.name || 'Somebody (has not filled out their
+            profile!)'}} {{nationality}}
+          </p>
+
+          <div ng-show="regIsOpen">
+            <div class="ui divider"></div>
+
+            <button class="ui fluid red button" ng-click="leaveTeam()">
+              Leave Team
+            </button>
+          </div>
+
+          <div class="ui form" ng-show="user.teamCode === user.teamAdmin && regIsOpen">
+            <div class="title">Enter your Teammate Email</div>
+            <br />
+            <div class="field">
+              <input
+                class="ui input"
+                type="email"
+                placeholder="Choose your team name..."
+                ng-model="email"
+              />
+            </div>
+
+            <div class="field">
+              <button class="ui fluid red button" ng-click="addTeamates()">
+                Add Teamates
+              </button>
             </div>
           </div>
 
-          <p
-            ng-repeat="user in teammates"
-            class="item">
-            {{user.profile.name || 'Somebody (has not filled out their profile!)'}} {{nationality}}
-          </p>
-
-          <div
-            ng-show="regIsOpen">
-            <div class="ui divider"></div>
-
-            <button
-              class="ui fluid red button"
-              ng-click="leaveTeam()">Leave Team</button>
-          </div>
-
         </div>
-
       </div>
+      <div class="ui error message" ng-show="error">{{error}}</div>
     </div>
   </div>
-
 </div>

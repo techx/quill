@@ -230,6 +230,12 @@ var schema = new mongoose.Schema({
     max: 140,
   },
 
+  teamAdmin: {
+    type: String,
+    min: 0,
+    max: 140,
+  },
+
   verified: {
     type: Boolean,
     required: true,

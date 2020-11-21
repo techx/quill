@@ -64,6 +64,9 @@ angular.module('reg')
           code: code
         });
       },
+      addTeamMates: function(emailAndCode){
+        return $http.put(base + Session.getUserId() + '/teammate', emailAndCode);
+      },
 
       leaveTeam: function(){
         return $http.delete(base + Session.getUserId() + '/team');

@@ -494,20 +494,27 @@ UserController.createOrJoinTeam = function(id, code, callback){
   })
   .select('profile.name')
   .exec(function(err, users){
+    // console.log('db user:',users);
     // Check to see if this team is joinable (< team max size)
     if (users.length >= maxTeamSize){
       return callback({
         message: "Team is full. If you need assistance to join or leave a team contact smartmove@niua.org"
       });
     }
-
+    if (users.length !== 0) {
+      return callback({
+        message: "Team Name Not Available"
+      });
+    }
+    
     // Otherwise, we can add that person to the team.
     User.findOneAndUpdate({
       _id: id,
       verified: true
     },{
       $set: {
-        teamCode: code
+        teamCode: code,
+        teamAdmin:code,
       }
     }, {
       new: true
@@ -516,6 +523,71 @@ UserController.createOrJoinTeam = function(id, code, callback){
 
   });
 };
+
+/**
+ * Given a team code and id, join a team.
+ * @param  {String}   id       Id of the user joining/creating
+ * @param  {String}   code     Code of the proposed team
+ * @param  {Function} callback args(err, users)
+ */
+UserController.addTeamMates = function( id, email, code, callback){
+  // console.log('USer controller :', email, code);
+  code = code.toLowerCase();
+
+  if (!code){
+    return callback({
+      message: "Please enter a team name."
+    });
+  }
+  if (!email){
+    return callback({
+      message: "Please enter valid email."
+    });
+  }
+
+  if (typeof code !== 'string' && typeof email !== 'string') {
+    return callback({
+      message: "Get outta here, punk!"
+    });
+  }
+
+  User.find({
+    teamCode: code
+  })
+  .select('profile.name')
+  .exec(function(err, users){
+    // Check to see if this team is joinable (< team max size)
+    if (users.length >= maxTeamSize){
+      return callback({
+        message: "Team is full. If you need assistance to join or leave a team contact smartmove@niua.org"
+      });
+    }
+    User.findOne({email:email},function(err, user){
+      // console.log('check user ',user);
+      if (user.teamCode) {
+        return callback({
+          message:"Your team mate is already part of another team",
+        });
+      }
+
+      // Otherwise, we can add that person to the team.
+    User.findOneAndUpdate({
+      email: email,
+      verified: true
+    },{
+      $set: {
+        teamCode: code,
+      }
+    }, {
+      new: true
+    },
+    callback);
+
+  });
+    });
+    
+};
+
 
 /**
  * Given an id, remove them from any teams.
@@ -527,7 +599,8 @@ UserController.leaveTeam = function(id, callback){
     _id: id
   },{
     $set: {
-      teamCode: null
+      teamCode: null,
+      teamAdmin:null,
     }
   }, {
     new: true

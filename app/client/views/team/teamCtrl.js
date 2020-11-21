@@ -13,13 +13,14 @@ angular.module('reg')
       $scope.regIsOpen = Utils.isRegOpen(Settings);
 
       $scope.user = currentUser.data;
-      $scope.nationality = ''
+      $scope.nationality = '';
+      console.log('currentUser',currentUser.data);
       if(currentUser.data.profile.nationality) {
-        $scope.nationality = '(' + currentUser.data.profile.nationality + ')'
+        $scope.nationality = '(' + currentUser.data.profile.nationality + ')';
       }
 
       $scope.TEAM = TEAM;
-      $scope.nationalityWarning = 'A team should have at least one participant of Indian nationality. If this criteria is not met, your team would be disqualified.'
+      $scope.nationalityWarning = 'A team should have at least one participant of Indian nationality. If this criteria is not met, your team would be disqualified.';
 
       function _populateTeammates() {
         UserService
@@ -28,12 +29,11 @@ angular.module('reg')
             $scope.error = null;
             $scope.teammates = response.data;
             response.data.forEach(u => {
-              console.log(response.data)
               if(u.profile.nationality.toLowerCase() == 'indian' || u.profile.nationality.toLowerCase() == 'india') {
-                $scope.nationalityWarning = ''
+                $scope.nationalityWarning = '';
                 return;
               }
-            })
+            });
           });
       }
 
@@ -61,6 +61,19 @@ angular.module('reg')
             $scope.error = null;
             $scope.user = response.data;
             $scope.teammates = [];
+          }, response => {
+            $scope.error = response.data.message;
+          });
+      };
+
+      $scope.addTeamates = function(){
+        UserService
+          .addTeamMates({email:$scope.email,code:$scope.user.teamCode})
+          .then(response => {
+            $scope.error = null;
+            $scope.user = response.data;
+            _populateTeammates();
+            location.reload();
           }, response => {
             $scope.error = response.data.message;
           });

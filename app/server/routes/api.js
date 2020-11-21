@@ -300,6 +300,21 @@ module.exports = function(router) {
   });
 
   /**
+   * Add teammates here.
+   * {
+   *   email: STRING
+   * }
+   */
+  router.put('/users/:id/teammate', isOwnerOrAdmin, function(req, res){
+    var email = req.body.email;
+    var code = req.body.code;
+    var id = req.params.id;
+    // console.log('api.js :',id, email, code);
+
+    UserController.addTeamMates(id, email,code, defaultResponse(req, res));
+
+  });
+  /**
    * Remove a user from a team.
    */
   router.delete('/users/:id/team', isOwnerOrAdmin, function(req, res){
