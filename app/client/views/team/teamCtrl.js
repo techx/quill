@@ -1,12 +1,13 @@
 angular.module('reg')
   .controller('TeamCtrl', [
     '$scope',
+    '$state',
     'currentUser',
     'settings',
     'Utils',
     'UserService',
     'TEAM',
-    function($scope, currentUser, settings, Utils, UserService, TEAM){
+    function($scope,$state ,currentUser, settings, Utils, UserService, TEAM){
       // Get the current user's most recent data.
       var Settings = settings.data;
 
@@ -14,7 +15,7 @@ angular.module('reg')
 
       $scope.user = currentUser.data;
       $scope.nationality = '';
-      console.log('currentUser',currentUser.data);
+      // console.log('currentUser',currentUser.data);
       if(currentUser.data.profile.nationality) {
         $scope.nationality = '(' + currentUser.data.profile.nationality + ')';
       }
@@ -27,13 +28,15 @@ angular.module('reg')
           .getMyTeammates()
           .then(response => {
             $scope.error = null;
-            $scope.teammates = response.data;
-            response.data.forEach(u => {
-              if(u.profile.nationality.toLowerCase() == 'indian' || u.profile.nationality.toLowerCase() == 'india') {
-                $scope.nationalityWarning = '';
-                return;
-              }
-            });
+            // console.log('teammates:', response.data[0].teamMates);
+            $scope.teammates = response.data[0].teamMates;
+            $scope.nationalityWarning = '';
+            // response.data.forEach(u => {
+            //   if(u.profile.nationality.toLowerCase() == 'indian' || u.profile.nationality.toLowerCase() == 'india') {
+            //     $scope.nationalityWarning = '';
+            //     return;
+            //   }
+            // });
           });
       }
 
@@ -77,6 +80,8 @@ angular.module('reg')
           }, response => {
             $scope.error = response.data.message;
           });
+          $scope.email='';
       };
+
 
     }]);

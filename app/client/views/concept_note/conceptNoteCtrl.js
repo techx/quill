@@ -1,140 +1,106 @@
-const swal = require('sweetalert');
+const swal = require("sweetalert");
+// import { HttpClient } from '@angular/common/http';
+// import * as S3 from 'aws-sdk/clients/s3';
+const S3 = require("aws-sdk/clients/s3");
 
-angular.module('reg')
-  .controller('ConceptNoteCtrl', [
-    '$scope',
-    '$rootScope',
-    '$state',
-    'currentUser',
-    'settings',
-    'Utils',
-    'UserService',
-    function($scope, $rootScope, $state, currentUser, settings, Utils, UserService){
-
-      // Set up the user
-      var user = currentUser.data;
-      $scope.user = user;
-      // console.log(user);
-      $scope.pastConfirmation = Date.now() > user.status.confirmBy;
-      $scope.conceptNoteStartDate = Utils.formatTime(settings.data.timeConceptNoteOpen);
-
-      $scope.formatTime = Utils.formatTime;
-
-      _setupForm();
-
-      $scope.fileName = user._id + "_" + user.profile.name.split(" ").join("_");
-
-      // -------------------------------
-      // All this just for dietary restriction checkboxes fml
-
-      var dietaryRestrictions = {
-        'Vegetarian': false,
-        'Vegan': false,
-        'Halal': false,
-        'Kosher': false,
-        'Nut Allergy': false
-      };
-
-      if (user.confirmation.dietaryRestrictions){
-        user.confirmation.dietaryRestrictions.forEach(function(restriction){
-          if (restriction in dietaryRestrictions){
-            dietaryRestrictions[restriction] = true;
-          }
+angular.module("reg").directive('fileModel', ['$parse', function ($parse) {
+  return {
+     restrict: 'A',
+     link: function(scope, element, attrs) {
+        var model = $parse(attrs.fileModel);
+        var modelSetter = model.assign;
+        element.bind('change', function() {
+           scope.$apply(function() {
+              modelSetter(scope, element[0].files[0]);
+           });
         });
-      }
+     }
+  };
+}])
+.controller("ConceptNoteCtrl", [
+  "$scope",
+  "currentUser",
+  "settings",
+  "$state",
+  "Utils",
+  "UserService",
+  "$http",
+  function ($scope, currentUser, settings, $state, Utils, UserService, $http) {
+    // Set up the user
+    $scope.user = currentUser.data;
+    var participateName = currentUser.data.profile.name;
+    // console.log(user);
+    // console.log("in coonroller", currentUser.data);
+    // console.log("setting", settings.data);
 
-      $scope.dietaryRestrictions = dietaryRestrictions;
+    // $scope.pastConfirmation = Date.now() > user.status.confirmBy;
+    $scope.pastConfirmation = new Date(Date.now());
+    $scope.conceptNoteStartDate = new Date(Date.now());
+    // $scope.conceptNoteStartDate = Utils.formatTime(
+    //   settings.data.timeConceptNoteOpen
+    // );
 
-      // -------------------------------
+    $scope.formatTime = Utils.formatTime;
+    var docfiles = [];
 
-      function _updateUser(e){
-        var confirmation = $scope.user.confirmation;
-        // Get the dietary restrictions as an array
-        var drs = [];
-        Object.keys($scope.dietaryRestrictions).forEach(function(key){
-          if ($scope.dietaryRestrictions[key]){
-            drs.push(key);
-          }
-        });
-        confirmation.dietaryRestrictions = drs;
-
-        UserService
-          .updateConfirmation(user._id, confirmation)
-          .then(response => {
-            swal("Woo!", "You're confirmed!", "success").then(value => {
-              $state.go("app.dashboard");
-            });
-          }, response => {
-            swal("Uh oh!", "Something went wrong.", "error");
+    $scope.submitForm = function () {
+      UserService.updateTheme($scope.user._id, $scope.user.theme).then(
+        (response) => {
+          swal("Theme Saved").then((value) => {
+            $state.go("app.note");
           });
+        },
+        (response) => {
+          swal("Uh oh!", "Something went wrong.", "error");
+        }
+      );
+    };
+
+    // bucket = new S3({
+    //   accessKeyId: "AKIAJHYIK5IH6KOU6ZLQ",
+    //   secretAccessKey: "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",
+    //   region: "ap-south-1",
+    // });
+    bucket = new S3({
+      accessKeyId: "AKIA37UO4YSCFKQNOUEH",
+      secretAccessKey: "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",
+      region: "ap-south-1",
+    });
+    $scope.onFileChange = function (files) {
+      for (let index = 0; index < files.length; index++) {
+        const file = files[index];
+        docfiles.push({ data: file, inProgress: false, progress: 0 });
       }
 
+      docfiles.forEach((file) => {
+        uploadFile(file);
+      });
+    };
 
-      function _setupForm(){
-        // Semantic-UI form validation
-        $('.ui.form').form({
-          fields: {
-            shirt: {
-              identifier: 'shirt',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please give us a shirt size!'
-                }
-              ]
-            },
-            phone: {
-              identifier: 'phone',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please enter a phone number.'
-                }
-              ]
-            },
-            signatureLiability: {
-              identifier: 'signatureLiabilityWaiver',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please type your digital signature.'
-                }
-              ]
-            },
-            signaturePhotoRelease: {
-              identifier: 'signaturePhotoRelease',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please type your digital signature.'
-                }
-              ]
-            },
-            signatureCodeOfConduct: {
-              identifier: 'signatureCodeOfConduct',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please type your digital signature.'
-                }
-              ]
-            },
-          }
-        });
-      }
-
-      $scope.submitForm = function(){
-        UserService
-          .updateTheme($scope.user._id, $scope.user.theme)
-          .then(response => {
-            // _updateUser();
-            swal("Woo!", "You're confirmed!", "success").then(value => {
-              $state.go("app.note");
-            });
-          }, response => {
-            // console.log(response);
-            swal("Uh oh!", "Something went wrong.", "error");
-          });
+    $scope.submitConceptNote = function () {
+      var file=$scope.fileUpload;
+      uploadFile(file);
+    };
+    uploadFile = function (file) {
+      var params = {
+        Bucket: "smart-move-s3",
+        Key: "conceptNote/" + participateName + "/" + file.name,
+        Expires: 3600,
+        ContentType: file.type,
       };
-
-    }]);
+      var url = bucket.getSignedUrl("putObject", params);
+      $http.put(url, file).then(
+        function (data) {
+          swal("File uploaded successfully").then((value) => {
+            $state.go("app.note");
+          });
+          // console.log("File uploaded successfully");
+        },
+        function (error) {
+          swal("Uh oh!", "Something went wrong.", error);
+          console.error("There was an error!", error);
+        }
+      );
+    };
+  },
+]);

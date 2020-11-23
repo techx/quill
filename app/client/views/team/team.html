@@ -3,12 +3,9 @@
 
   <div class="ui stackable centered page grid">
     <div class="column">
-
       <div class="ui segment">
         <p ng-show="!user.teamCode && regIsOpen">
-          Create a team with a unique name here. Share this name with your
-          teammates so that they can join your team after they register at
-          hack.dataspace.mobi.
+          Create a team with a unique name here. You can add your teammates using their email address
           <strong
             >Remember that it is mandatory to have at least one person of Indian
             nationality in your team.</strong
@@ -45,6 +42,7 @@
 
         <div ng-show="user.teamCode">
           <p><strong>{{ nationalityWarning }}</strong></p>
+          <p><strong>Now You're a Team Leader, Add your team mates</strong></p>
           <div class="form">
             <div class="title">Your Team Name:</div>
           </div>
@@ -61,11 +59,15 @@
             <div class="title">Your Team:</div>
           </div>
 
-          <p ng-repeat="user in teammates" class="item">
+          <!-- <p ng-repeat="user in teammates" class="item">
             {{user.profile.name || 'Somebody (has not filled out their
             profile!)'}} {{nationality}}
+          </p> -->
+          <p>{{user.profile.name}} (Team Lead)</p>
+          <p ng-repeat="teammate in teammates" class="item">
+            {{ teammate }} 
           </p>
-
+          
           <div ng-show="regIsOpen">
             <div class="ui divider"></div>
 
@@ -74,8 +76,11 @@
             </button>
           </div>
 
-          <div class="ui form" ng-show="user.teamCode === user.teamAdmin && regIsOpen">
-            <div class="title">Enter your Teammate Email</div>
+          <div
+            class="ui form"
+            ng-show="user.teamCode === user.teamAdmin && regIsOpen"
+          >
+            <div class="title">Enter your Teammate's Email</div>
             <br />
             <div class="field">
               <input
@@ -92,7 +97,13 @@
               </button>
             </div>
           </div>
-
+          <br />
+          <div class="field">
+            <p><strong>Please proceed to Concept Note Submission</strong></p>
+            <button class="ui fluid purple button" ui-sref="app.concept_note">
+              Next Step
+            </button>
+          </div>
         </div>
       </div>
       <div class="ui error message" ng-show="error">{{error}}</div>

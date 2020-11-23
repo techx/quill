@@ -99,9 +99,9 @@ angular.module('reg')
       }
 
       function _confirmUser(e){
-        console.log('confirm');
+        // console.log('confirm');
         var confirmation = $scope.user.confirmation;
-        console.log(confirmation);
+        // console.log(confirmation);
         // Get the dietary restrictions as an array
         /* var drs = [];
         Object.keys($scope.dietaryRestrictions).forEach(function(key){
@@ -123,13 +123,12 @@ angular.module('reg')
       }
 
       function _updateUser(e){
-        console.log($scope.user.profile);
         UserService
           .updateProfile(Session.getUserId(), $scope.user.profile)
           .then(response => {
             _confirmUser();
           }, response => {
-            console.log(response);
+            // console.log(response);
             swal("Uh oh!", "Something went wrong.", "error");
           });
       }
@@ -183,7 +182,7 @@ angular.module('reg')
                 },
                 {
                   type: 'regExp',
-                  value: /^([a-zA-Z]+\s)*[a-zA-Z]+$/i,
+                  value: /^([a-zA-Z,]+\s)*[a-zA-Z,]+$/i,
                   prompt: 'School can only contain characters.'
                 }
               ]
