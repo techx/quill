@@ -29,9 +29,21 @@ angular.module("reg").directive('fileModel', ['$parse', function ($parse) {
     // Set up the user
     $scope.user = currentUser.data;
     var participateName = currentUser.data.profile.name;
-    // console.log(user);
-    // console.log("in coonroller", currentUser.data);
-    // console.log("setting", settings.data);
+    // 
+    bucket = new S3({
+      accessKeyId: "AKIAJHYIK5IH6KOU6ZLQ",
+      secretAccessKey: "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",
+      region: "ap-south-1",
+    });
+    var bucketName= "smart-move";
+    // <----abhishek's access key---> 
+    // bucket = new S3({
+    //   accessKeyId: "AKIA37UO4YSCFKQNOUEH",
+    //   secretAccessKey: "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",
+    //   region: "ap-south-1",
+    // });
+    // var bucketName= "smart-move-s3";
+
 
     // $scope.pastConfirmation = Date.now() > user.status.confirmBy;
     $scope.pastConfirmation = new Date(Date.now());
@@ -56,16 +68,7 @@ angular.module("reg").directive('fileModel', ['$parse', function ($parse) {
       );
     };
 
-    // bucket = new S3({
-    //   accessKeyId: "AKIAJHYIK5IH6KOU6ZLQ",
-    //   secretAccessKey: "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",
-    //   region: "ap-south-1",
-    // });
-    bucket = new S3({
-      accessKeyId: "AKIA37UO4YSCFKQNOUEH",
-      secretAccessKey: "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",
-      region: "ap-south-1",
-    });
+    
     $scope.onFileChange = function (files) {
       for (let index = 0; index < files.length; index++) {
         const file = files[index];
@@ -83,7 +86,7 @@ angular.module("reg").directive('fileModel', ['$parse', function ($parse) {
     };
     uploadFile = function (file) {
       var params = {
-        Bucket: "smart-move-s3",
+        Bucket: bucketName,
         Key: "conceptNote/" + participateName + "/" + file.name,
         Expires: 3600,
         ContentType: file.type,
