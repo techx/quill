@@ -3,13 +3,21 @@ var User = require("../models/User");
 var Settings = require("../models/Settings");
 var Mailer = require("../services/email");
 var Stats = require("../services/stats");
+const S3 = require("aws-sdk/clients/s3");
 
 var validator = require("validator");
 var moment = require("moment");
-
+var axios=require('axios');
 var UserController = {};
 
 var maxTeamSize = process.env.TEAM_MAX_SIZE || 4;
+var bucketName = process.env.bucketName;
+// console.log(bucketName);
+var bucket = new S3({
+  accessKeyId: process.env.accessKeyId,
+  secretAccessKey: process.env.secretAccessKey,
+  region: process.env.region,
+});
 
 // Tests a string if it ends with target s
 function endsWith(s, test) {
@@ -647,7 +655,7 @@ UserController.leaveTeam = function (id, callback) {
       $set: {
         teamCode: null,
         teamAdmin: null,
-        teamMates:[],
+        teamMates: [],
       },
     },
     {
@@ -786,6 +794,34 @@ UserController.resetPassword = function (token, password, callback) {
       }
     );
   });
+};
+
+// Upload to s3 bucket
+UserController.uploadS3 = function (id,fileData, callback) {
+  User.findById(id)
+  .select("teamCode theme")
+  .exec(function (err, user) {
+    // console.log(user);
+    var params = {
+      Bucket: bucketName,
+      Key: user.teamCode + "/" + user.theme + "/" + "NOTE.pdf",
+      Expires: 3600,
+      ContentType: fileData.type,
+    };
+    var url = bucket.getSignedUrl("putObject", params);
+    axios.put(url, fileData).then( response => {
+      return callback(null,{
+        message:
+          "File uploaded successfully",
+      });
+    }).catch(error =>{
+      return callback(error);
+    });
+  
+  });
+
+  
+  
 };
 
 /**

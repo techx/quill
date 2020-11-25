@@ -2,7 +2,6 @@
 require('dotenv').load({silent: false});
 
 var express         = require('express');
-
 // Middleware!
 var bodyParser      = require('body-parser');
 var methodOverride  = require('method-override');
@@ -25,11 +24,15 @@ const connect = mongoose
 
 app.use(morgan('dev'));
 
+// app.use(bodyParser.urlencoded({
+//   extended: true,
+// }));
+// app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-  extended: true
+  limit: "50mb",
+  extended: false
 }));
-app.use(bodyParser.json());
-
+app.use(bodyParser.json({limit: "50mb"}));
 app.use(methodOverride());
 
 app.use(express.static(__dirname + '/app/client'));
