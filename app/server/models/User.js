@@ -226,11 +226,6 @@ var schema = new mongoose.Schema({
     min: 0,
     max: 140,
   },
-
-  teamMates: {
-    type: Array,
-    default: [],
-  },
   verified: {
     type: Boolean,
     required: true,

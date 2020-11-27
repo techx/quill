@@ -468,17 +468,18 @@ UserController.getTeammates = function (id, callback) {
       });
     }
 
-    // User
-    //   .find({
-    //     teamCode: code
-    //   })
-    //   .select('profile.name profile.nationality')
-    //   .exec(callback);
-    User.find({
-      _id: id,
-    })
-      .select("teamMates")
+    User
+      .find({
+        teamCode: code,
+        verified:true
+      })
+      .select('profile.name profile.nationality')
       .exec(callback);
+    // User.find({
+    //   _id: id,
+    // })
+    //   .select("teamMates")
+    //   .exec(callback);
   });
 };
 
@@ -568,34 +569,34 @@ UserController.addTeamMates = function (id, email, code, callback) {
       message: "Get outta here, punk!",
     });
   }
-  User.findById({
-    _id: id,
-    verified: true,
-  })
-    .select("teamMates")
-    .exec(function (err, users) {
-      // console.log("users list", users.teamMates);
-      if (users.teamMates.length >= maxTeamSize) {
-        return callback({
-          message:
-            "Team is full. If you need assistance to join or leave a team contact smartmove@niua.org",
-        });
-      }
-      User.findOneAndUpdate(
-        {
-          _id: id,
-          verified: true,
-        },
-        {
-          $push: { teamMates: email },
-        },
-        {
-          new: true,
-          upsert: true,
-        },
-        callback
-      );
-    });
+  // User.findById({
+  //   _id: id,
+  //   verified: true,
+  // })
+  //   .select("teamMates")
+  //   .exec(function (err, users) {
+  //     // console.log("users list", users.teamMates);
+  //     if (users.teamMates.length >= maxTeamSize) {
+  //       return callback({
+  //         message:
+  //           "Team is full. If you need assistance to join or leave a team contact smartmove@niua.org",
+  //       });
+  //     }
+  //     User.findOneAndUpdate(
+  //       {
+  //         _id: id,
+  //         verified: true,
+  //       },
+  //       {
+  //         $push: { teamMates: email },
+  //       },
+  //       {
+  //         new: true,
+  //         upsert: true,
+  //       },
+  //       callback
+  //     );
+  //   });
   // User.findOneAndUpdate({
   //   _id: id,
   //   verified: true
@@ -606,39 +607,70 @@ UserController.addTeamMates = function (id, email, code, callback) {
   // },
   // callback);
 
-  // User.find({
-  //   teamCode: code
-  // })
-  // .select('profile.name')
-  // .exec(function(err, users){
-  //   // Check to see if this team is joinable (< team max size)
-  //   if (users.length >= maxTeamSize){
-  //     return callback({
-  //       message: "Team is full. If you need assistance to join or leave a team contact smartmove@niua.org"
-  //     });
-  //   }
+  User.find({
+    teamCode: code
+  })
+  .select('profile.name')
+  .exec(function(err, users){
+    // Check to see if this team is joinable (< team max size)
+    if (users.length >= maxTeamSize){
+      return callback({
+        message: "Team is full. If you need assistance to join or leave a team contact smartmove@niua.org"
+      });
+    }
 
-  //   User.findOne({email:email},function(err, user){
-  //     // console.log('check user ',user);
-  //     if (user.teamCode) {
-  //       return callback({
-  //         message:"Your team mate is already part of another team",
-  //       });
-  //     }
+    User.findOne({email:email},async function(err, user){
+      // console.log('check user ',user);
+      
+      if (user.teamCode) {
+        return callback({
+          message:"Your team mate is already part of another team",
+        });
+      }
+      
+      await User.findOneAndUpdate(
+        {
+          email: email,
+        },
+        {
+          $set: {
+            teamCode: code,
+          },
+        },
+        {
+          new: true,
+        },
+      );
 
-  //     // Otherwise, we can add that person to the team.
-  //   User.findOneAndUpdate({
-  //     _id: id,
-  //     verified: true
-  //   },{
-  //     "$push": { "teamMates": email }
-  //   }, {
-  //     new: true
-  //   },
-  //   callback);
+      // After updating team code , send verification code
+      if(!user.verified){
+        // Sent mail for verification
+        UserController.sendVerificationEmailById(user.id, function (err, user) {
+            if (err || !user) {
+              return callback({
+                message:"Not able to send verification mail"+err,
+              });
+            }
+            // console.log(user);
+          });
 
-  // });
-  // });
+        return callback({
+          message:"Your team mate is not verified. We have sent mail for verification",
+        });
+      }
+      // Otherwise, we can add that person to the team.
+    // User.findOneAndUpdate({
+    //   _id: id,
+    //   verified: true
+    // },{
+    //   "$push": { "teamMates": email }
+    // }, {
+    //   new: true
+    // },
+    // callback);
+
+  });
+  });
 };
 
 /**

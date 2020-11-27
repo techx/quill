@@ -81,7 +81,7 @@ angular.module("reg").factory("UserService", [
       // Concept Note Submission
       // ------------------------
       submitNote: function (fileData) {
-        return $http.post(base + Session.getUserId()+"/upload", fileData);
+        return $http.post(base + Session.getUserId() + "/upload", fileData);
       },
 
       // -------------------------

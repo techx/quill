@@ -353,7 +353,7 @@ module.exports = function (router) {
     //   if (err || !user){
     //     return res.status(400).send(err);
     //   }
-    //   return res.json(user);
+    //   return res.json(user);team
     // });
   });
 

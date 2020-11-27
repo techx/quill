@@ -48,10 +48,11 @@ function sendOne(templateName, options, data, callback) {
 
   const email = new Email({
     message: {
-      from: EMAIL_CONTACT
+      from: EMAIL_CONTACT,
     },
     send: true,
-    transport: transporter
+    transport: transporter,
+    preview: false,
   });
 
   data.emailHeaderImage = EMAIL_HEADER_IMAGE;

@@ -42,7 +42,7 @@
 
         <div ng-show="user.teamCode">
           <p><strong>{{ nationalityWarning }}</strong></p>
-          <p><strong>Now You're a Team Leader, Add your team mates</strong></p>
+          <p ng-if="user.teamCode===user.teamAdmin"><strong>Now You're a Team Leader, Add your team mates</strong></p>
           <div class="form">
             <div class="title">Your Team Name:</div>
           </div>
@@ -59,14 +59,14 @@
             <div class="title">Your Team:</div>
           </div>
 
-          <!-- <p ng-repeat="user in teammates" class="item">
+          <p ng-repeat="user in teammates" class="item">
             {{user.profile.name || 'Somebody (has not filled out their
             profile!)'}} {{nationality}}
-          </p> -->
-          <p>{{user.profile.name}} (Team Lead)</p>
+          </p>
+          <!-- <p>{{user.profile.name}} (Team Lead)</p>
           <p ng-repeat="teammate in teammates" class="item">
             {{ teammate }} 
-          </p>
+          </p> -->
           
           <div ng-show="regIsOpen">
             <div class="ui divider"></div>
@@ -86,7 +86,7 @@
               <input
                 class="ui input"
                 type="email"
-                placeholder="Choose your team name..."
+                placeholder="Enter your team email..."
                 ng-model="email"
               />
             </div>
@@ -98,7 +98,7 @@
             </div>
           </div>
           <br />
-          <div class="field">
+          <div class="field" ng-if="user.teamCode===user.teamAdmin">
             <p><strong>Please proceed to Concept Note Submission</strong></p>
             <button class="ui fluid purple button" ui-sref="app.concept_note">
               Next Step

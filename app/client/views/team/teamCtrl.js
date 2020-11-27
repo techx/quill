@@ -28,15 +28,15 @@ angular.module('reg')
           .getMyTeammates()
           .then(response => {
             $scope.error = null;
-            // console.log('teammates:', response.data[0].teamMates);
-            $scope.teammates = response.data[0].teamMates;
-            $scope.nationalityWarning = '';
-            // response.data.forEach(u => {
-            //   if(u.profile.nationality.toLowerCase() == 'indian' || u.profile.nationality.toLowerCase() == 'india') {
-            //     $scope.nationalityWarning = '';
-            //     return;
-            //   }
-            // });
+            // console.log('teammates:', response.data);
+            $scope.teammates = response.data;
+            // $scope.nationalityWarning = '';
+            response.data.forEach(u => {
+              if(u.profile.nationality.toLowerCase() == 'indian' || u.profile.nationality.toLowerCase() == 'india') {
+                $scope.nationalityWarning = '';
+                return;
+              }
+            });
           });
       }
 
@@ -74,7 +74,7 @@ angular.module('reg')
           .addTeamMates({email:$scope.email,code:$scope.user.teamCode})
           .then(response => {
             $scope.error = null;
-            $scope.user = response.data;
+            // $scope.user = response.data;
             _populateTeammates();
             location.reload();
           }, response => {

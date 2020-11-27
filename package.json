@@ -8,12 +8,8 @@
     "angular": "^1.8.0",
     "angular-ui-router": "^1.0.26",
     "async": "^2.6.3",
-<<<<<<< HEAD
     "aws-sdk": "^2.797.0",
     "axios": "^0.21.0",
-=======
-    "aws-sdk": "^2.799.0",
->>>>>>> 8959cfebb22483ed1ab7cd796ba2a123586ff5b4
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "browserify": "^16.5.1",
