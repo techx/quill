@@ -257,9 +257,10 @@ module.exports = function (router) {
    */
   router.put("/users/:id/theme", isOwnerOrAdmin, function (req, res) {
     var theme = req.body.theme;
+    var subtheme = req.body.subtheme;
     var id = req.params.id;
 
-    UserController.updateThemeById(id, theme, defaultResponse(req, res));
+    UserController.updateThemeById(id, theme, subtheme, defaultResponse(req, res));
   });
 
   /**

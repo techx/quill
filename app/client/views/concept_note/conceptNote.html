@@ -21,18 +21,19 @@
 
           <div class="field">
             <label>Select a Theme (required)</label>
-            <select name="theme" ng-model="user.theme">
-              <option value=" ">Theme</option>
-              <option value="Restoring">
-                Restoring Public Transport Ridership
-              </option>
-              <option value="Sustainable">
-                Achieving Sustainable Public Transport and Resilience
-              </option>
-              <option value="Mobility">Equity in Mobility</option>
+            <select name="theme" ng-model="user.theme" ng-options="x for x in themes">
+              
             </select>
+            <p ng-if="!user.theme" style="color: red;">lease select theme</p>
           </div>
           <div class="field">
+            <label>Select a Sub Theme (required)</label>
+            <select name="subtheme" ng-model="user.subtheme" ng-options="x for x in subthemes[user.theme]">
+              
+            </select>
+            <p ng-if="!user.subtheme" style="color: red;">Please select Sub Theme</p>
+          </div>
+          <!-- <div class="field">
             <button
               type="submit"
               class="fluid ui purple button"
@@ -40,8 +41,8 @@
             >
               Save
             </button>
-          </div>
-          <br />
+          </div> -->
+          <!-- <br /> -->
 
           <div class="divided title">Concept Note</div>
           <div class="field">

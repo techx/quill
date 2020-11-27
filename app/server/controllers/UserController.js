@@ -4,19 +4,20 @@ var Settings = require("../models/Settings");
 var Mailer = require("../services/email");
 var Stats = require("../services/stats");
 const S3 = require("aws-sdk/clients/s3");
+const generator = require("generate-password");
 
 var validator = require("validator");
 var moment = require("moment");
-var axios=require('axios');
+var axios = require("axios");
 var UserController = {};
 
 var maxTeamSize = process.env.TEAM_MAX_SIZE || 4;
-var bucketName = process.env.bucketName;
+var bucketName = process.env.BUCKET_NAME;
 // console.log(bucketName);
 var bucket = new S3({
-  accessKeyId: process.env.accessKeyId,
-  secretAccessKey: process.env.secretAccessKey,
-  region: process.env.region,
+  accessKeyId: process.env.ACCESS_KEY_ID,
+  secretAccessKey: process.env.SECRET_ACCESS_KEY,
+  region: process.env.REGION,
 });
 
 // Tests a string if it ends with target s
@@ -180,7 +181,7 @@ UserController.createUser = function (email, password, callback) {
 
         // Send over a verification email
         var verificationToken = u.generateEmailVerificationToken();
-        Mailer.sendVerificationEmail(email, verificationToken);
+        Mailer.sendVerificationEmail({email,password}, verificationToken);
 
         return callback(null, {
           token: token,
@@ -327,7 +328,7 @@ UserController.updateProfileById = function (id, profile, callback) {
  * @param  {Object}   theme  theme object
  * @param  {Function} callback Callback with args (err, user)
  */
-UserController.updateThemeById = function (id, theme, callback) {
+UserController.updateThemeById = function (id, theme, subtheme, callback) {
   User.findOneAndUpdate(
     {
       _id: id,
@@ -337,6 +338,7 @@ UserController.updateThemeById = function (id, theme, callback) {
       $set: {
         lastUpdated: Date.now(),
         theme: theme,
+        subtheme:subtheme,
         "status.completedProfile": true,
         "status.admitted": true,
       },
@@ -468,12 +470,11 @@ UserController.getTeammates = function (id, callback) {
       });
     }
 
-    User
-      .find({
-        teamCode: code,
-        verified:true
-      })
-      .select('profile.name profile.nationality')
+    User.find({
+      teamCode: code,
+      verified: true,
+    })
+      .select("profile.name profile.nationality")
       .exec(callback);
     // User.find({
     //   _id: id,
@@ -569,108 +570,106 @@ UserController.addTeamMates = function (id, email, code, callback) {
       message: "Get outta here, punk!",
     });
   }
-  // User.findById({
-  //   _id: id,
-  //   verified: true,
-  // })
-  //   .select("teamMates")
-  //   .exec(function (err, users) {
-  //     // console.log("users list", users.teamMates);
-  //     if (users.teamMates.length >= maxTeamSize) {
-  //       return callback({
-  //         message:
-  //           "Team is full. If you need assistance to join or leave a team contact smartmove@niua.org",
-  //       });
-  //     }
-  //     User.findOneAndUpdate(
-  //       {
-  //         _id: id,
-  //         verified: true,
-  //       },
-  //       {
-  //         $push: { teamMates: email },
-  //       },
-  //       {
-  //         new: true,
-  //         upsert: true,
-  //       },
-  //       callback
-  //     );
-  //   });
-  // User.findOneAndUpdate({
-  //   _id: id,
-  //   verified: true
-  // },{
-  //   "$push": { "teamMates": email }
-  // }, {
-  //   new: true, upsert:true
-  // },
-  // callback);
 
   User.find({
-    teamCode: code
+    teamCode: code,
   })
-  .select('profile.name')
-  .exec(function(err, users){
-    // Check to see if this team is joinable (< team max size)
-    if (users.length >= maxTeamSize){
-      return callback({
-        message: "Team is full. If you need assistance to join or leave a team contact smartmove@niua.org"
-      });
-    }
-
-    User.findOne({email:email},async function(err, user){
-      // console.log('check user ',user);
-      
-      if (user.teamCode) {
+    .select("profile.name")
+    .exec(function (err, users) {
+      // Check to see if this team is joinable (< team max size)
+      if (users.length >= maxTeamSize) {
         return callback({
-          message:"Your team mate is already part of another team",
+          message:
+            "Team is full. If you need assistance to join or leave a team contact smartmove@niua.org",
         });
       }
-      
-      await User.findOneAndUpdate(
-        {
-          email: email,
-        },
-        {
-          $set: {
-            teamCode: code,
-          },
-        },
-        {
-          new: true,
-        },
-      );
+      User.findOne({ email: email }, async function (err, user) {
+        // console.log('check user ',user);
 
-      // After updating team code , send verification code
-      if(!user.verified){
-        // Sent mail for verification
-        UserController.sendVerificationEmailById(user.id, function (err, user) {
-            if (err || !user) {
+        // If email is not in our db then we need to add user in db
+        if (!user) {
+          var password = generator.generate({
+            length: 10,
+            numbers: true,
+          });
+          await UserController.createUser(email, password, async function (err, user) {
+            if (err) {
+              // return res.status(400).send(err);
               return callback({
-                message:"Not able to send verification mail"+err,
+                message: err,
               });
             }
-            // console.log(user);
+            await User.findOneAndUpdate(
+              {
+                email: email,
+              },
+              {
+                $set: {
+                  teamCode: code,
+                },
+              },
+              {
+                new: true,
+              }
+            );
+            
+            return callback({
+              message: "We have added your teammate in our database, You teammate will receive mail shortly with credentials",
+            });
           });
+        }
+        if (user && user.teamCode) {
+          return callback({
+            message: "Your team mate is already part of another team",
+          });
+        }
 
-        return callback({
-          message:"Your team mate is not verified. We have sent mail for verification",
-        });
-      }
-      // Otherwise, we can add that person to the team.
-    // User.findOneAndUpdate({
-    //   _id: id,
-    //   verified: true
-    // },{
-    //   "$push": { "teamMates": email }
-    // }, {
-    //   new: true
-    // },
-    // callback);
+        await User.findOneAndUpdate(
+          {
+            email: email,
+          },
+          {
+            $set: {
+              teamCode: code,
+            },
+          },
+          {
+            new: true,
+          }
+        );
 
-  });
-  });
+        // After updating team code , send verification code
+        if (user && !user.verified) {
+          // Sent mail for verification
+          UserController.sendVerificationEmailById(
+            user.id,
+            function (err, user) {
+              if (err || !user) {
+                return callback({
+                  message: "We are not able to send verification mail. Please report the error" + err,
+                });
+              }
+              // console.log(user);
+            }
+          );
+
+          return callback({
+            message:
+              "Your team mate is not verified. We have sent mail for verification",
+          });
+        }
+        // Otherwise, we can add that person to the team.
+        // User.findOneAndUpdate({
+        //   _id: id,
+        //   verified: true
+        // },{
+        //   "$push": { "teamMates": email }
+        // }, {
+        //   new: true
+        // },
+        // callback);
+      });
+    });
 };
 
 /**
@@ -711,7 +710,7 @@ UserController.sendVerificationEmailById = function (id, callback) {
         return callback(err);
       }
       var token = user.generateEmailVerificationToken();
-      Mailer.sendVerificationEmail(user.email, token);
+      Mailer.sendVerificationEmail({email:user.email}, token);
       return callback(err, user);
     }
   );
@@ -829,31 +828,29 @@ UserController.resetPassword = function (token, password, callback) {
 };
 
 // Upload to s3 bucket
-UserController.uploadS3 = function (id,fileData, callback) {
+UserController.uploadS3 = function (id, fileData, callback) {
   User.findById(id)
-  .select("teamCode theme")
-  .exec(function (err, user) {
-    // console.log(user);
-    var params = {
-      Bucket: bucketName,
-      Key: user.teamCode + "/" + user.theme + "/" + "NOTE.pdf",
-      Expires: 3600,
-      ContentType: fileData.type,
-    };
-    var url = bucket.getSignedUrl("putObject", params);
-    axios.put(url, fileData).then( response => {
-      return callback(null,{
-        message:
-          "File uploaded successfully",
-      });
-    }).catch(error =>{
-      return callback(error);
+    .select("teamCode theme subtheme")
+    .exec(function (err, user) {
+      // console.log(user);
+      var params = {
+        Bucket: bucketName,
+        Key: user.teamCode + "/" + user.theme + "/" +user.subtheme + "/"+ "NOTE.pdf",
+        Expires: 3600,
+        ContentType: fileData.type,
+      };
+      var url = bucket.getSignedUrl("putObject", params);
+      axios
+        .put(url, fileData)
+        .then((response) => {
+          return callback(null, {
+            message: "File uploaded successfully",
+          });
+        })
+        .catch((error) => {
+          return callback(error);
+        });
     });
-  
-  });
-
-  
-  
 };
 
 /**

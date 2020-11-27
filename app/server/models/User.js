@@ -91,6 +91,13 @@ var theme = {
   },
 };
 
+var subtheme = {
+  name: {
+    type: String,
+    min: 1,
+    max: 100,
+  },
+};
 // Only after confirmed
 var confirmation = {
   phoneNumber: String,
@@ -250,6 +257,7 @@ var schema = new mongoose.Schema({
 
   // User theme
   theme: theme,
+  subtheme:subtheme,
 
   /**
    * Confirmation information

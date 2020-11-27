@@ -21,6 +21,7 @@
     "express-fileupload": "^1.2.0",
     "form-data": "^3.0.0",
     "formidable": "^1.2.2",
+    "generate-password": "^1.5.1",
     "gulp-buffer": "0.0.2",
     "gulp-tap": "^1.0.1",
     "jquery": "^3.5.1",

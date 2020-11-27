@@ -1,6 +1,16 @@
 const swal = require("sweetalert");
-// import { HttpClient } from '@angular/common/http';
-// import * as S3 from 'aws-sdk/clients/s3';
+
+// Theme - Restoring Public Transport Ridership
+// Sub Theme - Covid-19 Recovery
+//                      Cost-effective Solutions
+
+// Theme- Achieving Sustainable Transport and Resilience
+// Sub Theme - Multi-modal integration
+//                       Sustainable Transport Modes
+
+// Theme - Equity in Mobility
+// Sub Theme - Gender and Safety
+//                      Inclusivity and Efficiency Improvement
 const S3 = require("aws-sdk/clients/s3");
 
 angular
@@ -45,26 +55,48 @@ angular
 
       // $scope.pastConfirmation = Date.now() > user.status.confirmBy;
       $scope.pastConfirmation = new Date(Date.now());
-      $scope.conceptNoteStartDate = new Date(Date.now());
-      // $scope.conceptNoteStartDate = Utils.formatTime(
-      //   settings.data.timeConceptNoteOpen
-      // );
+      // $scope.conceptNoteStartDate = new Date(Date.now());
+      $scope.conceptNoteStartDate = Utils.formatTime(
+        settings.data.timeConceptNoteOpen
+      );
 
       $scope.formatTime = Utils.formatTime;
-      var docfiles = [];
-
-      $scope.submitForm = function () {
-        UserService.updateTheme($scope.user._id, $scope.user.theme).then(
-          (response) => {
-            swal("Theme Saved").then((value) => {
-              $state.go("app.note");
-            });
-          },
-          (response) => {
-            swal("Uh oh!", "Something went wrong.", "error");
-          }
-        );
+      var themeList = {
+        "Restoring Public Transport Ridership": [
+          "Covid-19 Recovery",
+          "Cost-effective Solutions",
+        ],
+        "Achieving Sustainable Transport and Resilience": [
+          "Multi-modal integration",
+          "Sustainable Transport Modes",
+        ],
+        "Equity in Mobility": [
+          "Sub Gender and Safety",
+          "Inclusivity and Efficiency Improvement",
+        ],
       };
+      
+      $scope.themes = [
+        "Restoring Public Transport Ridership",
+        "Achieving Sustainable Transport and Resilience",
+        "Equity in Mobility",
+      ];
+      
+      $scope.subthemes = themeList;
+      var docfiles = [];
+      // console.log($scope.user);
+      // $scope.submitForm = function () {
+      //   UserService.updateTheme($scope.user._id, $scope.user.theme, $scope.user.subtheme).then(
+      //     (response) => {
+      //       swal("Theme Saved").then((value) => {
+      //         $state.go("app.note");
+      //       });
+      //     },
+      //     (response) => {
+      //       swal("Uh oh!", "Something went wrong.", "error");
+      //     }
+      //   );
+      // };
 
       $scope.onFileChange = function (files) {
         for (let index = 0; index < files.length; index++) {
@@ -78,6 +110,14 @@ angular
       };
 
       $scope.submitConceptNote = function () {
+        UserService.updateTheme($scope.user._id, $scope.user.theme, $scope.user.subtheme).then(
+          (response) => {
+            console.log(response);
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
         var file = $scope.fileUpload;
         uploadFile(file);
       };
@@ -104,25 +144,6 @@ angular
             console.log(error);
           }
         );
-        // var params = {
-        //   Bucket: bucketName,
-        //   Key: "conceptNote/" + participateName + "/" + file.name,
-        //   Expires: 3600,
-        //   ContentType: file.type,
-        // };
-        // var url = bucket.getSignedUrl("putObject", params);
-        // $http.put(url, file).then(
-        //   function (data) {
-        //     swal("File uploaded successfully").then((value) => {
-        //       $state.go("app.note");
-        //     });
-        //     // console.log("File uploaded successfully");
-        //   },
-        //   function (error) {
-        //     swal("Uh oh!", "Something went wrong.", error);
-        //     console.error("There was an error!", error);
-        //   }
-        // );
       };
     },
   ]);

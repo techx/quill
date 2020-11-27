@@ -39,9 +39,10 @@ angular.module("reg").factory("UserService", [
         });
       },
 
-      updateTheme: function (id, theme) {
+      updateTheme: function (id, theme, subtheme) {
         return $http.put(base + id + "/theme", {
           theme: theme,
+          subtheme:subtheme,
         });
       },
 
