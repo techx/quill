@@ -31,6 +31,7 @@ angular.module('reg')
       _setupForm();
 
       $scope.regIsClosed = Date.now() > settings.data.timeClose;
+      
 
       /**
        * TODO: JANK WARNING
@@ -150,6 +151,7 @@ angular.module('reg')
       }
 
       function _setupForm(){
+        console.log('setup')
         // Custom minors validation rule
         $.fn.form.settings.rules.allowMinors = function (value) {
           return minorsValidation();
@@ -325,14 +327,95 @@ angular.module('reg')
                   prompt: 'Not a valid twitter link.'
                 }
               ]
+            },
+            org_type: {
+              identifier: 'org_type',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please specify your organisation\'s type.'
+                }
+              ]
+            },
+            org_is_indian: {
+              identifier: 'org_is_indian',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please fill in the country of registration.'
+                }
+              ]
+            },
+            org_name: {
+              identifier: 'org_name',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please specify your organisation\'s name.'
+                }
+              ]
+            },
+            org_address: {
+              identifier: 'org_address',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please specify your organisation\'s address.'
+                }
+              ]
+            },
+            org_sector: {
+              identifier: 'org_sector',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please specify your organisation\'s sector.'
+                }
+              ]
+            },
+            org_website: {
+              identifier: 'org_website',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please specify your organisation\'s website.'
+                },
+                {
+                  type: 'regExp',
+                  value: '/(^$|^((https://)|(http://))(.)*)/i',
+                  prompt: 'Not a valid URL. It should start with https://... or http://...'
+                }
+              ]
+            },
+            designation: {
+              identifier: 'designation',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please specify your designation.'
+                }
+              ]
+            },
+            job_status: {
+              identifier: 'job_status',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please specify your job status.'
+                }
+              ]
             }
           }
         });
       }
 
       $scope.submitForm = function(){
-        if ($('.ui.form').form('is valid')){
-          _updateUser();
+        _setupForm();
+        if ($('.ui.form').form('validate form')){
+          console.log('123')
+          console.log($("[name='name']"))
+          console.log('valid form')
+          //_updateUser();
         } else {
           swal("Uh oh!", "Please Fill The Required Fields Correctly", "error");
         }

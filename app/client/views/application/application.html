@@ -5,301 +5,57 @@
 
   <div class="ui stackable page grid">
     <div class="column">
+      <!-- <div class="ui grid">
+        <div class="eight wide column">
+          <div class="participant-category">
+            <img src="assets/images/logo-color.svg" alt="">
+            <p>Students / Professors</p>
+          </div>
+        </div>
+        <div class="eight wide column">
+          <div class="participant-category">
+            <img src="assets/images/logo-color.svg" alt="">
+            <p>Others</p>
+          </div>
+        </div>
+      </div> -->
       <form class="ui form"
             ng-class="{'loading': loading}">
 
-        <div class="divided title">Basic Information</div>
-
-        <fieldset ng-disabled="regIsClosed">
-
         <div class="field">
-          <label> Email </label>
-          <input type="email"
-                 name="email"
-                 disabled="disabled"
-                 ng-model="user.email">
-        </div>
-
-        <div class="field">
-          <label> Full Name (required) </label>
-          <input type="text"
-                 name="name"
-                 ng-model="user.profile.name">
-        </div>
-
-        <div class="field">
-          <label> Nationality (required) </label>
-          <p>
-            Remember that it is mandatory to have at least one person of Indian nationality in your team. Read the <a href="https://smartmove.niua.org/#/guidelines">challenge guidelines</a> for more details.
-          </p>
-          <div id="nationality" class="ui search">
-            <div class="ui input">
-              <input class="prompt" type="text" placeholder="Indian, Mexican" name="nationality" ng-model="user.profile.nationality">                
-            </div>
-            <div class="results"></div>
-          </div>
-        </div>
-
-        <div class="field" ng-show="autoFilledSchool">
-          <label> School (required) </label>
-          <input class="ui input"
-                 disabled="disabled"
-                 ng-show="autoFilledSchool"
-                 ng-model="user.profile.school">
-        </div>
-
-        <div class="field" ng-show="!autoFilledSchool">
-          <label> School (required) </label>
-          <div id="school" class="ui search">
-            <div class="ui input">
-              <input class="prompt" type="text" placeholder="School" name="school" ng-model="user.profile.school">                
-            </div>
-            <div class="results"></div>
-          </div>
-        </div>
-
-        <!-- <div class="field">
-          <label>Graduation Year</label>
+          <label>Category (required)</label>
           <select
-            name="year"
-            ng-model="user.profile.graduationYear">
-            <option value="">Graduation Year</option>
-            <option value="2016">2016</option>
-            <option value="2017">2017</option>
-            <option value="2018">2018</option>
-            <option value="2019">2019</option>
-          </select>
-        </div> -->
-
-        <div class="field">
-          <label>Gender (required)</label>
-          <select
-            name="gender"
-            ng-model="user.profile.gender">
-            <option value="">Gender</option>
-            <option value="T">Transgender</option>
-            <option value="F">Female</option>
-            <option value="M">Male</option>
-            <option value="O">Other</option>
-            <option value="N">I prefer not to answer.</option>
+            name="category"
+            ng-model="user.profile.category">
+            <option value="">category</option>
+            <option value="STUD_PROF">Full-time Student / Professor</option>
+            <option value="IND">Individual</option>
+            <option value="ORG">Corporate / Startup / NGO / Organisation</option>
           </select>
         </div>
 
-        <div class="field">
-          <label>Age (required)</label>
-          <input type="text"
-                  name="age"
-                  placeholder="23"
-                  ng-model="user.profile.age">
-        </div>
+        <br/>
+        <br/>
 
-        <div class="field">
-          <label> What's your phone number? (required) </label>
-          <p>
-            We need this in case we need to get ahold of you!
-          </p>
-          <input type="tel"
-                 name="phone"
-                 ng-model="user.confirmation.phoneNumber"
-                 placeholder="+91 2341 352 437"
-                 >
-        </div>
-
-        <div class="field">
-          <label>
-              What would you like to learn or get out of SmartMove? 
-          </label>
-          <textarea ng-model="user.profile.essay">
-          </textarea>
-        </div>
-
-        <!-- <div class="field"
-             ng-hide="isMitStudent">
-          <p>
-            Because of limitations imposed by MIT, we are not legally allowed to host
-            non-MIT minors (those under 18) for HackMIT 2015. Checking the box below affirms that you are or will be 18 years or older by September 19th, 2015.
-          </p>
-          <p>
-            <strong>
-            We will be checking ID. If you are a non-MIT minor, you will be turned away at the door.
-            </strong>
-          </p>
-          <div class="ui checkbox">
-            <input type="checkbox" id="adult" ng-model="user.profile.adult">
-            <label for="adult">I am 18 or older.</label>
+        <div ng-switch="user.profile.category">
+          <div ng-switch-when="STUD_PROF">
+            <div ng-include src="'views/application/student.html'"></div>
           </div>
-        </div> -->
-
-        <br>
+          <div ng-switch-when="IND">
+            <div ng-include src="'views/application/student.html'"></div>
+          </div>
+          <div ng-switch-when="ORG">
+            <div ng-include src="'views/application/corporates.html'"></div>
+          </div>
+        </div>
 
         
 
-        </fieldset>
-
-        <fieldset ng-disabled="pastConfirmation">
-
-          <div class="divided title"> Skills & Accomplishments </div>
-
-          <div class="field">
-            <label>I am... (required)</label>
-            <select
-              name="course"
-              ng-model="user.profile.course">
-              <option value="">enjoying my life</option>
-              <option value="UG">an undergrad student</option>
-              <option value="PG">a postgrad student</option>
-              <option value="PHD">a PhD student</option>
-              <option value="PDOC">a postdoc scholar</option>
-              <option value="RF">a research fellow</option>
-              <option value="PROF">a professor</option>
-            </select>
-            <p>{{ user.profile.course === 'PHD' || user.profile.course === 'RF' ? "The Intellectual Property Rights (IPR) of the product developed will remain with the individual. We also request you to submit a No Objection Certificate (NOC) duly signed by the university/institute/organisation, confirming that the university/institute/organisation does not hold any rights of the product developed by the participant as part of the challenge. The NOC is mandatory if you are selected for the second phase of the challenge" : ''}}</p>
-          </div>
-  
-          <div class="field">
-            <label>I would describe myself as a... </label>
-            <input type="text"
-                   placeholder="Designer, Data Scientist, Entrepreneur, Hacker"
-                   ng-model="user.profile.description">
-          </div>
-
-          <div class="field">
-            <label>My field of study is... </label>
-            <input type="text"
-                   placeholder="Urban Planning, Data Science, Architecture etc.""
-                   ng-model="user.profile.field">
-          </div>
-
-          <div class="field">
-            <label> Github </label>
-            <input type="text"
-                   name="github"
-                   placeholder="https://github.com/foobar"
-                   ng-model="user.confirmation.github">
-          </div>
-
-          <div class="field">
-            <label> Twitter </label>
-            <input type="text"
-                   name="twitter"
-                   placeholder="https://twitter.com/foobar"
-                   ng-model="user.confirmation.twitter">
-          </div>
-
-          <br>
-          <br>
-
-          <div class="divided title">Legal</div>
-
-          <div class="field">
-            <label> Liability Waiver (required) </label>
-            <p>
-              <a
-                target="_blank"
-                href="https://drive.google.com/file/d/1BzZG-UbPV6JW2-NIf-TcVwxtGpFw5gQV/view?usp=sharing">
-                Liability Waiver
-              </a>
-            </p>
-            <p>
-              For legal reasons, we ask that you read and accept the terms of our liability waiver. Again, as we mentioned in the registration application - you must be a student or a researcher at an accredited academic institution at the time of registration. <strong>Falsification of information in the registration application may result in denial of participation and/or revocation of any awards.</strong>
-            </p>
-            <p>
-              By writing my name below, I affirm that I have read and accepted the terms of the liability waiver above. 
-            </p>
-            <input type="text"
-                   name="signatureLiabilityWaiver"
-                   placeholder="Your Full Legal Name"
-                   ng-model="user.confirmation.signatureLiability">
-          </div>
-
-          </br>
-
-          <div class="field">
-            <label> Photo Release (required) </label>
-            <p>
-              <a
-                target="_blank"
-                href="https://drive.google.com/file/d/1bep8jEd3RoQ5MykitsaoFDIUhwY7gsHk/view?usp=sharing">
-                Photo Release
-              </a>
-            </p>
-            <p>
-              Signing this photo release means if we take photos or photos of you, we can share it with the world.
-            </p>
-            <p>
-              By writing my name below, I affirm that I have read and accepted the terms of the photo release above.
-            </p>
-            <input type="text"
-                   name="signaturePhotoRelease"
-                   placeholder="Your Full Legal Name"
-                   ng-model="user.confirmation.signaturePhotoRelease">
-          </div>
-
-          </br>
-
-          <div class="field">
-            <label> Code of Conduct (required) </label>
-            <p>
-              <a
-                target="_blank"
-                href="https://drive.google.com/file/d/1KiM8fVRkWDLdgA5OmivPsNfoTBqvBbBr/view?usp=sharing">
-                Smart Move Innovative Urban Mobility Challenge Code of Conduct
-              </a>
-            </p>
-            <p>
-              It is extremely important to us that attendees follow a set of guidelines to make the event fun for everyone involved. Please read through and make sure you understand what we will be expecting of you.
-            </p>
-            <p>
-              By writing my name below, I affirm that I have read and will abide by the code of conduct detailed above.
-            </p>
-            <input type="text"
-                   name="signatureCodeOfConduct"
-                   placeholder="Your Full Legal Name"
-                   ng-model="user.confirmation.signatureCodeOfConduct">
-          </div>
-
-          <br>
-          <br>
-
-          <div class="divided title">everything else</div>
-
-          <div class="field">
-            <label>
-              Additional Notes
-            </label>
-            <p>
-              If there's anything else you need to let us know, tell us here!
-            </p>
-            <textarea
-              ng-model="user.confirmation.notes"></textarea>
-          </div>
-
-          <br/>
-
-          <div class="field">
-            <div class="ui checkbox">
-              <input type="checkbox" id="declaration" name="declaration" ng-model="user.profile.declaration">
-              <label for="declaration">
-                <p>
-                  I hereby declare that the information provided is true and correct. <strong>I further understand that any false statements may result in denial of participation and revocation of rewards.</strong>
-                </p>
-              </label>
-            </div>
-          </div>
-
-          <!-- <div class="field" ng-hide="regIsClosed">
-            <button type="submit"
-                    class="fluid ui purple button"
-                    ng-click="submitForm()">
-              Submit
-            </button>
-          </div> -->
-
-        </fieldset>
+        
 
         <br/>
 
-        <div class="field" ng-hide="regIsClosed">
+        <div class="field" ng-hide="regIsClosed || !user.profile.category">
           <button type="submit"
                   class="fluid ui purple button"
                   ng-click="submitForm()">

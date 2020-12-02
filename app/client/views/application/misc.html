@@ -1,0 +1,27 @@
+<fieldset>
+    <div class="divided title">everything else</div>
+
+    <div class="field">
+      <label>
+        Additional Notes
+      </label>
+      <p>
+        If there's anything else you need to let us know, tell us here!
+      </p>
+      <textarea
+        ng-model="user.confirmation.notes"></textarea>
+    </div>
+
+    <br/>
+
+    <div class="field">
+      <div class="ui checkbox">
+        <input type="checkbox" id="declaration" name="declaration" ng-model="user.profile.declaration">
+        <label for="declaration">
+          <p>
+            I hereby declare that the information provided is true and correct. <strong>I further understand that any false statements may result in denial of participation and revocation of rewards.</strong>
+          </p>
+        </label>
+      </div>
+    </div>
+</fieldset>

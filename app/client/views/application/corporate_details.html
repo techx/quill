@@ -1,0 +1,119 @@
+<div class="divided title">Organisation Details</div>
+
+<fieldset>
+
+<div class="field">
+    <label>Type of Organisation (required)</label>
+    <select
+    name="org_type"
+    ng-model="user.profile.org_type">
+    <option value=""></option>
+    <option value="STARTUP">Startup</option>
+    <option value="PRV">Private Company</option>
+    <option value="PUB">Public Entity</option>
+    <option value="NGO">NGO</option>
+    </select>
+</div>
+
+<div class="field">
+    <label>Country of Registration (required)</label>
+    <select
+    name="org_is_indian"
+    ng-model="user.profile.org_is_indian">
+    <option value=""></option>
+    <option value="INDIA">India</option>
+    <option value="OTHER">Other</option>
+    </select>
+</div>
+
+<div class="field">
+    <label> Name of the Organisation (required) </label>
+    <input type="text"
+            name="org_name"
+            ng-model="user.profile.org_name">
+</div>
+
+<div class="field">
+    <label>Number of Employees</label>
+    <select
+    name="no_of_employees"
+    ng-model="user.profile.org_no_of_employees">
+    <option value="">no of employees</option>
+    <option value="1_5">1 - 5</option>
+    <option value="6_20">6 - 20</option>
+    <option value="21_50">21 - 50</option>
+    <option value="more_50">> 50</option>
+    </select>
+</div>
+
+<div class="field" ng-show="user.profile.org_type=='STARTUP'">
+    <label>How much funding have you raised?</label>
+    <select
+    name="org_funding_raised"
+    ng-model="user.profile.org_funding_raised">
+    <option value="">funding raised</option>
+    <option value="BOOTSTRAPPED">Bootstrapped</option>
+    <option value="0_50">INR 0 - INR 50 lakhs</option>
+    <option value="50_100">INR 50 lakhs - INR 1 crore</option>
+    <option value="more_100">more than INR 1 crore</option>
+    </select>
+</div>
+
+<div class="field" ng-show="user.profile.org_type=='STARTUP'">
+    <label>Are you registered as a startup at DPIIT?</label>
+    <select
+    name="org_dpiit"
+    ng-model="user.profile.org_dpiit">
+    <option value="YES">Yes</option>
+    <option value="NO">No</option>
+    </select>
+</div>
+
+<div class="field">
+    <label>Registered Address (required)</label>
+    <input type="text"
+            name="org_address"
+            placeholder="5th Cross Street"
+            ng-model="user.profile.org_address">
+</div>
+
+<div class="field">
+    <label>Sector (required)</label>
+    <input type="text"
+            name="org_sector"
+            placeholder="Mobility etc"
+            ng-model="user.profile.org_sector">
+</div>
+
+<div class="field">
+    <label>Website (required)</label>
+    <input type="text"
+            name="org_website"
+            placeholder="Mobility etc"
+            ng-model="user.profile.org_website">
+</div>
+
+<div class="field">
+<label> Github </label>
+<input type="text"
+        name="org_github"
+        placeholder="https://github.com/foobar"
+        ng-model="user.profile.org_github">
+</div>
+
+<div class="field">
+<label> Twitter </label>
+<input type="text"
+        name="org_twitter"
+        placeholder="https://twitter.com/foobar"
+        ng-model="user.profile.org_twitter">
+</div>
+
+
+
+<br/>
+<br/>
+
+
+
+</fieldset>

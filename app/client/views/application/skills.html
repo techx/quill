@@ -1,0 +1,69 @@
+<fieldset ng-disabled="pastConfirmation">
+
+    <div class="divided title"> Skills & Accomplishments </div>
+
+    <div class="field" ng-show="user.profile.category=='STUD_PROF'">
+      <label>I am... (required)</label>
+      <select
+        name="course"
+        ng-model="user.profile.course">
+        <option value="">enjoying my life</option>
+        <option value="UG">an undergrad student</option>
+        <option value="PG">a postgrad student</option>
+        <option value="PHD">a PhD student</option>
+        <option value="PDOC">a postdoc scholar</option>
+        <option value="RF">a research fellow</option>
+        <option value="PROF">a professor</option>
+      </select>
+      <p>{{ user.profile.course === 'PHD' || user.profile.course === 'RF' ? "The Intellectual Property Rights (IPR) of the product developed will remain with the individual. We also request you to submit a No Objection Certificate (NOC) duly signed by the university/institute/organisation, confirming that the university/institute/organisation does not hold any rights of the product developed by the participant as part of the challenge. The NOC is mandatory if you are selected for the second phase of the challenge" : ''}}</p>
+    </div>
+
+    <div class="field" ng-show="user.profile.category=='IND'">
+        <label>I am... (required)</label>
+        <select
+          name="job_status"
+          ng-model="user.profile.job_status">
+          <option value="">enjoying my life</option>
+          <option value="EMPLOYED">a part-time/ full-time employed</option>
+          <option value="UNEMPLOYED">unemployed</option>
+          <option value="FREELANCER">a freelancer</option>
+        </select>
+      </div>
+
+    <div class="field">
+      <label>I would describe myself as a... </label>
+      <input type="text"
+             placeholder="Designer, Data Scientist, Entrepreneur, Hacker"
+             ng-model="user.profile.description">
+    </div>
+
+    <div class="field">
+      <label ng-show="user.profile.category=='IND'">My field of work is... </label>
+      <label ng-show="user.profile.category=='STUD_PROF'">My field of study is... </label>
+      <input type="text"
+             placeholder="Urban Planning, Data Science, Architecture etc.""
+             ng-model="user.profile.field">
+    </div>
+
+    <div class="field">
+      <label> Github </label>
+      <input type="text"
+             name="github"
+             placeholder="https://github.com/foobar"
+             ng-model="user.confirmation.github">
+    </div>
+
+    <div class="field">
+      <label> Twitter </label>
+      <input type="text"
+             name="twitter"
+             placeholder="https://twitter.com/foobar"
+             ng-model="user.confirmation.twitter">
+    </div>
+
+    <br>
+    <br>
+
+    
+
+  </fieldset>

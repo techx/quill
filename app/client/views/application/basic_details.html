@@ -1,0 +1,147 @@
+<div class="divided title">Basic Information</div>
+
+<fieldset ng-disabled="regIsClosed">
+
+<div class="field">
+    <label> Email </label>
+    <input type="email"
+            name="email"
+            disabled="disabled"
+            ng-model="user.email">
+</div>
+
+<div class="field">
+    <label> Full Name (required) </label>
+    <input type="text"
+            name="name"
+            ng-model="user.profile.name">
+</div>
+
+<div class="field" ng-show="user.profile.category=='ORG'">
+    <label> Designation (required) </label>
+    <input type="text"
+            name="designation"
+            ng-model="user.profile.designation">
+</div>
+
+<div class="field" ng-show="!(user.profile.category=='ORG')">
+    <label> Nationality (required) </label>
+    <p>
+    Remember that it is mandatory to have at least one person of Indian nationality in your team. Read the <a href="https://smartmove.niua.org/#/guidelines">challenge guidelines</a> for more details.
+    </p>
+    <div id="nationality" class="ui search">
+    <div class="ui input">
+        <input class="prompt" type="text" placeholder="Indian, Mexican" name="nationality" ng-model="user.profile.nationality">                
+    </div>
+    <div class="results"></div>
+    </div>
+</div>
+
+<!-- <div class="field" ng-show="autoFilledSchool ">
+    <label> School (required) </label>
+    <input class="ui input"
+            disabled="disabled"
+            ng-show="autoFilledSchool"
+            ng-model="user.profile.school">
+</div> -->
+
+<div class="field" ng-show="!autoFilledSchool && user.profile.category=='STUD_PROF'">
+    <label> School (required) </label>
+    <div id="school" class="ui search">
+    <div class="ui input">
+        <input class="prompt" type="text" placeholder="School" name="school" ng-model="user.profile.school">                
+    </div>
+    <div class="results"></div>
+    </div>
+</div>
+
+<div class="field" ng-show="!autoFilledSchool && user.profile.category=='IND'">
+    <label> School </label>
+    <div id="school" class="ui search">
+    <div class="ui input">
+        <input class="prompt" type="text" placeholder="School" name="past_school" ng-model="user.profile.past_school">                
+    </div>
+    <div class="results"></div>
+    </div>
+</div>
+
+<!-- <div class="field">
+    <label>Graduation Year</label>
+    <select
+    name="year"
+    ng-model="user.profile.graduationYear">
+    <option value="">Graduation Year</option>
+    <option value="2016">2016</option>
+    <option value="2017">2017</option>
+    <option value="2018">2018</option>
+    <option value="2019">2019</option>
+    </select>
+</div> -->
+
+<div class="field" ng-show="!(user.profile.category=='ORG')">
+    <label>Gender (required)</label>
+    <select
+    name="gender"
+    ng-model="user.profile.gender">
+    <option value="">Gender</option>
+    <option value="T">Transgender</option>
+    <option value="F">Female</option>
+    <option value="M">Male</option>
+    <option value="O">Other</option>
+    <option value="N">I prefer not to answer.</option>
+    </select>
+</div>
+
+<div class="field" ng-show="!(user.profile.category=='ORG')">
+    <label>Age (required)</label>
+    <input type="text"
+            name="age"
+            placeholder="23"
+            ng-model="user.profile.age">
+</div>
+
+<div class="field">
+    <label> What's your phone number? (required) </label>
+    <p>
+    We need this in case we need to get ahold of you!
+    </p>
+    <input type="tel"
+            name="phone"
+            ng-model="user.confirmation.phoneNumber"
+            placeholder="+91 2341 352 437"
+            >
+</div>
+
+<div class="field">
+    <label ng-show="!(user.profile.category=='ORG')">
+        What would you like to learn or get out of SmartMove? 
+    </label>
+    <label ng-show="user.profile.category=='ORG'">
+        What would your organisation like to learn or get out of SmartMove? 
+    </label>
+    <textarea ng-model="user.profile.essay">
+    </textarea>
+</div>
+
+<!-- <div class="field"
+        ng-hide="isMitStudent">
+    <p>
+    Because of limitations imposed by MIT, we are not legally allowed to host
+    non-MIT minors (those under 18) for HackMIT 2015. Checking the box below affirms that you are or will be 18 years or older by September 19th, 2015.
+    </p>
+    <p>
+    <strong>
+    We will be checking ID. If you are a non-MIT minor, you will be turned away at the door.
+    </strong>
+    </p>
+    <div class="ui checkbox">
+    <input type="checkbox" id="adult" ng-model="user.profile.adult">
+    <label for="adult">I am 18 or older.</label>
+    </div>
+</div> -->
+
+<br>
+
+
+
+</fieldset>
