@@ -28,7 +28,7 @@ angular.module('reg')
       // Populate the school dropdown
       populateSchools();
       populateNationality();
-      _setupForm();
+      //_setupForm();
 
       $scope.regIsClosed = Date.now() > settings.data.timeClose;
       
@@ -150,185 +150,174 @@ angular.module('reg')
         return true;
       }
 
-      function _setupForm(){
-        console.log('setup')
-        // Custom minors validation rule
-        $.fn.form.settings.rules.allowMinors = function (value) {
-          return minorsValidation();
-        };
+      function _setupForm() {
+			// Custom minors validation rule
+			$.fn.form.settings.rules.allowMinors = function (value) {
+			return minorsValidation();
+			};
 
-        // Semantic-UI form validation
-        $('.ui.form').form({
-          inline: true,
-          fields: {
-            name: {
-              identifier: 'name',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please enter your name.'
-                },
-                {
-                  type: 'regExp',
-                  value: /^([a-zA-Z]+\s)*[a-zA-Z]+$/i,
-                  prompt: 'Name can only contain characters.'
-                }
-              ]
-            },
-            school: {
-              identifier: 'school',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please enter your school name.'
-                },
-                {
-                  type: 'regExp',
-                  value: /^([a-zA-Z,]+\s)*[a-zA-Z,]+$/i,
-                  prompt: 'School can only contain characters.'
-                }
-              ]
-            },
-            phone: {
-              identifier: 'phone',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please enter your phone number.'
-                },
-                {
-                  type: 'regExp',
-                  value: /^([0-9+]+\s)*[0-9+]+$/i,
-                  prompt: 'Phone number can only contain +, SPACE and [0-9] digits.'
-                }
-              ]
-            },
-            course: {
-              identifier: 'course',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please enter your course name.'
-                }
-              ]
-            },
-            nationality: {
-              identifier: 'nationality',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please enter your nationality.'
-                },
-                {
-                  type: 'regExp',
-                  value: /^([a-zA-Z]+\s)*[a-zA-Z]+$/i,
-                  prompt: 'Nationality can only contain characters.'
-                }
-              ]
-            },
-            year: {
-              identifier: 'year',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please select your graduation year.'
-                }
-              ]
-            },
-            gender: {
-              identifier: 'gender',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please select a gender.'
-                }
-              ]
-            },
-            signatureLiability: {
-              identifier: 'signatureLiabilityWaiver',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please type your digital signature.'
-                },
-                {
-                  type: 'regExp',
-                  value: /^([a-zA-Z]+\s)*[a-zA-Z]+$/i,
-                  prompt: 'Your Digital Signature can only contain characters.'
-                }
-              ]
-            },
-            signaturePhotoRelease: {
-              identifier: 'signaturePhotoRelease',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please type your digital signature.'
-                },
-                {
-                  type: 'regExp',
-                  value: /^([a-zA-Z]+\s)*[a-zA-Z]+$/i,
-                  prompt: 'Your Digital Signature can only contain characters.'
-                }
-              ]
-            },
-            signatureCodeOfConduct: {
-              identifier: 'signatureCodeOfConduct',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please type your digital signature.'
-                },
-                {
-                  type: 'regExp',
-                  value: /^([a-zA-Z]+\s)*[a-zA-Z]+$/i,
-                  prompt: 'Your Digital Signature can only contain characters.'
-                }
-              ]
-            },
-            declaration: {
-              identifier: 'declaration',
-              rules: [
-                {
-                  type   : 'checked',
-                  prompt : 'You must agree to the declaration'
-                }
-              ]
-            },
-            age: {
-              identifier: 'age',
-              rules: [
-                {
-                  type: 'integer',
-                  prompt: '{name} must be an integer'
-                },
-                {
-                  type: 'integer[8..110]',
-                  prompt: 'Participant must be an adult.'
-                }
-              ]
-            },
-            github: {
-              identifier: 'github',
-              rules: [
-                {
-                  type: 'regExp',
-                  value: '/(^$|^(https://){0,1}(github.com/)+(.)*)/i',
-                  prompt: 'Not a valid github link.'
-                }
-              ]
-            },
-            twitter: {
-              identifier: 'twitter',
-              rules: [
-                {
-                  type: 'regExp',
-                  value: '/(^$|^(https://){0,1}(twitter.com/)+(.)*)/i',
-                  prompt: 'Not a valid twitter link.'
-                }
-              ]
-            },
-            org_type: {
+			var fields = {}
+			switch (user.profile.category) {
+				case 'STUD_PROF':
+					fields = Object.assign(
+						basicDetailsFields,
+						skillsFields,
+						legalFields,
+						miscFields)
+					delete fields.past_school;
+					break;
+				case 'IND':
+					fields = Object.assign(
+						basicDetailsFields,
+						skillsFields,
+						legalFields,
+						miscFields,
+						indFields)
+					delete fields.school;
+					delete fields.course;
+					break;
+				case 'ORG':
+					fields = Object.assign(
+						corporateDetailsFields,
+						basicDetailsFields,
+						legalFields,
+						miscFields,
+						corporateOnlyFields
+					)
+					delete fields.age;
+					delete fields.course;
+					delete fields.gender;
+					delete fields.nationality;
+					delete fields.school;
+					delete fields.past_school;
+					break;
+				default:
+					break;
+			}
+
+			console.log(fields)
+			// Semantic-UI form validation
+			$('.ui.form').form({
+			inline: true,
+			fields: fields
+			});
+    	}
+
+      	var basicDetailsFields = {
+			name: {
+				identifier: 'name',
+				rules: [
+					{
+						type: 'empty',
+						prompt: 'Please enter your name.'
+					},
+					{
+						type: 'regExp',
+						value: /^([a-zA-Z]+\s)*[a-zA-Z]+$/i,
+						prompt: 'Name can only contain characters.'
+					}
+				]
+			},
+			age: {
+				identifier: 'age',
+				rules: [
+					{
+						type: 'integer',
+						prompt: '{name} must be an integer'
+					},
+					{
+						type: 'integer[8..110]',
+						prompt: 'Participant must be an adult.'
+					}
+				]
+			},
+			school: {
+				identifier: 'school',
+				rules: [
+					{
+						type: 'empty',
+						prompt: 'Please enter your school name.'
+					},
+					{
+						type: 'regExp',
+						value: /^([a-zA-Z,-]+\s)*[a-zA-Z,-]+$/i,
+						prompt: 'School can only contain characters, hyphen and comma.'
+					}
+				]
+			},
+			past_school: {
+				identifier: 'past_school',
+				rules: [
+					{
+						type: 'regExp',
+						value: /(^$)|(^([a-zA-Z,-]+\s)*[a-zA-Z,-]+$)/i,
+						prompt: 'School can only contain characters, hyphen and comma.'
+					}
+				]
+			},
+			phone: {
+				identifier: 'phone',
+				rules: [
+					{
+						type: 'empty',
+						prompt: 'Please enter your phone number.'
+					},
+					{
+						type: 'regExp',
+						value: /^([0-9+]+\s)*[0-9+]+$/i,
+						prompt: 'Phone number can only contain +, SPACE and [0-9] digits.'
+					}
+				]
+			},
+			course: {
+			identifier: 'course',
+			rules: [
+					{
+						type: 'empty',
+						prompt: 'Please enter your course name.'
+					}
+				]
+			},
+			nationality: {
+				identifier: 'nationality',
+				rules: [
+					{
+						type: 'empty',
+						prompt: 'Please enter your nationality.'
+					},
+					{
+						type: 'regExp',
+						value: /^([a-zA-Z]+\s)*[a-zA-Z]+$/i,
+						prompt: 'Nationality can only contain characters.'
+					}
+				]
+			},
+			gender: {
+				identifier: 'gender',
+				rules: [
+					{
+						type: 'empty',
+						prompt: 'Please select a gender.'
+					}
+				]
+			}
+		
+      	}
+
+	  	var corporateOnlyFields = {
+			designation: {
+				identifier: 'designation',
+				rules: [
+					{
+						type: 'empty',
+						prompt: 'Please specify your designation.'
+					}
+				]
+			}
+	  	}
+
+      var corporateDetailsFields = {
+        org_type: {
               identifier: 'org_type',
               rules: [
                 {
@@ -387,37 +376,127 @@ angular.module('reg')
                 }
               ]
             },
-            designation: {
-              identifier: 'designation',
+			org_github: {
+				identifier: 'org_github',
+				rules: [
+					{
+						type: 'regExp',
+						value: '/(^$|^(https://){0,1}(github.com/)+(.)*)/i',
+						prompt: 'Not a valid github link.'
+					}
+				]
+            },
+            org_twitter: {
+				identifier: 'org_twitter',
+				rules: [
+					{
+						type: 'regExp',
+						value: '/(^$|^(https://){0,1}(twitter.com/)+(.)*)/i',
+						prompt: 'Not a valid twitter link.'
+					}
+				]
+            }
+      	}
+
+		var indFields = {
+			job_status: {
+				identifier: 'job_status',
+				rules: [
+					{
+						type: 'empty',
+						prompt: 'Please specify your job status.'
+					}
+				]
+            }
+		}
+
+		var skillsFields = {
+			github: {
+				identifier: 'github',
+				rules: [
+					{
+						type: 'regExp',
+						value: '/(^$|^(https://){0,1}(github.com/)+(.)*)/i',
+						prompt: 'Not a valid github link.'
+					}
+				]
+            },
+            twitter: {
+				identifier: 'twitter',
+				rules: [
+					{
+						type: 'regExp',
+						value: '/(^$|^(https://){0,1}(twitter.com/)+(.)*)/i',
+						prompt: 'Not a valid twitter link.'
+					}
+				]
+            },
+			
+		}
+
+	  	var legalFields = {
+			signatureLiability: {
+				identifier: 'signatureLiabilityWaiver',
+				rules: [
+					{
+						type: 'empty',
+						prompt: 'Please type your digital signature.'
+					},
+					{
+						type: 'regExp',
+						value: /^([a-zA-Z]+\s)*[a-zA-Z]+$/i,
+						prompt: 'Your Digital Signature can only contain characters.'
+					}
+				]
+            },
+            signaturePhotoRelease: {
+              identifier: 'signaturePhotoRelease',
               rules: [
                 {
-                  type: 'empty',
-                  prompt: 'Please specify your designation.'
+					type: 'empty',
+					prompt: 'Please type your digital signature.'
+                },
+                {
+					type: 'regExp',
+					value: /^([a-zA-Z]+\s)*[a-zA-Z]+$/i,
+					prompt: 'Your Digital Signature can only contain characters.'
                 }
               ]
             },
-            job_status: {
-              identifier: 'job_status',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please specify your job status.'
-                }
-              ]
+            signatureCodeOfConduct: {
+				identifier: 'signatureCodeOfConduct',
+				rules: [
+					{
+						type: 'empty',
+						prompt: 'Please type your digital signature.'
+					},
+					{
+						type: 'regExp',
+						value: /^([a-zA-Z]+\s)*[a-zA-Z]+$/i,
+						prompt: 'Your Digital Signature can only contain characters.'
+					}
+				]
             }
-          }
-        });
-      }
+		}
 
-      $scope.submitForm = function(){
-        _setupForm();
-        if ($('.ui.form').form('validate form')){
-          console.log('123')
-          console.log($("[name='name']"))
-          console.log('valid form')
-          //_updateUser();
-        } else {
-          swal("Uh oh!", "Please Fill The Required Fields Correctly", "error");
-        }
-      };
+		var miscFields = {
+			declaration: {
+				identifier: 'declaration',
+				rules: [
+					{
+						type   : 'checked',
+						prompt : 'You must agree to the declaration'
+					}
+				]
+            }
+		}
+
+		$scope.submitForm = function(){
+			_setupForm();
+			if ($('.ui.form').form('validate form')){
+				_updateUser();
+			} else {
+				swal("Uh oh!", "Please Fill The Required Fields Correctly", "error");
+			}
+		};
     }]);
