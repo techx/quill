@@ -4,7 +4,7 @@
   <div class="ui stackable centered page grid">
     <div class="column">
       <div class="ui segment">
-        <p ng-show="!user.teamCode && regIsOpen">
+        <p ng-show="!user.teamCode && regIsOpen && !(user.profile.category=='ORG')">
           Create a team with a unique name here. You can add your teammates using their email address
           <strong
             >Remember that it is mandatory to have at least one person of Indian
@@ -40,7 +40,15 @@
           </div>
         </div>
 
-        <div ng-show="user.teamCode">
+        <div ng-show="user.teamCode && user.profile.category=='ORG'" style="text-align: center">
+          <h5>Team Name: </h5> {{user.teamCode}}
+          <br/>
+          <button class="ui fluid red button" ng-click="leaveTeam()" style="margin-top: 30px;">
+            Change Team Name
+          </button>
+        </div>
+
+        <div ng-show="user.teamCode && !(user.profile.category=='ORG')">
           <p><strong>{{ nationalityWarning }}</strong></p>
           <p ng-if="user.teamCode===user.teamAdmin"><strong>Now You're a Team Leader, Add your team mates</strong></p>
           <div class="form">
@@ -61,7 +69,7 @@
 
           <p ng-repeat="user in teammates" class="item">
             {{user.profile.name || 'Somebody (has not filled out their
-            profile!)'}} {{nationality}}
+            profile!)'}} {{parseNationality(user.profile.nationality)}}
           </p>
           <!-- <p>{{user.profile.name}} (Team Lead)</p>
           <p ng-repeat="teammate in teammates" class="item">

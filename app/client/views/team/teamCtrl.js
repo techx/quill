@@ -1,3 +1,5 @@
+const swal = require("sweetalert");
+
 angular.module('reg')
   .controller('TeamCtrl', [
     '$scope',
@@ -14,10 +16,20 @@ angular.module('reg')
       $scope.regIsOpen = Utils.isRegOpen(Settings);
 
       $scope.user = currentUser.data;
-      $scope.nationality = '';
+      $scope.nationality = undefined;
+
+      if($scope.user.profile.category == 'ORG') {
+        $scope.code = $scope.user.profile.org.name;
+      }
+
       // console.log('currentUser',currentUser.data);
-      if(currentUser.data.profile.nationality) {
-        $scope.nationality = '(' + currentUser.data.profile.nationality + ')';
+      
+      $scope.parseNationality = (n) => {
+        if(n) {
+          return '(' + n + ')';
+        } else {
+          return ''
+        }
       }
 
       $scope.TEAM = TEAM;
@@ -32,7 +44,7 @@ angular.module('reg')
             $scope.teammates = response.data;
             // $scope.nationalityWarning = '';
             response.data.forEach(u => {
-              if(u.profile.nationality.toLowerCase() == 'indian' || u.profile.nationality.toLowerCase() == 'india') {
+              if($scope.user.profile.nationality && ($scope.user.profile.nationality.toLowerCase() == 'indian' || $scope.user.profile.nationality.toLowerCase() == 'india')) {
                 $scope.nationalityWarning = '';
                 return;
               }
@@ -73,10 +85,8 @@ angular.module('reg')
         UserService
           .addTeamMates({email:$scope.email,code:$scope.user.teamCode})
           .then(response => {
-            $scope.error = null;
-            // $scope.user = response.data;
+            swal("Woo!", "Successfully added a new teammate!", "success");
             _populateTeammates();
-            location.reload();
           }, response => {
             $scope.error = response.data.message;
           });
