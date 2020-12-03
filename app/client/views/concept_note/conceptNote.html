@@ -3,79 +3,125 @@
 
   <div class="ui stackable centered page grid">
     <div class="column">
-      <div class="ui form">
-        <!-- <div ng-show="!user.teamCode" style="text-align: center">
-          <p>Please create or join a team to submit the concept note.</p>
+      <form class="ui form note">
 
-          <div
-            class="ui pink button"
-            ng-show="!user.teamCode"
-            ui-sref="app.team"
-          >
-            Create or join a team
-          </div>
-        </div> -->
+        <p style="text-align: center; margin-bottom: 30px;">
+          One team can submit maximum three concept notes under each theme. Download the <a href="../../assets/Concept note templete.docx" target="_blank">Concept Note Template</a>
+        </p>
 
-        <fieldset ng-show="user.teamCode">
-          <div class="divided title">Theme</div>
+        <fieldset ng-show="user.teamCode" class="concept-note-fields">
+          <div class="divided title">Theme 1: Restoring Public Transport Ridership</div>
 
-          <div class="field">
-            <label>Select a Theme (required)</label>
-            <select name="theme" ng-model="user.theme" ng-options="x for x in themes">
-              
-            </select>
-            <p ng-if="!user.theme" style="color: red;">lease select theme</p>
-          </div>
           <div class="field">
             <label>Select a Sub Theme (required)</label>
-            <select name="subtheme" ng-model="user.subtheme" ng-options="x for x in subthemes[user.theme]">
-              
+            <select name="subtheme_one" ng-model="user.subtheme_one">
+              <option value=""></option>
+              <option value="Covid-19 Recovery">Covid-19 Recovery</option>
+              <option value="Cost-effective Solutions">Cost-effective Solutions</option>
             </select>
-            <p ng-if="!user.subtheme" style="color: red;">Please select Sub Theme</p>
           </div>
-          <!-- <div class="field">
-            <button
-              type="submit"
-              class="fluid ui purple button"
-              ng-click="submitForm()"
-            >
-              Save
-            </button>
-          </div> -->
-          <!-- <br /> -->
 
-          <div class="divided title">Concept Note</div>
-          <div class="field">
-            <label>
-              Download the <a href="../../assets/Concept note templete.docx" target="_blank">Concept Note Template</a>
-            </label>
-            
-          </div>
           <div class="field">
             <label> Please upload your concept note document </label>
             <input
               type="file"
-              file-model="fileUpload"
+              name="fileUpload_one"
+              file-model="fileUpload_one"
               accept="application/pdf"
             />
           </div>
 
-          <p>
-            Submissions accepted from
-            <strong>{{ conceptNoteStartDate }}</strong>
-          </p>
+          <div ng-show="user.status.conceptNoteSubmitted_one && user.subtheme_one" style="margin-bottom: 20px;">
+            You have submitted the concept note for this theme. <a href="#" ng-click="previewNote('one')">Preview it here</a>. <strong>If you re-upload, the existing one will override.</strong>
+          </div>
 
           <div class="field">
             <button
               type="submit"
               class="fluid ui purple button"
-              ng-click="submitConceptNote()"
+              ng-click="submitConceptNote('one')"
             >
-              Submit
+              Save
             </button>
           </div>
         </fieldset>
-      </div>
+
+        <fieldset ng-show="user.teamCode" class="concept-note-fields">
+          <div class="divided title">Theme 2: Achieving Sustainable Transport and Resilience</div>
+
+          <div class="field">
+            <label>Select a Sub Theme (required)</label>
+
+            <select name="subtheme_two" ng-model="user.subtheme_two">
+              <option value=""></option>
+              <option value="Multi-modal integration">Multi-modal integration</option>
+              <option value="Sustainable Transport Modes">Sustainable Transport Modes</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label> Please upload your concept note document </label>
+            <input
+              type="file"
+              name="fileUpload_two"
+              file-model="fileUpload_two"
+              accept="application/pdf"
+            />
+          </div>
+
+          <div ng-show="user.status.conceptNoteSubmitted_two && user.subtheme_two" style="margin-bottom: 20px;">
+            You have submitted the concept note for this theme. <a href="#" ng-click="previewNote('two')">Preview it here</a>. <strong>If you re-upload, the existing one will override.</strong>
+          </div>
+
+          <div class="field">
+            <button
+              type="submit"
+              class="fluid ui purple button"
+              ng-click="submitConceptNote('two')"
+            >
+              Save
+            </button>
+          </div>
+        </fieldset>
+
+        <fieldset ng-show="user.teamCode" class="concept-note-fields">
+          <div class="divided title">Theme 3: Equity in Mobility</div>
+
+          <div class="field">
+            <label>Select a Sub Theme (required)</label>
+
+            <select name="subtheme_three" ng-model="user.subtheme_three">
+              <option value=""></option>
+              <option value="Sub Gender and Safety">Sub Gender and Safety</option>
+              <option value="Inclusivity and Efficiency Improvement">Inclusivity and Efficiency Improvement</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label> Please upload your concept note document </label>
+            <input
+              type="file"
+              name="fileUpload_three"
+              file-model="fileUpload_three"
+              accept="application/pdf"
+            />
+          </div>
+
+          <div ng-show="user.status.conceptNoteSubmitted_three && user.subtheme_three" style="margin-bottom: 20px;">
+            You have submitted the concept note for this theme. <a href="#" ng-click="previewNote('three')">Preview it here</a>. <strong>If you re-upload, the existing one will override.</strong>
+          </div>
+
+          <div class="field">
+            <button
+              type="submit"
+              class="fluid ui purple button"
+              ng-click="submitConceptNote('three')"
+            >
+              Save
+            </button>
+          </div>
+        </fieldset>
+      </form>
     </div>
   </div>
 </div>

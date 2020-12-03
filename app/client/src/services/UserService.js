@@ -39,11 +39,8 @@ angular.module("reg").factory("UserService", [
         });
       },
 
-      updateTheme: function (id, theme, subtheme) {
-        return $http.put(base + id + "/theme", {
-          theme: theme,
-          subtheme:subtheme,
-        });
+      updateTheme: function (id, theme) {
+        return $http.put(base + id + "/theme", theme);
       },
 
       updateConfirmation: function (id, confirmation) {
@@ -83,6 +80,10 @@ angular.module("reg").factory("UserService", [
       // ------------------------
       submitNote: function (fileData) {
         return $http.post(base + Session.getUserId() + "/upload", fileData);
+      },
+
+      getNote: function (data) {
+        return $http.post(base + Session.getUserId() + "/get_note", data);
       },
 
       // -------------------------

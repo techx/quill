@@ -11,7 +11,6 @@ const swal = require("sweetalert");
 // Theme - Equity in Mobility
 // Sub Theme - Gender and Safety
 //                      Inclusivity and Efficiency Improvement
-const S3 = require("aws-sdk/clients/s3");
 
 angular
   .module("reg")
@@ -60,27 +59,30 @@ angular
         settings.data.timeConceptNoteOpen
       );
 
+      
+
       $scope.formatTime = Utils.formatTime;
       var themeList = {
-        "Restoring Public Transport Ridership": [
+        "RPTR": [
+          "",
           "Covid-19 Recovery",
           "Cost-effective Solutions",
         ],
-        "Achieving Sustainable Transport and Resilience": [
+        "ASTR": [
           "Multi-modal integration",
           "Sustainable Transport Modes",
         ],
-        "Equity in Mobility": [
+        "EM": [
           "Sub Gender and Safety",
           "Inclusivity and Efficiency Improvement",
         ],
       };
       
-      $scope.themes = [
-        "Restoring Public Transport Ridership",
-        "Achieving Sustainable Transport and Resilience",
-        "Equity in Mobility",
-      ];
+      themeMap = {
+        "one": "Restoring Public Transport Ridership",
+        "two": "Achieving Sustainable Transport and Resilience",
+        "three": "Equity in Mobility",
+      };
       
       $scope.subthemes = themeList;
       var docfiles = [];
@@ -98,6 +100,43 @@ angular
       //   );
       // };
 
+      $scope.themeChange = () => {
+        console.log('theme change')
+        $scope.subtheme = ''
+      }
+
+      function _setupForm(themeNo) {
+
+        console.log('form setup')
+
+        var fields = {
+          fileUpload: {
+            identifier: 'fileUpload_' + themeNo,
+            rules: [
+              {
+                type: 'empty',
+                prompt: 'Please select a PDF to upload.'
+              }
+            ]
+          },
+          subtheme: {
+            identifier: 'subtheme_' + themeNo,
+            rules: [
+              {
+                type: 'empty',
+                prompt: 'Please select a subtheme.'
+              }
+            ]
+          },
+        }
+        
+        // Semantic-UI form validation
+        $('.ui.form.note').form({
+          inline: true,
+          fields: fields
+        });
+      }
+
       $scope.onFileChange = function (files) {
         for (let index = 0; index < files.length; index++) {
           const file = files[index];
@@ -109,8 +148,37 @@ angular
         });
       };
 
-      $scope.submitConceptNote = function () {
-        UserService.updateTheme($scope.user._id, $scope.user.theme, $scope.user.subtheme).then(
+      $scope.previewNote = (themeNo) => {
+        var theme = themeMap[themeNo];
+        var subtheme = $scope.user['subtheme_' + themeNo];
+
+        UserService.getNote({
+          theme: theme,
+          subtheme: subtheme
+        }).then((res) => {
+          window.open(res.data.signedURL, '_blank');
+        })
+      }
+
+      $scope.submitConceptNote = function (themeNo) {
+
+        console.log(themeNo)
+
+        _setupForm(themeNo);
+
+        if ($('.ui.form.note').form('validate form')){
+          console.log('valid form')
+          uploadFile(
+            $scope['fileUpload_' + themeNo],
+            themeMap[themeNo],
+            $scope.user['subtheme_' + themeNo],
+            themeNo
+          )
+        } else {
+          swal("Uh oh!", "Please Fill The Required Fields Correctly", "error");
+        }
+
+        /* UserService.updateTheme($scope.user._id, $scope.user.theme, $scope.user.subtheme).then(
           (response) => {
             console.log(response);
           },
@@ -119,31 +187,58 @@ angular
           }
         );
         var file = $scope.fileUpload;
-        uploadFile(file);
+        uploadFile(file); */
       };
-      uploadFile = function (file) {
+      
+      uploadFile = function (file, theme, subtheme, themeNo) {
         // console.log(file, participateName);
         const imageObject = {};
+        console.log(file)
 
         for (const key in file) {
           const value = file[key];
           const notFunction = typeof value !== "function";
           notFunction && (imageObject[key] = value);
         }
+        imageObject['theme'] = theme
+        imageObject['subtheme'] = subtheme
         // fileData.append('participateName',participateName);
         // console.log(fileData);
-        UserService.submitNote(imageObject).then(
-          (response) => {
-            console.log(response);
-            swal("File uploaded successfully").then((value) => {
-              $state.go("app.note");
-            });
+        UserService.submitNote(imageObject).then((response) => {
+          console.log(response);
+          $http.put(response.data.signedURL, file, { headers: { 'Content-Type': file.type }}).then((data) => {
+
+            data = {}
+            data['theme'] = themeNo
+            data['subtheme'] = subtheme
+
+            UserService.updateTheme(
+              $scope.user._id,
+              data
+            ).then( (response) => {
+                console.log(response);
+                
+                swal("Kudos!", "Concept note submitted!", "success");
+                location.reload();
+              },
+              (error) => {
+                console.log(error);
+              }
+            );
+
+
+              
+              // console.log("File uploaded successfully");
           },
-          (error) => {
-            swal("Uh oh!", "Something went wrong.", "error");
-            console.log(error);
-          }
-        );
+          function (error) {
+            swal("Uh oh!", "Something went wrong.", error);
+            console.error("There was an error!", error);
+          });
+        }, 
+        (error) => {
+          swal("Uh oh!", "Something went wrong.", "error");
+          console.log(error);
+        });
       };
     },
   ]);

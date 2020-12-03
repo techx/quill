@@ -329,19 +329,20 @@ UserController.updateProfileById = function (id, profile, callback) {
  * @param  {Function} callback Callback with args (err, user)
  */
 UserController.updateThemeById = function (id, theme, subtheme, callback) {
+  var obj = {
+    lastUpdated: Date.now(),
+    'status.conceptNoteSubmitted': true
+  }
+  obj['subtheme_' + theme] = subtheme;
+  obj['status.conceptNoteSubmitted_' + theme] = true;
+  
   User.findOneAndUpdate(
     {
       _id: id,
       verified: true,
     },
     {
-      $set: {
-        lastUpdated: Date.now(),
-        theme: theme,
-        subtheme:subtheme,
-        "status.completedProfile": true,
-        "status.admitted": true,
-      },
+      $set: obj,
     },
     {
       new: true,
@@ -613,7 +614,7 @@ UserController.addTeamMates = function (id, email, code, callback) {
               }
             );
             
-            return callback({
+            return callback(null, {
               message: "We have added your teammate in our database, You teammate will receive mail shortly with credentials",
             });
           });
@@ -658,6 +659,10 @@ UserController.addTeamMates = function (id, email, code, callback) {
               "Your team mate is not verified. We have sent mail for verification",
           });
         }
+
+        return callback(null, {
+          message: email + ' successfully added.'
+        })
         // Otherwise, we can add that person to the team.
         // User.findOneAndUpdate({
         //   _id: id,
@@ -827,20 +832,47 @@ UserController.resetPassword = function (token, password, callback) {
   });
 };
 
-// Upload to s3 bucket
-UserController.uploadS3 = function (id, fileData, callback) {
+// Get from s3 bucket
+UserController.getSignedURLForPreviewS3 = function (id, data, callback) {
   User.findById(id)
-    .select("teamCode theme subtheme")
+    .select("teamCode")
     .exec(function (err, user) {
       // console.log(user);
+      var theme =  data.theme;
+      var subtheme = data.subtheme;
       var params = {
         Bucket: bucketName,
-        Key: user.teamCode + "/" + user.theme + "/" +user.subtheme + "/"+ "NOTE.pdf",
+        Key: user.teamCode + "/" + theme + "/" + subtheme + ".pdf",
+        Expires: 3600
+      };
+      var url = bucket.getSignedUrl("getObject", params);
+
+      return callback(null, {
+        signedURL: url
+      })
+    });
+};
+
+// Upload to s3 bucket
+UserController.getSignedUploadURLForS3 = function (id, fileData, callback) {
+  User.findById(id)
+    .select("teamCode")
+    .exec(function (err, user) {
+      // console.log(user);
+      var theme =  fileData.theme;
+      var subtheme = fileData.subtheme;
+      var params = {
+        Bucket: bucketName,
+        Key: user.teamCode + "/" + theme + "/" + subtheme + ".pdf",
         Expires: 3600,
-        ContentType: fileData.type,
+        ContentType: fileData.type
       };
       var url = bucket.getSignedUrl("putObject", params);
-      axios
+
+      return callback(null, {
+        signedURL: url
+      })
+      /* axios
         .put(url, fileData)
         .then((response) => {
           return callback(null, {
@@ -849,7 +881,7 @@ UserController.uploadS3 = function (id, fileData, callback) {
         })
         .catch((error) => {
           return callback(error);
-        });
+        }); */
     });
 };
 

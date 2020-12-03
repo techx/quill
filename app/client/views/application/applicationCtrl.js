@@ -195,7 +195,6 @@ angular.module('reg')
 					break;
 			}
 
-			console.log(fields)
 			// Semantic-UI form validation
 			$('.ui.form').form({
 			inline: true,

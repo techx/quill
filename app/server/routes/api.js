@@ -362,7 +362,15 @@ module.exports = function (router) {
   router.post("/users/:id/upload", isOwnerOrAdmin, function (req, res) {
     var fileData = req.body;
     var id = req.params.id;
-    UserController.uploadS3(id, fileData, defaultResponse(req, res));
+    UserController.getSignedUploadURLForS3(id, fileData, defaultResponse(req, res));
+    // return res.status(201).send();
+  });
+
+  // get from s3
+  router.post("/users/:id/get_note", isOwnerOrAdmin, function (req, res) {
+    var data = req.body;
+    var id = req.params.id;
+    UserController.getSignedURLForPreviewS3(id, data, defaultResponse(req, res));
     // return res.status(201).send();
   });
 

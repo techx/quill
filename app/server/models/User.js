@@ -183,21 +183,6 @@ var profile = {
   org: org,
 };
 
-var theme = {
-  name: {
-    type: String,
-    min: 1,
-    max: 100,
-  },
-};
-
-var subtheme = {
-  name: {
-    type: String,
-    min: 1,
-    max: 100,
-  },
-};
 // Only after confirmed
 var confirmation = {
   phoneNumber: String,
@@ -288,6 +273,19 @@ var status = {
     type: Boolean,
     default: false,
   },
+  conceptNoteSubmitted_one: {
+    type: Boolean,
+    default: false,
+  },
+  conceptNoteSubmitted_two: {
+    type: Boolean,
+    default: false,
+  },
+  conceptNoteSubmitted_three: {
+    type: Boolean,
+    default: false,
+  }
+
 };
 
 // define the schema for our admin model
@@ -356,8 +354,29 @@ var schema = new mongoose.Schema({
   profile: profile,
 
   // User theme
-  theme: theme,
-  subtheme:subtheme,
+  subtheme_one: {
+    name: {
+      type: String,
+      min: 1,
+      max: 100,
+    },
+  },
+
+  subtheme_two: {
+    name: {
+      type: String,
+      min: 1,
+      max: 100,
+    },
+  },
+
+  subtheme_three: {
+    name: {
+      type: String,
+      min: 1,
+      max: 100,
+    },
+  },
 
   /**
    * Confirmation information
@@ -526,6 +545,10 @@ schema.virtual("status.name").get(function () {
 
   if (!this.verified) {
     return "unverified";
+  }
+
+  if(this.status.conceptNoteSubmitted) {
+    return 'concept note submitted';
   }
 
   return "incomplete";
