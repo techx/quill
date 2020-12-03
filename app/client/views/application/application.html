@@ -55,7 +55,7 @@
 
         <br/>
 
-        <div class="field" ng-hide="regIsClosed || !user.profile.category">
+        <div class="field" ng-hide="regIsClosed || !user.profile.category || user.profile.org.is_indian=='OTHER'">
           <button type="submit"
                   class="fluid ui purple button"
                   ng-click="submitForm()">

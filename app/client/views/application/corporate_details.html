@@ -17,6 +17,10 @@
 
 <div class="field">
     <label>Country of Registration (required)</label>
+    <div class="ui error message" style="display:block" ng-show="user.profile.org.is_indian=='OTHER'">
+        <p>Sorry, this challenge is only open for organisations registered in India.</p>
+    </div>
+    
     <select
     name="org_is_indian"
     ng-model="user.profile.org.is_indian">
