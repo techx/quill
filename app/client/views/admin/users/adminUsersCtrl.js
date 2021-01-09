@@ -205,8 +205,11 @@ angular.module('reg')
           UserService
             .resendVerification(user._id)
             .then(response => {
-              $scope.users[index] = response.data;
-              swal("Sent", 'Resent verification email to ' + response.data.profile.name, "success");
+              if (!response.data.profile) {
+                swal("Failed to send", 'User is already verified', "error");
+              } else {
+                swal("Sent", 'Resent verification email to ' + response.data.profile.name, "success");
+              }
             });
         });
       };
