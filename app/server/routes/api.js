@@ -364,6 +364,14 @@ module.exports = function(router, multer) {
     console.log("here4")
     UserController.admitUser(id, user, defaultResponse(req, res));
   });
+  
+  /**
+   * Resend verification email to a user from the admin panel
+   */
+  router.post('/users/:id/resendver', isAdmin, function(req, res){
+    var id = req.params.id;
+    UserController.sendVerificationEmailById(id, defaultResponse(req, res));
+  });
 
   /**
    * Check in a user. ADMIN ONLY, DUH

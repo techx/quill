@@ -176,6 +176,40 @@ angular.module('reg')
           });
         });
       };
+      
+      $scope.resendVerification = function($event, user, index) {
+        $event.stopPropagation();
+
+        swal({
+          buttons: {
+            cancel: {
+              text: "Cancel",
+              value: null,
+              visible: true
+            },
+            accept: {
+              closeModal: false,
+              text: "Yes, resend",
+              value: true,
+              visible: true
+            }
+          },
+          dangerMode: true,
+          icon: "warning",
+          text: "Would you like to resend the verification email to " + user.profile.name + "?",
+          title: "Verify Resend"
+        }).then(value => {
+          if (!value) {
+            return;
+          }
+          UserService
+            .resendVerification(user._id)
+            .then(response => {
+              $scope.users[index] = response.data;
+              swal("Sent", 'Resent verification email to ' + response.data.profile.name, "success");
+            });
+        });
+      };
 
       $scope.toggleAdmin = function($event, user, index) {
         $event.stopPropagation();
