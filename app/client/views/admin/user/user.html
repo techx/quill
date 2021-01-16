@@ -118,6 +118,11 @@
       </div>
 
       <div class="field">
+        <label>Age</label>
+        <input type="number" min="18" max="100" ng-model="selectedUser.profile.age">
+      </div>
+
+      <div class="field">
         <label>Gender</label>
         <select
           name="gender"
@@ -131,12 +136,67 @@
       </div>
 
       <div class="field">
-        <label>I would describe myself as a...</label>
-        <input type="text"
-               placeholder="Designer, Data Scientist, iOS Wizard, Hacker Extraordinaire"
-               ng-model="selectedUser.profile.description">
+        <label>Race</label>
+        <select
+          name="race"
+          ng-model="selectedUser.profile.race">
+          <option value="">Race</option>
+          <option value="NA">Native American</option>
+          <option value="API">Asian/Pacific Islander</option>
+          <option value="BAA">Black or African American</option>
+          <option value="H">Hispanic</option>
+          <option value="WC">White / Caucasian</option>
+          <option value="MO">Multiple / Other</option>
+          <option value="none">Prefer not to answer</option>
+        </select>
       </div>
 
+      <div class="field">
+        <label>Hackathons Attended</label>
+        <input type="number" min="0" max="100" ng-model="selectedUser.profile.hackathons">
+      </div>
+
+      <div class = "field">
+        <label>Referrer</label>
+        <select name="referrer" ng-model="selectedUser.profile.referrer">
+          <option value=""></option>
+          <option value="YT">YouTube</option>
+          <option value="FB">Facebook</option>
+          <option value="IG">Instagram</option>
+          <option value="TWT">Twitter</option>
+          <option value="LI">LinkedIn</option>
+          <option value="F">Friends</option>
+          <option value="PROF">Professors</option>
+          <option value="HACK">Another hackathon</option>
+          <option value="HMAIL">HackUTD Mailing List</option>
+          <option value="AMAIL">ACM Mailing List</option>
+          <option value="GJ">HackUTD Game Jam</option>
+          <option value="ACMD">ACM Discord</option>
+          <option value="MLH">MLH</option>
+          <option value="O">Other</option>
+        </select>
+      </div>
+
+      <div class="field" ng-show="selectedUser.profile.referrer == 'O'">
+        <label>Referrer Other</label>
+        <input type="text" ng-model="selectedUser.profile.referrerOther">
+      </div>
+
+      <div class="field">
+        <label>Desired Prizes</label>
+        <input type="text" ng-model="selectedUser.profile.prize">
+      </div>
+
+      <div class="field">
+        <label>Desired Workshops</label>
+        <input type="text" ng-model="selectedUser.profile.workshop">
+      </div>
+
+      <div class="field">
+        <label>Favorite Joke</label>
+        <input type="text" ng-model="selectedUser.profile.joke">
+      </div>
+      <!--
       <div class="field">
         <label>
             What would you like to learn or get out of HackMIT? (optional)
@@ -161,7 +221,7 @@
           <label for="adult">I am 18 or older.</label>
         </div>
       </div>
-
+      -->
       <div class="field">
         <div
           ng-click="updateProfile()"
@@ -183,7 +243,7 @@
       <div class="ui header">
         Confirmation
       </div>
-
+      <!--
       <div class="field">
         <label> Phone </label>
         <input type="tel" ng-model="selectedUser.confirmation.phoneNumber" />
@@ -194,7 +254,7 @@
         <input
           type="text" ng-model="selectedUser.confirmation.dietaryRestrictions" />
       </div>
-
+      -->
       <div class="field">
         <label> Shirt Size </label>
         <input type="text" ng-model="selectedUser.profile.shirtSize" />
@@ -211,6 +271,11 @@
       </div>
 
       <div class="field">
+        <label> LinkedIn </label>
+        <input type="url" ng-model="selectedUser.profile.linkedin" />
+      </div>
+
+      <div class="field">
         <label> Website </label>
         <input type="url" ng-model="selectedUser.profile.website" />
       </div>
@@ -220,6 +285,93 @@
         <input type="url" ng-model="selectedUser.profile.resume" />
       </div>
 
+      <div class="field">
+        <label>Additional Notes</label>
+        <textarea ng-model="selectedUser.profile.notes"></textarea>
+      </div>
+
+      <div class="ui divider"></div>
+
+      <div class="ui header">
+        Status
+      </div>
+
+      <div class="field">
+        <strong> Confirmed </strong>
+        <i
+          ng-if="selectedUser.status.confirmed"
+          class="green check circle icon">
+        </i>
+        <i
+          ng-if="!selectedUser.status.confirmed"
+          class="red remove circle icon">
+        </i>
+      </div>
+
+      <div class="field">
+        <strong> Declined </strong>
+        <i
+          ng-if="selectedUser.status.declined"
+          class="green check circle icon">
+        </i>
+        <i
+          ng-if="!selectedUser.status.declined"
+          class="red remove circle icon">
+        </i>
+      </div>
+
+      <div class="field">
+        <strong> Completed Profile </strong>
+        <i
+          ng-if="selectedUser.status.completedProfile"
+          class="green check circle icon">
+        </i>
+        <i
+          ng-if="!selectedUser.status.completedProfile"
+          class="red remove circle icon">
+        </i>
+      </div>
+
+      <div class="field">
+        <strong> Admitted </strong>
+        <i
+          ng-if="selectedUser.status.admitted"
+          class="green check circle icon">
+        </i>
+        <i
+          ng-if="!selectedUser.status.admitted"
+          class="red remove circle icon">
+        </i>
+      </div>
+
+      <div class="field">
+        <label> Admitted By </label>
+        <input type="text" ng-model="selectedUser.status.admittedBy" />
+      </div>
+
+      <div class="field">
+        <strong> Checked In </strong>
+        <i
+          ng-if="selectedUser.status.checkedIn"
+          class="green check circle icon">
+        </i>
+        <i
+          ng-if="!selectedUser.status.checkedIn"
+          class="red remove circle icon">
+        </i>
+      </div>
+
+      <div class="field">
+        <label>Check In Time</label>
+        <input type="number" ng-model="selectedUser.status.checkInTime">
+      </div>
+
+      <div class="field">
+        <label>Confirm By</label>
+        <input type="number" ng-model="selectedUser.status.confirmBy">
+      </div>
+
+      <!--
       <div class="ui divider"></div>
 
       <div class="field">
@@ -238,7 +390,7 @@
         </label>
         <input type="text" ng-model="selectedUser.confirmation.hardware">
       </div>
-
+      
       <div class="ui divider"></div>
 
       <div class="ui header">
@@ -309,13 +461,13 @@
         <label> Hosting Notes </label>
         <textarea ng-model="selectedUser.confirmation.hostNotes"></textarea>
       </div>
-
+      -->
       <div class="ui divider"></div>
-
+      
       <div class="ui header">
-        Travel
+        Mailing Address
       </div>
-
+      <!--
       <div class="field">
         <strong> Needs Reimbursement</strong>
         <i
@@ -327,12 +479,12 @@
           class="red remove circle icon">
         </i>
       </div>
-
+      -->
       <div class="field">
         <label>Full Name</label>
         <input type="text"
                name="name"
-               ng-model="selectedUser.confirmation.address.name">
+               ng-model="selectedUser.profile.address.name">
       </div>
 
       <div class="field">
@@ -340,7 +492,7 @@
         <input
           type="text"
           name="addressLine1"
-          ng-model="selectedUser.confirmation.address.line1">
+          ng-model="selectedUser.profile.address.line1">
       </div>
 
       <div class="field">
@@ -348,7 +500,7 @@
         <input
           type="text"
           name="addressLine2"
-          ng-model="selectedUser.confirmation.address.line2">
+          ng-model="selectedUser.profile.address.line2">
       </div>
 
       <div class="four fields">
@@ -357,31 +509,40 @@
           <input
             type="text"
             name="city"
-            ng-model="selectedUser.confirmation.address.city">
+            ng-model="selectedUser.profile.address.city">
         </div>
         <div class="field">
           <label> State/Province/Region </label>
           <input
             type="text"
             name="state"
-            ng-model="selectedUser.confirmation.address.state">
+            ng-model="selectedUser.profile.address.state">
         </div>
         <div class="field">
           <label> ZIP </label>
           <input
             type="text"
             name="zip"
-            ng-model="selectedUser.confirmation.address.zip">
+            ng-model="selectedUser.profile.address.zip">
         </div>
         <div class="field">
           <label> Country </label>
           <input
             type="text"
             name="country"
-            ng-model="selectedUser.confirmation.address.country">
+            ng-model="selectedUser.profile.address.country">
         </div>
       </div>
 
+      <div class="field">
+        <div
+          ng-click="updateProfile()"
+          class="ui positive right labeled icon button">
+          Update Profile
+          <i class="checkmark icon"></i>
+        </div>
+      </div>
+      <!--
       <div class="field">
         <label> Receipt </label>
         <input type="url" ng-model="selectedUser.confirmation.receipt" />
@@ -391,7 +552,7 @@
         <label> Additional Notes </label>
         <textarea ng-model="selectedUser.confirmation.notes"></textarea>
       </div>
-
+      -->
     </fieldset>
 
   </div>
