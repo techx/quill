@@ -11,6 +11,8 @@ var profile = {
 
   school: String,
 
+  number: Number,
+
   graduationYear: {
     type: String,
     enum: {
