@@ -131,6 +131,15 @@ angular.module('reg')
         $('.ui.form').form({
           inline: true,
           fields: {
+            phone: {
+              identifier: 'phone',
+              rules: [
+                {
+                  type: 'regExp',
+                  value: /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/
+                }
+              ]
+            },
             name: {
               identifier: 'name',
               rules: [

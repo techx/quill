@@ -11,7 +11,7 @@ var profile = {
 
   school: String,
 
-  number: Number,
+  phone: Number,
 
   graduationYear: {
     type: String,
