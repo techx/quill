@@ -827,6 +827,23 @@
     "ryerson.ca": {
         "school": "Ryerson University",
         "state": "Ontario"
+    },
+    "uta.edu":{
+        "school": "The University of Texas at Arlington",
+        "state": "Texas"
+    },
+    "mines.edu":{
+        "school": "Colorado School of Mines",
+        "state": "Colorado"
+    },
+    "lamar.edu":{
+        "school": "Lamar University",
+        "state": "Texas"
+    },
+    "collin.edu":{
+        "school": "Collin College",
+        "state": "Texas"
     }
+    
 
 }

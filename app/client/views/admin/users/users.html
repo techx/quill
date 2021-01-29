@@ -97,11 +97,12 @@
           <tr>
             <th>Name</th>
             <th>E-mail address</th>
+            <th>Number</th>
             <th>School</th>
             <th>Grad</th>
             <th>V/S/A/C</th>
-            <th>Host</th>
-            <th>$</th>
+            <!-- <th>Host</th> -->
+            <!-- <th>$</th> -->
             <th></th>
             <th></th>
           </tr>
@@ -119,6 +120,7 @@
               </strong>
             </td>
             <td>{{user.email}}</td>
+            <td>{{user.profile.phone}}</td>
             <td>{{user.profile.school}}</td>
             <td
               class="collapsing">
@@ -178,7 +180,7 @@
             </td>
 
             <!-- Host -->
-            <td
+            <!-- <td
               class="collapsing">
 
               <span ng-if="user.status.confirmed">
@@ -196,9 +198,9 @@
                 </i>
               </span>
 
-            </td>
+            </td> -->
 
-            <td
+            <!-- <td
               class="collapsing">
               <span ng-if="user.status.confirmed">
                 <i
@@ -210,7 +212,7 @@
                   class="green money icon">
                 </i>
               </span>
-            </td>
+            </td> -->
 
             <td
               class="collapsing">
@@ -223,6 +225,12 @@
 
             <td
               class="right aligned collapsing">
+
+              <button
+                class="accept ui circular mini basic green icon button"
+                ng-click="resendVerification($event, user, $index)">
+                <i class="envelope outline icon"></i>
+              </button>
 
               <button
                 class="accept ui circular mini basic green icon button"
@@ -244,7 +252,7 @@
 
               </button>
 
-              <button
+              <!-- <button
                 ng-click="toggleAdmin($event, user, $index)"
                 class="ui circular mini basic green icon button">
 
@@ -256,7 +264,7 @@
                   ng-if="user.admin"
                   class="green spy icon"></i>
 
-              </button>
+              </button> -->
 
             </td>
           </tr>

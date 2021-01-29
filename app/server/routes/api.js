@@ -2,11 +2,16 @@ var UserController = require('../controllers/UserController');
 var SettingsController = require('../controllers/SettingsController');
 var User = require('../models/User');
 var json2csv = require('json2csv').parse;
-var path = require('path');
+var path = require('path');;
 
 var request = require('request');
 
-module.exports = function(router) {
+var gcloud = require('@google-cloud/storage');
+const storage = new gcloud.Storage();
+var bucket = storage.bucket('acm-core.appspot.com');
+
+module.exports = function(router, multer) {
+  var upload = multer({ storage: multer.memoryStorage() });
 
   function getToken(req){
     return req.headers['x-access-token'];
@@ -113,6 +118,36 @@ module.exports = function(router) {
   /**
    *  API!
    */
+
+
+  router.post('/users/:id/resume', isOwnerOrAdmin, upload.single('file'), function(req, res) {
+    const file = bucket.file('hackutd_resumes/' + req.params.id + '.pdf');
+    file.save(req.file.buffer, {
+      gzip: true,
+      contentType: 'application/pdf',
+    }, function(err) {
+      console.log(err);
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        res.status(200).json({});
+      }
+    });
+  });
+
+  router.get('/users/:id/resume', isOwnerOrAdmin, function(req, res) {
+    const file = bucket.file('hackutd_resumes/' + req.params.id + '.pdf');
+    file.download(function(err, contents) {
+      if (err) {
+        console.log(err);
+        res.status(500).send(err);
+      } else {
+        res.status(200).json({
+          file: contents.toString('base64')
+        })
+      }
+    })
+  });
 
   // ---------------------------------------------
   // Users
@@ -326,7 +361,16 @@ module.exports = function(router) {
     // Accept the hacker. Admin only
     var id = req.params.id;
     var user = req.user;
+    console.log("here4")
     UserController.admitUser(id, user, defaultResponse(req, res));
+  });
+  
+  /**
+   * Resend verification email to a user from the admin panel
+   */
+  router.post('/users/:id/resendver', isAdmin, function(req, res){
+    var id = req.params.id;
+    UserController.sendVerificationEmailById(id, defaultResponse(req, res));
   });
 
   /**

@@ -7,44 +7,25 @@ var mongoose   = require('mongoose'),
 var profile = {
 
   // Basic info
-  name: {
-    type: String,
-    min: 1,
-    max: 100,
-  },
+  name: String,
 
-  adult: {
-    type: Boolean,
-    required: true,
-    default: false,
-  },
+  school: String,
 
-  school: {
-    type: String,
-    min: 1,
-    max: 150,
-  },
+  phone: Number,
 
   graduationYear: {
     type: String,
     enum: {
-      values: '2016 2017 2018 2019'.split(' '),
+      values: '2021 2022 2023 2024'.split(' ')
     }
   },
 
-  description: {
-    type: String,
-    min: 0,
-    max: 300
+  age: {
+    type: Number,
+    min: 18,
+    max: 100
   },
 
-  essay: {
-    type: String,
-    min: 0,
-    max: 1500
-  },
-
-  // Optional info for demographics
   gender: {
     type: String,
     enum : {
@@ -52,28 +33,47 @@ var profile = {
     }
   },
 
-};
+  race: {
+    type: String,
+    enum: {
+      values: 'NA API BAA H WC MO none'.split(' ')
+    }
+  },
 
-// Only after confirmed
-var confirmation = {
-  phoneNumber: String,
-  dietaryRestrictions: [String],
+  major: String,
+
+  hackathons: {
+    type: Number,
+    min: 0,
+    max: 100
+  },
+
+  referrer: {
+    type: String,
+    enum: {
+      values: 'YT FB IG TWT LI F PROF HACK HMAIL AMAIL GJ ACMD MLH O'.split(' ')
+    }
+  },
+
+  referrerOther: String,
+
+  prize: String,
+
+  workshop: String,
+
   shirtSize: {
     type: String,
     enum: {
       values: 'XS S M L XL XXL WXS WS WM WL WXL WXXL'.split(' ')
     }
   },
-  wantsHardware: Boolean,
-  hardware: String,
 
-  major: String,
   github: String,
-  twitter: String,
+  linkedin: String,
   website: String,
-  resume: String,
 
-  needsReimbursement: Boolean,
+  joke: String,
+
   address: {
     name: String,
     line1: String,
@@ -83,20 +83,23 @@ var confirmation = {
     zip: String,
     country: String
   },
-  receipt: String,
-
-  hostNeededFri: Boolean,
-  hostNeededSat: Boolean,
-  genderNeutral: Boolean,
-  catFriendly: Boolean,
-  smokingFriendly: Boolean,
-  hostNotes: String,
 
   notes: String,
+  mlhShare: Boolean,
+  coc: Boolean,
 
-  signatureLiability: String,
-  signaturePhotoRelease: String,
-  signatureCodeOfConduct: String,
+  hasResume: {
+    type: Boolean,
+    default: false,
+  },
+};
+
+// Only after confirmed
+var confirmation = {
+  confirmed: {
+    type: Boolean,
+    default: false
+  }
 };
 
 var status = {
@@ -142,10 +145,6 @@ var status = {
   },
   confirmBy: {
     type: Number
-  },
-  reimbursementGiven: {
-    type: Boolean,
-    default: false
   }
 };
 
@@ -331,9 +330,8 @@ schema.statics.getByToken = function(token, callback){
 schema.statics.validateProfile = function(profile, cb){
   return cb(!(
     profile.name.length > 0 &&
-    profile.adult &&
     profile.school.length > 0 &&
-    ['2016', '2017', '2018', '2019'].indexOf(profile.graduationYear) > -1 &&
+    ['2021', '2022', '2023', '2024'].indexOf(profile.graduationYear) > -1 &&
     ['M', 'F', 'O', 'N'].indexOf(profile.gender) > -1
     ));
 };

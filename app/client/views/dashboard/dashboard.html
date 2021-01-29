@@ -5,7 +5,7 @@
 
   <div class="ui stackable centered page grid">
     <div class="column">
-      <div class="ui status segment">
+      <div class="ui status segment" id="dashboard-center">
         <div class="small title">
           Your status:
         </div>
@@ -60,6 +60,7 @@
         </div>
 
         <div
+          id="timeClose"
           ng-class="settings.timeClose"
           ng-if="!dashState('admittedAndCanConfirm') || !dashState('admittedAndCannotConfirm') || !dashState('confirmed') || !dashState('declined')">
           <strong>
@@ -76,6 +77,9 @@
           </strong>
           {{ timeConfirm }}
         </div>
+
+        <br>
+        <br>
 
         <div
           ng-if="dashState('openAndIncomplete')"

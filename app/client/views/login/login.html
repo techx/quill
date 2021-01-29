@@ -1,7 +1,7 @@
 <div id="login">
   <div class="container">
     <div class="content">
-      <div class="ui segment">
+      <div class="ui segment" id="custom-login">
 
         <div class="logo">
           <img src="assets/images/logo-color.svg">
@@ -18,18 +18,20 @@
           <div class="ui login-password form">
             <form ng-submit="login()">
               <div class="field">
-                <label> Email</label>
+                <label style="color: white"> Email</label>
                 <input type="email"
                        id='email'
                        placeholder="foo@bar.edu"
-                       ng-model="email">
+                       ng-model="email"
+                       style="color: white">
               </div>
               <div class="field">
-                <label> Password</label>
+                <label style="color: white"> Password</label>
                 <input type="password"
                        id='password'
                        placeholder="Password (at least 6 characters)"
-                       ng-model="password" required>
+                       ng-model="password" required
+                       style="color: white">
               </div>
               <div class="field">
                 <button id="login-password"

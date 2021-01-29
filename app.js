@@ -7,6 +7,7 @@ var express         = require('express');
 var bodyParser      = require('body-parser');
 var methodOverride  = require('method-override');
 var morgan          = require('morgan');
+var multer          = require('multer');
 
 var mongoose        = require('mongoose');
 var port            = process.env.PORT || 3000;
@@ -25,7 +26,9 @@ app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({
   extended: true
 }));
-app.use(bodyParser.json());
+app.use(bodyParser.json({
+  limit: '2mb'
+}));
 
 app.use(methodOverride());
 
@@ -34,7 +37,7 @@ app.use(express.static(__dirname + '/app/client'));
 // Routers =====================================================================
 
 var apiRouter = express.Router();
-require('./app/server/routes/api')(apiRouter);
+require('./app/server/routes/api')(apiRouter, multer);
 app.use('/api', apiRouter);
 
 var authRouter = express.Router();

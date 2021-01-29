@@ -1,0 +1,89 @@
+/* I do not endorse anything happening in this file. It's disgusting.
+   There is a deadline. */
+
+#custom-login {
+  background-color: #0f144a;
+}
+
+#password {
+  background-color: #233c69;
+}
+
+#email {
+  background-color: #233c69;
+}
+
+label.white {
+  color: rgba(255,255,255,.87);
+}
+
+#base>.content {
+  background-color: #f1e8b8;
+}
+
+#dashboard-center {
+  border: 2px solid #345995;
+  background-color: #f1e8b8;
+}
+
+#team-center {
+  border: 2px solid #345995;
+  background-color: #f1e8b8;
+}
+
+.ui.divider:not(.vertical):not(.horizontal) {
+  border-top: none;
+  border-bottom: 2px solid #345995;
+}
+
+.ui.purple.button {
+  background-color: #345995;
+
+  &:hover {
+    background-color: #4173c3;  
+  }
+
+  &:active {
+    background-color: #4173c3;  
+  }
+
+  &:focus {
+    background-color: #4173c3;  
+  }
+}
+
+#timeClose {
+  margin-bottom: 2rem;
+}
+
+#school > div.ui.input > input {
+  background-color: #F7F2D7;
+}
+
+#application > div.ui.stackable.page.grid > div > div > fieldset > div > input {
+  background-color: #F7F2D7;
+}
+
+#application > div.ui.stackable.page.grid > div > div > fieldset > div > select {
+  background-color: #F7F2D7;
+}
+
+#application > div.ui.stackable.page.grid > div > div > fieldset > div > textarea {
+  background-color: #F7F2D7;
+}
+
+#team-center > div.ui.form > div > input {
+  background-color: #F7F2D7;
+}
+
+#team-center > div.ui.form > div > button {
+  background-color: #11e0cf;
+}
+
+#dashboard-center > div.description.ng-scope > div:nth-child(4) {
+  background-color: #11e0cf;
+}
+
+#dashboard-center > div.description.ng-scope > div:nth-child(5) {
+  background-color: #11e0cf;
+}

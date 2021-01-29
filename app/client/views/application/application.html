@@ -5,113 +5,274 @@
 
   <div class="ui stackable page grid">
     <div class="column">
-      <div class="ui form"
-            ng-class="{'loading': loading}">
+      <div class="ui form" ng-class="{'loading': loading}">
 
         <div class="divided title">Basic Information</div>
 
         <fieldset ng-disabled="regIsClosed">
 
-        <div class="field">
-          <label> Email </label>
-          <input type="email"
-                 name="email"
-                 disabled="disabled"
-                 ng-model="user.email">
-        </div>
+          <div class="field">
+            <label> Email* </label>
+            <input type="email" name="email" disabled="disabled" ng-model="user.email">
+          </div>
 
-        <div class="field">
-          <label> Full Name </label>
-          <input type="text"
-                 name="name"
-                 ng-model="user.profile.name">
-        </div>
+          <div class="field">
+            <label> Phone Number* </label>
+            <input type="tel" name="phone" ng-model="user.profile.phone">
+          </div>
+          
+          <div class="field">
+            <label> Full Name* </label>
+            <input type="text" name="name" ng-model="user.profile.name">
+          </div>
 
-        <div class="field" ng-show="autoFilledSchool">
-          <label> School </label>
-          <input class="ui input"
-                 disabled="disabled"
-                 ng-show="autoFilledSchool"
-                 ng-model="user.profile.school">
-        </div>
+          <div class="field" ng-show="autoFilledSchool">
+            <label> School* </label>
+            <input class="ui input" disabled="disabled" ng-show="autoFilledSchool" ng-model="user.profile.school">
+          </div>
 
-        <div class="field" ng-show="!autoFilledSchool">
-          <label> School </label>
-          <div id="school" class="ui search">
-            <div class="ui input">
-              <input class="prompt" type="text" placeholder="School" name="school" ng-model="user.profile.school">                
+          <div class="field" ng-show="!autoFilledSchool">
+            <label> School* </label>
+            <div id="school" class="ui search">
+              <div class="ui input">
+                <input class="prompt" type="text" placeholder="School" name="school" ng-model="user.profile.school">
+              </div>
+              <div class="results"></div>
             </div>
-            <div class="results"></div>
           </div>
-        </div>
 
-        <div class="field">
-          <label>Graduation Year</label>
-          <select
-            name="year"
-            ng-model="user.profile.graduationYear">
-            <option value="">Graduation Year</option>
-            <option value="2016">2016</option>
-            <option value="2017">2017</option>
-            <option value="2018">2018</option>
-            <option value="2019">2019</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label>Gender</label>
-          <select
-            name="gender"
-            ng-model="user.profile.gender">
-            <option value="">Gender</option>
-            <option value="M">Male</option>
-            <option value="F">Female</option>
-            <option value="O">Other</option>
-            <option value="N">I prefer not to answer.</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label>I would describe myself as a...</label>
-          <input type="text"
-                 placeholder="Designer, Data Scientist, iOS Wizard, Hacker Extraordinaire"
-                 ng-model="user.profile.description">
-        </div>
-
-        <div class="field">
-          <label>
-              What would you like to learn or get out of HackMIT? (optional)
-          </label>
-          <textarea ng-model="user.profile.essay">
-          </textarea>
-        </div>
-
-        <div class="field"
-             ng-hide="isMitStudent">
-          <p>
-            Because of limitations imposed by MIT, we are not legally allowed to host
-            non-MIT minors (those under 18) for HackMIT 2015. Checking the box below affirms that you are or will be 18 years or older by September 19th, 2015.
-          </p>
-          <p>
-            <strong>
-            We will be checking ID. If you are a non-MIT minor, you will be turned away at the door.
-            </strong>
-          </p>
-          <div class="ui checkbox">
-            <input type="checkbox" id="adult" ng-model="user.profile.adult">
-            <label for="adult">I am 18 or older.</label>
+          <div class="field">
+            <label>Graduation Year*</label>
+            <select name="gradYear" ng-model="user.profile.graduationYear">
+              <option value=""></option>
+              <option value="2021">2021</option>
+              <option value="2022">2022</option>
+              <option value="2023">2023</option>
+              <option value="2024">2024</option>
+            </select>
           </div>
-        </div>
 
-        <br>
+          <div class="field">
+            <label>Age*</label>
+            <input type="number" min="18" max="100" ng-model="user.profile.age">
+          </div>
 
-        <div class="field" ng-hide="regIsClosed">
-          <button type="submit"
-                  class="fluid ui purple button"
-                  ng-click="submitForm()">
-            Submit
-          </button>
-        </div>
+          <div class="field">
+            <label>Gender*</label>
+            <select name="gender" ng-model="user.profile.gender">
+              <option value="">Gender</option>
+              <option value="M">Male</option>
+              <option value="F">Female</option>
+              <option value="O">Non-binary / Other</option>
+              <option value="N">I prefer not to answer.</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Race*</label>
+            <select name="race" ng-model="user.profile.race">
+              <option value="">Race</option>
+              <option value="NA">Native American</option>
+              <option value="API">Asian/Pacific Islander</option>
+              <option value="BAA">Black or African American</option>
+              <option value="H">Hispanic</option>
+              <option value="WC">White / Caucasian</option>
+              <option value="MO">Multiple / Other</option>
+              <option value="none">Prefer not to answer</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Major*</label>
+            <input type="text" name="major" ng-model="user.profile.major">
+          </div>
+
+          <br>
+          <br>
+
+          <div class="divided title">Hackathon Stuff</div>
+
+          <div class="field">
+            <label>How many hackathons have you attended?*</label>
+            <input type="number" min="0" max="100" ng-model="user.profile.hackathons">
+          </div>
+
+          <div class="field">
+            <label>How did you hear about HackUTD?*</label>
+            <select name="referrer" ng-model="user.profile.referrer">
+              <option value=""></option>
+              <option value="YT">YouTube</option>
+              <option value="FB">Facebook</option>
+              <option value="IG">Instagram</option>
+              <option value="TWT">Twitter</option>
+              <option value="LI">LinkedIn</option>
+              <option value="F">Friends</option>
+              <option value="PROF">Professors</option>
+              <option value="HACK">Another hackathon</option>
+              <option value="HMAIL">HackUTD Mailing List</option>
+              <option value="AMAIL">ACM Mailing List</option>
+              <option value="GJ">HackUTD Game Jam</option>
+              <option value="ACMD">ACM Discord</option>
+              <option value="MLH">MLH</option>
+              <option value="O">Other</option>
+            </select>
+          </div>
+
+          <div class="field" ng-show="user.profile.referrer == 'O'">
+            <label>Please specify.</label>
+            <input type="text" ng-model="user.profile.referrerOther">
+          </div>
+
+          <div class="field">
+            <label>What kind of prizes would you like to see at HackUTD?</label>
+            <input type="text" ng-model="user.profile.prize">
+          </div>
+
+          <div class="field">
+            <label>Are there any topics you'd want workshops at HackUTD to cover?</label>
+            <input type="text" ng-model="user.profile.workshop">
+          </div>
+
+          <br>
+          <br>
+          <div class="divided title">Swag</div>
+
+          <div class="field">
+            <label>Shirt Size*</label>
+            <p>
+              Let's get you some swag!
+            </p>
+            <select name="shirt" ng-model="user.profile.shirtSize" style="background-color: #F7F2D7" required>
+              <option value=""></option>
+              <option value="S">Unisex Small</option>
+              <option value="M">Unisex Medium</option>
+              <option value="L">Unisex Large</option>
+              <option value="XL">Unisex X-Large</option>
+            </select>
+          </div>
+
+          <br>
+          <div>
+            <div class="ui header">
+              Mailing Address
+            </div>
+
+            <p>
+              For the swag! We can only ship within the US.
+            </p>
+
+            <div class="field">
+              <label>Full Name</label>
+              <input type="text" name="name" ng-model="user.profile.address.name" style="background-color: #F7F2D7">
+            </div>
+
+            <div class="field">
+              <label> Address Line 1 - Street address, P.O. box, company name, c/o</label>
+              <input type="text" name="addressLine1" ng-model="user.profile.address.line1"
+                style="background-color: #F7F2D7">
+            </div>
+
+            <div class="field">
+              <label> Address Line 2 - Apartment, suite, unit, building, floor, etc. </label>
+              <input type="text" name="addressLine2" ng-model="user.profile.address.line2"
+                style="background-color: #F7F2D7">
+            </div>
+
+            <div class="three fields">
+              <div class="field">
+                <label> City </label>
+                <input type="text" name="city" ng-model="user.profile.address.city" style="background-color: #F7F2D7">
+              </div>
+              <div class="field">
+                <label> State </label>
+                <input type="text" name="state" ng-model="user.profile.address.state" style="background-color: #F7F2D7">
+              </div>
+              <div class="field">
+                <label> ZIP </label>
+                <input type="text" name="zip" ng-model="user.profile.address.zip" style="background-color: #F7F2D7">
+              </div>
+            </div>
+          </div>
+
+          <br>
+          <br>
+
+          <div class="divided title">Resume</div>
+          <div class="field">
+            <label>Please upload your resume (as a PDF)*</label>
+            <p>We'll be sharing this information with recruiters at the event.</p>
+            <input type="file" id="resume" accept="application/pdf" onfilechange="onFileChange"
+              style="background-color: #f1e8b8; border: 0; padding-left: 0">
+          </div>
+
+          <pdf ng-hide="!fileData" src="fileData"></pdf>
+
+          <br>
+          <br>
+          <div class="divided title">Legal</div>
+
+          <div class="field">
+            <p></p>
+            <div class="ui checkbox">
+              <input type="checkbox" id="mlhShare" ng-model="user.profile.mlhShare">
+              <label for="mlhShare">I authorize you to share my application/registration information for event
+                administration, ranking, MLH administration, pre- and post-event informational e-mails, and occasional
+                messages about hackathons in-line with the <a href="https://mlh.io/privacy">MLH Privacy Policy</a>. I further
+                agree to the terms of both the <a
+                  href="https://www.github.com/MLH/mlh-policies/tree/master/prize-terms-and-conditions">MLH Contest Terms and
+                  Conditions</a> and the <a href="https://mlh.io/privacy">MLH Privacy Policy</a>.*</label>
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="ui checkbox">
+              <input type="checkbox" id="coc" ng-model="user.profile.coc">
+              <label for="coc">I will at all times abide by and conform to the <a href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf">Major League Hacking Code of Conduct</a> while at the event.</label>
+            </div>
+          </div>
+
+          <br>
+          <br>
+
+          <div class="divided title">everything else</div>
+
+          <div class="field">
+            <label>GitHub</label>
+            <input type="text" name="zip" ng-model="user.profile.github" style="background-color: #F7F2D7">
+          </div>
+
+          <div class="field">
+            <label>LinkedIn</label>
+            <input type="text" name="zip" ng-model="user.profile.linkedin" style="background-color: #F7F2D7">
+          </div>
+
+          <div class="field">
+            <label>Personal website</label>
+            <input type="text" name="zip" ng-model="user.profile.website" style="background-color: #F7F2D7">
+          </div>
+
+          <div class="field">
+            <label>What's your favorite joke?</label>
+            <input type="text" name="zip" ng-model="user.profile.joke" style="background-color: #F7F2D7">
+          </div>
+
+          <div class="field">
+            <label>
+              Additional Notes
+            </label>
+            <p>
+              If there's anything else you need to let us know, tell us here!
+            </p>
+            <textarea style="background-color: #F7F2D7" ng-model="user.profile.notes"></textarea>
+          </div>
+
+          <br>
+
+          <div class="field" ng-hide="regIsClosed">
+            <button type="submit" class="fluid ui purple button" ng-click="submitForm()">
+              Submit
+            </button>
+          </div>
 
         </fieldset>
       </div>

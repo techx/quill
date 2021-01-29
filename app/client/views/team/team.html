@@ -10,7 +10,7 @@
         {{error}}
       </div>
 
-      <div class="ui segment">
+      <div class="ui segment" id="team-center">
         <div
           ng-show="!user.teamCode && !regIsOpen">
           <p>
@@ -23,6 +23,9 @@
 
           <div class="title">
             Join or Create a Team
+          </div>
+          <div style="margin:auto; text-align:center; padding-top: 0.7rem">
+            Teams are limited to 1-4 people
           </div>
 
           <br>
@@ -79,9 +82,12 @@
 
             <button
               class="ui fluid red button"
-              ng-click="leaveTeam()">Leave Team</button>
+              ng-click="leaveTeam()">Leave Team
+            </button>
           </div>
-
+          <div style="margin:auto; text-align:center; padding-top: 0.7rem">
+            Teams are limited to 1-4 people
+          </div>
         </div>
 
       </div>
