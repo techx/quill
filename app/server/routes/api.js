@@ -479,7 +479,7 @@ module.exports = function(router) {
     SettingsController.updateField('acceptanceText', text, defaultResponse(req, res));
   });
 
- 
+
   /**
    * Update the confirmation text.
    * body: {
@@ -514,7 +514,7 @@ module.exports = function(router) {
   router.put('/settings/times', isAdmin, function(req, res){
     var open = req.body.timeOpen;
     var close = req.body.timeClose;
-    var sponsorClose = req.body.sponsorClose; 
+    var sponsorClose = req.body.sponsorClose;
     SettingsController.updateRegistrationTimes(open, close, sponsorClose, defaultResponse(req, res));
   });
 
@@ -555,6 +555,66 @@ module.exports = function(router) {
     SettingsController.updateField('allowMinors', allowMinors, defaultResponse(req, res));
   });
 
+
+  /**
+   * Chat API
+   * Given a JWT, returns the user id associated with it
+   */
+   router.get('/chat/userid', function(req, res) {
+     var token = getToken(req);
+      UserController.getByToken(token, function(err, user){
+      if (err) {
+        return res.status(500).send(err);
+      }
+
+      res.json({
+        "_id" : user._id
+      });
+
+    });
+   })
+
+  /**
+   * Chat API
+   * Given a list of userIds, returns a object where the userIds are keys and the values are
+   * objects containing the userName and userProfilePirctureUrl
+   */
+   router.get('/chat/users', function(req, res) {
+     var userIds = JSON.parse(req.query.user_ids);
+
+     const getUserData = async (user_id) => {
+        return new Promise((res, rej) => {
+          UserController.getById(userId, function(err, user) {
+            if (err) {
+              res({"error" : "User not found"})
+            }
+            else {
+              // TODO: Get actual profile picture instead of cute penguin
+              console.log(user)
+              res({
+                userName: user.name,
+                userProfilePirctureUrl : "https://i.pinimg.com/736x/23/ff/2a/23ff2aacb6b4973b10ebab987837dbad.jpg"
+              });
+            }
+          });
+        })
+
+     }
+
+     const getAllData = async () => {
+      let ret = {}
+      for(userId of userIds) {
+        await getUserData(userId).then(console.log);
+        // ret[userId] = userData;
+        // console.log(userData)
+      }
+     }
+
+
+     getAllData()
+     res.json({'asdf' : 2})
+     // res.json(ret);
+    })
 
 
 

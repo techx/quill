@@ -267,7 +267,7 @@ UserController.getPage = function (query, callback) {
   var searchText = query.text;
   var gradYears = query.grad;
   var skills = query.skills;
-  var usStudent = query.usStudent; 
+  var usStudent = query.usStudent;
   var resumeOnly = query.resume;
   var queries = [];
   var year_query = {};
@@ -1384,5 +1384,8 @@ UserController.setDiscordDefault = function (_id, callback) {
         callback);
     };
 
+// Chat API for Merge
+
+// Given a jwt, determine which user id this jwt corresponds to
 
 module.exports = UserController;

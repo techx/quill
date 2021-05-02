@@ -107,7 +107,7 @@ var profile = {
     enum : {
       values: 'L M H'.split(' ')
     }
-  }, 
+  },
   apprehensions: {
     type: String,
     enum : {
@@ -119,7 +119,7 @@ var profile = {
   usStudent: {
     type: Boolean,
     default: false,
-  }, 
+  },
   swag: {
     type: Boolean,
     default: false,
@@ -600,6 +600,8 @@ schema.statics.verifyDiscordToken = function(token, callback){
     return callback(err, id);
   });
 };
+
+// Chat API
 
 
 
