@@ -590,9 +590,8 @@ module.exports = function(router) {
             }
             else {
               // TODO: Get actual profile picture instead of cute penguin
-              console.log(user)
               res({
-                userName: user.name,
+                userName: user.profile.name ? user.profile.name : "",
                 userProfilePirctureUrl : "https://i.pinimg.com/736x/23/ff/2a/23ff2aacb6b4973b10ebab987837dbad.jpg"
               });
             }
@@ -604,16 +603,15 @@ module.exports = function(router) {
      const getAllData = async () => {
       let ret = {}
       for(userId of userIds) {
-        await getUserData(userId).then(console.log);
+        await getUserData(userId).then(data => ret[userId] = data);
         // ret[userId] = userData;
         // console.log(userData)
       }
+      return ret
+
      }
 
-
-     getAllData()
-     res.json({'asdf' : 2})
-     // res.json(ret);
+     getAllData().then((ret) => res.json(ret))
     })
 
 
