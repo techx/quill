@@ -31,7 +31,7 @@
     "request": "^2.88.2",
     "showdown": "^1.9.1",
     "sweetalert": "^2.1.2",
-    "underscore": "^1.10.2",
+    "underscore": "^1.12.1",
     "validator": "^10.11.0",
     "vinyl-source-stream": "^2.0.0"
   },
