@@ -15,6 +15,7 @@ const ResetCtrl = require('../views/reset/resetCtrl.js');
 const SidebarCtrl = require('../views/sidebar/sidebarCtrl.js');
 const TeamCtrl = require('../views/team/teamCtrl.js');
 const VerifyCtrl = require('../views/verify/verifyCtrl.js');
+const ProfileCtrl = require('../views/profile/profileCtrl.js');
 
 angular.module('reg')
   .config([
@@ -104,6 +105,19 @@ angular.module('reg')
             return UserService.getCurrentUser();
           }
         }
+      })
+      .state('app.profile', {
+        url: "/profile",
+        templateUrl: "views/profile/profile.html",
+        controller: 'ProfileCtrl',
+        resolve: {
+          currentUser: function(UserService){
+            return UserService.getCurrentUser();
+          },
+          settings: function(SettingsService){
+            return SettingsService.getPublicSettings();
+          }
+        },
       })
       .state('app.team', {
         url: "/team",
