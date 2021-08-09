@@ -11,7 +11,6 @@ var UserController = {};
 
 var maxTeamSize = process.env.TEAM_MAX_SIZE || 4;
 
-
 // Tests a string if it ends with target s
 function endsWith(s, test){
   return test.indexOf(s, test.length - s.length) !== -1;
@@ -435,6 +434,45 @@ UserController.getTeammates = function(id, callback){
       })
       .select('profile.name')
       .exec(callback);
+  });
+};
+
+/**
+ *  get all members for this forum
+ * @param id
+ * @param callback
+ */
+UserController.getMentorForumMembers = function(id, callback){
+    User.findById(id).exec(function(err, user){
+      if (err || !user){
+        return callback(err, user);
+      }
+
+      var code = user.teamCode ? user.teamCode : null;
+
+      User.find({$or:[{teamCode: code},{mentor: true}]}).exec(callback);
+    });
+      // add picture to query
+      // .select('profile.name mentor picture')
+};
+
+/**
+ * returns all mentors in Hackathon
+ * @param callback
+ */
+UserController.getMentors = function(callback){
+  User.find({
+    mentor: true,
+  }, function(err, mentors){
+    if (err || !mentors){
+      return callback(err, mentors);
+    }
+    return callback(
+        null,
+        {
+          mentors: mentors
+        }
+  );
   });
 };
 

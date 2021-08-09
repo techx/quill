@@ -5,8 +5,9 @@ angular.module('reg')
     'settings',
     'Utils',
     'UserService',
+    'ForumService',
     'TEAM',
-    function($scope, currentUser, settings, Utils, UserService, TEAM){
+    function($scope, currentUser, settings, Utils, UserService, ForumService, TEAM){
       // Get the current user's most recent data.
       var Settings = settings.data;
 
@@ -30,15 +31,16 @@ angular.module('reg')
       }
 
       $scope.joinTeam = function(){
-        UserService
-          .joinOrCreateTeam($scope.code)
-          .then(response => {
-            $scope.error = null;
-            $scope.user = response.data;
-            _populateTeammates();
-          }, response => {
-            $scope.error = response.data.message;
-          });
+          UserService
+              .joinOrCreateTeam($scope.code)
+              .then(response => {
+                  $scope.error = null;
+                  $scope.user = response.data;
+                  _populateTeammates();
+                  _createNewForum(response.data.teamCode);
+                  }, response => {
+                  $scope.error = response.data.message;
+              });
       };
 
       $scope.leaveTeam = function(){
@@ -52,5 +54,16 @@ angular.module('reg')
             $scope.error = response.data.message;
           });
       };
+
+      function _createNewForum(teamName) {
+          ForumService
+              .addNewForum(teamName)
+              .then(response =>{
+                  console.log(response);
+              }, response => {
+                  console.log(response);
+                  // $scope.error = response.data.message;
+              });
+      }
 
     }]);

@@ -1,10 +1,12 @@
 var UserController = require('../controllers/UserController');
 var SettingsController = require('../controllers/SettingsController');
+var ForumController = require('../controllers/ForumController');
 var User = require('../models/User');
 var json2csv = require('json2csv').parse;
 var path = require('path');
 
 var request = require('request');
+const {add} = require("nodemon/lib/rules");
 
 module.exports = function(router) {
 
@@ -27,6 +29,29 @@ module.exports = function(router) {
       }
 
       if (user && user.admin){
+        req.user = user;
+        return next();
+      }
+
+      return res.status(401).send({
+        message: 'Get outta here, punk!'
+      });
+
+    });
+  }
+
+  /**
+   *  Same check for mentor
+   */
+  function isMentorOrHacker(req, res, next){
+    var token = getToken(req);
+
+    UserController.getByToken(token, function(err, user){
+      if (err) {
+        return res.status(500).send(err);
+      }
+
+      if (user && user.mentor){
         req.user = user;
         return next();
       }
@@ -113,6 +138,75 @@ module.exports = function(router) {
   /**
    *  API!
    */
+
+  // ---------------------------------------------
+  // Forums
+  // ---------------------------------------------
+
+  /**
+   * check if forum can be created
+   */
+  function canCreateForum(req, res, next){
+    var teamName = req.body.teamName;
+
+    User
+        .find({
+          teamCode : teamName,
+        }).count(function (err, count) {
+                    if (err || count > 1)
+                        return res.status(401).send({
+                          message: 'Unable to create forum - already exist'
+                        });
+                    else
+                        next();
+        });
+  }
+
+  /**
+   * create new forums when opening new team
+   */
+  router.put('/forums/create', canCreateForum, function(req, res, count){
+      var teamName = req.body.teamName;
+
+      ForumController.createNewForum(teamName, defaultResponse(req, res));
+  });
+
+
+  /**
+   *  Get - Get user relevant forums (for hacker)
+   */
+  router.get('/forums/:teamName', function(req, res){
+    var teamName = req.params.teamName;
+
+    ForumController.getAllForums(teamName,  defaultResponse(req, res));
+  });
+
+  /**
+   * Put - Update relevant forum
+   */
+  router.post('/forums/update', function(req, res){
+      var forumID = req.body.forumID;
+      var message = req.body.message;
+      var user = req.body.user;
+      var date = Date.now();
+
+      ForumController.updateForum(forumID, message, date, user, defaultResponse(req, res));
+  });
+
+  /**
+   * Delete - Delete forum only if last user left team. (only teams w/o mentor forums)
+   */
+  router.delete('/forums', isMentorOrHacker, function (req, res){
+    // prepare request and redirect to UserController.
+  });
+
+  // ---------------------------------------------
+  // Mentors
+  // ---------------------------------------------
+
+  router.get('/users/mentors', isOwnerOrAdmin, function(req, res){
+    UserController.getMentors(defaultResponse(req, res));
+  });
 
   // ---------------------------------------------
   // Users
@@ -270,6 +364,15 @@ module.exports = function(router) {
   router.get('/users/:id/team', isOwnerOrAdmin, function(req, res){
     var id = req.params.id;
     UserController.getTeammates(id, defaultResponse(req, res));
+  });
+
+  /**
+   * Get a user's team member's names job and picture. Uses the code associated
+   * with the user making the request.
+   */
+  router.get('/users/:id/mentorforum', function(req, res){
+    var id = req.params.id;
+    UserController.getMentorForumMembers(id, defaultResponse(req, res));
   });
 
   /**
@@ -478,5 +581,4 @@ module.exports = function(router) {
     var allowMinors = req.body.allowMinors;
     SettingsController.updateField('allowMinors', allowMinors, defaultResponse(req, res));
   });
-
 };

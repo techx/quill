@@ -1,6 +1,7 @@
 const angular = require('angular');
 const SettingsService = require('./services/SettingsService.js');
 const UserService = require('./services/UserService.js');
+const ForumService = require('./services/ForumService.js');
 
 const AdminCtrl = require('../views/admin/adminCtrl.js');
 const AdminSettingsCtrl = require('../views/admin/settings/adminSettingsCtrl.js');
@@ -15,6 +16,10 @@ const ResetCtrl = require('../views/reset/resetCtrl.js');
 const SidebarCtrl = require('../views/sidebar/sidebarCtrl.js');
 const TeamCtrl = require('../views/team/teamCtrl.js');
 const VerifyCtrl = require('../views/verify/verifyCtrl.js');
+const ForumCtrl = require('../views/forum/forumCtrl.js');
+const GeneralCtrl = require('../views/forum/general/generalCtrl');
+const MentorCtrl = require('../views/forum/mentor/mentorCtrl.js');
+const TeamForumCtrl = require('../views/forum/team/teamForumCtrl.js');
 
 angular.module('reg')
   .config([
@@ -121,6 +126,52 @@ angular.module('reg')
           }
         }
       })
+      .state('app.forum', {
+        url: "/forum",
+        templateUrl: "views/forum/forum.html",
+        controller: 'ForumCtrl',
+        data: {
+          requireVerified: true
+        },
+        resolve: {
+          userForums: function(ForumService){
+            return ForumService.getUserForums();
+          },
+          currentUser: function(UserService){
+            return UserService.getCurrentUser();
+          }
+        }
+      })
+        .state('app.forum.general', {
+          url: "/forum",
+          templateUrl: "views/forum/general/general.html",
+          controller: 'GeneralCtrl',
+          resolve: {
+            currentUser: function(UserService){
+              return UserService.getCurrentUser();
+            }
+          }
+        })
+        .state('app.forum.mentor', {
+          url: "/forum",
+          templateUrl: "views/forum/mentor/mentor.html",
+          controller: 'MentorCtrl',
+          resolve: {
+            currentUser: function(UserService){
+              return UserService.getCurrentUser();
+            }
+          }
+        })
+        .state('app.forum.team', {
+          url: "/forum",
+          templateUrl: "views/forum/team/team.html",
+          controller: 'TeamForumCtrl',
+          resolve: {
+            currentUser: function(UserService){
+              return UserService.getCurrentUser();
+            }
+          }
+        })
       .state('app.admin', {
         views: {
           '': {

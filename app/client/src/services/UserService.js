@@ -67,9 +67,23 @@ angular.module('reg')
         return $http.get(base + Session.getUserId() + '/team');
       },
 
+      getMentorForumMembers: function(){
+        return $http.get(base + Session.getUserId() + '/mentorforum');
+      },
+
+      // -------------------------
+      // Mentors
+      // -------------------------
+
+      getMentors: function (){
+        return $http.get(base + '/mentors');
+      },
+
       // -------------------------
       // Admin Only
       // -------------------------
+
+
 
       getCSV: function(){
         $http.get(base + 'exportcsv').then(function (data, status, headers) {
@@ -117,4 +131,4 @@ angular.module('reg')
       },
     };
   }
-  ]);
+]);

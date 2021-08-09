@@ -23,6 +23,14 @@
 
     <div
       ui-sref-active="active"
+      ui-sref="app.forum"
+      ng-show="!currentUser.status.declined"
+      class="item">
+      Forums
+    </div>
+
+    <div
+      ui-sref-active="active"
       ui-sref="app.confirmation"
       ng-show="!pastConfirmation && currentUser.status.admitted && !currentUser.status.declined"
       class="item">

@@ -29,6 +29,10 @@ angular.module('reg')
       return $window.localStorage.userId;
     };
 
+    this.getUserTeam = function(){
+        return JSON.parse($window.localStorage.currentUser).teamCode;
+    };
+
     this.getUser = function(){
       return JSON.parse($window.localStorage.currentUser);
     };

@@ -1,0 +1,81 @@
+<div class="ui segment" xmlns="http://www.w3.org/1999/html">
+    <div class="ui stackable grid">
+        <div class="three wide column">
+            <div class="ui header">
+                Members
+            </div>
+            <div id="users_list">
+                <div class="srch_bar">
+                    <div class="stylish-input-group">
+                        <input type="text" class="search-bar"  placeholder="Search" >
+                        <span class="input-group-addon">
+                            <button type="button"> <i class="fa fa-search" aria-hidden="true"></i> </button>
+                        </span>
+                    </div>
+                </div>
+                <div class="container">
+                    <a href="#" class="card human-resources" ng-repeat="new_user in users">
+                        <div class="overlay"></div>
+                        <div class="img"> <img class="img_src" src={{new_user.src}} alt="sunil"> </div>
+                        <b class="name">{{new_user.name}}</b>
+                        <p class="type">{{new_user.type}}</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div id="table-container" class="thirteen wide column">
+            <div class="ui header chat_head">
+                Chat
+            </div>
+            <div id="forum">
+                <div class="container">
+                    <div class="messaging">
+                        <div class="inbox_msg">
+                            <div class="headind_srch">
+                                <div class="srch_bar">
+                                    <div class="stylish-input-group">
+                                        <input type="text" class="search-bar"  placeholder="Search" >
+                                        <span class="input-group-addon">
+                                            <button type="button"> <i class="fa fa-search" aria-hidden="true"></i> </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mesgs">
+                                <div class="msg_history">
+                                    <div ng-repeat="message in testss" class="msg_box">
+                                        <div ng-if="message">
+                                            <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                                            <div class="received_msg">
+                                                <div class="received_withd_msg">
+                                                    <p class="nameTag" style="font-size: 12px">Admin Admin</p>
+                                                    <p>{{ message }}</p>
+                                                    <span class="time_date" ng-bind="date | date:'MM/dd/yyyy  hh:mm'"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div ng-if="!message">
+                                            <div class="outgoing_msg">
+                                                <div class="sent_msg">
+                                                    <p style="font-size: 12px">Arnaud</p>
+                                                    <p>Hello :)</p>
+                                                    <span class="time_date" ng-bind="date | date:'MM/dd/yyyy  hh:mm'"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="type_msg">
+                                    <div class="input_msg_write">
+                                        <input ng-model="messageToSend" type="text" class="write_msg" placeholder="Type a message"/>
+                                        <button ng-click="sendMessage()" class="msg_send_btn" type="button"><i class="text_button" aria-hidden="true">Send</i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>

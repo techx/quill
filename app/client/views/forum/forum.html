@@ -1,0 +1,31 @@
+<div id="forums" class="page forumData">
+    <div class="divided title">
+        Forums
+    </div>
+    <div class="ui three item menu">
+            <a
+                ng-if="team"
+                class="item team"
+                ui-sref="app.forum.team"
+                ui-sref-active="active">
+                Team Forum
+            </a>
+
+            <a
+                ng-if="team"
+                class="item mentor"
+                ui-sref="app.forum.mentor"
+                ui-sref-active="active">
+                Mentor Forum
+            </a>
+
+            <a
+                class="item general"
+                ui-sref="app.forum.general"
+                ui-sref-active="active">
+                Main Forum
+            </a>
+    </div>
+        <ui-view></ui-view>
+    </div>
+</div>
