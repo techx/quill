@@ -31,6 +31,29 @@ angular.module('reg')
           });
       }
 
+      // Populate the school dropdown
+      populateCompays();
+
+      /**
+       * TODO: JANK WARNING
+       */
+      function populateCompays(){
+
+        $http
+          .get('/assets/companys.json')
+          .then(function(res){
+            var companys = res.data;
+            var email = $scope.selectedUser.email.split('@')[1];
+
+            if (companys[email]){
+              $scope.selectedUser.profile.company = companys[email].company;
+              $scope.autoFilledCompany = true;
+            }
+
+          });
+      }
+
+
 
       $scope.updateProfile = function(){
         UserService
