@@ -1,0 +1,104 @@
+<div id="mentorApplication" class="page">
+    <div class="divided title">
+      Application
+    </div>
+    <div class="ui stackable page grid">
+      <div class="column">
+        <div class="ui form"
+              ng-class="{'loading': loading}">
+  
+          <div class="divided title">Basic Information</div>
+  
+          <fieldset ng-disabled="regIsClosed">
+  
+          <div class="field">
+            <label> Email </label>
+            <input type="email"
+                   name="email"
+                   disabled="disabled"
+                   ng-model="user.email">
+          </div>
+  
+          <div class="field">
+            <label> Full Name </label>
+            <input type="text"
+                   name="name"
+                   ng-model="user.profile.name">
+          </div>
+  
+          <div class="field" ng-show="autoFilledCompany">
+            <label> Company </label>
+            <input class="ui input"
+                   disabled="disabled"
+                   ng-show="autoFilledCompany"
+                   ng-model="user.profile.company">
+          </div>
+  
+          <div class="field" ng-show="!autoFilledCompany">
+            <label> Company </label>
+            <div id="company" class="ui search">
+              <div class="ui input">
+                <input class="prompt" type="text" placeholder="Company" name="company" ng-model="user.profile.company">                
+              </div>
+              <div class="results"></div>
+            </div>
+          </div>
+  
+          <div class="field">
+            <label>Gender</label>
+            <select
+              name="gender"
+              ng-model="user.profile.gender">
+              <option value="">Gender</option>
+              <option value="M">Male</option>
+              <option value="F">Female</option>
+              <option value="O">Other</option>
+              <option value="N">I prefer not to answer.</option>
+            </select>
+          </div>
+
+          <br>
+
+          <!--sdf
+          <div class="divided title"> Coming Dates </div>
+
+          <div id="availableDates" class="field">
+
+          </div>
+
+        -->
+
+          <br>
+          
+          <div class="field">
+            <p>
+              Because of goverment limitations, we are not legally allowed to host
+              minors (those under 18). Checking the box below affirms that you are or will be 18 years or older by September 19th, 2015.
+            </p>
+            <p>
+              <strong>
+              We will be checking ID.
+              </strong>
+            </p>
+            <div class="ui checkbox">
+              <input type="checkbox" id="adult" ng-model="user.profile.adult">
+              <label for="adult">I am 18 or older.</label>
+            </div>
+          </div>
+  
+          <br>
+  
+          <div class="field" ng-hide="regIsClosed">
+            <button type="submit"
+                    class="fluid ui purple button"
+                    ng-click="submitForm()">
+              Submit
+            </button>
+          </div>
+  
+          </fieldset>
+        </div>
+      </div>
+    </div>
+  </div>
+  

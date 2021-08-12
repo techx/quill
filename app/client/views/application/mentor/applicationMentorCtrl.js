@@ -2,7 +2,7 @@ const angular = require("angular");
 const swal = require("sweetalert");
 
 angular.module('reg')
-  .controller('ApplicationCtrl', [
+  .controller('ApplicationMentorCtrl', [
     '$scope',
     '$rootScope',
     '$state',
@@ -16,55 +16,79 @@ angular.module('reg')
       // Set up the user
       $scope.user = currentUser.data;
 
-      // Is the student from MIT?
-      $scope.isMitStudent = $scope.user.email.split('@')[1] == 'mit.edu';
-
-      // If so, default them to adult: true
-      if ($scope.isMitStudent){
-        $scope.user.profile.adult = true;
-      }
-
-      // Populate the school dropdown
-      populateSchools();
+      populateCompanys();
+      //setAvailableDatesToMentor();
       _setupForm();
 
-      $scope.regIsClosed = Date.now() > settings.data.timeClose;
+      $scope.regIsClosed = Date.now() > settings.data.timeCloseRegistration;
 
-      /**
+      /*
+          <label>Available Dates</label>
+            <p>The you are about to provide is the arriving times (pay attention that in order to submit application you nee to provide at least one arriving time)</p>
+            <p>Day 1</p>
+            <input min="2021-12-27T08:30:00" max="2021-12-27T23:59:00" ng-model="user.profile.dayOne" type="datetime-local"/>
+            <p>Day 2</p>
+            <input min="2021-12-28T00:00:00" max="2021-12-28T11:00:00" ng-model="user.profile.dayTwo" type="datetime-local"/>
+      
+
+
+      function setAvailableDatesToMentor(){
+        var availableDatesDiv = angular.getElementById("availableDates");
+        var label = angular.element('<label>Available Dates</label>');
+        availableDatesDiv.add(label);
+        var p = angular.element('<p>The you are about to provide is the arriving times (pay attention that in order to submit application you nee to provide at least one arriving time)</p>');
+        availableDatesDiv.add(p);
+        var numberOfHackDay = parseInt(settings.timeCloseHackathon.split('T')[0].split('-')[2]) - parseInt(settings.timeOpenHackathon.split('T')[0].split('-')[2]);
+        var openingDay = settings.timeOpenHackathon;
+
+
+        for (i = 0; i < numberOfHackDay; i++){
+          var dayP = angular.element('<p>Day '+ i + 1 +'</p>');
+          availableDatesDiv.add(dayP);
+          var openingDate = new Date(openingDay);
+          var currentDay = new Date(openingDate);
+          currentDay.setDate(myDate.getDate() + i);
+          var input = angular.element('<input min=' + '"'+ currentDay +'"' + ' max=' + '"'+ currentDay +'"' + ' ng-model="user.profile.day' + i + '" type="datetime-local"/>');
+          availableDatesDiv.add(input);
+        }
+      }
+      */
+
+      /*
        * TODO: JANK WARNING
        */
-      function populateSchools(){
+      function populateCompanys(){
         $http
-          .get('/assets/schools.json')
-          .then(function(res){
-            var schools = res.data;
+        .get('/assets/companys.json')
+        .then(function(res){
+            var companys = res.data;
             var email = $scope.user.email.split('@')[1];
 
-            if (schools[email]){
-              $scope.user.profile.school = schools[email].school;
-              $scope.autoFilledSchool = true;
+            if (companys[email]){
+              $scope.user.profile.company = companys[email].company;
+              $scope.autoFilledCompany = true;
             }
           });
 
         $http
-          .get('/assets/schools.csv')
+          .get('/assets/companys.csv')
           .then(function(res){
-            $scope.schools = res.data.split('\n');
-            $scope.schools.push('Other');
+            $scope.companys = res.data.split('\n');
+            $scope.companys.push('Other');
 
             var content = [];
 
-            for(i = 0; i < $scope.schools.length; i++) {
-              $scope.schools[i] = $scope.schools[i].trim();
-              content.push({title: $scope.schools[i]});
+            for(i = 0; i < $scope.companys.length; i++) {
+              $scope.companys[i] = $scope.companys[i].trim();
+              content.push({title: $scope.companys[i]});
             }
 
-            $('#school.ui.search')
+            $('#company.ui.search')
               .search({
                 source: content,
                 cache: true,
                 onSelect: function(result, response) {
-                  $scope.user.profile.school = result.title.trim();
+                  $scope.user.profile.company = result.title.trim();
                 }
               });
           });
@@ -117,21 +141,12 @@ angular.module('reg')
                 }
               ]
             },
-            school: {
-              identifier: 'school',
+            company: {
+              identifier: 'company',
               rules: [
                 {
                   type: 'empty',
-                  prompt: 'Please enter your school name.'
-                }
-              ]
-            },
-            year: {
-              identifier: 'year',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please select your graduation year.'
+                  prompt: 'Please enter your company name.'
                 }
               ]
             },
@@ -149,7 +164,7 @@ angular.module('reg')
               rules: [
                 {
                   type: 'allowMinors',
-                  prompt: 'You must be an adult, or an MIT student.'
+                  prompt: 'You must be an adult.'
                 }
               ]
             }
@@ -164,4 +179,6 @@ angular.module('reg')
           swal("Uh oh!", "Please Fill The Required Fields", "error");
         }
       };
-    }]);
+    }
+  ]
+);

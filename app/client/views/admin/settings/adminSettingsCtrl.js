@@ -40,7 +40,7 @@ angular.module('reg')
           });
       };
 
-      // Whitelist --------------------------------------
+      // Schools Whitelist --------------------------------------
 
       SettingsService
         .getWhitelistedEmails()
@@ -52,8 +52,25 @@ angular.module('reg')
         SettingsService
           .updateWhitelistedEmails($scope.whitelist.replace(/ /g, '').split(','))
           .then(response => {
-            swal('Whitelist updated.');
+            swal('Schools Whitelist updated.');
             $scope.whitelist = response.data.whitelistedEmails.join(", ");
+          });
+      };
+      
+      // Companys Whitelist --------------------------------------
+
+      SettingsService
+        .getCompanysWhitelistedEmails()
+        .then(response => {
+          $scope.companysWhitelist = response.data.join(", ");
+        });
+
+      $scope.updateCompanysWhitelist = function(){
+        SettingsService
+          .updateCompanysWhitelistedEmails($scope.companysWhitelist.replace(/ /g, '').split(','))
+          .then(response => {
+            swal('Companys Whitelist updated.');
+            $scope.companysWhitelist = response.data.companysWhitelistedEmails.join(", ");
           });
       };
 
