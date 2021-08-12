@@ -11,8 +11,8 @@ angular.module('reg')
       },
       updateRegistrationTimes: function(open, close){
         return $http.put(base + 'times', {
-          timeOpen: open,
-          timeClose: close,
+          timeOpenRegistration: open,
+          timeCloseRegistration: close,
         });
       },
       updateConfirmationTime: function(time){

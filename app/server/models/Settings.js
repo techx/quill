@@ -10,11 +10,11 @@ var mongoose = require('mongoose');
  */
 var schema = new mongoose.Schema({
   status: String,
-  timeOpen: {
+  timeOpenRegistration: {
     type: Number,
     default: 0
   },
-  timeClose: {
+  timeCloseRegistration: {
     type: Number,
     default: Date.now() + 31104000000 // Add a year from now.
   },
@@ -76,16 +76,16 @@ schema.statics.getWhitelistedEmails = function(callback){
 
 /**
  * Get the open and close time for registration.
- * @param  {Function} callback args(err, times : {timeOpen, timeClose, timeConfirm})
+ * @param  {Function} callback args(err, times : {timeOpenRegistration, timeCloseRegistration, timeConfirm})
  */
 schema.statics.getRegistrationTimes = function(callback){
   this
     .findOne({})
-    .select('timeOpen timeClose timeConfirm')
+    .select('timeOpenRegistration timeCloseRegistration timeConfirm')
     .exec(function(err, settings){
       callback(err, {
-        timeOpen: settings.timeOpen,
-        timeClose: settings.timeClose,
+        timeOpenRegistration: settings.timeOpenRegistration,
+        timeCloseRegistration: settings.timeCloseRegistration,
         timeConfirm: settings.timeConfirm
       });
     });

@@ -84,11 +84,11 @@ SettingsController.updateRegistrationTimes = function(open, close, callback){
   }
 
   if (open){
-    updatedTimes.timeOpen = open;
+    updatedTimes.timeOpenRegistration = open;
   }
 
   if (close){
-    updatedTimes.timeClose = close;
+    updatedTimes.timeCloseRegistration = close;
   }
 
   Settings
@@ -99,7 +99,7 @@ SettingsController.updateRegistrationTimes = function(open, close, callback){
 
 /**
  * Get the open and close time for registration.
- * @param  {Function} callback args(err, times : {timeOpen, timeClose})
+ * @param  {Function} callback args(err, times : {timeOpenRegistration, timeCloseRegistration})
  */
 SettingsController.getRegistrationTimes = function(callback){
   Settings.getRegistrationTimes(callback);

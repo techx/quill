@@ -374,8 +374,8 @@ module.exports = function(router) {
   /**
    * Get the public settings.
    * res: {
-   *   timeOpen: Number,
-   *   timeClose: Number,
+   *   timeOpenRegistration: Number,
+   *   timeCloseRegistration: Number,
    *   timeToConfirm: Number,
    *   acceptanceText: String,
    *   confirmationText: String,
@@ -433,13 +433,13 @@ module.exports = function(router) {
   /**
    * Set the registration open and close times.
    * body : {
-   *   timeOpen: Number,
-   *   timeClose: Number
+   *   timeOpenRegistration: Number,
+   *   timeCloseRegistration: Number
    * }
    */
   router.put('/settings/times', isAdmin, function(req, res){
-    var open = req.body.timeOpen;
-    var close = req.body.timeClose;
+    var open = req.body.timeOpenRegistration;
+    var close = req.body.timeCloseRegistration;
     SettingsController.updateRegistrationTimes(open, close, defaultResponse(req, res));
   });
 

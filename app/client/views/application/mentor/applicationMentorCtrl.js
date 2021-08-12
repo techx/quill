@@ -20,7 +20,7 @@ angular.module('reg')
       //setAvailableDatesToMentor();
       _setupForm();
 
-      $scope.regIsClosed = Date.now() > settings.data.timeClose;
+      $scope.regIsClosed = Date.now() > settings.data.timeCloseRegistration;
 
       /*
           <label>Available Dates</label>

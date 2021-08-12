@@ -18,14 +18,14 @@ angular.module('reg')
       var Settings = settings.data;
       var user = currentUser.data;
       $scope.user = user;
-      $scope.timeClose = Utils.formatTime(Settings.timeClose);
+      $scope.timeCloseRegistration = Utils.formatTime(Settings.timeCloseRegistration);
       $scope.timeConfirm = Utils.formatTime(Settings.timeConfirm);
 
       $scope.DASHBOARD = DASHBOARD;
 
       for (var msg in $scope.DASHBOARD) {
         if ($scope.DASHBOARD[msg].includes('[APP_DEADLINE]')) {
-          $scope.DASHBOARD[msg] = $scope.DASHBOARD[msg].replace('[APP_DEADLINE]', Utils.formatTime(Settings.timeClose));
+          $scope.DASHBOARD[msg] = $scope.DASHBOARD[msg].replace('[APP_DEADLINE]', Utils.formatTime(Settings.timeCloseRegistration));
         }
         if ($scope.DASHBOARD[msg].includes('[CONFIRM_DEADLINE]')) {
           $scope.DASHBOARD[msg] = $scope.DASHBOARD[msg].replace('[CONFIRM_DEADLINE]', Utils.formatTime(user.status.confirmBy));

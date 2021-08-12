@@ -39,13 +39,13 @@ function endsWith(s, test){
 
     var now = Date.now();
 
-    if (now < times.timeOpen){
+    if (now < times.timeOpenRegistration){
       return callback({
-        message: "Registration opens in " + moment(times.timeOpen).fromNow() + "!"
+        message: "Registration opens in " + moment(times.timeOpenRegistration).fromNow() + "!"
       });
     }
 
-    if (now > times.timeClose){
+    if (now > times.timeCloseRegistration){
       return callback({
         message: "Sorry, registration is closed."
       });
@@ -318,13 +318,13 @@ UserController.updateProfileById = function (id, profile, callback){
 
         var now = Date.now();
 
-        if (now < times.timeOpen){
+        if (now < times.timeOpenRegistration){
           return callback({
-            message: "Registration opens in " + moment(times.timeOpen).fromNow() + "!"
+            message: "Registration opens in " + moment(times.timeOpenRegistration).fromNow() + "!"
           });
         }
 
-        if (now > times.timeClose){
+        if (now > times.timeCloseRegistration){
           return callback({
             message: "Sorry, registration is closed."
           });
