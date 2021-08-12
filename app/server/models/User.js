@@ -32,6 +32,12 @@ var profile = {
     }
   },
 
+  major: {
+    type: String,
+    min: 1,
+    max: 100
+  },
+
   description: {
     type: String,
     min: 0,
@@ -73,7 +79,6 @@ var confirmation = {
   wantsHardware: Boolean,
   hardware: String,
 
-  major: String,
   github: String,
   twitter: String,
   website: String,
