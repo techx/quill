@@ -2,7 +2,7 @@
      ng-class="{open: showSidebar}">
   <div ui-sref="app.dashboard"
        class="logo item">
-    <img src="assets/images/logo.svg">
+    <img src="assets/images/logo.png" style="height: 200px;">
   </div>
 
   <div ui-sref-active="active"
@@ -15,10 +15,18 @@
 
     <div
       ui-sref-active="active"
-      ui-sref="app.application"
-      ng-show="!currentUser.status.declined"
+      ui-sref="app.applicationUser"
+      ng-show="!currentUser.status.declined && !currentUser.mentor"
       class="item">
       Application
+    </div>
+
+    <div
+    ui-sref-active="active"
+    ui-sref="app.applicationMentor"
+    ng-show="!currentUser.status.declined && currentUser.mentor"
+    class="item">
+    Application
     </div>
 
     <div

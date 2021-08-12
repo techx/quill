@@ -43,6 +43,31 @@ SettingsController.getWhitelistedEmails = function(callback){
 };
 
 /**
+ * Update the list of companys whitelisted emails and email extensions.
+ * @param  {[type]}   emails   [description]
+ * @param  {Function} callback args(err, settings)
+ */
+ SettingsController.updateCompanysWhitelistedEmails = function(emails, callback){
+  Settings
+    .findOneAndUpdate({},{
+      $set: {
+        companysWhitelistedEmails: emails
+      }
+    }, {new: true})
+    .select('companysWhitelistedEmails')
+    .exec(callback);
+};
+
+/**
+ * Get the list of companys whitelisted emails.
+ * Whitelist emails are by default not included in settings.
+ * @param  {Function} callback args(err, emails)
+ */
+SettingsController.getCompanysWhitelistedEmails = function(callback){
+  Settings.getCompanysWhitelistedEmails(callback);
+};
+
+/**
  * Set the time window for registrations.
  * If either open or close are null, do not change that time.
  * @param  {Number}   open     Open time in ms
