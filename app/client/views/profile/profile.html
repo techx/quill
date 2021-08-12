@@ -2,4 +2,34 @@
   <div class="divided title">
     {{user.profile.name}}
   </div>
+
+  <div class="ui stackable centered">
+    <div class="avatar">
+      <img src="../../assets/images/user.png">
+    </div>
+    
+    <div class="info">
+      <p>{{user.confirmation.major}} Student</p>
+      <p>{{user.profile.school}}</p>
+      <p>Class of {{user.profile.graduationYear}}</p>
+    </div>
+
+    <div class="links">
+      <a href="{{user.confirmation.github}}" target="_blank">
+      <img src="../../assets/images/github.png" class="icon">
+
+      <a href="{{user.confirmation.linkedin}}" target="_blank">
+      <img src="../../assets/images/linkedin.png" class="icon">
+    </div>
+    <div class="ui segment description">
+      <p>{{user.profile.description}}</p>
+      <p>{{user.profile.essay}}</p>
+    </div>
+
+    <div class="ui team">
+      <div>Team: {{user.teamCode}}</div>
+    </div>
+
+    </div>
+  </div>
 </div>
