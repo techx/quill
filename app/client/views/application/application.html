@@ -80,7 +80,16 @@
 
         <div class="field">
           <label>
-              What would you like to learn or get out of HackMIT? (optional)
+              Write a summary about yourself (optional)
+          </label>
+          <textarea ng-model="user.profile.summary"
+                    placeholder="Expert in computer vision and data science. I work at...">
+          </textarea>
+        </div>
+
+        <div class="field">
+          <label>
+            What would you like to learn or get out of HackMIT? (optional)
           </label>
           <textarea ng-model="user.profile.essay">
           </textarea>
