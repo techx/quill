@@ -28,7 +28,7 @@ angular.module('reg')
       populateSchools();
       _setupForm();
 
-      $scope.regIsClosed = Date.now() > settings.data.timeCloseRegistration;
+      $scope.regIsClosed = Date.now() > settings.data.timeClose;
 
       /**
        * TODO: JANK WARNING
