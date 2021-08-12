@@ -58,7 +58,6 @@ function endsWith(s, test){
       }
       for (var i = 0; i < emails.length; i++) {
         if (validator.isEmail(email) && endsWith(emails[i], email)){
-          console.log(here);
           isInSchool = true;
           //return callback(null, true);
         }
@@ -89,7 +88,7 @@ function endsWith(s, test){
           }, false, false);
         }
         else{
-          return callback(null, true, true);
+          return callback(null, true, isInCompany);
         }
       });
     });
