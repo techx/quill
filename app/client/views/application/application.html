@@ -27,6 +27,19 @@
                  ng-model="user.profile.name">
         </div>
 
+        <div class="field">
+          <label>Gender</label>
+          <select
+            name="gender"
+            ng-model="user.profile.gender">
+            <option value="">Gender</option>
+            <option value="M">Male</option>
+            <option value="F">Female</option>
+            <option value="O">Other</option>
+            <option value="N">I prefer not to answer.</option>
+          </select>
+        </div>
+
         <div class="field" ng-show="autoFilledSchool">
           <label> School </label>
           <input class="ui input"
@@ -57,20 +70,7 @@
             <option value="2019">2019</option>
           </select>
         </div>
-
-        <div class="field">
-          <label>Gender</label>
-          <select
-            name="gender"
-            ng-model="user.profile.gender">
-            <option value="">Gender</option>
-            <option value="M">Male</option>
-            <option value="F">Female</option>
-            <option value="O">Other</option>
-            <option value="N">I prefer not to answer.</option>
-          </select>
-        </div>
-
+        
         <div class="field">
           <label>I would describe myself as a...</label>
           <input type="text"
@@ -80,7 +80,7 @@
 
         <div class="field">
           <label>
-              Write a summary about yourself (optional)
+              Tell us a little bit about yourself (optional)
           </label>
           <textarea ng-model="user.profile.summary"
                     placeholder="Expert in computer vision and data science. I work at...">
