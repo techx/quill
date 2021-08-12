@@ -80,7 +80,7 @@ var confirmation = {
   hardware: String,
 
   github: String,
-  twitter: String,
+  linkedin: String,
   website: String,
   resume: String,
 
