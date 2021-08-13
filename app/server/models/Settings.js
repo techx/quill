@@ -18,6 +18,16 @@ var schema = new mongoose.Schema({
     type: Number,
     default: Date.now() + 31104000000 // Add a year from now.
   },
+  
+  timeOpenHackathon: {
+    type: Number,
+    default: Date.now()
+  },
+  timeCloseHackathon: {
+    type: Number,
+    default: Date.now() + 86000000 // Add a day from now.
+  },
+  
   timeConfirm: {
     type: Number,
     default: 604800000 // Date of confirmation
@@ -25,12 +35,12 @@ var schema = new mongoose.Schema({
   whitelistedEmails: {
     type: [String],
     select: false,
-    default: ['.edu'],
+    default: ['mta.ac.il'],
   },
   companysWhitelistedEmails: {
     type: [String],
     select: false,
-    default: ['.money'],
+    default: ['mtahack.com'],
   },
   waitlistText: {
     type: String
@@ -90,6 +100,23 @@ schema.statics.getRegistrationTimes = function(callback){
       });
     });
 };
+
+/**
+ * Get the open and close time for hackathon.
+ * @param  {Function} callback args(err, times : {timeOpenHackathon, timeCloseHackathon})
+ */
+ schema.statics.getHackathonTimes = function(callback){
+  this
+    .findOne({})
+    .select('timeOpenHackathon timeCloseHackathon')
+    .exec(function(err, settings){
+      callback(err, {
+        timeOpenHackathon: settings.timeOpenHackathon,
+        timeCloseHackathon: settings.timeCloseHackathon
+      });
+    });
+};
+
 
 schema.statics.getPublicSettings = function(callback){
   this

@@ -437,12 +437,26 @@ module.exports = function(router) {
    *   timeCloseRegistration: Number
    * }
    */
-  router.put('/settings/times', isAdmin, function(req, res){
+  router.put('/settings/Registrationtimes', isAdmin, function(req, res){
     var open = req.body.timeOpenRegistration;
     var close = req.body.timeCloseRegistration;
     SettingsController.updateRegistrationTimes(open, close, defaultResponse(req, res));
   });
 
+    /**
+   * Set the hackathon open and close times.
+   * body : {
+   *   timeOpenHackathon: Number,
+   *   timeCloseHackathon: Number
+   * }
+   */
+     router.put('/settings/hackathonTimes', isAdmin, function(req, res){
+      var open = req.body.timeOpenHackathon;
+      var close = req.body.timeCloseHackathon;
+      SettingsController.updateHackathonTimes(open, close, defaultResponse(req, res));
+    });
+  
+  
   /**
    * Get the whitelisted emails.
    *

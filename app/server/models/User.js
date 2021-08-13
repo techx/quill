@@ -31,6 +31,14 @@ var profile = {
     max: 150,
   },
 
+  
+  availableDates: {
+    type: String,
+    min: 1,
+    max: 150,
+  },
+  
+
   graduationYear: {
     type: String,
     enum: {

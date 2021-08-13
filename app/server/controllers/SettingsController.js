@@ -105,6 +105,43 @@ SettingsController.getRegistrationTimes = function(callback){
   Settings.getRegistrationTimes(callback);
 };
 
+/** Set the time window for hackathon.
+ * If either open or close are null, do not change that time.
+ * @param  {Number}   open     Open time in ms
+ * @param  {Number}   close    Close time in ms
+ * @param  {Function} callback args(err, settings)
+ */
+ SettingsController.updateHackathonTimes = function(open, close, callback){
+  var updatedTimes = {};
+
+  if (close <= open){
+    return callback({
+      message: "Hackathon cannot close before or at exactly the same time it opens."
+    });
+  }
+
+  if (open){
+    updatedTimes.timeOpenHackathon = open;
+  }
+
+  if (close){
+    updatedTimes.timeCloseHackathon = close;
+  }
+
+  Settings
+    .findOneAndUpdate({},{
+      $set: updatedTimes
+    }, {new: true}, callback);
+};
+
+/**
+ * Get the open and close time for hackathon.
+ * @param  {Function} callback args(err, times : {timeOpenHackathon, timeCloseHackathon})
+ */
+ SettingsController.getHackathonTimes = function(callback){
+  Settings.getHackathonTimes(callback);
+};
+
 /**
  * Get all public settings.
  * @param  {Function} callback [description]

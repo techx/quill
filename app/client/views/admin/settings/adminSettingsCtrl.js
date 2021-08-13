@@ -21,6 +21,8 @@ angular.module('reg')
          // Format the dates in settings.
         settings.timeOpenRegistration = new Date(settings.timeOpenRegistration);
         settings.timeCloseRegistration = new Date(settings.timeCloseRegistration);
+        settings.timeOpenHackathon = new Date(settings.timeOpenHackathon);
+        settings.timeCloseHackathon = new Date(settings.timeCloseHackathon);
         settings.timeConfirm = new Date(settings.timeConfirm);
 
         $scope.settings = settings;
@@ -115,6 +117,33 @@ angular.module('reg')
           .then(response => {
             updateSettings(response.data);
             swal("Looks good!", "Registration Times Updated", "success");
+          });
+      };
+
+      // Hackathon Times -----------------------------
+      
+      $scope.updateHackathonTimes = function(){
+      // Clean the dates and turn them to ms.
+      var open = cleanDate($scope.settings.timeOpenHackathon).getTime();
+      var close = cleanDate($scope.settings.timeCloseHackathon).getTime();
+      
+      if (open < 0 || close < 0 || open === undefined || close === undefined){
+        return swal('Oops...', 'You need to enter valid times.', 'error');
+      }
+      if (open >= close){
+        swal('Oops...', 'Hackathon cannot open after it closes.', 'error');
+       return;
+      }
+      if ((close - open) >= '180000000'){
+        swal('Oops...', 'Are you sure that the hackathon is that long?', 'error');
+       return;
+      }
+      
+      SettingsService
+        .updateHackathonTimes(open, close)
+        .then(response => {
+          updateSettings(response.data);
+          swal("Looks good!", "Hackathon Times Updated", "success");
           });
       };
 

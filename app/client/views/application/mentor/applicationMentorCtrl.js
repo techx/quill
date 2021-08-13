@@ -31,24 +31,23 @@ angular.module('reg')
             <input min="2021-12-28T00:00:00" max="2021-12-28T11:00:00" ng-model="user.profile.dayTwo" type="datetime-local"/>
       
 
-
-      function setAvailableDatesToMentor(){
-        var availableDatesDiv = angular.getElementById("availableDates");
-        var label = angular.element('<label>Available Dates</label>');
+            function setAvailableDatesToMentor(){
+        var availableDatesDiv = document.getElementById("availableDates");
+        var label = document.element('<label>Available Dates</label>');
         availableDatesDiv.add(label);
-        var p = angular.element('<p>The you are about to provide is the arriving times (pay attention that in order to submit application you nee to provide at least one arriving time)</p>');
+        var p = document.element('<p>The you are about to provide is the arriving times (pay attention that in order to submit application you nee to provide at least one arriving time)</p>');
         availableDatesDiv.add(p);
         var numberOfHackDay = parseInt(settings.timeCloseHackathon.split('T')[0].split('-')[2]) - parseInt(settings.timeOpenHackathon.split('T')[0].split('-')[2]);
         var openingDay = settings.timeOpenHackathon;
 
 
         for (i = 0; i < numberOfHackDay; i++){
-          var dayP = angular.element('<p>Day '+ i + 1 +'</p>');
+          var dayP = document.element('<p>Day '+ i + 1 +'</p>');
           availableDatesDiv.add(dayP);
           var openingDate = new Date(openingDay);
           var currentDay = new Date(openingDate);
           currentDay.setDate(myDate.getDate() + i);
-          var input = angular.element('<input min=' + '"'+ currentDay +'"' + ' max=' + '"'+ currentDay +'"' + ' ng-model="user.profile.day' + i + '" type="datetime-local"/>');
+          var input = document.element('<input min=' + '"'+ currentDay +'"' + ' max=' + '"'+ currentDay +'"' + ' ng-model="user.profile.day' + i + '" type="datetime-local"/>');
           availableDatesDiv.add(input);
         }
       }

@@ -17,14 +17,14 @@
 
         <div class="field">
           <label>
-            Opens: {{ formatDate(settings.timeOpenRegistration) }}
+            Opens: {{ formatDate(settings.timeOpenRegistration) }})
           </label>
           <input type="datetime-local" ng-model="settings.timeOpenRegistration">
         </div>
 
         <div class="field">
           <label>
-            Closes: {{ formatDate(settings.timeCloseRegistration) }}
+            Closes: {{ formatDate(settings.timeCloseRegistration) }})
           </label>
           <input type="datetime-local" ng-model="settings.timeCloseRegistration">
         </div>
@@ -38,6 +38,45 @@
         </div>
       </div>
     </div>
+
+     <!-- Hackathon day Open/Close -->
+    <div
+      ng-class="{'loading': loading}"
+      class="ui red segment">
+      <div class="ui form">
+
+        <div class="ui header">
+          Open/Close Hackathon Day
+        </div>
+
+        <p>
+          Mentor will be able to register to the time period specified.
+        </p>
+
+        <div class="field">
+          <label>
+            Opens: {{ formatDate(settings.timeOpenHackathon) }})
+          </label>
+          <input type="datetime-local" ng-model="settings.timeOpenHackathon">
+        </div>
+
+        <div class="field">
+          <label>
+            Closes: {{ formatDate(settings.timeCloseHackathon) }})
+          </label>
+          <input type="datetime-local" ng-model="settings.timeCloseHackathon">
+        </div>
+
+        <div class="ui field">
+          <div
+            class="ui green button"
+            ng-click="updateHackathonTimes()">
+            Update
+          </div>
+        </div>
+      </div>
+    </div>
+
 
   </div>
   <div class="column">
@@ -58,7 +97,7 @@
 
         <div class="field">
           <label>
-            Confirm By: {{ formatDate(settings.timeConfirm) }}
+            Confirm By: {{ formatDate(settings.timeConfirm) }})
           </label>
           <input type="datetime-local" ng-model="settings.timeConfirm">
         </div>
