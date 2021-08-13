@@ -23,9 +23,7 @@ function endsWith(s, test){
  * @param  {Function} callback args(err, true, false)
  * @return {[type]}            [description]
  */
- function canRegister(email, password,callback){
-  var isInSchool = false;
-  var isInCompany = false;
+ function canRegister(email, password, callback){
 
   if (!password || password.length < 6){
     return callback({ message: "Password must be 6 or more characters."}, false, false);
@@ -58,16 +56,9 @@ function endsWith(s, test){
       }
       for (var i = 0; i < emails.length; i++) {
         if (validator.isEmail(email) && endsWith(emails[i], email)){
-          console.log(here);
-          isInSchool = true;
-          //return callback(null, true);
+          return callback(null, true, false);
         }
       }
-
-      //return callback({
-      //  message: "Not a valid educational email."
-      //}, false);
-
 
       Settings.getCompanysWhitelistedEmails(function(err, emails){
         if (err || !emails){
@@ -75,22 +66,13 @@ function endsWith(s, test){
         }
         for (var i = 0; i < emails.length; i++) {
           if (validator.isEmail(email) && endsWith(emails[i], email)){
-            isInCompany = true;
-            //return callback(null, true);
+            return callback(null, true, true);
           }
         }
     
-        //return callback({
-        //  message: "Not a valid educational email."
-        //}, false);
-        if(isInSchool === false && isInCompany === false){
-          return callback({
-          message: "Not a valid email."
+        return callback({
+          message: "Not a valid educational email."
           }, false, false);
-        }
-        else{
-          return callback(null, true, true);
-        }
       });
     });
   });
@@ -171,8 +153,8 @@ UserController.createUser = function(email, password, callback) {
 
   email = email.toLowerCase();
 
-  // Check that there isn't a user with this email already.
-  canRegister(email, password, function(err, valid, isInCompany){
+  // Check that there isn't a user with this email already, and if the user passes whitelists.
+  canRegister(email, password, function(err, valid, isMentor){
 
     if (err || !valid){
       return callback(err);
@@ -180,13 +162,7 @@ UserController.createUser = function(email, password, callback) {
     var u = new User();
     u.email = email;
     u.password = User.generateHash(password);
-    
-    if(isInCompany === true){
-      u.mentor = true;
-    }
-    else{
-      u.mentor = false;
-    }
+    u.mentor = isMentor
 
     u.save(function(err){
       if (err){
