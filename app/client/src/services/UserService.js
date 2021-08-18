@@ -106,6 +106,23 @@ angular.module('reg')
       },
 
 
+      // ------------------------
+      // Grade
+      // ------------------------
+      addGrade: function(id, grade){
+        return $http.put(base + id + '/grades', {
+          grade: grade
+        });
+      },
+
+      getGrades: function(){
+        return $http.get(base + 'kaki');
+      },
+
+      getTeamNames: function(){
+        return $http.get(base + 'teamNames');
+      },
+
       // -------------------------
       // Admin Only
       // -------------------------

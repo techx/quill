@@ -1,0 +1,34 @@
+<div id="scoring" class="page">
+    <div class="divided title">
+        Scoring System
+    </div>
+
+    <div class="title" ng-if="!openScoringSystem">
+        <br>
+        <br>
+        <br>
+        The session is closed!
+    </div>
+
+    <div class="ui two item menu" ng-if="openScoringSystem">
+        <a
+                class="item"
+                ui-sref="app.scoring.grade"
+                ui-sref-active="active">
+            Scoring
+        </a>
+
+        <a
+                class="item"
+                ui-sref="app.scoring.results"
+                ui-sref-active="active">
+            Results
+        </a>
+
+    </div>
+
+
+    <!-- View for admin panel content -->
+    <ui-view ng-show="openScoringSystem"></ui-view>
+
+</div>

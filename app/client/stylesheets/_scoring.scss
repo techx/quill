@@ -1,0 +1,54 @@
+#scoring{
+  //ul li{
+  //  //white-space:nowrap;
+  //  //overflow:hidden;
+  //  display: inline;
+  //}
+  //li{
+  //  display: inline-block;
+  //}
+
+  .list li {
+    float: left;
+    list-style-position: inside;
+    list-style-type: disc;
+    margin-right: 2em;
+  }
+
+  [ng\:cloak], [ng-cloak], .ng-cloak {
+    display: none !important;
+  }
+
+}
+
+#grade{
+  .rating {
+    color: #a9a9a9;
+    margin: 0;
+    padding: 0;
+  }
+  ul.rating {
+    display: inline-block;
+  }
+  .rating li {
+    list-style-type: none;
+    display: inline-block;
+    padding: 1px;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+    font-size:20px;
+  }
+  .rating .filled {
+    color: orangered;
+  }
+  .clear{
+    margin-top:20px;
+  }
+}
+
+#result{
+  .content{
+    display:block;
+  }
+}

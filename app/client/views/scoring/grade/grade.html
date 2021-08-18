@@ -1,0 +1,84 @@
+<div id="grade">
+    <div class="ui pink segment">
+        <form class="ui form" name="scoringForm">
+            <div class="ui stackable centered page grid">
+                <div class="column">
+                    <div class="ui status segment">
+
+                        <div class="field">
+                            <label>Team</label>
+                            <select ng-options=" team for team in allTeams " ng-model="formData.selectedTeam"
+                                    ng-change="teamSelected()">
+                                <option value="">--Select Team--</option>
+                            </select>
+                        </div>
+
+                        <div ng-show="formData.selectedTeam">
+                            Members:
+                            <ul class="list">
+                                <li ng-repeat="name in members">{{name}}</li>
+                            </ul>
+                        </div>
+                        <br>
+
+                        <div class="ui divider"></div>
+                        <div class=col-md-12>
+                            <div ng-repeat="rating in ratings">
+                                <h3>{{rating.name}}: {{rating.current}} / {{rating.max}}</h3>
+                                <div star-rating rating-value="rating.current" max="rating.max" ></div>
+                                <br>
+                            </div>
+                        </div>
+
+
+
+<!--                        <h3>Code: {{rating.current}} / {{rating.max}}</h3>-->
+<!--                        <div star-rating rating-value="rating.current" max="rating.max" ></div>-->
+
+<!--                        <h3>Presentation: {{rating.current}} / {{rating.max}}</h3>-->
+<!--                        <div star-rating rating-value="rating.current" max="rating.max" ></div>-->
+                        <br>
+
+<!--                        <div class="field">-->
+<!--                            <label>Idea</label>-->
+<!--                            <select ng-options=" grade for grade  in grades " ng-model="formData.scoreIdea">-->
+<!--                                <option value="">&#45;&#45;Select Grade&#45;&#45;</option>-->
+<!--                            </select>-->
+<!--                        </div>-->
+
+<!--                        <div class="field">-->
+<!--                            <label>Code</label>-->
+<!--                            <select ng-options=" grade for grade  in grades " ng-model="formData.scoreCode">-->
+<!--                                <option value="">&#45;&#45;Select Grade&#45;&#45;</option>-->
+<!--                            </select>-->
+<!--                        </div>-->
+
+<!--                        <div class="field">-->
+<!--                            <label>Presentation</label>-->
+<!--                            <select ng-options=" grade for grade  in grades " ng-model="formData.scorePresentation">-->
+<!--                                <option value="">&#45;&#45;Select Grade&#45;&#45;</option>-->
+<!--                            </select>-->
+<!--                        </div>-->
+
+                        <div class="field">
+                            <button ng-disabled="!formData.selectedTeam" type="submit"
+                                    class="fluid ui purple button"
+                                    ng-click="submitForm()">
+                                Submit
+                            </button>
+                        </div>
+
+                        <!--                    Average: {{average}}-->
+
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+
+
+

@@ -451,6 +451,31 @@ module.exports = function(router) {
   });
 
   /**
+   * Add grade to a user from a team.
+   */
+  router.put('/users/:id/grades', isOwnerOrAdmin, function(req, res){
+    var id = req.params.id;
+    var grade = req.body.grade;
+
+    UserController.addGrade(id, grade, defaultResponse(req, res));
+  });
+
+
+  /**
+   * Get a user's team grades.
+   */
+  router.get('/users/kaki', function(req, res){
+    UserController.getGrades(defaultResponse(req, res));
+  });
+
+  /**
+   * Get a user's team names.
+   */
+  router.get('/users/teamNames', function(req, res){
+    UserController.getTeamNames(defaultResponse(req, res));
+  });
+
+  /**
    * Update a user's password.
    * {
    *   oldPassword: STRING,
@@ -609,6 +634,17 @@ module.exports = function(router) {
   });
 
   /**
+   * Get open scoring.
+   *
+   * res: {
+   *   emails: [String]
+   * }
+   */
+  router.get('/settings/openScoring', isAdmin, function(req, res){
+    SettingsController.getOpenScoring(defaultResponse(req, res));
+  });
+
+  /**
    * [ADMIN ONLY]
    * {
    *   emails: [String]
@@ -657,4 +693,18 @@ module.exports = function(router) {
     var allowMinors = req.body.allowMinors;
     SettingsController.updateField('allowMinors', allowMinors, defaultResponse(req, res));
   });
+
+  /**
+   * [ADMIN ONLY]
+   * {
+   *   openScoring: Boolean
+   * }
+   * res: Settings
+   *
+   */
+  router.put('/settings/scoring', isAdmin, function(req, res){
+    var openScoring = req.body.openScoring;
+    SettingsController.updateField('openScoring', openScoring, defaultResponse(req, res));
+  });
+
 };

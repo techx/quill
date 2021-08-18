@@ -213,6 +213,15 @@ var schema = new mongoose.Schema({
     min: 0,
     max: 140,
   },
+  /**
+   * add array of grades to each user
+   */
+  grades:{
+    type: [Number],
+    required: true,
+    default: [],
+    select: true
+  },
 
   forums: {
     type: Array,

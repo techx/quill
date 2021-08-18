@@ -102,6 +102,24 @@ class="ui green segment">
       </div>
     </div>
   </div>
+
+  <div class="column">
+    <div class="ui form">
+      <div class="grouped fields">
+        <div class="field">
+          <div class="ui toggle checkbox">
+            <input
+                    type="checkbox"
+                    name="openScoring"
+                    ng-class="{true: 'checked', false: ''}[settings.openScoring]"
+                    ng-model="settings.openScoring"
+                    ng-change="openScoringSystem()">
+            <label>Open Scoring System Session</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- Schools Whitelist -->
