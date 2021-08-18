@@ -25,11 +25,23 @@ var profile = {
     max: 150,
   },
 
+  company: {
+    type: String,
+    min: 1,
+    max: 150,
+  },
+
   graduationYear: {
     type: String,
     enum: {
       values: '2016 2017 2018 2019'.split(' '),
     }
+  },
+
+  major: {
+    type: String,
+    min: 1,
+    max: 100
   },
 
   description: {
@@ -39,6 +51,12 @@ var profile = {
   },
 
   essay: {
+    type: String,
+    min: 0,
+    max: 1500
+  },
+
+  summary: {
     type: String,
     min: 0,
     max: 1500
@@ -67,9 +85,8 @@ var confirmation = {
   wantsHardware: Boolean,
   hardware: String,
 
-  major: String,
   github: String,
-  twitter: String,
+  linkedin: String,
   website: String,
   resume: String,
 
@@ -174,6 +191,12 @@ var schema = new mongoose.Schema({
     default: false,
   },
 
+  mentor: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
+
   timestamp: {
     type: Number,
     required: true,
@@ -198,6 +221,11 @@ var schema = new mongoose.Schema({
     required: true,
     default: [],
     select: true
+  },
+
+  forums: {
+    type: Array,
+    default: [],
   },
 
   verified: {
@@ -337,14 +365,24 @@ schema.statics.getByToken = function(token, callback){
   }.bind(this));
 };
 
-schema.statics.validateProfile = function(profile, cb){
-  return cb(!(
-    profile.name.length > 0 &&
-    profile.adult &&
-    profile.school.length > 0 &&
-    ['2016', '2017', '2018', '2019'].indexOf(profile.graduationYear) > -1 &&
-    ['M', 'F', 'O', 'N'].indexOf(profile.gender) > -1
-    ));
+schema.statics.validateProfile = function(user, profile, cb){
+  if(user.mentor === false){
+    return cb(!(
+      profile.name.length > 0 &&
+      profile.adult &&
+      profile.school.length > 0 &&
+      ['2016', '2017', '2018', '2019'].indexOf(profile.graduationYear) > -1 &&
+      ['M', 'F', 'O', 'N'].indexOf(profile.gender) > -1
+      ));
+  }
+  else{
+    return cb(!(
+      profile.name.length > 0 &&
+      profile.adult &&
+      profile.company.length > 0 &&
+      ['M', 'F', 'O', 'N'].indexOf(profile.gender) > -1
+      ));
+  }
 };
 
 //=========================================

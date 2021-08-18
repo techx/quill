@@ -1,4 +1,4 @@
-<div id="application" class="page">
+<div id="userApplication" class="page">
   <div class="divided title">
     Application
   </div>
@@ -25,6 +25,19 @@
           <input type="text"
                  name="name"
                  ng-model="user.profile.name">
+        </div>
+
+        <div class="field">
+          <label>Gender</label>
+          <select
+            name="gender"
+            ng-model="user.profile.gender">
+            <option value="">Gender</option>
+            <option value="M">Male</option>
+            <option value="F">Female</option>
+            <option value="O">Other</option>
+            <option value="N">I prefer not to answer.</option>
+          </select>
         </div>
 
         <div class="field" ng-show="autoFilledSchool">
@@ -59,16 +72,11 @@
         </div>
 
         <div class="field">
-          <label>Gender</label>
-          <select
-            name="gender"
-            ng-model="user.profile.gender">
-            <option value="">Gender</option>
-            <option value="M">Male</option>
-            <option value="F">Female</option>
-            <option value="O">Other</option>
-            <option value="N">I prefer not to answer.</option>
-          </select>
+          <label> What are you studying? </label>
+          <input type="text"
+                 name="study"
+                 placeholder="Computer Science, Product Design, Basket Weaving, etc."
+                 ng-model="user.profile.major">
         </div>
 
         <div class="field">
@@ -80,21 +88,29 @@
 
         <div class="field">
           <label>
-              What would you like to learn or get out of EZHack? (optional)
+              Tell us a little bit about yourself (optional)
+          </label>
+          <textarea ng-model="user.profile.summary"
+                    placeholder="Expert in computer vision and data science. I work at...">
+          </textarea>
+        </div>
+
+        <div class="field">
+          <label>
+            What would you like to learn or get out of HackMIT? (optional)
           </label>
           <textarea ng-model="user.profile.essay">
           </textarea>
         </div>
 
-        <div class="field"
-             ng-hide="isMitStudent">
+        <div class="field">
           <p>
-            Because of limitations imposed by MIT, we are not legally allowed to host
-            non-MIT minors (those under 18) for EZHack 2021. Checking the box below affirms that you are or will be 18 years or older by September 19th, 2015.
+            Because of campus limitations, we are not legally allowed to host
+            minors (those under 18) for HackMIT 2015. Checking the box below affirms that you are or will be 18 years or older by September 19th, 2015.
           </p>
           <p>
             <strong>
-            We will be checking ID. If you are a non-MIT minor, you will be turned away at the door.
+            We will be checking ID. If you are a minor, you will be turned away at the door.
             </strong>
           </p>
           <div class="ui checkbox">

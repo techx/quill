@@ -1,0 +1,75 @@
+<div id="forums notification" class="page forumData">
+    <div class="divided title">
+        Forums
+    </div>
+    <div class="ui three item menu">
+        <a
+                ng-if="user.mentor"
+                class="item team notification"
+                ui-sref="app.forum.multiForum"
+                ui-sref-active="active">
+            Teams forums
+            <nav class="sidebar1" ng-if="unreadMsg !== 0">
+                <ul class="dots">
+                    <li>
+                        <b href="#">
+                            <span><mark class="big swing">{{unreadMsg}}</mark></span>
+                        </b>
+                    </li>
+                </ul>
+            </nav>
+        </a>
+
+        <a
+                ng-if="!user.mentor"
+                class="item team notification"
+                ui-sref="app.forum.team"
+                ui-sref-active="active">
+            Team forum
+            <nav class="sidebar1" ng-if="unreadMsgTeam">
+                <ul class="dots">
+                    <li>
+                        <b href="#">
+                            <span><mark class="big swing">{{unreadMsgTeam}}</mark></span>
+                        </b>
+                    </li>
+                </ul>
+            </nav>
+        </a>
+
+        <a
+                ng-if="!user.mentor"
+                class="item mentor notification"
+                ui-sref="app.forum.mentor"
+                ui-sref-active="active">
+            Mentor forum
+            <nav class="sidebar1" ng-if="unreadMsgMentor">
+                <ul class="dots">
+                    <li>
+                        <b href="#">
+                            <span><mark class="big swing">{{unreadMsgMentor}}</mark></span>
+                        </b>
+                    </li>
+                </ul>
+            </nav>
+        </a>
+
+        <a
+                class="item general notification"
+                ui-sref="app.forum.general"
+                ui-sref-active="active">
+            Main forum
+            <nav class="sidebar1" ng-if="unreadMsgGeneral">
+                <ul class="dots">
+                    <li>
+                        <b href="#">
+                            <span><mark class="big swing">{{unreadMsgGeneral}}</mark></span>
+                        </b>
+                    </li>
+                </ul>
+            </nav>
+        </a>
+    </div>
+    <ui-view></ui-view>
+</div>
+</div>

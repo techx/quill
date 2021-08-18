@@ -56,14 +56,25 @@ function canRegister(email, password, callback){
       }
       for (var i = 0; i < emails.length; i++) {
         if (validator.isEmail(email) && endsWith(emails[i], email)){
-          return callback(null, true);
+          return callback(null, true, false);
         }
       }
-      return callback({
-        message: "Not a valid educational email."
-      }, false);
-    });
 
+      Settings.getCompanysWhitelistedEmails(function(err, emails){
+        if (err || !emails){
+          return callback(err);
+        }
+        for (var i = 0; i < emails.length; i++) {
+          if (validator.isEmail(email) && endsWith(emails[i], email)){
+            return callback(null, true, true);
+          }
+        }
+
+        return callback({
+          message: "Not a valid educational email."
+          }, false, false);
+      });
+    });
   });
 }
 
@@ -134,7 +145,6 @@ UserController.loginWithPassword = function(email, password, callback){
  * @param  {Function} callback args(err, user)
  */
 UserController.createUser = function(email, password, callback) {
-
   if (typeof email !== "string"){
     return callback({
       message: "Email must be a string."
@@ -143,16 +153,17 @@ UserController.createUser = function(email, password, callback) {
 
   email = email.toLowerCase();
 
-  // Check that there isn't a user with this email already.
-  canRegister(email, password, function(err, valid){
+  // Check that there isn't a user with this email already, and if the user passes whitelists.
+  canRegister(email, password, function(err, valid, isMentor){
 
     if (err || !valid){
       return callback(err);
     }
-
     var u = new User();
     u.email = email;
     u.password = User.generateHash(password);
+    u.mentor = isMentor;
+
     u.save(function(err){
       if (err){
         // Duplicate key error codes
@@ -195,6 +206,22 @@ UserController.getByToken = function (token, callback) {
  */
 UserController.getAll = function (callback) {
   User.find({}, callback);
+};
+
+/**
+ * Get all users. - not admins only mentors and hacker.
+ * filter data.
+ * @param  {Function} callback args(err, user)
+ */
+UserController.getAllForForum = function (callback) {
+    User.find({
+        admin: false,
+        "status.completedProfile": true,
+    }, {
+        "profile.name": 1,
+        "mentor": 1,
+        "src": 1,
+    }, callback);
 };
 
 /**
@@ -269,50 +296,74 @@ UserController.updateProfileById = function (id, profile, callback){
 
   // Validate the user profile, and mark the user as profile completed
   // when successful.
-  User.validateProfile(profile, function(err){
+  User.findById(id).exec(function(err, user){
+    User.validateProfile(user, profile, function(err){
 
-    if (err){
-      return callback({message: 'invalid profile'});
-    }
-
-    // Check if its within the registration window.
-    Settings.getRegistrationTimes(function(err, times){
-      if (err) {
-        callback(err);
+      if (err){
+        return callback({message: 'invalid profile'});
       }
 
-      var now = Date.now();
+      // Check if its within the registration window.
+      Settings.getRegistrationTimes(function(err, times){
+        if (err) {
+          callback(err);
+        }
 
-      if (now < times.timeOpen){
-        return callback({
-          message: "Registration opens in " + moment(times.timeOpen).fromNow() + "!"
-        });
-      }
+        var now = Date.now();
 
-      if (now > times.timeClose){
-        return callback({
-          message: "Sorry, registration is closed."
-        });
-      }
+        if (now < times.timeOpen){
+          return callback({
+            message: "Registration opens in " + moment(times.timeOpen).fromNow() + "!"
+          });
+        }
+
+        if (now > times.timeClose){
+          return callback({
+            message: "Sorry, registration is closed."
+          });
+        }
+      });
+
+      User.findOneAndUpdate({
+        _id: id,
+        verified: true
+      },
+        {
+          $set: {
+            'lastUpdated': Date.now(),
+            'profile': profile,
+            'status.completedProfile': true
+          }
+        },
+        {
+          new: true
+        },
+        callback);
+
     });
+  });
+};
 
-    User.findOneAndUpdate({
-      _id: id,
-      verified: true
-    },
+/**
+ * Update a user's profile object, given an id and a forums.
+ *
+ * @param  {String}   id       Id of the user
+ * @param  {Map}   forums   forums map
+ * @param  {Function} callback Callback with args (err, user)
+ */
+UserController.updateForumsById = function (id, forums, callback) {
+  User.findOneAndUpdate({
+        _id: id,
+      },
       {
         $set: {
-          'lastUpdated': Date.now(),
-          'profile': profile,
-          'status.completedProfile': true
+          'forums': forums,
         }
       },
       {
         new: true
       },
       callback);
-
-  });
 };
 
 /**
@@ -436,6 +487,60 @@ UserController.getTeammates = function(id, callback){
       .select('profile.name')
       .exec(callback);
   });
+};
+
+/**
+ *  get all members for this forum
+ * @param id
+ * @param callback
+ */
+UserController.getMentorForumMembers = function (team, callback) {
+    User
+        .find({$or: [{teamCode: team}, {mentor: true}]},
+            function (err, users) {
+                if (err || !users) {
+                    return callback(err, users);
+                }
+            }).select('profile.name src mentor').exec(callback);
+    // add picture to query
+    // .select('profile.name mentor picture')
+};
+
+/**
+ *  get all members for this forum by team name
+ * @param id
+ * @param callback
+ */
+UserController.getMembersByTeam = function (team, callback) {
+    User
+        .find({teamCode: team},
+            function (err, users) {
+            if (err || !users) {
+                return callback(err, users);
+            }
+        }).select('profile.name src mentor').exec(callback);
+    // add picture to query
+    // .select('profile.name mentor picture')
+};
+
+/**
+ * returns all mentors in Hackathon
+ * @param callback
+ */
+UserController.getMentors = function (callback) {
+    User.find({
+        mentor: true,
+    }, function (err, mentors) {
+        if (err || !mentors) {
+            return callback(err, mentors);
+        }
+        return callback(
+            null,
+            {
+                mentors: mentors
+            }
+        );
+    });
 };
 
 /**

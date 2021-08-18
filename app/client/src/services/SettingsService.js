@@ -31,6 +31,14 @@ angular.module('reg')
           emails: emails
         });
       },
+      getCompanysWhitelistedEmails: function(){
+        return $http.get(base + 'companysWhitelist');
+      },
+      updateCompanysWhitelistedEmails: function(emails){
+        return $http.put(base + 'companysWhitelist', {
+          emails: emails
+        });
+      },
       updateWaitlistText: function(text){
         return $http.put(base + 'waitlist', {
           text: text

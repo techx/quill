@@ -8,12 +8,11 @@ angular.module('reg')
     var base = users + '/';
 
     return {
+
       // ----------------------
       // Basic Actions
       // ----------------------
       getCurrentUser: function(){
-        // console.log("userService");
-        // console.log(Session.getUserId());
         return $http.get(base + Session.getUserId());
       },
 
@@ -23,6 +22,10 @@ angular.module('reg')
 
       getAll: function(){
         return $http.get(base);
+      },
+
+      getAllForForum: function (){
+        return $http.get(base + "generalForum");
       },
 
       getPage: function(page, size, text){
@@ -38,6 +41,23 @@ angular.module('reg')
       updateProfile: function(id, profile){
         return $http.put(base + id + '/profile', {
           profile: profile
+        });
+      },
+
+      updateForums: function(id, forums){
+        var forumsArr = [];
+
+        for (let key of forums.keys()) {
+          forumsArr.push({
+            id: key,
+            lastMessage: forums.get(key).lastMessage,
+            forumType: forums.get(key).forumType
+          });
+        }
+
+        return $http.put(base  + 'forums', {
+          id: id,
+          forums: forumsArr
         });
       },
 
@@ -68,6 +88,24 @@ angular.module('reg')
         return $http.get(base + Session.getUserId() + '/team');
       },
 
+
+      getMembersByTeam: function(team){
+        return $http.get(base + team + '/membersteam');
+      },
+
+      // -------------------------
+      // Mentors
+      // -------------------------
+
+      getMentors: function (){
+        return $http.get(base + '/mentors');
+      },
+
+      getMentorForumMembers: function(teamName){
+        return $http.get(base + teamName + '/mentorforum');
+      },
+
+
       // ------------------------
       // Grade
       // ------------------------
@@ -88,6 +126,7 @@ angular.module('reg')
       // -------------------------
       // Admin Only
       // -------------------------
+
 
       getCSV: function(){
         $http.get(base + 'exportcsv').then(function (data, status, headers) {
@@ -135,4 +174,4 @@ angular.module('reg')
       },
     };
   }
-  ]);
+]);

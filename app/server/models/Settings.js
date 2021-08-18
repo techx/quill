@@ -23,9 +23,19 @@ var schema = new mongoose.Schema({
     default: 604800000 // Date of confirmation
   },
   whitelistedEmails: {
-    type: String,
-    select: true,
-    default: '.com',
+    type: [String],
+    select: false,
+    default: ['.edu', '.ac.il', '.com', 'gmail.com'],
+  },
+  companysWhitelistedEmails: {
+    type: [String],
+    select: false,
+    default: ['.money'],
+  },
+  companysWhitelistedEmails: {
+    type: [String],
+    select: false,
+    default: ['.money'],
   },
   waitlistText: {
     type: String
@@ -55,6 +65,20 @@ schema.statics.getWhitelistedEmails = function(callback){
     .select('whitelistedEmails')
     .exec(function(err, settings){
       return callback(err, settings.whitelistedEmails);
+    });
+};
+
+/**
+ * Get the list of companys whitelisted emails.
+ * Whitelist emails are by default not included in settings.
+ * @param  {Function} callback args(err, emails)
+ */
+ schema.statics.getCompanysWhitelistedEmails = function(callback){
+  this
+    .findOne({})
+    .select('companysWhitelistedEmails')
+    .exec(function(err, settings){
+      return callback(err, settings.companysWhitelistedEmails);
     });
 };
 
