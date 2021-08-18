@@ -1,0 +1,24 @@
+<div id="result" class="ui red segment">
+    <div ng-repeat="team in teamMap">
+        <h2 style="color:purple; text-align: center">{{team.rank}}</h2>
+
+        <div class="ui list">
+            <strong style="color:purple">Team</strong>: {{team.key}}
+            <br>
+            <strong style="color:purple">Score</strong>: {{team.value}}
+            <br>
+            <span class="item">
+<!--                <i class="users icon">:</i>-->
+                    <i class="users icon" style="color:purple">:</i>
+                <ul class="list">
+                    <li ng-repeat="member in team.members"> {{member}}</li>
+                </ul>
+            </span>
+
+        </div>
+
+        <div class="ui divider"></div>
+    </div>
+
+</div>
+

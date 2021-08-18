@@ -43,6 +43,14 @@ SettingsController.getWhitelistedEmails = function(callback){
 };
 
 /**
+ * Get open scoring.
+ * @param  {Function} callback args(err, emails)
+ */
+SettingsController.getOpenScoring = function(callback){
+  Settings.getOpenScoring(callback);
+};
+
+/**
  * Update the list of companys whitelisted emails and email extensions.
  * @param  {[type]}   emails   [description]
  * @param  {Function} callback args(err, settings)
