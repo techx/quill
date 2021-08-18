@@ -11,9 +11,10 @@ var UserController = {};
 
 var maxTeamSize = process.env.TEAM_MAX_SIZE || 4;
 
+
 // Tests a string if it ends with target s
-function endsWith(s, test) {
-    return test.indexOf(s, test.length - s.length) !== -1;
+function endsWith(s, test){
+  return test.indexOf(s, test.length - s.length) !== -1;
 }
 
 /**
@@ -22,10 +23,10 @@ function endsWith(s, test) {
  * @param  {Function} callback args(err, true, false)
  * @return {[type]}            [description]
  */
- function canRegister(email, password, callback){
+function canRegister(email, password, callback){
 
   if (!password || password.length < 6){
-    return callback({ message: "Password must be 6 or more characters."}, false, false);
+    return callback({ message: "Password must be 6 or more characters."}, false);
   }
 
   // Check if its within the registration window.

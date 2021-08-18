@@ -21,13 +21,13 @@ var profile = {
 
   school: {
     type: String,
-    min: 0,
+    min: 1,
     max: 150,
   },
 
   company: {
     type: String,
-    min: 0,
+    min: 1,
     max: 150,
   },
 

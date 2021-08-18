@@ -32,6 +32,11 @@ var schema = new mongoose.Schema({
     select: false,
     default: ['.money'],
   },
+  companysWhitelistedEmails: {
+    type: [String],
+    select: false,
+    default: ['.money'],
+  },
   waitlistText: {
     type: String
   },
