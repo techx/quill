@@ -3,53 +3,98 @@ angular.module('reg')
         '$http',
         'Session',
         'UserService',
-        function($http, Session, UserService){
+        function ($http, Session, UserService) {
 
             var forum = '/api/forums';
             var base = forum + '/';
-            var allForums;
 
-            var setForums = function(forums){
-                allForums = forums;
+            var localIntervals = new Map();
+
+            var setInterval = function (interval, key) {
+                localIntervals.set(key, interval);
             };
 
-            // forums received as
-            var getSpecificForum = function (type){
-                for (forum in allForums){
-                    if (allForums[forum].forumType === type)
-                        return allForums[forum];
+            var stopInterval = function (key) {
+                if (localIntervals.get(key) !== undefined) {
+                    clearInterval(localIntervals.get(key));
                 }
             };
 
             return {
                 // ----------------------
-                // Getters & Setters functions
+                // Getters , Setters and basic functions
                 // -------------
 
-                setForums : setForums,
-
-                getSpecificForum : getSpecificForum,
+                setInterval: setInterval,
+                stopInterval:stopInterval,
 
                 // ----------------------
                 // Main functions
                 // ----------------------
 
-                getUserForums: function(){
+                getHackerForums: function () {
                     return $http.get(base + Session.getUserTeam());
                 },
 
-                addNewForum : function(teamName){
+                getForum: function (forumID){
+                    return $http.get(base + "rec/" + forumID);
+                },
+
+                getMentorForums: function () {
+                    return $http.get(base + "mentor");
+                },
+
+                addNewForum: function (teamName) {
                     return $http.put(base + 'create', {
-                        teamName : teamName,
+                        teamName: teamName,
                     });
                 },
 
-                updateForum: function(forumID, message, user){
-                    return $http.post(base + 'update', {
-                        forumID : forumID,
-                        message : message,
-                        user : user
+                deleteForums: function(team){
+                   UserService
+                       .getMembersByTeam(team)
+                       .then(response => {
+                           console.log(response);
+                           if(!response.data.users || response.data.users.length === 0){
+                               return $http.delete(base + team);
+                           }
+                           }, response => {
+                                console.log(response);
+                           }
+                       );
+                },
+
+                sendMessage: function (forumID, message, user) {
+                    return $http.post(base + 'send', {
+                        forumID: forumID,
+                        message: message,
+                        user: user,
                     });
+                },
+
+                checkForUpdates : function(forums, forumIdUpdate) {
+                    var forumsList = [];
+
+                    for (let [key, value] of  forums.entries()) {
+                        if (forumIdUpdate && key === forumIdUpdate){
+                            forumsList.push({
+                                id: key,
+                                lastMessage: value.lastMessage,
+                                update: true
+                            });
+                        }
+                        else {
+                            forumsList.push({
+                                id: key,
+                                lastMessage: value.lastMessage
+                            });
+                        }
+                    }
+
+                    return $http.post(base + "updateAll/" ,
+                        {
+                            forums: forumsList
+                        });
                 },
             };
         }

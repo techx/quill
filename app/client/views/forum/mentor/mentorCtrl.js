@@ -1,41 +1,43 @@
-// const moment = require('moment');
-// const swal = require('sweetalert');
-
 angular.module('reg')
     .controller('MentorCtrl',[
         '$scope',
         '$state',
         '$stateParams',
-        'currentUser',
         'UserService',
         'ForumService',
-        function($scope, $state, $stateParams, currentUser, UserService, ForumService){
-            $('.msg_history').scrollTop($('.msg_history')[0].scrollHeight);
-            $scope.user = currentUser.data;
+        function($scope, $state, $stateParams, UserService, ForumService){
+            // declarations
+            const FORUM_TYPE = "mentor";
+            $scope.unreadMsgMentor = 0;
+            $scope.searchText = "";
+            $scope.searchUser = "";
+            $scope.myForum = new FormData();
+            $scope.forum = $scope.getAllForumsByType(FORUM_TYPE)[0];
 
-            $scope.forum = ForumService.getSpecificForum("mentor");
-
+            // get all chat members to show.
             function setMembers() {
-                UserService.getMentorForumMembers()
+                UserService.getMentorForumMembers($scope.myForum.team)
                     .then(response => {
-                        $scope.teammates = response.data;
+                        $scope.allUsers = response.data;
                     }, response => {
                         console.log(response);
                     });
             }
 
-            $scope.updateForum = function (){
-                if ($scope.sentMsg && $scope.sentMsg !== ''){
-                    ForumService.updateForum($scope.forum._id, $scope.sentMsg, $scope.user.profile.name)
-                        .then(response => {
-                            $scope.forum = response.data;
-                        }, response => {
-                            console.log(response.data);
-                        });
-                }
+            // set specific forum - general
+            function setForum(){
+                $scope.updateCurrentForum($scope.forum._id, function (){
+                    $scope.myForum = $scope.currentForum;
+                    setMembers();
+                    if ($scope.myForum.lastMessage - $scope.oldForums.get($scope.myForum._id) !== 0)
+                        $scope.updateUserForums($scope.myForum._id, $scope.myForum.lastMessage);
+                });
+            }
+
+            // send message
+            $scope.send = function (){
+                $scope.sendMessage($scope);
             };
 
-
-            setMembers();
-            $scope.users = [];
-        }]);
+            setForum();
+    }]);

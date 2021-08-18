@@ -10,7 +10,10 @@
   }
 
   .container{
-    height: 750px;
+    margin: 10px 10px 10px 10px;
+    width: 220px;
+    padding-left: 30px;
+    height: 760px;
     overflow-y: auto;
   }
 
@@ -45,7 +48,8 @@
     border-radius: 50%;
     background: var(--bg-color);
     top: 10px;
-    left: 70px;
+    //left: 70px;
+    left: 27px;
     z-index: 0;
     transition: transform 0.3s ease-out;
   }
@@ -72,10 +76,15 @@
   }
 
   .card {
-    width: 240px;
-    height: 200px;
+   // width: 240px;
+   // height: 200px;
+   // padding: 5px 5px 5px 5px;
+    margin: 7px 7px 7px 7px;
+    width: 150px;
+    height: 180px;
     background: #fff;
-    border-top-right-radius: 10px;
+    //border-top-right-radius: 10px;
+    border-radius: 12px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -163,14 +172,16 @@
     border-radius: 50%;
     background: var(--bg-color);
     top: 10px;
-    left: 70px;
+    //left: 70px;
+    left: 27px;
     z-index: 0;
     transition: transform 0.3s ease-out;
   }
 
   .name{
     position: absolute;
-    font-size: 20px;
+    //font-size: 20px;
+    font-size: 15px;
     bottom: 40px;
   }
 

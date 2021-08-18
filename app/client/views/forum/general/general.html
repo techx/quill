@@ -7,18 +7,21 @@
             <div id="users_list">
                 <div class="srch_bar">
                     <div class="stylish-input-group">
-                        <input type="text" class="search-bar"  placeholder="Search" >
+                        <input type="text" class="search-bar" ng-model="searchUser" placeholder="Search" >
                         <span class="input-group-addon">
                             <button type="button"> <i class="fa fa-search" aria-hidden="true"></i> </button>
                         </span>
                     </div>
                 </div>
                 <div class="container">
-                    <a href="#" class="card human-resources" ng-repeat="new_user in users">
+                    <a href="#" class="card human-resources" ng-repeat="new_user in allUsers | filter:searchUser">
                         <div class="overlay"></div>
-                        <div class="img"> <img class="img_src" src={{new_user.src}} alt="sunil"> </div>
-                        <b class="name">{{new_user.name}}</b>
-                        <p class="type">{{new_user.type}}</p>
+                        <div class="img">
+                            <img class="img_src" ng-if="new_user.src && new_user.src !== ''"  src={{new_user.src}} alt="sunil">
+                            <img class="img_src" ng-if="!new_user.src || new_user.src === ''" src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
+                        </div>
+                        <b class="name">{{new_user.profile.name}}</b>
+                        <p class="type">{{new_user.mentor ? "Mentor" : "Hacker"}}</p>
                     </a>
                 </div>
             </div>
@@ -34,7 +37,7 @@
                             <div class="headind_srch">
                                 <div class="srch_bar">
                                     <div class="stylish-input-group">
-                                        <input type="text" class="search-bar"  placeholder="Search" >
+                                        <input type="text" class="search-bar" ng-model="searchText" placeholder="Search" >
                                         <span class="input-group-addon">
                                             <button type="button"> <i class="fa fa-search" aria-hidden="true"></i> </button>
                                         </span>
@@ -43,23 +46,26 @@
                             </div>
                             <div class="mesgs">
                                 <div class="msg_history">
-                                    <div ng-repeat="message in testss" class="msg_box">
-                                        <div ng-if="message">
-                                            <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                                    <div ng-repeat="value in myForum.messages | filter:searchText" class="msg_box" on-finish-render="ngRepeatFinished">
+                                        <div ng-if="value.user !== user.profile.name && value.message !== ''">
+                                            <div class="incoming_msg_img">
+                                                <img ng-if="value.src && value.src !== ''"  src={{value.src}} alt="sunil">
+                                                <img ng-if="!value.src || value.src === ''" src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
+                                            </div>
                                             <div class="received_msg">
                                                 <div class="received_withd_msg">
-                                                    <p class="nameTag" style="font-size: 12px">Admin Admin</p>
-                                                    <p>{{ message }}</p>
-                                                    <span class="time_date" ng-bind="date | date:'MM/dd/yyyy  hh:mm'"></span>
+                                                    <p class="nameTag" style="font-size: 12px">{{ value.user }}</p>
+                                                    <p class="messageTag">{{ value.message }}</p>
+                                                    <span class="time_date" ng-bind="value.time | date:'MM/dd/yyyy  hh:mm'"></span>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div ng-if="!message">
+                                        <div ng-if="value.user === user.profile.name && value.message !== ''">
                                             <div class="outgoing_msg">
                                                 <div class="sent_msg">
-                                                    <p style="font-size: 12px">Arnaud</p>
-                                                    <p>Hello :)</p>
-                                                    <span class="time_date" ng-bind="date | date:'MM/dd/yyyy  hh:mm'"></span>
+                                                    <p class="nameTag" style="font-size: 12px">{{ value.user }}</p>
+                                                    <p class="messageTag">{{ value.message }}</p>
+                                                    <span class="time_date" ng-bind="value.time | date:'MM/dd/yyyy  hh:mm'"></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -67,8 +73,8 @@
                                 </div>
                                 <div class="type_msg">
                                     <div class="input_msg_write">
-                                        <input ng-model="messageToSend" type="text" class="write_msg" placeholder="Type a message"/>
-                                        <button ng-click="sendMessage()" class="msg_send_btn" type="button"><i class="text_button" aria-hidden="true">Send</i></button>
+                                        <input ng-model="sentMsg" type="text" placeholder="Type a message" ng-keyup="$event.keyCode == 13 && send()"/>
+                                        <button ng-click="send()" class="msg_send_btn" type="button"><i class="text_button" aria-hidden="true">Send</i></button>
                                     </div>
                                 </div>
                             </div>
@@ -77,5 +83,5 @@
                 </div>
             </div>
         </div>
-
     </div>
+</div>

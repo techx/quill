@@ -20,6 +20,7 @@ const ForumCtrl = require('../views/forum/forumCtrl.js');
 const GeneralCtrl = require('../views/forum/general/generalCtrl');
 const MentorCtrl = require('../views/forum/mentor/mentorCtrl.js');
 const TeamForumCtrl = require('../views/forum/team/teamForumCtrl.js');
+const MultiCtrl = require('../views/forum/multiForum/multiCtrl');
 
 angular.module('reg')
   .config([
@@ -134,43 +135,33 @@ angular.module('reg')
           requireVerified: true
         },
         resolve: {
-          userForums: function(ForumService){
-            return ForumService.getUserForums();
+          userForums: function(ForumService, Session){
+            return Session.isMentor() ? ForumService.getMentorForums() : ForumService.getHackerForums();
           },
           currentUser: function(UserService){
             return UserService.getCurrentUser();
           }
         }
       })
+        .state('app.forum.multiForum', {
+          url: "",
+          templateUrl: 'views/forum/multiForum/multi.html',
+          controller: 'MultiCtrl',
+        })
         .state('app.forum.general', {
-          url: "/forum",
+          url: "",
           templateUrl: "views/forum/general/general.html",
           controller: 'GeneralCtrl',
-          resolve: {
-            currentUser: function(UserService){
-              return UserService.getCurrentUser();
-            }
-          }
         })
         .state('app.forum.mentor', {
-          url: "/forum",
+          url: "",
           templateUrl: "views/forum/mentor/mentor.html",
           controller: 'MentorCtrl',
-          resolve: {
-            currentUser: function(UserService){
-              return UserService.getCurrentUser();
-            }
-          }
         })
         .state('app.forum.team', {
-          url: "/forum",
+          url: "",
           templateUrl: "views/forum/team/team.html",
           controller: 'TeamForumCtrl',
-          resolve: {
-            currentUser: function(UserService){
-              return UserService.getCurrentUser();
-            }
-          }
         })
       .state('app.admin', {
         views: {

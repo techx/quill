@@ -1,93 +1,44 @@
-// const moment = require('moment');
-// const swal = require('sweetalert');
-
 angular.module('reg')
-    .controller('GeneralCtrl',[
+    .controller('GeneralCtrl', [
         '$scope',
         '$state',
         '$stateParams',
         'ForumService',
-        'currentUser',
         'UserService',
-        function($scope, $state, $stateParams, ForumService, currentUser, UserService){
-            $('.msg_history').scrollTop($('.msg_history')[0].scrollHeight);
-            // send with enter - doesnt work
-            // ----------------------------
-            // var input = $('.write_msg');
-            // input.addEventListener("keyup", function(event) {
-            //     if (event.keyCode === 13) {
-            //         $('.msg_send_btn').click();
-            //     }
-            // });
-            //setInterval(retrieveForumData, 10000);          // 10 seconds
+        function ($scope, $state, $stateParams, ForumService, UserService) {
+            // declarations
+            const FORUM_TYPE = "general";
+            $scope.searchText = "";
+            $scope.unreadMsgGeneral = 0;
+            $scope.searchUser = "";
+            $scope.myForum = new FormData();
+            $scope.forum = $scope.getAllForumsByType(FORUM_TYPE)[0];
 
-            // set user cards
-            var menu_trigger = $("[data-card-menu]");
-            var back_trigger = $("[data-card-back]");
+            // get all chat members to show.
+            function setMembers() {
+                UserService.getAllForForum()
+                    .then(response => {
+                        $scope.allUsers = response.data;
+                    }, response => {
+                        console.log(response);
+                    });
+            }
 
-            menu_trigger.click(function(){
-                $(".card, body").toggleClass("show-menu");
-            });
+            // set specific forum - general
+            function setForum(){
+                $scope.updateCurrentForum($scope.forum._id, function (){
+                    $scope.myForum = $scope.currentForum;
+                    setMembers();
+                    if ($scope.myForum.lastMessage - $scope.oldForums.get($scope.myForum._id).lastMessage !== 0)
+                        $scope.updateUserForums($scope.myForum._id, $scope.myForum.lastMessage);
+                });
+            }
 
-            back_trigger.click(function(){
-                $(".card, body").toggleClass("show-menu");
-            });
-
-            // basic initialization
-            $scope.user = currentUser.data;
-
-            $scope.date = new Date();
-
-            $scope.users = [
-            {
-                src : "https://ptetutorials.com/images/user-profile.png",
-                name : "Admin Admin",
-                type : "Mentor"
-            },
-            {
-                src : "https://ptetutorials.com/images/user-profile.png",
-                name : "Arnaud",
-                type : "Hacker"
-            },
-            {
-                src : "https://ptetutorials.com/images/user-profile.png",
-                name : "Nadav",
-                type : "Hacker"
-            },
-            {
-                src : "https://ptetutorials.com/images/user-profile.png",
-                name : "Shai",
-                type : "Mentor"
-            },
-            {
-                src : "https://ptetutorials.com/images/user-profile.png",
-                name : "Lasri",
-                type : "Hacker"
-            },
-            {
-                src : "https://ptetutorials.com/images/user-profile.png",
-                name : "Test",
-                type : "Hacker"
-            },
-            ];
-
-
-            // test start
-            var messageMap = new Map();
-            messageMap.set(0 ,"Hey! ");
-            messageMap.set(1 ,"welcome to EZ-Hack forum");
-            messageMap.set(2 ,"");
-            $scope.testss = Array.from(messageMap.values());
-            // console.log(testss);
-
-            $scope.sendMessage = function (){
-                // take care of sent.
-                $scope.testss.push( $scope.messageToSend);
-                $scope.messageToSend = "";
+            // send message
+            $scope.send = function (){
+                $scope.sendMessage($scope);
             };
 
-            function retrieveForumData(){
-                    //
-                console.log("Shai");
-            }
+            setForum();
         }]);
+

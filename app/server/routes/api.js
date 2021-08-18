@@ -173,31 +173,57 @@ module.exports = function(router) {
 
 
   /**
-   *  Get - Get user relevant forums (for hacker)
+   *  Get - Get mentor relevant forums
+   */
+  router.get('/forums/mentor', function(req, res){
+    ForumController.getAllForumsMentor(defaultResponse(req, res));
+  });
+
+
+  /**
+   *  Get - Get mentor relevant forums
+   */
+  router.get('/forums/rec/:id', function(req, res){
+    var id = req.params.id;
+    ForumController.getForum(id, defaultResponse(req, res));
+  });
+
+
+  /**
+   *  Get - Get hacker relevant forums
    */
   router.get('/forums/:teamName', function(req, res){
     var teamName = req.params.teamName;
-
-    ForumController.getAllForums(teamName,  defaultResponse(req, res));
+    ForumController.getAllForumsHacker(teamName, defaultResponse(req, res));
   });
 
+
   /**
-   * Put - Update relevant forum
+   * Post - send message in relevant forum
    */
-  router.post('/forums/update', function(req, res){
+  router.post('/forums/send', function(req, res){
       var forumID = req.body.forumID;
       var message = req.body.message;
       var user = req.body.user;
       var date = Date.now();
 
-      ForumController.updateForum(forumID, message, date, user, defaultResponse(req, res));
+      ForumController.sendMessage(forumID, message, date, user, defaultResponse(req, res));
+  });
+
+  /**
+   * POST - Post all forums that have new messages.
+   */
+  router.post('/forums/updateAll', function(req, res) {
+    var forums = req.body.forums;
+    ForumController.checkForUpdates(forums, defaultResponse(req, res));
   });
 
   /**
    * Delete - Delete forum only if last user left team. (only teams w/o mentor forums)
    */
-  router.delete('/forums', isMentorOrHacker, function (req, res){
-    // prepare request and redirect to UserController.
+  router.delete('/forums/:team', function (req, res){
+      var team = req.params.team;
+      ForumController.deleteForum(team, defaultResponse(req, res));
   });
 
   // ---------------------------------------------
@@ -230,6 +256,13 @@ module.exports = function(router) {
       UserController.getAll(defaultResponse(req, res));
 
     }
+  });
+
+  /**
+   * GET - Get all users include mentors, select relevant data only
+   */
+  router.get('/users/generalForum', function (req, res) {
+    UserController.getAllForForum(defaultResponse(req, res));
   });
 
   /**
@@ -334,6 +367,15 @@ module.exports = function(router) {
   });
 
   /**
+   *  PUT - update a specific user's forums
+   */
+  router.put('/users/forums', function(req, res){
+    var id = req.body.id;
+    var forums = req.body.forums;
+    UserController.updateForumsById(id, forums , defaultResponse(req, res));
+  });
+
+  /**
    * [OWNER/ADMIN]
    *
    * PUT - Update a specific user's confirmation information.
@@ -370,9 +412,18 @@ module.exports = function(router) {
    * Get a user's team member's names job and picture. Uses the code associated
    * with the user making the request.
    */
-  router.get('/users/:id/mentorforum', function(req, res){
-    var id = req.params.id;
-    UserController.getMentorForumMembers(id, defaultResponse(req, res));
+  router.get('/users/:team/membersteam', function(req, res){
+    var team = req.params.team;
+    UserController.getMembersByTeam(team, defaultResponse(req, res));
+  });
+
+  /**
+   * Get a user's team member's names job and picture. Uses the code associated
+   * with the user making the request.
+   */
+  router.get('/users/:team/mentorforum', function(req, res){
+    var team = req.params.team;
+    UserController.getMentorForumMembers(team, defaultResponse(req, res));
   });
 
   /**

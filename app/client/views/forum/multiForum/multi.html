@@ -1,4 +1,4 @@
-<div class="ui segment" xmlns="http://www.w3.org/1999/html">
+<div class="ui segment" >
     <div class="ui stackable grid">
         <div class="three wide column">
             <div class="ui header">
@@ -26,8 +26,19 @@
                 </div>
             </div>
         </div>
-        <div id="table-container" class="thirteen wide column">
-            <div class="ui header chat_head">
+        <div id="table-container mentor-view" class="thirteen wide column">
+            <b style="display: inline-block">Pick a forum : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>
+            <div class="center team_pick" style="display: inline-block">
+                <select name="sources" id="sources" class="custom-select sources" placeholder="Choose team" ng-model="forumSelected" ng-change="onTeamChange()">
+                    <option ng-repeat="forum in forums" ng-if="oldForums.get(forum.id).lastMessage === newForums.get(forum.id).lastMessage" value="{{forum._id}}">
+                        {{forum.team}}&nbsp;&nbsp;&nbsp;&nbsp;
+                    </option>
+                    <option ng-repeat="forum in forums" ng-if="oldForums.get(forum.id).lastMessage !== newForums.get(forum.id).lastMessage" value="{{forum._id}}" >
+                        {{forum.team}}&nbsp;&nbsp;&nbsp;&nbsp; - &nbsp;&nbsp;&nbsp;&nbsp;{{newForums.get(forum.id).lastMessage - oldForums.get(forum.id).lastMessage}} Unread messages
+                    </option>
+                </select>
+            </div>
+            <div class="ui header chat_head" style="margin: 2px 2px 2px 2px">
                 Chat
             </div>
             <div id="forum">
@@ -46,11 +57,11 @@
                             </div>
                             <div class="mesgs">
                                 <div class="msg_history">
-                                    <div ng-repeat="value in myForum.messages | filter:searchText" class="msg_box" on-finish-render="ngRepeatFinished">
+                                    <div ng-repeat="value in multiForum.messages | filter:searchText" class="msg_box" on-finish-render="ngRepeatFinished">
                                         <div ng-if="value.user !== user.profile.name && value.message !== ''">
                                             <div class="incoming_msg_img">
-                                                <img ng-if="value.user.src && value.user.src !== ''"  src={{value.user.src}} alt="sunil">
-                                                <img ng-if="!value.user.src || value.user.src === ''" src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
+                                                <img ng-if="value.src && value.src !== ''"  src={{value.src}} alt="sunil">
+                                                <img ng-if="!value.src || value.src === ''" src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
                                             </div>
                                             <div class="received_msg">
                                                 <div class="received_withd_msg">
@@ -73,8 +84,8 @@
                                 </div>
                                 <div class="type_msg">
                                     <div class="input_msg_write">
-                                        <input ng-model="sentMsg" type="text" placeholder="Type a message" ng-keyup="$event.keyCode == 13 && send()"/>
-                                        <button ng-click="send()" class="msg_send_btn" type="button"><i class="text_button" aria-hidden="true">Send</i></button>
+                                        <input ng-model="sentMsg" type="text" placeholder="Type a message" ng-keyup="$event.keyCode == 13 && sendMessage()"/>
+                                        <button ng-click="sendMessage()" class="msg_send_btn" type="button"><i class="text_button" aria-hidden="true">Send</i></button>
                                     </div>
                                 </div>
                             </div>
