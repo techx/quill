@@ -38,6 +38,12 @@ var profile = {
     }
   },
 
+  major: {
+    type: String,
+    min: 1,
+    max: 100
+  },
+
   description: {
     type: String,
     min: 0,
@@ -49,6 +55,12 @@ var profile = {
     min: 0,
     max: 1500
   },
+
+  summary: {
+    type: String,
+    min: 0,
+    max: 1500
+  },  
 
   // Optional info for demographics
   gender: {
@@ -73,9 +85,8 @@ var confirmation = {
   wantsHardware: Boolean,
   hardware: String,
 
-  major: String,
   github: String,
-  twitter: String,
+  linkedin: String,
   website: String,
   resume: String,
 

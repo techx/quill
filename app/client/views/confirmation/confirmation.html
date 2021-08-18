@@ -99,15 +99,7 @@
           <br>
           <br>
 
-          <div class="divided title"> Skills & Accomplishments </div>
-
-          <div class="field">
-            <label> What are you studying? </label>
-            <input type="text"
-                   name="study"
-                   placeholder="Computer Science, Product Design, Basket Weaving, etc."
-                   ng-model="user.confirmation.major">
-          </div>
+          <div class="divided title"> Links </div>
 
           <div class="field">
             <label> Github </label>
@@ -118,17 +110,25 @@
           </div>
 
           <div class="field">
-            <label> Twitter </label>
+            <label> LinkedIn </label>
             <input type="text"
-                   name="twitter"
-                   placeholder="https://twitter.com/foobar"
-                   ng-model="user.confirmation.twitter">
+                   name="linkedin"
+                   placeholder="https://linkedin.com/in/foobar"
+                   ng-model="user.confirmation.linkedin">
           </div>
 
           <div class="field">
-            <label> Skill Sheet (required) </label>
+            <label> Personal Website </label>
+            <input type="text"
+                   name="website"
+                   placeholder="https://example.com"
+                   ng-model="user.confirmation.website">
+          </div>
+
+          <div class="field">
+            <label> Resume (required) </label>
             <p>
-              Upload a document outlining any skills or experience you'd like to share (ex. resume). PDF preferred!
+              Please upload your resume. We'll pass them to our awesome sponsors ;)
             </p>
             <a
               target="_blank"

@@ -27,6 +27,19 @@
                  ng-model="user.profile.name">
         </div>
 
+        <div class="field">
+          <label>Gender</label>
+          <select
+            name="gender"
+            ng-model="user.profile.gender">
+            <option value="">Gender</option>
+            <option value="M">Male</option>
+            <option value="F">Female</option>
+            <option value="O">Other</option>
+            <option value="N">I prefer not to answer.</option>
+          </select>
+        </div>
+
         <div class="field" ng-show="autoFilledSchool">
           <label> School </label>
           <input class="ui input"
@@ -59,16 +72,11 @@
         </div>
 
         <div class="field">
-          <label>Gender</label>
-          <select
-            name="gender"
-            ng-model="user.profile.gender">
-            <option value="">Gender</option>
-            <option value="M">Male</option>
-            <option value="F">Female</option>
-            <option value="O">Other</option>
-            <option value="N">I prefer not to answer.</option>
-          </select>
+          <label> What are you studying? </label>
+          <input type="text"
+                 name="study"
+                 placeholder="Computer Science, Product Design, Basket Weaving, etc."
+                 ng-model="user.profile.major">
         </div>
 
         <div class="field">
@@ -80,7 +88,16 @@
 
         <div class="field">
           <label>
-              What would you like to learn or get out of HackMIT? (optional)
+              Tell us a little bit about yourself (optional)
+          </label>
+          <textarea ng-model="user.profile.summary"
+                    placeholder="Expert in computer vision and data science. I work at...">
+          </textarea>
+        </div>
+
+        <div class="field">
+          <label>
+            What would you like to learn or get out of HackMIT? (optional)
           </label>
           <textarea ng-model="user.profile.essay">
           </textarea>
