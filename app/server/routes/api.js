@@ -306,6 +306,7 @@ module.exports = function(router) {
 
     var fields = ['_id','email','verified','timestamp','lastUpdated',
                   'profile.adult','profile.name','profile.school',
+                  'profile.company','mentor',
                   'profile.gender','profile.graduationYear',
                   'profile.description','profile.essay','status.name',
                   'status.completedProfile','status.admitted',
@@ -618,6 +619,30 @@ module.exports = function(router) {
   router.put('/settings/whitelist', isAdmin, function(req, res){
     var emails = req.body.emails;
     SettingsController.updateWhitelistedEmails(emails, defaultResponse(req, res));
+  });
+
+  /**
+   * Get the companys whitelisted emails.
+   *
+   * res: {
+   *   emails: [String]
+   * }
+   */
+   router.get('/settings/companysWhitelist', isAdmin, function(req, res){
+    SettingsController.getCompanysWhitelistedEmails(defaultResponse(req, res));
+  });
+
+  /**
+   * [ADMIN ONLY]
+   * {
+   *   companys emails: [String]
+   * }
+   * res: Settings
+   *
+   */
+  router.put('/settings/companysWhitelist', isAdmin, function(req, res){
+    var emails = req.body.emails;
+    SettingsController.updateCompanysWhitelistedEmails(emails, defaultResponse(req, res));
   });
 
   /**

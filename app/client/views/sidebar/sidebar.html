@@ -15,10 +15,26 @@
 
     <div
       ui-sref-active="active"
-      ui-sref="app.application"
-      ng-show="!currentUser.status.declined"
+      ui-sref="app.applicationUser"
+      ng-show="!currentUser.status.declined && !currentUser.mentor"
       class="item">
       Application
+    </div>
+
+    <div
+    ui-sref-active="active"
+    ui-sref="app.applicationMentor"
+    ng-show="!currentUser.status.declined && currentUser.mentor"
+    class="item">
+    Application
+    </div>
+
+    <div
+            ui-sref-active="active"
+            ui-sref="app.confirmation"
+            ng-show="!pastConfirmation && currentUser.status.admitted && !currentUser.status.declined"
+            class="item">
+      Confirmation
     </div>
 
     <div
@@ -27,15 +43,6 @@
       ng-show="!currentUser.status.declined && !currentUser.admin"
       class="item">
       Forums
-    </div>
-    <!--&& !currentUser.admin"-->
-
-    <div
-      ui-sref-active="active"
-      ui-sref="app.confirmation"
-      ng-show="!pastConfirmation && currentUser.status.admitted && !currentUser.status.declined"
-      class="item">
-      Confirmation
     </div>
 
     <div

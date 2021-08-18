@@ -8,7 +8,8 @@ const AdminSettingsCtrl = require('../views/admin/settings/adminSettingsCtrl.js'
 const AdminStatsCtrl = require('../views/admin/stats/adminStatsCtrl.js');
 const AdminUserCtrl = require('../views/admin/user/adminUserCtrl.js');
 const AdminUsersCtrl = require('../views/admin/users/adminUsersCtrl.js');
-const ApplicationCtrl = require('../views/application/applicationCtrl.js');
+const ApplicationUserCtrl = require('../views/application/users/applicationUserCtrl.js');
+const ApplicationMentorCtrl = require('../views/application/mentor/applicationMentorCtrl.js');
 const ConfirmationCtrl = require('../views/confirmation/confirmationCtrl.js');
 const DashboardCtrl = require('../views/dashboard/dashboardCtrl.js');
 const LoginCtrl = require('../views/login/loginCtrl.js');
@@ -82,10 +83,26 @@ angular.module('reg')
           }
         },
       })
-      .state('app.application', {
-        url: "/application",
-        templateUrl: "views/application/application.html",
-        controller: 'ApplicationCtrl',
+      .state('app.applicationUser', {
+        url: "/applicationUser",
+        templateUrl: "views/application/users/applicationUser.html",
+        controller: 'ApplicationUserCtrl',
+        data: {
+          requireVerified: true
+        },
+        resolve: {
+          currentUser: function(UserService){
+            return UserService.getCurrentUser();
+          },
+          settings: function(SettingsService){
+            return SettingsService.getPublicSettings();
+          }
+        }
+      })
+      .state('app.applicationMentor', {
+        url: "/applicationMentor",
+        templateUrl: "views/application/mentor/applicationMentor.html",
+        controller: 'ApplicationMentorCtrl',
         data: {
           requireVerified: true
         },
