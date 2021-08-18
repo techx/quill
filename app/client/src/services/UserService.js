@@ -8,11 +8,12 @@ angular.module('reg')
     var base = users + '/';
 
     return {
-
       // ----------------------
       // Basic Actions
       // ----------------------
       getCurrentUser: function(){
+        // console.log("userService");
+        // console.log(Session.getUserId());
         return $http.get(base + Session.getUserId());
       },
 
@@ -65,6 +66,23 @@ angular.module('reg')
 
       getMyTeammates: function(){
         return $http.get(base + Session.getUserId() + '/team');
+      },
+
+      // ------------------------
+      // Grade
+      // ------------------------
+      addGrade: function(id, grade){
+        return $http.put(base + id + '/grades', {
+          grade: grade
+        });
+      },
+
+      getGrades: function(){
+        return $http.get(base + 'kaki');
+      },
+
+      getTeamNames: function(){
+        return $http.get(base + 'teamNames');
       },
 
       // -------------------------

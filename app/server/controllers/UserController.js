@@ -505,6 +505,52 @@ UserController.leaveTeam = function(id, callback){
 };
 
 /**
+ * Given a team code and id, join a team.
+ * @param  {String}   id       Id of the user joining/creating
+ * @param grade
+ * @param  {Function} callback args(err, users)
+ */
+UserController.addGrade = function(id, grade, callback){
+  User.findOneAndUpdate({
+        _id: id
+      },{
+    $push: { grades: grade }
+    }, {
+        new: true
+      },
+      callback);
+};
+
+/**
+ * Get user's name, team
+ * @param  {Function} callback args(err, users)
+ */
+UserController.getTeamNames = function(callback){
+  User.find({
+    admin: false,
+    mentor:false,
+    // teamCode: {$ne :""}
+  },{
+    "profile.name" : 1,
+    teamCode: 1
+  }, callback);
+};
+
+
+/**
+ * Get user's name, team, grades.
+ * @param  {Function} callback args(err, users)
+ */
+UserController.getGrades = function(callback){
+  User.find({
+    // admin: false,
+    // mentor:false,
+    // teamCode: {$ne :""}
+  }, callback);
+};
+
+
+/**
  * Resend an email verification email given a user id.
  */
 UserController.sendVerificationEmailById = function(id, callback){

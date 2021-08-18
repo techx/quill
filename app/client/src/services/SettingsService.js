@@ -23,6 +23,9 @@ angular.module('reg')
       getWhitelistedEmails: function(){
         return $http.get(base + 'whitelist');
       },
+      getOpenScoring: function(){
+        return $http.get(base + 'openScoring');
+      },
       updateWhitelistedEmails: function(emails){
         return $http.put(base + 'whitelist', {
           emails: emails
@@ -46,6 +49,11 @@ angular.module('reg')
       updateAllowMinors: function(allowMinors){
         return $http.put(base + 'minors', { 
           allowMinors: allowMinors 
+        });
+      },
+      openScoringSystem: function(openScoring){
+        return $http.put(base + 'scoring', {
+          openScoring: openScoring
         });
       },
     };

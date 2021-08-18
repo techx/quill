@@ -43,6 +43,14 @@ SettingsController.getWhitelistedEmails = function(callback){
 };
 
 /**
+ * Get open scoring.
+ * @param  {Function} callback args(err, emails)
+ */
+SettingsController.getOpenScoring = function(callback){
+  Settings.getOpenScoring(callback);
+};
+
+/**
  * Set the time window for registrations.
  * If either open or close are null, do not change that time.
  * @param  {Number}   open     Open time in ms

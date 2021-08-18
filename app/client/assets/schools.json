@@ -1,5 +1,9 @@
 
 {
+    "gmail.com": {
+        "school": "test",
+        "state": "test"
+    },
     "utdallas.edu": {
         "school": "The University of Texas at Dallas",
         "state": "Texas"

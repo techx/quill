@@ -40,6 +40,18 @@ angular.module('reg')
           });
       };
 
+        $scope.openScoringSystem = function () {
+            SettingsService
+                .openScoringSystem($scope.settings.openScoring)
+                .then(response => {
+                    $scope.settings.openScoring = response.data.openScoring;
+                    const successText = $scope.settings.openScoring ?
+                        "Scoring system session is opened." :
+                        "Scoring system session is closed.";
+                    swal("Looks good!", successText, "success");
+                });
+        };
+
       // Whitelist --------------------------------------
 
       SettingsService
