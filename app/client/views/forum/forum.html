@@ -21,7 +21,7 @@
         </a>
 
         <a
-                ng-if="!user.mentor"
+                ng-if="!user.mentor && user.teamCode && user.teamCode != ''"
                 class="item team notification"
                 ui-sref="app.forum.team"
                 ui-sref-active="active">
@@ -38,7 +38,7 @@
         </a>
 
         <a
-                ng-if="!user.mentor"
+                ng-if="!user.mentor && user.teamCode && user.teamCode != ''"
                 class="item mentor notification"
                 ui-sref="app.forum.mentor"
                 ui-sref-active="active">

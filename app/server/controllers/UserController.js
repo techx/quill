@@ -501,9 +501,7 @@ UserController.getMentorForumMembers = function (team, callback) {
                 if (err || !users) {
                     return callback(err, users);
                 }
-            }).select('profile.name src mentor').exec(callback);
-    // add picture to query
-    // .select('profile.name mentor picture')
+            }).select('profile.name src mentor profile.picture').exec(callback);
 };
 
 /**
@@ -518,9 +516,7 @@ UserController.getMembersByTeam = function (team, callback) {
             if (err || !users) {
                 return callback(err, users);
             }
-        }).select('profile.name src mentor').exec(callback);
-    // add picture to query
-    // .select('profile.name mentor picture')
+        }).select('profile.name src mentor profile.picture').exec(callback);
 };
 
 /**
