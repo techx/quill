@@ -314,6 +314,9 @@ angular.module('reg')
                 name: 'Graduation Year',
                 value: user.profile.graduationYear
               },{
+                  name: 'Major',
+                  value: user.profile.major
+              },{
                 name: 'Description',
                 value: user.profile.description
               },{
@@ -333,9 +336,6 @@ angular.module('reg')
               },{
                 name: 'Shirt Size',
                 value: user.confirmation.shirtSize
-              },{
-                name: 'Major',
-                value: user.confirmation.major
               },{
                 name: 'Github',
                 value: user.confirmation.github
