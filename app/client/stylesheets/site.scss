@@ -50,7 +50,8 @@ $brand-tertiary: $tertiary;
 @import 'verify';
 @import 'team';
 @import 'admin';
-@import 'profile';
+@import "forum";
+@import "usersList";
 
 html,
 body {
@@ -80,6 +81,10 @@ body {
 /**
  * Semantic-UI Overrides for squareishness
  */
+.chat_head{
+  text-align: center;
+}
+
 .ui.segment {
   border-radius: 0;
   box-shadow: none;

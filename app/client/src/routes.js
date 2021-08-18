@@ -1,6 +1,7 @@
 const angular = require('angular');
 const SettingsService = require('./services/SettingsService.js');
 const UserService = require('./services/UserService.js');
+const ForumService = require('./services/ForumService.js');
 
 const AdminCtrl = require('../views/admin/adminCtrl.js');
 const AdminSettingsCtrl = require('../views/admin/settings/adminSettingsCtrl.js');
@@ -16,6 +17,11 @@ const ResetCtrl = require('../views/reset/resetCtrl.js');
 const SidebarCtrl = require('../views/sidebar/sidebarCtrl.js');
 const TeamCtrl = require('../views/team/teamCtrl.js');
 const VerifyCtrl = require('../views/verify/verifyCtrl.js');
+const ForumCtrl = require('../views/forum/forumCtrl.js');
+const GeneralCtrl = require('../views/forum/general/generalCtrl');
+const MentorCtrl = require('../views/forum/mentor/mentorCtrl.js');
+const TeamForumCtrl = require('../views/forum/team/teamForumCtrl.js');
+const MultiCtrl = require('../views/forum/multiForum/multiCtrl');
 
 angular.module('reg')
   .config([
@@ -138,6 +144,42 @@ angular.module('reg')
           }
         }
       })
+      .state('app.forum', {
+        url: "/forum",
+        templateUrl: "views/forum/forum.html",
+        controller: 'ForumCtrl',
+        data: {
+          requireVerified: true
+        },
+        resolve: {
+          userForums: function(ForumService, Session){
+            return Session.isMentor() ? ForumService.getMentorForums() : ForumService.getHackerForums();
+          },
+          currentUser: function(UserService){
+            return UserService.getCurrentUser();
+          }
+        }
+      })
+        .state('app.forum.multiForum', {
+          url: "",
+          templateUrl: 'views/forum/multiForum/multi.html',
+          controller: 'MultiCtrl',
+        })
+        .state('app.forum.general', {
+          url: "",
+          templateUrl: "views/forum/general/general.html",
+          controller: 'GeneralCtrl',
+        })
+        .state('app.forum.mentor', {
+          url: "",
+          templateUrl: "views/forum/mentor/mentor.html",
+          controller: 'MentorCtrl',
+        })
+        .state('app.forum.team', {
+          url: "",
+          templateUrl: "views/forum/team/team.html",
+          controller: 'TeamForumCtrl',
+        })
       .state('app.admin', {
         views: {
           '': {

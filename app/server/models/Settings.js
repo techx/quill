@@ -25,7 +25,12 @@ var schema = new mongoose.Schema({
   whitelistedEmails: {
     type: [String],
     select: false,
-    default: ['.edu'],
+    default: ['.edu', '.ac.il', '.com', 'gmail.com'],
+  },
+  companysWhitelistedEmails: {
+    type: [String],
+    select: false,
+    default: ['.money'],
   },
   companysWhitelistedEmails: {
     type: [String],
