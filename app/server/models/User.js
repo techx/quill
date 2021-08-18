@@ -21,7 +21,13 @@ var profile = {
 
   school: {
     type: String,
-    min: 1,
+    min: 0,
+    max: 150,
+  },
+
+  company: {
+    type: String,
+    min: 0,
     max: 150,
   },
 
@@ -30,6 +36,12 @@ var profile = {
     enum: {
       values: '2016 2017 2018 2019'.split(' '),
     }
+  },
+
+  major: {
+    type: String,
+    min: 1,
+    max: 100
   },
 
   description: {
@@ -43,6 +55,12 @@ var profile = {
     min: 0,
     max: 1500
   },
+
+  summary: {
+    type: String,
+    min: 0,
+    max: 1500
+  },  
 
   // Optional info for demographics
   gender: {
@@ -67,9 +85,8 @@ var confirmation = {
   wantsHardware: Boolean,
   hardware: String,
 
-  major: String,
   github: String,
-  twitter: String,
+  linkedin: String,
   website: String,
   resume: String,
 
@@ -169,6 +186,12 @@ var schema = new mongoose.Schema({
   },
 
   admin: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
+
+  mentor: {
     type: Boolean,
     required: true,
     default: false,
@@ -328,14 +351,24 @@ schema.statics.getByToken = function(token, callback){
   }.bind(this));
 };
 
-schema.statics.validateProfile = function(profile, cb){
-  return cb(!(
-    profile.name.length > 0 &&
-    profile.adult &&
-    profile.school.length > 0 &&
-    ['2016', '2017', '2018', '2019'].indexOf(profile.graduationYear) > -1 &&
-    ['M', 'F', 'O', 'N'].indexOf(profile.gender) > -1
-    ));
+schema.statics.validateProfile = function(user, profile, cb){
+  if(user.mentor === false){
+    return cb(!(
+      profile.name.length > 0 &&
+      profile.adult &&
+      profile.school.length > 0 &&
+      ['2016', '2017', '2018', '2019'].indexOf(profile.graduationYear) > -1 &&
+      ['M', 'F', 'O', 'N'].indexOf(profile.gender) > -1
+      ));
+  }
+  else{
+    return cb(!(
+      profile.name.length > 0 &&
+      profile.adult &&
+      profile.company.length > 0 &&
+      ['M', 'F', 'O', 'N'].indexOf(profile.gender) > -1
+      ));
+  }
 };
 
 //=========================================

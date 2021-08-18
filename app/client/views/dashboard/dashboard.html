@@ -90,7 +90,14 @@
           </p>
 
           <div class="ui purple button"
-               ui-sref="app.application">
+              ng-show = "!currentUser.mentor"
+              ui-sref="app.applicationUser">
+            Complete your application
+          </div>
+
+          <div class="ui purple button"
+          ng-show = "currentUser.mentor"
+          ui-sref="app.applicationMentor">
             Complete your application
           </div>
 
@@ -108,7 +115,14 @@
             {{ DASHBOARD.SUBMITTED }}
           </p>
           <div class="ui purple button"
-               ui-sref="app.application">
+              ng-show = "currentUser.mentor"
+              ui-sref="app.applicationMentor">
+            Edit your application
+          </div>
+
+          <div class="ui purple button"
+          ng-show = "!currentUser.mentor"
+          ui-sref="app.applicationUser">
             Edit your application
           </div>
 
@@ -150,7 +164,14 @@
           </div>
 
           <div class="ui purple button"
-               ui-sref="app.application">
+              ng-show = "!currentUser.mentor"
+              ui-sref="app.applicationUser">
+            View your application
+          </div>
+
+          <div class="ui purple button"
+          ng-show = "currentUser.mentor"
+          ui-sref="app.applicationMentor">
             View your application
           </div>
 

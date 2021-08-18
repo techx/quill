@@ -104,13 +104,13 @@ class="ui green segment">
   </div>
 </div>
 
-<!-- Whitelist -->
+<!-- Schools Whitelist -->
 <div
   ng-class="{'loading': loading}"
   class="ui green segment">
 
   <div class="ui header">
-    Whitelisted Emails
+    Schools Whitelisted Emails
   </div>
 
   <div class="ui form">
@@ -129,6 +129,37 @@ class="ui green segment">
       <div
         class="ui green button"
         ng-click="updateWhitelist()">
+        Update
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Companys Whitelist -->
+<div
+  ng-class="{'loading': loading}"
+  class="ui green segment">
+
+  <div class="ui header">
+    Companys Whitelisted Emails
+  </div>
+
+  <div class="ui form">
+   <div
+      class="ui label"
+      ng-repeat="email in companysWhitelist.replace(' ','').split(',')">
+      {{email}}
+    </div>
+    <br>
+    <br>
+    <div class="field">
+      <textarea class="ui input" type="text" ng-model="companysWhitelist">
+      </textarea>
+    </div>
+    <div class="field">
+      <div
+        class="ui green button"
+        ng-click="updateCompanysWhitelist()">
         Update
       </div>
     </div>
