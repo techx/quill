@@ -65,10 +65,7 @@ angular.module('reg')
             resolve: {
               settings: function(SettingsService) {
                 return SettingsService.getPublicSettings();
-              },
-              // openScoring: function (SettingsService) {
-              //     return SettingsService.getOpenScoring();
-              // }
+              }
             }
           }
         },
@@ -134,40 +131,31 @@ angular.module('reg')
           }
         }
       })
-        .state('app.scoring', {
-          url: "/Scoring_System",
-          templateUrl: "views/scoring/scoring.html",
-          controller: 'ScoringCtrl',
-          data: {
-            requireAdmin: true
+      .state('app.scoring', {
+        url: "/Scoring_System",
+        templateUrl: "views/scoring/scoring.html",
+        controller: 'ScoringCtrl',
+      })
+      .state('app.scoring.grade', {
+        url: "/grade",
+        templateUrl: "views/scoring/grade/grade.html",
+        controller: 'ScoringGradeCtrl',
+        resolve: {
+          allUsers: function (UserService) {
+            return UserService.getTeamNames();
           }
-        })
-        .state('app.scoring.grade', {
-          url: "/grade",
-          templateUrl: "views/scoring/grade/grade.html",
-          controller: 'ScoringGradeCtrl',
-          resolve: {
-            currentUser: function (UserService) {
-              return UserService.getCurrentUser();
-            },
-            settings: function (SettingsService) {
-              return SettingsService.getPublicSettings();
-            },
-            allUsers: function (UserService) {
-              return UserService.getAll();
-            }
+        }
+      })
+      .state('app.scoring.results', {
+        url: "/results",
+        templateUrl: "views/scoring/results/results.html",
+        controller: 'ScoringResultsCtrl',
+        resolve: {
+          allUsers: function (UserService) {
+            return UserService.getGrades();
           }
-        })
-        .state('app.scoring.results', {
-          url: "/results",
-          templateUrl: "views/scoring/results/results.html",
-          controller: 'ScoringResultsCtrl',
-          resolve: {
-            allUsers: function (UserService) {
-              return UserService.getAll();
-            }
-          }
-        })
+        }
+      })
       .state('app.team', {
         url: "/team",
         templateUrl: "views/team/team.html",

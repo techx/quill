@@ -116,11 +116,11 @@ angular.module('reg')
       },
 
       getGrades: function(){
-        return $http.get(base + 'kaki');
+        return $http.get(base + 'scoring/grades');
       },
 
       getTeamNames: function(){
-        return $http.get(base + 'teamNames');
+        return $http.get(base + 'scoring/teamNames');
       },
 
       // -------------------------

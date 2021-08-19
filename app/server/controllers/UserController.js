@@ -501,9 +501,7 @@ UserController.getMentorForumMembers = function (team, callback) {
                 if (err || !users) {
                     return callback(err, users);
                 }
-            }).select('profile.name src mentor').exec(callback);
-    // add picture to query
-    // .select('profile.name mentor picture')
+            }).select('profile.name src mentor profile.picture').exec(callback);
 };
 
 /**
@@ -518,9 +516,7 @@ UserController.getMembersByTeam = function (team, callback) {
             if (err || !users) {
                 return callback(err, users);
             }
-        }).select('profile.name src mentor').exec(callback);
-    // add picture to query
-    // .select('profile.name mentor picture')
+        }).select('profile.name src mentor profile.picture').exec(callback);
 };
 
 /**
@@ -634,7 +630,6 @@ UserController.getTeamNames = function(callback){
   User.find({
     admin: false,
     mentor:false,
-    // teamCode: {$ne :""}
   },{
     "profile.name" : 1,
     teamCode: 1
@@ -648,9 +643,13 @@ UserController.getTeamNames = function(callback){
  */
 UserController.getGrades = function(callback){
   User.find({
-    // admin: false,
-    // mentor:false,
-    // teamCode: {$ne :""}
+    admin: false,
+    mentor:false,
+    teamCode: {$ne :""}
+  },{
+    "profile.name" : 1,
+    teamCode: 1,
+    grades: 1
   }, callback);
 };
 
