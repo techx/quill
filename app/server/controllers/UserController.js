@@ -630,7 +630,6 @@ UserController.getTeamNames = function(callback){
   User.find({
     admin: false,
     mentor:false,
-    // teamCode: {$ne :""}
   },{
     "profile.name" : 1,
     teamCode: 1
@@ -644,9 +643,13 @@ UserController.getTeamNames = function(callback){
  */
 UserController.getGrades = function(callback){
   User.find({
-    // admin: false,
-    // mentor:false,
-    // teamCode: {$ne :""}
+    admin: false,
+    mentor:false,
+    teamCode: {$ne :""}
+  },{
+    "profile.name" : 1,
+    teamCode: 1,
+    grades: 1
   }, callback);
 };
 

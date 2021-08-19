@@ -453,7 +453,7 @@ module.exports = function(router) {
   /**
    * Add grade to a user from a team.
    */
-  router.put('/users/:id/grades', isOwnerOrAdmin, function(req, res){
+  router.put('/users/:id/grades', function(req, res){
     var id = req.params.id;
     var grade = req.body.grade;
 
@@ -464,14 +464,14 @@ module.exports = function(router) {
   /**
    * Get a user's team grades.
    */
-  router.get('/users/kaki', function(req, res){
+  router.get('/users/scoring/grades', function(req, res){
     UserController.getGrades(defaultResponse(req, res));
   });
 
   /**
    * Get a user's team names.
    */
-  router.get('/users/teamNames', function(req, res){
+  router.get('/users/scoring/teamNames', function(req, res){
     UserController.getTeamNames(defaultResponse(req, res));
   });
 
@@ -640,7 +640,7 @@ module.exports = function(router) {
    *   emails: [String]
    * }
    */
-  router.get('/settings/openScoring', isAdmin, function(req, res){
+  router.get('/settings/openScoring', function(req, res){
     SettingsController.getOpenScoring(defaultResponse(req, res));
   });
 

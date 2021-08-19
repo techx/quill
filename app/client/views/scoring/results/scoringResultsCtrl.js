@@ -4,9 +4,6 @@ angular.module('reg')
         'allUsers',
         'UserService',
         function ($scope, allUsers, UserService) {
-            $scope.allUsers = allUsers.data;
-            $scope.teamMap = [];
-
             function containsObject(name, list) {
                 var i;
                 for (i = 0; i < list.length; i++) {
@@ -26,6 +23,9 @@ angular.module('reg')
                 return (sum / allGrades.length).toFixed(2);
             }
 
+            $scope.allUsers = allUsers.data;
+            $scope.teamMap = [];
+
             var average;
 
             for (let i = 0; i < $scope.allUsers.length; i++) {
@@ -42,17 +42,17 @@ angular.module('reg')
                 }
             }
 
-            function compare( a, b ) {
-                if ( a.value < b.value ){
+            function compare(a, b) {
+                if (a.value < b.value){
                     return 1;
                 }
-                if ( a.value > b.value ){
+                if (a.value > b.value){
                     return -1;
                 }
                 return 0;
             }
 
-            $scope.teamMap.sort( compare );
+            $scope.teamMap.sort(compare);
 
             function getMembers(team){
                 var members = [];
