@@ -55,9 +55,8 @@ angular.module('reg')
           }
         });
         confirmation.dietaryRestrictions = drs;
-
-        UserService
-          .updateConfirmation(user._id, confirmation)
+        
+        UserService.updateConfirmation(user._id, confirmation)
           .then(response => {
             swal("Woo!", "You're confirmed!", "success").then(value => {
               $state.go("app.dashboard");
@@ -65,6 +64,7 @@ angular.module('reg')
           }, response => {
             swal("Uh oh!", "Something went wrong.", "error");
           });
+        
       }
 
       function _setupForm(){
@@ -89,26 +89,8 @@ angular.module('reg')
                 }
               ]
             },
-            signatureLiability: {
-              identifier: 'signatureLiabilityWaiver',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please type your digital signature.'
-                }
-              ]
-            },
             signaturePhotoRelease: {
               identifier: 'signaturePhotoRelease',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please type your digital signature.'
-                }
-              ]
-            },
-            signatureCodeOfConduct: {
-              identifier: 'signatureCodeOfConduct',
               rules: [
                 {
                   type: 'empty',
@@ -123,6 +105,8 @@ angular.module('reg')
       $scope.submitForm = function(){
         if ($('.ui.form').form('is valid')){
           _updateUser();
+        } else {
+          swal("Uh oh!", "Please Fill The Required Fields", "error");
         }
       };
 
