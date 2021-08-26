@@ -98,12 +98,11 @@
             <th>Name</th>
             <th>E-mail address</th>
             <th>School</th>
+            <th>Company</th>
             <th>Grad</th>
             <th>V/S/A/C</th>
-            <th>Host</th>
-            <th>$</th>
-            <th></th>
-            <th></th>
+            <th>Modify</th>
+            <th>Apt/Chk/Adm</th>
           </tr>
         </thead>
         <tbody>
@@ -120,6 +119,7 @@
             </td>
             <td>{{user.email}}</td>
             <td>{{user.profile.school}}</td>
+            <td>{{user.profile.company}}</td>
             <td
               class="collapsing">
               {{user.profile.graduationYear}}
@@ -175,41 +175,6 @@
                 class="red remove circle icon">
               </i>
 
-            </td>
-
-            <!-- Host -->
-            <td
-              class="collapsing">
-
-              <span ng-if="user.status.confirmed">
-                <i
-                  ng-if="user.confirmation.hostNeededFri"
-                  class="home icon">
-                </i>
-                <i
-                  ng-if="!user.confirmation.hostNeededFri && user.confirmation.hostNeededSat"
-                  class="no icon">
-                </i>
-                <i
-                  ng-if="user.confirmation.hostNeededSat"
-                  class="home icon">
-                </i>
-              </span>
-
-            </td>
-
-            <td
-              class="collapsing">
-              <span ng-if="user.status.confirmed">
-                <i
-                  ng-if="user.confirmation.needsReimbursement && !user.status.reimbursementGiven"
-                  class="red money icon">
-                </i>
-                <i
-                  ng-if="user.confirmation.needsReimbursement && user.status.reimbursementGiven"
-                  class="green money icon">
-                </i>
-              </span>
             </td>
 
             <td
