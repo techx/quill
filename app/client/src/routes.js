@@ -77,6 +77,15 @@ angular.module('reg')
           }
         },
       })
+      .state('app.home', {
+        url: "/home",
+        templateUrl: "views/home/home.html",
+        resolve: {
+          settings: function(SettingsService){
+            return SettingsService.getPublicSettings();
+          }
+        },
+      })
       .state('app.applicationUser', {
         url: "/applicationUser",
         templateUrl: "views/application/users/applicationUser.html",
