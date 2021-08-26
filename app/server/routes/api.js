@@ -179,7 +179,8 @@ module.exports = function(router) {
 
     var fields = ['_id','email','verified','timestamp','lastUpdated',
                   'profile.adult','profile.name','profile.school',
-                  'profile.company','mentor',
+                  'profile.company','mentor', 'profile.round1come','profile.round2come','profile.round3come',
+                  'profile.round1go','profile.round2go','profile.round3go',
                   'profile.gender','profile.graduationYear',
                   'profile.description','profile.essay','status.name',
                   'status.completedProfile','status.admitted',
