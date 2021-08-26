@@ -19,14 +19,15 @@
             {{stats.total}}
           </div>
         </div>
+        <em> Hackers </em>
         <div
           class="item">
           <i class="green circle check icon"></i>
           <div class="content">
             <strong>
-            Verified Users
+            Total
             </strong> :
-            {{stats.verified}} ({{stats.verified / stats.total * 100 | number: 1}}%)
+            {{stats.totalHackers}}
           </div>
         </div>
         <div
@@ -34,12 +35,21 @@
           <i class="green circle check icon"></i>
           <div class="content">
             <strong>
-            Submitted Users
+            Verified
             </strong> :
-            {{stats.submitted}} ({{stats.submitted / stats.total * 100 | number: 1}}%)
+            {{stats.verifiedHackers}} ({{stats.verifiedHackers / stats.totalHackers * 100 | number: 1}}%)
           </div>
         </div>
-        <div class="ui divider"></div>
+        <div
+          class="item">
+          <i class="green circle check icon"></i>
+          <div class="content">
+            <strong>
+            Submitted
+            </strong> :
+            {{stats.submittedHackers}} ({{stats.submittedHackers / stats.totalHackers  * 100 | number: 1}}%)
+          </div>
+        </div>
         <div
           class="item">
           <i class="green circle check icon"></i>
@@ -47,7 +57,7 @@
             <strong>
               Admitted
             </strong> :
-            {{stats.admitted}}
+            {{stats.admittedHackers}}
           </div>
         </div>
         <div
@@ -55,19 +65,9 @@
           <i class="green circle check icon"></i>
           <div class="content">
             <strong>
-              Confirmed (Total)
+              Confirmed
             </strong> :
-            {{stats.confirmed}}
-          </div>
-        </div>
-        <div
-          class="item">
-          <i class="green circle check icon"></i>
-          <div class="content">
-            <strong>
-              Confirmed (MIT)
-            </strong> :
-            {{stats.confirmedMit}}
+            {{stats.confirmedHackers}}
           </div>
         </div>
         <div class="item">
@@ -76,7 +76,79 @@
             <strong>
               Declined
             </strong> :
-              {{stats.declined}}
+              {{stats.declinedHackers}}
+          </div>
+        </div>
+        <em> Mentors </em>
+        <div
+          class="item">
+          <i class="green circle check icon"></i>
+          <div class="content">
+            <strong>
+            Total
+            </strong> :
+            {{stats.totalMentors}}
+          </div>
+        </div>
+        <div
+          class="item">
+          <i class="green circle check icon"></i>
+          <div class="content">
+            <strong>
+            Verified
+            </strong> :
+            {{stats.verifiedMentors}} ({{stats.verifiedMentors / stats.totalMentors * 100 | number: 1}}%)
+          </div>
+        </div>
+        <div
+          class="item">
+          <i class="green circle check icon"></i>
+          <div class="content">
+            <strong>
+            Submitted
+            </strong> :
+            {{stats.submittedMentors}} ({{stats.submittedMentors / stats.totalMentors  * 100 | number: 1}}%)
+          </div>
+        </div>
+        <div
+          class="item">
+          <i class="green circle check icon"></i>
+          <div class="content">
+            <strong>
+              Admitted
+            </strong> :
+            {{stats.admittedMentors}}
+          </div>
+        </div>
+        <div
+          class="item">
+          <i class="green circle check icon"></i>
+          <div class="content">
+            <strong>
+              Confirmed
+            </strong> :
+            {{stats.confirmedMentors}}
+          </div>
+        </div>
+        <div class="item">
+          <i class="circle red icon"></i>
+          <div class="content">
+            <strong>
+              Declined
+            </strong> :
+              {{stats.declinedMentors}}
+          </div>
+        </div>
+
+        <div class="ui divider"></div>
+
+        <div class="item">
+          <i class="green flag icon"></i>
+          <div class="content">
+            <strong>
+              Checked In Hackers
+            </strong> :
+              {{stats.checkedInHackers}}
           </div>
         </div>
 
@@ -84,26 +156,26 @@
           <i class="green flag icon"></i>
           <div class="content">
             <strong>
-              Checked In
+              Checked In Mentors
             </strong> :
-              {{stats.checkedIn}}
+              {{stats.checkedInMentors}}
           </div>
         </div>
 
         <div class="ui divider"></div>
-
+        <em>Hackers</em>
         <div class="item">
           <i class="child icon"></i>
           <div class="content">
             <strong>
               Unisex shirt sizes:
             </strong> :
-              XS ({{stats.shirtSizes['XS']}})
-              S ({{stats.shirtSizes['S']}})
-              M ({{stats.shirtSizes['M']}})
-              L ({{stats.shirtSizes['L']}})
-              XL ({{stats.shirtSizes['XL']}})
-              XXL ({{stats.shirtSizes['XXL']}})
+              XS ({{stats.shirtSizesHackers['XS']}})
+              S ({{stats.shirtSizesHackers['S']}})
+              M ({{stats.shirtSizesHackers['M']}})
+              L ({{stats.shirtSizesHackers['L']}})
+              XL ({{stats.shirtSizesHackers['XL']}})
+              XXL ({{stats.shirtSizesHackers['XXL']}})
           </div>
         </div>
 
@@ -113,32 +185,44 @@
             <strong>
               Women's shirt sizes:
             </strong> :
-              XS ({{stats.shirtSizes['WXS']}})
-              S ({{stats.shirtSizes['WS']}})
-              M ({{stats.shirtSizes['WM']}})
-              L ({{stats.shirtSizes['WL']}})
-              XL ({{stats.shirtSizes['WXL']}})
-              XXL ({{stats.shirtSizes['WXXL']}})
+              XS ({{stats.shirtSizesHackers['WXS']}})
+              S ({{stats.shirtSizesHackers['WS']}})
+              M ({{stats.shirtSizesHackers['WM']}})
+              L ({{stats.shirtSizesHackers['WL']}})
+              XL ({{stats.shirtSizesHackers['WXL']}})
+              XXL ({{stats.shirtSizesHackers['WXXL']}})
           </div>
         </div>
 
         <div class="ui divider"></div>
-
+        <em>Mentors</em>
         <div class="item">
-          <i class="green money icon"></i>
+          <i class="child icon"></i>
           <div class="content">
             <strong>
-              Total Reimbursements:
-            </strong>{{stats.reimbursementTotal}}
+              Unisex shirt sizes:
+            </strong> :
+              XS ({{stats.shirtSizesMentors['XS']}})
+              S ({{stats.shirtSizesMentors['S']}})
+              M ({{stats.shirtSizesMentors['M']}})
+              L ({{stats.shirtSizesMentors['L']}})
+              XL ({{stats.shirtSizesMentors['XL']}})
+              XXL ({{stats.shirtSizesMentors['XXL']}})
           </div>
         </div>
 
         <div class="item">
-          <i class="frown icon"></i>
+          <i class="child icon"></i>
           <div class="content">
             <strong>
-              Still Need Reimbursement:
-            </strong>{{stats.reimbursementMissing}}
+              Women's shirt sizes:
+            </strong> :
+              XS ({{stats.shirtSizesMentors['WXS']}})
+              S ({{stats.shirtSizesMentors['WS']}})
+              M ({{stats.shirtSizesMentors['WM']}})
+              L ({{stats.shirtSizesMentors['WL']}})
+              XL ({{stats.shirtSizesMentors['WXL']}})
+              XXL ({{stats.shirtSizesMentors['WXXL']}})
           </div>
         </div>
 
@@ -148,7 +232,7 @@
           <i class="plug icon"></i>
           <div class="content">
             <strong>
-              Need/Want Hardware:
+              Need/Want Hardware (Hackers Only):
             </strong>{{stats.wantsHardware}}
           </div>
         </div>
@@ -212,26 +296,22 @@
     </div>
     <div class="ui divider"></div>
       <div class="ui list">
-        <div class="item">
-          <strong>Fresh:</strong> {{stats.demo.year['2019']}} ({{stats.demo.year['2019'] / stats.total * 100 | number: 1}}%)
-        </div>
-        <div class="item">
-          <strong>Soph:</strong> {{stats.demo.year['2018']}} ({{stats.demo.year['2018'] / stats.total * 100 | number: 1}}%)
-        </div>
-        <div class="item">
-         <strong>Junior:</strong> {{stats.demo.year['2017']}} ({{stats.demo.year['2017'] / stats.total * 100 | number: 1}}%)
-        </div>
-        <div class="item">
-          <strong>Senior:</strong> {{stats.demo.year['2016']}} ({{stats.demo.year['2016'] / stats.total * 100 | number: 1}}%)
+        <strong>
+          Hackers Graduation Year:
+        </strong>
+        <div class="item"
+        ng-repeat="year in stats.demo.years | orderBy: '-count'">
+          <strong>{{year.year}}</strong>: {{year.count.count}} ({{year.count.count / stats.totalHackers * 100 | number: 1}}%)
         </div>
       </div>
     <div class="ui divider"></div>
+    <strong>Schools :</strong>
     <div class="ui list">
       <div
         class="item"
         ng-repeat="school in stats.demo.schools | orderBy: '-count'">
         <div class="content">
-          <strong>{{school.email}}</strong> : {{school.count}} ({{school.count / stats.total * 100 | number: 1}}%)
+          <strong>{{school.email}}</strong> : {{school.count}} ({{school.count / stats.totalHackers * 100 | number: 1}}%)
           <p>
           <div class="ui purple mini label">
             Submitted: {{school.stats.submitted}}
@@ -244,6 +324,32 @@
           </div>
           <div class="ui red mini label">
             Declined: {{school.stats.declined}}
+          </div>
+          </p>
+          <div class="ui divider"></div>
+        </div>
+      </div>
+    </div>
+
+    <strong>Companys :</strong>
+    <div class="ui list">
+      <div
+          class="item"
+          ng-repeat="company in stats.demo.companys | orderBy: '-count'">
+        <div class="content">
+          <strong>{{company.email}}</strong> : {{company.count}} ({{company.count / stats.totalMentors * 100 | number: 1}}%)
+          <p>
+          <div class="ui purple mini label">
+            Submitted: {{company.stats.submitted}}
+          </div>
+          <div class="ui pink mini label">
+            Admitted: {{company.stats.admitted}}
+          </div>
+          <div class="ui green mini label">
+            Confirmed: {{company.stats.confirmed}}
+          </div>
+          <div class="ui red mini label">
+            Declined: {{company.stats.declined}}
           </div>
           </p>
           <div class="ui divider"></div>
