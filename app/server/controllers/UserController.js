@@ -300,10 +300,13 @@ UserController.getById = function (id, callback){
  * @param  {Function} callback Callback with args (err, user)
  */
 UserController.updateProfileById = function (id, profile, callback){
-
   // Validate the user profile, and mark the user as profile completed
   // when successful.
   User.findById(id).exec(function(err, user){
+    if(err || !user){
+      return callback(err);
+    }
+    
     User.validateProfile(user, profile, function(err){
 
       if (err){
@@ -330,7 +333,6 @@ UserController.updateProfileById = function (id, profile, callback){
           });
         }
       });
-
       User.findOneAndUpdate({
         _id: id,
         verified: true
@@ -361,37 +363,42 @@ UserController.updateProfileById = function (id, profile, callback){
 UserController.updateConfirmationById = function (id, confirmation, callback){
 
   User.findById(id).exec(function(err, user){
-
     if(err || !user){
       return callback(err);
     }
 
-    // Make sure that the user followed the deadline, but if they're already confirmed
-    // that's okay.
-    if (Date.now() >= user.status.confirmBy && !user.status.confirmed){
-      return callback({
-        message: "You've missed the confirmation deadline."
-      });
-    }
+    User.validateConfirmation(user, confirmation, function(err){
+      if(err){
+        return callback({message: 'invalid confirmation'});
+      }
+    
+      // Make sure that the user followed the deadline, but if they're already confirmed
+      // that's okay.
+      if (Date.now() >= user.status.confirmBy && !user.status.confirmed){
+        return callback({
+          message: "You've missed the confirmation deadline."
+        });
+      }
 
-    // You can only confirm acceptance if you're admitted and haven't declined.
-    User.findOneAndUpdate({
-      '_id': id,
-      'verified': true,
-      'status.admitted': true,
-      'status.declined': {$ne: true}
-    },
-      {
-        $set: {
-          'lastUpdated': Date.now(),
-          'confirmation': confirmation,
-          'status.confirmed': true,
-        }
-      }, {
-        new: true
+
+      // You can only confirm acceptance if you're admitted and haven't declined.
+      User.findOneAndUpdate({
+        '_id': id,
+        'verified': true,
+        'status.admitted': true,
+        'status.declined': {$ne: true}
       },
+        {
+          $set: {
+            'lastUpdated': Date.now(),
+            'confirmation': confirmation,
+            'status.confirmed': true,
+          }
+        }, {
+          new: true
+        },
       callback);
-
+    });
   });
 };
 

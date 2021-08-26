@@ -18,7 +18,6 @@ var schema = new mongoose.Schema({
     type: Number,
     default: Date.now() + 31104000000 // Add a year from now.
   },
-  
   timeOpenHackathon: {
     type: Number,
     default: Date.now()
@@ -27,7 +26,7 @@ var schema = new mongoose.Schema({
     type: Number,
     default: Date.now() + 86000000 // Add a day from now.
   },
-  
+
   timeConfirm: {
     type: Number,
     default: 604800000 // Date of confirmation

@@ -314,6 +314,27 @@ angular.module('reg')
                 name: 'Graduation Year',
                 value: user.profile.graduationYear
               },{
+                name: 'Company',
+                value: user.profile.company
+              },{
+                name: 'day1come',
+                value: user.profile.day1come
+              },{
+                name: 'day1go',
+                value: user.profile.day1go
+              },{
+                name: 'day2come',
+                value: user.profile.day2come
+              },{
+                name: 'day2go',
+                value: user.profile.day2go
+              },{
+                name: 'day3come',
+                value: user.profile.day3come
+              },{
+                name: 'day3go',
+                value: user.profile.day3go
+              },{
                 name: 'Description',
                 value: user.profile.description
               },{

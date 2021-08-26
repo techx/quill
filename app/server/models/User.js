@@ -31,19 +31,36 @@ var profile = {
     max: 150,
   },
 
-  
-  availableDates: {
-    type: String,
-    min: 1,
-    max: 150,
+  round1come: {
+    type: Number,
   },
-  
 
+  round1go: {
+    type: Number,
+  },
+
+  round2come: {
+    type: Number,
+  },
+
+  round2go: {
+    type: Number,
+  },
+
+  round3come: {
+    type: Number,
+  },
+
+  round3go: {
+    type: Number,
+  },
+  numberOfRoundUserWantToCome: {
+    type: Number,
+  },
   graduationYear: {
     type: String,
-    enum: {
-      values: '2016 2017 2018 2019'.split(' '),
-    }
+    min: 0,
+    max: 150,
   },
 
   description: {
@@ -83,28 +100,8 @@ var confirmation = {
 
   major: String,
   github: String,
-  twitter: String,
   website: String,
   resume: String,
-
-  needsReimbursement: Boolean,
-  address: {
-    name: String,
-    line1: String,
-    line2: String,
-    city: String,
-    state: String,
-    zip: String,
-    country: String
-  },
-  receipt: String,
-
-  hostNeededFri: Boolean,
-  hostNeededSat: Boolean,
-  genderNeutral: Boolean,
-  catFriendly: Boolean,
-  smokingFriendly: Boolean,
-  hostNotes: String,
 
   notes: String,
 
@@ -354,7 +351,7 @@ schema.statics.validateProfile = function(user, profile, cb){
       profile.name.length > 0 &&
       profile.adult &&
       profile.school.length > 0 &&
-      ['2016', '2017', '2018', '2019'].indexOf(profile.graduationYear) > -1 &&
+      !isNaN(profile.graduationYear) &&
       ['M', 'F', 'O', 'N'].indexOf(profile.gender) > -1
       ));
   }
@@ -367,6 +364,25 @@ schema.statics.validateProfile = function(user, profile, cb){
       ));
   }
 };
+
+schema.statics.validateConfirmation = function(user, confirmation, cb) {
+  if(user.mentor === true){
+    return cb(!(
+      confirmation.phoneNumber.length > 0 &&
+      confirmation.signaturePhotoRelease.length > 0 &&
+      ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'WXS', 'WS', 'WM', 'WL', 'WXL', 'WXXL'].indexOf(confirmation.shirtSize) > -1
+    ));
+  }
+  else{
+    return cb(!(
+      confirmation.phoneNumber.length > 0 > 0 &&
+      confirmation.signaturePhotoRelease.length > 0 &&
+      confirmation.signatureCodeOfConduct.length > 0 &&
+      confirmation.signatureLiability.length > 0 &&
+      ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'WXS', 'WS', 'WM', 'WL', 'WXL', 'WXXL'].indexOf(confirmation.shirtSize) > -1
+    ));
+  }
+}
 
 //=========================================
 // Virtuals

@@ -19,13 +19,6 @@
                    ng-model="user.email">
           </div>
   
-          <div class="field">
-            <label> Full Name </label>
-            <input type="text"
-                   name="name"
-                   ng-model="user.profile.name">
-          </div>
-  
           <div class="field" ng-show="autoFilledCompany">
             <label> Company </label>
             <input class="ui input"
@@ -43,7 +36,14 @@
               <div class="results"></div>
             </div>
           </div>
-  
+
+          <div class="field">
+            <label> Full Name </label>
+            <input type="text"
+                   name="name"
+                   ng-model="user.profile.name">
+          </div>
+
           <div class="field">
             <label>Gender</label>
             <select
@@ -59,14 +59,49 @@
 
           <br>
 
-          <!--sdf
           <div class="divided title"> Coming Dates </div>
 
-          <div id="availableDates" class="field">
+          <div id="availableDates">
+            <label>Available Dates</label>
+            <p>The you are about to provide is the arriving times (pay attention that in order to submit application you nee to provide at least one arriving time)</p>
+            <div class="field" ng-show="isAbleToComeToMentor(1)">
+              <label>Round 1</label>
+              Come
+              <div class="field">
+                <input name="Round1ComingMentor" id="r1c" ng-model="user.profile.round1come" type="datetime-local"/>
+              </div>
+              Go
+              <div class="field">
+                <input name="Round1GoingMentor" id="r1g" ng-model="user.profile.round1go" type="datetime-local"/>
+              </div>
+            </div>
 
+            <div class="field" ng-show="isAbleToComeToMentor(2)">
+              <label>Round 2</label>
+              Come
+              <div class="field">
+                <input id="r2c" ng-model="user.profile.round2come" type="datetime-local"/>
+              </div> 
+              go
+              <div class="field">
+                <input id="r2g" ng-model="user.profile.round2go" type="datetime-local"/>
+              </div>
+            </div>
+
+            <div class="field" ng-show="isAbleToComeToMentor(3)">
+              <label>Round 3</label>
+              Come
+              <input id="r3c" ng-model="user.profile.round3come" type="datetime-local"/>
+              Go
+              <input id="r3g" ng-model="user.profile.round3go" type="datetime-local"/>            
+            </div>
+
+            <div class="ui field">
+              <div ng-click="increaseNumbersOfDaysUserWantToCome()" class="ui green button" >Add Round</div>
+            </div>
           </div>
 
-        -->
+        
 
           <br>
           
