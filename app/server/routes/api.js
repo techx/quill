@@ -124,6 +124,7 @@ module.exports = function(router) {
    * GET - Get all users, or a page at a time.
    * ex. Paginate with ?page=0&size=100
    */
+
   router.get('/users', isAdmin, function(req, res){
     var query = req.query;
 
@@ -284,7 +285,6 @@ module.exports = function(router) {
     var id = req.params.id;
 
     UserController.createOrJoinTeam(id, code, defaultResponse(req, res));
-
   });
 
   /**
@@ -294,6 +294,16 @@ module.exports = function(router) {
     var id = req.params.id;
 
     UserController.leaveTeam(id, defaultResponse(req, res));
+  });
+
+  /**
+   * Gets all the confirmed attendees
+   */
+  router.get('/users/:id/attendees', isOwnerOrAdmin, function(req, res) {
+    var query = req.query;
+    var id = req.params.id;
+
+    UserController.getAttendeesPage(id, query, defaultResponse(req, res));
   });
 
   /**
@@ -340,7 +350,7 @@ module.exports = function(router) {
   });
 
   /**
-   * Check in a user. ADMIN ONLY, DUH
+   * Check out a user. ADMIN ONLY, DUH
    */
   router.post('/users/:id/checkout', isAdmin, function(req, res){
     var id = req.params.id;

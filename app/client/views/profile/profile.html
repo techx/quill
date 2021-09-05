@@ -5,13 +5,23 @@
 
   <div class="ui stackable centered">
     <div class="avatar">
-      <img src="../../assets/images/user.png">
+      <img src="../../assets/images/user-male.png" ng-show="user.profile.gender === 'M'">
+      <img src="../../assets/images/user-female.png" ng-show="user.profile.gender !== 'M'">
     </div>
+
+    <p ng-show="user.mentor">Mentor</p>
+    <p ng-show="!user.mentor">Hacker</p>
     
     <div class="info">
-      <p>{{user.confirmation.major}} Student</p>
-      <p>{{user.profile.school}}</p>
-      <p>Class of {{user.profile.graduationYear}}</p>
+      <div ng-show="user.mentor">
+        <p>{{user.profile.position}}</p>
+        <p>{{user.profile.company}}</p>
+      </div>
+      <div ng-show="!user.mentor">
+        <p>{{user.profile.major}} Student</p>
+        <p>{{user.profile.school}}</p>
+        <p>Class of {{user.profile.graduationYear}}</p>
+      </div>
     </div>
 
     <div class="links">
@@ -19,24 +29,23 @@
       <img src="../../assets/images/github.png" class="icon">
       </a>
 
-      <a href="{{user.confirmation.linkedin}}" target="_blank">
+      <a href="{{user.confirmation.linkedin}}" target="_blank" ng-show="user.confirmation.linkedin">
       <img src="../../assets/images/linkedin.png" class="icon">
       </a>
 
-      <a href="{{user.confirmation.website}}" target="_blank">
+      <a href="{{user.confirmation.website}}" target="_blank" ng-show="user.confirmation.website">
         <img src="../../assets/images/internet.png" class="icon">
       </a>
 
     </div>
-    <div class="ui segment description">
+    <div ng-show="!user.mentor" class="ui segment description">
       <p>{{user.profile.description}}</p>
       <p>{{user.profile.summary}}</p>
     </div>
 
-    <div class="ui team">
+    <div ng-show="!user.mentor" class="ui team">
       <div>Team: {{user.teamCode}}</div>
     </div>
 
     </div>
-  </div>
 </div>

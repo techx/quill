@@ -53,6 +53,7 @@ angular.module('reg')
       // ------------------------
       // Team
       // ------------------------
+      
       joinOrCreateTeam: function(code){
         return $http.put(base + Session.getUserId() + '/team', {
           code: code
@@ -65,6 +66,19 @@ angular.module('reg')
 
       getMyTeammates: function(){
         return $http.get(base + Session.getUserId() + '/team');
+      },
+
+      // -------------------------
+      // Attendees
+      // -------------------------
+      
+      getAttendeesPage: function(page, size, text) {
+        return $http.get(base + Session.getUserId() + '/attendees' + '?' + $.param(
+          {
+            text: text,
+            page: page ? page : 0,
+            size: size ? size : 50
+          }));
       },
 
       // -------------------------

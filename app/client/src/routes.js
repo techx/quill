@@ -17,6 +17,8 @@ const SidebarCtrl = require('../views/sidebar/sidebarCtrl.js');
 const TeamCtrl = require('../views/team/teamCtrl.js');
 const VerifyCtrl = require('../views/verify/verifyCtrl.js');
 const ProfileCtrl = require('../views/profile/profileCtrl.js');
+const AttendeesCtrl = require('../views/attendees/attendeesCtrl.js');
+
 
 angular.module('reg')
   .config([
@@ -130,9 +132,6 @@ angular.module('reg')
         resolve: {
           currentUser: function(UserService){
             return UserService.getCurrentUser();
-          },
-          settings: function(SettingsService){
-            return SettingsService.getPublicSettings();
           }
         },
       })
@@ -149,6 +148,32 @@ angular.module('reg')
           },
           settings: function(SettingsService){
             return SettingsService.getPublicSettings();
+          }
+        }
+      })
+      .state('app.attendees', {
+        url: "/attendees?" +
+          '&page' +
+          '&size' +
+          '&query',
+        templateUrl: "views/attendees/attendees.html",
+        controller: 'AttendeesCtrl',
+        data: {
+          requireAdmitted: true
+        },
+        resolve: {
+          currentUser: function(UserService) {
+            return UserService.getCurrentUser();
+          }
+        }
+      })
+      .state('app.attendees.profile', {
+        url: "/attendees/profile/:id",
+        templateUrl: "views/attendees/profile/profile.html",
+        controller: 'AttendeesProfileCtrl',
+        resolve: {
+          'user': function($stateParams, UserService){
+            return UserService.get($stateParams.id);
           }
         }
       })
