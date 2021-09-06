@@ -6,12 +6,6 @@
   </div>
 
   <div ui-sref-active="active"
-      ui-sref="app.home"
-      class="item">
-    Home
-  </div>
-
-  <div ui-sref-active="active"
        ui-sref="app.dashboard"
        class="item">
     Dashboard
@@ -49,6 +43,14 @@
       ng-show="!currentUser.status.declined && !currentUser.mentor && !currentUser.admin"
       class="item">
       Team
+    </div>
+
+    <div
+    ui-sref-active="active"
+    ui-sref="app.mentorInstructions"
+    ng-show="!currentUser.status.declined && currentUser.mentor"
+    class="item">
+    Mentor Instructions
     </div>
 
     <div
