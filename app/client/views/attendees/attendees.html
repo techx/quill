@@ -1,0 +1,137 @@
+<div id="attendees" class="page">
+<div class="ui segment">
+    <div class="ui stackable grid">
+      <div class="three wide column">
+        <div class="ui header">
+          Search
+        </div>
+        <div class="ui form">
+          <div class="field">
+            <div class="ui icon fluid input">
+              <input type="text"
+                     placeholder="Search..."
+                     ng-model="queryText"
+                     ng-model-options="{debounce: 300}">
+                <i class="search icon"></i>
+            </div>
+          </div>
+  
+        </div>
+  
+        <div class="ui divider"></div>
+  
+        <button
+          ng-repeat="page in pages"
+          ng-class="page == currentPage ? 'active pink' : ''"
+          ng-click="goToPage(page)"
+          class="ui icon basic page button">
+          {{page}}
+        </button>
+  
+        <br>
+  
+      </div>
+      <div id="table-container" class="thirteen wide column">
+        <div class="ui header">
+          Attendees
+        </div>
+
+        <!--USER PROILE MODAL-->
+        <div class="ui long user modal">
+          <i class="close icon"></i>
+          <div class="header">
+            {{selectedUser.profile.name ? selectedUser.profile.name : selectedUser.email}}
+          </div>
+          <div class="content" id="profile">
+            <div class="ui stackable centered">
+              <div class="avatar">
+                <img src="../../assets/images/user-male.png" ng-show="selectedUser.profile.gender === 'M'">
+                <img src="../../assets/images/user-female.png" ng-show="selectedUser.profile.gender !== 'M'">
+              </div>
+
+              <p ng-show="selectedUser.mentor">Mentor</p>
+              <p ng-show="!selectedUser.mentor">Hacker</p>
+              
+              <div class="info">
+                <div ng-show="selectedUser.mentor">
+                  <p>{{selectedUser.profile.position}}</p>
+                  <p>{{selectedUser.profile.company}}</p>
+                </div>
+                <div ng-show="!selectedUser.mentor">
+                  <p>{{selectedUser.profile.major}} Student</p>
+                  <p>{{selectedUser.profile.school}}</p>
+                  <p>Class of {{selectedUser.profile.graduationYear}}</p>
+                </div>
+              </div>
+          
+              <div class="links">
+                <a href="{{selectedUser.confirmation.github}}" target="_blank" ng-show="selectedUser.confirmation.github">
+                <img src="../../assets/images/github.png" class="icon">
+                </a>
+          
+                <a href="{{selectedUser.confirmation.linkedin}}" target="_blank" ng-show="selectedUser.confirmation.linkedin">
+                <img src="../../assets/images/linkedin.png" class="icon">
+                </a>
+          
+                <a href="{{selectedUser.confirmation.website}}" target="_blank" ng-show="selectedUser.confirmation.website">
+                  <img src="../../assets/images/internet.png" class="icon">
+                </a>
+          
+              </div>
+              <div ng-show="!selectedUser.mentor" class="ui segment description">
+                <p>{{selectedUser.profile.description}}</p>
+                <p>{{selectedUser.profile.summary}}</p>
+              </div>
+          
+              <div ng-show="!selectedUser.mentor" class="ui team">
+                <div>Team: {{selectedUser.teamCode}}</div>
+              </div>
+          
+              </div>
+  
+          </div>
+  
+          <div class="actions">
+            <div class="ui positive right labeled icon button">
+              Done
+              <i class="checkmark icon"></i>
+            </div>
+          </div>
+        </div>
+  
+        <!--ATTENDEES TABLE-->
+        <table
+          class="ui celled selectable compact users table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Name</th>
+              <th>School/Company</th>
+              <th>Team</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              ng-click="selectUser(user)"
+              ng-repeat="user in users"
+              ng-class="rowClass(user)">
+              <td><img src="../../assets/images/user-male.png" class="icon" style="max-height: 30px;" ng-show="user.profile.gender === 'M'">
+              <img src="../../assets/images/user-female.png" class="icon" style="max-height: 30px;" ng-show="user.profile.gender !== 'M'"></td>
+              <td>
+                <strong>
+                  {{user.profile.name}}
+                  &nbsp;
+  
+                </strong>
+              </td>
+              <td>{{user.mentor ? user.profile.company : user.profile.school}}</td>
+              <td>{{user.mentor ? null : user.teamCode}}</td>
+            </tr>
+          </tbody>
+        </table>
+  
+      </div>
+    </div>
+  
+  </div>
+</div>

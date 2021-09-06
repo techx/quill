@@ -490,6 +490,63 @@ UserController.getTeammates = function(id, callback){
 };
 
 /**
+ * Gets the confirmed attendees.
+ * @param  {Function} callback args(err, users)
+ */
+UserController.getAttendeesPage = function(id, query, callback){
+  var page = query.page;
+  var size = parseInt(query.size);
+  var searchText = query.text;
+
+
+  var findQuery = {
+    admin: false,
+    "status.confirmed": true
+  };
+
+  if (searchText.length > 0){
+    var queries = [];
+    var re = new RegExp(searchText, 'i');
+    userFindQuery = {};
+
+    queries.push({ email: re });
+    queries.push({ 'profile.name': re });
+    queries.push({ 'teamCode': re });
+
+    
+    findQuery.$or = queries;
+  }
+
+  User
+    .find(findQuery)
+    .sort({
+      'profile.name': 'asc'
+    })
+    .select('profile.name profile.school profile.company profile.major profile.gender profile.description profile.summary teamCode mentor confirmation.github confirmation.linkedin confirmation.website')
+    .skip(page * size)
+    .limit(size)
+    .exec(function (err, users){
+      if (err || !users){
+        return callback(err);
+      }
+
+      User.count(findQuery).exec(function(err, count){
+
+        if (err){
+          return callback(err);
+        }
+
+        return callback(null, {
+          users: users,
+          page: page,
+          size: size,
+          totalPages: Math.ceil(count / size)
+        });
+      });
+    });
+}
+
+/*
  *  get all members for this forum
  * @param id
  * @param callback

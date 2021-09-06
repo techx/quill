@@ -50,8 +50,10 @@ $brand-tertiary: $tertiary;
 @import 'verify';
 @import 'team';
 @import 'admin';
-@import "forum";
-@import "usersList";
+@import 'profile';
+@import 'attendees';
+@import 'forum';
+@import 'usersList';
 @import 'scoring';
 
 html,
