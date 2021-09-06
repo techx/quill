@@ -455,4 +455,12 @@
   .custom-option.selection {
     background: #f9f9f9;
   }
+
+  @media only screen and (max-width: 1500px) {
+    #forum {
+      .container {
+        min-width: 700px;
+      }
+    }
+  }
 }

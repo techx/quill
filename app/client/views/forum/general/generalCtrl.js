@@ -24,6 +24,7 @@ angular.module('reg')
                     });
             }
 
+
             // set specific forum - general
             function setForum(){
                 $scope.updateCurrentForum($scope.forum._id, function (){

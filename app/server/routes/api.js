@@ -1,6 +1,7 @@
 var UserController = require('../controllers/UserController');
 var SettingsController = require('../controllers/SettingsController');
 var ForumController = require('../controllers/ForumController');
+var UpdatesController = require('../controllers/UpdatesController');
 var User = require('../models/User');
 var json2csv = require('json2csv').parse;
 var path = require('path');
@@ -232,6 +233,19 @@ module.exports = function(router) {
 
   router.get('/users/mentors', isOwnerOrAdmin, function(req, res){
     UserController.getMentors(defaultResponse(req, res));
+  });
+
+  // ---------------------------------------------
+  // Updates
+  // ---------------------------------------------
+
+  router.put('/updates/update', function (req, res) {
+    var message = req.body.message;
+    UpdatesController.update(message, defaultResponse(req, res));
+  });
+
+  router.get('/updates/getUpdates', function (req, res) {
+    UpdatesController.getUpdates(defaultResponse(req, res));
   });
 
   // ---------------------------------------------

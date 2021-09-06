@@ -29,7 +29,7 @@ angular.module('reg')
                 stopInterval:stopInterval,
 
                 // ----------------------
-                // Main functions
+                // Main functions to server
                 // ----------------------
 
                 getHackerForums: function () {
