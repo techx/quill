@@ -64,6 +64,7 @@
     display: inline-block;
     width: 6%;
   }
+
   .received_msg {
     display: inline-block;
     padding: 0 0 0 10px;
@@ -153,6 +154,10 @@
 
   .verticalLine {
     border-left: thick solid #ff0000;
+  }
+
+  .img_src_msg{
+    max-width: 80%;
   }
 }
 

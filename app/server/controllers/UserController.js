@@ -218,6 +218,7 @@ UserController.getAllForForum = function (callback) {
         admin: false,
         "status.completedProfile": true,
     }, {
+        "profile.gender": 1,
         "profile.name": 1,
         "mentor": 1,
         "src": 1,
@@ -544,11 +545,11 @@ UserController.getAttendeesPage = function(id, query, callback){
         });
       });
     });
-}
+};
 
-/*
+/**
  *  get all members for this forum
- * @param id
+ * @param team
  * @param callback
  */
 UserController.getMentorForumMembers = function (team, callback) {
@@ -558,12 +559,12 @@ UserController.getMentorForumMembers = function (team, callback) {
                 if (err || !users) {
                     return callback(err, users);
                 }
-            }).select('profile.name src mentor profile.picture').exec(callback);
+            }).select('profile.name src mentor profile.picture profile.gender').exec(callback);
 };
 
 /**
  *  get all members for this forum by team name
- * @param id
+ * @param team
  * @param callback
  */
 UserController.getMembersByTeam = function (team, callback) {
@@ -573,7 +574,7 @@ UserController.getMembersByTeam = function (team, callback) {
             if (err || !users) {
                 return callback(err, users);
             }
-        }).select('profile.name src mentor profile.picture').exec(callback);
+        }).select('profile.name src mentor profile.picture profile.gender').exec(callback);
 };
 
 /**
