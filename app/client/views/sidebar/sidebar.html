@@ -11,6 +11,22 @@
     Dashboard
   </div>
 
+  <div
+      ui-sref-active="active"
+      ui-sref="app.profile"
+      ng-show="currentUser.status.confirmed && currentUser.status.admitted && !currentUser.status.declined"
+      class="item">
+      Profile
+  </div>
+
+  <div
+      ui-sref-active="active"
+      ui-sref="app.attendees"
+      ng-show="currentUser.status.confirmed && currentUser.status.admitted && !currentUser.status.declined"
+      class="item">
+      Attendees
+  </div>
+
   <div ng-show="currentUser.verified">
 
     <div
