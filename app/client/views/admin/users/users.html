@@ -97,8 +97,7 @@
           <tr>
             <th>Name</th>
             <th>E-mail address</th>
-            <th>School</th>
-            <th>Company</th>
+            <th>School/Company</th>
             <th>Grad</th>
             <th>V/S/A/C</th>
             <th>Modify</th>
@@ -118,8 +117,8 @@
               </strong>
             </td>
             <td>{{user.email}}</td>
-            <td>{{user.profile.school}}</td>
-            <td>{{user.profile.company}}</td>
+            <td ng-if="!user.mentor">{{user.profile.school}}</td>
+            <td ng-if="user.mentor">{{user.profile.company}}</td>
             <td
               class="collapsing">
               {{user.profile.graduationYear}}
