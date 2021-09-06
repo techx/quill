@@ -6,6 +6,7 @@
   "dependencies": {
     "acorn": "^7.3.1",
     "angular": "^1.8.0",
+    "angular-animate": "^1.8.2",
     "angular-ui-router": "^1.0.26",
     "async": "^2.6.3",
     "bcrypt": "^3.0.8",
@@ -31,7 +32,7 @@
     "request": "^2.88.2",
     "showdown": "^1.9.1",
     "sweetalert": "^2.1.2",
-    "underscore": "^1.10.2",
+    "underscore": "^1.13.1",
     "validator": "^10.11.0",
     "vinyl-source-stream": "^2.0.0"
   },
@@ -58,7 +59,7 @@
     "gulp-uglify": "^3.0.2",
     "jest": "^24.9.0",
     "nodemon": "^1.19.4",
-    "pa11y-ci": "^2.3.0",
+    "pa11y-ci": "^2.4.2",
     "supertest": "^4.0.2"
   },
   "engines": {
