@@ -1,39 +1,45 @@
-# Quill
+# EZHack
 
-## *Registration, for hackers!*
+## *Event platform, for hackathons!*
 
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](code-of-conduct.md)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
-[![Dependencies](https://david-dm.org/techx/quill.svg)](https://app.dependabot.com/accounts/krubenok/repos/204301089)
+[![Dependencies](https://david-dm.org/sprinthack/ezhack.svg)](https://app.dependabot.com/accounts/krubenok/repos/204301089)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ecd84351d8444ca29d05756ac7f40fc0)](https://www.codacy.com/manual/krubenok/quill?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=krubenok/quill&amp;utm_campaign=Badge_Grade)
 
-Quill is a registration system designed especially for hackathons. For hackers, it’s a clean and streamlined interface to submit registration and confirmation information. For hackathon organizers, it’s an easy way to manage applications, view registration stats, and more!
+EZHack is an event platform designed especially for hackathons. For hackers, it’s a clean and streamlined interface to submit registration information and event updates. For mentors, it’s easy to register, check-in and score hackathon projects. For hackathon organizers, it’s an easy way to manage the hackathon - from participant applications, view registration stats, live updates and more!
 
 ![Login Splash](./docs/images/screenshots/login.png)
 
 ## Table of Contents
-- [Quill](#quill)
-  - [*Registration, for hackers!*](#registration-for-hackers)
+- [EZHack](#ezhack)
+  - [*Event platform, for hackathons!*](#event-platform-for-hackathons)
   - [Table of Contents](#table-of-contents)
   - [Features](#features)
-    - [Quill for Hackers](#quill-for-hackers)
+    - [EZHack for Hackers](#ezhack-for-hackers)
       - [Dashboard](#dashboard)
       - [Application](#application)
       - [Team Registration](#team-registration)
-    - [Quill for Admins](#quill-for-admins)
+      - [Team Forums](#team-forums)
+      - [Attendees and Profile](#attendees-and-profile)
+    - [EZHack for mentors](#ezhack-for-mentors)
+      - [Scoring](#scoring)
+      - [Mentor Instructions](#mentor-instructions)
+    - [EZHack for Admins](#ezhack-for-admins)
       - [Stats](#stats)
       - [Users Table](#users-table)
       - [Settings](#settings)
+      - [Event Updates](#event-updates)
   - [Setup](#setup)
     - [Requirements](#requirements)
     - [Local Deployment](#local-deployment)
       - [MongoDB](#mongodb)
       - [SMTP](#smtp)
-      - [Quill](#quill-1)
+      - [EZHackl](#ezhack-1)
     - [Deploying for your hackathon](#deploying-for-your-hackathon)
       - [MongoDB](#mongodb-1)
       - [SMTP](#smtp-1)
-      - [Quill](#quill-2)
+      - [EZHack](#EZHack-2)
   - [Customizing for your event](#customizing-for-your-event)
     - [Copy](#copy)
     - [Branding / Assets](#branding--assets)
@@ -53,7 +59,7 @@ Quill is a registration system designed especially for hackathons. For hackers, 
 
 ## Features
 
-### Quill for Hackers
+### EZHack for Hackers
 
 #### Dashboard
 
@@ -84,13 +90,47 @@ The Application tab takes users to their registration or confirmation form.
 
 Hackathons commonly allow participants to register and be admitted as a team. The Team tab allows users to create or join a team with other users.
 
-### Quill for Admins
+When registering, a participant can mark that he is the team leader of the team.
+
+![teams](docs/images/screenshots/teams.png)
+
+#### Attendees
+
+Every participant that has confirmed his attendance will get his/her own user profile. The participant can check out who is coming to the hackathon via the attendees page. The mentors are marked in blue.
+
+![attendees](docs/images/screenshots/attendees.png)
+
+![profile](docs/images/screenshots/profile.png)
+
+### EZHack for Mentors
+
+Mentors can register, mark their times of arrival to the hackathon rate group projects for the final judging.
+
+#### Scoring & Judging
+
+Mentors can use EZHack to rate the projects of each team, and then view the results on the results page.
+
+![scoring-scoring](docs/images/screenshots/scoring-scoring.png)
+
+![scoring-results](docs/images/screenshots/scoring-results.png)
+
+
+
+#### Mentor Instructions
+
+Each mentor can find instructions on how to judge, what to do and how to help the hackers throughout the hackathon at the instructions page, available only for mentors.
+
+![mentor-instructions](docs/images/screenshots/mentor-instructions.png)
+
+
+
+### EZHack for Admins
 
 Admins can view stats, look through applications, or edit settings from the Admin panel.
 
 #### Stats
 
-![Stats](./docs/images/screenshots/stats.png)
+![Stats](./docs/images/screenshots/admin-stats.png)
 
 The Stats tab summarizes useful registration statistics on the number of users in each stage of the process, demographic information, and miscellaneous event preferences like shirt sizes, dietary restrictions, or reimbursement requests.
 
@@ -110,9 +150,15 @@ The Stats tab summarizes useful registration statistics on the number of users i
 
 #### Settings
 
-![Settings](./docs/images/screenshots/settings.png)
+![Settings](./docs/images/screenshots/admin-settings.png)
 
-On the Settings tab, admins can easily control their event application timeline by setting registration / confirmation deadlines. They can also write custom waitlist, acceptance, and confirmation copy that users will see on their dashboard throughout the application process. The custom copy is interpreted as Markdown, so HTML and images can be added.
+On the Settings tab, admins can easily control their event application timeline by setting registration / confirmation deadlines. They can also write custom waitlist, open and close the scoring stage, acceptance, and confirmation copy that users will see on their dashboard throughout the application process. The custom copy is interpreted as Markdown, so HTML and images can be added.
+
+#### Event Updates
+
+The admin can also add live event updates to the participants and mentors by clickng the little ‘+’ beside the Event Updates section.
+
+![updates](docs/images/screenshots/updates.png)
 
 ## Setup
 
@@ -145,7 +191,7 @@ We use `dotenv` to keep track of environment variables, so be sure to stop track
 git update-index --assume-unchanged .env
 ```
 
-After doing this, fill in the environment variables in the `.env` before running Quill.
+After doing this, fill in the environment variables in the `.env` before running EZHack.
 
 ### Local Deployment
 
@@ -160,9 +206,9 @@ mongod --dbpath db --bind_ip 127.0.0.1
 
 #### SMTP
 
-This step is only required if you want to test the email-related functionality of Quill. The easiest option is to use the SMTP server provided by your personal email (Gmail, Outlook, etc.). Look for the documentation about SMTP for your respective email and fill in the values in the `.env` accordingly. Be warned that sending many emails this way is not recommended and this method should only be used for testing. In particular, note that Gmail will require you to enable less secure apps in your security settings before Quill will be able to send email.
+This step is only required if you want to test the email-related functionality of EZHack. The easiest option is to use the SMTP server provided by your personal email (Gmail, Outlook, etc.). Look for the documentation about SMTP for your respective email and fill in the values in the `.env` accordingly. Be warned that sending many emails this way is not recommended and this method should only be used for testing. In particular, note that Gmail will require you to enable less secure apps in your security settings before EZHack will be able to send email.
 
-#### Quill
+#### EZHack
 
 Install the necessary dependencies:
 
@@ -184,15 +230,15 @@ The database can either be hosted with a cloud-hosted MongoDB provider, such as 
 
 #### SMTP
 
-A dedicated SMTP provider is absolutely required if you want Quill to work for your hackathon. There are several providers available such as [Mailgun](https://www.mailgun.com) or [Sendgrid](https://sendgrid.com), both part of the GitHub Student Developer Pack. After setting this up, fill in the `.env` with the values that your provider gives you.
+A dedicated SMTP provider is absolutely required if you want EZHack to work for your hackathon. There are several providers available such as [Mailgun](https://www.mailgun.com) or [Sendgrid](https://sendgrid.com), both part of the GitHub Student Developer Pack. After setting this up, fill in the `.env` with the values that your provider gives you.
 
-#### Quill
+#### EZHack
 
-There are also several options for hosting Quill itself. You can use Heroku by clicking the __Deploy to Heroku__ button above where, after making a Heroku account, you will be able to set the configuration variables and deploy Quill. A Dockerfile has also been provided to make it easy to run Quill in a Docker container either on your own server or with your preferred cloud service provider. Don't forget to publish the container's port `3000` to the host machine. If using the command line, this is done by using the `-p` flag and specifying which port on the host machine should redirect to port 3000 on the container.
+There are also several options for hosting EZHack itself. You can use Heroku by clicking the __Deploy to Heroku__ button above where, after making a Heroku account, you will be able to set the configuration variables and deploy EZHack. A Dockerfile has also been provided to make it easy to run EZHack in a Docker container either on your own server or with your preferred cloud service provider. Don't forget to publish the container's port `3000` to the host machine. If using the command line, this is done by using the `-p` flag and specifying which port on the host machine should redirect to port 3000 on the container.
 
 ## Customizing for your event
 
-*_If you're using Quill for your event, please add yourself to this [list][users]. It takes less than a minute, but knowing that our software is helping real events keeps us going ♥_*
+*_If you're using EZHack for your event, please add yourself to this [list][users]. It takes less than a minute, but knowing that our software is helping real events keeps us going ♥_*
 
 ### Copy
 
@@ -268,24 +314,22 @@ Basic Jest testing has been implemented in the `test.js` file. Currently the onl
 
 ### Accessibility
 
-Testing for accessibility is a great way to make sure that all hackathon enthusiasts can use Quill, regardless of ability. It's good practice to run accessibility tests on any changes that you've made to ensure that no new accessibility errors were introduced.
+Testing for accessibility is a great way to make sure that all hackathon enthusiasts can use EZHack, regardless of ability. It's good practice to run accessibility tests on any changes that you've made to ensure that no new accessibility errors were introduced.
 
-An accessibility testing tool, pa11y-ci, has been provided and configured for this project. To run pa11y-ci, make sure that Quill is running locally on http://localhost:3000/ (alternatively, you can change the URLs specified in `.pa11yci` to match those of your running instance). Then, run the command `npm run test:accessibility`. If several of the URLs checked by pa11y-ci produce the same number of errors, pa11y-ci may be having trouble logging in with the default admin credentials specified in `.env`. Check that your instance of Quill is running correctly, or change the credentials used in `.pa11yci`.
+An accessibility testing tool, pa11y-ci, has been provided and configured for this project. To run pa11y-ci, make sure that EZHack is running locally on http://localhost:3000/ (alternatively, you can change the URLs specified in `.pa11yci` to match those of your running instance). Then, run the command `npm run test:accessibility`. If several of the URLs checked by pa11y-ci produce the same number of errors, pa11y-ci may be having trouble logging in with the default admin credentials specified in `.env`. Check that your instance of EZHack is running correctly, or change the credentials used in `.pa11yci`.
 
-If your contribution adds any new pages to Quill, please add them to `.pa11yci` to make sure that these pages are covered by the accessibility tests. If your new pages are accessed as a non-logged-in user, add them at the beginning of the URL list. If they are accessed when logged in, add them after the URL with actions to log in.
+If your contribution adds any new pages to EZHack, please add them to `.pa11yci` to make sure that these pages are covered by the accessibility tests. If your new pages are accessed as a non-logged-in user, add them at the beginning of the URL list. If they are accessed when logged in, add them after the URL with actions to log in.
 
 For more information on pa11y-ci, please visit [pa11y-ci] and [pa11y], in particular the [section on actions][pa11y-actions].
 
 
 ## Contributing
 
-Contributions to Quill are welcome and appreciated! Please take a look at [`CONTRIBUTING.md`][contribute] first.
-
-## Feedback / Questions
-
-If you have any questions about this software, please contact [quill@hackmit.org][email].
+Contributions to EZHack are welcome and appreciated! Please take a look at [`CONTRIBUTING.md`][contribute] first.
 
 ## Contributors
+
+EZHack is based on the popular registration platform developed by MIT students, Quill. Without them this project would not have been possible.
 
 ### Code Contributors
 
@@ -325,3 +369,4 @@ Copyright (c) 2015-2016 Edwin Zhang (https://github.com/ehzhang). Released under
 [pa11y-ci]: https://github.com/pa11y/pa11y-ci
 [pa11y]: https://github.com/pa11y/pa11y
 [pa11y-actions]: https://github.com/pa11y/pa11y#actions
+
