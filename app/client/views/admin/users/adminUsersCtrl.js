@@ -335,6 +335,9 @@ angular.module('reg')
                 name: 'day3go',
                 value: user.profile.day3go
               },{
+                  name: 'Major',
+                  value: user.profile.major
+              },{
                 name: 'Description',
                 value: user.profile.description
               },{
@@ -354,9 +357,6 @@ angular.module('reg')
               },{
                 name: 'Shirt Size',
                 value: user.confirmation.shirtSize
-              },{
-                name: 'Major',
-                value: user.confirmation.major
               },{
                 name: 'Github',
                 value: user.confirmation.github

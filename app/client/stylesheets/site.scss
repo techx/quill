@@ -20,6 +20,7 @@ $status-rejected-color: red; // Not used
 
 // Sidebar variables
 $sidebar-color: $primary;
+$sidebar-color-con : $primary_con;
 $sidebar-width: 265px;
 $sidebar-transition-time: .5s;
 $sidebar-tab-size: 55px;
@@ -51,6 +52,10 @@ $brand-tertiary: $tertiary;
 @import 'team';
 @import 'admin';
 @import 'profile';
+@import 'attendees';
+@import 'forum';
+@import 'usersList';
+@import 'scoring';
 
 html,
 body {
@@ -80,6 +85,10 @@ body {
 /**
  * Semantic-UI Overrides for squareishness
  */
+.chat_head{
+  text-align: center;
+}
+
 .ui.segment {
   border-radius: 0;
   box-shadow: none;

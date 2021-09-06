@@ -100,7 +100,7 @@
           <br>
           <br>
 
-          <div class="divided title" ng-show="!user.mentor"> Skills & Accomplishments </div>
+          <div class="divided title"> Skills & Accomplishments </div>
 
           <div class="field" ng-show="!user.mentor">
             <label> What are you studying? </label>
@@ -109,8 +109,9 @@
                    placeholder="Computer Science, Product Design, Basket Weaving, etc."
                    ng-model="user.confirmation.major">
           </div>
+          <div class="divided title"> Links </div>
 
-          <div class="field" ng-show="!user.mentor">
+          <div class="field">
             <label> Github </label>
             <input type="text"
                    name="github"
@@ -118,10 +119,26 @@
                    ng-model="user.confirmation.github">
           </div>
 
+          <div class="field">
+            <label> LinkedIn </label>
+            <input type="text"
+                   name="linkedin"
+                   placeholder="https://linkedin.com/in/foobar"
+                   ng-model="user.confirmation.linkedin">
+          </div>
+
+          <div class="field">
+            <label> Personal Website </label>
+            <input type="text"
+                   name="website"
+                   placeholder="https://example.com"
+                   ng-model="user.confirmation.website">
+          </div>
+
           <div class="field" ng-show="!user.mentor">
-            <label> Skill Sheet (required) </label>
+            <label> Resume (required) </label>
             <p>
-              Upload a document outlining any skills or experience you'd like to share (ex. resume). PDF preferred!
+              Please upload your resume. We'll pass them to our awesome sponsors ;)
             </p>
             <a
               target="_blank"

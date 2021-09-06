@@ -23,12 +23,10 @@ function endsWith(s, test){
  * @param  {Function} callback args(err, true, false)
  * @return {[type]}            [description]
  */
- function canRegister(email, password,callback){
-  var isInSchool = false;
-  var isInCompany = false;
+function canRegister(email, password, callback){
 
   if (!password || password.length < 6){
-    return callback({ message: "Password must be 6 or more characters."}, false, false);
+    return callback({ message: "Password must be 6 or more characters."}, false);
   }
 
   // Check if its within the registration window.
@@ -58,15 +56,9 @@ function endsWith(s, test){
       }
       for (var i = 0; i < emails.length; i++) {
         if (validator.isEmail(email) && endsWith(emails[i], email)){
-          isInSchool = true;
-          //return callback(null, true);
+          return callback(null, true, false);
         }
       }
-
-      //return callback({
-      //  message: "Not a valid educational email."
-      //}, false);
-
 
       Settings.getCompanysWhitelistedEmails(function(err, emails){
         if (err || !emails){
@@ -74,22 +66,13 @@ function endsWith(s, test){
         }
         for (var i = 0; i < emails.length; i++) {
           if (validator.isEmail(email) && endsWith(emails[i], email)){
-            isInCompany = true;
-            //return callback(null, true);
+            return callback(null, true, true);
           }
         }
-    
-        //return callback({
-        //  message: "Not a valid educational email."
-        //}, false);
-        if(isInSchool === false && isInCompany === false){
-          return callback({
-          message: "Not a valid email."
+
+        return callback({
+          message: "Not a valid educational email."
           }, false, false);
-        }
-        else{
-          return callback(null, true, isInCompany);
-        }
       });
     });
   });
@@ -170,8 +153,8 @@ UserController.createUser = function(email, password, callback) {
 
   email = email.toLowerCase();
 
-  // Check that there isn't a user with this email already.
-  canRegister(email, password, function(err, valid, isInCompany){
+  // Check that there isn't a user with this email already, and if the user passes whitelists.
+  canRegister(email, password, function(err, valid, isMentor){
 
     if (err || !valid){
       return callback(err);
@@ -179,13 +162,7 @@ UserController.createUser = function(email, password, callback) {
     var u = new User();
     u.email = email;
     u.password = User.generateHash(password);
-    
-    if(isInCompany === true){
-      u.mentor = true;
-    }
-    else{
-      u.mentor = false;
-    }
+    u.mentor = isMentor;
 
     u.save(function(err){
       if (err){
@@ -229,6 +206,22 @@ UserController.getByToken = function (token, callback) {
  */
 UserController.getAll = function (callback) {
   User.find({}, callback);
+};
+
+/**
+ * Get all users. - not admins only mentors and hacker.
+ * filter data.
+ * @param  {Function} callback args(err, user)
+ */
+UserController.getAllForForum = function (callback) {
+    User.find({
+        admin: false,
+        "status.completedProfile": true,
+    }, {
+        "profile.name": 1,
+        "mentor": 1,
+        "src": 1,
+    }, callback);
 };
 
 /**
@@ -391,6 +384,28 @@ UserController.updateProfileById = function (id, profile, teamLeader, callback){
 };
 
 /**
+ * Update a user's profile object, given an id and a forums.
+ *
+ * @param  {String}   id       Id of the user
+ * @param  {Map}   forums   forums map
+ * @param  {Function} callback Callback with args (err, user)
+ */
+UserController.updateForumsById = function (id, forums, callback) {
+  User.findOneAndUpdate({
+        _id: id,
+      },
+      {
+        $set: {
+          'forums': forums,
+        }
+      },
+      {
+        new: true
+      },
+      callback);
+};
+
+/**
  * Update a user's confirmation object, given an id and a confirmation.
  *
  * @param  {String}   id            Id of the user
@@ -518,6 +533,113 @@ UserController.getTeammates = function(id, callback){
 };
 
 /**
+ * Gets the confirmed attendees.
+ * @param  {Function} callback args(err, users)
+ */
+UserController.getAttendeesPage = function(id, query, callback){
+  var page = query.page;
+  var size = parseInt(query.size);
+  var searchText = query.text;
+
+
+  var findQuery = {
+    admin: false,
+    "status.confirmed": true
+  };
+
+  if (searchText.length > 0){
+    var queries = [];
+    var re = new RegExp(searchText, 'i');
+    userFindQuery = {};
+
+    queries.push({ email: re });
+    queries.push({ 'profile.name': re });
+    queries.push({ 'teamCode': re });
+
+    
+    findQuery.$or = queries;
+  }
+
+  User
+    .find(findQuery)
+    .sort({
+      'profile.name': 'asc'
+    })
+    .select('profile.name profile.school profile.company profile.major profile.gender profile.description profile.summary teamCode mentor confirmation.github confirmation.linkedin confirmation.website')
+    .skip(page * size)
+    .limit(size)
+    .exec(function (err, users){
+      if (err || !users){
+        return callback(err);
+      }
+
+      User.count(findQuery).exec(function(err, count){
+
+        if (err){
+          return callback(err);
+        }
+
+        return callback(null, {
+          users: users,
+          page: page,
+          size: size,
+          totalPages: Math.ceil(count / size)
+        });
+      });
+    });
+}
+
+/*
+ *  get all members for this forum
+ * @param id
+ * @param callback
+ */
+UserController.getMentorForumMembers = function (team, callback) {
+    User
+        .find({$or: [{teamCode: team}, {mentor: true}]},
+            function (err, users) {
+                if (err || !users) {
+                    return callback(err, users);
+                }
+            }).select('profile.name src mentor profile.picture').exec(callback);
+};
+
+/**
+ *  get all members for this forum by team name
+ * @param id
+ * @param callback
+ */
+UserController.getMembersByTeam = function (team, callback) {
+    User
+        .find({teamCode: team},
+            function (err, users) {
+            if (err || !users) {
+                return callback(err, users);
+            }
+        }).select('profile.name src mentor profile.picture').exec(callback);
+};
+
+/**
+ * returns all mentors in Hackathon
+ * @param callback
+ */
+UserController.getMentors = function (callback) {
+    User.find({
+        mentor: true,
+    }, function (err, mentors) {
+        if (err || !mentors) {
+            return callback(err, mentors);
+        }
+        return callback(
+            null,
+            {
+                mentors: mentors
+            }
+        );
+    });
+};
+
+/**
  * Given a team code and id, join a team.
  * @param  {String}   id       Id of the user joining/creating
  * @param  {String}   code     Code of the proposed team
@@ -582,6 +704,55 @@ UserController.leaveTeam = function(id, callback){
   },
   callback);
 };
+
+/**
+ * Given a team code and id, join a team.
+ * @param  {String}   id       Id of the user joining/creating
+ * @param grade
+ * @param  {Function} callback args(err, users)
+ */
+UserController.addGrade = function(id, grade, callback){
+  User.findOneAndUpdate({
+        _id: id
+      },{
+    $push: { grades: grade }
+    }, {
+        new: true
+      },
+      callback);
+};
+
+/**
+ * Get user's name, team
+ * @param  {Function} callback args(err, users)
+ */
+UserController.getTeamNames = function(callback){
+  User.find({
+    admin: false,
+    mentor:false,
+  },{
+    "profile.name" : 1,
+    teamCode: 1
+  }, callback);
+};
+
+
+/**
+ * Get user's name, team, grades.
+ * @param  {Function} callback args(err, users)
+ */
+UserController.getGrades = function(callback){
+  User.find({
+    admin: false,
+    mentor:false,
+    teamCode: {$ne :""}
+  },{
+    "profile.name" : 1,
+    teamCode: 1,
+    grades: 1
+  }, callback);
+};
+
 
 /**
  * Resend an email verification email given a user id.

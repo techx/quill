@@ -21,13 +21,13 @@ var profile = {
 
   school: {
     type: String,
-    min: 0,
+    min: 1,
     max: 150,
   },
 
   company: {
     type: String,
-    min: 0,
+    min: 1,
     max: 150,
   },
 
@@ -63,6 +63,12 @@ var profile = {
     max: 150,
   },
 
+  major: {
+    type: String,
+    min: 1,
+    max: 100
+  },
+
   description: {
     type: String,
     min: 0,
@@ -76,6 +82,12 @@ var profile = {
   },
 
   teamIdea: {
+    type: String,
+    min: 0,
+    max: 1500
+  },
+
+  summary: {
     type: String,
     min: 0,
     max: 1500
@@ -104,8 +116,8 @@ var confirmation = {
   wantsHardware: Boolean,
   hardware: String,
 
-  major: String,
   github: String,
+  linkedin: String,
   website: String,
   resume: String,
 
@@ -218,6 +230,20 @@ var schema = new mongoose.Schema({
     type: String,
     min: 0,
     max: 140,
+  },
+  /**
+   * add array of grades to each user
+   */
+  grades:{
+    type: [Number],
+    required: true,
+    default: [],
+    select: true
+  },
+
+  forums: {
+    type: Array,
+    default: [],
   },
 
   verified: {

@@ -1,0 +1,30 @@
+#profile {
+    text-align: center;
+
+    .avatar {
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 20%;
+        }
+    }
+
+    .info {
+        font-weight: bold;
+        padding-top: 2em;
+    }
+
+    .links {
+        padding-top: 2em;
+        padding-bottom: 2em;
+
+        .icon {
+            width: 45px;
+            padding-left: 1em;
+        }
+    }
+
+    .description {
+    }
+}

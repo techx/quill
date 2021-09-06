@@ -1,7 +1,8 @@
 const angular = require('angular');
 const SettingsService = require('./services/SettingsService.js');
 const UserService = require('./services/UserService.js');
-
+const ForumService = require('./services/ForumService.js');
+const UpdatesService = require('./services/UpdatesService.js');
 const AdminCtrl = require('../views/admin/adminCtrl.js');
 const AdminSettingsCtrl = require('../views/admin/settings/adminSettingsCtrl.js');
 const AdminStatsCtrl = require('../views/admin/stats/adminStatsCtrl.js');
@@ -16,19 +17,29 @@ const ResetCtrl = require('../views/reset/resetCtrl.js');
 const SidebarCtrl = require('../views/sidebar/sidebarCtrl.js');
 const TeamCtrl = require('../views/team/teamCtrl.js');
 const VerifyCtrl = require('../views/verify/verifyCtrl.js');
+const ProfileCtrl = require('../views/profile/profileCtrl.js');
+const AttendeesCtrl = require('../views/attendees/attendeesCtrl.js');
+const ForumCtrl = require('../views/forum/forumCtrl.js');
+const GeneralCtrl = require('../views/forum/general/generalCtrl');
+const MentorCtrl = require('../views/forum/mentor/mentorCtrl.js');
+const TeamForumCtrl = require('../views/forum/team/teamForumCtrl.js');
+const MultiCtrl = require('../views/forum/multiForum/multiCtrl');
+const ScoringCtrl = require('../views/scoring/scoringCtrl.js');
+const ScoringGradeCtrl = require('../views/scoring/grade/scoringGradeCtrl.js');
+const ScoringResultsCtrl = require('../views/scoring/results/scoringResultsCtrl.js');
 
 angular.module('reg')
-  .config([
-    '$stateProvider',
-    '$urlRouterProvider',
-    '$locationProvider',
-    function(
-      $stateProvider,
-      $urlRouterProvider,
-      $locationProvider) {
+    .config([
+        '$stateProvider',
+        '$urlRouterProvider',
+        '$locationProvider',
+        function (
+            $stateProvider,
+            $urlRouterProvider,
+            $locationProvider) {
 
-    // For any unmatched url, redirect to /state1
-    $urlRouterProvider.otherwise("/404");
+            // For any unmatched url, redirect to /state1
+            $urlRouterProvider.otherwise("/404");
 
     // Set up de states
     $stateProvider
@@ -136,6 +147,41 @@ angular.module('reg')
           }
         }
       })
+      .state('app.profile', {
+        url: "/profile",
+        templateUrl: "views/profile/profile.html",
+        controller: 'ProfileCtrl',
+        resolve: {
+          currentUser: function(UserService){
+            return UserService.getCurrentUser();
+          }
+        }
+      })
+      .state('app.scoring', {
+        url: "/Scoring_System",
+        templateUrl: "views/scoring/scoring.html",
+        controller: 'ScoringCtrl',
+      })
+      .state('app.scoring.grade', {
+        url: "/grade",
+        templateUrl: "views/scoring/grade/grade.html",
+        controller: 'ScoringGradeCtrl',
+        resolve: {
+          allUsers: function (UserService) {
+            return UserService.getTeamNames();
+          }
+        }
+      })
+      .state('app.scoring.results', {
+        url: "/results",
+        templateUrl: "views/scoring/results/results.html",
+        controller: 'ScoringResultsCtrl',
+        resolve: {
+          allUsers: function (UserService) {
+            return UserService.getGrades();
+          }
+        }
+      })
       .state('app.team', {
         url: "/team",
         templateUrl: "views/team/team.html",
@@ -152,6 +198,68 @@ angular.module('reg')
             return SettingsService.getPublicSettings();
           }
         }
+      })
+      .state('app.attendees', {
+        url: "/attendees?" +
+          '&page' +
+          '&size' +
+          '&query',
+        templateUrl: "views/attendees/attendees.html",
+        controller: 'AttendeesCtrl',
+        data: {
+          requireAdmitted: true
+        },
+        resolve: {
+          currentUser: function(UserService) {
+            return UserService.getCurrentUser();
+          }
+        }
+      })
+      .state('app.forum', {
+        url: "/forum",
+        templateUrl: "views/forum/forum.html",
+        controller: 'ForumCtrl',
+        data: {
+          requireVerified: true
+        },
+        resolve: {
+          userForums: function(ForumService, Session){
+            return Session.isMentor() ? ForumService.getMentorForums() : ForumService.getHackerForums();
+          },
+          currentUser: function(UserService){
+            return UserService.getCurrentUser();
+          }
+        }
+      })
+      .state('app.attendees.profile', {
+        url: "/attendees/profile/:id",
+        templateUrl: "views/attendees/profile/profile.html",
+        controller: 'AttendeesProfileCtrl',
+        resolve: {
+          'user': function($stateParams, UserService){
+            return UserService.get($stateParams.id);
+          }
+        }
+      })
+      .state('app.forum.multiForum', {
+        url: "",
+        templateUrl: 'views/forum/multiForum/multi.html',
+        controller: 'MultiCtrl',
+      })
+      .state('app.forum.general', {
+        url: "",
+        templateUrl: "views/forum/general/general.html",
+        controller: 'GeneralCtrl',
+      })
+      .state('app.forum.mentor', {
+        url: "",
+        templateUrl: "views/forum/mentor/mentor.html",
+        controller: 'MentorCtrl',
+      })
+      .state('app.forum.team', {
+        url: "",
+        templateUrl: "views/forum/team/team.html",
+        controller: 'TeamForumCtrl',
       })
       .state('app.admin', {
         views: {

@@ -34,7 +34,7 @@ var schema = new mongoose.Schema({
   whitelistedEmails: {
     type: [String],
     select: false,
-    default: ['mta.ac.il'],
+    default: ['.edu', '.ac.il'],
   },
   companysWhitelistedEmails: {
     type: [String],
@@ -51,6 +51,9 @@ var schema = new mongoose.Schema({
     type: String
   },
   allowMinors: {
+    type: Boolean
+  },
+  openScoring: {
     type: Boolean
   }
 });
@@ -82,6 +85,20 @@ schema.statics.getWhitelistedEmails = function(callback){
       return callback(err, settings.companysWhitelistedEmails);
     });
 };
+
+/**
+ * Get the open scoring.
+ * @param  {Function} callback args(err, emails)
+ */
+schema.statics.getOpenScoring = function(callback){
+  this
+      .findOne({})
+      .select('openScoring')
+      .exec(function(err, settings){
+        return callback(err, settings.openScoring);
+      });
+};
+
 
 /**
  * Get the open and close time for registration.
