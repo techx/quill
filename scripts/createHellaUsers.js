@@ -11,7 +11,7 @@ var username = 'hacker';
 for (var i = 0; i < users; i++){
   console.log(username, i);
   UserController
-    .createUser(username + i + '@school.edu', 'foobar', function(){
+    .createUser(username + i + '@mta.ac.il', 'foobar', function(){
     console.log(i);
     });
 }

@@ -16,14 +16,6 @@ angular.module('reg')
       // Set up the user
       $scope.user = currentUser.data;
 
-      // Is the student from MIT?
-//      $scope.isMitStudent = $scope.user.email.split('@')[1] == 'mit.edu';
-//
-//      // If so, default them to adult: true
-//      if ($scope.isMitStudent){
-//        $scope.user.profile.adult = true;
-//      }
-
       // Populate the school dropdown
       populateSchools();
       _setupForm();
@@ -72,7 +64,7 @@ angular.module('reg')
 
       function _updateUser(e){
         UserService
-          .updateProfile(Session.getUserId(), $scope.user.profile)
+          .updateProfile(Session.getUserId(), $scope.user.profile, $scope.user.teamLeader)
           .then(response => {
             swal("Awesome!", "Your application has been saved.", "success").then(value => {
               $state.go("app.dashboard");

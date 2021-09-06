@@ -15,44 +15,83 @@ angular.module('reg')
 
       // Set up the user
       $scope.user = currentUser.data;
-
-      populateCompanys();
-      //setAvailableDatesToMentor();
-      _setupForm();
-
-      $scope.regIsClosed = Date.now() > settings.data.timeCloseRegistration;
-
-      /*
-          <label>Available Dates</label>
-            <p>The you are about to provide is the arriving times (pay attention that in order to submit application you nee to provide at least one arriving time)</p>
-            <p>Day 1</p>
-            <input min="2021-12-27T08:30:00" max="2021-12-27T23:59:00" ng-model="user.profile.dayOne" type="datetime-local"/>
-            <p>Day 2</p>
-            <input min="2021-12-28T00:00:00" max="2021-12-28T11:00:00" ng-model="user.profile.dayTwo" type="datetime-local"/>
+      $scope.user.profile.numberOfRoundUserWantToCome = $scope.user.profile.numberOfRoundUserWantToCome == undefined ? 1: $scope.user.profile.numberOfRoundUserWantToCome;
       
+      function updateTimes(){
+         // Format the dates in settings.
+        $scope.user.profile.round1go = new Date($scope.user.profile.round1go);
+        $scope.user.profile.round1come = new Date($scope.user.profile.round1come);
+        $scope.user.profile.round2go = new Date($scope.user.profile.round2go);
+        $scope.user.profile.round2come = new Date($scope.user.profile.round2come);
+        $scope.user.profile.round3go = new Date($scope.user.profile.round3go);
+        $scope.user.profile.round3come = new Date($scope.user.profile.round3come);
+      }
 
+      // Take a date and remove the seconds.
+      function cleanDate(date){
+        return new Date(
+          date.getFullYear(),
+          date.getMonth(),
+          date.getDate(),
+          date.getHours(),
+          date.getMinutes()
+        );
+      }
 
-      function setAvailableDatesToMentor(){
-        var availableDatesDiv = angular.getElementById("availableDates");
-        var label = angular.element('<label>Available Dates</label>');
-        availableDatesDiv.add(label);
-        var p = angular.element('<p>The you are about to provide is the arriving times (pay attention that in order to submit application you nee to provide at least one arriving time)</p>');
-        availableDatesDiv.add(p);
-        var numberOfHackDay = parseInt(settings.timeCloseHackathon.split('T')[0].split('-')[2]) - parseInt(settings.timeOpenHackathon.split('T')[0].split('-')[2]);
-        var openingDay = settings.timeOpenHackathon;
-
-
-        for (i = 0; i < numberOfHackDay; i++){
-          var dayP = angular.element('<p>Day '+ i + 1 +'</p>');
-          availableDatesDiv.add(dayP);
-          var openingDate = new Date(openingDay);
-          var currentDay = new Date(openingDate);
-          currentDay.setDate(myDate.getDate() + i);
-          var input = angular.element('<input min=' + '"'+ currentDay +'"' + ' max=' + '"'+ currentDay +'"' + ' ng-model="user.profile.day' + i + '" type="datetime-local"/>');
-          availableDatesDiv.add(input);
+      $scope.increaseNumbersOfDaysUserWantToCome = function(){
+        if($scope.user.profile.numberOfRoundUserWantToCome == $scope.numberOfHackDay){
+          swal('Sorry this is the the maximum days round days you come on');
+        }
+        else{
+          $scope.user.profile.numberOfRoundUserWantToCome += 1;
         }
       }
-      */
+
+      $scope.isAbleToComeToMentor = function (roundNumber) {
+        return roundNumber <= $scope.user.profile.numberOfRoundUserWantToCome;
+      }
+
+      $scope.regIsClosed = Date.now() > settings.data.timeCloseRegistration;
+      $scope.maxDateTimeToChose = createMinMaxValue(new Date(settings.data.timeCloseHackathon));
+      $scope.minDateTimeToChose = createMinMaxValue(new Date(settings.data.timeOpenHackathon));
+
+      populateCompanys();
+      setAvailableDatesToMentor();
+      setMinMaxDatesToChose()
+      _setupForm();
+      updateTimes();
+
+      function setAvailableDatesToMentor(){
+        $scope.numberOfHackDay = Math.round((settings.data.timeCloseHackathon - settings.data.timeOpenHackathon) / 1000 / 60 / 60 / 24);
+      }
+
+      function createMinMaxValue(date){
+        var month = date.getMonth() > 9 ? date.getMonth() : '0' + date.getMonth();
+        var day = date.getDate() > 9 ? date.getDate() : '0' + date.getDate();
+        var hours = date.getHours() > 9 ?date.getHours() : '0' + date.getHours();
+        var minutes = date.getMinutes() > 9 ? date.getMinutes() : '0' + date.getMinutes();
+
+        return date.getFullYear() + '-' +
+        month + '-' +
+        day +
+        'T' + hours
+        + ':' + minutes;
+      }
+
+      function setMinMaxDatesToChose(){
+        document.getElementById("r1c").setAttribute("min", $scope.minDateTimeToChose);
+        document.getElementById("r1c").setAttribute("max", $scope.maxDateTimeToChose);
+        document.getElementById("r1g").setAttribute("min", $scope.minDateTimeToChose);
+        document.getElementById("r1g").setAttribute("max", $scope.maxDateTimeToChose);
+        document.getElementById("r2c").setAttribute("min", $scope.minDateTimeToChose);
+        document.getElementById("r2c").setAttribute("max", $scope.maxDateTimeToChose);
+        document.getElementById("r2g").setAttribute("min", $scope.minDateTimeToChose);
+        document.getElementById("r2g").setAttribute("max", $scope.maxDateTimeToChose);
+        document.getElementById("r3c").setAttribute("min", $scope.minDateTimeToChose);
+        document.getElementById("r3c").setAttribute("max", $scope.maxDateTimeToChose);
+        document.getElementById("r3g").setAttribute("min", $scope.minDateTimeToChose);
+        document.getElementById("r3g").setAttribute("max", $scope.maxDateTimeToChose);
+      }
 
       /*
        * TODO: JANK WARNING
@@ -95,6 +134,37 @@ angular.module('reg')
       }
 
       function _updateUser(e){
+        if($scope.user.profile.numberOfRoundUserWantToCome >= 1){
+          console.log(cleanDate($scope.user.profile.round1come).getTime());
+          $scope.user.profile.round1come = cleanDate($scope.user.profile.round1come).getTime();
+          $scope.user.profile.round1go = cleanDate($scope.user.profile.round1go).getTime();
+
+          if($scope.user.profile.round1go <= $scope.user.profile.round1come){
+            swal('Oops...', 'you can\'t go before you come :) (Round 1).', 'error');
+            return;
+          }
+        }
+        if($scope.user.profile.numberOfRoundUserWantToCome >= 2){
+          $scope.user.profile.round2come = cleanDate($scope.user.profile.round2come).getTime();
+          $scope.user.profile.round2go = cleanDate($scope.user.profile.round2go).getTime();
+
+          if($scope.user.profile.round2go <= $scope.user.profile.round2come){
+            swal('Oops...', 'you can\'t go before you come :) (Round 2).', 'error');
+            return;
+          }
+        }
+        if($scope.user.profile.numberOfRoundUserWantToCome >= 3){
+          $scope.user.profile.round3come = cleanDate($scope.user.profile.round3come).getTime();
+          $scope.user.profile.round3go = cleanDate($scope.user.profile.round3go).getTime();
+
+          if($scope.user.profile.round3go <= $scope.user.profile.round3come){
+            swal('Oops...', 'you can\'t go before you come :) (Round 3).', 'error');
+            return;
+          }
+        }
+        console.log($scope.user.profile);
+
+
         UserService
           .updateProfile(Session.getUserId(), $scope.user.profile)
           .then(response => {
@@ -156,6 +226,24 @@ angular.module('reg')
                 {
                   type: 'empty',
                   prompt: 'Please select a gender.'
+                }
+              ]
+            },
+            Round1GoingMentor: {
+              identifier: 'Round1GoingMentor',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please select a Round 1 Go.'
+                }
+              ]
+            },
+            Round1ComingMentor: {
+              identifier: 'Round1ComingMentor',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please select a Round 1 Coming.'
                 }
               ]
             },

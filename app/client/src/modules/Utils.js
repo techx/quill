@@ -6,7 +6,7 @@ angular.module('reg')
     function(){
       return {
         isRegOpen: function(settings){
-          return Date.now() > settings.timeOpen && Date.now() < settings.timeClose;
+          return Date.now() > settings.timeOpenRegistration && Date.now() < settings.timeCloseRegistration;
         },
         isAfter: function(time){
           return Date.now() > time;

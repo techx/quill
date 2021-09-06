@@ -63,6 +63,23 @@
 
           <div class="form">
             <div class="title">
+              Your Team Leader:
+            </div>
+          </div>
+
+          <p
+            ng-repeat="user in teammates"
+            class="item"
+            ng-show="user.teamLeader"> 
+            {{user.profile.name || 'Somebody (has not filled out their profile!)'}}
+          </p>
+
+          <br />
+
+          <div class="ui divider"></div>
+
+          <div class="form">
+            <div class="title">
               Your Team:
             </div>
           </div>
@@ -72,6 +89,8 @@
             class="item">
             {{user.profile.name || 'Somebody (has not filled out their profile!)'}}
           </p>
+
+          <br />
 
           <div
             ng-show="regIsOpen">

@@ -31,11 +31,36 @@ var profile = {
     max: 150,
   },
 
+  round1come: {
+    type: Number,
+  },
+
+  round1go: {
+    type: Number,
+  },
+
+  round2come: {
+    type: Number,
+  },
+
+  round2go: {
+    type: Number,
+  },
+
+  round3come: {
+    type: Number,
+  },
+
+  round3go: {
+    type: Number,
+  },
+  numberOfRoundUserWantToCome: {
+    type: Number,
+  },
   graduationYear: {
     type: String,
-    enum: {
-      values: '2016 2017 2018 2019'.split(' '),
-    }
+    min: 0,
+    max: 150,
   },
 
   major: {
@@ -51,6 +76,12 @@ var profile = {
   },
 
   essay: {
+    type: String,
+    min: 0,
+    max: 1500
+  },
+
+  teamIdea: {
     type: String,
     min: 0,
     max: 1500
@@ -89,25 +120,6 @@ var confirmation = {
   linkedin: String,
   website: String,
   resume: String,
-
-  needsReimbursement: Boolean,
-  address: {
-    name: String,
-    line1: String,
-    line2: String,
-    city: String,
-    state: String,
-    zip: String,
-    country: String
-  },
-  receipt: String,
-
-  hostNeededFri: Boolean,
-  hostNeededSat: Boolean,
-  genderNeutral: Boolean,
-  catFriendly: Boolean,
-  smokingFriendly: Boolean,
-  hostNotes: String,
 
   notes: String,
 
@@ -192,6 +204,12 @@ var schema = new mongoose.Schema({
   },
 
   mentor: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
+
+  teamLeader: {
     type: Boolean,
     required: true,
     default: false,
@@ -365,15 +383,27 @@ schema.statics.getByToken = function(token, callback){
   }.bind(this));
 };
 
-schema.statics.validateProfile = function(user, profile, cb){
+schema.statics.validateProfile = function(user, profile, teamLeader, cb){
   if(user.mentor === false){
-    return cb(!(
-      profile.name.length > 0 &&
-      profile.adult &&
-      profile.school.length > 0 &&
-      ['2016', '2017', '2018', '2019'].indexOf(profile.graduationYear) > -1 &&
-      ['M', 'F', 'O', 'N'].indexOf(profile.gender) > -1
-      ));
+    if(teamLeader === true){
+      return cb(!(
+        profile.name.length > 0 &&
+        profile.adult &&
+        profile.school.length > 0 &&
+        !isNaN(profile.graduationYear) &&
+        ['M', 'F', 'O', 'N'].indexOf(profile.gender) > -1 &&
+        profile.teamIdea.length > 0
+        ));
+    }
+    else{
+      return cb(!(
+        profile.name.length > 0 &&
+        profile.adult &&
+        profile.school.length > 0 &&
+        !isNaN(profile.graduationYear) &&
+        ['M', 'F', 'O', 'N'].indexOf(profile.gender) > -1
+        ));
+    }
   }
   else{
     return cb(!(
@@ -384,6 +414,25 @@ schema.statics.validateProfile = function(user, profile, cb){
       ));
   }
 };
+
+schema.statics.validateConfirmation = function(user, confirmation, cb) {
+  if(user.mentor === true){
+    return cb(!(
+      confirmation.phoneNumber.length > 0 &&
+      confirmation.signaturePhotoRelease.length > 0 &&
+      ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'WXS', 'WS', 'WM', 'WL', 'WXL', 'WXXL'].indexOf(confirmation.shirtSize) > -1
+    ));
+  }
+  else{
+    return cb(!(
+      confirmation.phoneNumber.length > 0 > 0 &&
+      confirmation.signaturePhotoRelease.length > 0 &&
+      confirmation.signatureCodeOfConduct.length > 0 &&
+      confirmation.signatureLiability.length > 0 &&
+      ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'WXS', 'WS', 'WM', 'WL', 'WXL', 'WXXL'].indexOf(confirmation.shirtSize) > -1
+    ));
+  }
+}
 
 //=========================================
 // Virtuals

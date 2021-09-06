@@ -1,6 +1,7 @@
 <div id="dashboard" class="page">
   <div class="divided title">
-    Dashboard
+    
+    <img src="../../assets/images/welcome-dribbble.gif" alt="welcome sign" width="220px"/>  
   </div>
 
   <div class="ui stackable centered page grid">
@@ -60,12 +61,13 @@
         </div>
 
         <div
-          ng-class="settings.timeClose"
+          ng-class="settings.timeCloseRegistration"
           ng-if="!dashState('admittedAndCanConfirm') || !dashState('admittedAndCannotConfirm') || !dashState('confirmed') || !dashState('declined')">
           <strong>
             Registration Deadline:
           </strong>
-          {{ timeClose }}
+          {{ timeCloseRegistration }}
+          )
         </div>
 
         <div
@@ -75,6 +77,7 @@
             Confirmation Deadline:
           </strong>
           {{ timeConfirm }}
+          )
         </div>
 
         <div

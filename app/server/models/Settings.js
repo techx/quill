@@ -10,14 +10,23 @@ var mongoose = require('mongoose');
  */
 var schema = new mongoose.Schema({
   status: String,
-  timeOpen: {
+  timeOpenRegistration: {
     type: Number,
     default: 0
   },
-  timeClose: {
+  timeCloseRegistration: {
     type: Number,
     default: Date.now() + 31104000000 // Add a year from now.
   },
+  timeOpenHackathon: {
+    type: Number,
+    default: Date.now()
+  },
+  timeCloseHackathon: {
+    type: Number,
+    default: Date.now() + 86000000 // Add a day from now.
+  },
+
   timeConfirm: {
     type: Number,
     default: 604800000 // Date of confirmation
@@ -25,17 +34,12 @@ var schema = new mongoose.Schema({
   whitelistedEmails: {
     type: [String],
     select: false,
-    default: ['.edu', '.ac.il', '.com', 'gmail.com'],
+    default: ['.edu', '.ac.il'],
   },
   companysWhitelistedEmails: {
     type: [String],
     select: false,
-    default: ['.money'],
-  },
-  companysWhitelistedEmails: {
-    type: [String],
-    select: false,
-    default: ['.money'],
+    default: ['mtahack.com'],
   },
   waitlistText: {
     type: String
@@ -98,20 +102,37 @@ schema.statics.getOpenScoring = function(callback){
 
 /**
  * Get the open and close time for registration.
- * @param  {Function} callback args(err, times : {timeOpen, timeClose, timeConfirm})
+ * @param  {Function} callback args(err, times : {timeOpenRegistration, timeCloseRegistration, timeConfirm})
  */
 schema.statics.getRegistrationTimes = function(callback){
   this
     .findOne({})
-    .select('timeOpen timeClose timeConfirm')
+    .select('timeOpenRegistration timeCloseRegistration timeConfirm')
     .exec(function(err, settings){
       callback(err, {
-        timeOpen: settings.timeOpen,
-        timeClose: settings.timeClose,
+        timeOpenRegistration: settings.timeOpenRegistration,
+        timeCloseRegistration: settings.timeCloseRegistration,
         timeConfirm: settings.timeConfirm
       });
     });
 };
+
+/**
+ * Get the open and close time for hackathon.
+ * @param  {Function} callback args(err, times : {timeOpenHackathon, timeCloseHackathon})
+ */
+ schema.statics.getHackathonTimes = function(callback){
+  this
+    .findOne({})
+    .select('timeOpenHackathon timeCloseHackathon')
+    .exec(function(err, settings){
+      callback(err, {
+        timeOpenHackathon: settings.timeOpenHackathon,
+        timeCloseHackathon: settings.timeCloseHackathon
+      });
+    });
+};
+
 
 schema.statics.getPublicSettings = function(callback){
   this

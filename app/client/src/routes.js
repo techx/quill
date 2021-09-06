@@ -93,7 +93,9 @@ angular.module('reg')
         templateUrl: "views/application/users/applicationUser.html",
         controller: 'ApplicationUserCtrl',
         data: {
-          requireVerified: true
+          requireVerified: true,
+          requireUser: true,
+          requireAdmin: false
         },
         resolve: {
           currentUser: function(UserService){
@@ -109,7 +111,9 @@ angular.module('reg')
         templateUrl: "views/application/mentor/applicationMentor.html",
         controller: 'ApplicationMentorCtrl',
         data: {
-          requireVerified: true
+          requireVerified: true,
+          requireMentor: true,
+          requireAdmin: false
         },
         resolve: {
           currentUser: function(UserService){
@@ -120,12 +124,22 @@ angular.module('reg')
           }
         }
       })
+      .state('app.mentorInstructions', {
+        url: "/mentorInstructions",
+        templateUrl: "views/mentorInstructions/mentorInstructions.html",
+        data: {
+          requireVerified: true,
+          requireMentor: true,
+          requireAdmin: false
+        }
+      })
       .state('app.confirmation', {
         url: "/confirmation",
         templateUrl: "views/confirmation/confirmation.html",
         controller: 'ConfirmationCtrl',
         data: {
-          requireAdmitted: true
+          requireAdmitted: true,
+          requireAdmin: false
         },
         resolve: {
           currentUser: function(UserService){
@@ -173,7 +187,8 @@ angular.module('reg')
         templateUrl: "views/team/team.html",
         controller: 'TeamCtrl',
         data: {
-          requireVerified: true
+          requireVerified: true,
+          requireAdmin: false
         },
         resolve: {
           currentUser: function(UserService){
@@ -320,6 +335,8 @@ angular.module('reg')
 
       var requireLogin = transition.to().data.requireLogin;
       var requireAdmin = transition.to().data.requireAdmin;
+      var requireMentor = transition.to().data.requireMentor;
+      var requireUser = transition.to().data.requireUser;
       var requireVerified = transition.to().data.requireVerified;
       var requireAdmitted = transition.to().data.requireAdmitted;
 
@@ -328,6 +345,14 @@ angular.module('reg')
       }
 
       if (requireAdmin && !Session.getUser().admin) {
+        return transition.router.stateService.target("app.dashboard");
+      }
+
+      if (requireUser && Session.getUser().mentor) {
+        return transition.router.stateService.target("app.dashboard");
+      }
+
+      if (requireMentor && !Session.getUser().mentor) {
         return transition.router.stateService.target("app.dashboard");
       }
 

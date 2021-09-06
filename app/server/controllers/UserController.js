@@ -37,13 +37,13 @@ function canRegister(email, password, callback){
 
     var now = Date.now();
 
-    if (now < times.timeOpen){
+    if (now < times.timeOpenRegistration){
       return callback({
-        message: "Registration opens in " + moment(times.timeOpen).fromNow() + "!"
+        message: "Registration opens in " + moment(times.timeOpenRegistration).fromNow() + "!"
       });
     }
 
-    if (now > times.timeClose){
+    if (now > times.timeCloseRegistration){
       return callback({
         message: "Sorry, registration is closed."
       });
@@ -292,12 +292,15 @@ UserController.getById = function (id, callback){
  * @param  {Object}   profile  Profile object
  * @param  {Function} callback Callback with args (err, user)
  */
-UserController.updateProfileById = function (id, profile, callback){
-
+UserController.updateProfileById = function (id, profile, teamLeader, callback){
   // Validate the user profile, and mark the user as profile completed
   // when successful.
   User.findById(id).exec(function(err, user){
-    User.validateProfile(user, profile, function(err){
+    if(err || !user){
+      return callback(err);
+    }
+    
+    User.validateProfile(user, profile, teamLeader, function(err){
 
       if (err){
         return callback({message: 'invalid profile'});
@@ -311,26 +314,61 @@ UserController.updateProfileById = function (id, profile, callback){
 
         var now = Date.now();
 
-        if (now < times.timeOpen){
+        if (now < times.timeOpenRegistration){
           return callback({
-            message: "Registration opens in " + moment(times.timeOpen).fromNow() + "!"
+            message: "Registration opens in " + moment(times.timeOpenRegistration).fromNow() + "!"
           });
         }
 
-        if (now > times.timeClose){
+        if (now > times.timeCloseRegistration){
           return callback({
             message: "Sorry, registration is closed."
           });
         }
       });
 
-      User.findOneAndUpdate({
+      var code = user.teamCode;
+      if (code !== undefined && code !== null && teamLeader){
+        User.find({
+          teamCode: code
+        })
+        .select('profile.name')
+        .exec(function(err, users){
+          if (err) {
+            callback(err);
+          }
+          users.forEach(teamMember => {
+            if(teamMember.id !== id){
+              User.findOneAndUpdate({
+                '_id': teamMember._id,
+                verified: true
+              },
+                {
+                  $set: {
+                    'teamLeader': false,
+                    'profile.teamIdea': '',
+                  }
+                },function (err, user) {
+                  if (err || !user){
+                    return callback(err);
+                  }
+                  console.log(user.profile.name + ' was removed as a team leader');
+                });
+            }
+          });
+        });
+
+
+
+      }
+      User.findOneAndUpdate({ 
         _id: id,
         verified: true
       },
         {
           $set: {
             'lastUpdated': Date.now(),
+            'teamLeader': teamLeader,
             'profile': profile,
             'status.completedProfile': true
           }
@@ -339,7 +377,8 @@ UserController.updateProfileById = function (id, profile, callback){
           new: true
         },
         callback);
-
+    
+      
     });
   });
 };
@@ -376,37 +415,42 @@ UserController.updateForumsById = function (id, forums, callback) {
 UserController.updateConfirmationById = function (id, confirmation, callback){
 
   User.findById(id).exec(function(err, user){
-
     if(err || !user){
       return callback(err);
     }
 
-    // Make sure that the user followed the deadline, but if they're already confirmed
-    // that's okay.
-    if (Date.now() >= user.status.confirmBy && !user.status.confirmed){
-      return callback({
-        message: "You've missed the confirmation deadline."
-      });
-    }
+    User.validateConfirmation(user, confirmation, function(err){
+      if(err){
+        return callback({message: 'invalid confirmation'});
+      }
+    
+      // Make sure that the user followed the deadline, but if they're already confirmed
+      // that's okay.
+      if (Date.now() >= user.status.confirmBy && !user.status.confirmed){
+        return callback({
+          message: "You've missed the confirmation deadline."
+        });
+      }
 
-    // You can only confirm acceptance if you're admitted and haven't declined.
-    User.findOneAndUpdate({
-      '_id': id,
-      'verified': true,
-      'status.admitted': true,
-      'status.declined': {$ne: true}
-    },
-      {
-        $set: {
-          'lastUpdated': Date.now(),
-          'confirmation': confirmation,
-          'status.confirmed': true,
-        }
-      }, {
-        new: true
+
+      // You can only confirm acceptance if you're admitted and haven't declined.
+      User.findOneAndUpdate({
+        '_id': id,
+        'verified': true,
+        'status.admitted': true,
+        'status.declined': {$ne: true}
       },
+        {
+          $set: {
+            'lastUpdated': Date.now(),
+            'confirmation': confirmation,
+            'status.confirmed': true,
+          }
+        }, {
+          new: true
+        },
       callback);
-
+    });
   });
 };
 
@@ -484,7 +528,6 @@ UserController.getTeammates = function(id, callback){
       .find({
         teamCode: code
       })
-      .select('profile.name')
       .exec(callback);
   });
 };

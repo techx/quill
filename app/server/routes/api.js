@@ -321,7 +321,8 @@ module.exports = function(router) {
 
     var fields = ['_id','email','verified','timestamp','lastUpdated',
                   'profile.adult','profile.name','profile.school',
-                  'profile.company','mentor',
+                  'profile.company','mentor', 'profile.round1come','profile.round2come','profile.round3come',
+                  'profile.round1go','profile.round2go','profile.round3go',
                   'profile.gender','profile.graduationYear',
                   'profile.description','profile.essay','status.name',
                   'status.completedProfile','status.admitted',
@@ -378,8 +379,9 @@ module.exports = function(router) {
   router.put('/users/:id/profile', isOwnerOrAdmin, function(req, res){
     var profile = req.body.profile;
     var id = req.params.id;
+    var teamLeader = req.body.teamLeader;
 
-    UserController.updateProfileById(id, profile , defaultResponse(req, res));
+    UserController.updateProfileById(id, profile , teamLeader, defaultResponse(req, res));
   });
 
   /**
@@ -577,8 +579,8 @@ module.exports = function(router) {
   /**
    * Get the public settings.
    * res: {
-   *   timeOpen: Number,
-   *   timeClose: Number,
+   *   timeOpenRegistration: Number,
+   *   timeCloseRegistration: Number,
    *   timeToConfirm: Number,
    *   acceptanceText: String,
    *   confirmationText: String,
@@ -636,16 +638,30 @@ module.exports = function(router) {
   /**
    * Set the registration open and close times.
    * body : {
-   *   timeOpen: Number,
-   *   timeClose: Number
+   *   timeOpenRegistration: Number,
+   *   timeCloseRegistration: Number
    * }
    */
-  router.put('/settings/times', isAdmin, function(req, res){
-    var open = req.body.timeOpen;
-    var close = req.body.timeClose;
+  router.put('/settings/Registrationtimes', isAdmin, function(req, res){
+    var open = req.body.timeOpenRegistration;
+    var close = req.body.timeCloseRegistration;
     SettingsController.updateRegistrationTimes(open, close, defaultResponse(req, res));
   });
 
+    /**
+   * Set the hackathon open and close times.
+   * body : {
+   *   timeOpenHackathon: Number,
+   *   timeCloseHackathon: Number
+   * }
+   */
+     router.put('/settings/hackathonTimes', isAdmin, function(req, res){
+      var open = req.body.timeOpenHackathon;
+      var close = req.body.timeCloseHackathon;
+      SettingsController.updateHackathonTimes(open, close, defaultResponse(req, res));
+    });
+  
+  
   /**
    * Get the whitelisted emails.
    *
