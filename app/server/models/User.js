@@ -75,6 +75,12 @@ var profile = {
     max: 1500
   },
 
+  teamIdea: {
+    type: String,
+    min: 0,
+    max: 1500
+  },
+
   // Optional info for demographics
   gender: {
     type: String,
@@ -186,6 +192,12 @@ var schema = new mongoose.Schema({
   },
 
   mentor: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
+
+  teamLeader: {
     type: Boolean,
     required: true,
     default: false,
@@ -345,15 +357,27 @@ schema.statics.getByToken = function(token, callback){
   }.bind(this));
 };
 
-schema.statics.validateProfile = function(user, profile, cb){
+schema.statics.validateProfile = function(user, profile, teamLeader, cb){
   if(user.mentor === false){
-    return cb(!(
-      profile.name.length > 0 &&
-      profile.adult &&
-      profile.school.length > 0 &&
-      !isNaN(profile.graduationYear) &&
-      ['M', 'F', 'O', 'N'].indexOf(profile.gender) > -1
-      ));
+    if(teamLeader === true){
+      return cb(!(
+        profile.name.length > 0 &&
+        profile.adult &&
+        profile.school.length > 0 &&
+        !isNaN(profile.graduationYear) &&
+        ['M', 'F', 'O', 'N'].indexOf(profile.gender) > -1 &&
+        profile.teamIdea.length > 0
+        ));
+    }
+    else{
+      return cb(!(
+        profile.name.length > 0 &&
+        profile.adult &&
+        profile.school.length > 0 &&
+        !isNaN(profile.graduationYear) &&
+        ['M', 'F', 'O', 'N'].indexOf(profile.gender) > -1
+        ));
+    }
   }
   else{
     return cb(!(

@@ -299,7 +299,7 @@ UserController.getById = function (id, callback){
  * @param  {Object}   profile  Profile object
  * @param  {Function} callback Callback with args (err, user)
  */
-UserController.updateProfileById = function (id, profile, callback){
+UserController.updateProfileById = function (id, profile, teamLeader, callback){
   // Validate the user profile, and mark the user as profile completed
   // when successful.
   User.findById(id).exec(function(err, user){
@@ -307,7 +307,7 @@ UserController.updateProfileById = function (id, profile, callback){
       return callback(err);
     }
     
-    User.validateProfile(user, profile, function(err){
+    User.validateProfile(user, profile, teamLeader, function(err){
 
       if (err){
         return callback({message: 'invalid profile'});
@@ -333,13 +333,49 @@ UserController.updateProfileById = function (id, profile, callback){
           });
         }
       });
-      User.findOneAndUpdate({
+
+      var code = user.teamCode;
+      if (code !== undefined && code !== null && teamLeader){
+        User.find({
+          teamCode: code
+        })
+        .select('profile.name')
+        .exec(function(err, users){
+          if (err) {
+            callback(err);
+          }
+          users.forEach(teamMember => {
+            if(teamMember.id !== id){
+              User.findOneAndUpdate({
+                '_id': teamMember._id,
+                verified: true
+              },
+                {
+                  $set: {
+                    'teamLeader': false,
+                    'profile.teamIdea': '',
+                  }
+                },function (err, user) {
+                  if (err || !user){
+                    return callback(err);
+                  }
+                  console.log(user.profile.name + ' was removed as a team leader');
+                });
+            }
+          });
+        });
+
+
+
+      }
+      User.findOneAndUpdate({ 
         _id: id,
         verified: true
       },
         {
           $set: {
             'lastUpdated': Date.now(),
+            'teamLeader': teamLeader,
             'profile': profile,
             'status.completedProfile': true
           }
@@ -348,7 +384,8 @@ UserController.updateProfileById = function (id, profile, callback){
           new: true
         },
         callback);
-
+    
+      
     });
   });
 };
@@ -476,7 +513,6 @@ UserController.getTeammates = function(id, callback){
       .find({
         teamCode: code
       })
-      .select('profile.name')
       .exec(callback);
   });
 };
