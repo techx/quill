@@ -62,11 +62,10 @@ angular.module('reg')
                                     }
                                 }
                             });
-
                             compareMessages();
                         }
                     }, response => {
-                        console.log(response);
+                        // console.log(response);
                     });
             }
 
@@ -192,14 +191,14 @@ angular.module('reg')
             };
 
         }]).directive('onFinishRender', function ($timeout) {
-    return {
-        restrict: 'A',
-        link: function (scope, element, attr) {
-            if (scope.$last === true) {
-                $timeout(function () {
-                    scope.$emit(attr.onFinishRender);
-                });
-            }
-        }
-    };
-});
+            return {
+                restrict: 'A',
+                link: function (scope, element, attr) {
+                    if (scope.$last === true) {
+                        $timeout(function () {
+                            scope.$emit(attr.onFinishRender);
+                        });
+                 }
+                }
+            };
+        });

@@ -92,6 +92,26 @@
     Logout
   </div>
 
+  <div class="message_box">
+    <div class="messages">
+      <b class="message_header" ng-if="!currentUser.admin">Event Updates</b>
+      <b class="message_header" ng-if="currentUser.admin" ng-click="openForm()">
+        <button class="update_btn"> Event Updates +</button>
+      </b>
+      <ul class="general_massages">
+        <li ng-repeat="update in updates | orderBy:'-date'">{{update.date | date:'MM/dd hh:mm'}} : <b>{{update.message}}</b></li>
+      </ul>
+    </div>
+    <div class="form-popup" id="myForm">
+      <form class="form-container">
+        <b><p class="form-header">New Update</p></b>
+        <b><textarea type="text" placeholder="Enter Update" ng-model="updateText" required></textarea></b>
+        <button type="submit" class="ui purple button btn" ng-click="addUpdate()">SEND</button>
+        <button type="button" class="ui red button btn" ng-click="closeForm()">CANCEL</button>
+      </form>
+    </div>
+  </div>
+
   <div class="note">
     {{ EVENT_INFO.NAME }}
   </div>

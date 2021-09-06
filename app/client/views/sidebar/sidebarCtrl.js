@@ -1,5 +1,6 @@
 const angular = require('angular');
 const Utils = require('../../src/modules/Utils.js');
+const swal = require("sweetalert");
 
 angular.module('reg')
     .service('settings', function () {
@@ -12,14 +13,19 @@ angular.module('reg')
         'AuthService',
         'Session',
         'EVENT_INFO',
+        'UpdatesService',
         'SettingsService',
-        function ($rootScope, $scope, settings, Utils, AuthService, Session, EVENT_INFO, SettingsService) {
+        function ($rootScope, $scope, settings, Utils, AuthService, Session, EVENT_INFO, UpdatesService, SettingsService) {
 
             var user = $rootScope.currentUser;
 
             $scope.EVENT_INFO = EVENT_INFO;
 
             $scope.pastConfirmation = Utils.isAfter(user.status.confirmBy);
+
+            $scope.updateText = "";
+
+            $scope.updates = [];
 
             $scope.logout = function () {
                 AuthService.logout();
@@ -35,4 +41,50 @@ angular.module('reg')
                 $scope.showSidebar = false;
             });
 
+            $scope.openForm = function openForm() {
+                $scope.updateText = "";
+                $("#myForm").css("display", "block");
+            };
+
+            $scope.closeForm = function () {
+                $("#myForm").css("display", "none");
+            };
+
+            $scope.addUpdate = function (){
+                var messageSent = {
+                    message : $scope.updateText,
+                    date: Date.now(),
+                    user: user._id,
+                };
+
+                UpdatesService
+                    .update(messageSent)
+                    .then(response => {
+                        if (response){
+                            $scope.updates = response.data.messages;
+                            $scope.closeForm();
+                            swal("Update sent successfully!!", $scope.updateText, "success");
+                        }
+                    }, response => {
+                        console.log(response);
+                        swal("Uh oh!", "Something went wrong..", "error");
+                    });
+            };
+
+            function getUpdates(){
+                UpdatesService
+                    .getUpdates()
+                    .then(response => {
+                        if (response){
+                            $scope.updates = response.data.messages;
+                        }
+                    }, response => {
+                        console.log(response);
+                    });
+            }
+
+            getUpdates();
+            UpdatesService.stopInterval();
+            var myInterval = setInterval(getUpdates, 180000);
+            UpdatesService.setInterval(myInterval);
         }]);

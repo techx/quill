@@ -5,6 +5,8 @@ ADMIN_PASSWORD = process.env.ADMIN_PASS;
 var User = require('../app/server/models/User');
 // Create general chat
 var Forum = require('../app/server/models/ForumData');
+// Create updates obj
+var Updates = require("../app/server/models/Updates");
 var general = "general";
 
 // If there is already a user
@@ -38,6 +40,20 @@ Forum
         var f = new Forum();
         f.forumType = general;
         f.team = "generalHackChat";
+        f.save(function(err){
+          if(err){
+            console.log(err);
+          }
+        });
+      }
+    });
+
+// Add new updates
+Updates
+    .findOne({})
+    .exec(function (err, updates){
+      if(!updates){
+        var f = new Updates();
         f.save(function(err){
           if(err){
             console.log(err);
