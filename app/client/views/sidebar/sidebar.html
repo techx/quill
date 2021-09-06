@@ -63,10 +63,34 @@
 
     <div
       ui-sref-active="active"
+      ui-sref="app.forum"
+      ng-show="!currentUser.status.declined && !currentUser.admin"
+      class="item">
+      Forums
+    </div>
+
+    <div
+      ui-sref-active="active"
+      ui-sref="app.team"
+      ng-show="!currentUser.status.declined"
+      class="item">
+      Team
+    </div>
+
+    <div
+      ui-sref-active="active"
       ui-sref="app.admin.stats"
       class="item"
       ng-show="currentUser.admin">
       Admin
+    </div>
+
+    <div
+       ui-sref-active="active"
+       ui-sref="app.scoring"
+       class="item"
+       ng-show="currentUser.mentor">
+      Scoring System
     </div>
 
   </div>

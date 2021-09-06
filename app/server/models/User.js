@@ -21,13 +21,13 @@ var profile = {
 
   school: {
     type: String,
-    min: 0,
+    min: 1,
     max: 150,
   },
 
   company: {
     type: String,
-    min: 0,
+    min: 1,
     max: 150,
   },
 
@@ -60,7 +60,7 @@ var profile = {
     type: String,
     min: 0,
     max: 1500
-  },  
+  },
 
   // Optional info for demographics
   gender: {
@@ -212,6 +212,20 @@ var schema = new mongoose.Schema({
     type: String,
     min: 0,
     max: 140,
+  },
+  /**
+   * add array of grades to each user
+   */
+  grades:{
+    type: [Number],
+    required: true,
+    default: [],
+    select: true
+  },
+
+  forums: {
+    type: Array,
+    default: [],
   },
 
   verified: {

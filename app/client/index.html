@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html ng-app="reg">
-  <head lang="en">
+<head lang="en">
     <base href="/">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,15 +10,15 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
     <!-- Semantic-UI -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css?version=51"/>
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 
     <!-- Angular app -->
     <script src="./build/app.js"></script>
 
     <!-- Custom styling -->
-    <link rel="stylesheet" href="./stylesheets/normalize.css">
-    <link rel="stylesheet" href="./build/site.css">
+    <link rel="stylesheet" href="./stylesheets/normalize.css?version=51">
+    <link rel="stylesheet" href="./build/site.css?version=51">
     <link href='//fonts.googleapis.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
     <link href='//fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>
 
@@ -29,33 +29,42 @@
     <link rel="icon" href="assets/images/favicon.png">
 
     <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-      ga('create', 'UA-63828172-10', 'auto');
-      ga('send', 'pageview');
+        ga('create', 'UA-63828172-10', 'auto');
+        ga('send', 'pageview');
     </script>
 
     <!-- Facebook Conversion Code for Registrations -->
-    <script>(function() {
-    var _fbq = window._fbq || (window._fbq = []);
-    if (!_fbq.loaded) {
-    var fbds = document.createElement('script');
-    fbds.async = true;
-    fbds.src = '//connect.facebook.net/en_US/fbds.js';
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(fbds, s);
-    _fbq.loaded = true;
-    }
+    <script>(function () {
+        var _fbq = window._fbq || (window._fbq = []);
+        if (!_fbq.loaded) {
+            var fbds = document.createElement('script');
+            fbds.async = true;
+            fbds.src = '//connect.facebook.net/en_US/fbds.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(fbds, s);
+            _fbq.loaded = true;
+        }
     })();
     window._fbq = window._fbq || [];
-    window._fbq.push(['track', '6027741035004', {'value':'0.01','currency':'USD'}]);
+    window._fbq.push(['track', '6027741035004', {'value': '0.01', 'currency': 'USD'}]);
     </script>
-    <noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6027741035004&amp;cd[value]=0.01&amp;cd[currency]=USD&amp;noscript=1" /></noscript>
-  </head>
-  <body>
-    <div class="container" id="root-view" ui-view></div>
-  </body>
+    <noscript><img height="1" width="1" alt="" style="display:none"
+                   src="https://www.facebook.com/tr?ev=6027741035004&amp;cd[value]=0.01&amp;cd[currency]=USD&amp;noscript=1"/>
+    </noscript>
+</head>
+<body>
+<div class="container" id="root-view" ui-view></div>
+</body>
 </html>

@@ -3,6 +3,9 @@ ADMIN_PASSWORD = process.env.ADMIN_PASS;
 
 // Create a default admin user.
 var User = require('../app/server/models/User');
+// Create general chat
+var Forum = require('../app/server/models/ForumData');
+var general = "general";
 
 // If there is already a user
 User
@@ -24,3 +27,21 @@ User
       });
     }
   });
+
+// Add General chat if doesnt exist
+Forum
+    .findOne({
+      forumType : general
+    })
+    .exec(function (err, forum){
+      if(!forum){
+        var f = new Forum();
+        f.forumType = general;
+        f.team = "generalHackChat";
+        f.save(function(err){
+          if(err){
+            console.log(err);
+          }
+        });
+      }
+    });
