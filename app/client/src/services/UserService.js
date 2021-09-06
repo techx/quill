@@ -34,9 +34,10 @@ angular.module('reg')
         );
       },
 
-      updateProfile: function(id, profile){
+      updateProfile: function(id, profile, teamLeader){
         return $http.put(base + id + '/profile', {
-          profile: profile
+          profile: profile,
+          teamLeader: teamLeader
         });
       },
 

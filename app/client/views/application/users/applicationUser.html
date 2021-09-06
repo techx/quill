@@ -1,4 +1,7 @@
 <div id="userApplication" class="page">
+  
+  <img src="../../assets/images/writing-hand-joypixels.gif" alt="this slowpoke moves" style=" position: absolute; top: 10; right: 0; width: 100px; text-align:right;" />
+
   <div class="divided title">
     Application
   </div>
@@ -77,8 +80,26 @@
         </div>
 
         <div class="field">
+          <div class="ui checkbox">
+            <input type="checkbox" id="teamLeader" ng-model="user.teamLeader">
+            <label for="teamLeader">
+              Are you the team leader?
+          </label>
+          </div>
+        </div>
+
+
+        <div class="field" ng-show="user.teamLeader">
           <label>
-              What would you like to learn or get out of HackMIT? (optional)
+              Please describe you idea for the hackathon in a few word (critical for your acception)
+          </label>
+          <textarea ng-model="user.profile.teamIdea">
+          </textarea>
+        </div>
+
+        <div class="field">
+          <label>
+              What would you like to learn or get out of MTA Hack? (optional)
           </label>
           <textarea ng-model="user.profile.essay">
           </textarea>
@@ -99,6 +120,8 @@
             <label for="adult">I am 18 or older.</label>
           </div>
         </div>
+
+
 
         <br>
 
