@@ -175,7 +175,7 @@ angular.module('reg')
             $scope.sendMessage = function ($childScope) {
                 var forum = $childScope.myForum;
                 if ($childScope.sentMsg && $childScope.sentMsg !== '') {
-                    ForumService.sendMessage(forum._id, $childScope.sentMsg, $childScope.user.profile.name)
+                    ForumService.sendMessage(forum._id, $childScope.sentMsg, $childScope.user.profile.name, $childScope.user.profile.gender)
                         .then(response => {
                             if (response.data) {
                                 forum.messages = forum.messages.concat(response.data.messages.slice(forum.lastMessage));
