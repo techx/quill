@@ -64,11 +64,14 @@ angular.module('reg')
                        );
                 },
 
-                sendMessage: function (forumID, message, user) {
+                sendMessage: function (forumID, message, user, gender) {
                     return $http.post(base + 'send', {
                         forumID: forumID,
                         message: message,
-                        user: user,
+                        user: {
+                            username: user,
+                            gender: gender
+                        }
                     });
                 },
 

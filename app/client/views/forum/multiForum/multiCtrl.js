@@ -10,13 +10,13 @@ angular.module('reg')
             $scope.forumSelected = 0;
             $scope.searchText = "";
             $scope.searchUser = "";
-            $scope.multiForum = new FormData();
+            $scope.myForum = new FormData();
             $scope.forums = $scope.getAllForumsByType("mentor");
 
             // get all chat members to show.
             function setMembers() {
                 UserService
-                    .getMentorForumMembers($scope.multiForum.team)
+                    .getMentorForumMembers($scope.myForum.team)
                     .then(response => {
                         if (response.data) {
                             $scope.allUsers = response.data;
@@ -29,28 +29,18 @@ angular.module('reg')
             // on team pick change.
             $scope.onTeamChange = function(){
                 $scope.updateCurrentForum($scope.forumSelected, function (){
-                    $scope.multiForum = $scope.currentForum;
+                    $scope.myForum = $scope.currentForum;
                     setMembers();
-                    if ($scope.multiForum.lastMessage - $scope.oldForums.get($scope.multiForum._id) !== 0)
-                         $scope.updateUserForums($scope.multiForum._id, $scope.multiForum.lastMessage);
+                    if ($scope.myForum.lastMessage - $scope.oldForums.get($scope.myForum._id) !== 0)
+                         $scope.updateUserForums($scope.myForum._id, $scope.myForum.lastMessage);
                 });
             };
 
+            // send message
+
             // sent message in chat
-            $scope.sendMessage = function () {
-                if ($scope.sentMsg && $scope.sentMsg !== '') {
-                    ForumService.sendMessage($scope.multiForum._id, $scope.sentMsg, $scope.user.profile.name)
-                        .then(response => {
-                            if (response.data) {
-                                $scope.multiForum = response.data;
-                                $scope.setForum($scope.multiForum);
-                                $scope.updateUserForums($scope.multiForum._id, $scope.multiForum.lastMessage);
-                            }
-                        }, response => {
-                            console.log(response.data);
-                        });
-                    $scope.sentMsg = "";
-                }
+            $scope.send = function (){
+                $scope.sendMessage($scope);
             };
 
         }]);

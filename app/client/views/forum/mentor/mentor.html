@@ -18,7 +18,8 @@
                         <div class="overlay"></div>
                         <div class="img">
                             <img class="img_src" ng-if="new_user.src && new_user.src !== ''"  src={{new_user.src}} alt="sunil">
-                            <img class="img_src" ng-if="!new_user.src || new_user.src === ''" src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
+                            <img class="img_src" ng-if="(!new_user.src || new_user.src === '') && new_user.profile.gender === 'M'" src="../../assets/images/user-male.png" alt="sunil">
+                            <img class="img_src" ng-if="(!new_user.src || new_user.src === '') && new_user.profile.gender !== 'M'" src="../../assets/images/user-female.png" alt="sunil">
                         </div>
                         <b class="name">{{new_user.profile.name}}</b>
                         <p class="type">{{new_user.mentor ? "Mentor" : "Hacker"}}</p>
@@ -47,23 +48,24 @@
                             <div class="mesgs">
                                 <div class="msg_history">
                                     <div ng-repeat="value in myForum.messages | filter:searchText" class="msg_box" on-finish-render="ngRepeatFinished">
-                                        <div ng-if="value.user !== user.profile.name && value.message !== ''">
+                                        <div ng-if="value.user.username !== user.profile.name && value.message !== ''">
                                             <div class="incoming_msg_img">
-                                                <img ng-if="value.src && value.src !== ''"  src={{value.src}} alt="sunil">
-                                                <img ng-if="!value.src || value.src === ''" src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
+                                                <img class="img_src_msg" ng-if="value.src && value.src !== ''"  src={{value.src}} alt="sunil">
+                                                <img class="img_src_msg" ng-if="(!value.src || value.src === '') && value.user.gender === 'M'" src="../../assets/images/user-male.png" alt="sunil">
+                                                <img class="img_src_msg" ng-if="(!value.src || value.src === '') && value.user.gender !== 'M'" src="../../assets/images/user-female.png" alt="sunil">
                                             </div>
                                             <div class="received_msg">
                                                 <div class="received_withd_msg">
-                                                    <p class="nameTag" style="font-size: 12px">{{ value.user }}</p>
+                                                    <p class="nameTag" style="font-size: 12px">{{ value.user.username }}</p>
                                                     <p class="messageTag">{{ value.message }}</p>
                                                     <span class="time_date" ng-bind="value.time | date:'MM/dd/yyyy  hh:mm'"></span>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div ng-if="value.user === user.profile.name && value.message !== ''">
+                                        <div ng-if="value.user.username === user.profile.name && value.message !== ''">
                                             <div class="outgoing_msg">
                                                 <div class="sent_msg">
-                                                    <p class="nameTag" style="font-size: 12px">{{ value.user }}</p>
+                                                    <p class="nameTag" style="font-size: 12px">{{ value.user.username }}</p>
                                                     <p class="messageTag">{{ value.message }}</p>
                                                     <span class="time_date" ng-bind="value.time | date:'MM/dd/yyyy  hh:mm'"></span>
                                                 </div>

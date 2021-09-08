@@ -6,12 +6,6 @@ ForumController.getByToken = function (token, callback) {
     Forum.getByToken(token, callback);
 };
 
-// function createMap(forums) {
-//     var map = new Map();
-//     forums.forEach(element => map[element.id] = element.lastMessage);
-//     return map;
-// }
-
 // callback is default response build
 ForumController.createNewForum = function (teamName, callback) {
     var forumMentor = new Forum();
