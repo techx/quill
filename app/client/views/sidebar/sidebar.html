@@ -32,7 +32,7 @@
     <div
       ui-sref-active="active"
       ui-sref="app.applicationUser"
-      ng-show="!currentUser.status.declined && !currentUser.mentor"
+      ng-show="!currentUser.status.declined && !currentUser.mentor && !currentUser.admin"
       class="item">
       Application
     </div>
@@ -40,7 +40,7 @@
     <div
     ui-sref-active="active"
     ui-sref="app.applicationMentor"
-    ng-show="!currentUser.status.declined && currentUser.mentor"
+    ng-show="!currentUser.status.declined && currentUser.mentor && !currentUser.admin"
     class="item">
     Application
     </div>
@@ -48,7 +48,7 @@
     <div
       ui-sref-active="active"
       ui-sref="app.confirmation"
-      ng-show="!pastConfirmation && currentUser.status.admitted && !currentUser.status.declined"
+      ng-show="!pastConfirmation && currentUser.status.admitted && !currentUser.status.declined && !currentUser.admin"
       class="item">
       Confirmation
     </div>
