@@ -14,8 +14,7 @@
     
     <div class="info">
       <div ng-show="user.mentor">
-        <p>{{user.profile.position}}</p>
-        <p>{{user.profile.company}}</p>
+        <p>{{user.profile.position}} at {{user.profile.company}}</p>
       </div>
       <div ng-show="!user.mentor">
         <p>{{user.profile.major}} Student</p>
