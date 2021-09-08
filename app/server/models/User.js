@@ -31,6 +31,12 @@ var profile = {
     max: 150,
   },
 
+  position: {
+    type: String,
+    min: 0,
+    max: 150,
+  },
+
   round1come: {
     type: Number,
   },
