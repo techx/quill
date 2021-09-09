@@ -329,7 +329,9 @@ UserController.updateProfileById = function (id, profile, teamLeader, callback){
       });
 
       var code = user.teamCode;
-      if (code !== undefined && code !== null && teamLeader){
+      if ((code !== undefined && code !== null) || teamLeader){
+        console.log("in if");
+
         User.find({
           teamCode: code
         })
@@ -358,26 +360,43 @@ UserController.updateProfileById = function (id, profile, teamLeader, callback){
             }
           });
         });
-
+        User.findOneAndUpdate({ 
+          _id: id,
+          verified: true
+        },
+          {
+            $set: {
+              'lastUpdated': Date.now(),
+              'teamLeader': teamLeader,
+              'profile': profile,
+              'status.completedProfile': true
+            }
+          },
+          {
+            new: true
+          },
+          callback);
 
 
       }
-      User.findOneAndUpdate({ 
-        _id: id,
-        verified: true
-      },
-        {
-          $set: {
-            'lastUpdated': Date.now(),
-            'teamLeader': teamLeader,
-            'profile': profile,
-            'status.completedProfile': true
-          }
+      else{
+        User.findOneAndUpdate({ 
+          _id: id,
+          verified: true
         },
-        {
-          new: true
-        },
-        callback);
+          {
+            $set: {
+              'lastUpdated': Date.now(),
+              'profile': profile,
+              'status.completedProfile': true
+            }
+          },
+          {
+            new: true
+          },
+          callback);
+      }
+
     
       
     });

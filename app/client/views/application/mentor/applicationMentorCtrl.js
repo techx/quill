@@ -19,12 +19,24 @@ angular.module('reg')
       
       function updateTimes(){
          // Format the dates in settings.
-        $scope.user.profile.round1go = new Date($scope.user.profile.round1go);
-        $scope.user.profile.round1come = new Date($scope.user.profile.round1come);
-        $scope.user.profile.round2go = new Date($scope.user.profile.round2go);
-        $scope.user.profile.round2come = new Date($scope.user.profile.round2come);
-        $scope.user.profile.round3go = new Date($scope.user.profile.round3go);
-        $scope.user.profile.round3come = new Date($scope.user.profile.round3come);
+        if($scope.user.profile.round1go != undefined && $scope.user.profile.round1go > 0){
+          $scope.user.profile.round1go = new Date($scope.user.profile.round1go);
+        }
+        if($scope.user.profile.round1come != undefined && $scope.user.profile.round1come > 0){
+          $scope.user.profile.round1come = new Date($scope.user.profile.round1come);
+        }
+        if($scope.user.profile.round2go != undefined && $scope.user.profile.round2go > 0){
+          $scope.user.profile.round2go = new Date($scope.user.profile.round2go);
+        }
+        if($scope.user.profile.round2come != undefined && $scope.user.profile.round2come > 0){
+          $scope.user.profile.round2come = new Date($scope.user.profile.round2come);
+        }
+        if($scope.user.profile.round3go != undefined && $scope.user.profile.round3go > 0){
+          $scope.user.profile.round3go = new Date($scope.user.profile.round3go);
+        }
+        if($scope.user.profile.round3come != undefined && $scope.user.profile.round3come > 0){
+          $scope.user.profile.round3come = new Date($scope.user.profile.round3come);
+        }
       }
 
       // Take a date and remove the seconds.
@@ -135,7 +147,6 @@ angular.module('reg')
 
       function _updateUser(e){
         if($scope.user.profile.numberOfRoundUserWantToCome >= 1){
-          console.log(cleanDate($scope.user.profile.round1come).getTime());
           $scope.user.profile.round1come = cleanDate($scope.user.profile.round1come).getTime();
           $scope.user.profile.round1go = cleanDate($scope.user.profile.round1go).getTime();
 
@@ -144,6 +155,7 @@ angular.module('reg')
             return;
           }
         }
+
         if($scope.user.profile.numberOfRoundUserWantToCome >= 2){
           $scope.user.profile.round2come = cleanDate($scope.user.profile.round2come).getTime();
           $scope.user.profile.round2go = cleanDate($scope.user.profile.round2go).getTime();
@@ -162,11 +174,10 @@ angular.module('reg')
             return;
           }
         }
-        console.log($scope.user.profile);
 
 
         UserService
-          .updateProfile(Session.getUserId(), $scope.user.profile)
+          .updateProfile(Session.getUserId(), $scope.user.profile, false)
           .then(response => {
             swal("Awesome!", "Your application has been saved.", "success").then(value => {
               $state.go("app.dashboard");
