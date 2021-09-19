@@ -14,6 +14,8 @@ var database        = process.env.DATABASE || process.env.MONGODB_URI || "mongod
 
 var settingsConfig  = require('./config/settings');
 var adminConfig     = require('./config/admin');
+var forumConfig     = require('./config/forum');
+var updatesConfig   = require('./config/updates');
 
 var app             = express();
 
