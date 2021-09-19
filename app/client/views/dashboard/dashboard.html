@@ -131,14 +131,14 @@
 
           <div
             class="ui pink button"
-            ng-show="!user.teamCode"
+            ng-show="!user.teamCode && !user.admin"
             ui-sref="app.team">
             Create or join a team
           </div>
 
           <div
             class="ui pink button"
-            ng-show="user.teamCode"
+            ng-show="user.teamCode && !user.admin"
             ui-sref="app.team">
             View your Team
           </div>
