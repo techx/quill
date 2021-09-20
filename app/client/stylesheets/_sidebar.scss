@@ -151,7 +151,10 @@
   /* Full-width input fields */
   .form-container textarea[type=text]{
     color: black;
-    width: 100%;
+    max-width: 278px;
+    min-width: 278px;
+    max-height: 140px;
+    min-height: 140px;
     padding: 10px;
     margin: 5px 0 22px 0;
     border: none;
