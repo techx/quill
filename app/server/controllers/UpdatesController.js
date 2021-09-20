@@ -4,13 +4,20 @@ var UpdatesController = {};
 
 /**
  * Get all messages.
- * @param  {Function} callback [description]
- * @return {[type]}            [description]
+ * @param {Integer} length
+ * @param {Function} callback
  */
-UpdatesController.getUpdates = function(callback){
+UpdatesController.getUpdates = function(length, callback){
     Updates
         .findOne({})
-        .exec(callback);
+        .exec(function(err, updates){
+            if (err || !updates || updates.messages.length === length){
+                return callback(err);
+            }
+
+            updates.messages = updates.messages.slice(length);
+            return callback(err, updates);
+        });
 };
 
 /**
