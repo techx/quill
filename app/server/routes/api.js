@@ -244,8 +244,9 @@ module.exports = function(router) {
     UpdatesController.update(message, defaultResponse(req, res));
   });
 
-  router.get('/updates/getUpdates', function (req, res) {
-    UpdatesController.getUpdates(defaultResponse(req, res));
+  router.get('/updates/getUpdates/:index', function (req, res) {
+    var index = req.params.index;
+    UpdatesController.getUpdates(index, defaultResponse(req, res));
   });
 
   // ---------------------------------------------

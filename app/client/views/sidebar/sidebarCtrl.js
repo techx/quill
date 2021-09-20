@@ -73,10 +73,12 @@ angular.module('reg')
 
             function getUpdates(){
                 UpdatesService
-                    .getUpdates()
+                    .getUpdates($scope.updates.length)
                     .then(response => {
                         if (response){
-                            $scope.updates = response.data.messages;
+                            if (response.data.messages.length > 0){
+                                $scope.updates = $scope.updates.concat(response.data.messages);
+                            }
                         }
                     }, response => {
                         console.log(response);
@@ -85,6 +87,6 @@ angular.module('reg')
 
             getUpdates();
             UpdatesService.stopInterval();
-            var myInterval = setInterval(getUpdates, 180000);
+            var myInterval = setInterval(getUpdates, 60000); // set time for Event Updates
             UpdatesService.setInterval(myInterval);
         }]);

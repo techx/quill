@@ -26,8 +26,8 @@ angular.module('reg')
                 // ----------------------
                 // Main functions to server
                 // ----------------------
-                getUpdates: function(){
-                    return $http.get(base + 'getUpdates');
+                getUpdates: function(finalIndex){
+                    return $http.get(base + 'getUpdates/' + finalIndex);
                 },
 
                 update: function (message){
