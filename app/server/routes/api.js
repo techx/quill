@@ -44,7 +44,7 @@ module.exports = function(router) {
   /**
    *  Same check for mentor
    */
-  function isMentorOrHacker(req, res, next){
+  function isMentor(req, res, next){
     var token = getToken(req);
 
     UserController.getByToken(token, function(err, user){
@@ -174,7 +174,7 @@ module.exports = function(router) {
 
 
   /**
-   *  Get - Get mentor relevant forums
+   *  Get - Get mentor relevant forums names
    */
   router.get('/forums/mentor', function(req, res){
     ForumController.getAllForumsMentor(defaultResponse(req, res));
@@ -239,11 +239,17 @@ module.exports = function(router) {
   // Updates
   // ---------------------------------------------
 
+  /**
+   * PUT - add new event update
+   */
   router.put('/updates/update', function (req, res) {
     var message = req.body.message;
     UpdatesController.update(message, defaultResponse(req, res));
   });
 
+  /**
+   * GET - get all updates (from specific index)
+   */
   router.get('/updates/getUpdates/:index', function (req, res) {
     var index = req.params.index;
     UpdatesController.getUpdates(index, defaultResponse(req, res));

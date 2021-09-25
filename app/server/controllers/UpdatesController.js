@@ -3,7 +3,7 @@ var Updates = require('../models/Updates');
 var UpdatesController = {};
 
 /**
- * Get all messages.
+ * Get all messages from specific index.
  * @param {Integer} length
  * @param {Function} callback
  */

@@ -6,7 +6,11 @@ ForumController.getByToken = function (token, callback) {
     Forum.getByToken(token, callback);
 };
 
-// callback is default response build
+/**
+ * Create new forum
+ * @param teamName
+ * @param callback // default response
+ */
 ForumController.createNewForum = function (teamName, callback) {
     var forumMentor = new Forum();
     var forumTeam = new Forum();
