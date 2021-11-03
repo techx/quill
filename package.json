@@ -32,7 +32,7 @@
     "showdown": "^1.9.1",
     "sweetalert": "^2.1.2",
     "underscore": "^1.10.2",
-    "validator": "^10.11.0",
+    "validator": "^13.7.0",
     "vinyl-source-stream": "^2.0.0"
   },
   "scripts": {
