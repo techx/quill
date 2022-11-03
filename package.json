@@ -48,7 +48,7 @@
   },
   "devDependencies": {
     "eslint": "^6.8.0",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.2",
     "gulp-clean-css": "^4.3.0",
     "gulp-concat": "^2.6.1",
     "gulp-ng-annotate": "^2.1.0",
