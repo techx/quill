@@ -20,7 +20,7 @@
     "gulp-tap": "^1.0.1",
     "jquery": "^3.5.1",
     "json2csv": "^4.5.4",
-    "jsonwebtoken": "5.0.4",
+    "jsonwebtoken": "9.0.0",
     "method-override": "^3.0.0",
     "minimist": "^1.2.5",
     "moment": "^2.27.0",
